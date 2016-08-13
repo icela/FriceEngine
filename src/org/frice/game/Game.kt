@@ -2,11 +2,13 @@ package org.frice.game
 
 import org.frice.game.event.OnFrameClickEvent
 import org.frice.game.event.OnFrameMouseEvent
+import org.frice.game.resource.ImageResource
 import org.frice.game.spirit.BaseObject
 import org.frice.game.spirit.ImageObject
 import java.awt.*
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
+import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JFrame
 
@@ -24,8 +26,11 @@ abstract class Game() : JFrame(), Runnable {
 	protected var backgroundColor: Color
 		get() = panel.background
 		set(value) {
-			panel.background = value
+			if (value is ImageResource) {
+				buffer
+			} else panel.background = value
 		}
+	private val buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 
 	init {
 		layout = BorderLayout()
@@ -57,8 +62,21 @@ abstract class Game() : JFrame(), Runnable {
 		}
 	}
 
-	protected fun addObject(obj: ImageObject) = objs.add(obj)
-	protected fun removeObject(obj: ImageObject) = objs.remove(obj)
+	protected fun addObject(obj: ImageObject) {
+		buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
+		objs.add(obj)
+	}
+
+	protected fun removeObject(obj: ImageObject) {
+		objs.remove(obj)
+		objs.forEach { obj ->
+			when (obj) {
+				is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
+				else -> {
+				}
+			}
+		}
+	}
 
 	abstract fun onInit()
 	abstract fun onExit()

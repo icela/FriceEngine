@@ -2,7 +2,7 @@ import org.frice.game.Game;
 import org.frice.game.event.OnFrameClickEvent;
 import org.frice.game.event.OnFrameMouseEvent;
 import org.frice.game.spirit.ImageObject;
-import org.frice.game.texture.FileTexture;
+import org.frice.game.resource.FileImageResource;
 import org.frice.utils.time.Timer;
 
 import javax.swing.*;
@@ -48,7 +48,7 @@ public class Demo1 extends Game {
 					break;
 				case 0:
 					fuck += 100;
-					object = new ImageObject(new FileTexture("test.png"), fuck, fuck);
+					object = new ImageObject(new FileImageResource("test.png"), fuck, fuck);
 					addObject(object);
 					objects.add(object);
 					break;

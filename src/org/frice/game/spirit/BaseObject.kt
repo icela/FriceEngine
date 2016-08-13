@@ -1,6 +1,6 @@
 package org.frice.game.spirit
 
-import org.frice.game.texture.Texture
+import org.frice.game.resource.ImageResource
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -8,5 +8,6 @@ import org.frice.game.texture.Texture
  * @since v0.1
  */
 interface BaseObject {
-	var texture: Texture
+	var id: Int
+	var resource: ImageResource
 }
