@@ -2,11 +2,9 @@ package org.frice.game
 
 import org.frice.game.event.OnFrameClickEvent
 import org.frice.game.event.OnFrameMouseEvent
+import org.frice.game.spirit.BaseObject
 import org.frice.game.spirit.ImageObject
-import java.awt.BorderLayout
-import java.awt.Canvas
-import java.awt.Graphics
-import java.awt.Rectangle
+import java.awt.*
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.util.*
@@ -22,7 +20,12 @@ import javax.swing.JFrame
 abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
 	protected var paused = false
-	private val objs = ArrayList<ImageObject>()
+	private val objs = ArrayList<BaseObject>()
+	protected var backgroundColor: Color
+		get() = panel.background
+		set(value) {
+			panel.background = value
+		}
 
 	init {
 		layout = BorderLayout()
@@ -50,7 +53,7 @@ abstract class Game() : JFrame(), Runnable {
 		while (!paused) {
 			onRefresh()
 			panel.repaint()
-			Thread.sleep(100)
+			Thread.sleep(200)
 		}
 	}
 
@@ -74,7 +77,11 @@ abstract class Game() : JFrame(), Runnable {
 
 		override fun paint(g: Graphics) {
 			objs.forEach { obj ->
-				g.drawImage(obj.getImage(), obj.x, obj.y, this)
+				when (obj) {
+					is ImageObject -> g.drawImage(obj.getImage(), obj.x, obj.y, this)
+					else -> {
+					}
+				}
 			}
 		}
 	}

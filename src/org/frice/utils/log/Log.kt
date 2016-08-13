@@ -5,6 +5,6 @@ package org.frice.utils.log
  * @author ice1000
  * @since v0.1
  */
-object Logger {
-	fun log(e: Any?) = println(e?.toString())
+object Log {
+	fun v(e: Any?) = println(e?.toString())
 }

@@ -9,7 +9,7 @@ import org.frice.game.texture.Texture
  * @author ice1000
  * @since v0.1
  */
-class ImageObject(var texture: Texture, var x: Int = 0, var y: Int = 0) {
+class ImageObject(override var texture: Texture, var x: Int = 0, var y: Int = 0) : BaseObject {
 
 	/**
 	 * @return returns an image instance of this texture
