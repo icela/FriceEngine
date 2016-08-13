@@ -1,4 +1,4 @@
-package org.frice.event
+package org.frice.game.event
 
 import java.awt.event.MouseEvent
 

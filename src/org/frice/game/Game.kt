@@ -1,19 +1,28 @@
 package org.frice.game
 
-import org.frice.event.OnFrameClickEvent
-import org.frice.event.OnFrameMouseEvent
-import java.awt.*
+import org.frice.game.event.OnFrameClickEvent
+import org.frice.game.event.OnFrameMouseEvent
+import org.frice.game.spirit.BaseObject
+import java.awt.BorderLayout
+import java.awt.Canvas
+import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
-import javax.swing.JPanel
+import java.util.*
+import javax.swing.JFrame
 
 /**
+ * Do not override the constructor.
+ *
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
  * @since v0.1
  */
-abstract class Game() : Frame() {
-	val panel = GamePanel()
+abstract class Game() : JFrame(), Runnable {
+	private val panel = GamePanel()
+	protected var paused = false
+	private val objs = ArrayList<BaseObject>()
 
 	init {
 		layout = BorderLayout()
@@ -26,8 +35,10 @@ abstract class Game() : Frame() {
 			override fun mousePressed(e: MouseEvent) = onMouse(OnFrameMouseEvent.create(e))
 		})
 		add(panel, BorderLayout.CENTER)
+		defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 		onInit()
 		isVisible = true
+		Thread(this).start()
 	}
 
 	override fun setBounds(r: Rectangle) {
@@ -35,24 +46,33 @@ abstract class Game() : Frame() {
 		panel.bounds = r
 	}
 
+	override fun run() {
+		while (!paused) {
+			onRefresh()
+			panel.repaint()
+			Thread.sleep(100)
+		}
+	}
+
+	protected fun addObject(obj: BaseObject) = objs.add(obj)
+
+	abstract fun onInit()
+	abstract fun onExit()
+	abstract fun onRefresh()
+	abstract fun onClick(e: OnFrameClickEvent)
+	abstract fun onMouse(e: OnFrameMouseEvent)
+
 	/**
 	 * Created by ice1000 on 2016/8/13.
 	 * @author ice1000
 	 * @since v0.1
 	 */
-	inner class GamePanel : JPanel() {
+	inner class GamePanel : Canvas() {
 		init {
 		}
 
 		override fun paint(g: Graphics) {
-			onPaint(g as Graphics2D)
+			objs.forEach { obj -> g.drawImage(obj.getImage(), obj.x, obj.y, this) }
 		}
 	}
-
-	abstract fun onInit()
-	abstract fun onExit()
-	abstract fun onPaint(g: Graphics2D)
-	abstract fun onClick(e: OnFrameClickEvent)
-	abstract fun onMouse(e: OnFrameMouseEvent)
-
 }
