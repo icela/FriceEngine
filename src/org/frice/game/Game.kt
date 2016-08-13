@@ -94,13 +94,7 @@ abstract class Game() : JFrame(), Runnable {
 		}
 
 		override fun paint(g: Graphics) {
-			objs.forEach { obj ->
-				when (obj) {
-					is ImageObject -> g.drawImage(obj.getImage(), obj.x, obj.y, this)
-					else -> {
-					}
-				}
-			}
+			g.drawImage(buffer, 0, 0, this)
 		}
 	}
 }

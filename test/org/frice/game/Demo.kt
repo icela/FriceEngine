@@ -2,8 +2,8 @@ package org.frice.game
 
 import org.frice.game.event.OnFrameClickEvent
 import org.frice.game.event.OnFrameMouseEvent
-import org.frice.game.spirit.ImageObject
 import org.frice.game.resource.FileImageResource
+import org.frice.game.spirit.ImageObject
 import org.frice.utils.log.Log
 import org.frice.utils.time.Timer
 import java.awt.Color
@@ -39,7 +39,7 @@ class Demo : Game() {
 			if (fuck > 300) mode = 1 else if (fuck < 1) mode = 0
 			when (mode) {
 				0 -> {
-					obj = ImageObject(texture, fuck, fuck)
+					obj = ImageObject(texture, -1, fuck, fuck)
 					objList.add(obj)
 					addObject(obj)
 					fuck += 100
