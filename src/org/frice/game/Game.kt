@@ -1,9 +1,9 @@
 package org.frice.game
 
-import org.frice.game.event.OnFrameClickEvent
-import org.frice.game.event.OnFrameMouseEvent
+import org.frice.game.event.OnClickEvent
+import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.ImageResource
-import org.frice.game.spirit.BaseObject
+import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import java.awt.*
 import java.awt.event.MouseEvent
@@ -22,29 +22,30 @@ import javax.swing.JFrame
 abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
 	protected var paused = false
-	private val objs = ArrayList<BaseObject>()
+	private val objs = ArrayList<FObject>()
 	protected var backgroundColor: Color
 		get() = panel.background
 		set(value) {
 			if (value is ImageResource) {
-				buffer
+				buffer.graphics.drawImage(value.image.getScaledInstance(width, height, 0), 0, 0, this)
 			} else panel.background = value
 		}
-	private val buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+	private val buffer: BufferedImage
 
 	init {
 		layout = BorderLayout()
 		bounds = Rectangle(200, 200, 640, 480)
 		addMouseListener(object : MouseListener {
-			override fun mouseClicked(e: MouseEvent) = onClick(OnFrameClickEvent.create(e))
-			override fun mouseEntered(e: MouseEvent) = onMouse(OnFrameMouseEvent.create(e))
-			override fun mouseReleased(e: MouseEvent) = onMouse(OnFrameMouseEvent.create(e))
-			override fun mouseExited(e: MouseEvent) = onMouse(OnFrameMouseEvent.create(e))
-			override fun mousePressed(e: MouseEvent) = onMouse(OnFrameMouseEvent.create(e))
+			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
+			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
+			override fun mouseReleased(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
+			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
+			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
 		})
 		add(panel, BorderLayout.CENTER)
 		defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 		onInit()
+		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
 		Thread(this).start()
 	}
@@ -69,6 +70,7 @@ abstract class Game() : JFrame(), Runnable {
 
 	protected fun removeObject(obj: ImageObject) {
 		objs.remove(obj)
+		//
 		objs.forEach { obj ->
 			when (obj) {
 				is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
@@ -81,8 +83,8 @@ abstract class Game() : JFrame(), Runnable {
 	abstract fun onInit()
 	abstract fun onExit()
 	abstract fun onRefresh()
-	abstract fun onClick(e: OnFrameClickEvent)
-	abstract fun onMouse(e: OnFrameMouseEvent)
+	abstract fun onClick(e: OnClickEvent)
+	abstract fun onMouse(e: OnMouseEvent)
 
 	/**
 	 * Created by ice1000 on 2016/8/13.
@@ -90,9 +92,6 @@ abstract class Game() : JFrame(), Runnable {
 	 * @since v0.1
 	 */
 	inner class GamePanel : Canvas() {
-		init {
-		}
-
 		override fun paint(g: Graphics) {
 			g.drawImage(buffer, 0, 0, this)
 		}

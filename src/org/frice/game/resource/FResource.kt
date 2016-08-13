@@ -5,6 +5,6 @@ package org.frice.game.resource
  * @author ice1000
  * @since v0.1.1
  */
-interface Resource {
+interface FResource {
 	fun getResource(): Any
 }

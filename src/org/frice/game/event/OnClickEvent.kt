@@ -7,10 +7,10 @@ import java.awt.event.MouseEvent
  * @author ice1000
  * @since v0.1
  */
-interface OnFrameClickEvent {
+interface OnClickEvent {
 
 	companion object {
-		fun create(e: MouseEvent) = object : OnFrameClickEvent {
+		fun create(e: MouseEvent) = object : OnClickEvent {
 			override val event = e
 		}
 	}

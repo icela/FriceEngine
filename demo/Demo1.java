@@ -1,6 +1,6 @@
 import org.frice.game.Game;
-import org.frice.game.event.OnFrameClickEvent;
-import org.frice.game.event.OnFrameMouseEvent;
+import org.frice.game.event.OnClickEvent;
+import org.frice.game.event.OnMouseEvent;
 import org.frice.game.spirit.ImageObject;
 import org.frice.game.resource.FileImageResource;
 import org.frice.utils.time.Timer;
@@ -57,12 +57,12 @@ public class Demo1 extends Game {
 	}
 
 	@Override
-	public void onClick(OnFrameClickEvent onFrameClickEvent) {
+	public void onClick(OnClickEvent onClickEvent) {
 		JOptionPane.showMessageDialog(this, "fuck!!!!!!");
 	}
 
 	@Override
-	public void onMouse(OnFrameMouseEvent onFrameMouseEvent) {
+	public void onMouse(OnMouseEvent onFrameMouseEvent) {
 
 	}
 

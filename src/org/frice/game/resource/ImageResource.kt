@@ -8,6 +8,6 @@ import java.awt.Image
  * @author ice1000
  * @since v0.1
  */
-interface ImageResource: Resource {
+interface ImageResource: FResource {
 	val image: Image
 }

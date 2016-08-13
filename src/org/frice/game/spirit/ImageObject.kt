@@ -9,11 +9,13 @@ import org.frice.game.resource.ImageResource
  * @author ice1000
  * @since v0.1
  */
-class ImageObject(override var resource: ImageResource, override var id: Int, var x: Int, var y: Int) : BaseObject {
+class ImageObject(override var resource: ImageResource, override var id: Int, var x: Int, var y: Int) : FObject {
 
 	constructor(resource: ImageResource, id: Int) : this(resource, id, 0, 0)
 
 	constructor(resource: ImageResource) : this(resource, -1, 0, 0)
+
+	constructor(resource: ImageResource, x: Int, y: Int) : this(resource, -1, x, y)
 
 	/**
 	 * @return returns an image instance of this resource
