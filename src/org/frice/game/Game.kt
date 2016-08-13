@@ -2,7 +2,7 @@ package org.frice.game
 
 import org.frice.game.event.OnFrameClickEvent
 import org.frice.game.event.OnFrameMouseEvent
-import org.frice.game.spirit.BaseObject
+import org.frice.game.spirit.ImageObject
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Graphics
@@ -22,7 +22,7 @@ import javax.swing.JFrame
 abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
 	protected var paused = false
-	private val objs = ArrayList<BaseObject>()
+	private val objs = ArrayList<ImageObject>()
 
 	init {
 		layout = BorderLayout()
@@ -54,7 +54,8 @@ abstract class Game() : JFrame(), Runnable {
 		}
 	}
 
-	protected fun addObject(obj: BaseObject) = objs.add(obj)
+	protected fun addObject(obj: ImageObject) = objs.add(obj)
+	protected fun removeObject(obj: ImageObject) = objs.remove(obj)
 
 	abstract fun onInit()
 	abstract fun onExit()
@@ -72,7 +73,9 @@ abstract class Game() : JFrame(), Runnable {
 		}
 
 		override fun paint(g: Graphics) {
-			objs.forEach { obj -> g.drawImage(obj.getImage(), obj.x, obj.y, this) }
+			objs.forEach { obj ->
+				g.drawImage(obj.getImage(), obj.x, obj.y, this)
+			}
 		}
 	}
 }
