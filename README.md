@@ -29,6 +29,7 @@ When you wanna build games with frice engine, follow these steps:
 - Import the jar in the latest release to your project.
 - Create a class extends Game in org.frice.game package.
 - Implement the abstract methods, just understand them by name.
+- call the empty constructor in the public static void main.
 - For full API doc please view [help](help.md)
 
 ## Demos
