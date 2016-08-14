@@ -22,7 +22,7 @@ import javax.swing.JFrame
 abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
 	protected var paused = false
-	private val objs = ArrayList<FObject>()
+	private val objects = ArrayList<FObject>()
 	protected var backgroundColor: Color
 		get() = panel.background
 		set(value) {
@@ -65,13 +65,13 @@ abstract class Game() : JFrame(), Runnable {
 
 	protected fun addObject(obj: ImageObject) {
 		buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
-		objs.add(obj)
+		objects.add(obj)
 	}
 
 	protected fun removeObject(obj: ImageObject) {
-		objs.remove(obj)
+		objects.remove(obj)
 		//
-		objs.forEach { obj ->
+		objects.forEach { obj ->
 			when (obj) {
 				is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
 				else -> {

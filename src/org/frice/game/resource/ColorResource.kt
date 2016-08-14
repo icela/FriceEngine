@@ -7,16 +7,15 @@ import java.awt.Color
  * @author ice1000
  * @since v0.1.1
  */
-class ColorResource(val color: Color): FResource {
+class ColorResource(val color: Color) : FResource {
 	override fun getResource() = color
-	override fun equals(other: Any?): Boolean{
+
+	override fun equals(other: Any?): Boolean {
 		if (other == null || other !is ColorResource) return false
 		if (color.rgb == other.color.rgb && color.alpha == other.color.alpha) return true
 		return false
 	}
 
-	override fun hashCode(): Int{
-		return color.hashCode()
-	}
+	override fun hashCode() = color.hashCode()
 
 }
