@@ -5,9 +5,10 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
-import org.frice.game.spirit.ColorObject
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
+import org.frice.game.spirit.ShapedColorObject
+import org.frice.utils.shape.FRectangle
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Graphics
@@ -61,12 +62,14 @@ abstract class Game() : JFrame(), Runnable {
 		while (!paused) {
 			onRefresh()
 			drawBackground(back)
-			objects.forEach { obj ->
-				when (obj) {
-					is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
-					is ColorObject -> {
-						buffer.graphics.color = obj.res.color
-						buffer.graphics.fillRect(0, 0, width, height)
+			objects.forEach { o ->
+				when (o) {
+					is ImageObject -> buffer.graphics.drawImage(o.getImage(), o.x, o.y, this)
+					is ShapedColorObject -> {
+						buffer.graphics.color = o.res.color
+						when (o.shape) {
+							is FRectangle -> buffer.graphics.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+						}
 					}
 					else -> {
 					}
@@ -78,11 +81,13 @@ abstract class Game() : JFrame(), Runnable {
 	}
 
 	private fun drawBackground(back: FResource) {
-		when(back) {
+		when (back) {
 			is ImageResource -> buffer.graphics.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
 			is ColorResource -> {
 				buffer.graphics.color = back.color
 				buffer.graphics.fillRect(0, 0, width, height)
+			}
+			else -> {
 			}
 		}
 	}

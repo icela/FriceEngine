@@ -3,8 +3,10 @@ import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.FileImageResource;
-import org.frice.game.spirit.ColorObject;
+import org.frice.game.spirit.FObject;
 import org.frice.game.spirit.ImageObject;
+import org.frice.game.spirit.ShapedColorObject;
+import org.frice.utils.shape.FRectangle;
 import org.frice.utils.time.FTimer;
 
 import javax.swing.*;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
  */
 public class Demo1 extends Game {
 
-	private ArrayList<ImageObject> objects = new ArrayList<>();
+	private ArrayList<FObject> objects = new ArrayList<>();
 	private FTimer timer;
 	private int fuck = 0;
 	private int mode = 0;
@@ -28,7 +30,7 @@ public class Demo1 extends Game {
 		setBack(ColorResource.Companion.getPINK());
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
-		addObject(new ColorObject(ColorResource.Companion.getCYAN(), -1));
+		addObject(new ShapedColorObject(ColorResource.Companion.getCYAN(), new FRectangle(50, 50)));
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class Demo1 extends Game {
 	@Override
 	public void onRefresh() {
 		if (timer.ended()) {
-			ImageObject object;
+			FObject object;
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;
 			switch (mode) {
