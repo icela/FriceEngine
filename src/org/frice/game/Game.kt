@@ -14,6 +14,7 @@ import org.frice.utils.error.log.FLog
 import org.frice.utils.shape.FCircle
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
+import org.frice.utils.time.FTimeListener
 import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.Graphics
@@ -36,6 +37,7 @@ import javax.swing.JPanel
 abstract class Game() : Frame(), Runnable {
 	private val panel = GamePanel()
 	private val objects = ArrayList<FObject>()
+	private val timeListeners = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
 	private val bg: Graphics
 		get() = buffer.graphics
@@ -81,6 +83,7 @@ abstract class Game() : Frame(), Runnable {
 		while (true) {
 			if (!paused) {
 				onRefresh()
+				timeListeners.forEach { it.check() }
 				panel.repaint()
 			}
 			Thread.sleep((1000 / refreshPerSecond).toLong())
@@ -101,6 +104,8 @@ abstract class Game() : Frame(), Runnable {
 
 	protected fun addObject(obj: FObject) = objects.add(obj)
 	protected fun removeObject(obj: FObject) = objects.remove(obj)
+	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 
 	abstract fun onInit()
 	abstract fun onExit()
