@@ -6,6 +6,4 @@ package org.frice.utils.shape
  * @since v0.1.1
  */
 interface FShape {
-	var x: Int
-	var y: Int
 }

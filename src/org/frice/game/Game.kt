@@ -8,9 +8,9 @@ import org.frice.game.resource.ImageResource
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import org.frice.game.spirit.ShapedColorObject
+import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 import java.awt.BorderLayout
-import java.awt.Canvas
 import java.awt.Graphics
 import java.awt.Rectangle
 import java.awt.event.MouseEvent
@@ -18,6 +18,7 @@ import java.awt.event.MouseListener
 import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JFrame
+import javax.swing.JPanel
 
 /**
  * Do not override the constructor.
@@ -59,24 +60,27 @@ abstract class Game() : JFrame(), Runnable {
 	}
 
 	override fun run() {
-		while (!paused) {
-			onRefresh()
-			drawBackground(back)
-			objects.forEach { o ->
-				when (o) {
-					is ImageObject -> buffer.graphics.drawImage(o.getImage(), o.x, o.y, this)
-					is ShapedColorObject -> {
-						buffer.graphics.color = o.res.color
-						when (o.shape) {
-							is FRectangle -> buffer.graphics.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+		while (true) {
+			if (!paused) {
+				onRefresh()
+				drawBackground(back)
+				objects.forEach { o ->
+					when (o) {
+						is ImageObject -> buffer.graphics.drawImage(o.getImage(), o.x, o.y, this)
+						is ShapedColorObject -> {
+							buffer.graphics.color = o.res.color
+							when (o.shape) {
+								is FRectangle -> buffer.graphics.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+								is FOval -> buffer.graphics.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+							}
+						}
+						else -> {
 						}
 					}
-					else -> {
-					}
 				}
+				panel.repaint()
+				Thread.sleep((1000 / refreshPerSecond).toLong())
 			}
-			panel.repaint()
-			Thread.sleep((1000 / refreshPerSecond).toLong())
 		}
 	}
 
@@ -87,8 +91,7 @@ abstract class Game() : JFrame(), Runnable {
 				buffer.graphics.color = back.color
 				buffer.graphics.fillRect(0, 0, width, height)
 			}
-			else -> {
-			}
+			else -> throw
 		}
 	}
 
@@ -106,7 +109,8 @@ abstract class Game() : JFrame(), Runnable {
 	 * @author ice1000
 	 * @since v0.1
 	 */
-	inner class GamePanel : Canvas() {
+	inner class GamePanel : JPanel() {
+		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
 			g.drawImage(buffer, 0, 0, this)
 		}
