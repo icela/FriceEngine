@@ -1,6 +1,5 @@
 package org.frice.game.resource
 
-import java.awt.Graphics2D
 import java.awt.Image
 
 /**

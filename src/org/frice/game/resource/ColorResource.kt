@@ -26,6 +26,10 @@ class ColorResource(val color: Color) : FResource {
 		val PINK = ColorResource(Color.PINK)
 	}
 
+	constructor(color: Int):this(Color(color))
+
+	constructor(color: String):this(Color.getColor(color))
+
 	override fun getResource() = color
 
 	override fun equals(other: Any?): Boolean {

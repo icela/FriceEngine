@@ -1,7 +1,8 @@
-# API doc
+# API reference
 This is the full API reference of frice engine.
 
 ## org.frice.game.Game
+Abstract.<br/>
 **Do not override the constructor, anything about initializing please put them into "onInit()"!**
 
 ### Life cycle methods
@@ -25,7 +26,7 @@ setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
 
 ## org.frice.game.spirit.FObject
-Abstract.<br/>
+Interface.<br/>
 Represent game objects.
 
 ### Members
@@ -36,16 +37,7 @@ x: Int|location x
 y: Int|location y
 
 ## org.frice.game.spirit.ImageObject
-
-### Parent
-[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
-
-### constructors
-Param|Usage
-:---|---:
-res: ImageResource|image that will display on game scene
-
-## org.frice.game.spirit.ShapedColorObject
+Class.
 
 ### Parent
 [org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
@@ -53,4 +45,52 @@ res: ImageResource|image that will display on game scene
 ### Constructors
 Param|Usage
 :---|---:
+res: ImageResource|image resource that will display on game scene
+
+## org.frice.game.spirit.ShapedColorObject
+Class.
+
+### Parent
+[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
+
+### Constructors
+Param|Usage
+:---|---:
+res: ColorResource|color that will display on game scene
+shape: FShape|shape of this object
+
+## org.frice.game.resource.FResource
+Interface.
+
+## org.frice.game.resource.ImageResource
+Interface.
+
+### Members
+Name and type|Usage
+:---|---:
+image: Image|image
+
+## org.frice.game.resource.FileImageResource
+Class.
+
+### Constructors
+Param|Usage
+:---|---:
+file: File|file that contains the image
+path: String|path of file that contains the image
+
+## org.frice.game.resource.ColorResource
+Class.
+
+### Constructors
+Param|Usage
+:---|---:
+color: Color|color
+color: Int|color code
+color: String|color code string
+
+### Built-in colors
+```
+GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
+```
 
