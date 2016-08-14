@@ -8,6 +8,24 @@ import java.awt.Color
  * @since v0.1.1
  */
 class ColorResource(val color: Color) : FResource {
+
+	companion object {
+		val GREEN = ColorResource(Color.GREEN)
+		val BLUE = ColorResource(Color.BLUE)
+		val GRAY = ColorResource(Color.GRAY)
+		val DARK_GRAY = ColorResource(Color.DARK_GRAY)
+		val LIGHT_GRAY = ColorResource(Color.LIGHT_GRAY)
+		val WHITE = ColorResource(Color.WHITE)
+		val RED = ColorResource(Color.RED)
+		val BLACK = ColorResource(Color.BLACK)
+		val CYAN = ColorResource(Color.CYAN)
+		val MAGENTA = ColorResource(Color.MAGENTA)
+		val YELLOW = ColorResource(Color.YELLOW)
+		val SHIT_YELLOW = ColorResource(Color(0x633516))
+		val ORANGE = ColorResource(Color.ORANGE)
+		val PINK = ColorResource(Color.PINK)
+	}
+
 	override fun getResource() = color
 
 	override fun equals(other: Any?): Boolean {

@@ -2,10 +2,15 @@ package org.frice.game
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.resource.ColorResource
+import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Canvas
+import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.image.BufferedImage
@@ -23,13 +28,7 @@ abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
 	protected var paused = false
 	private val objects = ArrayList<FObject>()
-	protected var backgroundColor: Color
-		get() = panel.background
-		set(value) {
-			if (value is ImageResource) {
-				buffer.graphics.drawImage(value.image.getScaledInstance(width, height, 0), 0, 0, this)
-			} else panel.background = value
-		}
+	protected var back: FResource = ColorResource.SHIT_YELLOW
 	private val buffer: BufferedImage
 
 	init {
@@ -58,27 +57,31 @@ abstract class Game() : JFrame(), Runnable {
 	override fun run() {
 		while (!paused) {
 			onRefresh()
+			drawBackground(back)
+			objects.forEach { obj ->
+				when (obj) {
+					is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
+					else -> {
+					}
+				}
+			}
 			panel.repaint()
 			Thread.sleep(200)
 		}
 	}
 
-	protected fun addObject(obj: ImageObject) {
-		buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
-		objects.add(obj)
-	}
-
-	protected fun removeObject(obj: ImageObject) {
-		objects.remove(obj)
-		//
-		objects.forEach { obj ->
-			when (obj) {
-				is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
-				else -> {
-				}
+	private fun drawBackground(back: FResource) {
+		when(back) {
+			is ImageResource -> buffer.graphics.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
+			is ColorResource -> {
+				buffer.graphics.color = back.color
+				buffer.graphics.fillRect(0, 0, width, height)
 			}
 		}
 	}
+
+	protected fun addObject(obj: FObject) = objects.add(obj)
+	protected fun removeObject(obj: FObject) = objects.remove(obj)
 
 	abstract fun onInit()
 	abstract fun onExit()

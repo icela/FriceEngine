@@ -2,11 +2,11 @@ package org.frice.game
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.spirit.ImageObject
+import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FileImageResource
+import org.frice.game.spirit.ImageObject
 import org.frice.utils.log.FLog
 import org.frice.utils.time.FTimer
-import java.awt.Color
 import java.awt.Rectangle
 import java.io.File
 import java.util.*
@@ -26,7 +26,7 @@ class Demo : Game() {
 	override fun onInit() {
 		bounds = Rectangle(100, 100, 640, 480)
 		title = "Demo of Frice"
-		backgroundColor = Color.BLUE
+		back = ColorResource.BLUE
 	}
 
 	override fun onMouse(e: OnMouseEvent) {

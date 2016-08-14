@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class Demo1 extends Game {
 
 	private ArrayList<ImageObject> objects = new ArrayList<>();
-	private FTimer FTimer;
+	private FTimer timer;
 	private int fuck = 0;
 	private int mode = 0;
 
 	@Override
 	public void onInit() {
-		FTimer = new FTimer(800);
+		timer = new FTimer(800);
 		setBackground(Color.CYAN);
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
@@ -35,7 +35,7 @@ public class Demo1 extends Game {
 
 	@Override
 	public void onRefresh() {
-		if (FTimer.ended()) {
+		if (timer.ended()) {
 			ImageObject object;
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;

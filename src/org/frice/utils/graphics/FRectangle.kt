@@ -7,5 +7,6 @@ import java.awt.Rectangle
  * @author ice1000
  * @since v0.1.1
  */
-class FRectangle(val x: Int, val y: Int, val width: Int, val height: Int): Rectangle(x, y, width, height) {
+class FRectangle(val x: Int, val y: Int, val width: Int, val height: Int) : Rectangle(x, y, width, height) {
+
 }
