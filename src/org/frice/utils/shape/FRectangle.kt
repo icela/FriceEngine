@@ -1,4 +1,4 @@
-package org.frice.utils.graphics
+package org.frice.utils.shape
 
 import java.awt.Rectangle
 

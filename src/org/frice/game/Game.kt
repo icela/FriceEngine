@@ -5,6 +5,7 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
+import org.frice.game.spirit.ColorObject
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import java.awt.BorderLayout
@@ -26,10 +27,12 @@ import javax.swing.JFrame
  */
 abstract class Game() : JFrame(), Runnable {
 	private val panel = GamePanel()
-	protected var paused = false
 	private val objects = ArrayList<FObject>()
-	protected var back: FResource = ColorResource.SHIT_YELLOW
 	private val buffer: BufferedImage
+
+	protected var paused = false
+	protected var back: FResource = ColorResource.SHIT_YELLOW
+	protected var refreshPerSecond = 10.0
 
 	init {
 		layout = BorderLayout()
@@ -61,12 +64,16 @@ abstract class Game() : JFrame(), Runnable {
 			objects.forEach { obj ->
 				when (obj) {
 					is ImageObject -> buffer.graphics.drawImage(obj.getImage(), obj.x, obj.y, this)
+					is ColorObject -> {
+						buffer.graphics.color = obj.res.color
+						buffer.graphics.fillRect(0, 0, width, height)
+					}
 					else -> {
 					}
 				}
 			}
 			panel.repaint()
-			Thread.sleep(200)
+			Thread.sleep((1000 / refreshPerSecond).toLong())
 		}
 	}
 
@@ -86,8 +93,8 @@ abstract class Game() : JFrame(), Runnable {
 	abstract fun onInit()
 	abstract fun onExit()
 	abstract fun onRefresh()
-	abstract fun onClick(e: OnClickEvent)
-	abstract fun onMouse(e: OnMouseEvent)
+	abstract fun onClick(e: OnClickEvent?)
+	abstract fun onMouse(e: OnMouseEvent?)
 
 	/**
 	 * Created by ice1000 on 2016/8/13.

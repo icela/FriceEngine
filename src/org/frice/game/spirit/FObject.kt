@@ -9,5 +9,7 @@ import org.frice.game.resource.FResource
  */
 interface FObject {
 	var id: Int
+	val x: Int
+	val y: Int
 	fun getResource(): FResource
 }

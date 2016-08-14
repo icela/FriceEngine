@@ -29,9 +29,6 @@ class Demo : Game() {
 		back = ColorResource.BLUE
 	}
 
-	override fun onMouse(e: OnMouseEvent) {
-	}
-
 	override fun onRefresh() {
 		if (dickTimer.ended()) {
 			val texture = FileImageResource("tres" + File.separator + "display.png")
@@ -58,7 +55,10 @@ class Demo : Game() {
 	override fun onExit() {
 	}
 
-	override fun onClick(e: OnClickEvent) {
+	override fun onMouse(e: OnMouseEvent?) {
+	}
+
+	override fun onClick(e: OnClickEvent?) {
 	}
 
 }

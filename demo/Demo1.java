@@ -1,12 +1,13 @@
 import org.frice.game.Game;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
-import org.frice.game.spirit.ImageObject;
+import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.FileImageResource;
+import org.frice.game.spirit.ColorObject;
+import org.frice.game.spirit.ImageObject;
 import org.frice.utils.time.FTimer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -24,9 +25,10 @@ public class Demo1 extends Game {
 	@Override
 	public void onInit() {
 		timer = new FTimer(800);
-		setBackground(Color.CYAN);
+		setBack(ColorResource.Companion.getPINK());
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
+		addObject(new ColorObject(ColorResource.Companion.getCYAN(), -1));
 	}
 
 	@Override

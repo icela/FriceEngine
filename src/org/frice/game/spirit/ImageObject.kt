@@ -9,7 +9,7 @@ import org.frice.game.resource.ImageResource
  * @author ice1000
  * @since v0.1
  */
-class ImageObject(val res: ImageResource, override var id: Int, var x: Int, var y: Int) : FObject {
+class ImageObject(val res: ImageResource, override var id: Int, override var x: Int, override var y: Int) : FObject {
 	
 	override fun getResource() = res
 
