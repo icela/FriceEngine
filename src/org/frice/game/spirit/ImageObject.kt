@@ -25,6 +25,7 @@ class ImageObject(val res: ImageResource, override var id: Int, var x: Int, var 
 	fun getImage() = res.image
 
 	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
 		if (other == null || other !is ImageObject) return false
 		if ((id == -1 || id == other.id) && res == other.res && x == other.x && y == other.y) return true
 		return false

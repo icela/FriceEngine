@@ -9,6 +9,7 @@ import javax.imageio.ImageIO
  * @since v0.1
  */
 class FileImageResource(file: File) : ImageResource {
+	
 	constructor(path: String) : this(File(path))
 
 	override val image = ImageIO.read(file)!!

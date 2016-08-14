@@ -3,7 +3,7 @@ import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.spirit.ImageObject;
 import org.frice.game.resource.FileImageResource;
-import org.frice.utils.time.Timer;
+import org.frice.utils.time.FTimer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class Demo1 extends Game {
 
 	private ArrayList<ImageObject> objects = new ArrayList<>();
-	private Timer timer;
+	private FTimer FTimer;
 	private int fuck = 0;
 	private int mode = 0;
 
 	@Override
 	public void onInit() {
-		timer = new Timer(800);
+		FTimer = new FTimer(800);
 		setBackground(Color.CYAN);
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
@@ -35,7 +35,7 @@ public class Demo1 extends Game {
 
 	@Override
 	public void onRefresh() {
-		if (timer.ended()) {
+		if (FTimer.ended()) {
 			ImageObject object;
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;

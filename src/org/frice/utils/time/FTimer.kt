@@ -5,7 +5,7 @@ package org.frice.utils.time
  * @author ice1000
  * @since v0.1
  */
-class Timer(val time: Int) {
+class FTimer(val time: Int) {
 	private var start = System.currentTimeMillis()
 
 	fun ended(): Boolean = if (System.currentTimeMillis() - start > time) {

@@ -4,8 +4,8 @@ import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.spirit.ImageObject
 import org.frice.game.resource.FileImageResource
-import org.frice.utils.log.Log
-import org.frice.utils.time.Timer
+import org.frice.utils.log.FLog
+import org.frice.utils.time.FTimer
 import java.awt.Color
 import java.awt.Rectangle
 import java.io.File
@@ -18,7 +18,7 @@ import java.util.*
  */
 class Demo : Game() {
 
-	val dickTimer = Timer(1000)
+	val dickTimer = FTimer(1000)
 	var fuck = 0
 	val objList = ArrayList<ImageObject>()
 	var mode = 0
@@ -51,7 +51,7 @@ class Demo : Game() {
 					fuck -= 100
 				}
 			}
-			Log.v("objList.size = ${objList.size}")
+			FLog.v("objList.size = ${objList.size}")
 		}
 	}
 

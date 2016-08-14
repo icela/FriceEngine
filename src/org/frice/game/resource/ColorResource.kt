@@ -11,6 +11,7 @@ class ColorResource(val color: Color) : FResource {
 	override fun getResource() = color
 
 	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
 		if (other == null || other !is ColorResource) return false
 		if (color.rgb == other.color.rgb && color.alpha == other.color.alpha) return true
 		return false
