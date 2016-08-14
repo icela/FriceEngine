@@ -55,13 +55,13 @@ abstract class Game() : Frame(), Runnable {
 		})
 		add(panel, BorderLayout.CENTER)
 		addWindowListener(object : WindowListener{
-			override fun windowDeiconified(e: WindowEvent?) = Unit
-			override fun windowActivated(e: WindowEvent?) = Unit
-			override fun windowDeactivated(e: WindowEvent?) = Unit
-			override fun windowIconified(e: WindowEvent?) = Unit
-			override fun windowClosing(e: WindowEvent?) = onExit()
-			override fun windowClosed(e: WindowEvent?) = System.exit(0)
-			override fun windowOpened(e: WindowEvent?) = Unit
+			override fun windowDeiconified(e: WindowEvent) = Unit
+			override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
+			override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
+			override fun windowIconified(e: WindowEvent) = Unit
+			override fun windowClosing(e: WindowEvent) = onExit()
+			override fun windowClosed(e: WindowEvent) = System.exit(0)
+			override fun windowOpened(e: WindowEvent) = Unit
 		})
 		onInit()
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
@@ -78,23 +78,9 @@ abstract class Game() : Frame(), Runnable {
 		while (true) {
 			if (!paused) {
 				onRefresh()
-				drawBackground(back)
-				objects.forEach { o ->
-					when (o) {
-						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
-						is ShapedColorObject -> {
-							bg.color = o.res.color
-							when (o.shape) {
-								is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
-								is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
-								is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
-							}
-						}
-					}
-				}
 				panel.repaint()
-				Thread.sleep((1000 / refreshPerSecond).toLong())
 			}
+			Thread.sleep((1000 / refreshPerSecond).toLong())
 		}
 	}
 
@@ -128,6 +114,20 @@ abstract class Game() : Frame(), Runnable {
 	inner class GamePanel : JPanel() {
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
+			drawBackground(back)
+			objects.forEach { o ->
+				when (o) {
+					is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
+					is ShapedColorObject -> {
+						bg.color = o.res.color
+						when (o.shape) {
+							is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+							is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+							is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+						}
+					}
+				}
+			}
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}

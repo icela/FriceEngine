@@ -2,6 +2,7 @@ package org.frice.game
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FileImageResource
 import org.frice.game.spirit.ImageObject
@@ -17,6 +18,13 @@ import java.util.*
  * @since v0.1
  */
 class Demo : Game() {
+	override fun onLoseFocus(e: OnWindowEvent?) {
+		paused = true
+	}
+
+	override fun onFocus(e: OnWindowEvent?) {
+		paused = false
+	}
 
 	val dickTimer = FTimer(1000)
 	var fuck = 0
@@ -53,6 +61,7 @@ class Demo : Game() {
 	}
 
 	override fun onExit() {
+		System.exit(0)
 	}
 
 	override fun onMouse(e: OnMouseEvent?) {
