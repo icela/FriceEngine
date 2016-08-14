@@ -1,4 +1,4 @@
-package org.frice.utils.log
+package org.frice.utils.error.log
 
 /**
  * Created by ice1000 on 2016/8/13.
