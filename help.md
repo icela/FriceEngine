@@ -21,6 +21,8 @@ Method|Usage
 :---|---:
 addObject(FObject)|add an game object to screen
 removeObject(FObject)|remove the object from screen(using the **id** field to judge if they are the same)
+addTimeListener(listener: FTimeListener)|add an object to timeListeners, and they will be checked when needed.
+removeTimeListener(listener: FTimeListener)|remove the object to timeListeners, and it won't be checked when needed.
 setBack(FResource)|set the background
 setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
@@ -40,7 +42,7 @@ y: Int|location y
 Class.
 
 ### Parent
-[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
+org.frice.game.spirit.FObject
 
 ### Constructors
 Param|Usage
@@ -51,7 +53,7 @@ res: ImageResource|image resource that will display on game scene
 Class.
 
 ### Parent
-[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
+org.frice.game.spirit.FObject
 
 ### Constructors
 Param|Usage
@@ -118,3 +120,15 @@ time: Int|the time(millis seconds) between each invokes
 Name|Usage
 :---|---:
 ended()|returns if the time's up.
+
+## org.frice.utils.time.FTimeListener
+Class.
+
+### Parent
+org.frice.utils.time.FTimer
+
+### Constructors
+Param|Usage
+:---|---:
+timeUp: () -> Unit|this closure will be invoked when time's up(ended())
+timeUp: OnTimeEvent|execute() in this interface will be invoked when time's up(ended())
