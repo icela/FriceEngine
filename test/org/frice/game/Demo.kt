@@ -5,7 +5,7 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.FileImageResource
 import org.frice.game.spirit.ImageObject
-import org.frice.utils.error.log.FLog
+import org.frice.utils.message.log.FLog
 import org.frice.utils.time.FTimer
 import java.awt.Rectangle
 import java.io.File

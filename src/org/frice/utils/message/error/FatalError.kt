@@ -1,6 +1,6 @@
-package org.frice.utils.error.exceptions
+package org.frice.utils.message.error
 
-import org.frice.utils.error.log.FLog
+import org.frice.utils.message.log.FLog
 
 /**
  * Created by ice1000 on 2016/8/14.

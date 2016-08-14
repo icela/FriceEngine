@@ -23,7 +23,7 @@ addObject(FObject)|add an game object to screen
 removeObject(FObject)|remove the object from screen(using the **id** field to judge if they are the same)
 addTimeListener(listener: FTimeListener)|add an object to timeListeners, and they will be checked when needed.
 removeTimeListener(listener: FTimeListener)|remove the object to timeListeners, and it won't be checked when needed.
-setBack(FResource)|set the background
+setBack(FResource)|set the background(color or image)
 setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
 
@@ -96,7 +96,7 @@ color: String|color code string
 GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
 ```
 
-## org.frice.utils.error.log.FLog
+## org.frice.utils.message.log.FLog
 Static object.
 
 ### APIs

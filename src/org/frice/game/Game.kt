@@ -9,8 +9,8 @@ import org.frice.game.resource.ImageResource
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import org.frice.game.spirit.ShapedColorObject
-import org.frice.utils.error.exceptions.FatalError
-import org.frice.utils.error.log.FLog
+import org.frice.utils.message.error.FatalError
+import org.frice.utils.message.log.FLog
 import org.frice.utils.shape.FCircle
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
