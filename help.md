@@ -1,13 +1,10 @@
 # API doc
-
-This is the full API doc of frice engine.
+This is the full API reference of frice engine.
 
 ## org.frice.game.Game
-
 **Do not override the constructor, anything about initializing please put them into "onInit()"!**
 
 ### Life cycle methods
-
 Method|Usage
 :---|---:
 onInit()|invoked when initialize
@@ -19,7 +16,6 @@ onLoseFocus(OnWindowEvent)|invoked when lost focus(user clicked other windows)
 onFocus(OnWindowEvent)|invoke when having focus(user clicked the game window)
 
 ### General APIs
-
 Method|Usage
 :---|---:
 addObject(FObject)|add an game object to screen
@@ -29,9 +25,32 @@ setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
 
 ## org.frice.game.spirit.FObject
-
-Abstract.
+Abstract.<br/>
 Represent game objects.
 
+### Members
+Name and type|Usage
+:---|---:
+id: Int|to specify objects from others
+x: Int|location x
+y: Int|location y
 
+## org.frice.game.spirit.ImageObject
+
+### Parent
+[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
+
+### constructors
+Param|Usage
+:---|---:
+res: ImageResource|image that will display on game scene
+
+## org.frice.game.spirit.ShapedColorObject
+
+### Parent
+[org.frice.game.spirit.FObject](#org.frice.game.spirit.FObject)
+
+### Constructors
+Param|Usage
+:---|---:
 
