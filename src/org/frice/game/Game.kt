@@ -42,6 +42,7 @@ abstract class Game() : Frame(), Runnable {
 	protected var paused = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW
 	protected var refreshPerSecond = 10.0
+	protected var debug = true
 
 	init {
 		layout = BorderLayout()
@@ -54,7 +55,7 @@ abstract class Game() : Frame(), Runnable {
 			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
 		})
 		add(panel, BorderLayout.CENTER)
-		addWindowListener(object : WindowListener{
+		addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit
 			override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
 			override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
@@ -88,8 +89,9 @@ abstract class Game() : Frame(), Runnable {
 		when (back) {
 			is ImageResource -> bg.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
 			is ColorResource -> {
-				bg.color = back.color
-				bg.fillRect(0, 0, width, height)
+				val g = bg
+				g.color = back.color
+				g.fillRect(0, 0, width, height)
 			}
 			else -> throw FatalError("Unable to draw background")
 		}
@@ -115,19 +117,20 @@ abstract class Game() : Frame(), Runnable {
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
 			drawBackground(back)
-			objects.forEach { o ->
-				when (o) {
-					is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
-					is ShapedColorObject -> {
-						bg.color = o.res.color
-						when (o.shape) {
-							is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
-							is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
-							is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+			if (debug)
+				objects.forEach { o ->
+					when (o) {
+						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
+						is ShapedColorObject -> {
+							bg.color = o.res.color
+							when (o.shape) {
+								is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+								is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+								is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+							}
 						}
 					}
 				}
-			}
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}
