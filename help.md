@@ -16,7 +16,7 @@ onMouse(OnMouseEvent)|invoked while the mouse had done sth(move, press, etc)
 onLoseFocus(OnWindowEvent)|invoked when lost focus(user clicked other windows)
 onFocus(OnWindowEvent)|invoke when having focus(user clicked the game window)
 
-### General APIs
+### APIs
 Method|Usage
 :---|---:
 addObject(FObject)|add an game object to screen
@@ -94,3 +94,27 @@ color: String|color code string
 GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
 ```
 
+## org.frice.utils.error.log.FLog
+Static object.
+
+### APIs
+Method|Usage
+v(e: Any?)|log a verbose message
+d(e: Any?)|log a debug message
+i(e: Any?)|log a info message
+w(e: Any?)|log a warning message
+e(e: Any?)|log an error message
+
+## org.frice.utils.time.FTimer
+Class.<br/>
+I think I didn't tell the function well(Sorry for my english), so please view usage in demos.
+
+### Constructors
+Param|Usage
+:---|---:
+time: Int|the time(millis seconds) between each invokes
+
+### APIs
+Name|Usage
+:---|---:
+ended()|returns if the time's up.
