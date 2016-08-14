@@ -24,6 +24,7 @@ removeObject(FObject)|remove the object from screen(using the **id** field to ju
 addTimeListener(listener: FTimeListener)|add an object to timeListeners, and they will be checked when needed.
 removeTimeListener(listener: FTimeListener)|remove the object to timeListeners, and it won't be checked when needed.
 setBack(FResource)|set the background(color or image)
+setRefreshPerSecond(Double)|There will be a sleep between every two refresh, the length of every sleep is 1000/value. Default is 10.
 setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
 
@@ -101,6 +102,7 @@ Static object.
 
 ### APIs
 Method|Usage
+:---|---:
 v(e: Any?)|log a verbose message
 d(e: Any?)|log a debug message
 i(e: Any?)|log a info message
@@ -109,7 +111,7 @@ e(e: Any?)|log an error message
 
 ## org.frice.utils.time.FTimer
 Class.<br/>
-I think I didn't tell the function well(Sorry for my english), so please view usage in demos.
+I think I didn't tell the function well(Sorry for my English), so please view usage in demos.
 
 ### Constructors
 Param|Usage
