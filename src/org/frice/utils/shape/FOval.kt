@@ -5,7 +5,9 @@ package org.frice.utils.shape
  * @author ice1000
  * @since v0.1.1
  */
-class FCircle(var r: Double) : FShape {
+class FOval(var rh: Double, var rv: Double) : FShape {
 	val width: Int
-		get() = (r * 2).toInt()
+		get() = (rh * 2).toInt()
+	val height: Int
+		get() = (rv * 2).toInt()
 }

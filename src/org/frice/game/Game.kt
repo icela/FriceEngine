@@ -8,6 +8,8 @@ import org.frice.game.resource.ImageResource
 import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import org.frice.game.spirit.ShapedColorObject
+import org.frice.utils.error.exceptions.FatalError
+import org.frice.utils.shape.FCircle
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 import java.awt.BorderLayout
@@ -72,9 +74,8 @@ abstract class Game() : JFrame(), Runnable {
 							when (o.shape) {
 								is FRectangle -> buffer.graphics.fillRect(o.x, o.y, o.shape.width, o.shape.height)
 								is FOval -> buffer.graphics.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+								is FCircle -> buffer.graphics.fillOval(o.x, o.y, o.shape.width, o.shape.width)
 							}
-						}
-						else -> {
 						}
 					}
 				}
@@ -91,7 +92,7 @@ abstract class Game() : JFrame(), Runnable {
 				buffer.graphics.color = back.color
 				buffer.graphics.fillRect(0, 0, width, height)
 			}
-			else -> throw
+			else -> throw FatalError("Unable to draw background")
 		}
 	}
 
