@@ -2,6 +2,7 @@ package org.frice.game
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
@@ -13,13 +14,15 @@ import org.frice.utils.shape.FCircle
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 import java.awt.BorderLayout
+import java.awt.Frame
 import java.awt.Graphics
 import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
 import java.util.*
-import javax.swing.JFrame
 import javax.swing.JPanel
 
 /**
@@ -29,10 +32,12 @@ import javax.swing.JPanel
  * @author ice1000
  * @since v0.1
  */
-abstract class Game() : JFrame(), Runnable {
+abstract class Game() : Frame(), Runnable {
 	private val panel = GamePanel()
 	private val objects = ArrayList<FObject>()
 	private val buffer: BufferedImage
+	private val bg: Graphics
+		get() = buffer.graphics
 
 	protected var paused = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW
@@ -49,7 +54,15 @@ abstract class Game() : JFrame(), Runnable {
 			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
 		})
 		add(panel, BorderLayout.CENTER)
-		defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+		addWindowListener(object : WindowListener{
+			override fun windowDeiconified(e: WindowEvent?) = Unit
+			override fun windowActivated(e: WindowEvent?) = Unit
+			override fun windowDeactivated(e: WindowEvent?) = Unit
+			override fun windowIconified(e: WindowEvent?) = Unit
+			override fun windowClosing(e: WindowEvent?) = onExit()
+			override fun windowClosed(e: WindowEvent?) = System.exit(0)
+			override fun windowOpened(e: WindowEvent?) = Unit
+		})
 		onInit()
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
@@ -68,13 +81,13 @@ abstract class Game() : JFrame(), Runnable {
 				drawBackground(back)
 				objects.forEach { o ->
 					when (o) {
-						is ImageObject -> buffer.graphics.drawImage(o.getImage(), o.x, o.y, this)
+						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
 						is ShapedColorObject -> {
-							buffer.graphics.color = o.res.color
+							bg.color = o.res.color
 							when (o.shape) {
-								is FRectangle -> buffer.graphics.fillRect(o.x, o.y, o.shape.width, o.shape.height)
-								is FOval -> buffer.graphics.fillOval(o.x, o.y, o.shape.width, o.shape.height)
-								is FCircle -> buffer.graphics.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+								is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+								is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+								is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
 							}
 						}
 					}
@@ -87,10 +100,10 @@ abstract class Game() : JFrame(), Runnable {
 
 	private fun drawBackground(back: FResource) {
 		when (back) {
-			is ImageResource -> buffer.graphics.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
+			is ImageResource -> bg.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
 			is ColorResource -> {
-				buffer.graphics.color = back.color
-				buffer.graphics.fillRect(0, 0, width, height)
+				bg.color = back.color
+				bg.fillRect(0, 0, width, height)
 			}
 			else -> throw FatalError("Unable to draw background")
 		}
@@ -104,6 +117,8 @@ abstract class Game() : JFrame(), Runnable {
 	abstract fun onRefresh()
 	abstract fun onClick(e: OnClickEvent?)
 	abstract fun onMouse(e: OnMouseEvent?)
+	abstract fun onLoseFocus(e: OnWindowEvent?)
+	abstract fun onFocus(e: OnWindowEvent?)
 
 	/**
 	 * Created by ice1000 on 2016/8/13.

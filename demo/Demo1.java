@@ -1,6 +1,7 @@
 import org.frice.game.Game;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
+import org.frice.game.event.OnWindowEvent;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.FileImageResource;
 import org.frice.game.spirit.FObject;
@@ -67,10 +68,19 @@ public class Demo1 extends Game {
 
 	@Override
 	public void onMouse(OnMouseEvent onFrameMouseEvent) {
-
 	}
 
 	public static void main(String[] args) {
 		new Demo1();
+	}
+
+	@Override
+	public void onLoseFocus(OnWindowEvent e) {
+		setPaused(true);
+	}
+
+	@Override
+	public void onFocus(OnWindowEvent e) {
+		setPaused(false);
 	}
 }
