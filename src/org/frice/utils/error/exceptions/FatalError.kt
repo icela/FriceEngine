@@ -1,5 +1,7 @@
 package org.frice.utils.error.exceptions
 
+import org.frice.utils.error.log.FLog
+
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
@@ -7,4 +9,7 @@ package org.frice.utils.error.exceptions
  */
 class FatalError(s: String) : Error(s) {
 	constructor(): this("")
+	init {
+		FLog.e(s)
+	}
 }

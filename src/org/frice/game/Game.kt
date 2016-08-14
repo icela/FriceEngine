@@ -10,6 +10,7 @@ import org.frice.game.spirit.FObject
 import org.frice.game.spirit.ImageObject
 import org.frice.game.spirit.ShapedColorObject
 import org.frice.utils.error.exceptions.FatalError
+import org.frice.utils.error.log.FLog
 import org.frice.utils.shape.FCircle
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
@@ -68,6 +69,7 @@ abstract class Game() : Frame(), Runnable {
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
 		Thread(this).start()
+		FLog.v("Engine start!")
 	}
 
 	override fun setBounds(r: Rectangle) {
@@ -122,11 +124,12 @@ abstract class Game() : Frame(), Runnable {
 					when (o) {
 						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
 						is ShapedColorObject -> {
-							bg.color = o.res.color
+							val bgg = bg
+							bgg.color = o.res.color
 							when (o.shape) {
-								is FRectangle -> bg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
-								is FOval -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
-								is FCircle -> bg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+								is FRectangle -> bgg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
+								is FOval -> bgg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
+								is FCircle -> bgg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
 							}
 						}
 					}

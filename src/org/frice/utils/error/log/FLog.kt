@@ -7,4 +7,8 @@ package org.frice.utils.error.log
  */
 object FLog {
 	fun v(e: Any?) = println(e?.toString())
+	fun d(e: Any?) = println(e?.toString())
+	fun i(e: Any?) = println(e?.toString())
+	fun w(e: Any?) = println(e?.toString())
+	fun e(e: Any?) = System.err.println(e?.toString())
 }

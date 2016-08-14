@@ -25,7 +25,8 @@ class ShapedColorObject(val res: ColorResource, val shape: FShape,
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || other !is ShapedColorObject) return false
-		if (res == other.res && id == other.id) return true
+		if ((id != -1 && id == other.id) ||
+				res == other.res && x == other.x && y == other.y) return true
 		return true
 	}
 

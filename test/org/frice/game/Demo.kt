@@ -3,7 +3,6 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FileImageResource
 import org.frice.game.spirit.ImageObject
 import org.frice.utils.error.log.FLog
@@ -18,25 +17,18 @@ import java.util.*
  * @since v0.1
  */
 class Demo : Game() {
-	override fun onLoseFocus(e: OnWindowEvent?) {
-		paused = true
-	}
-
-	override fun onFocus(e: OnWindowEvent?) {
-		paused = false
-	}
-
 	val dickTimer = FTimer(1000)
+
 	var fuck = 0
+
 	val objList = ArrayList<ImageObject>()
 	var mode = 0
-
 	override fun onInit() {
 		bounds = Rectangle(100, 100, 640, 480)
 		title = "Demo of Frice"
-		back = ColorResource.BLUE
+		refreshPerSecond = 100.0
+//		back = ColorResource.BLUE
 	}
-
 	override fun onRefresh() {
 		if (dickTimer.ended()) {
 			val texture = FileImageResource("tres" + File.separator + "display.png")
@@ -68,6 +60,14 @@ class Demo : Game() {
 	}
 
 	override fun onClick(e: OnClickEvent?) {
+	}
+
+	override fun onLoseFocus(e: OnWindowEvent?) {
+		paused = true
+	}
+
+	override fun onFocus(e: OnWindowEvent?) {
+		paused = false
 	}
 
 }
