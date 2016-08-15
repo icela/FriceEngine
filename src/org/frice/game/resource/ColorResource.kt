@@ -21,7 +21,7 @@ class ColorResource(val color: Color) : FResource {
 		val CYAN = ColorResource(Color.CYAN)
 		val MAGENTA = ColorResource(Color.MAGENTA)
 		val YELLOW = ColorResource(Color.YELLOW)
-		val SHIT_YELLOW = ColorResource(Color(0x633516))
+		val SHIT_YELLOW = ColorResource(Color(0x633516)) /* Color of poop, just make it happy */
 		val ORANGE = ColorResource(Color.ORANGE)
 		val PINK = ColorResource(Color.PINK)
 	}

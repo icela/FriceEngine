@@ -19,7 +19,7 @@ import java.util.*
 class Demo3 : Game() {
 	val dickTimer = FTimer(1000)
 
-	var fuck = 0.0
+	var fuck = 0.0 /* QwQ just calm down:) */
 
 	val objList = ArrayList<ImageObject>()
 	var mode = 0
