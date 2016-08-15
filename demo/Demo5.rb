@@ -1,17 +1,20 @@
 require 'java'
 
-class Demo5 < org.frice.game.Game
+class Demo5 < org.frice.game.GameForRuby
+	def initialize
+		onInit
+	end
 	def onInit
-		setBounds java.awt.Rectangle.new 100, 100, 800, 800
-		setTitle 'JRuby demo by ice1000'
+		initWindow
+		window.setBounds java.awt.Rectangle.new 100, 100, 800, 800
+		window.setTitle 'JRuby demo by ice1000'
 	end
-	def onRefresh
+	def on_refresh
 	end
-	def onClick(e)
+	def on_click(e)
 	end
-	def onMouse(e)
+	def on_mouse(e)
 	end
 end
 
-a = Demo5.new
-p a.getTitle
+Demo5.new

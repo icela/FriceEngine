@@ -20,7 +20,7 @@ git clone https://github.com/icela/FriceEngine.git
 - [X] Kotlin(Native)
 - [X] Java
 - [X] Groovy
-- [ ] JRuby
+- [ ] JRuby(seemed not working with my project)
 - [ ] Scala(I don't know if supported)
 
 ## Basic
