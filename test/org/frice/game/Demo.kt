@@ -3,8 +3,8 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.resource.FileImageResource
 import org.frice.game.obj.ImageObject
+import org.frice.game.resource.FileImageResource
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimer
 import java.awt.Rectangle
@@ -19,7 +19,7 @@ import java.util.*
 class Demo : Game() {
 	val dickTimer = FTimer(1000)
 
-	var fuck = 0
+	var fuck = 0.0
 
 	val objList = ArrayList<ImageObject>()
 	var mode = 0

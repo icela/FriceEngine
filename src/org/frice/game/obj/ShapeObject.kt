@@ -13,21 +13,21 @@ import java.util.*
  * @author ice1000
  * @since v0.1.1
  */
-open class ShapeObject(val res: ColorResource, val shape: FShape,
-                  override var id: Int, override var x: Int, override var y: Int) : FObject {
+open class ShapeObject(val res: ColorResource, val shape: FShape, override var id: Int,
+                       override var x: Double, override var y: Double) : FObject {
 	override val anims: ArrayList<MoveAnim> = ArrayList()
 
-	constructor(res: ColorResource, shape: FShape, x: Int, y: Int) : this(res, shape, -1, x, y)
+	constructor(res: ColorResource, shape: FShape, x: Double, y: Double) : this(res, shape, -1, x, y)
 
-	constructor(res: ColorResource, shape: FShape, id: Int) : this(res, shape, id, 0, 0)
+	constructor(res: ColorResource, shape: FShape, id: Int) : this(res, shape, id, 0.0, 0.0)
 
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
 	override fun getResource() = res
 
-	override fun move(p: Pair<Int, Int>) {
+	override fun move(p: Pair<Double, Double>) {
 		x += p.first
-		x += p.second
+		y += p.second
 	}
 
 	override fun equals(other: Any?): Boolean {

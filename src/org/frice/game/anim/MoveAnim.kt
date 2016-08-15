@@ -6,5 +6,5 @@ package org.frice.game.anim
  * @since v0.2.1
  */
 interface MoveAnim : FAnim {
-	fun getDelta(): Pair<Int, Int>
+	fun getDelta(): Pair<Double, Double>
 }

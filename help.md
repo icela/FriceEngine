@@ -96,7 +96,7 @@ color: String|color code string
 GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
 ```
 
-## org.frice.utils.message.log.FLog
+## org.frice.game.utils.message.log.FLog
 Static object.
 
 ### APIs
@@ -107,7 +107,7 @@ i(e: Any?)|log a info message
 w(e: Any?)|log a warning message
 e(e: Any?)|log an error message
 
-## org.frice.utils.time.FTimer
+## org.frice.game.utils.time.FTimer
 Class.<br/>
 I think I didn't tell the function well(Sorry for my english), so please view usage in demos.
 
@@ -121,11 +121,11 @@ Name|Usage
 :---|---:
 ended()|returns if the time's up.
 
-## org.frice.utils.time.FTimeListener
+## org.frice.game.utils.time.FTimeListener
 Class.
 
 ### Parent
-org.frice.utils.time.FTimer
+org.frice.game.utils.time.FTimer
 
 ### Constructors
 Param|Usage

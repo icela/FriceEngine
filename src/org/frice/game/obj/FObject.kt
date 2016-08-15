@@ -11,9 +11,9 @@ import java.util.*
  */
 interface FObject {
 	var id: Int
-	var x: Int
-	var y: Int
+	var x: Double
+	var y: Double
 	val anims: ArrayList<MoveAnim>
 	fun getResource(): FResource
-	fun move(p: Pair<Int, Int>)
+	fun move(p: Pair<Double, Double>)
 }

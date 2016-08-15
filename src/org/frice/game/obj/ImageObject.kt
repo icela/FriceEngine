@@ -11,18 +11,19 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-open class ImageObject(val res: ImageResource, override var id: Int, override var x: Int, override var y: Int) : FObject {
+open class ImageObject(val res: ImageResource, override var id: Int,
+                       override var x: Double, override var y: Double) : FObject {
 	override fun getResource() = res
 
-	constructor(res: ImageResource, id: Int) : this(res, id, 0, 0)
+	constructor(res: ImageResource, id: Int) : this(res, id, 0.0, 0.0)
 
-	constructor(res: ImageResource) : this(res, -1, 0, 0)
+	constructor(res: ImageResource) : this(res, -1, 0.0, 0.0)
 
-	constructor(res: ImageResource, x: Int, y: Int) : this(res, -1, x, y)
+	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
 	override val anims: ArrayList<MoveAnim> = ArrayList()
 
-	override fun move(p: Pair<Int, Int>) {
+	override fun move(p: Pair<Double, Double>) {
 		x += p.first
 		y += p.second
 	}
@@ -40,11 +41,12 @@ open class ImageObject(val res: ImageResource, override var id: Int, override va
 		return false
 	}
 
-	override fun hashCode(): Int {
+	override fun hashCode(): Int{
 		var result = res.hashCode()
 		result = 31 * result + id
-		result = 31 * result + x
-		result = 31 * result + y
+		result = 31 * result + x.hashCode()
+		result = 31 * result + y.hashCode()
+		result = 31 * result + anims.hashCode()
 		return result
 	}
 }

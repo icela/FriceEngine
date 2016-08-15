@@ -80,10 +80,6 @@ public class Demo1 extends Game {
 	public void onMouse(OnMouseEvent onFrameMouseEvent) {
 	}
 
-	public static void main(String[] args) {
-		new Demo1();
-	}
-
 	@Override
 	public void onLoseFocus(OnWindowEvent e) {
 		setPaused(true);
@@ -92,5 +88,9 @@ public class Demo1 extends Game {
 	@Override
 	public void onFocus(OnWindowEvent e) {
 		setPaused(false);
+	}
+
+	public static void main(String[] args) {
+		new Demo1();
 	}
 }

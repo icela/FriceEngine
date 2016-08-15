@@ -128,14 +128,14 @@ abstract class Game() : Frame(), Runnable {
 				objects.forEach { o ->
 					o.anims.forEach { a -> o.move(a.getDelta()) }
 					when (o) {
-						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
+						is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 						is ShapeObject -> {
 							val bgg = bg
 							bgg.color = o.res.color
 							when (o.shape) {
-								is FRectangle -> bgg.fillRect(o.x, o.y, o.shape.width, o.shape.height)
-								is FOval -> bgg.fillOval(o.x, o.y, o.shape.width, o.shape.height)
-								is FCircle -> bgg.fillOval(o.x, o.y, o.shape.width, o.shape.width)
+								is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.height)
+								is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.height)
+								is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.width)
 							}
 						}
 					}

@@ -6,9 +6,15 @@ package org.frice.game.utils.message.log
  * @since v0.1
  */
 object FLog {
-	@JvmStatic fun v(e: Any?) = println(e?.toString())
-	@JvmStatic fun d(e: Any?) = println(e?.toString())
-	@JvmStatic fun i(e: Any?) = println(e?.toString())
-	@JvmStatic fun w(e: Any?) = println(e?.toString())
-	@JvmStatic fun e(e: Any?) = System.err.println(e?.toString())
+	@JvmStatic fun v(e: Any?) = verbose(e)
+	@JvmStatic fun d(e: Any?) = debug(e)
+	@JvmStatic fun i(e: Any?) = info(e)
+	@JvmStatic fun w(e: Any?) = warning(e)
+	@JvmStatic fun e(e: Any?) = error(e)
+
+	@JvmStatic fun verbose(e: Any?) = println(e?.toString())
+	@JvmStatic fun debug(e: Any?) = println(e?.toString())
+	@JvmStatic fun info(e: Any?) = println(e?.toString())
+	@JvmStatic fun warning(e: Any?) = println(e?.toString())
+	@JvmStatic fun error(e: Any?) = System.err.println(e?.toString())
 }
