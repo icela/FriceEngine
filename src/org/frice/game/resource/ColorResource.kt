@@ -24,6 +24,11 @@ class ColorResource(val color: Color) : FResource {
 		val SHIT_YELLOW = ColorResource(Color(0x633516))
 		val ORANGE = ColorResource(Color.ORANGE)
 		val PINK = ColorResource(Color.PINK)
+		val 小埋色 = ColorResource(Color(0xFFAC2B))
+		val 基佬紫 = ColorResource(Color(0x781895))
+		val 吾王蓝 = BLUE
+		val 教主黄 = YELLOW
+		val 宝强绿 = GREEN
 	}
 
 	constructor(color: Int):this(Color(color))

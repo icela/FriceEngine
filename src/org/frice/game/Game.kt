@@ -2,8 +2,6 @@ package org.frice.game
 
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
-import org.frice.game.event.OnClickEvent
-import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.ImageObject
@@ -18,10 +16,9 @@ import org.frice.game.utils.shape.FOval
 import org.frice.game.utils.shape.FRectangle
 import org.frice.game.utils.time.FTimeListener
 import java.awt.BorderLayout
+import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Rectangle
-import java.awt.event.MouseEvent
-import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
@@ -35,7 +32,7 @@ import javax.swing.JPanel
  * @author ice1000
  * @since v0.1
  */
-abstract class Game() : AbstractGame() {
+abstract class Game() : AbstractGame(), Runnable {
 	private val panel = GamePanel()
 	private val objects = ArrayList<FObject>()
 	private val timeListeners = ArrayList<FTimeListener>()
@@ -44,15 +41,6 @@ abstract class Game() : AbstractGame() {
 		get() = buffer.graphics
 
 	init {
-		layout = BorderLayout()
-		bounds = Rectangle(200, 200, 640, 480)
-		addMouseListener(object : MouseListener {
-			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
-			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
-			override fun mouseReleased(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
-			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
-			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
-		})
 		add(panel, BorderLayout.CENTER)
 		addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit
@@ -79,6 +67,21 @@ abstract class Game() : AbstractGame() {
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
 		panel.bounds = r
+	}
+
+	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
+		super.setBounds(x, y, width, height)
+		panel.setBounds(x, y, width, height)
+	}
+
+	override fun setSize(width: Int, height: Int) {
+		super.setSize(width, height)
+		panel.setSize(width, height)
+	}
+
+	override fun setSize(d: Dimension?) {
+		super.setSize(d)
+		panel.size = d
 	}
 
 	override fun run() {
