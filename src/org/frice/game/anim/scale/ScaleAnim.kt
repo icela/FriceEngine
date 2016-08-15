@@ -7,6 +7,6 @@ import org.frice.game.anim.FAnim
  * @author ice1000
  * @since v0.2.2
  */
-interface ScaleAnim : FAnim {
-	fun getAfter(): Pair<Double, Double>
+abstract class ScaleAnim : FAnim() {
+	abstract fun getAfter(): Pair<Double, Double>
 }

@@ -41,6 +41,7 @@ abstract class Game() : AbstractGame(), Runnable {
 		get() = buffer.graphics
 
 	init {
+		setBounds(200, 200, 640, 480)
 		add(panel, BorderLayout.CENTER)
 		addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit

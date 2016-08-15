@@ -5,5 +5,10 @@ package org.frice.game.anim
  * @author ice1000
  * @since v0.2.1
  */
-interface FAnim {
+abstract class FAnim() {
+	protected val start: Double
+		get() = field / 1000
+	init {
+		start = System.currentTimeMillis().toDouble()
+	}
 }

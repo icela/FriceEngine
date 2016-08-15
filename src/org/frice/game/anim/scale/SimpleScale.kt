@@ -5,6 +5,11 @@ package org.frice.game.anim.scale
  * @author ice1000
  * @since v0.2.3
  */
-class SimpleScale(val x: Double, val y: Double) : ScaleAnim {
-	override fun getAfter() = Pair(x, y)
+class SimpleScale(val x: Double, val y: Double) : ScaleAnim() {
+	private val timeFromStart: Double
+		get() = System.currentTimeMillis().toDouble() / 1000 - start
+
+	override fun getAfter() = Pair(
+			x * timeFromStart,
+			y * timeFromStart)
 }

@@ -2,6 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.resource.ColorResource
+import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.shape.FShape
 import java.util.*
 
@@ -31,8 +32,11 @@ open class ShapeObject(val res: ColorResource, val shape: FShape, override var i
 	}
 
 	override fun scale(p: Pair<Double, Double>) {
-		shape.width = (shape.width * p.first).toInt()
-		shape.height = (shape.width * p.second).toInt()
+		shape.width = (shape.width.toDouble() * p.first).toInt()
+		shape.height = (shape.height.toDouble() * p.second).toInt()
+		FLog.debug("shape.width = ${shape.width}")
+		FLog.debug("shape.height = ${shape.height}")
+		FLog.debug("p = $p")
 	}
 
 	override fun equals(other: Any?): Boolean {

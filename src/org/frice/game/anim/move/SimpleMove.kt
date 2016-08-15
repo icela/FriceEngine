@@ -11,7 +11,7 @@ import org.frice.game.utils.message.log.FLog
  * @param x pixels per second
  * @param y pixels per second
  */
-open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
+open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim() {
 	private var cache: Double
 		get() = field / 1000
 	protected var now: Double

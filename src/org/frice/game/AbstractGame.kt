@@ -7,7 +7,6 @@ import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import java.awt.BorderLayout
 import java.awt.Frame
-import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 
@@ -26,7 +25,6 @@ abstract class AbstractGame() : Frame() {
 
 	init {
 		layout = BorderLayout()
-		bounds = Rectangle(200, 200, 640, 480)
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
 			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))

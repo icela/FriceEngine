@@ -5,9 +5,5 @@ package org.frice.game.utils.shape
  * @author ice1000
  * @since v0.1.1
  */
-class FCircle(var r: Double) : FShape {
-	override var width = (r * 2).toInt()
-		get() = (r * 2).toInt()
-	override var height = width
-		get() = width
+class FCircle(r: Double) : FOval(r, r) {
 }

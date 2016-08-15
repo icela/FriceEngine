@@ -13,14 +13,8 @@ import org.frice.game.utils.message.log.FLog
  */
 
 class AccelerateMove(private var ax: Double, private var ay: Double) : SimpleMove(0, 0) {
-	private val start: Double
-		get() = field / 1000.0
 	var mx = 0.0
 	var my = 0.0
-
-	init {
-		start = System.currentTimeMillis().toDouble()
-	}
 
 	override fun getDelta(): Pair<Double, Double> {
 		now = System.currentTimeMillis().toDouble()
