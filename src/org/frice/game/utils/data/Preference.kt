@@ -17,8 +17,8 @@ import javax.xml.transform.stream.StreamResult
  * @author ice1000
  * @since 0.2.2
  */
-class Preference private constructor(val file: File) {
-	private constructor(path: String) : this(File(path))
+class Preference constructor(val file: File) {
+	constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder
 	private val doc: Document

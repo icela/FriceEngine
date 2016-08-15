@@ -4,7 +4,7 @@ import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.ImageObject;
-import org.frice.game.resource.FileImageResource;
+import org.frice.game.resource.image.FileImageResource;
 
 /**
  * Demo for accelerate (AccelerateMove), this is a simple gravity mode.

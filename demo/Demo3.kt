@@ -2,7 +2,7 @@ import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.ImageObject
-import org.frice.game.resource.FileImageResource
+import org.frice.game.resource.image.FileImageResource
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimer
 import java.awt.Rectangle

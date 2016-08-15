@@ -1,5 +1,6 @@
-package org.frice.game.resource
+package org.frice.game.resource.image
 
+import org.frice.game.resource.FResource
 import java.awt.Image
 
 /**

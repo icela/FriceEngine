@@ -24,6 +24,12 @@
             <option name="SMART_TABS" value="true" />
           </indentOptions>
         </codeStyleSettings>
+        <codeStyleSettings language="ruby">
+          <indentOptions>
+            <option name="USE_TAB_CHARACTER" value="true" />
+            <option name="SMART_TABS" value="true" />
+          </indentOptions>
+        </codeStyleSettings>
       </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="true" />

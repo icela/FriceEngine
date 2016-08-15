@@ -9,7 +9,7 @@ import org.frice.game.obj.ImageObject
 import org.frice.game.obj.ShapeObject
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
-import org.frice.game.resource.ImageResource
+import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.shape.FCircle

@@ -1,4 +1,4 @@
-package org.frice.game.resource
+package org.frice.game.resource.image
 
 import java.io.File
 import javax.imageio.ImageIO

@@ -1,6 +1,8 @@
 # FriceEngine
 
-An easy, light weight, native game engine running on JVM
+An easy, light weight, native game engine running on JVM.
+
+View [Help](help.md) to learn more about Frice Engine.
 
 # Build
 
