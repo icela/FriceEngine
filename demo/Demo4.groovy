@@ -1,46 +1,45 @@
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.event.OnWindowEvent
+import org.frice.game.utils.data.Preference
+import org.frice.game.utils.message.FDialog
 
 class Demo4 extends Game {
 
-    @Override
-    protected void onInit() {
+	def fuck = new Preference("test.xml")
+	FDialog dialog
 
-    }
+	@Override
+	protected void onInit() {
+		dialog = new FDialog(this)
+	}
 
-    @Override
-    protected void onExit() {
+	@Override
+	protected void onRefresh() {
+		switch (dialog.confirm("what do U want?")) {
+			case 0:
+				fuck.insert(dialog.input("inserting, key?"), dialog.input("inserting, value?"))
+				break
+			case 1:
+				dialog.confirm(fuck.query(
+						dialog.input("querying, key?"),
+						dialog.input("querying, value?")).toString())
+				break
+			case 2:
+				onExit()
+				break
+		}
+	}
 
-    }
+	@Override
+	protected void onClick(OnClickEvent e) {
+	}
 
-    @Override
-    protected void onRefresh() {
+	@Override
+	protected void onMouse(OnMouseEvent e) {
+	}
 
-    }
-
-    @Override
-    protected void onClick(OnClickEvent e) {
-
-    }
-
-    @Override
-    protected void onMouse(OnMouseEvent e) {
-
-    }
-
-    @Override
-    protected void onLoseFocus(OnWindowEvent e) {
-        this.paused = true
-    }
-
-    @Override
-    protected void onFocus(OnWindowEvent e) {
-        this.paused = false
-    }
-
-    public static void main(String[] args) {
-        new Demo4()
-    }
+	public static void main(String[] args) {
+		new Demo4()
+	}
 }

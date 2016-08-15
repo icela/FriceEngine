@@ -10,7 +10,9 @@ import javax.swing.JOptionPane
  */
 class FDialog(val game: Game) {
 	fun show(msg: String) = JOptionPane.showMessageDialog(game, msg)
-	fun input() = JOptionPane.showInputDialog(game)
-	fun confirm(msg: String) = confirm(msg, "", JOptionPane.YES_NO_CANCEL_OPTION)
+	fun input() = input("")
+	fun input(msg: String) = JOptionPane.showInputDialog(game, msg)
+	fun confirm(msg: String) = confirm(msg, "")
+	fun confirm(msg: String, title: String) = confirm(msg, title, JOptionPane.YES_NO_CANCEL_OPTION)
 	fun confirm(msg: String, title: String, option: Int) = JOptionPane.showConfirmDialog(game, msg, title, option)
 }
