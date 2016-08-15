@@ -7,11 +7,7 @@ An easy, light, native game engine running on JVM
 
 Clone这个项目，并且使用IntelliJ IDEA打开（确保您已安装Kotlin插件）。
 
-Clone me , (
-```
-git clone https://github.com/icela/FriceEngine.git
-```)
-and open with IntelliJ IDEA (please install Kotlin plugin first!).
+Clone me , (`git clone https://github.com/icela/FriceEngine.git`) and open with IntelliJ IDEA (please install Kotlin plugin first!).
 
 # Usage
 
