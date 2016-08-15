@@ -7,6 +7,8 @@ import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.FileImageResource;
 import org.frice.game.utils.time.FTimer;
 
+import java.util.Random;
+
 /**
  * Created by ice1000 on 2016/8/15.
  *
@@ -15,7 +17,9 @@ import org.frice.game.utils.time.FTimer;
  */
 public class Demo2 extends Game {
 
-	private FTimer timer = new FTimer(100);
+	private FTimer timer;
+	private Random random = new Random();
+	private ImageObject object;
 
 	public static void main(String[] args) {
 		new Demo2();
@@ -23,11 +27,12 @@ public class Demo2 extends Game {
 
 	@Override
 	public void onInit() {
-		addObject(new ImageObject(new FileImageResource("test.png"), 20, 20) {{
-			getAnims().add(new SimpleMove(10, 10));
-		}});
+		timer = new FTimer(100);
+		object = new ImageObject(new FileImageResource("test.png"), 20, 20);
+		object.getAnims().add(new SimpleMove(10, 10));
+		addObject(object);
 //		setBack(new FileImageResource("test.png"));
-//		setRefreshPerSecond(1);
+//		setRefreshPerSecond(20.0);
 	}
 
 	@Override
@@ -37,6 +42,13 @@ public class Demo2 extends Game {
 
 	@Override
 	public void onRefresh() {
+		try {
+			if (timer.ended()) {
+				object.getAnims().clear();
+				object.getAnims().add(new SimpleMove(random.nextInt(80) - 40, random.nextInt(80) - 40));
+			}
+		} catch (Exception ignored){
+		}
 	}
 
 	@Override

@@ -44,7 +44,7 @@ abstract class Game() : Frame(), Runnable {
 
 	protected var paused = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW
-	protected var refreshPerSecond = 10.0
+	protected var refreshPerSecond = 15.0
 	protected var debug = true
 
 	init {
