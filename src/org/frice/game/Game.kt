@@ -29,7 +29,7 @@ import java.util.*
 import javax.swing.JPanel
 
 /**
- * Do not override the constructor.
+ * DO NOT override the constructor.
  *
  * Created by ice1000 on 2016/8/13.
  * @author ice1000

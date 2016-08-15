@@ -21,6 +21,7 @@ import java.util.ArrayList;
  * @author ice1000
  * @since v0.1
  */
+/* PS: Maybe you'll feel uncomfortable, but just calm down:) */
 public class Demo1 extends Game {
 
 	private ArrayList<FObject> objects = new ArrayList<>();
