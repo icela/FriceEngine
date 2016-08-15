@@ -1,15 +1,16 @@
 import org.frice.game.Game;
+import org.frice.game.anim.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.event.OnWindowEvent;
-import org.frice.game.resource.ColorResource;
-import org.frice.game.resource.FileImageResource;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.obj.ShapeObject;
+import org.frice.game.resource.ColorResource;
+import org.frice.game.resource.FileImageResource;
 import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.message.log.FLog;
-import org.frice.game.utils.shape.FRectangle;
+import org.frice.game.utils.shape.FOval;
 import org.frice.game.utils.time.FTimeListener;
 import org.frice.game.utils.time.FTimer;
 
@@ -34,7 +35,9 @@ public class Demo1 extends Game {
 		setBack(ColorResource.Companion.getPINK());
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
-		addObject(new ShapeObject(ColorResource.Companion.getCYAN(), new FRectangle(50, 50)));
+		addObject(new ShapeObject(ColorResource.Companion.getDARK_GRAY(), new FOval(50, 50)) {{
+			getAnims().add(new SimpleMove(10, 20));
+		}});
 		addTimeListener(new FTimeListener(200, () -> {
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;
@@ -70,7 +73,7 @@ public class Demo1 extends Game {
 	@Override
 	public void onClick(OnClickEvent onClickEvent) {
 //		dialog.show("fuck!!!!!!");
-		FLog.i(dialog.confirm(""));
+		FLog.i(dialog.confirm("Choose"));
 	}
 
 	@Override

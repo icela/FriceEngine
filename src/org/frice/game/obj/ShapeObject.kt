@@ -13,9 +13,9 @@ import java.util.*
  * @author ice1000
  * @since v0.1.1
  */
-class ShapeObject(val res: ColorResource, val shape: FShape,
+open class ShapeObject(val res: ColorResource, val shape: FShape,
                   override var id: Int, override var x: Int, override var y: Int) : FObject {
-	override var anims: ArrayList<MoveAnim> = ArrayList()
+	override val anims: ArrayList<MoveAnim> = ArrayList()
 
 	constructor(res: ColorResource, shape: FShape, x: Int, y: Int) : this(res, shape, -1, x, y)
 

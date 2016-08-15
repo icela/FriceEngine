@@ -13,7 +13,7 @@ interface FObject {
 	var id: Int
 	var x: Int
 	var y: Int
-	var anims: ArrayList<MoveAnim>
+	val anims: ArrayList<MoveAnim>
 	fun getResource(): FResource
 	fun move(p: Pair<Int, Int>)
 }

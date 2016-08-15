@@ -11,7 +11,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-class ImageObject(val res: ImageResource, override var id: Int, override var x: Int, override var y: Int) : FObject {
+open class ImageObject(val res: ImageResource, override var id: Int, override var x: Int, override var y: Int) : FObject {
 	override fun getResource() = res
 
 	constructor(res: ImageResource, id: Int) : this(res, id, 0, 0)
@@ -20,7 +20,7 @@ class ImageObject(val res: ImageResource, override var id: Int, override var x: 
 
 	constructor(res: ImageResource, x: Int, y: Int) : this(res, -1, x, y)
 
-	override var anims: ArrayList<MoveAnim> = ArrayList()
+	override val anims: ArrayList<MoveAnim> = ArrayList()
 
 	override fun move(p: Pair<Int, Int>) {
 		x += p.first
