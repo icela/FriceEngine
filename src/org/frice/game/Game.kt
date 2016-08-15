@@ -1,5 +1,6 @@
 package org.frice.game
 
+import org.frice.game.anim.move.MoveAnim
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
@@ -126,7 +127,11 @@ abstract class Game() : Frame(), Runnable {
 			drawBackground(back)
 			if (debug)
 				objects.forEach { o ->
-					o.anims.forEach { a -> o.move(a.getDelta()); }
+					o.anims.forEach { a ->
+						when (a) {
+							is MoveAnim -> o.move(a.getDelta())
+						}
+					}
 					when (o) {
 						is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 						is ShapeObject -> {

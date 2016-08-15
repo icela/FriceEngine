@@ -3,9 +3,13 @@ package org.frice.game.anim.move
 import org.frice.game.utils.message.log.FLog
 
 /**
+ * Move with force (accelerate), give accelerate value to ax and by
+ *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000
  * @since v0.2.2
+ * @param ax accelerate on x
+ * @param ay accelerate on y
  */
 
 class ForceMove(private var ax: Double, private var ay: Double) : SimpleMove(0, 0) {
