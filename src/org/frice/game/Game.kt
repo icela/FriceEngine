@@ -44,7 +44,7 @@ abstract class Game() : Frame(), Runnable {
 
 	protected var paused = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW
-	protected var refreshPerSecond = 15.0
+	protected var refreshPerSecond = 15
 	protected var debug = true
 
 	init {
@@ -86,7 +86,7 @@ abstract class Game() : Frame(), Runnable {
 				timeListeners.forEach { it.check() }
 				panel.repaint()
 			}
-			Thread.sleep((1000 / refreshPerSecond).toLong())
+			Thread.sleep((1000.0 / refreshPerSecond).toLong())
 		}
 	}
 

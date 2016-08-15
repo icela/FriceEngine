@@ -28,11 +28,11 @@ public class Demo2 extends Game {
 	@Override
 	public void onInit() {
 		timer = new FTimer(100);
-		object = new ImageObject(new FileImageResource("test.png"), 20, 20);
+		object = new ImageObject(new FileImageResource("test.png"), 120, 120);
 		object.getAnims().add(new SimpleMove(10, 10));
 		addObject(object);
 //		setBack(new FileImageResource("test.png"));
-//		setRefreshPerSecond(20.0);
+		setRefreshPerSecond(40);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class Demo2 extends Game {
 		try {
 			if (timer.ended()) {
 				object.getAnims().clear();
-				object.getAnims().add(new SimpleMove(random.nextInt(80) - 40, random.nextInt(80) - 40));
+				object.getAnims().add(new SimpleMove(random.nextInt(180) - 90, random.nextInt(180) - 90));
 			}
 		} catch (Exception ignored){
 		}
