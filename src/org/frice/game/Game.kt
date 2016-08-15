@@ -3,12 +3,12 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
+import org.frice.game.obj.FObject
+import org.frice.game.obj.ImageObject
+import org.frice.game.obj.ShapeObject
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
-import org.frice.game.obj.FObject
-import org.frice.game.obj.ImageObject
-import org.frice.game.obj.ShapedColorObject
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.shape.FCircle
@@ -52,10 +52,10 @@ abstract class Game() : Frame(), Runnable {
 		bounds = Rectangle(200, 200, 640, 480)
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
-			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
-			override fun mouseReleased(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
-			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
-			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e))
+			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
+			override fun mouseReleased(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
+			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 		})
 		add(panel, BorderLayout.CENTER)
 		addWindowListener(object : WindowListener {
@@ -128,7 +128,7 @@ abstract class Game() : Frame(), Runnable {
 				objects.forEach { o ->
 					when (o) {
 						is ImageObject -> bg.drawImage(o.getImage(), o.x, o.y, this)
-						is ShapedColorObject -> {
+						is ShapeObject -> {
 							val bgg = bg
 							bgg.color = o.res.color
 							when (o.shape) {

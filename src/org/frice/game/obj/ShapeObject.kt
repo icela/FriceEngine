@@ -11,8 +11,8 @@ import org.frice.game.utils.shape.FShape
  * @author ice1000
  * @since v0.1.1
  */
-class ShapedColorObject(val res: ColorResource, val shape: FShape,
-		override var id: Int, override val x: Int, override val y: Int) : FObject {
+class ShapeObject(val res: ColorResource, val shape: FShape,
+                  override var id: Int, override val x: Int, override val y: Int) : FObject {
 
 	constructor(res: ColorResource, shape: FShape, x: Int, y: Int) : this(res, shape, -1, x, y)
 
@@ -24,7 +24,7 @@ class ShapedColorObject(val res: ColorResource, val shape: FShape,
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
-		if (other == null || other !is ShapedColorObject) return false
+		if (other == null || other !is ShapeObject) return false
 		if ((id != -1 && id == other.id) ||
 				res == other.res && x == other.x && y == other.y) return true
 		return true

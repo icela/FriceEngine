@@ -6,7 +6,7 @@ import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.FileImageResource;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
-import org.frice.game.obj.ShapedColorObject;
+import org.frice.game.obj.ShapeObject;
 import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.message.log.FLog;
 import org.frice.game.utils.shape.FRectangle;
@@ -34,7 +34,7 @@ public class Demo1 extends Game {
 		setBack(ColorResource.Companion.getPINK());
 		setBounds(100, 100, 800, 800);
 		setTitle("Fuck Fuck Fuck");
-		addObject(new ShapedColorObject(ColorResource.Companion.getCYAN(), new FRectangle(50, 50)));
+		addObject(new ShapeObject(ColorResource.Companion.getCYAN(), new FRectangle(50, 50)));
 		addTimeListener(new FTimeListener(200, () -> {
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;

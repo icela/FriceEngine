@@ -11,13 +11,16 @@ interface OnMouseEvent : OnClickEvent {
 	companion object {
 
 		val MOUSE_CLICK = 0x00
-		val MOUSE_RELEASE = 0x01
+		val MOUSE_RELEASED = 0x01
 		val MOUSE_ENTERED = 0x02
 		val MOUSE_EXITED = 0x03
 		val MOUSE_PRESSED = 0x04
 
-		fun create(e: MouseEvent) = object : OnMouseEvent {
+		fun create(e: MouseEvent, t: Int) = object : OnMouseEvent {
 			override val event = e
+			override fun type() = t
 		}
 	}
+
+	fun type(): Int
 }
