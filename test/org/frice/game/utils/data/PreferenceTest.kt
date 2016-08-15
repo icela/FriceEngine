@@ -8,9 +8,25 @@ import org.junit.Test
  * @since v0.2.2
  */
 class PreferenceTest {
+
+	var p: Preference? = null
+
+	fun init() {
+		p = Preference("D://text.xml")
+	}
+
 	@Test
 	fun insert() {
-		val p = Preference("text.xml")
-		p.insert("ice", 1000)
+		init()
+		p?.insert("ice", 1000)
+		p?.insert("lizhaohan", 1)
+		p?.insert("jelly", "bean")
+	}
+
+	@Test
+	fun query() {
+		init()
+		println("p?.query(\"ice\", 5) = ${p?.query("ice", 5)}")
+		println("p?.query(\"jelly\", jelly) = ${p?.query("jelly", "")}")
 	}
 }

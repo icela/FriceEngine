@@ -28,7 +28,7 @@ class Preference(val file: File) {
 		private val ROOT = "PREFERENCE_CONST_ROOT"
 		private val TYPE = "PREFERENCE_CONST_TYPE"
 		private val VALUE = "PREFERENCE_CONST_VALUE"
-		
+
 		private val TYPE_BYTE = "PREFERENCE_CONST_TYPE_BYTE"
 		private val TYPE_INT = "PREFERENCE_CONST_TYPE_INT"
 		private val TYPE_LONG = "PREFERENCE_CONST_TYPE_LONG"
@@ -48,7 +48,7 @@ class Preference(val file: File) {
 			doc.appendChild(root)
 		} else {
 			doc = builder.parse(file)
-			root = doc.getElementById(ROOT)
+			root = doc.documentElement
 		}
 	}
 
@@ -58,8 +58,12 @@ class Preference(val file: File) {
 	}
 
 	fun insert(key: String, value: Any?) = value.let {
+		try {
+			while (true) root.removeChild(doc.getElementsByTagName(key).item(0))
+		} catch (ignored: Exception) {
+		}
 		val node = doc.createElement(key)
-		node.nodeValue = value.toString()
+		node.setAttribute(VALUE, value.toString())
 		node.setAttribute(TYPE, when (value) {
 			is Byte -> TYPE_BYTE
 			is Int -> TYPE_INT
@@ -72,5 +76,22 @@ class Preference(val file: File) {
 			else -> throw FatalError("invalid type!")
 		})
 		root.appendChild(node)
+		save()
+	}
+
+	fun query(key: String, default: Any): Any {
+		val node = doc.getElementsByTagName(key).item(0)
+		val value = node.attributes.getNamedItem(VALUE).nodeValue ?: return default
+		when (node.attributes.getNamedItem(TYPE).nodeValue) {
+			TYPE_BYTE -> return value.toByte()
+			TYPE_INT -> return value.toInt()
+			TYPE_LONG -> return value.toLong()
+			TYPE_SHORT -> return value.toShort()
+			TYPE_CHAR -> return value.toCharArray()[0]
+			TYPE_FLOAT -> return value.toFloat()
+			TYPE_DOUBLE -> return value.toDouble()
+			TYPE_STRING -> return value
+			else -> return default
+		}
 	}
 }
