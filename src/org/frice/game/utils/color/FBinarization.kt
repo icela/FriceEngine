@@ -1,4 +1,4 @@
-package org.frice.utils.color
+package org.frice.game.utils.color
 
 import java.awt.Color
 

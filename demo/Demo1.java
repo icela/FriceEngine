@@ -7,11 +7,11 @@ import org.frice.game.resource.FileImageResource;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.obj.ShapedColorObject;
-import org.frice.utils.message.FDialog;
-import org.frice.utils.message.log.FLog;
-import org.frice.utils.shape.FRectangle;
-import org.frice.utils.time.FTimeListener;
-import org.frice.utils.time.FTimer;
+import org.frice.game.utils.message.FDialog;
+import org.frice.game.utils.message.log.FLog;
+import org.frice.game.utils.shape.FRectangle;
+import org.frice.game.utils.time.FTimeListener;
+import org.frice.game.utils.time.FTimer;
 
 import java.util.ArrayList;
 

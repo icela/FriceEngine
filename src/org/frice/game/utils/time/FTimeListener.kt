@@ -1,4 +1,4 @@
-package org.frice.utils.time
+package org.frice.game.utils.time
 
 import org.frice.game.event.OnTimeEvent
 

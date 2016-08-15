@@ -1,4 +1,4 @@
-package org.frice.utils.time
+package org.frice.game.utils.time
 
 /**
  * Created by ice1000 on 2016/8/13.

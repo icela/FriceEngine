@@ -1,7 +1,7 @@
 package org.frice.game.obj
 
 import org.frice.game.resource.ColorResource
-import org.frice.utils.shape.FShape
+import org.frice.game.utils.shape.FShape
 
 /**
  * an object with a color and a shape, used to create an simple object quickly

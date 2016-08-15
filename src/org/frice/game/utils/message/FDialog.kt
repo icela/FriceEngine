@@ -1,4 +1,4 @@
-package org.frice.utils.message
+package org.frice.game.utils.message
 
 import org.frice.game.Game
 import javax.swing.JOptionPane

@@ -1,4 +1,4 @@
-package org.frice.utils.shape
+package org.frice.game.utils.shape
 
 import java.awt.geom.Rectangle2D
 
