@@ -2,6 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.resource.image.ImageResource
+import org.frice.game.utils.shape.FRectangle
 import java.awt.Image
 import java.awt.image.BufferedImage
 import java.util.*
@@ -24,6 +25,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
 	override val anims: ArrayList<FAnim> = ArrayList()
+	override val shape = FRectangle(res.image.width, res.image.height)
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),

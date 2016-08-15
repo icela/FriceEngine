@@ -2,6 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.resource.FResource
+import org.frice.game.utils.shape.FShape
 import java.util.*
 
 /**
@@ -14,6 +15,7 @@ interface FObject {
 	var x: Double
 	var y: Double
 	val anims: ArrayList<FAnim>
+	val shape: FShape
 	fun getResource(): FResource
 	fun move(p: Pair<Double, Double>)
 	fun scale(p: Pair<Double, Double>)
