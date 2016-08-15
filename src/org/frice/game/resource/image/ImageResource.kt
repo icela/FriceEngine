@@ -8,6 +8,10 @@ import java.awt.Image
  * @author ice1000
  * @since v0.1
  */
-interface ImageResource: FResource {
-	val image: Image
+abstract class ImageResource : FResource {
+
+	abstract val image: Image
+
+	override fun getResource() = image
+
 }
