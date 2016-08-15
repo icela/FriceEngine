@@ -9,7 +9,6 @@ import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.FileImageResource;
 import org.frice.game.utils.message.FDialog;
-import org.frice.game.utils.message.log.FLog;
 import org.frice.game.utils.shape.FOval;
 import org.frice.game.utils.time.FTimeListener;
 import org.frice.game.utils.time.FTimer;
@@ -73,7 +72,20 @@ public class Demo1 extends Game {
 	@Override
 	public void onClick(OnClickEvent onClickEvent) {
 //		dialog.show("fuck!!!!!!");
-		FLog.i(dialog.confirm("Choose"));
+		switch (dialog.confirm("Choose")) {
+			case 0:
+				dialog.show("Yes!");
+				break;
+			case 1:
+				dialog.show("No!");
+				break;
+			case 2:
+				dialog.show("Canceled!");
+				break;
+			default:
+				dialog.show("???WTF???");
+				break;
+		}
 	}
 
 	@Override
