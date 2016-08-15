@@ -136,7 +136,8 @@ timeUp: () -> Unit|this closure will be invoked when time's up(ended())
 timeUp: OnTimeEvent|execute() in this interface will be invoked when time's up(ended())
 
 ## org.frice.game.utils.data.Preference
-Class.
+Class.<br/>
+Operating an xml file to save data.
 
 ### Constructors
 All private. Please use the factory methods **getPreference**.
@@ -145,3 +146,7 @@ All private. Please use the factory methods **getPreference**.
 Name|Usage
 :---|---:
 getPreference(file: File)|create a instance from file
+getPreference(path: String)|create a instance from file path
+insert(key: String, value: Any?)|insert a key-value pair into the xml file
+query(key: String, value: Any)|query a value to the key from the xml file
+
