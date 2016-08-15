@@ -1,5 +1,4 @@
-package org.frice.game
-
+import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
@@ -15,7 +14,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-class Demo : Game() {
+class Demo3 : Game() {
 	val dickTimer = FTimer(1000)
 
 	var fuck = 0.0
@@ -24,10 +23,11 @@ class Demo : Game() {
 	var mode = 0
 	override fun onInit() {
 		bounds = Rectangle(100, 100, 640, 480)
-		title = "Demo of Frice"
+		title = "Demo3 of Frice"
 		refreshPerSecond = 100
 //		back = ColorResource.BLUE
 	}
+
 	override fun onRefresh() {
 		if (dickTimer.ended()) {
 			val texture = FileImageResource("tres" + File.separator + "display.png")
@@ -69,4 +69,9 @@ class Demo : Game() {
 		paused = false
 	}
 
+	companion object {
+		@JvmStatic fun main(args: Array<String>) {
+			Demo3()
+		}
+	}
 }
