@@ -1,4 +1,6 @@
-package org.frice.game.anim
+package org.frice.game.anim.move
+
+import org.frice.game.anim.FAnim
 
 /**
  * Created by ice1000 on 2016/8/15.

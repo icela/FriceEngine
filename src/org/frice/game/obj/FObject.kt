@@ -1,6 +1,6 @@
 package org.frice.game.obj
 
-import org.frice.game.anim.MoveAnim
+import org.frice.game.anim.move.MoveAnim
 import org.frice.game.resource.FResource
 import java.util.*
 

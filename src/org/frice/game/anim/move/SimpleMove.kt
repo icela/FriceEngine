@@ -1,4 +1,4 @@
-package org.frice.game.anim
+package org.frice.game.anim.move
 
 import org.frice.game.utils.message.log.FLog
 
@@ -9,7 +9,7 @@ import org.frice.game.utils.message.log.FLog
  * @param x pixels per second
  * @param y pixels per second
  */
-class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
+open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
 	private var cache: Double
 		get() = field / 1000
 	private var now: Double
@@ -23,9 +23,10 @@ class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
 	override fun getDelta(): Pair<Double, Double> {
 		now = System.currentTimeMillis().toDouble()
 		FLog.debug(now - cache)
-		val pair = Pair((now - cache) * x,
-				(now - cache) * y)
+		val pair = getPair(x, y)
 		cache = now * 1000
 		return pair
 	}
+
+	protected fun getPair(x: Int, y: Int) = Pair((now - cache) * x, (now - cache) * y)
 }
