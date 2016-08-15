@@ -126,7 +126,7 @@ abstract class Game() : Frame(), Runnable {
 			drawBackground(back)
 			if (debug)
 				objects.forEach { o ->
-					o.anims.forEach { a -> o.move(a.getDelta()) }
+					o.anims.forEach { a -> o.move(a.getDelta()); }
 					when (o) {
 						is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 						is ShapeObject -> {

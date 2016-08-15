@@ -12,7 +12,7 @@ import org.frice.game.utils.message.log.FLog
 open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
 	private var cache: Double
 		get() = field / 1000
-	private var now: Double
+	protected var now: Double
 		get() = field / 1000
 
 	init {

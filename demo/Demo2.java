@@ -1,5 +1,6 @@
 import org.frice.game.Game;
-import org.frice.game.anim.SimpleMove;
+import org.frice.game.anim.move.ForceMove;
+import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.event.OnWindowEvent;
@@ -27,9 +28,12 @@ public class Demo2 extends Game {
 
 	@Override
 	public void onInit() {
-		timer = new FTimer(100);
-		object = new ImageObject(new FileImageResource("test.png"), 120, 120);
-		object.getAnims().add(new SimpleMove(10, 10));
+		timer = new FTimer(10000);
+		setSize(800, 800);
+		object = new ImageObject(new FileImageResource("test.png"), 0, 620);
+		object.getAnims().add(new ForceMove(0, 10));
+		object.getAnims().add(new SimpleMove(0, -600));
+		object.getAnims().add(new SimpleMove(100, 0));
 		addObject(object);
 //		setBack(new FileImageResource("test.png"));
 		setRefreshPerSecond(40);
@@ -42,13 +46,14 @@ public class Demo2 extends Game {
 
 	@Override
 	public void onRefresh() {
-		try {
-			if (timer.ended()) {
-				object.getAnims().clear();
-				object.getAnims().add(new SimpleMove(random.nextInt(180) - 90, random.nextInt(180) - 90));
-			}
-		} catch (Exception ignored){
-		}
+//		try {
+//			if (timer.ended()) {
+//				object.getAnims().clear();
+//				object.getAnims().add(new SimpleMove(random.nextInt(180) - 90, random.nextInt(180) - 90));
+//				object.getAnims().add(new ForceMove(random.nextInt(180) - 90, random.nextInt(180) - 90));
+//			}
+//		} catch (Exception ignored){
+//		}
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 import org.frice.game.Game;
-import org.frice.game.anim.SimpleMove;
+import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.event.OnWindowEvent;

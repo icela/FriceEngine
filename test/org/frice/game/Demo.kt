@@ -5,7 +5,6 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.ImageObject
 import org.frice.game.resource.FileImageResource
-import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimer
 import java.awt.Rectangle
 import java.io.File
@@ -48,7 +47,7 @@ class Demo : Game() {
 					fuck -= 100
 				}
 			}
-			FLog.v("objList.size = ${objList.size}")
+//			FLog.v("objList.size = ${objList.size}")
 		}
 	}
 
