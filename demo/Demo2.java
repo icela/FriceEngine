@@ -3,7 +3,6 @@ import org.frice.game.anim.move.ForceMove;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
-import org.frice.game.event.OnWindowEvent;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.FileImageResource;
 
@@ -20,7 +19,7 @@ public class Demo2 extends Game {
 	}
 
 	@Override
-	public void onInit() {
+	protected void onInit() {
 		setSize(800, 800);
 		ImageObject object = new ImageObject(new FileImageResource("test.png"), 0, 620);
 		object.getAnims().add(new ForceMove(0, 10));
@@ -31,29 +30,14 @@ public class Demo2 extends Game {
 	}
 
 	@Override
-	public void onExit() {
-		System.exit(0);
+	protected void onRefresh() {
 	}
 
 	@Override
-	public void onRefresh() {
+	protected void onClick(OnClickEvent e) {
 	}
 
 	@Override
-	public void onClick(OnClickEvent e) {
-	}
-
-	@Override
-	public void onMouse(OnMouseEvent e) {
-	}
-
-	@Override
-	public void onLoseFocus(OnWindowEvent e) {
-		setPaused(true);
-	}
-
-	@Override
-	public void onFocus(OnWindowEvent e) {
-		setPaused(false);
+	protected void onMouse(OnMouseEvent e) {
 	}
 }

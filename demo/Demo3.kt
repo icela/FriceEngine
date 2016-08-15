@@ -1,7 +1,6 @@
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.ImageObject
 import org.frice.game.resource.FileImageResource
 import org.frice.game.utils.time.FTimer
@@ -51,22 +50,10 @@ class Demo3 : Game() {
 		}
 	}
 
-	override fun onExit() {
-		System.exit(0)
-	}
-
 	override fun onMouse(e: OnMouseEvent?) {
 	}
 
 	override fun onClick(e: OnClickEvent?) {
-	}
-
-	override fun onLoseFocus(e: OnWindowEvent?) {
-		paused = true
-	}
-
-	override fun onFocus(e: OnWindowEvent?) {
-		paused = false
 	}
 
 	companion object {

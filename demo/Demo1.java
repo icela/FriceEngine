@@ -2,7 +2,6 @@ import org.frice.game.Game;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
-import org.frice.game.event.OnWindowEvent;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.obj.ShapeObject;
@@ -90,16 +89,6 @@ public class Demo1 extends Game {
 
 	@Override
 	public void onMouse(OnMouseEvent onFrameMouseEvent) {
-	}
-
-	@Override
-	public void onLoseFocus(OnWindowEvent e) {
-		setPaused(true);
-	}
-
-	@Override
-	public void onFocus(OnWindowEvent e) {
-		setPaused(false);
 	}
 
 	public static void main(String[] args) {

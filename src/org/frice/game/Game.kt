@@ -108,13 +108,18 @@ abstract class Game() : Frame(), Runnable {
 	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
 	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 
-	abstract fun onInit()
-	abstract fun onExit()
-	abstract fun onRefresh()
-	abstract fun onClick(e: OnClickEvent?)
-	abstract fun onMouse(e: OnMouseEvent?)
-	abstract fun onLoseFocus(e: OnWindowEvent?)
-	abstract fun onFocus(e: OnWindowEvent?)
+	protected abstract fun onInit()
+	protected abstract fun onRefresh()
+	protected abstract fun onClick(e: OnClickEvent?)
+	protected abstract fun onMouse(e: OnMouseEvent?)
+	protected open fun onExit() = System.exit(0)
+	protected open fun onLoseFocus(e: OnWindowEvent?) {
+		paused = true
+	}
+
+	protected open fun onFocus(e: OnWindowEvent?) {
+		paused = false
+	}
 
 	/**
 	 * Created by ice1000 on 2016/8/13.
