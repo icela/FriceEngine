@@ -27,7 +27,7 @@ setBack(FResource)|set the background(color or image)
 setBounds(int x, int y, int width, int height)|from JFrame
 setTitle(String)|from JFrame
 
-## org.frice.game.spirit.FObject
+## org.frice.game.obj.FObject
 Interface.<br/>
 Represent game objects.
 
@@ -38,22 +38,22 @@ id: Int|to specify objects from others
 x: Int|location x
 y: Int|location y
 
-## org.frice.game.spirit.ImageObject
+## org.frice.game.obj.ImageObject
 Class.
 
 ### Parent
-org.frice.game.spirit.FObject
+org.frice.game.obj.FObject
 
 ### Constructors
 Param|Usage
 :---|---:
 res: ImageResource|image resource that will display on game scene
 
-## org.frice.game.spirit.ShapedColorObject
+## org.frice.game.obj.ShapedColorObject
 Class.
 
 ### Parent
-org.frice.game.spirit.FObject
+org.frice.game.obj.FObject
 
 ### Constructors
 Param|Usage

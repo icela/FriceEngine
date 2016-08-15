@@ -1,4 +1,4 @@
-package org.frice.game.spirit
+package org.frice.game.obj
 
 import org.frice.game.resource.FResource
 

@@ -6,9 +6,9 @@ import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.ImageResource
-import org.frice.game.spirit.FObject
-import org.frice.game.spirit.ImageObject
-import org.frice.game.spirit.ShapedColorObject
+import org.frice.game.obj.FObject
+import org.frice.game.obj.ImageObject
+import org.frice.game.obj.ShapedColorObject
 import org.frice.utils.message.error.FatalError
 import org.frice.utils.message.log.FLog
 import org.frice.utils.shape.FCircle
