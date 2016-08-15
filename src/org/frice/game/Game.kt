@@ -1,6 +1,7 @@
 package org.frice.game
 
 import org.frice.game.anim.move.MoveAnim
+import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
@@ -17,7 +18,6 @@ import org.frice.game.utils.shape.FOval
 import org.frice.game.utils.shape.FRectangle
 import org.frice.game.utils.time.FTimeListener
 import java.awt.BorderLayout
-import java.awt.Frame
 import java.awt.Graphics
 import java.awt.Rectangle
 import java.awt.event.MouseEvent
@@ -35,18 +35,13 @@ import javax.swing.JPanel
  * @author ice1000
  * @since v0.1
  */
-abstract class Game() : Frame(), Runnable {
+abstract class Game() : AbstractGame() {
 	private val panel = GamePanel()
 	private val objects = ArrayList<FObject>()
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
 	private val bg: Graphics
 		get() = buffer.graphics
-
-	protected var paused = false
-	protected var back: FResource = ColorResource.SHIT_YELLOW
-	protected var refreshPerSecond = 15
-	protected var debug = true
 
 	init {
 		layout = BorderLayout()
@@ -74,6 +69,12 @@ abstract class Game() : Frame(), Runnable {
 		Thread(this).start()
 		FLog.v("Engine start!")
 	}
+
+
+	protected fun addObject(obj: FObject) = objects.add(obj)
+	protected fun removeObject(obj: FObject) = objects.remove(obj)
+	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
@@ -103,24 +104,6 @@ abstract class Game() : Frame(), Runnable {
 		}
 	}
 
-	protected fun addObject(obj: FObject) = objects.add(obj)
-	protected fun removeObject(obj: FObject) = objects.remove(obj)
-	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
-	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
-
-	protected abstract fun onInit()
-	protected abstract fun onRefresh()
-	protected abstract fun onClick(e: OnClickEvent?)
-	protected abstract fun onMouse(e: OnMouseEvent?)
-	protected open fun onExit() = System.exit(0)
-	protected open fun onLoseFocus(e: OnWindowEvent?) {
-		paused = true
-	}
-
-	protected open fun onFocus(e: OnWindowEvent?) {
-		paused = false
-	}
-
 	/**
 	 * Created by ice1000 on 2016/8/13.
 	 * @author ice1000
@@ -135,6 +118,7 @@ abstract class Game() : Frame(), Runnable {
 					o.anims.forEach { a ->
 						when (a) {
 							is MoveAnim -> o.move(a.getDelta())
+							is ScaleAnim -> o.scale(a.getAfter())
 						}
 					}
 					when (o) {

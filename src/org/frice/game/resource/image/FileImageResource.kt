@@ -12,6 +12,6 @@ class FileImageResource(file: File) : ImageResource() {
 
 	constructor(path: String) : this(File(path))
 
-	override val image = ImageIO.read(file)!!
+	override var image = ImageIO.read(file)!!
 
 }

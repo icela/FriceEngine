@@ -6,8 +6,8 @@ package org.frice.game.utils.shape
  * @since v0.1.1
  */
 class FOval(var rh: Double, var rv: Double) : FShape {
-	val width: Int
+	override var width = (rh * 2).toInt()
 		get() = (rh * 2).toInt()
-	val height: Int
+	override var height = (rv * 2).toInt()
 		get() = (rv * 2).toInt()
 }

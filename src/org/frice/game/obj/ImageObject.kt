@@ -1,7 +1,9 @@
 package org.frice.game.obj
 
-import org.frice.game.anim.move.MoveAnim
+import org.frice.game.anim.FAnim
 import org.frice.game.resource.image.ImageResource
+import java.awt.Image
+import java.awt.image.BufferedImage
 import java.util.*
 
 /**
@@ -11,7 +13,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-open class ImageObject(val res: ImageResource, override var id: Int,
+open class ImageObject(var res: ImageResource, override var id: Int,
                        override var x: Double, override var y: Double) : FObject {
 	override fun getResource() = res
 
@@ -21,7 +23,12 @@ open class ImageObject(val res: ImageResource, override var id: Int,
 
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
-	override val anims: ArrayList<MoveAnim> = ArrayList()
+	override val anims: ArrayList<FAnim> = ArrayList()
+
+	override fun scale(p: Pair<Double, Double>) {
+		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),
+				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+	}
 
 	override fun move(p: Pair<Double, Double>) {
 		x += p.first
@@ -41,7 +48,7 @@ open class ImageObject(val res: ImageResource, override var id: Int,
 		return false
 	}
 
-	override fun hashCode(): Int{
+	override fun hashCode(): Int {
 		var result = res.hashCode()
 		result = 31 * result + id
 		result = 31 * result + x.hashCode()

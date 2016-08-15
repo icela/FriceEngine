@@ -1,7 +1,7 @@
 package org.frice.game.resource.image
 
 import org.frice.game.resource.FResource
-import java.awt.Image
+import java.awt.image.BufferedImage
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -10,7 +10,7 @@ import java.awt.Image
  */
 abstract class ImageResource : FResource {
 
-	abstract val image: Image
+	abstract var image: BufferedImage
 
 	override fun getResource() = image
 

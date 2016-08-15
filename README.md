@@ -6,7 +6,7 @@ View [Help](help.md) to learn more about Frice Engine.
 
 # Build
 
-clone and open with IntelliJ IDEA(please install Kotlin plugin):
+clone and open with IntelliJ IDEA(please install Kotlin, Groovy, Ruby plugin):
 
 clone:
 ```bash
@@ -20,8 +20,8 @@ git clone https://github.com/icela/FriceEngine.git
 - [X] Kotlin(Native)
 - [X] Java
 - [X] Groovy
-- [ ] Scala(I don't know if supported)
 - [ ] JRuby
+- [ ] Scala(I don't know if supported)
 
 ## Basic
 

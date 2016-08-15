@@ -15,5 +15,5 @@ class Demo5 < Game
 	end
 end
 
-a = Demo5.new
+a = Demo5.new()
 p a.getTitle

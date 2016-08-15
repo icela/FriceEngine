@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D
  * @author ice1000
  * @since v0.1.1
  */
-class FRectangle(val width: Int, val height: Int) : FShape {
+class FRectangle(override var width: Int, override var height: Int) : FShape {
 	constructor(rect: Rectangle2D) : this(rect.width.toInt(), rect.height.toInt())
 
 	override fun equals(other: Any?): Boolean {

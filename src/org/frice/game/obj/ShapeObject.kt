@@ -1,6 +1,6 @@
 package org.frice.game.obj
 
-import org.frice.game.anim.move.MoveAnim
+import org.frice.game.anim.FAnim
 import org.frice.game.resource.ColorResource
 import org.frice.game.utils.shape.FShape
 import java.util.*
@@ -15,7 +15,7 @@ import java.util.*
  */
 open class ShapeObject(val res: ColorResource, val shape: FShape, override var id: Int,
                        override var x: Double, override var y: Double) : FObject {
-	override val anims: ArrayList<MoveAnim> = ArrayList()
+	override val anims: ArrayList<FAnim> = ArrayList()
 
 	constructor(res: ColorResource, shape: FShape, x: Double, y: Double) : this(res, shape, -1, x, y)
 
@@ -28,6 +28,11 @@ open class ShapeObject(val res: ColorResource, val shape: FShape, override var i
 	override fun move(p: Pair<Double, Double>) {
 		x += p.first
 		y += p.second
+	}
+
+	override fun scale(p: Pair<Double, Double>) {
+		shape.width = (shape.width * p.first).toInt()
+		shape.height = (shape.width * p.second).toInt()
 	}
 
 	override fun equals(other: Any?): Boolean {

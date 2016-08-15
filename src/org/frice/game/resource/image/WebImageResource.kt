@@ -14,6 +14,6 @@ class WebImageResource(val url: URL) : ImageResource() {
 
 	constructor(url: String) : this(URL(url))
 
-	override val image = ImageIO.read(url)!!
+	override var image = ImageIO.read(url)!!
 
 }

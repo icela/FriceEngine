@@ -6,4 +6,6 @@ package org.frice.game.utils.shape
  * @since v0.1.1
  */
 interface FShape {
+	var width: Int
+	var height: Int
 }

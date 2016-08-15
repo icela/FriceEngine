@@ -8,5 +8,5 @@ import org.frice.game.anim.FAnim
  * @since v0.2.2
  */
 interface ScaleAnim : FAnim {
-	fun getDelta(): Pair<Double, Double>
+	fun getAfter(): Pair<Double, Double>
 }
