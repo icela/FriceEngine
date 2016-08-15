@@ -4,6 +4,9 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.message.FDialog
 
+/**
+ * Demo for database operating
+ */
 class Demo4 extends Game {
 
 	def fuck = new Preference("test.xml")

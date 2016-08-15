@@ -15,9 +15,11 @@ import org.frice.game.utils.time.FTimer;
 import java.util.ArrayList;
 
 /**
+ * Demo for the simplest use of Frice Engine
  * Created by ice1000 on 2016/8/13.
  *
  * @author ice1000
+ * @since v0.1
  */
 public class Demo1 extends Game {
 

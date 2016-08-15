@@ -3,12 +3,15 @@ import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.ImageObject
 import org.frice.game.resource.FileImageResource
+import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimer
 import java.awt.Rectangle
 import java.io.File
 import java.util.*
 
 /**
+ * Demo for timer
+ *
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
  * @since v0.1
@@ -46,7 +49,7 @@ class Demo3 : Game() {
 					fuck -= 100
 				}
 			}
-//			FLog.v("objList.size = ${objList.size}")
+			FLog.v("objList.size = ${objList.size}")
 		}
 	}
 

@@ -12,7 +12,7 @@ import org.frice.game.utils.message.log.FLog
  * @param ay accelerate on y
  */
 
-class ForceMove(private var ax: Double, private var ay: Double) : SimpleMove(0, 0) {
+class AccelerateMove(private var ax: Double, private var ay: Double) : SimpleMove(0, 0) {
 	private val start: Double
 		get() = field / 1000.0
 	var mx = 0.0
