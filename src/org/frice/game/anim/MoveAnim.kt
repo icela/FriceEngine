@@ -5,5 +5,6 @@ package org.frice.game.anim
  * @author ice1000
  * @since v0.2.1
  */
-interface FAnim {
+interface MoveAnim : FAnim {
+	fun getDelta(): Pair<Int, Int>
 }

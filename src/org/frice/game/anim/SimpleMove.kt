@@ -7,15 +7,16 @@ package org.frice.game.anim
  * @param x pixels per millis second
  * @param y pixels per millis second
  */
-class SimpleAnim(private val x: Double, private val y: Double) : FAnim {
+class SimpleMove(private val x: Int, private val y: Int) : MoveAnim {
 	private var cache: Long
 
 	init {
 		cache = System.currentTimeMillis()
 	}
 
-	override fun move(): Pair<Double, Double> {
-		val pair = Pair((System.currentTimeMillis() - cache) * x, (System.currentTimeMillis() - cache) * y)
+	override fun getDelta(): Pair<Int, Int> {
+		val pair = Pair((System.currentTimeMillis() - cache).toInt() * x,
+				(System.currentTimeMillis() - cache).toInt() * y)
 		cache = System.currentTimeMillis()
 		return pair
 	}
