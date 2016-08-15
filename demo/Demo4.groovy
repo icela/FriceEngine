@@ -9,7 +9,7 @@ import org.frice.game.utils.message.FDialog
  */
 class Demo4 extends Game {
 
-	def fuck = new Preference("test.xml")
+	def fuck = Preference.getPreference("test.xml")
 	FDialog dialog
 
 	@Override
