@@ -17,8 +17,8 @@ import javax.xml.transform.stream.StreamResult
  * @author ice1000
  * @since 0.2.2
  */
-class Preference(val file: File) {
-	constructor(path: String) : this(File(path))
+class Preference private constructor(val file: File) {
+	private constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder
 	private val doc: Document
@@ -37,6 +37,15 @@ class Preference(val file: File) {
 		private val TYPE_FLOAT = "PREFERENCE_CONST_TYPE_FLOAT"
 		private val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
 		private val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
+
+		private var instance: Preference? = null
+
+		@JvmStatic fun getPreference(path: String) = getPreference(File(path))
+
+		@JvmStatic fun getPreference(file: File): Preference {
+			if (instance == null) instance = Preference(file)
+			return instance!!
+		}
 	}
 
 	init {

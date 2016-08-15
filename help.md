@@ -134,3 +134,6 @@ Param|Usage
 :---|---:
 timeUp: () -> Unit|this closure will be invoked when time's up(ended())
 timeUp: OnTimeEvent|execute() in this interface will be invoked when time's up(ended())
+
+## org.frice.game.utils.data.Preference
+Class.
