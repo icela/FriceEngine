@@ -26,16 +26,13 @@ public class Demo6 extends Game {
 
 	@Override
 	protected void onRefresh() {
-
 	}
 
 	@Override
 	protected void onClick(OnClickEvent e) {
-
 	}
 
 	@Override
 	protected void onMouse(OnMouseEvent e) {
-
 	}
 }

@@ -117,27 +117,26 @@ abstract class Game() : AbstractGame(), Runnable {
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
 			drawBackground(back)
-			if (debug)
-				objects.forEach { o ->
-					o.anims.forEach { a ->
-						when (a) {
-							is MoveAnim -> o.move(a.getDelta())
-							is ScaleAnim -> o.scale(a.getAfter())
-						}
+			objects.forEach { o ->
+				o.anims.forEach { a ->
+					when (a) {
+						is MoveAnim -> o.move(a.getDelta())
+						is ScaleAnim -> o.scale(a.getAfter())
 					}
-					when (o) {
-						is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
-						is ShapeObject -> {
-							val bgg = bg
-							bgg.color = o.res.color
-							when (o.shape) {
-								is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.height)
-								is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.height)
-								is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.shape.width, o.shape.width)
-							}
+				}
+				when (o) {
+					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+					is ShapeObject -> {
+						val bgg = bg
+						bgg.color = o.res.color
+						when (o.shape) {
+							is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width, o.height)
+							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width, o.height)
+							is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width, o.width)
 						}
 					}
 				}
+			}
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}
