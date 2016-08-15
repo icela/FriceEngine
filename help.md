@@ -150,3 +150,6 @@ getPreference(path: String)|create a instance from file path
 insert(key: String, value: Any?)|insert a key-value pair into the xml file
 query(key: String, value: Any)|query a value to the key from the xml file
 
+## org.frice.game.utils.message.FDialog
+Class.<br/>
+To show dialogs on screen. Very simple, I think there's no need to write a doc for it.
