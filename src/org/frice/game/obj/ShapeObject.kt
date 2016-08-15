@@ -1,7 +1,9 @@
 package org.frice.game.obj
 
+import org.frice.game.anim.FAnim
 import org.frice.game.resource.ColorResource
 import org.frice.game.utils.shape.FShape
+import java.util.*
 
 /**
  * an object with a color and a shape, used to create an simple object quickly
@@ -12,7 +14,8 @@ import org.frice.game.utils.shape.FShape
  * @since v0.1.1
  */
 class ShapeObject(val res: ColorResource, val shape: FShape,
-                  override var id: Int, override val x: Int, override val y: Int) : FObject {
+                  override var id: Int, override var x: Int, override var y: Int) : FObject {
+	override var anims: ArrayList<FAnim> = ArrayList()
 
 	constructor(res: ColorResource, shape: FShape, x: Int, y: Int) : this(res, shape, -1, x, y)
 

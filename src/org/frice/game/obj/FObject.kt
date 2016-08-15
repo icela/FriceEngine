@@ -1,6 +1,8 @@
 package org.frice.game.obj
 
+import org.frice.game.anim.FAnim
 import org.frice.game.resource.FResource
+import java.util.*
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -9,7 +11,8 @@ import org.frice.game.resource.FResource
  */
 interface FObject {
 	var id: Int
-	val x: Int
-	val y: Int
+	var x: Int
+	var y: Int
+	var anims: ArrayList<FAnim>
 	fun getResource(): FResource
 }

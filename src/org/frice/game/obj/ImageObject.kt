@@ -1,6 +1,8 @@
 package org.frice.game.obj
 
+import org.frice.game.anim.FAnim
 import org.frice.game.resource.ImageResource
+import java.util.*
 
 /**
  * Base GameObject class
@@ -10,7 +12,6 @@ import org.frice.game.resource.ImageResource
  * @since v0.1
  */
 class ImageObject(val res: ImageResource, override var id: Int, override var x: Int, override var y: Int) : FObject {
-	
 	override fun getResource() = res
 
 	constructor(res: ImageResource, id: Int) : this(res, id, 0, 0)
@@ -18,6 +19,8 @@ class ImageObject(val res: ImageResource, override var id: Int, override var x: 
 	constructor(res: ImageResource) : this(res, -1, 0, 0)
 
 	constructor(res: ImageResource, x: Int, y: Int) : this(res, -1, x, y)
+
+	override var anims: ArrayList<FAnim> = ArrayList()
 
 	/**
 	 * @return returns an image instance of this res
