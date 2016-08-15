@@ -18,3 +18,5 @@ class Demo5 < org.frice.game.GameForRuby
 end
 
 Demo5.new
+
+org.frice.game.Game.new
