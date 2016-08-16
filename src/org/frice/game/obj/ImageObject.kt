@@ -28,7 +28,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 		is ShapeObject -> when (other.shape) {
 			is FRectangle -> rectCollide(this, other)
 		// TODO
-			else -> false
+			else -> rectCollide(this, other)
 		}
 		is ImageObject -> rectCollide(this, other)
 		else -> false

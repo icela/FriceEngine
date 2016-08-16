@@ -89,7 +89,11 @@ abstract class Game() : AbstractGame(), Runnable {
 	override fun run() {
 		while (true) {
 			if (!paused) {
-				onRefresh()
+				try {
+					onRefresh()
+				} catch (e: Exception) {
+					FLog.error(e)
+				}
 				timeListeners.forEach { it.check() }
 				panel.repaint()
 			}
@@ -125,6 +129,9 @@ abstract class Game() : AbstractGame(), Runnable {
 						is ScaleAnim -> o.scale(a.getAfter())
 					}
 				}
+				o.targets.forEach { t ->
+					o.isCollide(t)
+				}
 				when (o) {
 					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
@@ -133,7 +140,6 @@ abstract class Game() : AbstractGame(), Runnable {
 						when (o.shape) {
 							is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
 							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
-//							is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.width.toInt())
 						}
 					}
 				}

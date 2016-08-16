@@ -38,14 +38,14 @@ open class ShapeObject(val res: ColorResource, override val shape: FShape, overr
 			is FRectangle -> when (shape) {
 				is FRectangle -> rectCollide(this, other)
 				// TODO
-				else -> false
+				else -> rectCollide(this, other)
 			}
 			// TODO
-			else -> false
+			else -> rectCollide(this, other)
 		}
 		is ImageObject -> when (shape) {
 			is FRectangle -> rectCollide(this, other)
-			else -> false
+			else -> rectCollide(this, other)
 		}
 		else -> false
 	}

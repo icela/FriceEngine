@@ -37,7 +37,7 @@ abstract class AbstractGame() : Frame() {
 	protected abstract fun onInit()
 	protected abstract fun onRefresh()
 	protected abstract fun onClick(e: OnClickEvent?)
-	protected abstract fun onMouse(e: OnMouseEvent?)
+	protected open fun onMouse(e: OnMouseEvent?) = Unit
 	protected open fun onExit() = System.exit(0)
 	protected open fun onLoseFocus(e: OnWindowEvent?) {
 		paused = true
