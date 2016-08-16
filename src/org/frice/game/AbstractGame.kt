@@ -19,7 +19,7 @@ import java.awt.event.WindowListener
  * @author ice1000
  * @since v0.2.3
  */
-abstract class AbstractGame() : Frame() {
+open class AbstractGame() : Frame() {
 	protected var paused = false
 	protected var stopped = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW

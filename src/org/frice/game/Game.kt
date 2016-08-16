@@ -26,7 +26,7 @@ import javax.swing.JPanel
  * @author ice1000
  * @since v0.1
  */
-abstract class Game() : AbstractGame(), Runnable {
+open class Game() : AbstractGame(), Runnable {
 	private val panel = GamePanel()
 	private val objects = ArrayList<FObject>()
 	private val timeListeners = ArrayList<FTimeListener>()

@@ -3,7 +3,6 @@ import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
-import org.frice.game.resource.image.WebImageResource;
 import org.frice.game.utils.time.FTimer;
 
 /**
@@ -27,7 +26,7 @@ public class Demo2 extends Game {
 	@Override
 	protected void onInit() {
 		setSize(800, 800);
-		object1 = new ImageObject(new FileImageResource("test.png"), 0, 620);
+		object1 = new ImageObject(new FileImageResource("1.png"), 0, 620);
 		object1.getAnims().add(new AccelerateMove(0, 10));
 		object1.getAnims().add(new SimpleMove(0, -600));
 		object1.getAnims().add(new SimpleMove(100, 0));
@@ -48,9 +47,9 @@ public class Demo2 extends Game {
 	}
 
 	private ImageObject make() {
-		return new ImageObject(new WebImageResource(
-				"https://avatars3.githubusercontent.com/u/16398479?v=3&s=40"
-//				"test.png"
+		return new ImageObject(
+//				new WebImageResource("https://avatars3.githubusercontent.com/u/16398479?v=3&s=40"
+				new FileImageResource("1.png"
 		), 20, 720) {{
 			getAnims().add(new AccelerateMove(0, 10));
 			getAnims().add(new SimpleMove(0, -700));
