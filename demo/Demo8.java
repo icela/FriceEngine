@@ -2,6 +2,7 @@ import org.frice.game.Game;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.resource.image.FrameImageResource;
+import org.frice.game.utils.audio.PlayerThread;
 
 /**
  * Created by ice1000 on 2016/8/16.
@@ -10,11 +11,10 @@ import org.frice.game.resource.image.FrameImageResource;
  * @since v0.3.1
  */
 public class Demo8 extends Game {
-	private ImageObject object;
 
 	@Override
 	protected void onInit() {
-		object = new ImageObject(new FrameImageResource(this, new FileImageResource[]{
+		ImageObject object = new ImageObject(new FrameImageResource(this, new FileImageResource[]{
 				new FileImageResource("1.png"),
 				new FileImageResource("2.png"),
 				new FileImageResource("3.png"),
@@ -22,6 +22,7 @@ public class Demo8 extends Game {
 				new FileImageResource("5.png")}, 1000), 100.0, 100.0);
 		addObject(object);
 		setCursor(object);
+		new PlayerThread("1.wav").start();
 	}
 
 	public static void main(String[] args) {

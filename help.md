@@ -63,7 +63,7 @@ res: ImageResource|image resource that will display on game scene
 Class.
 
 ### Demos
-
+see Demo7.
 
 ### Parent
 org.frice.game.obj.FObject
@@ -164,4 +164,7 @@ query(key: String, value: Any)|query a value to the key from the xml file
 
 ## org.frice.game.utils.message.FDialog
 Class.<br/>
-To show dialogs on screen. Very simple, I think there's no need to write a doc for it.
+To show dialogs on screen. Very simple, I think there's no need to write a doc for it.<br/>
+Constructor needs a context.
+
+## 

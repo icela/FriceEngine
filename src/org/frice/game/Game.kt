@@ -11,7 +11,10 @@ import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JPanel
@@ -75,10 +78,6 @@ open class Game() : AbstractGame(), Runnable {
 	override fun setSize(d: Dimension) {
 		super.setSize(d)
 		panel.size = d
-	}
-
-	protected fun setCursor(o: ImageObject) {
-		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
 
 	override fun run() {
