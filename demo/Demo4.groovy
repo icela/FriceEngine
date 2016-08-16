@@ -1,6 +1,4 @@
 import org.frice.game.Game
-import org.frice.game.event.OnClickEvent
-import org.frice.game.event.OnMouseEvent
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.message.FDialog
 
@@ -32,14 +30,6 @@ class Demo4 extends Game {
 				onExit()
 				break
 		}
-	}
-
-	@Override
-	protected void onClick(OnClickEvent e) {
-	}
-
-	@Override
-	protected void onMouse(OnMouseEvent e) {
 	}
 
 	public static void main(String[] args) {

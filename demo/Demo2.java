@@ -1,8 +1,6 @@
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
-import org.frice.game.event.OnClickEvent;
-import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.resource.image.WebImageResource;
@@ -10,7 +8,7 @@ import org.frice.game.utils.time.FTimer;
 
 /**
  * Demo for accelerate (AccelerateMove), this is a simple gravity mode.
- *
+ * <p>
  * Created by ice1000 on 2016/8/15.
  *
  * @author ice1000
@@ -58,13 +56,5 @@ public class Demo2 extends Game {
 			getAnims().add(new SimpleMove(0, -700));
 			getAnims().add(new SimpleMove(280, 0));
 		}};
-	}
-
-	@Override
-	protected void onClick(OnClickEvent e) {
-	}
-
-	@Override
-	protected void onMouse(OnMouseEvent e) {
 	}
 }

@@ -1,14 +1,13 @@
 import org.frice.game.Game;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
-import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.image.FileImageResource;
-import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.graphics.shape.FOval;
+import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.time.FTimeListener;
 import org.frice.game.utils.time.FTimer;
 
@@ -42,11 +41,6 @@ public class Demo1 extends Game {
 			if (fuck > 500) mode = 1;
 			if (fuck < 1) mode = 0;
 		}));
-	}
-
-	@Override
-	public void onExit() {
-		System.exit(0);
 	}
 
 	@Override
@@ -87,10 +81,6 @@ public class Demo1 extends Game {
 				dialog.show("???WTF???");
 				break;
 		}
-	}
-
-	@Override
-	public void onMouse(OnMouseEvent onFrameMouseEvent) {
 	}
 
 	public static void main(String[] args) {

@@ -1,6 +1,4 @@
 import org.frice.game.Game
-import org.frice.game.event.OnClickEvent
-import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.ImageObject
 import org.frice.game.resource.image.FileImageResource
 import org.frice.game.utils.message.log.FLog
@@ -31,35 +29,26 @@ class Demo3 : Game() {
 	}
 
 	override fun onRefresh() {
-		try {
-			if (dickTimer.ended()) {
-				val texture = FileImageResource("tres" + File.separator + "display.png")
-				val obj: ImageObject
-				if (fuck > 300) mode = 1 else if (fuck < 1) mode = 0
-				when (mode) {
-					0 -> {
-						obj = ImageObject(texture, fuck, fuck)
-						objList.add(obj)
-						addObject(obj)
-						fuck += 100
-					}
-					1 -> {
-						obj = objList[objList.size - 1]
-						objList.remove(obj)
-						removeObject(obj)
-						fuck -= 100
-					}
+		if (dickTimer.ended()) {
+			val texture = FileImageResource("tres" + File.separator + "display.png")
+			val obj: ImageObject
+			if (fuck > 300) mode = 1 else if (fuck < 1) mode = 0
+			when (mode) {
+				0 -> {
+					obj = ImageObject(texture, fuck, fuck)
+					objList.add(obj)
+					addObject(obj)
+					fuck += 100
 				}
-				FLog.v("objList.size = ${objList.size}")
+				1 -> {
+					obj = objList[objList.size - 1]
+					objList.remove(obj)
+					removeObject(obj)
+					fuck -= 100
+				}
 			}
-		} catch (e: Exception) {
+			FLog.v("objList.size = ${objList.size}")
 		}
-	}
-
-	override fun onMouse(e: OnMouseEvent?) {
-	}
-
-	override fun onClick(e: OnClickEvent?) {
 	}
 
 	companion object {

@@ -14,17 +14,13 @@ public class Demo8 extends Game {
 
 	@Override
 	protected void onInit() {
-		object = new ImageObject(new FrameImageResource(new FileImageResource[]{
+		object = new ImageObject(new FrameImageResource(this, new FileImageResource[]{
 				new FileImageResource("1.png"),
 				new FileImageResource("2.png"),
 				new FileImageResource("3.png"),
 				new FileImageResource("4.png"),
 				new FileImageResource("5.png")}, 1000), 100.0, 100.0);
 		addObject(object);
-	}
-
-	@Override
-	protected void onRefresh() {
 	}
 
 	public static void main(String[] args) {
