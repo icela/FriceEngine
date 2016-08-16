@@ -130,8 +130,14 @@ abstract class Game() : AbstractGame(), Runnable {
 						val bgg = bg
 						bgg.color = o.res.color
 						when (o.shape) {
-							is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
-							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+							is FRectangle -> bgg.fillRect(o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt())
+							is FOval -> bgg.fillOval(o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt())
 						}
 					}
 				}
