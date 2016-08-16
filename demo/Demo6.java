@@ -26,7 +26,7 @@ public class Demo6 extends Game {
 		addTimeListener(new FTimeListener(2000, () -> addObject(new ShapeObject(ColorResource.Companion.get基佬紫(),
 				new FOval(80.0, 120.0), 10, 750) {{
 			getAnims().add(new SimpleScale(1.1, 1.1));
-			getAnims().add(new AccelerateMove(0, 10));
+			getAnims().add(AccelerateMove.getGravity());
 			getAnims().add(new SimpleMove(0, -700));
 			getAnims().add(new SimpleMove(100, 0));
 		}})));
