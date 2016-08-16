@@ -116,6 +116,9 @@ open class Game() : AbstractGame(), Runnable {
 			objects.forEach { o ->
 				o.runAnims()
 				o.checkCollision()
+			}
+			g.drawImage(buffer, 0, 0, this)
+			objects.forEach { o ->
 				when (o) {
 					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {

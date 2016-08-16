@@ -17,14 +17,22 @@ git clone https://github.com/icela/FriceEngine.git
 
 ## Supported
 
+### Languages
 - [X] Kotlin(Native)
 - [X] Java
 - [X] Groovy
 - [ ] JRuby(seemed not working with my project)
 - [ ] Scala(I don't know if supported)
 
-## Basic
+### Functions
+- [X] Game Objects(from image or shape, image from file or web)
+- [X] Collision detecting
+- [X] Audio playing(wav only, because mp3 needs a library and it's too large)
+- [X] Dialogs
+- [X] Cursor overriding
+- [X] 
 
+## Basic
 FriceEngine is based on the life cycle mode.<br/>
 When you wanna build games with frice engine, follow these steps:
 
