@@ -5,6 +5,9 @@ This is the full API reference of frice engine.
 Abstract.<br/>
 **Do not override the constructor, anything about initializing please put them into "onInit()"!**
 
+### Demos
+see every demos are OK.
+
 ### Life cycle methods
 Method|Usage
 :---|---:
@@ -32,6 +35,9 @@ setTitle(String)|from JFrame
 Interface.<br/>
 Represent game objects.
 
+### Demos
+see Demo1.
+
 ### Members
 Name and type|Usage
 :---|---:
@@ -41,6 +47,9 @@ y: Int|location y
 
 ## org.frice.game.obj.ImageObject
 Class.
+
+### Demos
+see Demo1.
 
 ### Parent
 org.frice.game.obj.FObject
@@ -52,6 +61,9 @@ res: ImageResource|image resource that will display on game scene
 
 ## org.frice.game.obj.ShapedColorObject
 Class.
+
+### Demos
+
 
 ### Parent
 org.frice.game.obj.FObject

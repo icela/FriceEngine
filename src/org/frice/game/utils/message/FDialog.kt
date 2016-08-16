@@ -1,6 +1,6 @@
 package org.frice.game.utils.message
 
-import org.frice.game.Game
+import java.awt.Frame
 import javax.swing.JOptionPane
 
 /**
@@ -8,7 +8,7 @@ import javax.swing.JOptionPane
  * @author ice1000
  * @since v0.2
  */
-class FDialog(val game: Game) {
+class FDialog(val game: Frame) {
 	fun show(msg: String) = JOptionPane.showMessageDialog(game, msg)
 	fun input() = input("")
 	fun input(msg: String) = JOptionPane.showInputDialog(game, msg)

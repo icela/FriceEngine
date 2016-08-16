@@ -5,12 +5,14 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
+import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
+import javax.swing.JOptionPane
 
 /**
  * First game class(not for you)
@@ -50,7 +52,12 @@ open class AbstractGame() : Frame() {
 	protected open fun onRefresh() = Unit
 	protected open fun onClick(e: OnClickEvent?) = Unit
 	protected open fun onMouse(e: OnMouseEvent?) = Unit
-	protected open fun onExit() = System.exit(0)
+	protected open fun onExit() {
+		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", JOptionPane.YES_NO_OPTION) ==
+				JOptionPane.YES_OPTION)
+			System.exit(0)
+	}
+
 	protected open fun onLoseFocus(e: OnWindowEvent?) {
 		paused = true
 	}
