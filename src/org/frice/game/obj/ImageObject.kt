@@ -16,13 +16,16 @@ import java.util.*
  */
 open class ImageObject(var res: ImageResource, override var id: Int,
                        override var x: Double, override var y: Double) : FObject {
-	override fun getResource() = res
-
 	constructor(res: ImageResource, id: Int) : this(res, id, 0.0, 0.0)
 
 	constructor(res: ImageResource) : this(res, -1, 0.0, 0.0)
 
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
+
+	override fun getResource() = res
+
+	// TODO
+	override fun isCollide(other: FObject) = false
 
 	override val anims: ArrayList<FAnim> = ArrayList()
 	override val shape = FRectangle(res.image.width, res.image.height)

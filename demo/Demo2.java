@@ -5,6 +5,7 @@ import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
+import org.frice.game.resource.image.WebImageResource;
 import org.frice.game.utils.time.FTimer;
 
 /**
@@ -49,7 +50,7 @@ public class Demo2 extends Game {
 	}
 
 	private ImageObject make() {
-		return new ImageObject(new FileImageResource(
+		return new ImageObject(new WebImageResource(
 				"https://avatars3.githubusercontent.com/u/16398479?v=3&s=40"
 //				"test.png"
 		), 20, 720) {{

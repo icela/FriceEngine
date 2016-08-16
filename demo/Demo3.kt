@@ -31,25 +31,28 @@ class Demo3 : Game() {
 	}
 
 	override fun onRefresh() {
-		if (dickTimer.ended()) {
-			val texture = FileImageResource("tres" + File.separator + "display.png")
-			val obj: ImageObject
-			if (fuck > 300) mode = 1 else if (fuck < 1) mode = 0
-			when (mode) {
-				0 -> {
-					obj = ImageObject(texture, fuck, fuck)
-					objList.add(obj)
-					addObject(obj)
-					fuck += 100
+		try {
+			if (dickTimer.ended()) {
+				val texture = FileImageResource("tres" + File.separator + "display.png")
+				val obj: ImageObject
+				if (fuck > 300) mode = 1 else if (fuck < 1) mode = 0
+				when (mode) {
+					0 -> {
+						obj = ImageObject(texture, fuck, fuck)
+						objList.add(obj)
+						addObject(obj)
+						fuck += 100
+					}
+					1 -> {
+						obj = objList[objList.size - 1]
+						objList.remove(obj)
+						removeObject(obj)
+						fuck -= 100
+					}
 				}
-				1 -> {
-					obj = objList[objList.size - 1]
-					objList.remove(obj)
-					removeObject(obj)
-					fuck -= 100
-				}
+				FLog.v("objList.size = ${objList.size}")
 			}
-			FLog.v("objList.size = ${objList.size}")
+		} catch (e: Exception) {
 		}
 	}
 

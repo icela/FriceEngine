@@ -42,5 +42,5 @@ When you wanna build games with frice engine, follow these steps:
 - [demo/Demo4.groovy](demo/Demo4.groovy)
 - [demo/Demo5.rb](demo/Demo5.rb) (not working)
 - [demo/Demo6.java](demo/Demo6.java)
-- [demo/Demo7.java flappy bird demo](demo/Demo7.java)
+- [demo/Demo7.java](demo/Demo7.java)(flappy bird demo)
 

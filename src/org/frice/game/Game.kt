@@ -11,7 +11,6 @@ import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.shape.FCircle
 import org.frice.game.utils.shape.FOval
 import org.frice.game.utils.shape.FRectangle
 import org.frice.game.utils.time.FTimeListener
@@ -132,9 +131,9 @@ abstract class Game() : AbstractGame(), Runnable {
 						val bgg = bg
 						bgg.color = o.res.color
 						when (o.shape) {
-							is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width, o.height)
-							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width, o.height)
-							is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width, o.width)
+							is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+//							is FCircle -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.width.toInt())
 						}
 					}
 				}

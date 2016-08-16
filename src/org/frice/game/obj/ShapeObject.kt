@@ -2,6 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.resource.ColorResource
+import org.frice.game.utils.shape.FRectangle
 import org.frice.game.utils.shape.FShape
 import java.util.*
 
@@ -22,11 +23,22 @@ open class ShapeObject(val res: ColorResource, override val shape: FShape, overr
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
 	override val anims: ArrayList<FAnim> = ArrayList()
+
 	private var scale = Pair(1.0, 1.0)
-	val width: Int
-		get () = (shape.width * scale.first).toInt()
-	val height: Int
-		get() = (shape.height * scale.second).toInt()
+
+	override fun isCollide(other: FObject) = when (other) {
+		is ShapeObject -> when (shape) {
+			is FRectangle -> x + width > other.x &&
+			else -> false
+		}
+		is ImageObject ->
+		else -> false
+	}
+
+	override val width: Double
+		get () = (shape.width * scale.first)
+	override val height: Double
+		get() = (shape.height * scale.second)
 
 	override fun getResource() = res
 
