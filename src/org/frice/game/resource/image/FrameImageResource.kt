@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage
  * @author ice1000
  * @since v0.3.1
  */
-class FrameResource(val list: MutableList<ImageResource>, val div: Int, val loop: Boolean) : ImageResource() {
+class FrameImageResource(val list: MutableList<ImageResource>, val div: Int, val loop: Boolean) : ImageResource() {
 	constructor(list: MutableList<ImageResource>, div: Int) : this(list, div, true)
 	constructor(list: Array<ImageResource>, div: Int, loop: Boolean) : this(list.toMutableList(), div, loop)
 	constructor(list: Array<ImageResource>, div: Int) : this(list.toMutableList(), div, true)

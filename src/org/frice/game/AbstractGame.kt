@@ -9,6 +9,8 @@ import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 
 /**
  * First game class(not for you)
@@ -33,11 +35,20 @@ abstract class AbstractGame() : Frame() {
 			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
 			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 		})
+		addWindowListener(object : WindowListener {
+			override fun windowDeiconified(e: WindowEvent) = Unit
+			override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
+			override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
+			override fun windowIconified(e: WindowEvent) = Unit
+			override fun windowClosing(e: WindowEvent) = onExit()
+			override fun windowClosed(e: WindowEvent) = System.exit(0)
+			override fun windowOpened(e: WindowEvent) = Unit
+		})
 	}
 
-	protected abstract fun onInit()
-	protected abstract fun onRefresh()
-	protected abstract fun onClick(e: OnClickEvent?)
+	protected open fun onInit() = Unit
+	protected open fun onRefresh() = Unit
+	protected open fun onClick(e: OnClickEvent?) = Unit
 	protected open fun onMouse(e: OnMouseEvent?) = Unit
 	protected open fun onExit() = System.exit(0)
 	protected open fun onLoseFocus(e: OnWindowEvent?) {

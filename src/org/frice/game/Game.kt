@@ -40,15 +40,6 @@ abstract class Game() : AbstractGame(), Runnable {
 	init {
 		setBounds(200, 200, 640, 480)
 		add(panel, BorderLayout.CENTER)
-		addWindowListener(object : WindowListener {
-			override fun windowDeiconified(e: WindowEvent) = Unit
-			override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
-			override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
-			override fun windowIconified(e: WindowEvent) = Unit
-			override fun windowClosing(e: WindowEvent) = onExit()
-			override fun windowClosed(e: WindowEvent) = System.exit(0)
-			override fun windowOpened(e: WindowEvent) = Unit
-		})
 		onInit()
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true

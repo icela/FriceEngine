@@ -10,7 +10,7 @@ import javax.imageio.ImageIO
  * @author ice1000
  * @since v0.2.2
  */
-class WebImageResource(val url: URL) : ImageResource() {
+class WebImageResource(url: URL) : ImageResource() {
 
 	constructor(url: String) : this(URL(url))
 
