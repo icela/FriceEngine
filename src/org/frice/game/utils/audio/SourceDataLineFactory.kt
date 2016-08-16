@@ -6,17 +6,15 @@ import javax.sound.sampled.DataLine
 import javax.sound.sampled.SourceDataLine
 
 /**
+ * From https://github.com/ice1000/Dekoder
+ *
  * Created by ice1000 on 2016/8/16.
  * @author ice1000
  * @since v0.3.1
  */
 object SourceDataLineFactory {
 	fun getLine(audioFormat: AudioFormat): SourceDataLine {
-		val info = DataLine.Info(
-				SourceDataLine::class.java,
-				audioFormat
-		)
-		val res = AudioSystem.getLine(info) as SourceDataLine
+		val res = AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java, audioFormat)) as SourceDataLine
 		res.open(audioFormat)
 		return res
 	}
