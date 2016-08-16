@@ -37,5 +37,15 @@
     </orderEntry>
     <orderEntry type="library" name="groovy-2.4.7" level="application" />
     <orderEntry type="library" name="jruby-9.0.5.0-p0 facet library" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/annotations-java8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <LIBRARY_FILE />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

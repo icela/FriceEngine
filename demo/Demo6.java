@@ -6,7 +6,9 @@ import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
+import org.frice.game.utils.message.log.FLog;
 import org.frice.game.utils.shape.FOval;
+import org.frice.game.utils.time.FTimeListener;
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -21,12 +23,13 @@ public class Demo6 extends Game {
 	@Override
 	protected void onInit() {
 		setSize(900, 900);
-		addObject(new ShapeObject(ColorResource.Companion.get基佬紫(), new FOval(80.0, 120.0), 10, 750) {{
+		addTimeListener(new FTimeListener(2000, () -> addObject(new ShapeObject(ColorResource.Companion.get基佬紫(),
+				new FOval(80.0, 120.0), 10, 750) {{
 			getAnims().add(new SimpleScale(1.1, 1.1));
 			getAnims().add(new AccelerateMove(0, 10));
 			getAnims().add(new SimpleMove(0, -700));
 			getAnims().add(new SimpleMove(100, 0));
-		}});
+		}})));
 	}
 
 	@Override
@@ -35,6 +38,8 @@ public class Demo6 extends Game {
 
 	@Override
 	protected void onClick(OnClickEvent e) {
+		setPaused(!getPaused());
+		FLog.e("paused");
 	}
 
 	@Override

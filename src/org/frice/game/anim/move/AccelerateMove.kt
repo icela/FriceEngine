@@ -1,7 +1,5 @@
 package org.frice.game.anim.move
 
-import org.frice.game.utils.message.log.FLog
-
 /**
  * Move with force (accelerate), give accelerate value to ax and by
  *
@@ -20,7 +18,7 @@ class AccelerateMove(private var ax: Double, private var ay: Double) : SimpleMov
 		now = System.currentTimeMillis().toDouble()
 		mx = (now - start) * ax
 		my = (now - start) * ay
-		FLog.debug("my = $my, now = $now, start = $start")
+//		FLog.debug("my = $my, now = $now, start = $start")
 		return getPair(mx.toInt(), my.toInt())
 	}
 }

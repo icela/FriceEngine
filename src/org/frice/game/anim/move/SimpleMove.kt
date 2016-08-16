@@ -1,7 +1,5 @@
 package org.frice.game.anim.move
 
-import org.frice.game.utils.message.log.FLog
-
 /**
  * Simple move anim
  *
@@ -24,7 +22,7 @@ open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim() {
 
 	override fun getDelta(): Pair<Double, Double> {
 		now = System.currentTimeMillis().toDouble()
-		FLog.debug(now - cache)
+//		FLog.debug(now - cache)
 		val pair = getPair(x, y)
 		cache = now * 1000
 		return pair

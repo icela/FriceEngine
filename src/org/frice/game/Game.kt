@@ -61,7 +61,9 @@ abstract class Game() : AbstractGame(), Runnable {
 
 
 	protected fun addObject(obj: FObject) = objects.add(obj)
+	protected fun addObjects(objs: Array<FObject>) = objects.addAll(objs)
 	protected fun removeObject(obj: FObject) = objects.remove(obj)
+	protected fun removeObjects(objs: Array<FObject>) = objects.removeAll(objs)
 	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
 	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 
