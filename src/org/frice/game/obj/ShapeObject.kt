@@ -23,22 +23,32 @@ open class ShapeObject(val res: ColorResource, override val shape: FShape, overr
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
 	override val anims: ArrayList<FAnim> = ArrayList()
+	override val targets: ArrayList<FObject> = ArrayList()
 
 	private var scale = Pair(1.0, 1.0)
 
-	override fun isCollide(other: FObject) = when (other) {
-		is ShapeObject -> when (shape) {
-			is FRectangle -> x + width > other.x &&
-			else -> false
-		}
-		is ImageObject ->
-		else -> false
-	}
+	override val height: Double
+		get() = (shape.height * scale.second)
 
 	override val width: Double
 		get () = (shape.width * scale.first)
-	override val height: Double
-		get() = (shape.height * scale.second)
+
+	override fun isCollide(other: FObject) = when (other) {
+		is ShapeObject -> when (other.shape) {
+			is FRectangle -> when (shape) {
+				is FRectangle -> rectCollide(this, other)
+				// TODO
+				else -> false
+			}
+			// TODO
+			else -> false
+		}
+		is ImageObject -> when (shape) {
+			is FRectangle -> rectCollide(this, other)
+			else -> false
+		}
+		else -> false
+	}
 
 	override fun getResource() = res
 

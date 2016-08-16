@@ -24,10 +24,24 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 
 	override fun getResource() = res
 
-	// TODO
-	override fun isCollide(other: FObject) = false
+	override fun isCollide(other: FObject) = when (other) {
+		is ShapeObject -> when (other.shape) {
+			is FRectangle -> rectCollide(this, other)
+		// TODO
+			else -> false
+		}
+		is ImageObject -> rectCollide(this, other)
+		else -> false
+	}
+
+	override val width: Double
+		get() = res.image.width.toDouble()
+	override val height: Double
+		get() = res.image.height.toDouble()
 
 	override val anims: ArrayList<FAnim> = ArrayList()
+	override val targets: ArrayList<FObject> = ArrayList()
+
 	override val shape = FRectangle(res.image.width, res.image.height)
 
 	override fun scale(p: Pair<Double, Double>) {
