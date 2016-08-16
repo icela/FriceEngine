@@ -11,10 +11,7 @@ import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
-import java.awt.BorderLayout
-import java.awt.Dimension
-import java.awt.Graphics
-import java.awt.Rectangle
+import java.awt.*
 import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JPanel
@@ -35,12 +32,14 @@ open class Game() : AbstractGame(), Runnable {
 		get() = buffer.graphics
 
 	init {
-		setBounds(200, 200, 640, 480)
+		isResizable = false
 		add(panel, BorderLayout.CENTER)
+		setBounds(200, 200, 640, 480)
 		onInit()
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-		isVisible = true
 		Thread(this).start()
+		isVisible = true
+		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
 	}
 
@@ -50,15 +49,20 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun clearObjects() = objects.clear()
 	protected fun removeObject(obj: FObject) = objects.remove(obj)
 	protected fun removeObjects(objs: Array<FObject>) = objects.removeAll(objs)
+
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	fun addTimeListeners(listeners: Array<FTimeListener>) = timeListeners.addAll(listeners)
 	fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
+	fun removeTimeListeners(listeners: Array<FTimeListener>) = timeListeners.removeAll(listeners)
 
 	override fun setBounds(r: Rectangle) {
+//		r.height += insets.top
 		super.setBounds(r)
 		panel.bounds = r
 	}
 
 	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
+//		FLog.debug("insets.top = ${insets.top}")
 		super.setBounds(x, y, width, height)
 		panel.setBounds(x, y, width, height)
 	}
@@ -68,9 +72,13 @@ open class Game() : AbstractGame(), Runnable {
 		panel.setSize(width, height)
 	}
 
-	override fun setSize(d: Dimension?) {
+	override fun setSize(d: Dimension) {
 		super.setSize(d)
 		panel.size = d
+	}
+
+	protected fun setCursor(o: ImageObject) {
+		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
 
 	override fun run() {
@@ -115,7 +123,7 @@ open class Game() : AbstractGame(), Runnable {
 					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						val bgg = bg
-						bgg.color = o.res.color
+						bgg.color = o.getResource().color
 						when (o.shape) {
 							is FRectangle -> bgg.fillRect(o.x.toInt(),
 									o.y.toInt(),

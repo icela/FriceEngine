@@ -33,7 +33,7 @@ public class Demo7 extends Game {
 		gameOver = () -> {
 			setStopped(true);
 			new FDialog(this).show("Game Over");
-			onExit();
+			System.exit(0);
 		};
 	}
 
@@ -46,8 +46,8 @@ public class Demo7 extends Game {
 	@Override
 	protected void onClick(OnClickEvent e) {
 		object.getAnims().clear();
-		object.getAnims().add(AccelerateMove.getGravity(60.0));
-		object.getAnims().add(new SimpleMove(0, -300));
+		object.getAnims().add(AccelerateMove.getGravity(120.0));
+		object.getAnims().add(new SimpleMove(0, -800));
 	}
 
 	private ShapeObject[] getObj() {

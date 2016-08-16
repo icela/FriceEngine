@@ -20,7 +20,7 @@ public class Demo8 extends Game {
 				new FileImageResource("3.png"),
 				new FileImageResource("4.png"),
 				new FileImageResource("5.png")}, 1000), 100.0, 100.0);
-		addObject(object);
+		setCursor(object);
 	}
 
 	public static void main(String[] args) {
