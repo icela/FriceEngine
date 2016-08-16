@@ -6,7 +6,7 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.event.OnCollideEvent
 import org.frice.game.obj.collide.CollideBox
 import org.frice.game.resource.FResource
-import org.frice.game.utils.shape.FShape
+import org.frice.game.utils.graphics.shape.FShape
 import java.util.*
 
 /**

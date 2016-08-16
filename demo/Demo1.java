@@ -8,7 +8,7 @@ import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.utils.message.FDialog;
-import org.frice.game.utils.shape.FOval;
+import org.frice.game.utils.graphics.shape.FOval;
 import org.frice.game.utils.time.FTimeListener;
 import org.frice.game.utils.time.FTimer;
 

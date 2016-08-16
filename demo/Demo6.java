@@ -7,7 +7,7 @@ import org.frice.game.event.OnMouseEvent;
 import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
 import org.frice.game.utils.message.log.FLog;
-import org.frice.game.utils.shape.FOval;
+import org.frice.game.utils.graphics.shape.FOval;
 import org.frice.game.utils.time.FTimeListener;
 
 /**

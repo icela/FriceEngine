@@ -9,8 +9,8 @@ import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.shape.FOval
-import org.frice.game.utils.shape.FRectangle
+import org.frice.game.utils.graphics.shape.FOval
+import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.time.FTimeListener
 import java.awt.BorderLayout
 import java.awt.Dimension

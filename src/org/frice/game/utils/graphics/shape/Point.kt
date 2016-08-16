@@ -1,4 +1,4 @@
-package org.frice.game.utils.shape
+package org.frice.game.utils.graphics.shape
 
 /**
  * Created by ice1000 on 2016/8/16.
