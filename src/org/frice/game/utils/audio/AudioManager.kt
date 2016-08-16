@@ -8,9 +8,9 @@ import java.io.File
  * @since v0.3.1
  */
 object AudioManager {
-	fun play(file: File) = PlayerThread(file).start()
-	fun play(path: String) = PlayerThread(path).start()
+	@JvmStatic fun play(file: File) = AudioPlayer(file).start()
+	@JvmStatic fun play(path: String) = AudioPlayer(path).start()
 
-	fun getPlayer(file: File) = PlayerThread(file)
-	fun getPlayer(path: String) = PlayerThread(path)
+	@JvmStatic fun getPlayer(file: File) = AudioPlayer(file)
+	@JvmStatic fun getPlayer(path: String) = AudioPlayer(path)
 }

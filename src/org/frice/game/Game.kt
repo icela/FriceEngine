@@ -81,15 +81,13 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	override fun run() {
-		while (true) {
-			if (!paused && !stopped) {
-				try {
-					onRefresh()
-				} catch (ignored: Exception) {
-				}
-				timeListeners.forEach { it.check() }
-				panel.repaint()
+		while (true) if (!paused && !stopped) {
+			try {
+				onRefresh()
+			} catch (ignored: Exception) {
 			}
+			timeListeners.forEach { it.check() }
+			panel.repaint()
 			Thread.sleep((1000.0 / refreshPerSecond).toLong())
 		}
 	}
