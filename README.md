@@ -36,6 +36,11 @@ When you wanna build games with frice engine, follow these steps:
 
 ## Demos
 
-- [root/demo/Demo1.java](demo/Demo1.java)
-- [root/test/org/frice/game/Demo.kt](test/org/frice/game/Demo.kt)
+- [demo/Demo1.java](demo/Demo1.java)
+- [demo/Demo2.java](demo/Demo2.java)
+- [demo/Demo3.kt](demo/Demo3.kt)
+- [demo/Demo4.groovy](demo/Demo4.groovy)
+- [demo/Demo5.rb](demo/Demo5.rb) (not working)
+- [demo/Demo6.java](demo/Demo6.java)
+- [demo/Demo7.java flappy bird demo](demo/Demo7.java)
 
