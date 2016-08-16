@@ -10,23 +10,18 @@ import java.awt.image.BufferedImage
  * @author ice1000
  * @since v0.3.1
  */
-class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, div: Int, val loop: Boolean) : ImageResource() {
-	constructor(game: Game, list: MutableList<ImageResource>, div: Int) :
-	this(game, list, div, true)
+class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, div: Int) : ImageResource() {
 
-	constructor(game: Game, list: Array<ImageResource>, div: Int, loop: Boolean) :
-	this(game, list.toMutableList(), div, loop)
-
-	constructor(game: Game, list: Array<ImageResource>, div: Int) :
-	this(game, list.toMutableList(), div, true)
+	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 
 	private var start: Long
 	private val timer: FTimeListener
 	private var counter = 0
 	private var ended = false
+	var loop = true
 
 	override var image: BufferedImage
-		get() = if (loop || ended) list.last().image else list.getImage(counter).image
+		get() = if (loop || ended) list.getImage(counter).image else list.last().image
 		set(value) {
 			list.add(ImageResource.create(value))
 		}
@@ -39,9 +34,10 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	init {
 		start = System.currentTimeMillis()
 		timer = FTimeListener(div, {
-			FLog.e("fuck")
+			FLog.e("counter = $counter")
 			counter++
 			counter %= list.size
 		})
+		game.addTimeListener(timer)
 	}
 }

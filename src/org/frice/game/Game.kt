@@ -1,6 +1,5 @@
 package org.frice.game
 
-import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.ImageObject
 import org.frice.game.obj.ShapeObject
@@ -16,8 +15,6 @@ import java.awt.BorderLayout
 import java.awt.Dimension
 import java.awt.Graphics
 import java.awt.Rectangle
-import java.awt.event.WindowEvent
-import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JPanel
@@ -53,8 +50,8 @@ abstract class Game() : AbstractGame(), Runnable {
 	protected fun clearObjects() = objects.clear()
 	protected fun removeObject(obj: FObject) = objects.remove(obj)
 	protected fun removeObjects(objs: Array<FObject>) = objects.removeAll(objs)
-	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
-	protected fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
+	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
