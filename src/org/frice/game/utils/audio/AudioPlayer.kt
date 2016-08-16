@@ -11,10 +11,24 @@ import javax.sound.sampled.*
  * @author ice1000
  * @since v0.3.1
  */
-class AudioPlayer internal constructor(file: File) : Runnable {
+class AudioPlayer internal constructor(file: File) {
 	internal constructor(path: String) : this(File(path))
 
-	private val thread = Thread(this)
+	private val thread = Thread({
+		line.open()
+		line.start()
+		var inBytes = 0
+//		var cnt = 0
+		val audioData = ByteArray(BUFFER_SIZE)
+		while (!exited && inBytes != -1) {
+//			FLog.debug("loop ${cnt++}")
+			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
+			if (inBytes >= 0) line.write(audioData, 0, inBytes)
+		}
+		line.drain()
+		line.close()
+		FLog.info("Ended playing")
+	})
 
 	companion object {
 		val BUFFER_SIZE = 2048
@@ -43,22 +57,6 @@ class AudioPlayer internal constructor(file: File) : Runnable {
 	fun exit() {
 		exited = true
 		thread.join()
-	}
-
-	override fun run() {
-		line.open()
-		line.start()
-		var inBytes = 0
-//		var cnt = 0
-		val audioData = ByteArray(BUFFER_SIZE)
-		while (!exited && inBytes != -1) {
-//			FLog.debug("loop ${cnt++}")
-			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
-			if (inBytes >= 0) line.write(audioData, 0, inBytes)
-		}
-		line.drain()
-		line.close()
-		FLog.info("Ended playing")
 	}
 
 	fun start() = thread.start()

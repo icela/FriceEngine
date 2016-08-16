@@ -16,6 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class Demo8 extends Game {
 
 	private AudioPlayer player;
+	private int cnt = 0;
 
 	@Override
 	protected void onInit() {
@@ -33,8 +34,8 @@ public class Demo8 extends Game {
 
 	@Override
 	protected void onClick(@Nullable OnClickEvent e) {
-		if (player.getPaused()) player.setPaused(false);
-		else player.setPaused(true);
+		cnt++;
+		if (cnt > 10) player.exit();
 	}
 
 	public static void main(String[] args) {
