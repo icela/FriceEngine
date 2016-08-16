@@ -1,7 +1,5 @@
 package org.frice.game
 
-import org.frice.game.anim.move.MoveAnim
-import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.ImageObject
@@ -124,15 +122,8 @@ abstract class Game() : AbstractGame(), Runnable {
 		override fun paint(g: Graphics) {
 			drawBackground(back)
 			objects.forEach { o ->
-				o.anims.forEach { a ->
-					when (a) {
-						is MoveAnim -> o.move(a.getDelta())
-						is ScaleAnim -> o.scale(a.getAfter())
-					}
-				}
-				o.targets.forEach { t ->
-					if (o.isCollide(t.first)) t.second.handle()
-				}
+				o.runAnims()
+				o.checkCollision()
 				when (o) {
 					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {

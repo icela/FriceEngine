@@ -1,6 +1,8 @@
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
+import org.frice.game.anim.move.MoveAnim
+import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.event.OnCollideEvent
 import org.frice.game.obj.collide.CollideBox
 import org.frice.game.resource.FResource
@@ -30,4 +32,12 @@ interface FObject : CollideBox {
 			rect1.x <= rect2.x + rect2.width &&
 			rect1.y <= rect2.y + rect2.height
 
+	fun runAnims() = anims.forEach { a ->
+		when (a) {
+			is MoveAnim -> move(a.getDelta())
+			is ScaleAnim -> scale(a.getAfter())
+		}
+	}
+
+	fun checkCollision() = targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
 }
