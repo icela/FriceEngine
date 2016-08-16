@@ -33,7 +33,6 @@ public class Demo7 extends Game {
 		gameOver = () -> {
 			setStopped(true);
 			new FDialog(this).show("Game Over");
-//			clearObjects();
 			onExit();
 		};
 	}

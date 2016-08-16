@@ -7,10 +7,10 @@ import org.frice.game.obj.ShapeObject
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
-import org.frice.game.utils.message.error.FatalError
-import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.message.error.FatalError
+import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import java.awt.BorderLayout
 import java.awt.Dimension
@@ -90,8 +90,7 @@ abstract class Game() : AbstractGame(), Runnable {
 			if (!paused && !stopped) {
 				try {
 					onRefresh()
-				} catch (e: Exception) {
-					FLog.error(e)
+				} catch (ignored: Exception) {
 				}
 				timeListeners.forEach { it.check() }
 				panel.repaint()

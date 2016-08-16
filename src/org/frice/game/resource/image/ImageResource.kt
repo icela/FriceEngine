@@ -10,6 +10,12 @@ import java.awt.image.BufferedImage
  */
 abstract class ImageResource : FResource {
 
+	companion object {
+		fun create(image: BufferedImage) = object : ImageResource() {
+			override var image = image
+		}
+	}
+
 	abstract var image: BufferedImage
 
 	override fun getResource() = image
