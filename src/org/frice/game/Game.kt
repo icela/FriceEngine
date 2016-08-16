@@ -61,6 +61,7 @@ abstract class Game() : AbstractGame(), Runnable {
 
 	protected fun addObject(obj: FObject) = objects.add(obj)
 	protected fun addObjects(objs: Array<FObject>) = objects.addAll(objs)
+	protected fun clearObjects() = objects.clear()
 	protected fun removeObject(obj: FObject) = objects.remove(obj)
 	protected fun removeObjects(objs: Array<FObject>) = objects.removeAll(objs)
 	protected fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
@@ -88,7 +89,7 @@ abstract class Game() : AbstractGame(), Runnable {
 
 	override fun run() {
 		while (true) {
-			if (!paused) {
+			if (!paused && !stopped) {
 				try {
 					onRefresh()
 				} catch (e: Exception) {
@@ -130,7 +131,7 @@ abstract class Game() : AbstractGame(), Runnable {
 					}
 				}
 				o.targets.forEach { t ->
-					o.isCollide(t)
+					if (o.isCollide(t.first)) t.second.handle()
 				}
 				when (o) {
 					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)

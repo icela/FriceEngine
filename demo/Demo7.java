@@ -1,13 +1,15 @@
+import kotlin.Pair;
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
+import org.frice.game.event.OnCollideEvent;
 import org.frice.game.obj.ShapeObject;
 import org.frice.game.resource.ColorResource;
+import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.shape.FCircle;
 import org.frice.game.utils.shape.FRectangle;
 import org.frice.game.utils.time.FTimer;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -19,25 +21,33 @@ public class Demo7 extends Game {
 	private Random random = new Random();
 	private FTimer timer = new FTimer(3000);
 	private ShapeObject object;
+	private OnCollideEvent gameOver;
 
 	@Override
 	protected void onInit() {
 		setSize(500, 800);
 		setTitle("Flappy bird demo by ice1000");
-		object = new ShapeObject(ColorResource.Companion.get宝强绿(), new FCircle(30.0), 50.0, 200.0);
+		object = new ShapeObject(ColorResource.Companion.get宝强绿(), new FCircle(20.0), 50.0, 200.0);
 		object.getAnims().add(AccelerateMove.getGravity());
 		addObject(object);
+		gameOver = () -> {
+			setStopped(true);
+			new FDialog(this).show("Game Over");
+//			clearObjects();
+			onExit();
+		};
 	}
 
 	@Override
 	protected void onRefresh() {
+		if (object.getY() > getHeight() + 20) gameOver.handle();
 		if (timer.ended()) addObjects(getObj());
 	}
 
 	@Override
-	protected void onClick(@Nullable OnClickEvent e) {
+	protected void onClick(OnClickEvent e) {
 		object.getAnims().clear();
-		object.getAnims().add(AccelerateMove.getGravity(50.0));
+		object.getAnims().add(AccelerateMove.getGravity(60.0));
 		object.getAnims().add(new SimpleMove(0, -300));
 	}
 
@@ -46,9 +56,11 @@ public class Demo7 extends Game {
 		return new ShapeObject[]{new ShapeObject(ColorResource.Companion.get教主黄(),
 				new FRectangle(50, height), 550.0, 0.0) {{
 			getAnims().add(new SimpleMove(-100, 0));
+			getTargets().add(new Pair<>(object, gameOver));
 		}}, new ShapeObject(ColorResource.Companion.get教主黄(),
 				new FRectangle(50, getHeight() - height), 550.0, height + 200.0) {{
 			getAnims().add(new SimpleMove(-100, 0));
+			getTargets().add(new Pair<>(object, gameOver));
 		}}};
 	}
 }

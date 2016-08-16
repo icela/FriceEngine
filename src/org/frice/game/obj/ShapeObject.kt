@@ -1,6 +1,7 @@
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
+import org.frice.game.event.OnCollideEvent
 import org.frice.game.resource.ColorResource
 import org.frice.game.utils.shape.FRectangle
 import org.frice.game.utils.shape.FShape
@@ -23,7 +24,7 @@ open class ShapeObject(val res: ColorResource, override val shape: FShape, overr
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
 	override val anims: ArrayList<FAnim> = ArrayList()
-	override val targets: ArrayList<FObject> = ArrayList()
+	override val targets: ArrayList<Pair<FObject, OnCollideEvent>> = ArrayList()
 
 	private var scale = Pair(1.0, 1.0)
 

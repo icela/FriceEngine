@@ -1,6 +1,7 @@
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
+import org.frice.game.event.OnCollideEvent
 import org.frice.game.obj.collide.CollideBox
 import org.frice.game.resource.FResource
 import org.frice.game.utils.shape.FShape
@@ -18,7 +19,7 @@ interface FObject : CollideBox {
 	val width: Double
 	val height: Double
 	val anims: ArrayList<FAnim>
-	val targets: ArrayList<FObject>
+	val targets: ArrayList<Pair<FObject, OnCollideEvent>>
 	val shape: FShape
 	fun getResource(): FResource
 	fun move(p: Pair<Double, Double>)

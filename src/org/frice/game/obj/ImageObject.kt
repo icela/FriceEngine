@@ -1,6 +1,7 @@
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
+import org.frice.game.event.OnCollideEvent
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.shape.FRectangle
 import java.awt.Image
@@ -40,7 +41,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 		get() = res.image.height.toDouble()
 
 	override val anims: ArrayList<FAnim> = ArrayList()
-	override val targets: ArrayList<FObject> = ArrayList()
+	override val targets: ArrayList<Pair<FObject, OnCollideEvent>> = ArrayList()
 
 	override val shape = FRectangle(res.image.width, res.image.height)
 
