@@ -1,8 +1,8 @@
 package org.frice.game
 
 import org.frice.game.obj.FObject
-import org.frice.game.obj.ImageObject
-import org.frice.game.obj.ShapeObject
+import org.frice.game.obj.sub.ImageObject
+import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource

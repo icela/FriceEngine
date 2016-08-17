@@ -1,5 +1,5 @@
 import org.frice.game.Game
-import org.frice.game.obj.ImageObject
+import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.image.FileImageResource
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimer

@@ -4,7 +4,7 @@ import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
 import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnCollideEvent;
-import org.frice.game.obj.ShapeObject;
+import org.frice.game.obj.sub.ShapeObject;
 import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.graphics.shape.FCircle;

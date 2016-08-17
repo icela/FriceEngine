@@ -1,7 +1,7 @@
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
-import org.frice.game.obj.ImageObject;
+import org.frice.game.obj.sub.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.utils.time.FTimer;
 

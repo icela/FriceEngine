@@ -1,6 +1,6 @@
 import org.frice.game.Game;
 import org.frice.game.event.OnClickEvent;
-import org.frice.game.obj.ImageObject;
+import org.frice.game.obj.sub.ImageObject;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.resource.image.FrameImageResource;
 import org.frice.game.utils.audio.AudioManager;

@@ -37,7 +37,7 @@ open class AbstractGame() : Frame() {
 
 	protected var paused = false
 	protected var stopped = false
-	protected var back: FResource = ColorResource.SHIT_YELLOW
+	protected var back: FResource = ColorResource.LIGHT_GRAY
 	protected var refreshPerSecond = 1000
 	protected var debug = true
 
