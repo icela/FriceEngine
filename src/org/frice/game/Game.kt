@@ -127,7 +127,7 @@ open class Game() : AbstractGame(), Runnable {
 					is ShapeObject -> {
 						val bgg = bg
 						bgg.color = o.getResource().color
-						when (o.shape) {
+						when (o.collideBox) {
 							is FRectangle -> bgg.fillRect(o.x.toInt(),
 									o.y.toInt(),
 									o.width.toInt(),

@@ -15,7 +15,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1.1
  */
-open class ShapeObject(protected val res: ColorResource, override val shape: FShape, override var id: Int,
+open class ShapeObject(protected val res: ColorResource, override val collideBox: FShape, override var id: Int,
                        override var x: Double, override var y: Double) : FObject {
 	constructor(res: ColorResource, shape: FShape, x: Double, y: Double) : this(res, shape, -1, x, y)
 
@@ -29,14 +29,14 @@ open class ShapeObject(protected val res: ColorResource, override val shape: FSh
 	private var scale = Pair(1.0, 1.0)
 
 	override val height: Double
-		get() = (shape.height * scale.second)
+		get() = (collideBox.height * scale.second)
 
 	override val width: Double
-		get () = (shape.width * scale.first)
+		get () = (collideBox.width * scale.first)
 
 	override fun isCollide(other: FObject) = when (other) {
-		is ShapeObject -> when (other.shape) {
-			is FRectangle -> when (shape) {
+		is ShapeObject -> when (other.collideBox) {
+			is FRectangle -> when (collideBox) {
 				is FRectangle -> rectCollide(this, other)
 				// TODO
 				else -> rectCollide(this, other)
@@ -44,7 +44,7 @@ open class ShapeObject(protected val res: ColorResource, override val shape: FSh
 			// TODO
 			else -> rectCollide(this, other)
 		}
-		is ImageObject -> when (shape) {
+		is ImageObject -> when (collideBox) {
 			is FRectangle -> rectCollide(this, other)
 			else -> rectCollide(this, other)
 		}

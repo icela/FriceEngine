@@ -26,7 +26,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override fun getResource() = res
 
 	override fun isCollide(other: FObject) = when (other) {
-		is ShapeObject -> when (other.shape) {
+		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> rectCollide(this, other)
 		// TODO
 			else -> rectCollide(this, other)
@@ -43,7 +43,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override val anims: ArrayList<FAnim> = ArrayList()
 	override val targets: ArrayList<Pair<FObject, OnCollideEvent>> = ArrayList()
 
-	override val shape = FRectangle(res.image.width, res.image.height)
+	override val collideBox = FRectangle(res.image.width, res.image.height)
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),

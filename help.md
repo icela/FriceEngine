@@ -48,6 +48,9 @@ Name and type|Usage
 id: Int|to specify objects from others
 x: Int|location x
 y: Int|location y
+anims: ArrayList<FAnim>|Owned animations, will follow these animations while game is running.
+targets: ArrayList<Pair<FObject, OnCollideEvent>>|first param is the target object, second one is the lambda will be called while owner collides the target object.
+
 
 ## org.frice.game.obj.ImageObject
 Class.
@@ -227,6 +230,33 @@ Class.<br/>
 ### Constructors
 Param|Usage
 :---|---:
-
+x: Int|number of pixels that the owner should move per second, horizontally.
+y: Int|number of pixels that the owner should move per second, vertically.
 
 ## org.frice.game.anim.move.AccelerateMove
+Class.<br/>
+
+### Constructors
+Param|Usage
+:---|---:
+x: Int|number of **pixels per second** that the owner should move per second, horizontally.
+y: Int|number of **pixels per second** that the owner should move per second, vertically.
+
+### APIs
+Method|Usage
+:---|---:
+getGravity(g: Double)|returns an AccelerateMove instance with y = g and x = 0
+getGravity()|returns an AccelerateMove instance with y = 10 and x = 0
+
+## org.frice.game.anim.move.CustomMove
+Abstract.<br/>
+For you to create your own way to Move.
+
+### APIs
+Method|Usage
+:---|---:
+getXDelta(timeFromBegin: Double): Double|you receive how many seconds has past from created, and return how many pixels the owner should move, horizontally.
+getYDelta(timeFromBegin: Double): Double|same as the one above, but vertically.
+
+
+

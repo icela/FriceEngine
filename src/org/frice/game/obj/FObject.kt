@@ -22,7 +22,7 @@ interface FObject : CollideBox {
 	val height: Double
 	val anims: ArrayList<FAnim>
 	val targets: ArrayList<Pair<FObject, OnCollideEvent>>
-	val shape: FShape
+	val collideBox: FShape
 	fun getResource(): FResource
 	fun move(p: Pair<Double, Double>)
 	fun scale(p: Pair<Double, Double>)

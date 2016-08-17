@@ -1,5 +1,7 @@
 # FriceEngine
 
+![image](https://avatars1.githubusercontent.com/u/21008243)
+
 An easy, light weight, native game engine running on JVM.<br/>
 View [Help](help.md) or wiki to learn more about Frice Engine.
 
