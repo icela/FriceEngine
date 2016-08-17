@@ -34,7 +34,7 @@ git clone https://github.com/icela/FriceEngine.git
 - [X] Kotlin(Native)
 - [X] Java
 - [X] Groovy
-- [X] JRuby(seemed not working with my project)
+- [X] JRuby
 - [ ] Scala(I don't know if supported)
 
 ### Functions

@@ -94,6 +94,14 @@ Param|Usage
 file: File|file that contains the image
 path: String|path of file that contains the image
 
+## org.frice.game.resource.WebImageResource
+Class.
+
+### Constructors
+Param|Usage
+:---|---:
+url: String|url of website that contains the image
+
 ## org.frice.game.resource.ColorResource
 Class.
 
@@ -113,13 +121,13 @@ GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELL
 Static object.
 
 ### APIs
-Method|Usage
-:---|---:
-v(e: Any?)|log a verbose message
-d(e: Any?)|log a debug message
-i(e: Any?)|log a info message
-w(e: Any?)|log a warning message
-e(e: Any?)|log an error message
+Method|Alias|Usage
+:---|---|---:
+v(e: Any?)|verbose|log a verbose message
+d(e: Any?)|debug|log a debug message
+i(e: Any?)|info|log a info message
+w(e: Any?)|warning|log a warning message
+e(e: Any?)|error|log an error message
 
 ## org.frice.game.utils.time.FTimer
 Class.<br/>
@@ -167,4 +175,25 @@ Class.<br/>
 To show dialogs on screen. Very simple, I think there's no need to write a doc for it.<br/>
 Constructor needs a context.
 
-## 
+## org.frice.game.utils.audio.AudioManager
+Singleton.<br/>
+Use this to play audio. But BGM isn't recommended.
+
+### APIs
+Method|Usage
+:---|---:
+play(file: File)|play the wav file
+play(path: String)|create a file from the path and invoke the last method
+getPlayer(file: File)|returns a player thread(so that you can stop the thread while playing)
+getPlayer(path: String)|create a file from the path and invoke the last method
+
+## org.frice.game.utils.audio.AudioPlayer
+Class.<br/>
+This is the player thread.
+
+### APIs
+Method|Usage
+:---|---:
+start()|start playing
+exit()|stop playing
+ 

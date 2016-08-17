@@ -33,7 +33,7 @@ class AudioPlayer internal constructor(file: File) {
 	companion object {
 		val BUFFER_SIZE = 2048
 
-		fun getLine(audioFormat: AudioFormat): SourceDataLine {
+		private fun getLine(audioFormat: AudioFormat): SourceDataLine {
 			return (AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java,
 					audioFormat)) as SourceDataLine).apply {
 				open(audioFormat)
