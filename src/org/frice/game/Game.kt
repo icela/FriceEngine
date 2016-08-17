@@ -43,7 +43,6 @@ open class Game() : AbstractGame(), Runnable {
 		FLog.v("Engine start!")
 	}
 
-
 	protected fun addObject(obj: FObject) = objects.add(obj)
 	protected fun addObjects(objs: Array<FObject>) = objects.addAll(objs)
 	protected fun clearObjects() = objects.clear()
@@ -77,11 +76,15 @@ open class Game() : AbstractGame(), Runnable {
 		panel.size = d
 	}
 
-
 	protected fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	protected fun setCursor(o: ImageObject) {
 		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
+
+	protected fun getScreenCut() = ImageResource.create(BufferedImage(width, height,
+			BufferedImage.TYPE_INT_ARGB).apply {
+		graphics.drawImage(buffer, width, height, this@Game)
+	})
 
 	override fun run() {
 		while (true) if (!paused && !stopped) {
