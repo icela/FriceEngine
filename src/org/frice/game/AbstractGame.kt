@@ -8,6 +8,7 @@ import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Frame
+import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
@@ -22,6 +23,21 @@ import javax.swing.JOptionPane
  * @since v0.2.3
  */
 open class AbstractGame() : Frame() {
+	companion object {
+		@JvmStatic val SMALL_PHONE = Rectangle(100, 100, 480, 800)
+		@JvmStatic val BIG_PHONE = Rectangle(100, 100, 720, 1200)
+		@JvmStatic val HUGE_PHONE = Rectangle(100, 100, 1080, 1920)
+
+		@JvmStatic val SMALL_SQUARE = Rectangle(100, 100, 400, 400)
+		@JvmStatic val BIG_SQUARE = Rectangle(100, 100, 800, 800)
+
+		@JvmStatic fun Rectangle.turn() {
+			width -= -height
+			height -= width
+			width += height
+		}
+	}
+
 	protected var paused = false
 	protected var stopped = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW

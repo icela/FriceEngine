@@ -6,7 +6,8 @@ require 'java'
 require './FriceEngine.jar'
 
 class Demo5 < org.frice.game.Game
-	def onInit
+
+	def on_init
 		setBounds java.awt.Rectangle.new 100, 100, 800, 800
 		setTitle 'JRuby demo by ice1000'
 
