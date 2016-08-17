@@ -41,12 +41,23 @@ class ParticleResource(val game: Game,
 
 	init {
 		drawBackground()
+		loop((image.width * image.height * percentage).toInt()) {
+			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
+		}
 	}
 
 	override fun getResource() = image.apply {
-		drawBackground()
-		loop((image.width * image.height * percentage).toInt()) {
+		var cache1: Int
+		var cache2: Int
+		loop(100) {
+			cache1 = random.nextInt(x)
+			cache2 = random.nextInt(y)
 			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
+			image.setRGB(cache1, cache2, when (back) {
+				is ColorResource -> back.color.rgb
+				is ImageResource -> back.image.getRGB(cache1, cache2)
+				else -> ColorResource.WHITE.color.rgb
+			})
 		}
 	}
 }
