@@ -87,8 +87,8 @@ open class AbstractGame() : Frame() {
 	}
 
 	protected fun addKeyListener(
-			pressed: (KeyEvent) -> Unit = { },
 			typed: (KeyEvent) -> Unit = { },
+			pressed: (KeyEvent) -> Unit = { },
 			released: (KeyEvent) -> Unit = { }) {
 		addKeyListener(object : KeyListener {
 			override fun keyPressed(e: KeyEvent?) = pressed(e!!)
@@ -97,7 +97,6 @@ open class AbstractGame() : Frame() {
 		})
 	}
 
-	protected fun listenKeyPressed(key: OnKeyEvent) {
-		addKeyListener { key.execute(it) }
-	}
+	protected fun listenKeyPressed(key: OnKeyEvent) =
+			addKeyListener({ key.execute(it) }, { key.execute(it) }, { key.execute(it) })
 }
