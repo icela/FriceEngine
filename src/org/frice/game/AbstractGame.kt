@@ -1,6 +1,7 @@
 package org.frice.game
 
 import org.frice.game.event.OnClickEvent
+import org.frice.game.event.OnKeyEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.FResource
@@ -86,8 +87,8 @@ open class AbstractGame() : Frame() {
 	}
 
 	protected fun addKeyListener(
-			typed: (KeyEvent) -> Unit = { },
 			pressed: (KeyEvent) -> Unit = { },
+			typed: (KeyEvent) -> Unit = { },
 			released: (KeyEvent) -> Unit = { }) {
 		addKeyListener(object : KeyListener {
 			override fun keyPressed(e: KeyEvent?) = pressed(e!!)
@@ -96,6 +97,7 @@ open class AbstractGame() : Frame() {
 		})
 	}
 
-	protected fun listenKeyPressed()
-
+	protected fun listenKeyPressed(key: OnKeyEvent) {
+		addKeyListener { key.execute(it) }
+	}
 }
