@@ -21,7 +21,7 @@ git clone https://github.com/icela/FriceEngine.git
 - [X] Kotlin(Native)
 - [X] Java
 - [X] Groovy
-- [ ] JRuby(seemed not working with my project)
+- [X] JRuby(seemed not working with my project)
 - [ ] Scala(I don't know if supported)
 
 ### Functions
@@ -30,7 +30,8 @@ git clone https://github.com/icela/FriceEngine.git
 - [X] Audio playing(wav only, because mp3 needs a library and it's too large)
 - [X] Dialogs
 - [X] Cursor overriding
-- [X] 
+- [X] Clock system
+
 
 ## Basic
 FriceEngine is based on the life cycle mode.<br/>
@@ -47,8 +48,8 @@ When you wanna build games with frice engine, follow these steps:
 - [demo/Demo1.java](demo/Demo1.java)
 - [demo/Demo2.java](demo/Demo2.java)
 - [demo/Demo3.kt](demo/Demo3.kt)
-- [demo/Demo4.groovy](demo/Demo4.groovy)
-- [demo/Demo5.rb](demo/Demo5.rb) (not working)
-- [demo/Demo6.java](demo/Demo6.java)
+- [demo/Demo4.groovy](demo/Demo4.groovy)(database demo)
+- [demo/Demo5.rb](demo/Demo5.rb) (it can crate game window but cannot add objects)
+- [demo/Demo6.java](demo/Demo6.java)(accelerate demo)
 - [demo/Demo7.java](demo/Demo7.java)(flappy bird demo)
-
+- [demo/Demo8.java](demo/Demo8.java)(audio and cursor demo)

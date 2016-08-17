@@ -91,16 +91,20 @@ class Preference constructor(val file: File) {
 	fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
 		val value = node.attributes.getNamedItem(VALUE).nodeValue ?: return default
-		when (node.attributes.getNamedItem(TYPE).nodeValue) {
-			TYPE_BYTE -> return value.toByte()
-			TYPE_INT -> return value.toInt()
-			TYPE_LONG -> return value.toLong()
-			TYPE_SHORT -> return value.toShort()
-			TYPE_CHAR -> return value.toCharArray()[0]
-			TYPE_FLOAT -> return value.toFloat()
-			TYPE_DOUBLE -> return value.toDouble()
-			TYPE_STRING -> return value
-			else -> return default
+		return try {
+			when (node.attributes.getNamedItem(TYPE).nodeValue) {
+				TYPE_BYTE -> value.toByte()
+				TYPE_INT -> value.toInt()
+				TYPE_LONG -> value.toLong()
+				TYPE_SHORT -> value.toShort()
+				TYPE_CHAR -> value.toCharArray()[0]
+				TYPE_FLOAT -> value.toFloat()
+				TYPE_DOUBLE -> value.toDouble()
+				TYPE_STRING -> value
+				else -> default
+			}
+		} catch (e: Exception) {
+			default
 		}
 	}
 }
