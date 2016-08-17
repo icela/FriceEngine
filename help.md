@@ -121,8 +121,9 @@ list: Array<ImageResource>|an array of images
 div: Int|division time between two images
 
 ### APIs
-
-setLoop(Boolean)|
+Method|Usage
+:---|---:
+setLoop(Boolean)|true means it should loop.
 
 ## org.frice.game.resource.ColorResource
 Class.
