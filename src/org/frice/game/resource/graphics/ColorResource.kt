@@ -10,6 +10,9 @@ import java.awt.Color
  */
 class ColorResource(val color: Color) : FResource {
 
+	/**
+	 * 颜表立。。。
+	 */
 	companion object {
 		@JvmStatic val GREEN = ColorResource(Color.GREEN)
 		@JvmStatic val BLUE = ColorResource(Color.BLUE)
@@ -30,6 +33,7 @@ class ColorResource(val color: Color) : FResource {
 		@JvmStatic val 吾王蓝 = BLUE
 		@JvmStatic val 教主黄 = YELLOW
 		@JvmStatic val 宝强绿 = GREEN
+		@JvmStatic val 如果奇迹有颜色那么一定是橙色 = ORANGE
 	}
 
 	constructor(color: Int):this(Color(color))

@@ -9,10 +9,7 @@ import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.Rectangle
-import java.awt.event.MouseEvent
-import java.awt.event.MouseListener
-import java.awt.event.WindowEvent
-import java.awt.event.WindowListener
+import java.awt.event.*
 import javax.swing.JOptionPane
 
 /**
@@ -62,6 +59,7 @@ open class AbstractGame() : Frame() {
 			override fun windowClosed(e: WindowEvent) = Unit
 			override fun windowOpened(e: WindowEvent) = Unit
 		})
+
 	}
 
 	protected open fun onInit() = Unit
@@ -69,7 +67,9 @@ open class AbstractGame() : Frame() {
 	protected open fun onClick(e: OnClickEvent?) = Unit
 	protected open fun onMouse(e: OnMouseEvent?) = Unit
 	protected open fun onExit() {
-		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", JOptionPane.YES_NO_OPTION) ==
+		if (FDialog(this).confirm("Are you sure to exit?",
+				"Ensuring",
+				JOptionPane.YES_NO_OPTION) ==
 				JOptionPane.YES_OPTION)
 			System.exit(0)
 	}
@@ -80,6 +80,17 @@ open class AbstractGame() : Frame() {
 
 	protected open fun onFocus(e: OnWindowEvent?) {
 		paused = false
+	}
+
+	protected fun addKeyListener(
+			typed: (KeyEvent) -> Unit = { },
+			pressed: (KeyEvent) -> Unit = { },
+			released: (KeyEvent) -> Unit = { }) {
+		addKeyListener(object : KeyListener {
+			override fun keyPressed(e: KeyEvent?) = pressed(e!!)
+			override fun keyReleased(e: KeyEvent?) = released(e!!)
+			override fun keyTyped(e: KeyEvent?) = typed(e!!)
+		})
 	}
 
 }

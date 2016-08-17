@@ -20,9 +20,7 @@ inline fun <T> T.loopIf(condition: () -> Boolean, block: T.() -> Unit): T {
 inline fun <T> T.forceRun(block: T.() -> Unit): T {
 	try {
 		block.invoke(this)
-	} catch (e: Error) {
-	} catch (e: Exception) {
-	} finally {
+	} catch (e: Throwable) {
 	}
 	return this
 }
