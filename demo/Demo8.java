@@ -7,6 +7,8 @@ import org.frice.game.utils.audio.AudioManager;
 import org.frice.game.utils.audio.AudioPlayer;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+
 /**
  * Created by ice1000 on 2016/8/16.
  *
@@ -30,6 +32,7 @@ public class Demo8 extends Game {
 		setCursor(object);
 		player = AudioManager.getPlayer("1.wav");
 		player.start();
+		new Color(0x1BA61C);
 	}
 
 	@Override
