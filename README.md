@@ -1,72 +1,73 @@
-# FriceEngine
+ # FriceEngine
 
 ![image](https://avatars1.githubusercontent.com/u/21008243)
 
-An easy, light weight, native game engine running on JVM.<br/>
-View [Help](help.md) or wiki to learn more about Frice Engine.
+一个简单易用的原生轻量级JVM游戏引擎。<br/>
+查看 [APIs](apis.md) 或者Wiki以更多地了解Frice Engine。
+An easy, light, native game engine running on JVM.<br/>
+View [APIs](apis.md) or wiki to learn more about Frice Engine.
 
-## How easy?
-[A flappy bird game](demo/Demo7.java) needs 65 lines of code only.<br/>
-Written in Kotlin, but also work with Java, JRuby, Groovy, Scala.
+## Why easy? 为什么易用？
+["愤怒的小鸟"模拟](demo/Demo7.java) 仅用了65行代码。
+使用Kotlin写就，并支持Java, JRuby, Groovy, Scala等语言。
+[A flappy bird game](demo/Demo7.java) is in 65 lines of code only.<br/>
+Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
-## How light?
-Kotlin-runtime.jar is 736kb, and the jar of this engine is a little above 800kb.<br/>
-And if you use Kotlin, you don't have to copy runtime to your target('cause already built-in)<br/>
-mp3 support in the future will take 200kb.
+## Why light? 为什么轻量？
+Kotlin运行时库仅用736KB（使用Kotlin开发游戏可以在游戏集成而不必引擎附带），引擎也仅仅略大于800KB。
+未来将会加入的MP3支持可能会占用200KB。
+Kotlin runtime is 736KB in size (if not using Kotlin to build games), and the engine JAR file size is just a bit above 800KB.<br/>
+MP3 format support (in the future) will take 200KB.
 
-## How native?
-No JNI, no native method, everything is written by me in pure Kotlin.<br/>
-But mp3 support in the future will probably be external.<br/>
-That means this engine is completely platform-independent.<br/>
-And this is what a JVM app should exactly be.
+## Why native? 为什么原生？
+This engine is completely platform-independent: no JNIs, no native methods, everything is written by myself in pure Kotlin.<br/>
+And this is what a JVM app should be exactly.
+
+# Before you build
+clone (`clone https://github.com/icela/FriceEngine.git`) and open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).
 
 # Build
-clone and open with IntelliJ IDEA(please install Kotlin, Groovy, Ruby plugin):
+Currently under construction. Maybe you know how to build your own apps.
 
-clone:
-```bash
-git clone https://github.com/icela/FriceEngine.git
-```
-
-# Use
+# Usage
 
 ## Supported
 
 ### Languages
-- [X] Kotlin(Native)
+- [X] Kotlin (Native)
 - [X] Java
 - [X] Groovy
 - [X] JRuby
-- [ ] Scala(I don't know if supported)
+- [ ] Scala (Not tested)
 
 ### Functions
-- [X] Game Objects(from image or shape, image from file or web)
+- [X] Game Objects (from image or shape, image from file or web)
 - [X] Life cycle
 - [X] Collision detecting
-- [X] Audio playing(wav only, because mp3 needs a library and it's too large)
+- [X] Audio playing (*.wav only)
 - [X] Dialogs
 - [X] Cursor overriding
 - [X] Clock system
-- [X] Animations(frame, move, scale, accelerate, etc.)
-- [X] A key-value database
+- [X] Animations (frame, move, scale, accelerate, etc.)
+- [X] A simple key-value database
 
-## Basic
+## Basics
 FriceEngine is based on the life cycle mode.<br/>
-When you wanna build games with frice engine, follow these steps:
+To build games based on frice engine, follow these steps:
 
-- Import the jar in the latest release to your project.
-- Create a class extends Game in org.frice.game package.
-- Implement the abstract methods, just understand them by name.
-- call the empty constructor in the public static void main.
-- For full API doc please view [help](help.md)
+1. Import the jar in the latest release to your project.
+2. Create a class extends Game in org.frice.game package.
+3. Implement the abstract methods, just understand them by name.
+4. call the empty constructor in the public static void main.
+5. For full API doc please view [help](help.md)
 
 ## Demos
 
 - [demo/Demo1.java](demo/Demo1.java)
 - [demo/Demo2.java](demo/Demo2.java)
 - [demo/Demo3.kt](demo/Demo3.kt)
-- [demo/Demo4.groovy](demo/Demo4.groovy)(database demo)
-- [demo/Demo5.rb](demo/Demo5.rb) (it can crate game window but cannot add objects)
-- [demo/Demo6.java](demo/Demo6.java)(accelerate demo)
-- [demo/Demo7.java](demo/Demo7.java)(flappy bird demo)
-- [demo/Demo8.java](demo/Demo8.java)(audio and cursor demo)
+- [demo/Demo4.groovy](demo/Demo4.groovy) (database demo)
+- [demo/Demo5.rb](demo/Demo5.rb) (BUG: it can create a game window but cannot add objects)
+- [demo/Demo6.java](demo/Demo6.java) (acceleration demo)
+- [demo/Demo7.java](demo/Demo7.java) (flappy bird demo)
+- [demo/Demo8.java](demo/Demo8.java) (audio and cursor demo)
