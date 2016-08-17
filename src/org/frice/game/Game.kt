@@ -117,31 +117,6 @@ open class Game() : AbstractGame(), Runnable {
 	 * @since v0.1
 	 */
 	inner class GamePanel : JPanel() {
-		private val draw: (o: FObject) -> Unit = { o ->
-			when (o) {
-				is ParticleEffect ->
-					bg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
-				is ImageObject ->
-					bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
-				is ShapeObject -> {
-					val bgg = bg
-					bgg.color = o.getResource().color
-					when (o.collideBox) {
-						is FRectangle -> bgg.fillRect(
-								o.x.toInt(),
-								o.y.toInt(),
-								o.width.toInt(),
-								o.height.toInt())
-						is FOval -> bgg.fillOval(
-								o.x.toInt(),
-								o.y.toInt(),
-								o.width.toInt(),
-								o.height.toInt())
-					}
-				}
-			}
-
-		}
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
@@ -151,7 +126,30 @@ open class Game() : AbstractGame(), Runnable {
 				o.checkCollision()
 			}
 			g.drawImage(buffer, 0, 0, this)
-			objects.forEach { o -> draw(o) }
+			objects.forEach { o ->
+				when (o) {
+					is ParticleEffect ->
+						bg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
+					is ImageObject ->
+						bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+					is ShapeObject -> {
+						val bgg = bg
+						bgg.color = o.getResource().color
+						when (o.collideBox) {
+							is FRectangle -> bgg.fillRect(
+									o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt())
+							is FOval -> bgg.fillOval(
+									o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt())
+						}
+					}
+				}
+			}
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}

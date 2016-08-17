@@ -10,6 +10,7 @@ import java.awt.BorderLayout
 import java.awt.Frame
 import java.awt.Rectangle
 import java.awt.event.*
+import java.util.*
 import javax.swing.JOptionPane
 
 /**
@@ -40,6 +41,8 @@ open class AbstractGame() : Frame() {
 	protected var back: FResource = ColorResource.LIGHT_GRAY
 	protected var refreshPerSecond = 1000
 	protected var debug = true
+
+	protected val random = Random()
 
 	init {
 		layout = BorderLayout()
@@ -92,5 +95,7 @@ open class AbstractGame() : Frame() {
 			override fun keyTyped(e: KeyEvent?) = typed(e!!)
 		})
 	}
+
+	protected fun listenKeyPressed()
 
 }

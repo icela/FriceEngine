@@ -4,7 +4,6 @@ import org.frice.game.Game
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.loop
-import org.frice.game.utils.message.log.FLog
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -48,10 +47,10 @@ class ParticleResource(val game: Game,
 	}
 
 	override fun getResource() = image.apply {
-		FLog.debug("Ah!? Ah!")
+//		FLog.debug("Ah!? Ah!")
 		var cache1: Int
 		var cache2: Int
-		loop(100) {
+		loop((image.width * image.height * 0.5).toInt()) {
 			cache1 = random.nextInt(x)
 			cache2 = random.nextInt(y)
 			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
