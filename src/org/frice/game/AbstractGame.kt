@@ -3,8 +3,8 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.FResource
+import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Frame
@@ -25,7 +25,7 @@ open class AbstractGame() : Frame() {
 	protected var paused = false
 	protected var stopped = false
 	protected var back: FResource = ColorResource.SHIT_YELLOW
-	protected var refreshPerSecond = 30
+	protected var refreshPerSecond = 1000
 	protected var debug = true
 
 	init {

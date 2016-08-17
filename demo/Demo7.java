@@ -46,8 +46,8 @@ public class Demo7 extends Game {
 	@Override
 	protected void onClick(OnClickEvent e) {
 		object.getAnims().clear();
-		object.getAnims().add(AccelerateMove.getGravity(120.0));
-		object.getAnims().add(new SimpleMove(0, -800));
+		object.getAnims().add(AccelerateMove.getGravity(30.0));
+		object.getAnims().add(new SimpleMove(0, -400));
 	}
 
 	private ShapeObject[] getObj() {
