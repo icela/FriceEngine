@@ -5,19 +5,28 @@ require 'java'
 # don't use this path on your computer
 require './FriceEngine.jar'
 
-class Demo5 < org.frice.game.Game
+java_import org.frice.game.Game
+java_import org.frice.game.resource.graphics.ColorResource
+java_import org.frice.game.utils.graphics.shape.FOval
+java_import org.frice.game.obj.ShapeObject
+java_import org.frice.game.utils.time.FTimer
+java_import org.frice.game.utils.message.FDialog
+
+java_import java.awt.Rectangle
+
+class Demo5 < Game
 
 	def on_init
-		setBounds java.awt.Rectangle.new 100, 100, 800, 800
+		setBounds Rectangle.new 100, 100, 800, 800
 		setTitle 'JRuby demo by ice1000'
 
 		@bool = false
 
-		color = org.frice.game.resource.graphics.ColorResource.new '111111'
-		@oval = org.frice.game.utils.graphics.shape.FOval.new 20.0, 15.0
+		color = ColorResource.new '111111'
+		@oval = FOval.new 20.0, 15.0
 
-		@obj = org.frice.game.obj.ShapeObject.new color, @oval, 20.0, 20.0
-		@timer = org.frice.game.utils.time.FTimer.new 1000
+		@obj = ShapeObject.new color, @oval, 20.0, 20.0
+		@timer = FTimer.new 1000
 
 		# now it's the problem. The object doesn't appear on the game window.
 		add_object @obj
@@ -36,7 +45,7 @@ class Demo5 < org.frice.game.Game
 	end
 
 	def on_click(e)
-		org.frice.game.utils.message.FDialog.new(self).show 'onClick'
+		FDialog.new(self).show 'onClick'
 	end
 
 	def on_mouse(e)
