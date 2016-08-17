@@ -51,7 +51,6 @@ y: Int|location y
 anims: ArrayList<FAnim>|Owned animations, will follow these animations while game is running.
 targets: ArrayList<Pair<FObject, OnCollideEvent>>|first param is the target object, second one is the lambda will be called while owner collides the target object.
 
-
 ## org.frice.game.obj.ImageObject
 Class.
 
@@ -236,11 +235,14 @@ y: Int|number of pixels that the owner should move per second, vertically.
 ## org.frice.game.anim.move.AccelerateMove
 Class.<br/>
 
+### Demos
+See Demo6, Demo7.
+
 ### Constructors
 Param|Usage
 :---|---:
-x: Int|number of **pixels per second** that the owner should move per second, horizontally.
-y: Int|number of **pixels per second** that the owner should move per second, vertically.
+x: Int|number of **pixels per second** that the owner's speed should increase move per second, horizontally.
+y: Int|number of **pixels per second** that the owner's speed should increase per second, vertically.
 
 ### APIs
 Method|Usage
@@ -258,5 +260,16 @@ Method|Usage
 getXDelta(timeFromBegin: Double): Double|you receive how many seconds has past from created, and return how many pixels the owner should move, horizontally.
 getYDelta(timeFromBegin: Double): Double|same as the one above, but vertically.
 
+## org.frice.game.anim.scale.ScaleAnim
+Abstract.
+
+## org.frice.game.anim.scale.SimpleScale
+Class.
+
+### Constructors
+Param|Usage
+:---|---:
+x: Double|how many times bigger that the owner should scale per second, horizontally.
+y: Double|how many times bigger that the owner should scale per second, vertically.
 
 
