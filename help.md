@@ -1,5 +1,7 @@
 # API reference
-This is the full API reference of frice engine.
+This is the full API reference of frice engine.<br/>
+Some classes and interface you don't need to know are not shown here.<br/>
+There are information you should know only.
 
 ## org.frice.game.Game
 Abstract.<br/>
@@ -28,8 +30,10 @@ addTimeListener(listener: FTimeListener)|add an object to timeListeners, and the
 removeTimeListener(listener: FTimeListener)|remove the object to timeListeners, and it won't be checked when needed.
 setBack(FResource)|set the background(color or image)
 setRefreshPerSecond(Double)|There will be a sleep between every two refresh, the length of every sleep is 1000/value. Default is 10.
-setBounds(int x, int y, int width, int height)|from JFrame
-setTitle(String)|from JFrame
+setCursor(o: ImageObject)|set the cursor as an ImageObject, and you can still operate it as an object(will call addObject() automatically)
+setCursor(o: ImageResource)|create an ImageObject and invoke the last method
+setBounds(int x, int y, int width, int height)|from Frame
+setTitle(String)|from Frame
 
 ## org.frice.game.obj.FObject
 Interface.<br/>
@@ -101,6 +105,22 @@ Class.
 Param|Usage
 :---|---:
 url: String|url of website that contains the image
+
+## org.frice.game.resource.FrameImageResource
+Class.<br/>
+Use this to implement frame animation.
+
+### Constructors
+Param|Usage
+:---|---:
+game: Game|context, just give "this" in your own Game class
+list: List<ImageResource>|a list of images
+list: Array<ImageResource>|an array of images
+div: Int|division time between two images
+
+### APIs
+
+setLoop(Boolean)|
 
 ## org.frice.game.resource.ColorResource
 Class.
@@ -196,4 +216,17 @@ Method|Usage
 :---|---:
 start()|start playing
 exit()|stop playing
- 
+
+## org.frice.game.anim.FAnim
+Abstract.<br/>
+Animations are all subclasses of FAnim.
+
+## org.frice.game.anim.move.SimpleMove
+Class.<br/>
+
+### Constructors
+Param|Usage
+:---|---:
+
+
+## org.frice.game.anim.move.AccelerateMove

@@ -3,14 +3,11 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.obj.ImageObject
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
-import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Frame
-import java.awt.Point
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
@@ -67,12 +64,6 @@ open class AbstractGame() : Frame() {
 
 	protected open fun onFocus(e: OnWindowEvent?) {
 		paused = false
-	}
-
-
-	protected fun setCursor(o: ImageObject) = setCursor(o.getResource())
-	protected fun setCursor(o: ImageResource) {
-		cursor = toolkit.createCustomCursor(o.image, Point(0, 0), "cursor")
 	}
 
 }

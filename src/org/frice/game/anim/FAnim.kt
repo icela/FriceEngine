@@ -8,6 +8,7 @@ package org.frice.game.anim
 abstract class FAnim() {
 	protected val start: Double
 		get() = field / 1000
+
 	init {
 		start = System.currentTimeMillis().toDouble()
 	}
