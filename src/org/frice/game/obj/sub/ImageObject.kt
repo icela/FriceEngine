@@ -24,6 +24,8 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
+	constructor(res: BufferedImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
+
 	override fun getResource() = res
 
 	override fun isCollide(other: FObject) = when (other) {

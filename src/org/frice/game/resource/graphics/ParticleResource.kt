@@ -4,6 +4,7 @@ import org.frice.game.Game
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.loop
+import org.frice.game.utils.message.log.FLog
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -18,7 +19,7 @@ class ParticleResource(val game: Game,
                        var x: Int, var y: Int,
                        val back: FResource,
                        var fore: ColorResource,
-                       val percentage: Double) : FResource {
+                       percentage: Double) : FResource {
 	constructor(game: Game, x: Int, y: Int, back: ColorResource, fore: ColorResource) :
 	this(game, x, y, back, fore, 0.5)
 
@@ -47,6 +48,7 @@ class ParticleResource(val game: Game,
 	}
 
 	override fun getResource() = image.apply {
+		FLog.debug("Ah!? Ah!")
 		var cache1: Int
 		var cache2: Int
 		loop(100) {

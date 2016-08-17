@@ -1,6 +1,7 @@
 package org.frice.game
 
 import org.frice.game.obj.FObject
+import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
@@ -116,6 +117,21 @@ open class Game() : AbstractGame(), Runnable {
 	 * @since v0.1
 	 */
 	inner class GamePanel : JPanel() {
+		private fun draw(o: FObject): Any = when (o) {
+			is ParticleEffect -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+			is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+			is ShapeObject -> {
+				val bgg = bg
+				bgg.color = o.getResource().color
+				when (o.collideBox) {
+					is FRectangle -> bgg.fillRect(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+					is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+					else -> Unit
+				}
+			}
+			else -> Unit
+		}
+
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
 			drawBackground(back)
@@ -124,25 +140,7 @@ open class Game() : AbstractGame(), Runnable {
 				o.checkCollision()
 			}
 			g.drawImage(buffer, 0, 0, this)
-			objects.forEach { o ->
-				when (o) {
-					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
-					is ShapeObject -> {
-						val bgg = bg
-						bgg.color = o.getResource().color
-						when (o.collideBox) {
-							is FRectangle -> bgg.fillRect(o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt())
-							is FOval -> bgg.fillOval(o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt())
-						}
-					}
-				}
-			}
+			objects.forEach { o -> draw(o) }
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}

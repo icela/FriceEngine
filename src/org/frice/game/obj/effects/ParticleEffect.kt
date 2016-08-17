@@ -3,7 +3,9 @@ package org.frice.game.obj.effects
 import org.frice.game.anim.FAnim
 import org.frice.game.event.OnCollideEvent
 import org.frice.game.obj.FObject
+import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.graphics.ParticleResource
+import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import java.util.*
 
@@ -12,20 +14,21 @@ import java.util.*
  * @author ice1000
  * @since 0.3.2
  */
-class ParticleEffect(var res: ParticleResource, override var x: Double, override var y: Double) : FObject {
+class ParticleEffect(private var resource: ParticleResource, override var x: Double, override var y: Double) :
+		ImageObject(resource.getResource(), x, y) {
 	override var id = -1
 
 	override val anims = ArrayList<FAnim>()
 	override val targets = ArrayList<Pair<FObject, OnCollideEvent>>()
 
-	override val collideBox = FRectangle(0, 0)
+	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
 	override val width: Double
-		get() = res.x.toDouble()
+		get() = resource.x.toDouble()
 	override val height: Double
-		get() = res.y.toDouble()
+		get() = resource.y.toDouble()
 
-	override fun getResource() = res
+	override fun getResource() = ImageResource.create(resource.getResource())
 
 	override fun move(p: Pair<Double, Double>) {
 		x += p.first
@@ -33,8 +36,8 @@ class ParticleEffect(var res: ParticleResource, override var x: Double, override
 	}
 
 	override fun scale(p: Pair<Double, Double>) {
-		res.x = (res.x * p.first).toInt()
-		res.y = (res.y * p.second).toInt()
+		resource.x = (resource.x * p.first).toInt()
+		resource.y = (resource.y * p.second).toInt()
 	}
 
 	override fun isCollide(other: FObject) = false
