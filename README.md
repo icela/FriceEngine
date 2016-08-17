@@ -1,11 +1,24 @@
 # FriceEngine
 
-An easy, light weight, native game engine running on JVM.
+An easy, light weight, native game engine running on JVM.<br/>
+View [Help](help.md) or wiki to learn more about Frice Engine.
 
-View [Help](help.md) to learn more about Frice Engine.
+## How easy?
+[A flappy bird game](demo/Demo7.java) needs 65 lines of code only.<br/>
+Written in Kotlin, but also work with Java, JRuby, Groovy, Scala.
+
+## How light?
+Kotlin-runtime.jar is 736kb, and the jar of this engine is a little above 800kb.<br/>
+And if you use Kotlin, you don't have to copy runtime to your target('cause already built-in)<br/>
+mp3 support in the future will take 200kb.
+
+## How native?
+No JNI, no native method, everything is written by me in pure Kotlin.<br/>
+But mp3 support in the future will probably be external.<br/>
+That means this engine is completely platform-independent.<br/>
+And this is what a JVM app should exactly be.
 
 # Build
-
 clone and open with IntelliJ IDEA(please install Kotlin, Groovy, Ruby plugin):
 
 clone:
@@ -26,12 +39,14 @@ git clone https://github.com/icela/FriceEngine.git
 
 ### Functions
 - [X] Game Objects(from image or shape, image from file or web)
+- [X] Life cycle
 - [X] Collision detecting
 - [X] Audio playing(wav only, because mp3 needs a library and it's too large)
 - [X] Dialogs
 - [X] Cursor overriding
 - [X] Clock system
-
+- [X] Animations(frame, move, scale, accelerate, etc.)
+- [X] A key-value database
 
 ## Basic
 FriceEngine is based on the life cycle mode.<br/>
