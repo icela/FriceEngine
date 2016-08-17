@@ -1,15 +1,15 @@
+import kotlin.Pair;
 import org.frice.game.Game;
 import org.frice.game.anim.move.SimpleMove;
-import org.frice.game.event.OnClickEvent;
 import org.frice.game.obj.effects.ParticleEffect;
 import org.frice.game.obj.sub.ImageObject;
 import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.resource.graphics.ParticleResource;
 import org.frice.game.resource.image.FileImageResource;
+import org.frice.game.utils.audio.AudioManager;
 import org.frice.game.utils.time.FTimer;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * Created by ice1000 on 2016/8/17.
@@ -23,7 +23,6 @@ public class Demo9 extends Game {
 	}
 
 	private ImageObject boss;
-	private int x = 250, y = 250;
 	private FTimer timer = new FTimer(600);
 
 	@Override
@@ -35,18 +34,31 @@ public class Demo9 extends Game {
 		addObject(new ParticleEffect(new ParticleResource(this, 500, 500,
 				ColorResource.getWHITE(), ColorResource.getGREEN()), 0, 0));
 		addObject(boss);
-		setCursor(plane);
-		addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
+		addObject(plane);
+		listenKeyPressed(e -> {
+			switch (e.getKeyCode()) {
+				case KeyEvent.VK_SPACE:
+					ImageObject object = new ImageObject(new FileImageResource("2.png"), plane.getX(), plane.getY());
+					object.getAnims().add(new SimpleMove(0, -300));
+					object.getTargets().add(new Pair<>(boss, () -> {
+						AudioManager.play("1.wav");
+						removeObject(object);
+					}));
+					addObject(object);
+					break;
+				case KeyEvent.VK_A:
+					plane.setX(plane.getX() - 20);
+					break;
+				case KeyEvent.VK_D:
+					plane.setX(plane.getX() + 20);
+					break;
+				case KeyEvent.VK_S:
+					plane.setY(plane.getY() + 20);
+					break;
+				case KeyEvent.VK_W:
+					plane.setY(plane.getY() - 20);
+					break;
 
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
 			}
 		});
 	}
@@ -59,11 +71,5 @@ public class Demo9 extends Game {
 					getRandom().nextInt(500) - (int) boss.getX(),
 					getRandom().nextInt(500) - (int) boss.getY()));
 		}
-	}
-
-	@Override
-	protected void onClick(OnClickEvent e) {
-		x = e.getEvent().getX();
-		y = e.getEvent().getY();
 	}
 }
