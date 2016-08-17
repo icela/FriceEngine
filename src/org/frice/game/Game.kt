@@ -6,8 +6,10 @@ import org.frice.game.obj.ShapeObject
 import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
+import org.frice.game.utils.forceRun
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.loopIf
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
@@ -87,11 +89,8 @@ open class Game() : AbstractGame(), Runnable {
 	})
 
 	override fun run() {
-		while (true) if (!paused && !stopped) {
-			try {
-				onRefresh()
-			} catch (ignored: Exception) {
-			}
+		loopIf({ !paused && !stopped }) {
+			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
 			Thread.sleep((1000.0 / refreshPerSecond).toLong())
