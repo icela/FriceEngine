@@ -1,62 +1,58 @@
 # API reference
 This is the full API reference of frice engine.<br/>
-Some classes and interface you don't need to know are not shown here.<br/>
-There are information you should know only.
+Some classes and interface are private, so they are not shown here.<br/>
 
-## org.frice.game.Game
-Abstract.<br/>
-**Do not override the constructor, anything about initializing please put them into "onInit()"!**
+## Abstract: org.frice.game.Game
+**Do not override the constructor, anything about initialization please put them into "onInit()"!**
 
 ### Demos
-see every demos are OK.
+See [README](README.md).
 
 ### Life cycle methods
 Method|Usage
 :---|---:
-onInit()|invoked when initialize
-onExit()|invoked when exit button was clicked(will not exit automatically)
-onRefresh()|invoked while running and looped
-onClick(OnClickEvent)|invoked when window is clicked
-onMouse(OnMouseEvent)|invoked while the mouse had done sth(move, press, etc)
-onLoseFocus(OnWindowEvent)|invoked when lost focus(user clicked other windows)
-onFocus(OnWindowEvent)|invoke when having focus(user clicked the game window)
+onInit()|Invoked when initializing
+onExit()|Invoked when exiting (NOTE: engine does not perform process termination automatically)
+onRefresh()|Invoked after game window is refreshed, if not paused)
+onClick(OnClickEvent)|Invoked while clicking in game window
+onMouse(OnMouseEvent)|Invoked when a mouse event arrives(moving, pressing, etc)
+onLoseFocus(OnWindowEvent)|Invoked when game window blurs
+onFocus(OnWindowEvent)|Invoke when game window gets focus
 
 ### APIs
 Method|Usage
 :---|---:
-addObject(FObject)|add an game object to screen
-removeObject(FObject)|remove the object from screen(using the **id** field to judge if they are the same)
-addTimeListener(listener: FTimeListener)|add an object to timeListeners, and they will be checked when needed.
-removeTimeListener(listener: FTimeListener)|remove the object to timeListeners, and it won't be checked when needed.
-setBack(FResource)|set the background(color or image)
-setRefreshPerSecond(Double)|There will be a sleep between every two refresh, the length of every sleep is 1000/value. Default is 10.
-setCursor(o: ImageObject)|set the cursor as an ImageObject, and you can still operate it as an object(will call addObject() automatically)
-setCursor(o: ImageResource)|create an ImageObject and invoke the last method
-getScreenCut(): ImageResource|returns the image copy of display
-setBounds(int x, int y, int width, int height)|from Frame
-setTitle(String)|from Frame
+addObject(FObject)|Adds an object to game window
+removeObject(FObject)|Removes an object from screen
+addTimeListener(listener: FTimeListener)|Adds a timer listener. It will be invoked when timeouts.
+removeTimeListener(listener: FTimeListener)|Remove a object from timer listeners.
+setBack(FResource)|Sets window background
+setRefreshPerSecond(Double)|Sets refresh frequency. Default is 15 refreshes per second.
+setCursor(o: ImageObject)|Sets the cursor as an ImageObject. You can operate it like any other objects. This will call `addObject()` by itself.
+setCursor(o: ImageResource)|Create an ImageObject and invoke the last method
+getScreenCut(): ImageResource|Returns the current screenshot.
+setBounds(int x, int y, int width, int height)|*Inherited from Frame*
+setTitle(String)|*Inherited from Frame*
 
-## org.frice.game.obj.FObject
-Interface.<br/>
-Represent game objects.
+## Interface: org.frice.game.obj.FObject
+Represents a game object.
 
 ### Demos
-see Demo1.
+See [demo/Demo1.java](demo/Demo1.java).
 
 ### Members
-Name and type|Usage
+Name: Type|Usage
 :---|---:
-id: Int|to specify objects from others
-x: Int|location x
-y: Int|location y
-anims: ArrayList<FAnim>|Owned animations, will follow these animations while game is running.
-targets: ArrayList<Pair<FObject, OnCollideEvent>>|first param is the target object, second one is the lambda will be called while owner collides the target object.
+id: Int|Unique ID
+x: Int|Location x
+y: Int|Location y
+anims: ArrayList<FAnim>|Animation list of this object. Engine will play them if game is not paused.
+targets: ArrayList<Pair<FObject, OnCollideEvent>>|Param `FObject` is the target object, `OnCollideEvent` is a lambda which will be called when owner collides the target object.
 
-## org.frice.game.obj.ImageObject
-Class.
+## Class: org.frice.game.obj.ImageObject
 
 ### Demos
-see Demo1.
+see [demo/Demo1.java](demo/Demo1.java).
 
 ### Parent
 org.frice.game.obj.FObject
@@ -66,11 +62,10 @@ Param|Usage
 :---|---:
 res: ImageResource|image resource that will display on game scene
 
-## org.frice.game.obj.ShapedColorObject
-Class.
+## Class: org.frice.game.obj.ShapedColorObject
 
 ### Demos
-see Demo7.
+see [demo/Demo7.java](demo/Demo7.java).
 
 ### Parent
 org.frice.game.obj.FObject
@@ -78,97 +73,84 @@ org.frice.game.obj.FObject
 ### Constructors
 Param|Usage
 :---|---:
-res: ColorResource|color that will display on game scene
-shape: FShape|shape of this object
+res: ColorResource|Color of this object.
+shape: FShape|Shape of this object
 
-## org.frice.game.resource.FResource
-Interface.
+## Interface: org.frice.game.resource.FResource
 
-## org.frice.game.resource.ImageResource
-Interface.
+## Interface: org.frice.game.resource.ImageResource
 
 ### Members
-Name and type|Usage
+Name: Type|Usage
 :---|---:
-image: Image|image
+image: Image|Image object.
 
-## org.frice.game.resource.FileImageResource
-Class.
+## Class: org.frice.game.resource.FileImageResource
 
 ### Constructors
 Param|Usage
 :---|---:
-file: File|file that contains the image
-path: String|path of file that contains the image
+file: File, String|Image file handler or path to the image file.
 
-## org.frice.game.resource.WebImageResource
-Class.
+## Class: org.frice.game.resource.WebImageResource
 
 ### Constructors
 Param|Usage
 :---|---:
-url: String|url of website that contains the image
+url: String|URL of the image
 
-## org.frice.game.resource.FrameImageResource
-Class.<br/>
-Use this to implement frame animation.
+## Class: org.frice.game.resource.FrameImageResource
+Implements frame animation.
 
 ### Constructors
 Param|Usage
 :---|---:
-game: Game|context, just give "this" in your own Game class
-list: List<ImageResource>|a list of images
-list: Array<ImageResource>|an array of images
-div: Int|division time between two images
+game: Game|Game context, just pass `this` in your own Game class
+list: List<ImageResource>, Array<ImageResource>|List of images
+div: Int|Division time between two images
 
 ### APIs
 Method|Usage
 :---|---:
-setLoop(Boolean)|true means it should loop.
+setLoop(Boolean)|Set whether the animation should loop.
 
-## org.frice.game.resource.ColorResource
-Class.
+## Class: org.frice.game.resource.ColorResource
 
 ### Constructors
 Param|Usage
 :---|---:
-color: Color|color
-color: Int|color code
-color: String|color code string
+color: Color, Int, String|color
 
 ### Built-in colors
 ```
 GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
 ```
 
-## org.frice.game.utils.message.log.FLog
-Static object.
+## Static object: org.frice.game.utils.message.log.FLog
 
 ### APIs
 Method|Alias|Usage
 :---|---|---:
-v(e: Any?)|verbose|log a verbose message
-d(e: Any?)|debug|log a debug message
-i(e: Any?)|info|log a info message
-w(e: Any?)|warning|log a warning message
-e(e: Any?)|error|log an error message
+v(e: Any?)|verbose|Log a verbose message
+d(e: Any?)|debug|Log a debug message
+i(e: Any?)|info|Log a info message
+w(e: Any?)|warning|Log a warning message
+e(e: Any?)|error|Log an error message
 
-## org.frice.game.utils.time.FTimer
-Class.<br/>
-I think I didn't tell the function well(Sorry for my English), so please view usage in demos.
+## Class: org.frice.game.utils.time.FTimer
+I'm afraid that I can't doc this function very well for my poor English, so please view its usage in demos.
 
 ### Constructors
 Param|Usage
 :---|---:
-time: Int|the time(millis seconds) between each invokes
+time: Int|Interval between two invokes
 
 ### APIs
 Name|Usage
 :---|---:
-ended()|returns if the time's up.
+ended()|Returns whether time's up.
 
-## org.frice.game.utils.time.FTimeListener
-Class.
+## Class: org.frice.game.utils.time.FTimeListener
 
 ### Parent
 org.frice.game.utils.time.FTimer
@@ -176,102 +158,89 @@ org.frice.game.utils.time.FTimer
 ### Constructors
 Param|Usage
 :---|---:
-timeUp: () -> Unit|this closure will be invoked when time's up(ended())
-timeUp: OnTimeEvent|execute() in this interface will be invoked when time's up(ended())
+timeUp: () -> Unit, OnTimeEvent|Function that will be invoked when time's up(`ended()`)
 
-## org.frice.game.utils.data.Preference
-Class.<br/>
-Operating an xml file to save data.
+## Class: org.frice.game.utils.data.Preference
+Operates an xml file for config.
 
 ### Constructors
-All private. Please use the factory methods **getPreference**.
+All private. Please use the factory methods `getPreference()`.
 
 ### APIs
 Name|Usage
 :---|---:
-getPreference(file: File)|create a instance from file
-getPreference(path: String)|create a instance from file path
-insert(key: String, value: Any?)|insert a key-value pair into the xml file
-query(key: String, value: Any)|query a value to the key from the xml file
+getPreference(file: File, String)|Creates a instance from a file handler, or path to the file.
+insert(key: String, value: Any?)|Insert a key-value pair into the file
+query(key: String, value: Any)|Query a value by `key` from the file
 
-## org.frice.game.utils.message.FDialog
-Class.<br/>
-To show dialogs on screen. Very simple, I think there's no need to write a doc for it.<br/>
+## Class: org.frice.game.utils.message.FDialog
+Shows dialogs on screen. Quite simple to use, I think there's no need to write a doc for it.<br/>
 Constructor needs a context.
 
 ## org.frice.game.utils.audio.AudioManager
 Singleton.<br/>
-Use this to play audio. But BGM isn't recommended.
+Plays audio. However background music isn't recommended.
 
 ### APIs
 Method|Usage
 :---|---:
-play(file: File)|play the wav file
-play(path: String)|create a file from the path and invoke the last method
-getPlayer(file: File)|returns a player thread(so that you can stop the thread while playing)
-getPlayer(path: String)|create a file from the path and invoke the last method
+play(file: File, String)|Play the wav file specified in arg `file`.
+getPlayer(file: File, String)|Returns the player thread(for pausing, stopping, etc.)
 
-## org.frice.game.utils.audio.AudioPlayer
-Class.<br/>
-This is the player thread.
+## Class: org.frice.game.utils.audio.AudioPlayer
+The audio player thread.
 
 ### APIs
 Method|Usage
 :---|---:
-start()|start playing
-exit()|stop playing
+start()|Starts playing
+exit()|Stops playing
 
-## org.frice.game.anim.FAnim
-Abstract.<br/>
+## Abstract:org.frice.game.anim.FAnim
 Animations are all subclasses of FAnim.
 
-## org.frice.game.anim.move.SimpleMove
-Class.<br/>
+## Class: org.frice.game.anim.move.SimpleMove
 
 ### Constructors
 Param|Usage
 :---|---:
-x: Int|number of pixels that the owner should move per second, horizontally.
-y: Int|number of pixels that the owner should move per second, vertically.
+x: Int|Pixels that the owner should move by **per second**, horizontally.
+y: Int|Pixels that the owner should move by **per second**, vertically.
 
-## org.frice.game.anim.move.AccelerateMove
-Class.<br/>
+## Class: org.frice.game.anim.move.AccelerateMove
 
 ### Demos
-See Demo6, Demo7.
+See [demo/Demo6.java](demo/Demo6.java), [demo/Demo7.java](demo/Demo7.java)
 
 ### Constructors
 Param|Usage
 :---|---:
-x: Int|number of **pixels per second** that the owner's speed should increase move per second, horizontally.
-y: Int|number of **pixels per second** that the owner's speed should increase per second, vertically.
+x: Int|Pixels that the owner's speed should be increased by **per second**, horizontally.
+y: Int|Pixels that the owner's speed should be increased by **per second**, vertically.
 
 ### APIs
 Method|Usage
 :---|---:
-getGravity(g: Double)|returns an AccelerateMove instance with y = g and x = 0
-getGravity()|returns an AccelerateMove instance with y = 10 and x = 0
+getGravity(g: Double)|Returns an `AccelerateMove` instance with y = g and x = 0
+getGravity()|Returns an `AccelerateMove` instance with y = 10 and x = 0
 
-## org.frice.game.anim.move.CustomMove
-Abstract.<br/>
-For you to create your own way to Move.
+## Abstract:org.frice.game.anim.move.CustomMove
+Defines a user-customized move.
 
 ### APIs
 Method|Usage
 :---|---:
-getXDelta(timeFromBegin: Double): Double|you receive how many seconds has past from created, and return how many pixels the owner should move, horizontally.
+getXDelta(timeFromBegin: Double): Double|Receives time in seconds elapsed since creation of the owner. Returns pixels that the owner should move by, horizontally.
 getYDelta(timeFromBegin: Double): Double|same as the one above, but vertically.
 
-## org.frice.game.anim.scale.ScaleAnim
-Abstract.
+## Abstract: org.frice.game.anim.scale.ScaleAnim
 
-## org.frice.game.anim.scale.SimpleScale
-Class.
+## Class: org.frice.game.anim.scale.SimpleScale
 
 ### Constructors
 Param|Usage
 :---|---:
-x: Double|how many times bigger that the owner should scale per second, horizontally.
-y: Double|how many times bigger that the owner should scale per second, vertically.
+x: Double|How many times bigger that the owner should scale per second, horizontally.
+y: Double|How many times bigger that the owner should scale per second, vertically.
 
 
