@@ -22,6 +22,16 @@ inline fun <T> T.forceRun(block: T.() -> Unit): T {
 		block.invoke(this)
 	} catch (e: Error) {
 	} catch (e: Exception) {
+	} finally {
 	}
+	return this
+}
+
+fun <T> T.pause(length: Int) = pause(length.toLong())
+
+fun <T> T.pause(length: Double) = pause(length.toLong())
+
+fun <T> T.pause(length: Long): T {
+	Thread.sleep(length)
 	return this
 }

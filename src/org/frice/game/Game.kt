@@ -12,6 +12,7 @@ import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.loopIf
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.pause
 import org.frice.game.utils.time.FTimeListener
 import java.awt.*
 import java.awt.image.BufferedImage
@@ -93,7 +94,7 @@ open class Game() : AbstractGame(), Runnable {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
-			Thread.sleep((1000.0 / refreshPerSecond).toLong())
+			pause(1000.0 / refreshPerSecond)
 		}
 	}
 
