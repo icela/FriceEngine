@@ -27,7 +27,7 @@ public class Demo7 extends Game {
 	protected void onInit() {
 		setSize(500, 800);
 		setTitle("Flappy bird demo by ice1000");
-		object = new ShapeObject(ColorResource.Companion.get宝强绿(), new FCircle(20.0), 50.0, 200.0);
+		object = new ShapeObject(ColorResource.get宝强绿(), new FCircle(20.0), 50.0, 200.0);
 		object.getAnims().add(AccelerateMove.getGravity());
 		addObject(object);
 		gameOver = () -> {
@@ -52,11 +52,11 @@ public class Demo7 extends Game {
 
 	private ShapeObject[] getObj() {
 		int height = random.nextInt(400);
-		return new ShapeObject[]{new ShapeObject(ColorResource.Companion.get教主黄(),
+		return new ShapeObject[]{new ShapeObject(ColorResource.get教主黄(),
 				new FRectangle(50, height), 550.0, 0.0) {{
 			getAnims().add(new SimpleMove(-150, 0));
 			getTargets().add(new Pair<>(object, gameOver));
-		}}, new ShapeObject(ColorResource.Companion.get教主黄(),
+		}}, new ShapeObject(ColorResource.get教主黄(),
 				new FRectangle(50, getHeight() - height - 400), 550.0, height + 400.0) {{
 			getAnims().add(new SimpleMove(-150, 0));
 			getTargets().add(new Pair<>(object, gameOver));
