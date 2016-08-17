@@ -6,19 +6,30 @@ require 'java'
 require './FriceEngine.jar'
 
 java_import org.frice.game.Game
+java_import org.frice.game.obj.ShapeObject
 java_import org.frice.game.resource.graphics.ColorResource
 java_import org.frice.game.utils.graphics.shape.FOval
-java_import org.frice.game.obj.ShapeObject
 java_import org.frice.game.utils.time.FTimer
 java_import org.frice.game.utils.message.FDialog
 
-java_import java.awt.Rectangle
+
+module JavaAWT
+	java_import java.awt.Rectangle do |package, name|
+		'J' + name
+	end
+end
+
+module JavaSwing
+	include JavaAWT
+end
 
 class Demo5 < Game
 
 	def on_init
-		setBounds Rectangle.new 100, 100, 800, 800
-		setTitle 'JRuby demo by ice1000'
+		set_bounds JavaAWT::JRectangle.new 100, 100, 800, 800
+		set_title 'JRuby demo by ice1000'
+
+		@click_count = 0
 
 		@bool = false
 
@@ -45,7 +56,8 @@ class Demo5 < Game
 	end
 
 	def on_click(e)
-		FDialog.new(self).show 'onClick'
+		FDialog.new(self).show "onClick #{@click_count}"
+		@click_count += 1
 	end
 
 	def on_mouse(e)
