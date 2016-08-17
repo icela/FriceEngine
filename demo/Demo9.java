@@ -11,12 +11,6 @@ import org.frice.game.utils.time.FTimer;
 
 import java.awt.event.KeyEvent;
 
-/**
- * Created by ice1000 on 2016/8/17.
- *
- * @author ice1000
- * @since 0.3.2
- */
 public class Demo9 extends Game {
 	public static void main(String[] args) {
 		new Demo9();
@@ -73,3 +67,9 @@ public class Demo9 extends Game {
 		}
 	}
 }
+
+
+// 苟利国家生死以，岂因祸福避趋之！
+// 祝长者生日快乐！
+
+
