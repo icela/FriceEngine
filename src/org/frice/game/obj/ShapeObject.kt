@@ -2,7 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.event.OnCollideEvent
-import org.frice.game.resource.ColorResource
+import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.shape.FShape
 import java.util.*

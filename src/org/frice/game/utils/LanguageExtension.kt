@@ -27,6 +27,8 @@ inline fun <T> T.forceRun(block: T.() -> Unit): T {
 	return this
 }
 
+inline fun <T> T.forceLoop(block: T.() -> Unit) = forceRun { loop(block) }
+
 fun <T> T.pause(length: Int) = pause(length.toLong())
 
 fun <T> T.pause(length: Double) = pause(length.toLong())

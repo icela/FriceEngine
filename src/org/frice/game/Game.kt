@@ -3,8 +3,8 @@ package org.frice.game
 import org.frice.game.obj.FObject
 import org.frice.game.obj.ImageObject
 import org.frice.game.obj.ShapeObject
-import org.frice.game.resource.ColorResource
 import org.frice.game.resource.FResource
+import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.forceRun
 import org.frice.game.utils.graphics.shape.FOval

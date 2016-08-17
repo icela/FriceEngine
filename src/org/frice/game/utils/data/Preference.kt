@@ -1,5 +1,6 @@
 package org.frice.game.utils.data
 
+import org.frice.game.utils.forceLoop
 import org.frice.game.utils.message.error.FatalError
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -67,10 +68,7 @@ class Preference constructor(val file: File) {
 	}
 
 	fun insert(key: String, value: Any?) = value.let {
-		try {
-			while (true) root.removeChild(doc.getElementsByTagName(key).item(0))
-		} catch (ignored: Exception) {
-		}
+		forceLoop { root.removeChild(doc.getElementsByTagName(key).item(0)) }
 		val node = doc.createElement(key)
 		node.setAttribute(VALUE, value.toString())
 		node.setAttribute(TYPE, when (value) {

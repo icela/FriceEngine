@@ -4,7 +4,7 @@ import org.frice.game.event.OnClickEvent;
 import org.frice.game.obj.FObject;
 import org.frice.game.obj.ImageObject;
 import org.frice.game.obj.ShapeObject;
-import org.frice.game.resource.ColorResource;
+import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.utils.graphics.shape.FOval;
 import org.frice.game.utils.message.FDialog;

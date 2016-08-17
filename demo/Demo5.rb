@@ -12,7 +12,7 @@ class Demo5 < org.frice.game.Game
 
 		@bool = false
 
-		color = org.frice.game.resource.ColorResource.new '111111'
+		color = org.frice.game.resource.graphics.ColorResource.new '111111'
 		@oval = org.frice.game.utils.graphics.shape.FOval.new 20.0, 15.0
 
 		@obj = org.frice.game.obj.ShapeObject.new color, @oval, 20.0, 20.0

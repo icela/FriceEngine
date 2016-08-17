@@ -1,5 +1,6 @@
-package org.frice.game.resource
+package org.frice.game.resource.graphics
 
+import org.frice.game.resource.FResource
 import java.awt.Color
 
 /**

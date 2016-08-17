@@ -3,7 +3,7 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.resource.ColorResource
+import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.FResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
