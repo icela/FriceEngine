@@ -32,6 +32,7 @@ setBack(FResource)|set the background(color or image)
 setRefreshPerSecond(Double)|There will be a sleep between every two refresh, the length of every sleep is 1000/value. Default is 10.
 setCursor(o: ImageObject)|set the cursor as an ImageObject, and you can still operate it as an object(will call addObject() automatically)
 setCursor(o: ImageResource)|create an ImageObject and invoke the last method
+getScreenCut(): ImageResource|returns the image copy of display
 setBounds(int x, int y, int width, int height)|from Frame
 setTitle(String)|from Frame
 
