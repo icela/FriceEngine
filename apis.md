@@ -248,3 +248,6 @@ y: Double|How many times bigger that the owner should scale per second, vertical
 ## Class:org.frice.game.obj.button.SimpleButton
 A Button.
 
+
+## Class:org.frice.game.obj.effects.ParticleEffect
+An object to display particles.

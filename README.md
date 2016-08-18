@@ -52,6 +52,11 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Clock system
 - [X] Animations (frame, move, scale, accelerate, etc.)
 - [X] A simple key-value database
+- [X] Screen cut
+- [X] Buttons
+- [X] Particle effects
+- [X] Easy time controlling
+- [X] Language extensions(for Kotlin only)
 
 ## Basics
 FriceEngine is based on the life cycle mode.<br/>
