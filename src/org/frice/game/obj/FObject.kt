@@ -14,12 +14,8 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-interface FObject : CollideBox {
+interface FObject : CollideBox , AbstractObject{
 	var id: Int
-	var x: Double
-	var y: Double
-	val width: Double
-	val height: Double
 	val anims: ArrayList<FAnim>
 	val targets: ArrayList<Pair<FObject, OnCollideEvent>>
 	val collideBox: FShape
@@ -40,8 +36,4 @@ interface FObject : CollideBox {
 	}
 
 	fun checkCollision() = targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
-
-	fun contains(px: Int, py: Int) {
-		//
-	}
 }
