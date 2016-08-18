@@ -16,10 +16,10 @@ import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loopIf
-import org.frice.game.utils.kotlin.pause
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
+import org.frice.game.utils.time.FTimer
 import java.awt.*
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
@@ -37,12 +37,14 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val panel = GamePanel()
+	private val refresh = FTimer(3)
 
 	private val objects = ArrayList<AbstractObject>()
 	private val buttons = ArrayList<FButton>()
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
+
+	private val panel = GamePanel()
 	private val stableBuffer: BufferedImage
 	private val bg: Graphics
 		get() = buffer.graphics
@@ -112,7 +114,7 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
 	override fun run() {
-		loopIf({ !paused && !stopped }.pause(1000.0 / refreshPerSecond)) {
+		loopIf({ !paused && !stopped && refresh.ended()}) {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()

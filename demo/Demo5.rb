@@ -6,7 +6,7 @@ require 'java'
 require './FriceEngine.jar'
 
 java_import org.frice.game.Game
-java_import org.frice.game.obj.ShapeObject
+java_import org.frice.game.obj.sub.ShapeObject
 java_import org.frice.game.resource.graphics.ColorResource
 java_import org.frice.game.utils.graphics.shape.FOval
 java_import org.frice.game.utils.time.FTimer

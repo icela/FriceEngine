@@ -41,7 +41,6 @@ abstract class AbstractGame() : JFrame() {
 	protected var paused = false
 	protected var stopped = false
 	protected var back: FResource = ColorResource.LIGHT_GRAY
-	protected var refreshPerSecond = 1000
 	protected var debug = true
 
 	protected val random = Random()

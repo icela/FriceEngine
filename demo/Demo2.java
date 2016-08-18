@@ -32,7 +32,6 @@ public class Demo2 extends Game {
 		object1.getAnims().add(new SimpleMove(100, 0));
 		addObject(object1);
 		addObject(object2 = make());
-		setRefreshPerSecond(40);
 		timer = new FTimer(5000);
 	}
 

@@ -24,7 +24,7 @@ class Demo3 : Game() {
 	override fun onInit() {
 		bounds = Rectangle(100, 100, 640, 480)
 		title = "Demo3 of Frice"
-		refreshPerSecond = 100
+//		refreshPerSecond = 100
 //		back = ColorResource.BLUE
 	}
 
