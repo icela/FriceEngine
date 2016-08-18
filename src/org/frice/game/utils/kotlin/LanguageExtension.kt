@@ -2,6 +2,7 @@ package org.frice.game.utils.kotlin
 
 /**
  * Kotlin language extension
+ * for Kotlin only
  *
  *
  * Created by ice1000 on 2016/8/17.
@@ -38,6 +39,9 @@ inline fun <T> T.forceGet(default: Any, block: T.() -> Any): Any {
 	}
 }
 
+/**
+ * if there's exception, it will exit
+ */
 inline fun <T> T.forceLoop(block: T.() -> Unit) = forceRun { loop(block) }
 
 fun <T> T.pause(length: Int) = pause(length.toLong())
