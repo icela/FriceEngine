@@ -21,7 +21,7 @@ import javax.swing.JOptionPane
  * @author ice1000
  * @since v0.2.3
  */
-open class AbstractGame() : Frame() {
+abstract class AbstractGame() : Frame() {
 	companion object {
 		@JvmStatic val SMALL_PHONE = Rectangle(100, 100, 480, 800)
 		@JvmStatic val BIG_PHONE = Rectangle(100, 100, 720, 1200)
@@ -50,9 +50,16 @@ open class AbstractGame() : Frame() {
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
 			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
-			override fun mouseReleased(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
 			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
-			override fun mousePressed(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+			override fun mouseReleased(e: MouseEvent) {
+				touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+				onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+			}
+
+			override fun mousePressed(e: MouseEvent) {
+				touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+				onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+			}
 		})
 		addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit
@@ -65,6 +72,8 @@ open class AbstractGame() : Frame() {
 		})
 
 	}
+
+	protected abstract fun touch(e: OnMouseEvent)
 
 	protected open fun onInit() = Unit
 	protected open fun onRefresh() = Unit
