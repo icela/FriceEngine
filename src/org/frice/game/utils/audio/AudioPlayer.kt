@@ -13,7 +13,7 @@ import javax.sound.sampled.*
 class AudioPlayer internal constructor(file: File) {
 	internal constructor(path: String) : this(File(path))
 
-	private val thread = Thread({
+	internal fun main() = {
 		line.open()
 		line.start()
 		var inBytes = 0
@@ -27,7 +27,9 @@ class AudioPlayer internal constructor(file: File) {
 		line.drain()
 		line.close()
 //		FLog.info("Ended playing")
-	})
+	}
+
+	private val thread = Thread { main() }
 
 	companion object {
 		val BUFFER_SIZE = 2048
