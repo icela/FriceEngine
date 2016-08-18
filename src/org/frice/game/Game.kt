@@ -1,5 +1,6 @@
 package org.frice.game
 
+import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
 import org.frice.game.obj.button.FButton
@@ -31,10 +32,12 @@ import javax.swing.JPanel
  */
 open class Game() : AbstractGame(), Runnable {
 	private val panel = GamePanel()
+
 	private val objects = ArrayList<AbstractObject>()
 	private val buttons = ArrayList<FButton>()
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
+	private val stableBuffer: BufferedImage
 	private val bg: Graphics
 		get() = buffer.graphics
 
@@ -44,6 +47,7 @@ open class Game() : AbstractGame(), Runnable {
 		setBounds(200, 200, 640, 480)
 		onInit()
 		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		Thread(this).start()
 		isVisible = true
 		insets.set(0, insets.left, insets.bottom, insets.right)
@@ -56,23 +60,25 @@ open class Game() : AbstractGame(), Runnable {
 		else objects.add(obj)
 	}
 
-	protected fun removeObjects(objs: Array<FObject>) = objs.forEach { o -> removeObject(o) }
 	protected fun clearObjects() = objects.clear()
+	protected fun removeObjects(objs: Array<FObject>) = objs.forEach { o -> removeObject(o) }
 	protected fun removeObject(obj: FObject) {
 		if (obj is FButton) buttons.add(obj)
 		else objects.remove(obj)
 	}
 
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+
 	fun addTimeListeners(listeners: Array<FTimeListener>) = timeListeners.addAll(listeners)
 	fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 	fun removeTimeListeners(listeners: Array<FTimeListener>) = timeListeners.removeAll(listeners)
-
 	override fun setBounds(r: Rectangle) {
 //		r.height += insets.top
 		super.setBounds(r)
 		panel.bounds = r
 	}
+
+	override fun touch(e: OnMouseEvent) = buttons.forEach { b -> b.onClick(e) }
 
 	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
 //		FLog.debug("insets.top = ${insets.top}")
@@ -95,10 +101,7 @@ open class Game() : AbstractGame(), Runnable {
 		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
 
-	protected fun getScreenCut() = ImageResource.create(BufferedImage(width, height,
-			BufferedImage.TYPE_INT_ARGB).apply {
-		graphics.drawImage(buffer, width, height, this@Game)
-	})
+	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
 	override fun run() {
 		loopIf({ !paused && !stopped }) {
@@ -162,6 +165,14 @@ open class Game() : AbstractGame(), Runnable {
 					}
 				}
 			}
+			buttons.forEach { b ->
+				val bgg = bg
+				bgg.color = b.getColor().color
+				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
+						b.width.toInt(), b.height.toInt(),
+						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
+			}
+			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
 		}
 	}

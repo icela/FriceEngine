@@ -23,7 +23,7 @@ class ShapeButton(
 	var onClickListener: OnClickListener? = null
 
 	override fun onClick(e: OnMouseEvent) {
-		bool = (containsPoint(e.event.x, e.event.y) && e.type() == OnMouseEvent.MOUSE_PRESSED)
+		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
 		onClickListener?.onClick()
 	}
 

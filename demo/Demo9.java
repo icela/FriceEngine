@@ -9,9 +9,14 @@ import org.frice.game.resource.image.FileImageResource;
 import org.frice.game.utils.audio.AudioManager;
 import org.frice.game.utils.time.FTimer;
 
+import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class Demo9 extends Game {
+	private int cnt = 0;
+
 	public static void main(String[] args) {
 		new Demo9();
 	}
@@ -52,7 +57,15 @@ public class Demo9 extends Game {
 				case KeyEvent.VK_W:
 					plane.setY(plane.getY() - 20);
 					break;
-
+				case KeyEvent.VK_C:
+					new Thread(() -> {
+						try {
+							ImageIO.write(getScreenCut().getImage(), "png", new File("截屏" + cnt++ + ".png"));
+						} catch (IOException ignored) {
+							System.out.println("车祸现场");
+						}
+					}).start();
+					break;
 			}
 		});
 	}

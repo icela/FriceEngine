@@ -2,15 +2,17 @@ import kotlin.Pair;
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
-import org.frice.game.event.OnClickEvent;
 import org.frice.game.event.OnCollideEvent;
 import org.frice.game.obj.sub.ShapeObject;
 import org.frice.game.resource.graphics.ColorResource;
-import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.graphics.shape.FCircle;
 import org.frice.game.utils.graphics.shape.FRectangle;
+import org.frice.game.utils.message.FDialog;
 import org.frice.game.utils.time.FTimer;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Demo7 extends Game {
@@ -31,23 +33,27 @@ public class Demo7 extends Game {
 		object.getAnims().add(AccelerateMove.getGravity());
 		addObject(object);
 		gameOver = () -> {
-			setStopped(true);
+			new Thread(() -> {
+				try {
+					ImageIO.write(getScreenCut().getImage(), "png", new File("截屏.png"));
+				} catch (IOException ignored) {
+					System.out.println("车祸现场");
+				}
+			}).start();
 			new FDialog(this).show("Game Over");
 			System.exit(0);
 		};
+		listenKeyPressed(e -> {
+			object.getAnims().clear();
+			object.getAnims().add(AccelerateMove.getGravity());
+			object.getAnims().add(new SimpleMove(0, -400));
+		});
 	}
 
 	@Override
 	protected void onRefresh() {
 		if (object.getY() > getHeight() + 20) gameOver.handle();
 		if (timer.ended()) addObjects(getObj());
-	}
-
-	@Override
-	protected void onClick(OnClickEvent e) {
-		object.getAnims().clear();
-		object.getAnims().add(AccelerateMove.getGravity());
-		object.getAnims().add(new SimpleMove(0, -400));
 	}
 
 	private ShapeObject[] getObj() {
