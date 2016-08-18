@@ -9,7 +9,8 @@ import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
 import java.awt.Rectangle
-import java.awt.event.*
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 import java.util.*
 import javax.swing.JFrame
 import javax.swing.JOptionPane
@@ -47,30 +48,6 @@ abstract class AbstractGame() : JFrame() {
 
 	init {
 		layout = BorderLayout()
-		addMouseListener(object : MouseListener {
-			override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
-			override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
-			override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
-			override fun mouseReleased(e: MouseEvent) {
-				touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
-				onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
-			}
-
-			override fun mousePressed(e: MouseEvent) {
-				touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
-				onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
-			}
-		})
-		addWindowListener(object : WindowListener {
-			override fun windowDeiconified(e: WindowEvent) = Unit
-			override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
-			override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
-			override fun windowIconified(e: WindowEvent) = Unit
-			override fun windowClosing(e: WindowEvent) = onExit()
-			override fun windowClosed(e: WindowEvent) = Unit
-			override fun windowOpened(e: WindowEvent) = Unit
-		})
-
 	}
 
 	protected abstract fun touch(e: OnMouseEvent)

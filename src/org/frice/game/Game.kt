@@ -1,6 +1,8 @@
 package org.frice.game
 
+import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
 import org.frice.game.obj.button.FButton
@@ -19,6 +21,10 @@ import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import java.awt.*
+import java.awt.event.MouseEvent
+import java.awt.event.MouseListener
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
 import java.util.*
 import javax.swing.JPanel
@@ -46,7 +52,7 @@ open class Game() : AbstractGame(), Runnable {
 		add(panel, BorderLayout.CENTER)
 		setBounds(200, 200, 640, 480)
 		onInit()
-		buffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		Thread(this).start()
 		isVisible = true
@@ -72,16 +78,15 @@ open class Game() : AbstractGame(), Runnable {
 	fun addTimeListeners(listeners: Array<FTimeListener>) = timeListeners.addAll(listeners)
 	fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
 	fun removeTimeListeners(listeners: Array<FTimeListener>) = timeListeners.removeAll(listeners)
+
+	override fun touch(e: OnMouseEvent) = buttons.forEach { b -> b.onClick(e) }
+
 	override fun setBounds(r: Rectangle) {
-//		r.height += insets.top
 		super.setBounds(r)
 		panel.bounds = r
 	}
 
-	override fun touch(e: OnMouseEvent) = buttons.forEach { b -> b.onClick(e) }
-
 	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
-//		FLog.debug("insets.top = ${insets.top}")
 		super.setBounds(x, y, width, height)
 		panel.setBounds(x, y, width, height)
 	}
@@ -95,6 +100,9 @@ open class Game() : AbstractGame(), Runnable {
 		super.setSize(d)
 		panel.size = d
 	}
+
+//	override fun getWidth() = panel.width
+//	override fun getHeight() = panel.height
 
 	protected fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	protected fun setCursor(o: ImageObject) {
@@ -129,7 +137,32 @@ open class Game() : AbstractGame(), Runnable {
 	 * @author ice1000
 	 * @since v0.1
 	 */
-	inner class GamePanel : JPanel() {
+	inner class GamePanel() : JPanel() {
+		init {
+			addMouseListener(object : MouseListener {
+				override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
+				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
+				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
+				override fun mouseReleased(e: MouseEvent) {
+					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+				}
+
+				override fun mousePressed(e: MouseEvent) {
+					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+				}
+			})
+			addWindowListener(object : WindowListener {
+				override fun windowDeiconified(e: WindowEvent) = Unit
+				override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
+				override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
+				override fun windowIconified(e: WindowEvent) = Unit
+				override fun windowClosing(e: WindowEvent) = onExit()
+				override fun windowClosed(e: WindowEvent) = Unit
+				override fun windowOpened(e: WindowEvent) = Unit
+			})
+		}
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paint(g: Graphics) {
@@ -140,7 +173,6 @@ open class Game() : AbstractGame(), Runnable {
 					o.checkCollision()
 				}
 			}
-			g.drawImage(buffer, 0, 0, this)
 			objects.forEach { o ->
 				when (o) {
 					is ParticleEffect ->
