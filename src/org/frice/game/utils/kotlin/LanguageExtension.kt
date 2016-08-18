@@ -48,3 +48,8 @@ fun <T> T.pause(length: Long): T {
 	Thread.sleep(length)
 	return this
 }
+
+inline fun <T> T.async(crossinline block: T.() -> Unit): T {
+	Thread({ block.invoke(this) }).start()
+	return this
+}

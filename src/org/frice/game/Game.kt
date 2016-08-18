@@ -20,7 +20,10 @@ import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
@@ -105,11 +108,6 @@ open class Game() : AbstractGame(), Runnable {
 
 //	override fun getWidth() = panel.width
 //	override fun getHeight() = panel.height
-
-	protected fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
-	protected fun setCursor(o: ImageObject) {
-		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
-	}
 
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
