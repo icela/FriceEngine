@@ -10,7 +10,7 @@ import org.frice.game.utils.graphics.shape.FShape
  * @author ice1000
  * @since v0.3.3
  */
-class ShapeButton(
+class SimpleButton(
 		val shape: FShape, val colorResource: ColorResource,
 		override var text: String, override var x: Double,
 		override var y: Double, override val width: Double, override val height: Double) : FButton {

@@ -243,4 +243,8 @@ Param|Usage
 x: Double|How many times bigger that the owner should scale per second, horizontally.
 y: Double|How many times bigger that the owner should scale per second, vertically.
 
+## Interface:org.frice.game.obj.button.FButton
+
+## Class:org.frice.game.obj.button.SimpleButton
+A Button.
 

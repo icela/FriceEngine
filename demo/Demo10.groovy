@@ -1,5 +1,5 @@
 import org.frice.game.Game
-import org.frice.game.obj.button.ShapeButton
+import org.frice.game.obj.button.SimpleButton
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.graphics.shape.FRectangle
 
@@ -15,7 +15,7 @@ class Demo10 extends Game {
 
 	@Override
 	protected void onInit() {
-		addObject(new ShapeButton(new FRectangle(100, 100),
+		addObject(new SimpleButton(new FRectangle(100, 100),
 				ColorResource.getBLUE(), "", 50, 50, 100, 100))
 	}
 }
