@@ -1,6 +1,6 @@
 package org.frice.game.utils.data
 
-import org.frice.game.utils.forceLoop
+import org.frice.game.utils.kotlin.forceLoop
 import org.frice.game.utils.message.error.FatalError
 import org.w3c.dom.Document
 import org.w3c.dom.Element

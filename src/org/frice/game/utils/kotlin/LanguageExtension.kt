@@ -1,4 +1,4 @@
-package org.frice.game.utils
+package org.frice.game.utils.kotlin
 
 /**
  * Kotlin language extension
@@ -13,7 +13,7 @@ inline fun <T> T.loop(block: T.() -> Unit): T {
 	while (true) block.invoke(this)
 }
 
-inline fun <T> T.loop(count: Int, block: T.(Int) -> kotlin.Unit): T {
+inline fun <T> T.loop(count: Int, block: T.(Int) -> Unit): T {
 	for (index in 0..count - 1) block.invoke(this, index)
 	return this
 }

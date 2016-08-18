@@ -40,4 +40,8 @@ interface FObject : CollideBox {
 	}
 
 	fun checkCollision() = targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
+
+	fun contains(px: Int, py: Int) {
+		//
+	}
 }
