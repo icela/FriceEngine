@@ -1,19 +1,21 @@
 package org.frice.game
 
+import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
+import org.frice.game.obj.button.FButton
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
-import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loopIf
+import org.frice.game.utils.kotlin.pause
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.kotlin.pause
 import org.frice.game.utils.time.FTimeListener
 import java.awt.*
 import java.awt.image.BufferedImage
@@ -29,7 +31,8 @@ import javax.swing.JPanel
  */
 open class Game() : AbstractGame(), Runnable {
 	private val panel = GamePanel()
-	private val objects = ArrayList<FObject>()
+	private val objects = ArrayList<AbstractObject>()
+	private val buttons = ArrayList<FButton>()
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
 	private val bg: Graphics
@@ -47,11 +50,18 @@ open class Game() : AbstractGame(), Runnable {
 		FLog.v("Engine start!")
 	}
 
-	protected fun addObject(obj: FObject) = objects.add(obj)
-	protected fun addObjects(objs: Array<FObject>) = objects.addAll(objs)
+	protected fun addObjects(objs: Array<FObject>) = objs.forEach { o -> addObject(o) }
+	protected fun addObject(obj: FObject) {
+		if (obj is FButton) buttons.add(obj)
+		else objects.add(obj)
+	}
+
+	protected fun removeObjects(objs: Array<FObject>) = objs.forEach { o -> removeObject(o) }
 	protected fun clearObjects() = objects.clear()
-	protected fun removeObject(obj: FObject) = objects.remove(obj)
-	protected fun removeObjects(objs: Array<FObject>) = objects.removeAll(objs)
+	protected fun removeObject(obj: FObject) {
+		if (obj is FButton) buttons.add(obj)
+		else objects.remove(obj)
+	}
 
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
 	fun addTimeListeners(listeners: Array<FTimeListener>) = timeListeners.addAll(listeners)
@@ -122,8 +132,10 @@ open class Game() : AbstractGame(), Runnable {
 		override fun paint(g: Graphics) {
 			drawBackground(back)
 			objects.forEach { o ->
-				o.runAnims()
-				o.checkCollision()
+				if (o is FObject) {
+					o.runAnims()
+					o.checkCollision()
+				}
 			}
 			g.drawImage(buffer, 0, 0, this)
 			objects.forEach { o ->
