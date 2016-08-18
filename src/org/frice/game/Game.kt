@@ -112,11 +112,10 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
 	override fun run() {
-		loopIf({ !paused && !stopped }) {
+		loopIf({ !paused && !stopped }.pause(1000.0 / refreshPerSecond)) {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
-			pause(1000.0 / refreshPerSecond)
 		}
 	}
 
