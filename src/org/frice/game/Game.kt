@@ -54,15 +54,15 @@ open class Game() : AbstractGame(), Runnable {
 		FLog.v("Engine start!")
 	}
 
-	protected fun addObjects(objs: Array<FObject>) = objs.forEach { o -> addObject(o) }
-	protected fun addObject(obj: FObject) {
+	protected fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+	protected fun addObject(obj: AbstractObject) {
 		if (obj is FButton) buttons.add(obj)
 		else objects.add(obj)
 	}
 
 	protected fun clearObjects() = objects.clear()
-	protected fun removeObjects(objs: Array<FObject>) = objs.forEach { o -> removeObject(o) }
-	protected fun removeObject(obj: FObject) {
+	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> removeObject(o) }
+	protected fun removeObject(obj: AbstractObject) {
 		if (obj is FButton) buttons.add(obj)
 		else objects.remove(obj)
 	}

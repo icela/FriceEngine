@@ -8,10 +8,10 @@ import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
-import java.awt.Frame
 import java.awt.Rectangle
 import java.awt.event.*
 import java.util.*
+import javax.swing.JFrame
 import javax.swing.JOptionPane
 
 /**
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane
  * @author ice1000
  * @since v0.2.3
  */
-abstract class AbstractGame() : Frame() {
+abstract class AbstractGame() : JFrame() {
 	companion object {
 		@JvmStatic val SMALL_PHONE = Rectangle(100, 100, 480, 800)
 		@JvmStatic val BIG_PHONE = Rectangle(100, 100, 720, 1200)
