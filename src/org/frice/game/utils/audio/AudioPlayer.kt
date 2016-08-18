@@ -1,6 +1,5 @@
 package org.frice.game.utils.audio
 
-import org.frice.game.utils.message.log.FLog
 import java.io.File
 import javax.sound.sampled.*
 
@@ -27,7 +26,7 @@ class AudioPlayer internal constructor(file: File) {
 		}
 		line.drain()
 		line.close()
-		FLog.info("Ended playing")
+//		FLog.info("Ended playing")
 	})
 
 	companion object {

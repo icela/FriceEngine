@@ -1,5 +1,6 @@
 package org.frice.game.utils.data
 
+import org.frice.game.utils.kotlin.forceGet
 import org.frice.game.utils.kotlin.forceLoop
 import org.frice.game.utils.message.error.FatalError
 import org.w3c.dom.Document
@@ -89,7 +90,7 @@ class Preference constructor(val file: File) {
 	fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
 		val value = node.attributes.getNamedItem(VALUE).nodeValue ?: return default
-		return try {
+		return forceGet(default) {
 			when (node.attributes.getNamedItem(TYPE).nodeValue) {
 				TYPE_BYTE -> value.toByte()
 				TYPE_INT -> value.toInt()
@@ -101,8 +102,6 @@ class Preference constructor(val file: File) {
 				TYPE_STRING -> value
 				else -> default
 			}
-		} catch (e: Exception) {
-			default
 		}
 	}
 }

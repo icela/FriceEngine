@@ -30,6 +30,14 @@ inline fun <T> T.forceRun(block: T.() -> Unit): T {
 	return this
 }
 
+inline fun <T> T.forceGet(default: Any, block: T.() -> Any): Any {
+	return try {
+		block.invoke(this)
+	} catch (e: Throwable) {
+		default
+	}
+}
+
 inline fun <T> T.forceLoop(block: T.() -> Unit) = forceRun { loop(block) }
 
 fun <T> T.pause(length: Int) = pause(length.toLong())
