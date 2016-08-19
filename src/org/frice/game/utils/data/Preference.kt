@@ -61,6 +61,7 @@ class Preference constructor(val file: File) {
 			doc = builder.parse(file)
 			root = doc.documentElement
 		}
+		save()
 	}
 
 	private fun save() {
@@ -89,7 +90,12 @@ class Preference constructor(val file: File) {
 
 	fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
-		val value = node.attributes.getNamedItem(VALUE).nodeValue ?: return default
+		val value: String?
+		try {
+			value = node.attributes.getNamedItem(VALUE).nodeValue
+		} catch (e: Throwable) {
+			return default
+		}
 		return forceGet(default) {
 			when (node.attributes.getNamedItem(TYPE).nodeValue) {
 				TYPE_BYTE -> value.toByte()
