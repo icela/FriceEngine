@@ -119,11 +119,10 @@ open class Game() : AbstractGame(), Runnable {
 		}
 	}
 
-	private fun drawBackground(back: FResource) {
+	private fun drawBackground(back: FResource, g: Graphics) {
 		when (back) {
-			is ImageResource -> bg.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
+			is ImageResource -> g.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
 			is ColorResource -> {
-				val g = bg
 				g.color = back.color
 				g.fillRect(0, 0, width, height)
 			}
@@ -164,8 +163,8 @@ open class Game() : AbstractGame(), Runnable {
 		}
 
 		override fun update(g: Graphics?) = paint(g)
-		override fun paint(g: Graphics) {
-			drawBackground(back)
+		override fun paintComponent(g: Graphics) {
+			drawBackground(back, bg)
 			objects.forEach { o ->
 				if (o is FObject) {
 					o.runAnims()
