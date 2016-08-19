@@ -44,16 +44,22 @@ open class Game() : AbstractGame(), Runnable {
 
 	private val objects = ArrayList<AbstractObject>()
 	private val objectsDelete = ArrayList<AbstractObject>()
+
 	private val buttons = ArrayList<FButton>()
 	private val buttonsDelete = ArrayList<FButton>()
+
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val timeListenersDelete = ArrayList<FTimeListener>()
+
 	private val buffer: BufferedImage
 
 	private val panel = GamePanel()
 	private val stableBuffer: BufferedImage
 	private val bg: Graphics
 		get() = buffer.graphics
+
+	protected var loseFocus = false
+		private set
 
 	init {
 		isResizable = false
@@ -155,8 +161,16 @@ open class Game() : AbstractGame(), Runnable {
 			})
 			addWindowListener(object : WindowListener {
 				override fun windowDeiconified(e: WindowEvent) = Unit
-				override fun windowActivated(e: WindowEvent) = onFocus(OnWindowEvent.create(e))
-				override fun windowDeactivated(e: WindowEvent) = onLoseFocus(OnWindowEvent.create(e))
+				override fun windowActivated(e: WindowEvent) {
+					loseFocus = false
+					onFocus(OnWindowEvent.create(e))
+				}
+
+				override fun windowDeactivated(e: WindowEvent) {
+					loseFocus = true
+					onLoseFocus(OnWindowEvent.create(e))
+				}
+
 				override fun windowIconified(e: WindowEvent) = Unit
 				override fun windowClosing(e: WindowEvent) = onExit()
 				override fun windowClosed(e: WindowEvent) = Unit
@@ -211,6 +225,12 @@ open class Game() : AbstractGame(), Runnable {
 //							" o.y.toInt() = ${o.y.toInt()}, height = $height")
 				}
 			}
+			if (loseFocus) {
+			}
+
+			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
+			g.drawImage(buffer, 0, 0, this)
+
 			objects.removeAll(objectsDelete)
 			objectsDelete.clear()
 
@@ -219,9 +239,6 @@ open class Game() : AbstractGame(), Runnable {
 
 			buttons.removeAll(buttonsDelete)
 			buttonsDelete.clear()
-
-			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
-			g.drawImage(buffer, 0, 0, this)
 		}
 	}
 }

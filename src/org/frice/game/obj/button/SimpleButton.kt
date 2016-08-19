@@ -26,8 +26,4 @@ class SimpleButton(
 		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
 		onClickListener?.onClick()
 	}
-
-	interface OnClickListener {
-		fun onClick()
-	}
 }
