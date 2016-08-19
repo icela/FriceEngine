@@ -8,6 +8,7 @@ import org.frice.game.obj.FObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
 import org.frice.game.obj.effects.ParticleEffect
+import org.frice.game.obj.misc.FLine
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
@@ -200,10 +201,8 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			objects.forEach { o ->
 				when (o) {
-					is ParticleEffect ->
-						bg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
-					is ImageObject ->
-						bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+					is ParticleEffect -> bg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
+					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						val bgg = bg
 						bgg.color = o.getResource().color
@@ -220,6 +219,7 @@ open class Game() : AbstractGame(), Runnable {
 									o.height.toInt())
 						}
 					}
+					is FLine -> bg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
 				}
 				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width ||
 						o.y.toInt() < 0 || o.y.toInt() > height)) {
@@ -250,7 +250,7 @@ open class Game() : AbstractGame(), Runnable {
 			/**
 			 * 厚颜无耻
 			 */
-//			bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
+			//			bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
 
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
