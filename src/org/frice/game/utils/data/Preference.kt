@@ -57,11 +57,11 @@ class Preference constructor(val file: File) {
 			doc = builder.newDocument()
 			root = doc.createElement(ROOT)
 			doc.appendChild(root)
+			save()
 		} else {
 			doc = builder.parse(file)
 			root = doc.documentElement
 		}
-		save()
 	}
 
 	private fun save() {
