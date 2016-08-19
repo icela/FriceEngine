@@ -6,6 +6,7 @@ import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
 import org.frice.game.obj.button.FButton
+import org.frice.game.obj.button.FText
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
@@ -41,13 +42,13 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val refresh = FTimer(3)
+	private val refresh = FTimer(4)
 
 	private val objects = ArrayList<AbstractObject>()
 	private val objectsDelete = ArrayList<AbstractObject>()
 
-	private val buttons = ArrayList<FButton>()
-	private val buttonsDelete = ArrayList<FButton>()
+	private val texts = ArrayList<FText>()
+	private val textDelete = ArrayList<FText>()
 
 	private val timeListeners = ArrayList<FTimeListener>()
 	private val timeListenersDelete = ArrayList<FTimeListener>()
@@ -77,14 +78,14 @@ open class Game() : AbstractGame(), Runnable {
 
 	protected fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
 	protected fun addObject(obj: AbstractObject) {
-		if (obj is FButton) buttons.add(obj)
+		if (obj is FText) texts.add(obj)
 		else objects.add(obj)
 	}
 
 	protected fun clearObjects() = objectsDelete.addAll(objects)
 	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
 	protected fun removeObject(obj: AbstractObject) {
-		if (obj is FButton) buttonsDelete.add(obj)
+		if (obj is FText) textDelete.add(obj)
 		else objectsDelete.add(obj)
 	}
 
@@ -93,7 +94,7 @@ open class Game() : AbstractGame(), Runnable {
 	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
 	fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
 
-	override fun touch(e: OnMouseEvent) = buttons.forEach { b -> b.onClick(e) }
+	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
@@ -181,6 +182,15 @@ open class Game() : AbstractGame(), Runnable {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
+			objects.removeAll(objectsDelete)
+			objectsDelete.clear()
+
+			timeListeners.removeAll(timeListenersDelete)
+			timeListenersDelete.clear()
+
+			texts.removeAll(textDelete)
+			textDelete.clear()
+
 			drawBackground(back, bg)
 			objects.forEach { o ->
 				if (o is FObject) {
@@ -211,20 +221,18 @@ open class Game() : AbstractGame(), Runnable {
 						}
 					}
 				}
-			}
-			buttons.forEach { b ->
-				val bgg = bg
-				bgg.color = b.getColor().color
-				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
-						b.width.toInt(), b.height.toInt(),
-						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
-			}
-			objects.forEach { o ->
 				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width || o.y.toInt() < 0 || o.y.toInt() > height)) {
 					removeObject(o)
 //					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
 //							" o.y.toInt() = ${o.y.toInt()}, height = $height")
 				}
+			}
+			texts.forEach { b ->
+				val bgg = bg
+				bgg.color = b.getColor().color
+				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
+						b.width.toInt(), b.height.toInt(),
+						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
 			}
 			if (loseFocus) {
 				loop(buffer.width) { x ->
@@ -233,18 +241,8 @@ open class Game() : AbstractGame(), Runnable {
 					}
 				}
 			}
-
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
-
-			objects.removeAll(objectsDelete)
-			objectsDelete.clear()
-
-			timeListeners.removeAll(timeListenersDelete)
-			timeListenersDelete.clear()
-
-			buttons.removeAll(buttonsDelete)
-			buttonsDelete.clear()
 		}
 	}
 }
