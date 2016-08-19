@@ -3,8 +3,8 @@ package org.frice.game.obj
 import org.frice.game.anim.FAnim
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
-import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.obj.collide.CollideBox
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
 import java.util.*
@@ -14,7 +14,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-interface FObject : CollideBox , AbstractObject{
+interface FObject : CollideBox , PhysicalObject{
 	var id: Int
 	val anims: ArrayList<FAnim>
 	val targets: ArrayList<Pair<FObject, OnCollideEvent>>

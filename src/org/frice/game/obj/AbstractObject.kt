@@ -8,8 +8,4 @@ package org.frice.game.obj
 interface AbstractObject {
 	var x: Double
 	var y: Double
-	val width: Double
-	val height: Double
-
-	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 }
