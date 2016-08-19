@@ -51,6 +51,8 @@ abstract class AbstractGame() : JFrame() {
 
 	protected val random = Random()
 
+	protected var autoGC = true
+
 	init {
 		layout = BorderLayout()
 	}
