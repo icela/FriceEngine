@@ -66,7 +66,7 @@ To build games based on frice engine, follow these steps:
 2. Create a class extends Game in org.frice.game package.
 3. Implement the abstract methods, just understand them by name.
 4. call the empty constructor in the public static void main.
-5. For full API doc please view [help](help.md)
+5. For full API doc please view [help](apis.md)
 
 ## Demos
 
@@ -84,4 +84,4 @@ To build games based on frice engine, follow these steps:
 
 ## How can it be?
 
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/1.gif?raw=true)
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/1.gif?raw=true) Demo11 <br/>
