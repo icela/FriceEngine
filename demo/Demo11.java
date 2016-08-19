@@ -5,6 +5,11 @@ import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.utils.graphics.shape.FRectangle;
 import org.frice.game.utils.time.FTimeListener;
 
+/**
+ * An awesome demo
+ *
+ * @author SuperSodaSea
+ */
 public class Demo11 extends Game {
 
 	private ColorResource colors[];
