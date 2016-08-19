@@ -81,3 +81,7 @@ To build games based on frice engine, follow these steps:
 - [demo/Demo9.java](demo/Demo9.java)
 - [demo/Demo10.groovy](demo/Demo10.groovy)
 - [demo/Demo11.java](demo/Demo11.java) (an awesome demo by [@SuperSodaSea](https://github.com/SuperSodaSea))
+
+## How can it be?
+
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/1.gif?raw=true)
