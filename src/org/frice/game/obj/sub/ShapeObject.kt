@@ -65,10 +65,10 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
-		if (other == null || other !is ShapeObject) return false
-		if ((id != -1 && id == other.id) ||
-				res == other.res && x == other.x && y == other.y) return true
-		return true
+//		if (other == null || other !is ShapeObject) return false
+//		if ((id != -1 && id == other.id) ||
+//				res == other.res && x == other.x && y == other.y) return true
+		return false
 	}
 
 	override fun hashCode(): Int {

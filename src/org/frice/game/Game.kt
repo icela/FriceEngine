@@ -196,7 +196,6 @@ open class Game() : AbstractGame(), Runnable {
 						}
 					}
 				}
-				if (autoGC && (o.x < -width || o.x > width * 2 || o.y < -height || o.y > height * 2)) removeObject(o)
 			}
 			buttons.forEach { b ->
 				val bgg = bg
@@ -205,12 +204,22 @@ open class Game() : AbstractGame(), Runnable {
 						b.width.toInt(), b.height.toInt(),
 						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
 			}
+			objects.forEach { o ->
+				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width || o.y.toInt() < 0 || o.y.toInt() > height)) {
+					removeObject(o)
+//					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
+//							" o.y.toInt() = ${o.y.toInt()}, height = $height")
+				}
+			}
 			objects.removeAll(objectsDelete)
 			objectsDelete.clear()
+
 			timeListeners.removeAll(timeListenersDelete)
 			timeListenersDelete.clear()
+
 			buttons.removeAll(buttonsDelete)
 			buttonsDelete.clear()
+
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
 		}
