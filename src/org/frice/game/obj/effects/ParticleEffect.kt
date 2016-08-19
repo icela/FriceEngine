@@ -1,7 +1,7 @@
 package org.frice.game.obj.effects
 
 import org.frice.game.anim.FAnim
-import org.frice.game.event.OnCollideEvent
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.graphics.ParticleResource

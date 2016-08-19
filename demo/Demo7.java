@@ -2,7 +2,7 @@ import kotlin.Pair;
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccelerateMove;
 import org.frice.game.anim.move.SimpleMove;
-import org.frice.game.event.OnCollideEvent;
+import org.frice.game.obj.collide.OnCollideEvent;
 import org.frice.game.obj.sub.ShapeObject;
 import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.utils.graphics.shape.FCircle;

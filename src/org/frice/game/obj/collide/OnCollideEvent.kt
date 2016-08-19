@@ -1,4 +1,4 @@
-package org.frice.game.event
+package org.frice.game.obj.collide
 
 /**
  * Created by ice1000 on 2016/8/16.

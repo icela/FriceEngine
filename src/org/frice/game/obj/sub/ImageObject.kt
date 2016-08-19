@@ -1,7 +1,7 @@
 package org.frice.game.obj.sub
 
 import org.frice.game.anim.FAnim
-import org.frice.game.event.OnCollideEvent
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.obj.FObject
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
