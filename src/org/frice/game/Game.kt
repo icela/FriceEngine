@@ -43,8 +43,11 @@ open class Game() : AbstractGame(), Runnable {
 	private val refresh = FTimer(3)
 
 	private val objects = ArrayList<AbstractObject>()
+	private val objectsDelete = ArrayList<AbstractObject>()
 	private val buttons = ArrayList<FButton>()
+	private val buttonsDelete = ArrayList<FButton>()
 	private val timeListeners = ArrayList<FTimeListener>()
+	private val timeListenersDelete = ArrayList<FTimeListener>()
 	private val buffer: BufferedImage
 
 	private val panel = GamePanel()
@@ -71,18 +74,17 @@ open class Game() : AbstractGame(), Runnable {
 		else objects.add(obj)
 	}
 
-	protected fun clearObjects() = objects.clear()
-	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> removeObject(o) }
+	protected fun clearObjects() = objectsDelete.addAll(objects)
+	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
 	protected fun removeObject(obj: AbstractObject) {
-		if (obj is FButton) buttons.add(obj)
-		else objects.remove(obj)
+		if (obj is FButton) buttonsDelete.add(obj)
+		else objectsDelete.add(obj)
 	}
 
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
-
-	fun addTimeListeners(listeners: Array<FTimeListener>) = timeListeners.addAll(listeners)
-	fun removeTimeListener(listener: FTimeListener) = timeListeners.remove(listener)
-	fun removeTimeListeners(listeners: Array<FTimeListener>) = timeListeners.removeAll(listeners)
+	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
+	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
+	fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
 
 	override fun touch(e: OnMouseEvent) = buttons.forEach { b -> b.onClick(e) }
 
@@ -202,6 +204,12 @@ open class Game() : AbstractGame(), Runnable {
 						b.width.toInt(), b.height.toInt(),
 						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
 			}
+			objects.removeAll(objectsDelete)
+			objectsDelete.clear()
+			timeListeners.removeAll(timeListenersDelete)
+			timeListenersDelete.clear()
+			buttons.removeAll(buttonsDelete)
+			buttonsDelete.clear()
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
 		}
