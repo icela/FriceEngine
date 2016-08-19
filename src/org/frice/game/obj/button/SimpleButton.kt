@@ -17,7 +17,7 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
                    override val width: Double, override val height: Double) : FButton {
 
 	constructor(shape: FShape, text: String, font: Font, x: Double, y: Double,
-	            width: Double, height: Double) : this(shape, ColorResource.DARK_GRAY, text, font, x, y, width, height)
+	            width: Double, height: Double) : this(shape, ColorResource.GRAY, text, font, x, y, width, height)
 
 	constructor(shape: FShape, text: String, font: Int, x: Double, y: Double, width: Double, height: Double) :
 	this(shape, text, Font(Font.MONOSPACED, Font.BOLD, font), x, y, width, height)

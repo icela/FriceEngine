@@ -221,18 +221,23 @@ open class Game() : AbstractGame(), Runnable {
 						}
 					}
 				}
-				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width || o.y.toInt() < 0 || o.y.toInt() > height)) {
+				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width ||
+						o.y.toInt() < 0 || o.y.toInt() > height)) {
 					removeObject(o)
 //					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
 //							" o.y.toInt() = ${o.y.toInt()}, height = $height")
 				}
 			}
 			texts.forEach { b ->
-				val bgg = bg
-				bgg.color = b.getColor().color
-				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
-						b.width.toInt(), b.height.toInt(),
-						(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
+				if (b is FButton) {
+					val bgg = bg
+					bgg.color = b.getColor().color
+					bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
+							b.width.toInt(), b.height.toInt(),
+							(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
+					bgg.color = ColorResource.GRAY.color
+					bgg.drawString(b.text, b.x.toInt() + 10, b.y.toInt() + 20)
+				} else bg.drawString(b.text, b.x.toInt(), b.y.toInt())
 			}
 			if (loseFocus) {
 				loop(buffer.width) { x ->
@@ -241,6 +246,12 @@ open class Game() : AbstractGame(), Runnable {
 					}
 				}
 			}
+
+			/**
+			 * 厚颜无耻
+			 */
+//			bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
+
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)
 		}
