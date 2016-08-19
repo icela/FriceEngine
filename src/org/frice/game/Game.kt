@@ -129,6 +129,8 @@ open class Game() : AbstractGame(), Runnable {
 
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
+	override fun getMousePosition() = panel.mousePosition!!
+
 	override fun run() {
 		loopIf({ !paused && !stopped && refresh.ended() }) {
 			forceRun { onRefresh() }
