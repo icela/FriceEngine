@@ -114,7 +114,7 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
 	override fun run() {
-		loopIf({ !paused && !stopped && refresh.ended()}) {
+		loopIf({ !paused && !stopped && refresh.ended() }) {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
@@ -196,6 +196,7 @@ open class Game() : AbstractGame(), Runnable {
 						}
 					}
 				}
+				if (o.x < -width || o.x > width * 2 || o.y < -height || o.y > height * 2) removeObject(o)
 			}
 			buttons.forEach { b ->
 				val bgg = bg
