@@ -9,4 +9,5 @@ import org.frice.game.resource.image.ImageResource
  * @since v0.4
  */
 class BoneObject(res: ImageResource, id: Int, x: Double, y: Double) : ImageObject(res, id, x, y) {
+	override var died = false
 }

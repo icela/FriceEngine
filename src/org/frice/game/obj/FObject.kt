@@ -35,5 +35,9 @@ interface FObject : CollideBox, PhysicalObject {
 		}
 	}
 
-	fun checkCollision() = targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
+	fun checkCollision() {
+		targets.removeIf { t -> t.first.died }
+		targets.forEach { t -> if (isCollide(t.first)) t.second.handle()
+		}
+	}
 }

@@ -5,6 +5,7 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
+import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
 import org.frice.game.obj.effects.ParticleEffect
@@ -77,6 +78,7 @@ open class Game() : AbstractGame(), Runnable {
 		FLog.v("Engine start!")
 	}
 
+	protected fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
 	protected fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
 	protected fun addObject(obj: AbstractObject) {
 		if (obj is FText) texts.add(obj)
@@ -85,6 +87,7 @@ open class Game() : AbstractGame(), Runnable {
 
 	protected fun clearObjects() = objectsDelete.addAll(objects)
 	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
+	protected fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
 	protected fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDelete.add(obj)
 		else objectsDelete.add(obj)
@@ -92,8 +95,12 @@ open class Game() : AbstractGame(), Runnable {
 
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
 	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
-	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
+	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
+
+	fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
 	fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
+	fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
+	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
 
 	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
@@ -223,6 +230,7 @@ open class Game() : AbstractGame(), Runnable {
 				}
 				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width ||
 						o.y.toInt() < 0 || o.y.toInt() > height)) {
+					if (o is PhysicalObject) o.died = true
 					removeObject(o)
 //					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
 //							" o.y.toInt() = ${o.y.toInt()}, height = $height")
@@ -250,7 +258,7 @@ open class Game() : AbstractGame(), Runnable {
 			/**
 			 * 厚颜无耻
 			 */
-			//			bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
+			//bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
 
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)

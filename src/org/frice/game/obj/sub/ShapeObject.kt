@@ -36,6 +36,8 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 	override val width: Double
 		get () = (collideBox.width * scale.first)
 
+	override var died = false
+
 	override fun isCollide(other: PhysicalObject) = when (other) {
 		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> when (collideBox) {

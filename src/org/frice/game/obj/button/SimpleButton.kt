@@ -26,6 +26,7 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 	this(shape, text, Font(Font.MONOSPACED, Font.BOLD, 16), x, y, width, height)
 
 	private var bool = false
+	override var died = false
 
 	override fun getColor() = if (bool) ColorResource(colorResource.color.darker())
 	else colorResource

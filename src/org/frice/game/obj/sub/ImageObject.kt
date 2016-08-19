@@ -1,9 +1,9 @@
 package org.frice.game.obj.sub
 
 import org.frice.game.anim.FAnim
-import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import java.awt.Image
@@ -48,6 +48,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>> = ArrayList()
 
 	override val collideBox = FRectangle(res.image.width, res.image.height)
+	override var died = false
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),

@@ -27,6 +27,7 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 		get() = resource.x.toDouble()
 	override val height: Double
 		get() = resource.y.toDouble()
+	override var died = false
 
 	override fun getResource() = ImageResource.create(resource.getResource())
 
