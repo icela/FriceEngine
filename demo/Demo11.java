@@ -5,6 +5,8 @@ import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.utils.graphics.shape.FCircle;
 import org.frice.game.utils.time.FTimeListener;
 
+import java.awt.*;
+
 /**
  * An awesome demo
  *
@@ -12,30 +14,25 @@ import org.frice.game.utils.time.FTimeListener;
  */
 public class Demo11 extends Game {
 
-	private ColorResource colors[] = new ColorResource[]{
-			ColorResource.Companion.get东条希(),
-			ColorResource.Companion.get冰封绿(),
-			ColorResource.Companion.get南小鸟(),
-			ColorResource.Companion.get吾王蓝(),
-			ColorResource.Companion.get园田海未(),
-			ColorResource.Companion.get基佬紫(),
-			ColorResource.Companion.get如果奇迹有颜色那么一定是橙色(),
-			ColorResource.Companion.get宝强绿(),
-			ColorResource.Companion.get小埋色(),
-			ColorResource.Companion.get小泉花阳(),
-			ColorResource.Companion.get教主黄(),
-			ColorResource.Companion.get星空凛(),
-			ColorResource.Companion.get洵濑绘理(),
-			ColorResource.Companion.get矢泽妮可(),
-			ColorResource.Companion.get西木野真姬(),
-			ColorResource.Companion.get高坂穗乃果(),
-	};
+	private ColorResource colors[];
 	private double a = 0;
 	private double b = 0;
 
 	@Override
 	public void onInit() {
-		setSize(1920, 1080);
+		new Color(0xffffff);
+		colors = new ColorResource[]{
+				ColorResource.Companion.get东条希(),
+				ColorResource.Companion.get南小鸟(),
+				ColorResource.Companion.get园田海未(),
+				ColorResource.Companion.get小泉花阳(),
+				ColorResource.Companion.get星空凛(),
+				ColorResource.Companion.get洵濑绘理(),
+				ColorResource.Companion.get矢泽妮可(),
+				ColorResource.Companion.get西木野真姬(),
+				ColorResource.Companion.get高坂穗乃果(),
+		};
+		setSize(1200, 720);
 		setTitle("IAmSoSquare Demo");
 		setBack(ColorResource.Companion.getBLACK());
 		addTimeListener(new FTimeListener(1, () -> {
