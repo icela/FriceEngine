@@ -1,8 +1,8 @@
 package org.frice.game.obj.effects
 
 import org.frice.game.anim.FAnim
+import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.collide.OnCollideEvent
-import org.frice.game.obj.FObject
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.resource.image.ImageResource
@@ -19,7 +19,7 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 	override var id = -1
 
 	override val anims = ArrayList<FAnim>()
-	override val targets = ArrayList<Pair<FObject, OnCollideEvent>>()
+	override val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
 
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
@@ -40,5 +40,5 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 		resource.y = (resource.y * p.second).toInt()
 	}
 
-	override fun isCollide(other: FObject) = false
+	override fun isCollide(other: PhysicalObject) = false
 }

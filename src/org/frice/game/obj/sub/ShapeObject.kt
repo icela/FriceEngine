@@ -1,8 +1,9 @@
 package org.frice.game.obj.sub
 
 import org.frice.game.anim.FAnim
-import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.obj.FObject
+import org.frice.game.obj.collide.OnCollideEvent
+import org.frice.game.obj.PhysicalObject
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.shape.FShape
@@ -25,7 +26,7 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
 	override val anims: ArrayList<FAnim> = ArrayList()
-	override val targets: ArrayList<Pair<FObject, OnCollideEvent>> = ArrayList()
+	override val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>> = ArrayList()
 
 	private var scale = Pair(1.0, 1.0)
 
@@ -35,7 +36,7 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 	override val width: Double
 		get () = (collideBox.width * scale.first)
 
-	override fun isCollide(other: FObject) = when (other) {
+	override fun isCollide(other: PhysicalObject) = when (other) {
 		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> when (collideBox) {
 				is FRectangle -> rectCollide(this, other)
