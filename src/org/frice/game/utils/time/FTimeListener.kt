@@ -1,14 +1,17 @@
 package org.frice.game.utils.time
 
-import org.frice.game.utils.time.OnTimeEvent
-
 /**
+ * @param times if the value is -1, will loop.
+ *
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
  * @since v0.2
  */
-class FTimeListener(time: Int, val timeUp: () -> Unit) : FTimer(time) {
-	constructor(time: Int, timeUp: OnTimeEvent) : this(time, { timeUp.execute() })
+class FTimeListener(time: Int, times: Int, val timeUp: () -> Unit) : FTimer(time, times) {
+	constructor(time: Int, timeUp: OnTimeEvent) : this(time, -1, { timeUp.execute() })
 
-	fun check() = if (ended()) timeUp.invoke() else Unit
+	fun check() = if (ended() && times != 0) {
+		if (times > 0) times--
+		timeUp.invoke()
+	} else Unit
 }

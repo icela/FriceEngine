@@ -57,6 +57,7 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Particle effects
 - [X] Easy time controlling
 - [X] Language extensions(for Kotlin only)
+- [X] Smart auto garbage collection(you can close it)
 
 ## Basics
 FriceEngine is based on the life cycle mode.<br/>
@@ -73,4 +74,9 @@ see [FriceDemo](https://github.com/icela/FriceDemo)
 
 ## How can it be?
 
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/1.gif?raw=true) Demo11 <br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/0.gif?raw=true)<br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/2.gif?raw=true)<br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/3.gif?raw=true)<br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/4.gif?raw=true)<br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/5.gif?raw=true)<br/>
+![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/6.gif?raw=true)<br/>
