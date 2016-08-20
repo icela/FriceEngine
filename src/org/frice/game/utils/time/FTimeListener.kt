@@ -1,6 +1,6 @@
 package org.frice.game.utils.time
 
-import org.frice.game.event.OnTimeEvent
+import org.frice.game.utils.time.OnTimeEvent
 
 /**
  * Created by ice1000 on 2016/8/14.

@@ -1,6 +1,6 @@
 package org.frice.game.obj.collide
 
-import org.frice.game.obj.FObject
+import org.frice.game.obj.PhysicalObject
 
 /**
  * Created by ice1000 on 2016/8/16.
@@ -8,5 +8,5 @@ import org.frice.game.obj.FObject
  * @since v0.3
  */
 interface CollideBox {
-	fun isCollide(other: FObject): Boolean
+	fun isCollide(other: PhysicalObject): Boolean
 }

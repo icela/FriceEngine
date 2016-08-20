@@ -27,10 +27,10 @@ removeObject(FObject)|Removes an object from screen
 addTimeListener(listener: FTimeListener)|Adds a timer listener. It will be invoked when timeouts.
 removeTimeListener(listener: FTimeListener)|Remove a object from timer listeners.
 setBack(FResource)|Sets window background
-setRefreshPerSecond(Double)|Sets refresh frequency. Default is 15 refreshes per second.
 setCursor(o: ImageObject)|Sets the cursor as an ImageObject. You can operate it like any other objects. This will call `addObject()` by itself.
 setCursor(o: ImageResource)|Create an ImageObject and invoke the last method
 getScreenCut(): ImageResource|Returns the current screenshot.
+setAutoGC(Boolean)|if true, the engine will remove objects far from the game window.
 setBounds(int x, int y, int width, int height)|*Inherited from Frame*
 setTitle(String)|*Inherited from Frame*
 
@@ -243,4 +243,11 @@ Param|Usage
 x: Double|How many times bigger that the owner should scale per second, horizontally.
 y: Double|How many times bigger that the owner should scale per second, vertically.
 
+## Interface:org.frice.game.obj.button.FButton
 
+## Class:org.frice.game.obj.button.SimpleButton
+A Button.
+
+
+## Class:org.frice.game.obj.effects.ParticleEffect
+An object to display particles.

@@ -3,8 +3,8 @@ package org.frice.game.obj
 import org.frice.game.anim.FAnim
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
-import org.frice.game.event.OnCollideEvent
 import org.frice.game.obj.collide.CollideBox
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
 import java.util.*
@@ -14,20 +14,16 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-interface FObject : CollideBox {
+interface FObject : CollideBox, PhysicalObject {
 	var id: Int
-	var x: Double
-	var y: Double
-	val width: Double
-	val height: Double
 	val anims: ArrayList<FAnim>
-	val targets: ArrayList<Pair<FObject, OnCollideEvent>>
+	val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>>
 	val collideBox: FShape
 	fun getResource(): FResource
 	fun move(p: Pair<Double, Double>)
 	fun scale(p: Pair<Double, Double>)
 
-	fun rectCollide(rect1: FObject, rect2: FObject) = rect1.x + rect1.width >= rect2.x &&
+	fun rectCollide(rect1: PhysicalObject, rect2: PhysicalObject) = rect1.x + rect1.width >= rect2.x &&
 			rect2.y <= rect1.y + rect1.height &&
 			rect1.x <= rect2.x + rect2.width &&
 			rect1.y <= rect2.y + rect2.height
@@ -39,5 +35,9 @@ interface FObject : CollideBox {
 		}
 	}
 
-	fun checkCollision() = targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
+	fun checkCollision() {
+		targets.removeIf { t -> t.first.died }
+		targets.forEach { t -> if (isCollide(t.first)) t.second.handle()
+		}
+	}
 }

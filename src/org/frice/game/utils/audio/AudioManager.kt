@@ -1,5 +1,6 @@
 package org.frice.game.utils.audio
 
+import org.frice.game.utils.kotlin.async
 import java.io.File
 
 /**
@@ -8,8 +9,8 @@ import java.io.File
  * @since v0.3.1
  */
 object AudioManager {
-	@JvmStatic fun play(file: File) = AudioPlayer(file).start()
-	@JvmStatic fun play(path: String) = AudioPlayer(path).start()
+	@JvmStatic fun play(file: File) = async() { AudioPlayer(file).main() }
+	@JvmStatic fun play(path: String) = async() { AudioPlayer(path).main() }
 
 	@JvmStatic fun getPlayer(file: File) = AudioPlayer(file)
 	@JvmStatic fun getPlayer(path: String) = AudioPlayer(path)

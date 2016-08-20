@@ -1,7 +1,9 @@
-package org.frice.game.obj
+package org.frice.game.obj.sub
 
 import org.frice.game.anim.FAnim
-import org.frice.game.event.OnCollideEvent
+import org.frice.game.obj.FObject
+import org.frice.game.obj.PhysicalObject
+import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import java.awt.Image
@@ -23,9 +25,11 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
+	constructor(res: BufferedImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
+
 	override fun getResource() = res
 
-	override fun isCollide(other: FObject) = when (other) {
+	override fun isCollide(other: PhysicalObject) = when (other) {
 		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> rectCollide(this, other)
 		// TODO
@@ -41,9 +45,10 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 		get() = res.image.height.toDouble()
 
 	override val anims: ArrayList<FAnim> = ArrayList()
-	override val targets: ArrayList<Pair<FObject, OnCollideEvent>> = ArrayList()
+	override val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>> = ArrayList()
 
 	override val collideBox = FRectangle(res.image.width, res.image.height)
+	override var died = false
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),

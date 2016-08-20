@@ -9,7 +9,7 @@ import org.junit.Test
  */
 class PreferenceTest {
 
-	var p: Preference? = null
+	lateinit var p: Preference
 
 	fun init() {
 		p = Preference("D://text.xml")
@@ -18,15 +18,15 @@ class PreferenceTest {
 	@Test
 	fun insert() {
 		init()
-		p?.insert("ice", 1000)
-		p?.insert("lizhaohan", 1)
-		p?.insert("jelly", "bean")
+		p.insert("ice", 1000)
+		p.insert("lizhaohan", 1)
+		p.insert("jelly", "bean")
 	}
 
 	@Test
 	fun query() {
 		init()
-		println("p?.query(\"ice\", 5) = ${p?.query("ice", 5)}")
-		println("p?.query(\"jelly\", jelly) = ${p?.query("jelly", "")}")
+		println("p?.query(\"ice\", 5) = ${p.query("ice", 5)}")
+		println("p?.query(\"jelly\", jelly) = ${p.query("jelly", "")}")
 	}
 }

@@ -1,5 +1,7 @@
 package org.frice.game.utils.data
 
+import org.frice.game.utils.kotlin.forceGet
+import org.frice.game.utils.kotlin.forceLoop
 import org.frice.game.utils.message.error.FatalError
 import org.w3c.dom.Document
 import org.w3c.dom.Element
@@ -55,6 +57,7 @@ class Preference constructor(val file: File) {
 			doc = builder.newDocument()
 			root = doc.createElement(ROOT)
 			doc.appendChild(root)
+			save()
 		} else {
 			doc = builder.parse(file)
 			root = doc.documentElement
@@ -67,10 +70,7 @@ class Preference constructor(val file: File) {
 	}
 
 	fun insert(key: String, value: Any?) = value.let {
-		try {
-			while (true) root.removeChild(doc.getElementsByTagName(key).item(0))
-		} catch (ignored: Exception) {
-		}
+		forceLoop { root.removeChild(doc.getElementsByTagName(key).item(0)) }
 		val node = doc.createElement(key)
 		node.setAttribute(VALUE, value.toString())
 		node.setAttribute(TYPE, when (value) {
@@ -90,8 +90,13 @@ class Preference constructor(val file: File) {
 
 	fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
-		val value = node.attributes.getNamedItem(VALUE).nodeValue ?: return default
-		return try {
+		val value: String?
+		try {
+			value = node.attributes.getNamedItem(VALUE).nodeValue
+		} catch (e: Throwable) {
+			return default
+		}
+		return forceGet(default) {
 			when (node.attributes.getNamedItem(TYPE).nodeValue) {
 				TYPE_BYTE -> value.toByte()
 				TYPE_INT -> value.toInt()
@@ -103,8 +108,6 @@ class Preference constructor(val file: File) {
 				TYPE_STRING -> value
 				else -> default
 			}
-		} catch (e: Exception) {
-			default
 		}
 	}
 }
