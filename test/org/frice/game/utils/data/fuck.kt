@@ -2,8 +2,6 @@ package org.frice.game.utils.data
 
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
-import org.frice.game.utils.data.Preference
-import org.frice.game.utils.data.SettingsLoader
 import org.frice.game.utils.message.log.FLog
 
 /**
@@ -19,9 +17,9 @@ class FFF() : Game() {
 	private var started = false
 
 	fun load() {
-//		this.javaClass.superclass.declaredFields.forEach {
-//			FLog.w(it)
-//		}
+		this.javaClass.declaredFields.forEach {
+			FLog.w(it)
+		}
 		Preference(file).apply {
 			insert("autoGC", "false")
 			insert("title", "settings test title set")

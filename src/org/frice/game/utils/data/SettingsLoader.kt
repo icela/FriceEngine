@@ -22,7 +22,8 @@ class SettingsLoader(file: File) {
 		var clazz: Class<*> = game.javaClass
 		p.list().forEach { pair ->
 			while (true) try {
-				val field = clazz.superclass.getDeclaredField(pair.first as String)
+				FLog.d(clazz.toString().substring(6) + "." + pair.first as String)
+				val field = clazz.superclass.getDeclaredField(clazz.toString().substring(6) + "." + pair.first as String)
 				field.isAccessible = true
 				field.set(game, when (pair.second) {
 					"true" -> true
