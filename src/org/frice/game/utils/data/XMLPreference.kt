@@ -19,7 +19,7 @@ import javax.xml.transform.stream.StreamResult
  * @author ice1000
  * @since 0.2.2
  */
-class XMLPreference constructor(val file: File) {
+class XMLPreference constructor(val file: File) : Database{
 	constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder
@@ -69,7 +69,7 @@ class XMLPreference constructor(val file: File) {
 		transformer.transform(DOMSource(doc), StreamResult(file))
 	}
 
-	fun insert(key: String, value: Any?) = value.let {
+	override fun insert(key: String, value: Any?) = value.let {
 		forceLoop { root.removeChild(doc.getElementsByTagName(key).item(0)) }
 		val node = doc.createElement(key)
 		node.setAttribute(VALUE, value.toString())
@@ -88,7 +88,12 @@ class XMLPreference constructor(val file: File) {
 		save()
 	}
 
-	fun query(key: String, default: Any): Any {
+	override fun <T> queryWithType(key: String, default: T): Any {
+		val value = doc.getElementsByTagName(key).item(0).attributes.getNamedItem(VALUE).nodeValue
+		return value ?: default!!
+	}
+
+	override fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
 		val value: String?
 		try {
