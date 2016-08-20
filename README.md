@@ -26,7 +26,14 @@ This engine is completely platform-independent: no JNIs, no native methods, ever
 And this is what a JVM app should be exactly.
 
 # Before you build
-Clone (`clone https://github.com/icela/FriceEngine.git`) and open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).
+
+```
+git clone https://github.com/icela/FriceEngine.git
+cd FriceEngine
+git submodule init
+git submodule update
+```
+Then open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).
 
 # Build
 Currently under construction. Maybe you know how to build your own apps.
