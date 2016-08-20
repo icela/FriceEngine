@@ -1,5 +1,6 @@
-package org.frice.game
+package org.frice.game.utils.data
 
+import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.SettingsLoader
