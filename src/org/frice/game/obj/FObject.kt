@@ -20,8 +20,6 @@ abstract class FObject : CollideBox, PhysicalObject {
 	val anims = ArrayList<FAnim>()
 	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
 
-	override var rotate = 0.0
-
 	abstract val collideBox: FShape
 
 	abstract fun getResource(): FResource
