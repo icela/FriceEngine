@@ -13,13 +13,13 @@ import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
 
 /**
- * An Android-like Preference.
+ * An Android-like XMLPreference.
  *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000
  * @since 0.2.2
  */
-class Preference constructor(val file: File) {
+class XMLPreference constructor(val file: File) {
 	constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder
@@ -40,12 +40,12 @@ class Preference constructor(val file: File) {
 		private val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
 		private val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
 
-		private var instance: Preference? = null
+		private var instance: XMLPreference? = null
 
 		@JvmStatic fun getPreference(path: String) = getPreference(File(path))
 
-		@JvmStatic fun getPreference(file: File): Preference {
-			if (instance == null) instance = Preference(file)
+		@JvmStatic fun getPreference(file: File): XMLPreference {
+			if (instance == null) instance = XMLPreference(file)
 			return instance!!
 		}
 	}

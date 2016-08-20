@@ -7,12 +7,12 @@ import org.junit.Test
  * @author ice1000
  * @since v0.2.2
  */
-class PreferenceTest {
+class XMLPreferenceTest {
 
-	lateinit var p: Preference
+	lateinit var p: XMLPreference
 
 	fun init() {
-		p = Preference("D://text.xml")
+		p = XMLPreference("D://text.xml")
 	}
 
 	@Test
