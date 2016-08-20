@@ -88,10 +88,10 @@ class XMLPreference constructor(val file: File) : Database{
 		save()
 	}
 
-	override fun <T> queryWithType(key: String, default: T): Any {
-		val value = doc.getElementsByTagName(key).item(0).attributes.getNamedItem(VALUE).nodeValue
-		return value ?: default!!
-	}
+//	override fun <T> queryWithType(key: String, default: T): Any {
+//		val value = doc.getElementsByTagName(key).item(0).attributes.getNamedItem(VALUE).nodeValue
+//		return value ?: default!!
+//	}
 
 	override fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)
