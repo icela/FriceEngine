@@ -9,6 +9,9 @@ abstract class FAnim() {
 	protected val start: Double
 		get() = field / 1000
 
+	protected val now: Double
+		get() = System.currentTimeMillis().toDouble() / 1000
+
 	init {
 		start = System.currentTimeMillis().toDouble()
 	}

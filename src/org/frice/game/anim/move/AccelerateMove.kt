@@ -20,7 +20,6 @@ class AccelerateMove(private var ax: Double, private var ay: Double) : SimpleMov
 	var my = 0.0
 
 	override fun getDelta(): Pair<Double, Double> {
-		now = System.currentTimeMillis().toDouble()
 		mx = (now - start) * ax
 		my = (now - start) * ay
 //		FLog.debug("my = $my, now = $now, start = $start")

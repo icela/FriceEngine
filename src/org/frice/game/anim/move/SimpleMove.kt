@@ -12,16 +12,12 @@ package org.frice.game.anim.move
 open class SimpleMove(private val x: Int, private val y: Int) : MoveAnim() {
 	private var cache: Double
 		get() = field / 1000
-	protected var now: Double
-		get() = field / 1000
 
 	init {
-		now = System.currentTimeMillis().toDouble()
 		cache = System.currentTimeMillis().toDouble()
 	}
 
 	override fun getDelta(): Pair<Double, Double> {
-		now = System.currentTimeMillis().toDouble()
 		val pair = getPair(x, y)
 		cache = now * 1000
 		return pair

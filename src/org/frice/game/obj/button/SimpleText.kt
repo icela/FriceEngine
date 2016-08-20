@@ -10,7 +10,7 @@ import java.awt.Font
  * @since v0.4
  */
 class SimpleText(var colorResource: ColorResource, override var font: Font,
-                 override var text: String, override var x: Double, override var y: Double) : FText {
+                 override var text: String, override var x: Double, override var y: Double) : FText() {
 
 	constructor(text: String, font: Font, x: Double, y: Double) :
 	this(ColorResource.DARK_GRAY, font, text, x, y)

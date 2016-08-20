@@ -1,6 +1,7 @@
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
+import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.obj.collide.CollideBox
@@ -14,14 +15,25 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-interface FObject : CollideBox, PhysicalObject {
-	var id: Int
-	val anims: ArrayList<FAnim>
-	val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>>
-	val collideBox: FShape
-	fun getResource(): FResource
-	fun move(p: Pair<Double, Double>)
-	fun scale(p: Pair<Double, Double>)
+abstract class FObject : CollideBox, PhysicalObject() {
+	open var id = -1
+	val anims = ArrayList<FAnim>()
+	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
+
+	abstract val collideBox: FShape
+
+	abstract fun getResource(): FResource
+
+	abstract fun scale(p: Pair<Double, Double>)
+
+	open fun move(p: Pair<Double, Double>) {
+		x += p.first
+		y += p.second
+	}
+
+	open fun rotate(angle: Double) {
+		rotate += angle
+	}
 
 	fun rectCollide(rect1: PhysicalObject, rect2: PhysicalObject) = rect1.x + rect1.width >= rect2.x &&
 			rect2.y <= rect1.y + rect1.height &&
@@ -32,12 +44,14 @@ interface FObject : CollideBox, PhysicalObject {
 		when (a) {
 			is MoveAnim -> move(a.getDelta())
 			is ScaleAnim -> scale(a.getAfter())
+			is RotateAnim -> rotate(a.getRotate())
 		}
 	}
 
 	fun checkCollision() {
 		targets.removeIf { t -> t.first.died }
-		targets.forEach { t -> if (isCollide(t.first)) t.second.handle()
+		targets.forEach { t ->
+			if (isCollide(t.first)) t.second.handle()
 		}
 	}
 }

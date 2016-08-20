@@ -1,6 +1,7 @@
 package org.frice.game.obj.button
 
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.obj.FContainer
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.graphics.shape.FShape
 import java.awt.Font
@@ -14,7 +15,7 @@ import java.awt.Font
 class SimpleButton(val shape: FShape, var colorResource: ColorResource,
                    override var text: String, override var font: Font,
                    override var x: Double, override var y: Double,
-                   override val width: Double, override val height: Double) : FButton {
+                   override var width: Double, override var height: Double) : FButton(), FContainer {
 
 	constructor(shape: FShape, text: String, font: Font, x: Double, y: Double,
 	            width: Double, height: Double) : this(shape, ColorResource.GRAY, text, font, x, y, width, height)
@@ -26,7 +27,6 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 	this(shape, text, Font(Font.MONOSPACED, Font.BOLD, 16), x, y, width, height)
 
 	private var bool = false
-	override var died = false
 
 	override fun getColor() = if (bool) ColorResource(colorResource.color.darker())
 	else colorResource

@@ -10,9 +10,9 @@ import java.awt.Font
  * @author ice1000
  * @since v0.4
  */
-interface FText : AbstractObject {
-	var text: String
-	var font: Font
+abstract class FText : AbstractObject() {
+	open var text = ""
+	abstract var font: Font
 
-	fun getColor(): ColorResource
+	abstract fun getColor(): ColorResource
 }
