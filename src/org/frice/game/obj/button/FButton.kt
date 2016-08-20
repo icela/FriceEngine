@@ -10,4 +10,7 @@ import org.frice.game.event.OnMouseEvent
 
 abstract class FButton : FText() {
 	abstract fun onClick(e: OnMouseEvent)
+
+	abstract var width: Double
+	abstract var height: Double
 }

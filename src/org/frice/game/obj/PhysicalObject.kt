@@ -6,11 +6,6 @@ package org.frice.game.obj
  * @author ice1000
  * @since v0.4
  */
-abstract class PhysicalObject : AbstractObject() {
-	abstract val width: Double
-	abstract val height: Double
-
+abstract class PhysicalObject : AbstractObject(), FContainer {
 	open var died = false
-
-	open fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 }

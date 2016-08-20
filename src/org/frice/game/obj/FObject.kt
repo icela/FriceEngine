@@ -15,7 +15,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-abstract class FObject : CollideBox, PhysicalObject {
+abstract class FObject : CollideBox, PhysicalObject() {
 	open var id = -1
 	val anims = ArrayList<FAnim>()
 	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
