@@ -75,9 +75,9 @@ open class Game() : AbstractGame(), Runnable {
 		FLog.v("Engine start!")
 	}
 
-	protected fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
-	protected fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
-	protected fun addObject(obj: AbstractObject) {
+	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
+	fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+	fun addObject(obj: AbstractObject) {
 		if (obj is FText) texts.add(obj)
 		else objects.add(obj)
 	}
@@ -94,10 +94,10 @@ open class Game() : AbstractGame(), Runnable {
 	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
 	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
 
-	fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
-	fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
-	fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
-	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
+	protected fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
+	protected fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
+	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
+	protected fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
 
 	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
