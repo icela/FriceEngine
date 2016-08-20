@@ -57,6 +57,7 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Particle effects
 - [X] Easy time controlling
 - [X] Language extensions(for Kotlin only)
+- [X] Smart auto garbage collection(you can close it)
 
 ## Basics
 FriceEngine is based on the life cycle mode.<br/>

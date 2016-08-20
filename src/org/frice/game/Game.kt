@@ -230,8 +230,8 @@ open class Game() : AbstractGame(), Runnable {
 					}
 					is FLine -> bg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
 				}
-				if (autoGC && (o.x.toInt() < 0 || o.x.toInt() > width ||
-						o.y.toInt() < 0 || o.y.toInt() > height)) {
+				if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
+						o.y.toInt() < -height || o.y.toInt() > height + height)) {
 					if (o is PhysicalObject) o.died = true
 					removeObject(o)
 //					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
