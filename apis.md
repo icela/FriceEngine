@@ -38,7 +38,7 @@ setTitle(String)|*Inherited from Frame*
 Represents a game object.
 
 ### Demos
-See [demo/Demo1.java](demo/Demo1.java).
+See [demos/demo/Demo1.java](demos/demo/Demo1.java).
 
 ### Members
 Name: Type|Usage
@@ -52,7 +52,7 @@ targets: ArrayList<Pair<FObject, OnCollideEvent>>|Param `FObject` is the target 
 ## Class: org.frice.game.obj.ImageObject
 
 ### Demos
-see [demo/Demo1.java](demo/Demo1.java).
+see [demos/demo/Demo1.java](demos/demo/Demo1.java).
 
 ### Parent
 org.frice.game.obj.FObject
@@ -65,7 +65,7 @@ res: ImageResource|image resource that will display on game scene
 ## Class: org.frice.game.obj.ShapedColorObject
 
 ### Demos
-see [demo/Demo7.java](demo/Demo7.java).
+see [demos/demo/Demo7.java](demos/demo/Demo7.java).
 
 ### Parent
 org.frice.game.obj.FObject
@@ -210,7 +210,7 @@ y: Int|Pixels that the owner should move by **per second**, vertically.
 ## Class: org.frice.game.anim.move.AccelerateMove
 
 ### Demos
-See [demo/Demo6.java](demo/Demo6.java), [demo/Demo7.java](demo/Demo7.java)
+See [demos/demo/Demo6.java](demos/demo/Demo6.java), [demos/demo/Demo7.java](demos/demo/Demo7.java)
 
 ### Constructors
 Param|Usage
