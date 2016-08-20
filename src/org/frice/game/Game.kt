@@ -16,6 +16,7 @@ import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
+import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loop
@@ -216,7 +217,7 @@ open class Game() : AbstractGame(), Runnable {
 						val bgg = bg
 						bgg.color = o.getResource().color
 						when (o.collideBox) {
-							is FRectangle -> bgg.fillRect(
+							is FPoint, is FRectangle -> bgg.fillRect(
 									o.x.toInt(),
 									o.y.toInt(),
 									o.width.toInt(),

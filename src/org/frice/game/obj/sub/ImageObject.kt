@@ -1,14 +1,11 @@
 package org.frice.game.obj.sub
 
-import org.frice.game.anim.FAnim
 import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
-import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import java.awt.Image
 import java.awt.image.BufferedImage
-import java.util.*
 
 /**
  * Base GameObject class
@@ -18,7 +15,7 @@ import java.util.*
  * @since v0.1
  */
 open class ImageObject(var res: ImageResource, override var id: Int,
-                       override var x: Double, override var y: Double) : FObject {
+                       override var x: Double, override var y: Double) : FObject() {
 	constructor(res: ImageResource, id: Int) : this(res, id, 0.0, 0.0)
 
 	constructor(res: ImageResource) : this(res, -1, 0.0, 0.0)
@@ -44,20 +41,12 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override val height: Double
 		get() = res.image.height.toDouble()
 
-	override val anims: ArrayList<FAnim> = ArrayList()
-	override val targets: ArrayList<Pair<PhysicalObject, OnCollideEvent>> = ArrayList()
-
 	override val collideBox = FRectangle(res.image.width, res.image.height)
 	override var died = false
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),
 				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
-	}
-
-	override fun move(p: Pair<Double, Double>) {
-		x += p.first
-		y += p.second
 	}
 
 	/**
