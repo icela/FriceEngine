@@ -20,7 +20,9 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 	override val height: Double
 		get() = resource.y.toDouble()
 
-	override fun getResource() = ImageResource.create(resource.getResource())
+	override fun getImage() = resource.getResource()
+
+	override fun getResource() = ImageResource.create(getImage())
 
 	override fun scale(p: Pair<Double, Double>) {
 		resource.x = (resource.x * p.first).toInt()

@@ -52,7 +52,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	/**
 	 * @return returns an image instance of this res
 	 */
-	fun getImage() = res.image
+	open fun getImage() = res.image
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

@@ -8,7 +8,6 @@ import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
-import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.misc.FLine
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
@@ -206,9 +205,9 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			objects.forEach { o ->
 				val bgg = bg
-				bg.rotate(o.rotate)
+				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
+				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
-					is ParticleEffect -> bgg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
 					is ImageObject -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						bgg.color = o.getResource().color
@@ -236,15 +235,16 @@ open class Game() : AbstractGame(), Runnable {
 				}
 			}
 			texts.forEach { b ->
+				val bgg = bg
+				bgg.rotate(b.rotate)
 				if (b is FButton) {
-					val bgg = bg
 					bgg.color = b.getColor().color
 					bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
 							b.width.toInt(), b.height.toInt(),
 							(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
 					bgg.color = ColorResource.GRAY.color
 					bgg.drawString(b.text, b.x.toInt() + 10, b.y.toInt() + 20)
-				} else bg.drawString(b.text, b.x.toInt(), b.y.toInt())
+				} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
 			}
 			if (loseFocus) {
 				loop(buffer.width) { x ->
