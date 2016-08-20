@@ -8,4 +8,6 @@ package org.frice.game.obj
 interface AbstractObject {
 	var x: Double
 	var y: Double
+
+	var rotate: Double
 }

@@ -25,10 +25,7 @@ import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
-import java.awt.BorderLayout
-import java.awt.Dimension
-import java.awt.Graphics
-import java.awt.Rectangle
+import java.awt.*
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
@@ -60,8 +57,8 @@ open class Game() : AbstractGame(), Runnable {
 
 	private val panel = GamePanel()
 	private val stableBuffer: BufferedImage
-	private val bg: Graphics
-		get() = buffer.graphics
+	private val bg: Graphics2D
+		get() = buffer.graphics as Graphics2D
 
 	protected var loseFocus = false
 		private set
@@ -140,15 +137,13 @@ open class Game() : AbstractGame(), Runnable {
 		}
 	}
 
-	private fun drawBackground(back: FResource, g: Graphics) {
+	private fun drawBackground(back: FResource, g: Graphics2D) {
 		when (back) {
-			is ImageResource -> g.drawImage(back.image.getScaledInstance(width, height, 0), 0, 0, this)
-			is ColorResource -> {
-				g.color = back.color
-				g.fillRect(0, 0, width, height)
-			}
+			is ImageResource -> g.paint = TexturePaint(back.image, Rectangle(0, 0, width, height))
+			is ColorResource -> g.color = back.color
 			else -> throw FatalError("Unable to draw background")
 		}
+		g.fillRect(0, 0, width, height)
 	}
 
 	/**
@@ -210,11 +205,12 @@ open class Game() : AbstractGame(), Runnable {
 				}
 			}
 			objects.forEach { o ->
+				val bgg = bg
+				bg.rotate(o.rotate)
 				when (o) {
-					is ParticleEffect -> bg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
-					is ImageObject -> bg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+					is ParticleEffect -> bgg.drawImage(o.getResource().getResource(), o.x.toInt(), o.y.toInt(), this)
+					is ImageObject -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
-						val bgg = bg
 						bgg.color = o.getResource().color
 						when (o.collideBox) {
 							is FPoint, is FRectangle -> bgg.fillRect(
