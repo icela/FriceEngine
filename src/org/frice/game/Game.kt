@@ -60,6 +60,10 @@ open class Game() : AbstractGame(), Runnable {
 	private val bg: Graphics2D
 		get() = buffer.graphics as Graphics2D
 
+	private var fpsCounter = 0
+	private var fpsDisplay = 0
+	private val fpsTimer: FTimer
+
 	protected var loseFocus = false
 		private set
 
@@ -74,6 +78,7 @@ open class Game() : AbstractGame(), Runnable {
 		isVisible = true
 		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
+		fpsTimer = FTimer(1000)
 	}
 
 	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
@@ -134,6 +139,11 @@ open class Game() : AbstractGame(), Runnable {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
+			fpsCounter++
+			if (fpsTimer.ended()) {
+				fpsDisplay = fpsCounter
+				fpsCounter = 0
+			}
 		}
 	}
 
@@ -262,6 +272,8 @@ open class Game() : AbstractGame(), Runnable {
 					}
 				}
 			}
+
+			if (showFPS) bg.drawString("fps: $fpsDisplay", 30, height - 30)
 
 			/**
 			 * 厚颜无耻

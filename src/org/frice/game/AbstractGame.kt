@@ -53,6 +53,8 @@ abstract class AbstractGame() : JFrame() {
 
 	protected var autoGC = true
 
+	protected var showFPS = true
+
 	init {
 		layout = BorderLayout()
 	}
