@@ -81,47 +81,129 @@ open class Game() : AbstractGame(), Runnable {
 		fpsTimer = FTimer(1000)
 	}
 
+	/**
+	 * add objects
+	 *
+	 * @param objs as a collection
+	 */
 	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
+
+	/**
+	 * add objects
+	 *
+	 * @param objs as an array
+	 */
 	fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+
+	/**
+	 * add an object to game, to be shown on screen.
+	 */
 	fun addObject(obj: AbstractObject) {
 		if (obj is FText) texts.add(obj)
 		else objects.add(obj)
 	}
 
+	/**
+	 * clear all objects.
+	 * this method is safe.
+	 */
 	protected fun clearObjects() = objectsDelete.addAll(objects)
+
+	/**
+	 * remove objects.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to them, as an array.
+	 */
 	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
+
+	/**
+	 * remove objects.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to them, as a collection.
+	 */
 	protected fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
+
+	/**
+	 * remove single object.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to it.
+	 */
 	protected fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDelete.add(obj)
 		else objectsDelete.add(obj)
 	}
 
+	/**
+	 * add a auto-execute time listener
+	 * you must add or it won't work.
+	 */
 	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+
+	/**
+	 * add an array of auto-execute time listeners
+	 */
 	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
+
+	/**
+	 * add a collection of auto-execute time listeners
+	 */
 	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
 
+	/**
+	 * remove all auto-execute time listeners
+	 */
 	protected fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
-	protected fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
-	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
+
+	/**
+	 * auto-execute time listeners which are equal to the given array.
+	 *
+	 * @param listeners the array
+	 */
+	protected fun removeTimeListeners(listeners: Array<FTimeListener>) =
+			listeners.forEach { l -> removeTimeListener(l) }
+
+	/**
+	 * auto-execute time listeners which are equal to the given collection.
+	 *
+	 * @param listeners the collection
+	 */
+	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) =
+			removeTimeListeners(listeners.toTypedArray())
+
 	protected fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
 
 	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
+	/**
+	 * set the frame bounds (size and position)
+	 */
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
 		panel.bounds = r
 	}
 
+	/**
+	 * set the frame bounds (size and position)
+	 */
 	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
 		super.setBounds(x, y, width, height)
 		panel.setBounds(x, y, width, height)
 	}
 
+	/**
+	 * set the frame size
+	 */
 	override fun setSize(width: Int, height: Int) {
 		super.setSize(width, height)
 		panel.setSize(width, height)
 	}
 
+	/**
+	 * set the frame size
+	 */
 	override fun setSize(d: Dimension) {
 		super.setSize(d)
 		panel.size = d
@@ -130,8 +212,18 @@ open class Game() : AbstractGame(), Runnable {
 //	override fun getWidth() = panel.width
 //	override fun getHeight() = panel.height
 
+	/**
+	 * get the screen cut.
+	 *
+	 * @return screen cut as an image
+	 */
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
+	/**
+	 * this method escaped the error
+	 *
+	 * @return exact position of the mouse
+	 */
 	override fun getMousePosition() = panel.mousePosition!!
 
 	override fun run() {
@@ -159,6 +251,9 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
+	 * Main game view.
+	 * all rendering work and game object calculating are here.
+	 *
 	 * Created by ice1000 on 2016/8/13.
 	 * @author ice1000
 	 * @since v0.1

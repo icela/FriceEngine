@@ -44,15 +44,36 @@ abstract class AbstractGame() : JFrame() {
 		}
 	}
 
+	/**
+	 * if paused, main window will not call onRefresh.
+	 */
 	protected var paused = false
+
+	/**
+	 * not implemented yet.
+	 * currently it's same as paused.
+	 */
 	protected var stopped = false
+
+	/**
+	 * background resource (don't setBackground, please setBack instead.)
+	 */
 	protected var back: FResource = ColorResource.LIGHT_GRAY
 	protected var debug = true
 
+	/**
+	 * a general purpose random instance
+	 */
 	protected val random = Random()
 
+	/**
+	 * if true, the engine will collect all objects which are far away from screen.
+	 */
 	protected var autoGC = true
 
+	/**
+	 * if true, there will be a fps calculating on the left-bottom screen.
+	 */
 	protected var showFPS = true
 
 	init {
