@@ -211,6 +211,8 @@ open class Game() : AbstractGame(), Runnable {
 					is ImageObject -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						bgg.color = o.getResource().color
+						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+								RenderingHints.VALUE_ANTIALIAS_ON)
 						when (o.collideBox) {
 							is FPoint, is FRectangle -> bgg.fillRect(
 									o.x.toInt(),
@@ -224,7 +226,11 @@ open class Game() : AbstractGame(), Runnable {
 									o.height.toInt())
 						}
 					}
-					is FLine -> bg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
+					is FLine -> {
+						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+								RenderingHints.VALUE_ANTIALIAS_ON)
+						bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
+					}
 				}
 				if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
 						o.y.toInt() < -height || o.y.toInt() > height + height)) {
@@ -236,6 +242,8 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			texts.forEach { b ->
 				val bgg = bg
+				bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+						RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 				bgg.rotate(b.rotate)
 				if (b is FButton) {
 					bgg.color = b.getColor().color
