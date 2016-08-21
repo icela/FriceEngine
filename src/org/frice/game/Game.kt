@@ -17,6 +17,7 @@ import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.graphics.utils.darker
 import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loop
 import org.frice.game.utils.kotlin.loopIf
@@ -257,7 +258,7 @@ open class Game() : AbstractGame(), Runnable {
 			if (loseFocus) {
 				loop(buffer.width) { x ->
 					loop(buffer.height) { y ->
-						buffer.setRGB(x, y, buffer.getRGB(x, y) * 2 / 3)
+						buffer.setRGB(x, y, buffer.getRGB(x, y).darker())
 					}
 				}
 			}
