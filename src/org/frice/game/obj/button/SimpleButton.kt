@@ -35,6 +35,6 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 
 	override fun onClick(e: OnMouseEvent) {
 		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
-		onClickListener?.onClick()
+		onClickListener?.onClick(e)
 	}
 }

@@ -269,7 +269,10 @@ open class Game() : AbstractGame(), Runnable {
 	inner class GamePanel() : JPanel() {
 		init {
 			addMouseListener(object : MouseListener {
-				override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
+				override fun mouseClicked(e: MouseEvent) {
+					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
+					onClick(OnClickEvent.create(e))
+				}
 				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
 				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
 				override fun mouseReleased(e: MouseEvent) {
