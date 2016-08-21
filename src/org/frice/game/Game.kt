@@ -68,7 +68,6 @@ open class Game() : AbstractGame(), Runnable {
 		private set
 
 	init {
-		isResizable = false
 		add(panel, BorderLayout.CENTER)
 		setBounds(200, 200, 640, 480)
 		onInit()

@@ -3,6 +3,8 @@ package org.frice.game.resource.image
 import java.awt.Rectangle
 
 /**
+ * create an image from a part of another image
+ *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000
  * @since v0.2.3

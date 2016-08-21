@@ -17,6 +17,7 @@ import java.awt.event.KeyListener
 import java.util.*
 import javax.swing.JFrame
 import javax.swing.JOptionPane
+import javax.swing.WindowConstants
 
 /**
  * First game class(not for you)
@@ -77,6 +78,8 @@ abstract class AbstractGame() : JFrame() {
 	protected var showFPS = true
 
 	init {
+		isResizable = false
+		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 	}
 
@@ -88,10 +91,10 @@ abstract class AbstractGame() : JFrame() {
 	protected open fun onMouse(e: OnMouseEvent?) = Unit
 	protected open fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?",
-				"Ensuring",
-				JOptionPane.YES_NO_OPTION) ==
+				"Ensuring", JOptionPane.YES_NO_OPTION) ==
 				JOptionPane.YES_OPTION)
 			System.exit(0)
+		else return
 	}
 
 	protected open fun onLoseFocus(e: OnWindowEvent?) {

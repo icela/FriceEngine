@@ -25,6 +25,9 @@ class ParticleResource(val game: Game,
 	constructor(game: Game, x: Int, y: Int) :
 	this(game, x, y, ColorResource.BLACK, ColorResource.WHITE, 0.5)
 
+	/**
+	 * particle effects as an image
+	 */
 	private val image = BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB_PRE)
 	private val random = Random(Random().nextLong())
 

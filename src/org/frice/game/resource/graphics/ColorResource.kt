@@ -45,12 +45,18 @@ class ColorResource(val color: Color) : FResource {
 		@JvmStatic val 小泉花阳 = ColorResource(0x1BA61C)
 		@JvmStatic val 矢泽妮可 = PINK
 		@JvmStatic val 屎黄色 = SHIT_YELLOW
+		@JvmStatic val 天依蓝 = ColorResource(0x66CCFF)
+		@JvmStatic val 清真绿 = ColorResource(0x038B43)
 	}
 
 	constructor(color: Int):this(Color(color))
 
 	constructor(color: String):this(Color.getColor(color))
 
+	/**
+	 * not for users and developer.
+	 * this should only be called in the engine core.
+	 */
 	override fun getResource() = color
 
 	override fun equals(other: Any?): Boolean {
