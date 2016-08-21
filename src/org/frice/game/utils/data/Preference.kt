@@ -21,7 +21,15 @@ class Preference(private val file: File) : Database {
 		forceRun { properties.load(file.inputStream()) }
 	}
 
-	override fun query(key: String, default: Any) = properties[key] ?: default
+	override fun query(key: String, default: Any) = when (properties[key] as String) {
+		"true" -> true
+		"false" -> false
+		else -> try {
+			Integer.parseInt(properties[key] as String)
+		} catch (e: Throwable) {
+			properties[key] ?: default
+		}
+	}
 
 	override fun insert(key: String, value: Any?) {
 		properties.put(key, value.toString())

@@ -42,7 +42,7 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val refresh = FTimer(4)
+	private val refresh = FTimer(1)
 
 	private val objects = ArrayList<AbstractObject>()
 	private val objectsDelete = ArrayList<AbstractObject>()
@@ -140,9 +140,11 @@ open class Game() : AbstractGame(), Runnable {
 			timeListeners.forEach { it.check() }
 			panel.repaint()
 			fpsCounter++
-			if (fpsTimer.ended()) {
-				fpsDisplay = fpsCounter
-				fpsCounter = 0
+			forceRun {
+				if (fpsTimer.ended()) {
+					fpsDisplay = fpsCounter
+					fpsCounter = 0
+				}
 			}
 		}
 	}
