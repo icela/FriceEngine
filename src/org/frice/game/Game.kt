@@ -35,6 +35,10 @@ import java.util.*
 import javax.swing.JPanel
 
 /**
+ * The base game class.
+ * this class do the render work, and something which are invisible to
+ * game developer.
+ *
  * Do not override the constructor.
  *
  * Created by ice1000 on 2016/8/13.
@@ -172,6 +176,11 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) =
 			removeTimeListeners(listeners.toTypedArray())
 
+	/**
+	 * remove a specific listener
+	 *
+	 * @param listener the listener
+	 */
 	protected fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
 
 	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }

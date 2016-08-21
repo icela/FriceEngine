@@ -1,8 +1,9 @@
 package org.frice.game.utils.data
 
 import org.frice.game.Game
-import org.frice.game.utils.message.FDialog
-import org.frice.game.utils.message.log.FLog
+import org.frice.game.obj.sub.ShapeObject
+import org.frice.game.resource.graphics.ColorResource
+import org.frice.game.utils.graphics.shape.FCircle
 
 /**
  * Created by ice1000 on 2016/8/21.
@@ -12,7 +13,11 @@ import org.frice.game.utils.message.log.FLog
 class Test() : Game() {
 	override fun onInit() {
 		super.onInit()
-		FLog.i(FDialog(this).confirm("fuck"))
+
+//		FLog.i(FDialog(this).confirm("fuck"))
+		addObject(ShapeObject(ColorResource.西木野真姬, FCircle(40.0), 100.0, 100.0).apply {
+//			anims.add()
+		})
 	}
 
 //	override fun onExit() {

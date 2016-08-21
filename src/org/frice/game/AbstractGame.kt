@@ -107,6 +107,7 @@ abstract class AbstractGame() : JFrame() {
 
 	/**
 	 * for kotlin only
+	 * add keyboard listeners with lambda
 	 */
 	protected fun addKeyListener(
 			typed: (KeyEvent) -> Unit = { },
