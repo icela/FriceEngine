@@ -121,9 +121,9 @@ abstract class AbstractGame() : JFrame() {
 			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
 
 	protected fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
-	protected fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener { e ->
+	protected fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
-	}
+	})
 
 	protected fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyPressedEvent(keyCode, { e -> key.execute(e) })

@@ -3,16 +3,16 @@
 ![image](https://avatars1.githubusercontent.com/u/21008243)
 
 一个简单、易用的原生轻量级JVM游戏引擎。<br/>
-查看 [API文档](apis.md) 或者Wiki以更多地了解Frice Engine。
+查看 [API文档](https://github.com/icela/FriceEngine/blob/master/apis.md) 或者Wiki以更多地了解Frice Engine。
 
 An easy, light, native game engine running on JVM.<br/>
-View [APIs](apis.md) or wiki to learn more about Frice Engine.
+View [APIs](https://github.com/icela/FriceEngine/blob/master/apis.md) or wiki to learn more about Frice Engine.
 
 ## Why easy? 为什么简单易用？
-[一个简单的Flappy bird](demos/demo/Demo7.java) 仅用了65行代码。
+[一个简单的Flappy bird](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) 仅用了65行代码。
 使用Kotlin写就，并支持Java, JRuby, Groovy, Scala等语言。
 
-[A flappy bird game](demos/demo/Demo7.java) is in 65 lines of code only.<br/>
+[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) is in 65 lines of code only.<br/>
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
 ## Why light? 为什么轻量？
@@ -78,7 +78,7 @@ To build games based on frice engine, follow these steps:
 2. Create a class extends Game in org.frice.game package.
 3. Implement the abstract methods, just understand them by name.
 4. call the empty constructor in the public static void main.
-5. For full API doc please view [APIs](apis.md)
+5. For full API doc please view [APIs](https://github.com/icela/FriceEngine/blob/master/apis.md)
 
 ## Demos
 see [FriceDemo](https://github.com/icela/FriceDemo)
