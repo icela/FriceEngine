@@ -78,6 +78,7 @@ open class Game() : AbstractGame(), Runnable {
 		/// to prevent this engine from the f#cking NPE!!
 		panel = GamePanel()
 		add(panel, BorderLayout.CENTER)
+		bounds = AbstractGame.BIG_SQUARE
 		fpsTimer = FTimer(1000)
 		onInit()
 		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
@@ -187,7 +188,9 @@ open class Game() : AbstractGame(), Runnable {
 	 */
 	protected fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
-	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
+	override fun mouse(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onMouse(e) }
+
+	override fun click(e: OnClickEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
 	/**
 	 * set the frame bounds (size and position)
@@ -274,19 +277,19 @@ open class Game() : AbstractGame(), Runnable {
 		init {
 			addMouseListener(object : MouseListener {
 				override fun mouseClicked(e: MouseEvent) {
-					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
+					click(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
 					onClick(OnClickEvent.create(e))
 				}
 
 				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
 				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
 				override fun mouseReleased(e: MouseEvent) {
-					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
 					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
 				}
 
 				override fun mousePressed(e: MouseEvent) {
-					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 				}
 			})

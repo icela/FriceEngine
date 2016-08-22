@@ -6,15 +6,12 @@ import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.SimpleMove
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
-import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.button.OnClickListener
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.ParticleEffect
-import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.ParticleResource
-import org.frice.game.resource.image.WebImageResource
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
@@ -46,21 +43,20 @@ class Test() : Game() {
 		addObject(ParticleEffect(ParticleResource(this, width / 2, height / 2), width * 0.25, height * 0.25))
 		addObject(SimpleButton(FRectangle(80, 20), "I am a button", 30.0, 30.0, 80.0, 30.0).apply {
 			onClickListener = object : OnClickListener {
-				override fun onClick(e: OnMouseEvent) {
-					if (e.type() == OnMouseEvent.MOUSE_CLICK)
-						addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 20.0), 100.0, 100.0).apply {
-							anims.add(SimpleMove(150, 150))
-							anims.add(AccelerateMove(-1.0, -1.0))
-							anims.add(SimpleScale(1.1, 1.0))
-							anims.add(RotateAnim(1.0))
-						})
+				override fun onClick(e: OnClickEvent) {
+					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 20.0), 100.0, 100.0).apply {
+						anims.add(SimpleMove(150, 150))
+						anims.add(AccelerateMove(-1.0, -1.0))
+						anims.add(SimpleScale(1.1, 1.0))
+						anims.add(RotateAnim(0.1))
+					})
 				}
 			}
 		})
 //		AudioManager.getPlayer("1.wav").start()
 //		AudioManager.play("1.wav")
 
-		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
+//		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
 
 		preference = Preference("settings.properties")
 		preference.insert("fuck", "microsoft")
@@ -76,8 +72,8 @@ class Test() : Game() {
 		FPoint(1, 2)
 
 //		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
-		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
-				10.0, 10.0))
+//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
+//				10.0, 10.0))
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.gray())
 	}

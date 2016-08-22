@@ -83,7 +83,8 @@ abstract class AbstractGame() : JFrame() {
 		layout = BorderLayout()
 	}
 
-	protected abstract fun touch(e: OnMouseEvent)
+	protected abstract fun mouse(e: OnMouseEvent)
+	protected abstract fun click(e: OnClickEvent)
 
 	protected open fun onInit() = Unit
 	protected open fun onRefresh() = Unit

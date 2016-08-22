@@ -1,7 +1,6 @@
 package org.frice.game.obj.button
 
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.event.OnClickEvent
 
 /**
  * Created by ice1000 on 2016/8/19.
@@ -9,6 +8,6 @@ import org.frice.game.event.OnClickEvent
  * @since v0.4
  */
 
-interface OnClickListener {
-	fun onClick(e: OnClickEvent)
+interface OnMouseListener {
+	fun onMouse(e: OnMouseEvent)
 }
