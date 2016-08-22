@@ -39,6 +39,6 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 	}
 
 	override fun onClick(e: OnClickEvent) {
-		onClickListener?.onClick(e)
+		if (containsPoint(e.event.x, e.event.y)) onClickListener?.onClick(e)
 	}
 }
