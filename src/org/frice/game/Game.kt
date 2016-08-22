@@ -49,17 +49,20 @@ open class Game() : AbstractGame(), Runnable {
 	private val refresh = FTimer(1)
 
 	private val objects = ArrayList<AbstractObject>()
-	private val objectsDelete = ArrayList<AbstractObject>()
+	private val objectDeleteBuffer = ArrayList<AbstractObject>()
+	private val objectAddBuffer = ArrayList<AbstractObject>()
 
 	private val texts = ArrayList<FText>()
-	private val textDelete = ArrayList<FText>()
+	private val textDeleteBuffer = ArrayList<FText>()
+	private val textAddBuffer = ArrayList<FText>()
 
 	private val timeListeners = ArrayList<FTimeListener>()
-	private val timeListenersDelete = ArrayList<FTimeListener>()
+	private val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
+	private val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
 	private val buffer: BufferedImage
 
-	private val panel = GamePanel()
+	private val panel: GamePanel
 	private val stableBuffer: BufferedImage
 	private val bg: Graphics2D
 		get() = buffer.graphics as Graphics2D
@@ -72,16 +75,17 @@ open class Game() : AbstractGame(), Runnable {
 		private set
 
 	init {
+		/// to prevent this engine from the f#cking NPE!!
+		panel = GamePanel()
 		add(panel, BorderLayout.CENTER)
-		setBounds(200, 200, 640, 480)
+		fpsTimer = FTimer(1000)
 		onInit()
 		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-		Thread(this).start()
 		isVisible = true
-		insets.set(0, insets.left, insets.bottom, insets.right)
+		Thread(this).start()
+//		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
-		fpsTimer = FTimer(1000)
 	}
 
 	/**
@@ -102,15 +106,15 @@ open class Game() : AbstractGame(), Runnable {
 	 * add an object to game, to be shown on screen.
 	 */
 	fun addObject(obj: AbstractObject) {
-		if (obj is FText) texts.add(obj)
-		else objects.add(obj)
+		if (obj is FText) textAddBuffer.add(obj)
+		else objectAddBuffer.add(obj)
 	}
 
 	/**
 	 * clear all objects.
 	 * this method is safe.
 	 */
-	protected fun clearObjects() = objectsDelete.addAll(objects)
+	protected fun clearObjects() = objectDeleteBuffer.addAll(objects)
 
 	/**
 	 * remove objects.
@@ -118,7 +122,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs will remove objects which is equal to them, as an array.
 	 */
-	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
+	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
 
 	/**
 	 * remove objects.
@@ -135,15 +139,15 @@ open class Game() : AbstractGame(), Runnable {
 	 * @param objs will remove objects which is equal to it.
 	 */
 	protected fun removeObject(obj: AbstractObject) {
-		if (obj is FText) textDelete.add(obj)
-		else objectsDelete.add(obj)
+		if (obj is FText) textDeleteBuffer.add(obj)
+		else objectDeleteBuffer.add(obj)
 	}
 
 	/**
 	 * add a auto-execute time listener
 	 * you must add or it won't work.
 	 */
-	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
 	/**
 	 * add an array of auto-execute time listeners
@@ -158,7 +162,7 @@ open class Game() : AbstractGame(), Runnable {
 	/**
 	 * remove all auto-execute time listeners
 	 */
-	protected fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
+	protected fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
 	/**
 	 * auto-execute time listeners which are equal to the given array.
@@ -181,7 +185,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param listener the listener
 	 */
-	protected fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
+	protected fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
 	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
 
@@ -273,6 +277,7 @@ open class Game() : AbstractGame(), Runnable {
 					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
 					onClick(OnClickEvent.create(e))
 				}
+
 				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
 				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
 				override fun mouseReleased(e: MouseEvent) {
@@ -306,14 +311,22 @@ open class Game() : AbstractGame(), Runnable {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			objects.removeAll(objectsDelete)
-			objectsDelete.clear()
+			// do the delete and add work
+			// to prevent Exceptions
+			objects.addAll(objectAddBuffer)
+			objects.removeAll(objectDeleteBuffer)
+			objectDeleteBuffer.clear()
+			objectAddBuffer.clear()
 
-			timeListeners.removeAll(timeListenersDelete)
-			timeListenersDelete.clear()
+			timeListeners.addAll(timeListenerAddBuffer)
+			timeListeners.removeAll(timeListenerDeleteBuffer)
+			timeListenerDeleteBuffer.clear()
+			timeListenerAddBuffer.clear()
 
-			texts.removeAll(textDelete)
-			textDelete.clear()
+			texts.addAll(textAddBuffer)
+			texts.removeAll(textDeleteBuffer)
+			textDeleteBuffer.clear()
+			textAddBuffer.clear()
 
 			drawBackground(back, bg)
 			objects.forEach { o ->

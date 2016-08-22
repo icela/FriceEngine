@@ -60,6 +60,8 @@ class Test() : Game() {
 //		AudioManager.getPlayer("1.wav").start()
 //		AudioManager.play("1.wav")
 
+		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
+
 		preference = Preference("settings.properties")
 		preference.insert("fuck", "microsoft")
 
