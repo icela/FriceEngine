@@ -36,10 +36,10 @@ import javax.swing.JPanel
 
 /**
  * The base game class.
- * this class do the render work, and something which are invisible to
+ * this class do rendering, and something which are invisible to
  * game developer.
  *
- * Do not override the constructor.
+ * DO NOT override the constructor.
  *
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
@@ -90,21 +90,21 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
-	 * add objects
+	 * adds objects
 	 *
 	 * @param objs as a collection
 	 */
 	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
 
 	/**
-	 * add objects
+	 * adds objects
 	 *
 	 * @param objs as an array
 	 */
 	fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
 
 	/**
-	 * add an object to game, to be shown on screen.
+	 * adds an object to game, to be shown on game window.
 	 */
 	fun addObject(obj: AbstractObject) {
 		if (obj is FText) textAddBuffer.add(obj)
@@ -112,13 +112,13 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
-	 * clear all objects.
+	 * clears all objects.
 	 * this method is safe.
 	 */
 	protected fun clearObjects() = objectDeleteBuffer.addAll(objects)
 
 	/**
-	 * remove objects.
+	 * removes objects.
 	 * this method is safe.
 	 *
 	 * @param objs will remove objects which is equal to them, as an array.
@@ -126,7 +126,7 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
 
 	/**
-	 * remove objects.
+	 * removes objects.
 	 * this method is safe.
 	 *
 	 * @param objs will remove objects which is equal to them, as a collection.
@@ -134,7 +134,7 @@ open class Game() : AbstractGame(), Runnable {
 	protected fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
 
 	/**
-	 * remove single object.
+	 * removes single object.
 	 * this method is safe.
 	 *
 	 * @param objs will remove objects which is equal to it.
@@ -145,28 +145,28 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
-	 * add a auto-execute time listener
+	 * adds a auto-executed time listener
 	 * you must add or it won't work.
 	 */
 	fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
 	/**
-	 * add an array of auto-execute time listeners
+	 * adds an array of auto-executed time listeners
 	 */
 	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
 
 	/**
-	 * add a collection of auto-execute time listeners
+	 * adds a collection of auto-executed time listeners
 	 */
 	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
 
 	/**
-	 * remove all auto-execute time listeners
+	 * removes all auto-executed time listeners
 	 */
 	protected fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
 	/**
-	 * auto-execute time listeners which are equal to the given array.
+	 * removes auto-executed time listeners specified in the given array.
 	 *
 	 * @param listeners the array
 	 */
@@ -182,7 +182,7 @@ open class Game() : AbstractGame(), Runnable {
 			removeTimeListeners(listeners.toTypedArray())
 
 	/**
-	 * remove a specific listener
+	 * removes specified listener
 	 *
 	 * @param listener the listener
 	 */
@@ -228,7 +228,7 @@ open class Game() : AbstractGame(), Runnable {
 //	override fun getHeight() = panel.height
 
 	/**
-	 * get the screen cut.
+	 * get a screenshot.
 	 *
 	 * @return screen cut as an image
 	 */

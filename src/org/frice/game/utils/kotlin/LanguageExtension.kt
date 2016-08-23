@@ -40,7 +40,7 @@ inline fun <T> T.forceGet(default: Any, block: T.() -> Any): Any {
 }
 
 /**
- * if there's exception, it will exit
+ * it will exit when meets an uncaught exception.
  */
 inline fun <T> T.forceLoop(block: T.() -> Unit) = forceRun { loop(block) }
 

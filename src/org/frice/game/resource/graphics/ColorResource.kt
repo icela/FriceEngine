@@ -12,6 +12,7 @@ class ColorResource(val color: Color) : FResource {
 
 	/**
 	 * 颜表立。。。
+	 * Read these color names in UTF-8 w/o BOM encoding, and pick up your 信仰 and 节操.
 	 */
 	companion object {
 		@JvmStatic val GREEN = ColorResource(Color.GREEN)
@@ -54,8 +55,8 @@ class ColorResource(val color: Color) : FResource {
 	constructor(color: String):this(Color.getColor(color))
 
 	/**
-	 * not for users and developer.
-	 * this should only be called in the engine core.
+	 * not for users and developers.
+	 * this should only be called by the engine itself.
 	 */
 	override fun getResource() = color
 
