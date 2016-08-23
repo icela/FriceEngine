@@ -31,7 +31,7 @@ And this is what a JVM app should be exactly.
 
 # Before you build
 
-```
+```Shell
 git clone https://github.com/icela/FriceEngine.git
 cd FriceEngine
 git submodule init
@@ -61,7 +61,7 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Dialogs
 - [X] Cursor overriding
 - [X] Clock system
-- [X] Animations (frame, move, scale, accelerate, etc.)
+- [X] Animations (frames, moving, scaling, accelerations, etc.)
 - [X] A simple key-value database
 - [X] Screen cut
 - [X] Buttons

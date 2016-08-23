@@ -4,7 +4,7 @@ import java.awt.Color
 
 /**
  * Created by ice1000 on 16-8-6.
- * referred http://blog.csdn.net/lzs109/article/details/7316507
+ * Reference: http://blog.csdn.net/lzs109/article/details/7316507
  * @author ice1000
  */
 

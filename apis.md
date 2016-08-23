@@ -90,7 +90,7 @@ image: Image|Image object.
 ### Constructors
 Param|Usage
 :---|---:
-file: File, String|Image file handler or path to the image file.
+file: File<br />file: String|Image file handler or path to the image file.
 
 ## Class: org.frice.game.resource.WebImageResource
 
@@ -169,13 +169,14 @@ All private. Please use the factory methods `getPreference()`.
 ### APIs
 Name|Usage
 :---|---:
-getPreference(file: File, String)|Creates a instance from a file handler, or path to the file.
+getPreference(file: File)<br />getPreference(file: String)|Creates a instance from a file handler, or path to the file.
 insert(key: String, value: Any?)|Insert a key-value pair into the file
 query(key: String, value: Any)|Query a value by `key` from the file
 
 ## Class: org.frice.game.utils.message.FDialog
 Shows dialogs on screen. Quite simple to use, I think there's no need to write a doc for it.<br/>
 Constructor needs a context.
+See [FDialog.kt](src/org/frice/game/utils/message/FDialog.kt).
 
 ## org.frice.game.utils.audio.AudioManager
 Singleton.<br/>
@@ -184,8 +185,8 @@ Plays audio. However background music isn't recommended.
 ### APIs
 Method|Usage
 :---|---:
-play(file: File, String)|Play the wav file specified in arg `file`.
-getPlayer(file: File, String)|Returns the player thread(for pausing, stopping, etc.)
+play(file: File)<br />play(file: String)|Play the wav file specified in arg `file`.
+getPlayer(file: File)<br />getPlayer(file: String)|Returns the player thread(for pausing, stopping, etc.)
 
 ## Class: org.frice.game.utils.audio.AudioPlayer
 The audio player thread.
@@ -221,8 +222,7 @@ y: Int|Pixels that the owner's speed should be increased by **per second**, vert
 ### APIs
 Method|Usage
 :---|---:
-getGravity(g: Double)|Returns an `AccelerateMove` instance with y = g and x = 0
-getGravity()|Returns an `AccelerateMove` instance with y = 10 and x = 0
+getGravity(g: Double), getGravity()|Returns an `AccelerateMove` instance which y = g  (default 10) and x = 0
 
 ## Abstract:org.frice.game.anim.move.CustomMove
 Defines a user-customized move.
