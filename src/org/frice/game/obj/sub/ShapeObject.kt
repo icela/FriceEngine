@@ -1,7 +1,7 @@
 package org.frice.game.obj.sub
 
 import org.frice.game.obj.FObject
-import org.frice.game.obj.PhysicalObject
+import org.frice.game.obj.collide.CollideBox
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.shape.FShape
@@ -32,19 +32,19 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 
 	override var died = false
 
-	override fun isCollide(other: PhysicalObject) = when (other) {
+	override fun isCollide(other: CollideBox): Boolean = when (other) {
 		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> when (collideBox) {
-				is FRectangle -> rectCollide(this, other)
-			// TODO
-				else -> rectCollide(this, other)
+				is FRectangle -> this rectCollideRect other
+//				is FOval ->
+				else -> this rectCollideRect other
 			}
 		// TODO
-			else -> rectCollide(this, other)
+			else -> this rectCollideRect other
 		}
 		is ImageObject -> when (collideBox) {
-			is FRectangle -> rectCollide(this, other)
-			else -> rectCollide(this, other)
+			is FRectangle -> this rectCollideRect other
+			else -> this rectCollideRect other
 		}
 		else -> false
 	}

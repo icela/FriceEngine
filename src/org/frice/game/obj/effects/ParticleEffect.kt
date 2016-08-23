@@ -1,6 +1,6 @@
 package org.frice.game.obj.effects
 
-import org.frice.game.obj.PhysicalObject
+import org.frice.game.obj.collide.CollideBox
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.resource.image.ImageResource
@@ -29,5 +29,5 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 		resource.y = (resource.y * p.second).toInt()
 	}
 
-	override fun isCollide(other: PhysicalObject) = false
+	override fun isCollide(other: CollideBox): Boolean = false
 }
