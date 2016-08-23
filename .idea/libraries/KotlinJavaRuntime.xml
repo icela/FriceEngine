@@ -4,7 +4,6 @@
       <root url="jar://$PROJECT_DIR$/lib/kotlin-runtime.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <LIBRARY_FILE />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/lib/kotlin-runtime-sources.jar!/" />
     </SOURCES>

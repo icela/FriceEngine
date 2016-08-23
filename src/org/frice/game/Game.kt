@@ -17,6 +17,7 @@ import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.graphics.utils.darker
 import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loop
 import org.frice.game.utils.kotlin.loopIf
@@ -34,6 +35,10 @@ import java.util.*
 import javax.swing.JPanel
 
 /**
+ * The base game class.
+ * this class do the render work, and something which are invisible to
+ * game developer.
+ *
  * Do not override the constructor.
  *
  * Created by ice1000 on 2016/8/13.
@@ -41,81 +46,179 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val refresh = FTimer(4)
+	private val refresh = FTimer(1)
 
 	private val objects = ArrayList<AbstractObject>()
-	private val objectsDelete = ArrayList<AbstractObject>()
+	private val objectDeleteBuffer = ArrayList<AbstractObject>()
+	private val objectAddBuffer = ArrayList<AbstractObject>()
 
 	private val texts = ArrayList<FText>()
-	private val textDelete = ArrayList<FText>()
+	private val textDeleteBuffer = ArrayList<FText>()
+	private val textAddBuffer = ArrayList<FText>()
 
 	private val timeListeners = ArrayList<FTimeListener>()
-	private val timeListenersDelete = ArrayList<FTimeListener>()
+	private val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
+	private val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
 	private val buffer: BufferedImage
 
-	private val panel = GamePanel()
+	private val panel: GamePanel
 	private val stableBuffer: BufferedImage
 	private val bg: Graphics2D
 		get() = buffer.graphics as Graphics2D
+
+	private var fpsCounter = 0
+	private var fpsDisplay = 0
+	private val fpsTimer: FTimer
 
 	protected var loseFocus = false
 		private set
 
 	init {
-		isResizable = false
+		/// to prevent this engine from the f#cking NPE!!
+		panel = GamePanel()
 		add(panel, BorderLayout.CENTER)
-		setBounds(200, 200, 640, 480)
+		bounds = AbstractGame.BIG_SQUARE
+		fpsTimer = FTimer(1000)
 		onInit()
 		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
-		Thread(this).start()
 		isVisible = true
-		insets.set(0, insets.left, insets.bottom, insets.right)
+		Thread(this).start()
+//		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
 	}
 
-	protected fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
-	protected fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
-	protected fun addObject(obj: AbstractObject) {
-		if (obj is FText) texts.add(obj)
-		else objects.add(obj)
+	/**
+	 * add objects
+	 *
+	 * @param objs as a collection
+	 */
+	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
+
+	/**
+	 * add objects
+	 *
+	 * @param objs as an array
+	 */
+	fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+
+	/**
+	 * add an object to game, to be shown on screen.
+	 */
+	fun addObject(obj: AbstractObject) {
+		if (obj is FText) textAddBuffer.add(obj)
+		else objectAddBuffer.add(obj)
 	}
 
-	protected fun clearObjects() = objectsDelete.addAll(objects)
-	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectsDelete.add(o) }
+	/**
+	 * clear all objects.
+	 * this method is safe.
+	 */
+	protected fun clearObjects() = objectDeleteBuffer.addAll(objects)
+
+	/**
+	 * remove objects.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to them, as an array.
+	 */
+	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
+
+	/**
+	 * remove objects.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to them, as a collection.
+	 */
 	protected fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
+
+	/**
+	 * remove single object.
+	 * this method is safe.
+	 *
+	 * @param objs will remove objects which is equal to it.
+	 */
 	protected fun removeObject(obj: AbstractObject) {
-		if (obj is FText) textDelete.add(obj)
-		else objectsDelete.add(obj)
+		if (obj is FText) textDeleteBuffer.add(obj)
+		else objectDeleteBuffer.add(obj)
 	}
 
-	fun addTimeListener(listener: FTimeListener) = timeListeners.add(listener)
+	/**
+	 * add a auto-execute time listener
+	 * you must add or it won't work.
+	 */
+	fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
+
+	/**
+	 * add an array of auto-execute time listeners
+	 */
 	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
+
+	/**
+	 * add a collection of auto-execute time listeners
+	 */
 	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
 
-	fun clearTimeListeners() = timeListenersDelete.addAll(timeListeners)
-	fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
-	fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
-	fun removeTimeListener(listener: FTimeListener) = timeListenersDelete.add(listener)
+	/**
+	 * remove all auto-execute time listeners
+	 */
+	protected fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
-	override fun touch(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
+	/**
+	 * auto-execute time listeners which are equal to the given array.
+	 *
+	 * @param listeners the array
+	 */
+	protected fun removeTimeListeners(listeners: Array<FTimeListener>) =
+			listeners.forEach { l -> removeTimeListener(l) }
 
+	/**
+	 * auto-execute time listeners which are equal to the given collection.
+	 *
+	 * @param listeners the collection
+	 */
+	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) =
+			removeTimeListeners(listeners.toTypedArray())
+
+	/**
+	 * remove a specific listener
+	 *
+	 * @param listener the listener
+	 */
+	protected fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
+
+	override fun mouse(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onMouse(e) }
+
+	override fun click(e: OnClickEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
+
+	/**
+	 * set the frame bounds (size and position)
+	 */
 	override fun setBounds(r: Rectangle) {
 		super.setBounds(r)
 		panel.bounds = r
 	}
 
+	/**
+	 * set the frame bounds (size and position)
+	 */
 	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
 		super.setBounds(x, y, width, height)
 		panel.setBounds(x, y, width, height)
 	}
 
+	/**
+	 * set the frame size
+	 */
 	override fun setSize(width: Int, height: Int) {
 		super.setSize(width, height)
 		panel.setSize(width, height)
 	}
 
+	/**
+	 * set the frame size
+	 */
 	override fun setSize(d: Dimension) {
 		super.setSize(d)
 		panel.size = d
@@ -124,8 +227,18 @@ open class Game() : AbstractGame(), Runnable {
 //	override fun getWidth() = panel.width
 //	override fun getHeight() = panel.height
 
+	/**
+	 * get the screen cut.
+	 *
+	 * @return screen cut as an image
+	 */
 	protected fun getScreenCut() = ImageResource.create(stableBuffer)
 
+	/**
+	 * this method escaped the error
+	 *
+	 * @return exact position of the mouse
+	 */
 	override fun getMousePosition() = panel.mousePosition!!
 
 	override fun run() {
@@ -133,6 +246,13 @@ open class Game() : AbstractGame(), Runnable {
 			forceRun { onRefresh() }
 			timeListeners.forEach { it.check() }
 			panel.repaint()
+			fpsCounter++
+			forceRun {
+				if (fpsTimer.ended()) {
+					fpsDisplay = fpsCounter
+					fpsCounter = 0
+				}
+			}
 		}
 	}
 
@@ -146,6 +266,9 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
+	 * Main game view.
+	 * all rendering work and game object calculating are here.
+	 *
 	 * Created by ice1000 on 2016/8/13.
 	 * @author ice1000
 	 * @since v0.1
@@ -153,16 +276,20 @@ open class Game() : AbstractGame(), Runnable {
 	inner class GamePanel() : JPanel() {
 		init {
 			addMouseListener(object : MouseListener {
-				override fun mouseClicked(e: MouseEvent) = onClick(OnClickEvent.create(e))
+				override fun mouseClicked(e: MouseEvent) {
+					click(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
+					onClick(OnClickEvent.create(e))
+				}
+
 				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
 				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
 				override fun mouseReleased(e: MouseEvent) {
-					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
 					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
 				}
 
 				override fun mousePressed(e: MouseEvent) {
-					touch(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 				}
 			})
@@ -187,14 +314,22 @@ open class Game() : AbstractGame(), Runnable {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			objects.removeAll(objectsDelete)
-			objectsDelete.clear()
+			// do the delete and add work
+			// to prevent Exceptions
+			objects.addAll(objectAddBuffer)
+			objects.removeAll(objectDeleteBuffer)
+			objectDeleteBuffer.clear()
+			objectAddBuffer.clear()
 
-			timeListeners.removeAll(timeListenersDelete)
-			timeListenersDelete.clear()
+			timeListeners.addAll(timeListenerAddBuffer)
+			timeListeners.removeAll(timeListenerDeleteBuffer)
+			timeListenerDeleteBuffer.clear()
+			timeListenerAddBuffer.clear()
 
-			texts.removeAll(textDelete)
-			textDelete.clear()
+			texts.addAll(textAddBuffer)
+			texts.removeAll(textDeleteBuffer)
+			textDeleteBuffer.clear()
+			textAddBuffer.clear()
 
 			drawBackground(back, bg)
 			objects.forEach { o ->
@@ -211,6 +346,8 @@ open class Game() : AbstractGame(), Runnable {
 					is ImageObject -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						bgg.color = o.getResource().color
+						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+								RenderingHints.VALUE_ANTIALIAS_ON)
 						when (o.collideBox) {
 							is FPoint, is FRectangle -> bgg.fillRect(
 									o.x.toInt(),
@@ -224,7 +361,11 @@ open class Game() : AbstractGame(), Runnable {
 									o.height.toInt())
 						}
 					}
-					is FLine -> bg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
+					is FLine -> {
+						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+								RenderingHints.VALUE_ANTIALIAS_ON)
+						bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
+					}
 				}
 				if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
 						o.y.toInt() < -height || o.y.toInt() > height + height)) {
@@ -236,6 +377,8 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			texts.forEach { b ->
 				val bgg = bg
+				bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+						RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 				bgg.rotate(b.rotate)
 				if (b is FButton) {
 					bgg.color = b.getColor().color
@@ -249,10 +392,12 @@ open class Game() : AbstractGame(), Runnable {
 			if (loseFocus) {
 				loop(buffer.width) { x ->
 					loop(buffer.height) { y ->
-						buffer.setRGB(x, y, buffer.getRGB(x, y) * 2 / 3)
+						buffer.setRGB(x, y, buffer.getRGB(x, y).darker())
 					}
 				}
 			}
+
+			if (showFPS) bg.drawString("fps: $fpsDisplay", 30, height - 30)
 
 			/**
 			 * 厚颜无耻

@@ -1,5 +1,6 @@
 package org.frice.game.obj.button
 
+import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.FContainer
 import org.frice.game.resource.graphics.ColorResource
@@ -33,8 +34,11 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 
 	var onClickListener: OnClickListener? = null
 
-	override fun onClick(e: OnMouseEvent) {
+	override fun onMouse(e: OnMouseEvent) {
 		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
-		onClickListener?.onClick()
+	}
+
+	override fun onClick(e: OnClickEvent) {
+		if (containsPoint(e.event.x, e.event.y)) onClickListener?.onClick(e)
 	}
 }

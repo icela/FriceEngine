@@ -1,0 +1,1 @@
+java -jar dokka.jar ./src

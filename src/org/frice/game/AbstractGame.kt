@@ -17,6 +17,7 @@ import java.awt.event.KeyListener
 import java.util.*
 import javax.swing.JFrame
 import javax.swing.JOptionPane
+import javax.swing.WindowConstants
 
 /**
  * First game class(not for you)
@@ -44,20 +45,46 @@ abstract class AbstractGame() : JFrame() {
 		}
 	}
 
+	/**
+	 * if paused, main window will not call onRefresh.
+	 */
 	protected var paused = false
+
+	/**
+	 * not implemented yet.
+	 * currently it's same as paused.
+	 */
 	protected var stopped = false
+
+	/**
+	 * background resource (don't setBackground, please setBack instead.)
+	 */
 	protected var back: FResource = ColorResource.LIGHT_GRAY
 	protected var debug = true
 
+	/**
+	 * a general purpose random instance
+	 */
 	protected val random = Random()
 
+	/**
+	 * if true, the engine will collect all objects which are far away from screen.
+	 */
 	protected var autoGC = true
 
+	/**
+	 * if true, there will be a fps calculating on the left-bottom screen.
+	 */
+	protected var showFPS = true
+
 	init {
+		isResizable = false
+		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 	}
 
-	protected abstract fun touch(e: OnMouseEvent)
+	protected abstract fun mouse(e: OnMouseEvent)
+	protected abstract fun click(e: OnClickEvent)
 
 	protected open fun onInit() = Unit
 	protected open fun onRefresh() = Unit
@@ -65,10 +92,10 @@ abstract class AbstractGame() : JFrame() {
 	protected open fun onMouse(e: OnMouseEvent?) = Unit
 	protected open fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?",
-				"Ensuring",
-				JOptionPane.YES_NO_OPTION) ==
+				"Ensuring", JOptionPane.YES_NO_OPTION) ==
 				JOptionPane.YES_OPTION)
 			System.exit(0)
+		else return
 	}
 
 	protected open fun onLoseFocus(e: OnWindowEvent?) {
@@ -81,6 +108,7 @@ abstract class AbstractGame() : JFrame() {
 
 	/**
 	 * for kotlin only
+	 * add keyboard listeners with lambda
 	 */
 	protected fun addKeyListener(
 			typed: (KeyEvent) -> Unit = { },
@@ -98,9 +126,9 @@ abstract class AbstractGame() : JFrame() {
 			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
 
 	protected fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
-	protected fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener { e ->
+	protected fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
-	}
+	})
 
 	protected fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyPressedEvent(keyCode, { e -> key.execute(e) })

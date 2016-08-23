@@ -23,7 +23,7 @@ class FRectangle(override var width: Int, override var height: Int) : FShape {
 		return result
 	}
 
-//	infix fun collide(o: FRectangle) = (x > o.x && )
+//	infix fun rectCollideRect(o: FRectangle) = (x > o.x && )
 
 
 }

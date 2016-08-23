@@ -160,7 +160,7 @@ Param|Usage
 :---|---:
 timeUp: () -> Unit, OnTimeEvent|Function that will be invoked when time's up(`ended()`)
 
-## Class: org.frice.game.utils.data.Preference
+## Class: org.frice.game.utils.data.XMLPreference
 Operates an xml file for config.
 
 ### Constructors

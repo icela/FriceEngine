@@ -1,5 +1,6 @@
 package org.frice.game.obj.button
 
+import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 
 /**
@@ -9,7 +10,8 @@ import org.frice.game.event.OnMouseEvent
  */
 
 abstract class FButton : FText() {
-	abstract fun onClick(e: OnMouseEvent)
+	abstract fun onClick(e: OnClickEvent)
+	abstract fun onMouse(e: OnMouseEvent)
 
 	abstract var width: Double
 	abstract var height: Double
