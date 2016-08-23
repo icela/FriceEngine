@@ -32,6 +32,7 @@ import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
 import java.util.*
+import javax.imageio.ImageIO
 import javax.swing.JPanel
 
 /**
@@ -75,6 +76,9 @@ open class Game() : AbstractGame(), Runnable {
 		private set
 
 	init {
+		// set icon
+		iconImage = ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
+
 		/// to prevent this engine from the f#cking NPE!!
 		panel = GamePanel()
 		add(panel, BorderLayout.CENTER)

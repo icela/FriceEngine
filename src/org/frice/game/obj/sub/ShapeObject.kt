@@ -39,7 +39,7 @@ open class ShapeObject(protected val res: ColorResource, override val collideBox
 //				is FOval ->
 				else -> this rectCollideRect other
 			}
-		// TODO
+//			is FOval ->
 			else -> this rectCollideRect other
 		}
 		is ImageObject -> when (collideBox) {

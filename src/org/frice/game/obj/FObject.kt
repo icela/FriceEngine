@@ -39,9 +39,11 @@ abstract class FObject : PhysicalObject() {
 					x <= rect.x + rect.width &&
 					y <= rect.y + rect.height
 
-	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject) {
-		//
-	}
+//	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject): Boolean {
+//		if (!rectCollideRect(oval)) return false
+//		val xxx = if (x + width / 2 > oval.x + oval.width / 2) x else x + width
+//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
+//	}
 
 	fun runAnims() = anims.forEach { a ->
 		when (a) {

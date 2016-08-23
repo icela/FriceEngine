@@ -29,7 +29,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override fun isCollide(other: CollideBox): Boolean = when (other) {
 		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> this rectCollideRect other
-		// TODO
+			// TODO
 			else -> this rectCollideRect other
 		}
 		is ImageObject -> this rectCollideRect other
