@@ -14,7 +14,7 @@
 *.xml
 
 # Image Files #
-#*.png
+*.png
 *.jpg
 *.gif
 *.bmp

@@ -3,68 +3,37 @@
     <title>FriceEngine - 简单、易用的原生轻量级JVM游戏引擎</title>
 <style id="system" type="text/css">h1,h2,h3,h4,h5,h6,p,blockquote {    margin: 0;    padding: 0;}body {    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;    font-size: 13px;    line-height: 18px;    color: #737373;    margin: 10px 13px 10px 13px;}a {    color: #0069d6;}a:hover {    color: #0050a3;    text-decoration: none;}a img {    border: none;}p {    margin-bottom: 9px;}h1,h2,h3,h4,h5,h6 {    color: #404040;    line-height: 36px;}h1 {    margin-bottom: 18px;    font-size: 30px;}h2 {    font-size: 24px;}h3 {    font-size: 18px;}h4 {    font-size: 16px;}h5 {    font-size: 14px;}h6 {    font-size: 13px;}hr {    margin: 0 0 19px;    border: 0;    border-bottom: 1px solid #ccc;}blockquote {    padding: 13px 13px 21px 15px;    margin-bottom: 18px;    font-family:georgia,serif;    font-style: italic;}blockquote:before {    content:"C";    font-size:40px;    margin-left:-10px;    font-family:georgia,serif;    color:#eee;}blockquote p {    font-size: 14px;    font-weight: 300;    line-height: 18px;    margin-bottom: 0;    font-style: italic;}code, pre {    font-family: Monaco, Andale Mono, Courier New, monospace;}code {    background-color: #fee9cc;    color: rgba(0, 0, 0, 0.75);    padding: 1px 3px;    font-size: 12px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    border-radius: 3px;}pre {    display: block;    padding: 14px;    margin: 0 0 18px;    line-height: 16px;    font-size: 11px;    border: 1px solid #d9d9d9;    white-space: pre-wrap;    word-wrap: break-word;}pre code {    background-color: #fff;    color:#737373;    font-size: 11px;    padding: 0;}@media screen and (min-width: 768px) {    body {        width: 748px;        margin:10px auto;    }}</style><style id="custom" type="text/css"></style></head>
 <body marginheight="0"><h1>FriceEngine</h1>
-<p><img src="https://avatars1.githubusercontent.com/u/21008243" alt="image">
-
-</p>
-<p>一个简单、易用的原生轻量级JVM游戏引擎。<br>
-查看 <a href="https://github.com/icela/FriceEngine/blob/master/apis.md">API文档</a> 或者Wiki以更多地了解Frice Engine。
-
-</p>
-<p>An easy, light, native game engine running on JVM.<br>
+<p><img src="https://avatars1.githubusercontent.com/u/21008243" alt="image"></p><p>一个简单、易用的原生轻量级JVM游戏引擎。<br>
+查看 <a href="https://github.com/icela/FriceEngine/blob/master/apis.md">API文档</a> 或者Wiki以更多地了解Frice Engine。</p><p>An easy, light, native game engine running on JVM.<br>
 View <a href="https://github.com/icela/FriceEngine/blob/master/apis.md">APIs</a> or wiki to learn more about Frice Engine.
-
-</p>
-<h2>Why easy? 为什么简单易用？</h2>
+</p><h2>Why easy? 为什么简单易用？</h2>
 <p><a href="https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java">一个简单的Flappy bird</a> 仅用了65行代码。
-使用Kotlin写就，并支持Java, JRuby, Groovy, Scala等语言。
-
-</p>
-<p><a href="https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java">A flappy bird game</a> is in 65 lines of code only.<br>
-Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
-
-</p>
-<h2>Why light? 为什么轻量？</h2>
+使用Kotlin写就，并支持Java, JRuby, Groovy, Scala等语言。</p><p><a href="https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java">A flappy bird game</a> is in 65 lines of code only.<br>
+Written in Kotlin, also work on Java, JRuby, Groovy and Scala.</p><h2>Why light? 为什么轻量？</h2>
 <p>Kotlin运行时库仅用736KB（使用Kotlin开发游戏，可以直接使用引擎附带的运行时），引擎也仅仅略大于800KB。<br>
 未来将会加入的MP3支持可能会占用200KB。
-
-</p>
-<p>Kotlin runtime is only 736KB(if you choose Kotlin to build games, you won't need to add another kotlin-runtime), and the engine JAR file size is just a bit above 800KB.<br>
+</p><p>Kotlin runtime is only 736KB(if you choose Kotlin to build games, you won't need to add another kotlin-runtime), and the engine JAR file size is just a bit above 800KB.<br>
 MP3 format support (in the future) will take 200KB.
-
-</p>
-<h2>Why native? 为什么原生？</h2>
-<p>这个引擎是完全平台无关的：没有JNI，没有native的方法，所有的一切均由Kotlin编写。<br>
-这正是一个JVM App所应该有的样子。
-
-</p>
-<p>This engine is completely platform-independent: no JNIs, no native methods, everything is written by myself in pure Kotlin.<br>
-And this is what a JVM app should be exactly.
-
-</p>
-<h1>Before you build</h1>
+</p><h2>Why native? 为什么原生？</h2><p>这个引擎是完全平台无关的：没有JNI，没有native的方法，所有的一切均由Kotlin编写。<br>
+这正是一个JVM App所应该有的样子。</p>
+<p>This engine is completely platform-independent: no JNIs, no native methods, everything is written by myself in pure Kotlin.<br>And this is what a JVM app should be exactly.
+</p><h1>Before you build</h1>
 <pre><code>git clone https://github.com/icela/FriceEngine.git
 cd FriceEngine
 git submodule init
 git submodule update</code></pre>
-<p>Then open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).
-
-</p>
+<p>Then open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).</p>
 <h1>Build</h1>
-<p>Currently under construction. Maybe you know how to build your own apps.
-
-</p>
+<p>Currently under construction. Maybe you know how to build your own apps.</p>
 <h1>Usage</h1>
 <h2>Supported</h2>
-<h3>Languages</h3>
-<ul>
+<h3>Languages</h3><ul>
 <li>[X] Kotlin (Native)</li>
 <li>[X] Java</li>
 <li>[X] Groovy</li>
 <li>[X] JRuby</li>
 <li>[ ] Scala (Not tested)</li>
-</ul>
-<h3>Functions</h3>
-<ul>
+</ul><h3>Functions</h3><ul>
 <li>[X] Game Objects (from image or shape, image from file or web)</li>
 <li>[X] Life cycle</li>
 <li>[X] Collision detecting</li>
@@ -82,10 +51,7 @@ git submodule update</code></pre>
 <li>[X] Smart auto garbage collection(you can close it)</li>
 </ul>
 <h2>Basics</h2>
-<p>FriceEngine is based on the life cycle mode.<br>
-To build games based on frice engine, follow these steps:
-
-</p>
+<p>FriceEngine is based on the life cycle mode.<br>To build games based on frice engine, follow these steps:</p>
 <ol>
 <li>Import the jar in the latest release to your project.</li>
 <li>Create a class extends Game in org.frice.game package.</li>
@@ -95,17 +61,11 @@ To build games based on frice engine, follow these steps:
 </ol>
 <h2>Demos</h2>
 <p>see <a href="https://github.com/icela/FriceDemo">FriceDemo</a>
-
-</p>
-<h2>How can it be?</h2>
-<p>
+</p><h2>How can it be?</h2><p>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/0.gif?raw=true" alt=""><br><br>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/2.gif?raw=true" alt=""><br><br>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/3.gif?raw=true" alt=""><br><br>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/4.gif?raw=true" alt=""><br><br>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/5.gif?raw=true" alt=""><br><br>
 <img src="https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/6.gif?raw=true" alt=""><br><br>
-
-</p>
-<p>Edit By <a href="http://mahua.jser.me">MaHua</a></p>
 </body></html>
