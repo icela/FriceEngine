@@ -55,8 +55,6 @@ abstract class FObject : PhysicalObject() {
 
 	fun checkCollision() {
 		targets.removeIf { t -> t.first.died }
-		targets.forEach { t ->
-			if (isCollide(t.first)) t.second.handle()
-		}
+		targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
 	}
 }

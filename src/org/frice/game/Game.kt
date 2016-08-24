@@ -49,15 +49,15 @@ import javax.swing.JPanel
 open class Game() : AbstractGame(), Runnable {
 	private val refresh = FTimer(1)
 
-	private val objects = ArrayList<AbstractObject>()
+	private val objects = LinkedList<AbstractObject>()
 	private val objectDeleteBuffer = ArrayList<AbstractObject>()
 	private val objectAddBuffer = ArrayList<AbstractObject>()
 
-	private val texts = ArrayList<FText>()
+	private val texts = LinkedList<FText>()
 	private val textDeleteBuffer = ArrayList<FText>()
 	private val textAddBuffer = ArrayList<FText>()
 
-	private val timeListeners = ArrayList<FTimeListener>()
+	private val timeListeners = LinkedList<FTimeListener>()
 	private val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
 	private val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
