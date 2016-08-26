@@ -8,7 +8,7 @@ import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
-import org.frice.game.obj.misc.FLine
+import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
@@ -79,7 +79,7 @@ open class Game() : AbstractGame(), Runnable {
 		// set icon
 		iconImage = ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
 
-		/// to prevent this engine from the f#cking NPE!!
+		/// to prevent this engine from the call#cking NPE!!
 		panel = GamePanel()
 		add(panel, BorderLayout.CENTER)
 		bounds = AbstractGame.BIG_SQUARE
@@ -365,7 +365,7 @@ open class Game() : AbstractGame(), Runnable {
 									o.height.toInt())
 						}
 					}
-					is FLine -> {
+					is LineEffect -> {
 						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 								RenderingHints.VALUE_ANTIALIAS_ON)
 						bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
