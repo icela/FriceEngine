@@ -1,6 +1,7 @@
 package org.frice.game.resource.graphics
 
 import org.frice.game.resource.FResource
+import org.frice.game.utils.kotlin.forceRun
 import java.awt.image.BufferedImage
 
 /**
@@ -17,7 +18,7 @@ class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, 
 		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		(0..width step 1).forEach { x ->
 			listOf(0.0, 0.2, 0.4, 0.6, 0.8).forEach { d ->
-				image.setRGB((x + d).toInt(), f(x + d).toInt(), colorResource.color.rgb)
+				forceRun { image.setRGB((x + d).toInt(), f(x + d).toInt(), colorResource.color.rgb) }
 			}
 		}
 	}

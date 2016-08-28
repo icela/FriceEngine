@@ -158,7 +158,7 @@ w(e: Any?)|warning|Log a warning message
 e(e: Any?)|error|Log an error message
 
 ## Class: org.frice.game.utils.time.FTimer
-I'm afraid that I can't doc this function very well for my poor English, so please view its usage in demos.
+I'm afraid that I can't doc this FFunction very well for my poor English, so please view its usage in demos.
 
 ### Constructors
 Param|Usage
@@ -178,7 +178,7 @@ org.frice.game.utils.time.FTimer
 ### Constructors
 Param|Usage
 :---|---:
-timeUp: () -> Unit, OnTimeEvent|Function that will be invoked when time's up(`ended()`)
+timeUp: () -> Unit, OnTimeEvent|FFunction that will be invoked when time's up(`ended()`)
 
 ## Class: org.frice.game.utils.data.XMLPreference
 Operates an xml file for config.

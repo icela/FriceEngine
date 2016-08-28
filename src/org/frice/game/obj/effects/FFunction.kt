@@ -6,6 +6,6 @@ package org.frice.game.obj.effects
  * @author ice1000
  * @since v0.4
  */
-interface Function {
+interface FFunction {
 	fun call(x: Double): Double
 }

@@ -17,8 +17,8 @@ import java.awt.image.BufferedImage
 class FunctionEffect(res: FunctionResource, override var x: Double, override var y: Double) :
 		ImageObject(res.getResource(), x, y) {
 
-	constructor(function: Function, x: Double, y: Double, width: Int, height: Int) :
-	this(FunctionResource(ColorResource.BLUE, { x -> function.call(x) }, width, height), x, y)
+	constructor(FFunction: FFunction, x: Double, y: Double, width: Int, height: Int) :
+	this(FunctionResource(ColorResource.BLUE, { x -> FFunction.call(x) }, width, height), x, y)
 
 	override val width: Double
 		get() = res.image.width.toDouble()
