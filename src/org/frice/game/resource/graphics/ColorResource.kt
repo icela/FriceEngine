@@ -48,6 +48,7 @@ class ColorResource(val color: Color) : FResource {
 		@JvmStatic val 屎黄色 = SHIT_YELLOW
 		@JvmStatic val 天依蓝 = ColorResource(0x66CCFF)
 		@JvmStatic val 清真绿 = ColorResource(0x038B43)
+		@JvmStatic val IntelliJ_IDEA黑 = ColorResource(0x2B2B2B)
 	}
 
 	constructor(color: Int):this(Color(color))

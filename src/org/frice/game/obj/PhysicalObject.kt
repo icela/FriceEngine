@@ -11,4 +11,8 @@ import org.frice.game.obj.collide.CollideBox
 abstract class PhysicalObject : AbstractObject(), CollideBox, FContainer {
 	open var died = false
 	var mass = 1.0
+		set(value) {
+			if (value <= 0) field = 0.00001
+			else field = value
+		}
 }

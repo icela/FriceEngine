@@ -42,7 +42,8 @@ Name|Usage
 :---|---:
 getAnims(): List<(FAnim)>|get the list of anims, you can add and remove animations via this.
 getTargets(): List<(Pair<(FObject, Event)>)>|get a list of pairs, it has an object reference and an event interface. when collision occurs, the interface will be called.
-get
+addForce(Double, Double)|add a force to this object(actually you added an accelerate anim to it). It's force, and you had better set the mass first.
+setMass(Double)|set the mass. It's safe, if you set an unsafe value, it will fuck the value automatically. :joy:
 
 ### Demos
 see Demo1.java in the demo repo.
@@ -124,6 +125,9 @@ Param|Usage
 game: Game|Game context, just pass `this` in your own Game class
 list: List<ImageResource>, Array<ImageResource>|List of images
 div: Int|Division time between two images
+
+## Class: org.frice.game.resource.image.PartImageResource
+Create an image resource from a part of another image.
 
 ### APIs
 Method|Usage
