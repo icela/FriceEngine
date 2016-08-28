@@ -50,8 +50,8 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Kotlin (Native)
 - [X] Java
 - [X] Groovy
-- [X] JRuby
-- [ ] Scala (Not tested)
+- [X] Scala
+- [X] JRuby(with bugs)
 
 ### Functions
 - [X] Game Objects (from image or shape, image from file or web)
