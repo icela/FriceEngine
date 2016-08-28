@@ -2,6 +2,7 @@ package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
 import org.frice.game.anim.RotateAnim
+import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.obj.collide.OnCollideEvent
@@ -56,5 +57,9 @@ abstract class FObject : PhysicalObject() {
 	fun checkCollision() {
 		targets.removeIf { t -> t.first.died }
 		targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
+	}
+
+	fun addForce(x: Double, y: Double) {
+		anims.add(AccelerateMove(x / mass, y / mass))
 	}
 }

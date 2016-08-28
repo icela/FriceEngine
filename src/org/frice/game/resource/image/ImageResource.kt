@@ -2,6 +2,8 @@ package org.frice.game.resource.image
 
 import org.frice.game.resource.FResource
 import java.awt.image.BufferedImage
+import java.io.File
+import java.net.URL
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -14,6 +16,12 @@ abstract class ImageResource : FResource {
 		fun create(image: BufferedImage) = object : ImageResource() {
 			override var image = image
 		}
+
+		fun fromImage(image: BufferedImage) = create(image)
+		fun fromFile(file: File) = FileImageResource(file)
+		fun fromPath(path: String) = FileImageResource(path)
+		fun fromWeb(url: String) = WebImageResource(url)
+		fun fromURL(url: URL) = WebImageResource(url)
 	}
 
 	abstract var image: BufferedImage

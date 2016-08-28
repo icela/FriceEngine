@@ -37,8 +37,15 @@ setTitle(String)|*Inherited from Frame*
 ## Interface: org.frice.game.obj.FObject
 Represents a game object.
 
+### APIs
+Name|Usage
+:---|---:
+getAnims(): List<(FAnim)>|get the list of anims, you can add and remove animations via this.
+getTargets(): List<(Pair<(FObject, Event)>)>|get a list of pairs, it has an object reference and an event interface. when collision occurs, the interface will be called.
+get
+
 ### Demos
-See [demos/demo/Demo1.java](demos/demo/Demo1.java).
+see Demo1.java in the demo repo.
 
 ### Members
 Name: Type|Usage
@@ -49,10 +56,10 @@ y: Int|Location y
 anims: ArrayList<FAnim>|Animation list of this object. Engine will play them if game is not paused.
 targets: ArrayList<Pair<FObject, OnCollideEvent>>|Param `FObject` is the target object, `OnCollideEvent` is a lambda which will be called when owner collides the target object.
 
-## Class: org.frice.game.obj.ImageObject
+## Class: org.frice.game.obj.sub.ImageObject
 
 ### Demos
-see [demos/demo/Demo1.java](demos/demo/Demo1.java).
+see Demo1.java in the demo repo.
 
 ### Parent
 org.frice.game.obj.FObject
@@ -62,10 +69,10 @@ Param|Usage
 :---|---:
 res: ImageResource|image resource that will display on game scene
 
-## Class: org.frice.game.obj.ShapedColorObject
+## Class: org.frice.game.obj.sub.ShapeObject
 
 ### Demos
-see [demos/demo/Demo7.java](demos/demo/Demo7.java).
+see Demo7.java in the demo repo.
 
 ### Parent
 org.frice.game.obj.FObject
@@ -84,6 +91,15 @@ shape: FShape|Shape of this object
 Name: Type|Usage
 :---|---:
 image: Image|Image object.
+
+### APIs
+Name|Usage
+:---|---:
+fun fromImage(image: BufferedImage)| create an image from bufferedImage
+fun fromFile(file: File)| create an image from file
+fun fromPath(path: String)| create an image from file path
+fun fromWeb(url: String)| create an image from url as string
+fun fromURL(url: URL)| create an image from url
 
 ## Class: org.frice.game.resource.FileImageResource
 
@@ -173,6 +189,16 @@ getPreference(file: File)<br />getPreference(file: String)|Creates a instance fr
 insert(key: String, value: Any?)|Insert a key-value pair into the file
 query(key: String, value: Any)|Query a value by `key` from the file
 
+## Class:org.frice.game.utils.data.Preference
+
+### APIs
+Name|Usage
+:---|---:
+list()|get a list of pair
+insert(key: String, value: Any?)|Insert a key-value pair into the file
+query(key: String, value: Any)|Query a value by `key` from the file
+
+
 ## Class: org.frice.game.utils.message.FDialog
 Shows dialogs on screen. Quite simple to use, I think there's no need to write a doc for it.<br/>
 Constructor needs a context.
@@ -196,9 +222,6 @@ Method|Usage
 :---|---:
 start()|Starts playing
 exit()|Stops playing
-
-## Abstract:org.frice.game.anim.FAnim
-Animations are all subclasses of FAnim.
 
 ## Class: org.frice.game.anim.move.SimpleMove
 
@@ -233,8 +256,6 @@ Method|Usage
 getXDelta(timeFromBegin: Double): Double|Receives time in seconds elapsed since creation of the owner. Returns pixels that the owner should move by, horizontally.
 getYDelta(timeFromBegin: Double): Double|same as the one above, but vertically.
 
-## Abstract: org.frice.game.anim.scale.ScaleAnim
-
 ## Class: org.frice.game.anim.scale.SimpleScale
 
 ### Constructors
@@ -243,11 +264,8 @@ Param|Usage
 x: Double|How many times bigger that the owner should scale per second, horizontally.
 y: Double|How many times bigger that the owner should scale per second, vertically.
 
-## Interface:org.frice.game.obj.button.FButton
-
 ## Class:org.frice.game.obj.button.SimpleButton
 A Button.
-
 
 ## Class:org.frice.game.obj.effects.ParticleEffect
 An object to display particles.
