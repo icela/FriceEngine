@@ -17,7 +17,7 @@ class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, 
 	init {
 		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		(0..width step 1).forEach { x ->
-			listOf(0.0, 0.2, 0.4, 0.6, 0.8).forEach { d ->
+			listOf(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9).forEach { d ->
 				forceRun { image.setRGB((x + d).toInt(), f(x + d).toInt(), colorResource.color.rgb) }
 			}
 		}

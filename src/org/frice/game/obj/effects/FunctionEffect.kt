@@ -8,7 +8,7 @@ import java.awt.Image
 import java.awt.image.BufferedImage
 
 /**
- * Not tested
+ * Tested, Work stably.
  * Created by ice1000 on 2016/8/24.
  *
  * @author ice1000

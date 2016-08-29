@@ -49,6 +49,7 @@ class ColorResource(val color: Color) : FResource {
 		@JvmStatic val 天依蓝 = ColorResource(0x66CCFF)
 		@JvmStatic val 清真绿 = ColorResource(0x038B43)
 		@JvmStatic val IntelliJ_IDEA黑 = ColorResource(0x2B2B2B)
+		@JvmStatic val 如果真爱有颜色那么一定是黄色 = 教主黄
 	}
 
 	constructor(color: Int):this(Color(color))
