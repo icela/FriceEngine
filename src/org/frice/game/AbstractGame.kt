@@ -31,12 +31,15 @@ import javax.swing.WindowConstants
  */
 abstract class AbstractGame() : JFrame() {
 	companion object {
-		@JvmStatic val SMALL_PHONE = Rectangle(100, 100, 480, 800)
-		@JvmStatic val BIG_PHONE = Rectangle(100, 100, 720, 1200)
-		@JvmStatic val HUGE_PHONE = Rectangle(100, 100, 1080, 1920)
+		@JvmStatic private val TO_X = 100
+		@JvmStatic private val TO_Y = 100
 
-		@JvmStatic val SMALL_SQUARE = Rectangle(100, 100, 400, 400)
-		@JvmStatic val BIG_SQUARE = Rectangle(100, 100, 800, 800)
+		@JvmStatic val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
+		@JvmStatic val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)
+		@JvmStatic val HUGE_PHONE = Rectangle(TO_X, TO_Y, 1080, 1920)
+
+		@JvmStatic val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
+		@JvmStatic val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
 
 		@JvmStatic fun Rectangle.turn() {
 			width -= -height

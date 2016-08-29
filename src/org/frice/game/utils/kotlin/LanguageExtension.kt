@@ -60,3 +60,8 @@ inline fun <T> T.async(crossinline block: T.() -> Unit): T {
 	Thread({ block.invoke(this) }).start()
 	return this
 }
+
+/**
+ * times once, get a pair
+ */
+operator fun Pair<Double, Double>.times(double: Double): Pair<Double, Double> = Pair(first / double, second / double)

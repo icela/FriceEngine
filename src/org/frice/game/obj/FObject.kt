@@ -8,6 +8,7 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
+import org.frice.game.utils.kotlin.times
 import java.util.*
 
 /**
@@ -19,6 +20,12 @@ abstract class FObject : PhysicalObject() {
 	open var id = -1
 	val anims = ArrayList<FAnim>()
 	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
+
+	/**
+	 * physics force
+	 * will change with mass(see #runAnims below)
+	 */
+	val force = AccelerateMove(0.0, 0.0)
 
 	abstract val collideBox: FShape
 
@@ -47,6 +54,8 @@ abstract class FObject : PhysicalObject() {
 //	}
 
 	fun runAnims() = anims.forEach { a ->
+		// move force first
+		move(force.getDelta().times(mass))
 		when (a) {
 			is MoveAnim -> move(a.getDelta())
 			is ScaleAnim -> scale(a.getAfter())
@@ -60,6 +69,7 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	fun addForce(x: Double, y: Double) {
-		anims.add(AccelerateMove(x / mass, y / mass))
+		force.ax += x
+		force.ay += y
 	}
 }
