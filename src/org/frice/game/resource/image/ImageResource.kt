@@ -13,15 +13,15 @@ import java.net.URL
 abstract class ImageResource : FResource {
 
 	companion object {
-		fun create(image: BufferedImage) = object : ImageResource() {
+		@JvmStatic fun create(image: BufferedImage) = object : ImageResource() {
 			override var image = image
 		}
 
-		fun fromImage(image: BufferedImage) = create(image)
-		fun fromFile(file: File) = FileImageResource(file)
-		fun fromPath(path: String) = FileImageResource(path)
-		fun fromWeb(url: String) = WebImageResource(url)
-		fun fromURL(url: URL) = WebImageResource(url)
+		@JvmStatic fun fromImage(image: BufferedImage) = create(image)
+		@JvmStatic fun fromFile(file: File) = FileImageResource(file)
+		@JvmStatic fun fromPath(path: String) = FileImageResource(path)
+		@JvmStatic fun fromWeb(url: String) = WebImageResource(url)
+		@JvmStatic fun fromURL(url: URL) = WebImageResource(url)
 	}
 
 	abstract var image: BufferedImage

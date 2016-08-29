@@ -8,13 +8,22 @@ import java.awt.Color
  * @author ice1000
  */
 
-fun Int.gray(): Int {
-	val color = Color(this)
-	return (color.blue + color.green + color.red) / 3
-}
+object ColorUtils {
+	@JvmStatic val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
 
-fun Int.darker(): Int {
-	val color = Color(this)
-	return (color.blue * 2 / 3) or ((color.green * 2 / 3) shl 8) or
-			((color.red * 2 / 3) shl 16) or ((color.alpha shl 24))
+	@JvmStatic fun Int.toAscii() = when (gray() / asciiList.size) {
+
+		else -> asciiList[0]
+	}
+
+	@JvmStatic fun Int.gray(): Int {
+		val color = Color(this)
+		return (color.blue + color.green + color.red) / 3
+	}
+
+	@JvmStatic fun Int.darker(): Int {
+		val color = Color(this)
+		return (color.blue * 2 / 3) or ((color.green * 2 / 3) shl 8) or
+				((color.red * 2 / 3) shl 16) or ((color.alpha shl 24))
+	}
 }
