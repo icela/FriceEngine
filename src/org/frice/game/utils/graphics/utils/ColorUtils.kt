@@ -11,10 +11,7 @@ import java.awt.Color
 object ColorUtils {
 	@JvmStatic val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
 
-	@JvmStatic fun Int.toAscii() = when (gray() / asciiList.size) {
-
-		else -> asciiList[0]
-	}
+	@JvmStatic fun Int.toAscii() = asciiList[gray() / (256 / asciiList.size + 1)]
 
 	@JvmStatic fun Int.gray(): Int {
 		val color = Color(this)

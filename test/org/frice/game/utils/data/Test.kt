@@ -16,7 +16,7 @@ import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
-import org.frice.game.utils.graphics.utils.gray
+import org.frice.game.utils.graphics.utils.ColorUtils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer

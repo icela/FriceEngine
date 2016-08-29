@@ -17,7 +17,7 @@ import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
-import org.frice.game.utils.graphics.utils.darker
+import org.frice.game.utils.graphics.utils.ColorUtils.darker
 import org.frice.game.utils.kotlin.forceRun
 import org.frice.game.utils.kotlin.loop
 import org.frice.game.utils.kotlin.loopIf
