@@ -2,6 +2,7 @@ package org.frice.game.special.gal
 
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
+import org.frice.game.obj.button.SimpleButton
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
 import java.io.File
@@ -32,6 +33,7 @@ class GalGame() : Game() {
 		val now = stepSequence.first()
 		when (now) {
 			is GalBackground -> {
+				back = now.image
 			}
 			is GalText -> {
 			}
@@ -46,6 +48,7 @@ class GalGame() : Game() {
 				}
 			}
 			is GalOptions -> {
+				val list = listOf<SimpleButton>()
 			}
 			is GalAudio -> {
 				if (!skip) AudioManager.play(now.file)
@@ -60,6 +63,9 @@ class GalGame() : Game() {
 		if (!recursive) stepSequence.removeAt(0)
 	}
 
+	/**
+	 * init the data and start playing game
+	 */
 	protected fun gameStart() {
 		step = 0
 		nextStep()
@@ -87,7 +93,10 @@ class GalGame() : Game() {
 		}
 	}
 
-	class GalOption(val text: String)
+	/**
+	 * an option
+	 */
+	class GalOption(val text: String, val target: Int)
 
 	/**
 	 * text

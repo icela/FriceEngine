@@ -2,6 +2,7 @@ package org.frice.game.obj.button
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
+import org.frice.game.obj.FContainer
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -9,12 +10,14 @@ import org.frice.game.event.OnMouseEvent
  * @since v0.3.2
  */
 
-interface  FButton {
-	fun onClick(e: OnClickEvent)
-	fun onMouse(e: OnMouseEvent)
+interface FButton : FContainer {
+	var onClickListener: OnClickListener?
 
-	var width: Double
-	var height: Double
+	fun onClick(e: OnClickEvent) {
+		if (containsPoint(e.event.x, e.event.y)) onClickListener?.onClick(e)
+	}
+
+	fun onMouse(e: OnMouseEvent)
 
 	/**
 	 * Created by ice1000 on 2016/8/19.
