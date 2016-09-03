@@ -18,4 +18,7 @@ object WebUtils {
 
 	@JvmStatic fun readImage(url: URL) = ImageIO.read(url)!!
 	@JvmStatic fun readImage(url: String) = readImage(URL(url))
+
+	@JvmStatic fun readImages(url: String) = HTMLUtils.findTag(readText(url), "img")
+	@JvmStatic fun readImages(url: URL) = HTMLUtils.findTag(readText(url), "img")
 }
