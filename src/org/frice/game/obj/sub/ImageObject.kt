@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage
  * @since v0.1
  */
 open class ImageObject(var res: ImageResource, override var id: Int,
-                       override var x: Double, override var y: Double) : FObject() {
+                       override var x: Double, override var y: Double) : FObject(), FObject.ImageOwner {
 	constructor(res: ImageResource, id: Int) : this(res, id, 0.0, 0.0)
 
 	constructor(res: ImageResource) : this(res, -1, 0.0, 0.0)
@@ -52,7 +52,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	/**
 	 * @return returns an image instance of this res
 	 */
-	open fun getImage() = res.image
+	override fun getImage() = res.image
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

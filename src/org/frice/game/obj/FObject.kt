@@ -8,6 +8,7 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
 import org.frice.game.utils.kotlin.times
+import java.awt.image.BufferedImage
 import java.util.*
 
 /**
@@ -83,5 +84,9 @@ abstract class FObject : PhysicalObject() {
 	 */
 	interface OnCollideEvent {
 		fun handle()
+	}
+
+	interface ImageOwner {
+		fun getImage(): BufferedImage
 	}
 }

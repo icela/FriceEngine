@@ -5,6 +5,7 @@ import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
+import org.frice.game.utils.kotlin.loop
 import java.io.File
 import java.util.*
 
@@ -57,7 +58,7 @@ class GalGame() : Game() {
 			is GalSkip -> {
 				stepSequence.removeAt(0)
 				recursive = true
-				(0..if (now.isAbsolute) now.index - step else now.index).forEach { i -> nextStep(true) }
+				loop(if (now.isAbsolute) now.index - step else now.index) { nextStep(true) }
 			}
 		}
 		if (!recursive) stepSequence.removeAt(0)

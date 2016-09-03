@@ -9,7 +9,6 @@ import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
 import org.frice.game.obj.effects.LineEffect
-import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
@@ -47,7 +46,7 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val refresh = FTimer(1)
+	private val refresh = FTimer(3)
 
 	private val objects = LinkedList<AbstractObject>()
 	private val objectDeleteBuffer = ArrayList<AbstractObject>()
@@ -89,7 +88,7 @@ open class Game() : AbstractGame(), Runnable {
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
 		Thread(this).start()
-//		insets.set(0, insets.left, insets.bottom, insets.right)
+		//		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
 		onLastInit()
 	}
@@ -229,11 +228,8 @@ open class Game() : AbstractGame(), Runnable {
 		panel.size = d
 	}
 
-//	override fun getWidth() = panel.width
-//	override fun getHeight() = panel.height
-
 	/**
-	 * get a screenshot.
+	 * get a screenShot.
 	 *
 	 * @return screen cut as an image
 	 */
@@ -268,6 +264,26 @@ open class Game() : AbstractGame(), Runnable {
 			else -> throw FatalError("Unable to draw background")
 		}
 		g.fillRect(0, 0, width, height)
+	}
+
+	/**
+	 * do the delete and add work, to prevent Exceptions
+	 */
+	private fun processBuffer() {
+		objects.addAll(objectAddBuffer)
+		objects.removeAll(objectDeleteBuffer)
+		objectDeleteBuffer.clear()
+		objectAddBuffer.clear()
+
+		timeListeners.addAll(timeListenerAddBuffer)
+		timeListeners.removeAll(timeListenerDeleteBuffer)
+		timeListenerDeleteBuffer.clear()
+		timeListenerAddBuffer.clear()
+
+		texts.addAll(textAddBuffer)
+		texts.removeAll(textDeleteBuffer)
+		textDeleteBuffer.clear()
+		textAddBuffer.clear()
 	}
 
 	/**
@@ -319,22 +335,7 @@ open class Game() : AbstractGame(), Runnable {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			// do the delete and add work
-			// to prevent Exceptions
-			objects.addAll(objectAddBuffer)
-			objects.removeAll(objectDeleteBuffer)
-			objectDeleteBuffer.clear()
-			objectAddBuffer.clear()
-
-			timeListeners.addAll(timeListenerAddBuffer)
-			timeListeners.removeAll(timeListenerDeleteBuffer)
-			timeListenerDeleteBuffer.clear()
-			timeListenerAddBuffer.clear()
-
-			texts.addAll(textAddBuffer)
-			texts.removeAll(textDeleteBuffer)
-			textDeleteBuffer.clear()
-			textAddBuffer.clear()
+			processBuffer()
 
 			drawBackground(back, bg)
 			objects.forEach { o ->
@@ -345,14 +346,14 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			objects.forEach { o ->
 				val bgg = bg
+				bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+						RenderingHints.VALUE_ANTIALIAS_ON)
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
-					is ImageObject -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+					is FObject.ImageOwner -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
 					is ShapeObject -> {
 						bgg.color = o.getResource().color
-						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-								RenderingHints.VALUE_ANTIALIAS_ON)
 						when (o.collideBox) {
 							is FPoint, is FRectangle -> bgg.fillRect(
 									o.x.toInt(),
@@ -366,18 +367,14 @@ open class Game() : AbstractGame(), Runnable {
 									o.height.toInt())
 						}
 					}
-					is LineEffect -> {
-						bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-								RenderingHints.VALUE_ANTIALIAS_ON)
-						bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
-					}
+					is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
 				}
 				if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
 						o.y.toInt() < -height || o.y.toInt() > height + height)) {
 					if (o is PhysicalObject) o.died = true
 					removeObject(o)
-//					FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
-//							" o.y.toInt() = ${o.y.toInt()}, height = $height")
+					//FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
+					//		" o.y.toInt() = ${o.y.toInt()}, height = $height")
 				}
 			}
 			texts.forEach { b ->
