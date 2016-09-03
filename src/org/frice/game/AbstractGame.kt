@@ -91,8 +91,8 @@ abstract class AbstractGame() : JFrame() {
 
 	protected open fun onInit() = Unit
 	protected open fun onRefresh() = Unit
-	protected open fun onClick(e: OnClickEvent?) = Unit
-	protected open fun onMouse(e: OnMouseEvent?) = Unit
+	protected open fun onClick(e: OnClickEvent) = Unit
+	protected open fun onMouse(e: OnMouseEvent) = Unit
 	protected open fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?",
 				"Ensuring", JOptionPane.YES_NO_OPTION) ==
