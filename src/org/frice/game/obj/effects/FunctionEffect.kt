@@ -34,4 +34,13 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
+	/**
+	 * Created by ice1000 on 2016/8/27.
+	 *
+	 * @author ice1000
+	 * @since v0.4
+	 */
+	interface FFunction {
+		fun call(x: Double): Double
+	}
 }

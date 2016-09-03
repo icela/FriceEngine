@@ -5,7 +5,6 @@ import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
-import org.frice.game.obj.collide.OnCollideEvent
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
 import org.frice.game.utils.kotlin.times
@@ -71,5 +70,14 @@ abstract class FObject : PhysicalObject() {
 	fun addForce(x: Double, y: Double) {
 		force.ax += x
 		force.ay += y
+	}
+
+	/**
+	 * Created by ice1000 on 2016/8/16.
+	 * @author ice1000
+	 * @since v0.3
+	 */
+	interface OnCollideEvent {
+		fun handle()
 	}
 }
