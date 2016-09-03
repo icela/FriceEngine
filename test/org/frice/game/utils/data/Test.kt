@@ -6,7 +6,7 @@ import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.SimpleMove
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
-import org.frice.game.obj.button.OnClickListener
+import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ShapeObject
@@ -42,7 +42,7 @@ class Test() : Game() {
 
 		addObject(ParticleEffect(ParticleResource(this, width / 2, height / 2), width * 0.25, height * 0.25))
 		addObject(SimpleButton(FRectangle(80, 20), "I am a button", 30.0, 30.0, 80.0, 30.0).apply {
-			onClickListener = object : OnClickListener {
+			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
 					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 20.0), 100.0, 100.0).apply {
 						anims.add(SimpleMove(150, 150))
@@ -84,7 +84,7 @@ class Test() : Game() {
 		}
 	}
 
-	override fun onClick(e: OnClickEvent?) {
+	override fun onClick(e: OnClickEvent) {
 		super.onClick(e)
 		FLog.v(e.toString())
 		FLog.v(mousePosition)
