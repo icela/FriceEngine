@@ -4,6 +4,7 @@ import org.frice.game.utils.kotlin.loop
 import java.util.*
 
 /**
+ * HTML tags finder
  * Created by ice1000 on 2016/9/3.
  *
  * @author ice1000
@@ -19,7 +20,8 @@ object HTMLUtils {
 		loop(c.size - tag.size + 2) { i ->
 			// find start index
 			if (c[i] == '<') {
-				tag.forEachIndexed { j, t -> if (c[i + j + 1] == t) tagMark = true }
+				tagMark = true
+				tag.forEachIndexed { j, t -> if (c[i + j + 1] != t) tagMark = false }
 				if (tagMark) tagStart = i
 			}
 			// find end index

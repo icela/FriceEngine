@@ -11,7 +11,8 @@ import javax.imageio.ImageIO
  * @since v0.5
  */
 object FileUtils {
-	@JvmStatic fun image2File(image: BufferedImage, file: File) = ImageIO.write(image, "png", file)
+	@JvmStatic fun image2File(image: BufferedImage, type: String, file: File) = ImageIO.write(image, type, file)
+	@JvmStatic fun image2File(image: BufferedImage, file: File) = image2File(image, "png", file)
 	@JvmStatic fun image2File(image: BufferedImage, file: String) = image2File(image, File(file))
 
 	@JvmStatic fun string2File(string: String, file: File) = file.writeText(string)
