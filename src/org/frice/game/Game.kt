@@ -71,9 +71,6 @@ open class Game() : AbstractGame(), Runnable {
 	private var fpsDisplay = 0
 	private val fpsTimer: FTimer
 
-	protected var loseFocus = false
-		private set
-
 	init {
 		// set icon
 		iconImage = ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
@@ -141,7 +138,7 @@ open class Game() : AbstractGame(), Runnable {
 	 * removes single object.
 	 * this method is safe.
 	 *
-	 * @param objs will remove objects which is equal to it.
+	 * @param obj will remove objects which is equal to it.
 	 */
 	protected fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDeleteBuffer.add(obj)
@@ -401,10 +398,10 @@ open class Game() : AbstractGame(), Runnable {
 
 			if (showFPS) bg.drawString("fps: $fpsDisplay", 30, height - 30)
 
-			/**
+			/*
 			 * 厚颜无耻
+			 * bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
 			 */
-			//bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
 
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
 			g.drawImage(buffer, 0, 0, this)

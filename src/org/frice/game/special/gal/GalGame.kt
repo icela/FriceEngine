@@ -2,6 +2,8 @@ package org.frice.game.special.gal
 
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
+import org.frice.game.obj.button.FButton
+import org.frice.game.obj.button.ImageButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
@@ -13,6 +15,7 @@ import java.util.*
  * Created by ice1000 on 2016/9/3 0003.
  *
  * @author ice1000
+ * @since v0.5
  */
 class GalGame() : Game() {
 
@@ -97,7 +100,17 @@ class GalGame() : Game() {
 	/**
 	 * an option
 	 */
-	class GalOption(val text: String, val target: Int)
+	interface GalOption {
+		val button: FButton
+	}
+
+	inner class GalTextOption(val text: String, val target: Int) : GalOption {
+		override val button = SimpleButton(text, width / 4.0, 0.0, width / 2.0, 25.0)
+	}
+
+	class GalImageOption(val imageButton: ImageButton) : GalOption {
+		override val button = imageButton
+	}
 
 	/**
 	 * text

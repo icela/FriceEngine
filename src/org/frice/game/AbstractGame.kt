@@ -80,6 +80,9 @@ abstract class AbstractGame() : JFrame() {
 	 */
 	protected var showFPS = true
 
+	protected var loseFocus = false
+		private set
+
 	init {
 		isResizable = false
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE

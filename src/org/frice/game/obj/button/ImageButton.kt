@@ -13,6 +13,9 @@ import org.frice.game.resource.image.ImageResource
 class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResource,
                   override var x: Double, override var y: Double,
                   override var width: Double, override var height: Double) : FButton, FObject.ImageOwner {
+	constructor(image: ImageResource, x: Double, y: Double, width: Double, height: Double) :
+	this(image, image, x, y, width, height)
+
 	override var onClickListener: FButton.OnClickListener? = null
 
 	private var bool = false
