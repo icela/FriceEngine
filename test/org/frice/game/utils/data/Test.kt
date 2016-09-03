@@ -15,7 +15,6 @@ import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
-import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.utils.ColorUtils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
@@ -41,7 +40,7 @@ class Test() : Game() {
 		}))
 
 		addObject(ParticleEffect(ParticleResource(this, width / 2, height / 2), width * 0.25, height * 0.25))
-		addObject(SimpleButton(FRectangle(80, 20), "I am a button", 30.0, 30.0, 80.0, 30.0).apply {
+		addObject(SimpleButton("I am a button", 30.0, 30.0, 80.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
 					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 20.0), 100.0, 100.0).apply {

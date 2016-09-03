@@ -16,6 +16,6 @@ object WebUtils {
 	@JvmStatic fun readBytes(url: URL) = url.readBytes()
 	@JvmStatic fun readBytes(url: String) = readBytes(URL(url))
 
-	@JvmStatic fun readImage(url: URL) = ImageIO.read(url)
+	@JvmStatic fun readImage(url: URL) = ImageIO.read(url)!!
 	@JvmStatic fun readImage(url: String) = readImage(URL(url))
 }
