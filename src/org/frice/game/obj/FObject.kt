@@ -19,6 +19,7 @@ abstract class FObject : PhysicalObject() {
 	open var id = -1
 	val anims = ArrayList<FAnim>()
 	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
+	override var rotate = 0.0
 
 	/**
 	 * physics force
@@ -41,16 +42,19 @@ abstract class FObject : PhysicalObject() {
 		rotate += angle
 	}
 
+	/**
+	 * Magic! Don't touch!
+	 */
 	protected infix fun PhysicalObject.rectCollideRect(rect: PhysicalObject) =
 			x + width >= rect.x && rect.y <= y + height &&
 					x <= rect.x + rect.width &&
 					y <= rect.y + rect.height
 
-//	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject): Boolean {
-//		if (!rectCollideRect(oval)) return false
-//		val xxx = if (x + width / 2 > oval.x + oval.width / 2) x else x + width
-//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
-//	}
+	//	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject): Boolean {
+	//		if (!rectCollideRect(oval)) return false
+	//		val xxx = if (x + width / 2 > oval.x + oval.width / 2) x else x + width
+	//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
+	//	}
 
 	fun runAnims() = anims.forEach { a ->
 		// move force first

@@ -16,7 +16,7 @@ import java.awt.Font
 class SimpleButton(val shape: FShape, var colorResource: ColorResource,
                    override var text: String, override var font: Font,
                    override var x: Double, override var y: Double,
-                   override var width: Double, override var height: Double) : FButton(), FContainer {
+                   override var width: Double, override var height: Double) : FButton, FText(), FContainer {
 
 	constructor(shape: FShape, text: String, font: Font, x: Double, y: Double,
 	            width: Double, height: Double) : this(shape, ColorResource.GRAY, text, font, x, y, width, height)
@@ -32,7 +32,7 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 	override fun getColor() = if (bool) ColorResource(colorResource.color.darker())
 	else colorResource
 
-	var onClickListener: OnClickListener? = null
+	var onClickListener: FButton.OnClickListener? = null
 
 	override fun onMouse(e: OnMouseEvent) {
 		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))

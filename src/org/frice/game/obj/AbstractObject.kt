@@ -5,9 +5,9 @@ package org.frice.game.obj
  * @author ice1000
  * @since v0.3.3
  */
-abstract class AbstractObject {
-	abstract var x: Double
-	abstract var y: Double
+interface  AbstractObject {
+	var x: Double
+	var y: Double
 
-	open var rotate = 0.0
+	var rotate: Double
 }

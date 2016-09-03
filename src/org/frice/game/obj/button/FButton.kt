@@ -9,12 +9,12 @@ import org.frice.game.event.OnMouseEvent
  * @since v0.3.2
  */
 
-abstract class FButton : FText() {
-	abstract fun onClick(e: OnClickEvent)
-	abstract fun onMouse(e: OnMouseEvent)
+interface  FButton {
+	fun onClick(e: OnClickEvent)
+	fun onMouse(e: OnMouseEvent)
 
-	abstract var width: Double
-	abstract var height: Double
+	var width: Double
+	var height: Double
 
 	/**
 	 * Created by ice1000 on 2016/8/19.

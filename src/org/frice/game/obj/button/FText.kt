@@ -10,9 +10,10 @@ import java.awt.Font
  * @author ice1000
  * @since v0.4
  */
-abstract class FText : AbstractObject() {
+abstract class FText : AbstractObject {
 	open var text = ""
 	abstract var font: Font
+	override var rotate = 0.0
 
 	abstract fun getColor(): ColorResource
 }
