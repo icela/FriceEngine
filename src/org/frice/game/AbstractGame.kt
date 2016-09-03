@@ -90,6 +90,7 @@ abstract class AbstractGame() : JFrame() {
 	protected abstract fun click(e: OnClickEvent)
 
 	protected open fun onInit() = Unit
+	protected open fun onLastInit() = Unit
 	protected open fun onRefresh() = Unit
 	protected open fun onClick(e: OnClickEvent) = Unit
 	protected open fun onMouse(e: OnMouseEvent) = Unit

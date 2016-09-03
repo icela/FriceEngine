@@ -91,6 +91,7 @@ open class Game() : AbstractGame(), Runnable {
 		Thread(this).start()
 //		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
+		onLastInit()
 	}
 
 	/**

@@ -3,6 +3,7 @@ package org.frice.game.special.gal
 import org.frice.game.Game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.resource.image.ImageResource
+import org.frice.game.utils.audio.AudioManager
 import java.io.File
 import java.util.*
 
@@ -22,20 +23,47 @@ class GalGame() : Game() {
 	private val stepSequence = ArrayList<Step>()
 	private val stepMarked = ArrayList<Int>()
 
-	private var step = 0
+	protected var step = 0
+		private set
 
-	private fun nextStep() {
+	private fun nextStep(skip: Boolean = false) {
 		++step
-		when (stepSequence.first()) {
-			is GalBackground -> {}
-			is GalText -> {}
-			is Gal立ち絵 -> {}
-			is GalOptions -> {}
+		var recursive = false
+		val now = stepSequence.first()
+		when (now) {
+			is GalBackground -> {
+			}
+			is GalText -> {
+			}
+			is Gal立ち絵 -> {
+				when (now.position) {
+					POSITION_LEFT -> {
+					}
+					POSITION_MIDDLE -> {
+					}
+					POSITION_RIGHT -> {
+					}
+				}
+			}
+			is GalOptions -> {
+			}
+			is GalAudio -> {
+				if (!skip) AudioManager.play(now.file)
+				stepSequence.removeAt(0)
+			}
+			is GalSkip -> {
+				stepSequence.removeAt(0)
+				recursive = true
+				(0..if (now.isAbsolute) now.index - step else now.index).forEach { i -> nextStep(true) }
+			}
 		}
-		stepSequence.removeAt(0)
+		if (!recursive) stepSequence.removeAt(0)
 	}
-	
-	protected fun gameStart() = nextStep()
+
+	protected fun gameStart() {
+		step = 0
+		nextStep()
+	}
 
 	protected fun load(path: String) = ImageResource.fromPath(path)
 	protected fun load(file: File) = ImageResource.fromFile(file)
@@ -69,15 +97,31 @@ class GalGame() : Game() {
 	/**
 	 * background
 	 */
-	protected inner class GalBackground(val imageResource: ImageResource) : Step()
+	protected inner class GalBackground(val image: ImageResource) : Step()
 
 	/**
-	 * 立绘
-	 * 立ち絵
+	 * 立绘, 立ち絵
+	 * @see GalTaChiE
 	 */
-	protected open inner class Gal立ち絵(val imageResource: ImageResource, val position: Int) : Step()
+	protected open inner class Gal立ち絵(val image: ImageResource, val position: Int) : Step()
 
+	/**
+	 * alias of 立ち絵
+	 * @see Gal立ち絵
+	 */
 	protected inner class GalTaChiE(imageResource: ImageResource, position: Int) : Gal立ち絵(imageResource, position)
 
 	protected inner class GalOptions(val list: List<GalOption>) : Step()
+	protected inner class GalSkip(val index: Int) : Step() {
+		var isAbsolute = false
+			private set
+
+		constructor(index: Int, isAbsolute: Boolean) : this(index) {
+			this.isAbsolute = isAbsolute
+		}
+	}
+
+	protected inner class GalAudio(val file: File) : Step() {
+		constructor(path: String) : this(File(path))
+	}
 }
