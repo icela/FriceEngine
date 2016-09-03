@@ -1,6 +1,5 @@
 package org.frice.game.obj.button
 
-import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.image.ImageResource
 
@@ -15,9 +14,9 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
                   override var width: Double, override var height: Double) : FButton {
 	override var onClickListener: FButton.OnClickListener? = null
 
-	override fun onClick(e: OnClickEvent) {
-	}
+	private var bool = false
 
-	override fun onMouse(e: OnMouseEvent) {
+	override fun onMouse(e: OnMouseEvent): Boolean {
+		//
 	}
 }

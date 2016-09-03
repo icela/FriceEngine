@@ -17,7 +17,7 @@ interface FButton : FContainer {
 		if (containsPoint(e.event.x, e.event.y)) onClickListener?.onClick(e)
 	}
 
-	fun onMouse(e: OnMouseEvent)
+	fun onMouse(e: OnMouseEvent) = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
 
 	/**
 	 * Created by ice1000 on 2016/8/19.

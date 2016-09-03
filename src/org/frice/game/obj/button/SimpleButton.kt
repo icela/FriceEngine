@@ -32,7 +32,8 @@ class SimpleButton(val shape: FShape, var colorResource: ColorResource,
 	override fun getColor() = if (bool) ColorResource(colorResource.color.darker())
 	else colorResource
 
-	override fun onMouse(e: OnMouseEvent) {
-		bool = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
+	override fun onMouse(e: OnMouseEvent): Boolean {
+		bool = super.onMouse(e)
+		return bool
 	}
 }
