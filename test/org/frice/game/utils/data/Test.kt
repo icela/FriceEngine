@@ -52,10 +52,10 @@ class Test() : Game() {
 				}
 			}
 		})
-//		AudioManager.getPlayer("1.wav").start()
-//		AudioManager.play("1.wav")
+		//		AudioManager.getPlayer("1.wav").start()
+		//		AudioManager.play("1.wav")
 
-//		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
+		//		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
 
 		preference = Preference("settings.properties")
 		preference.insert("fuck", "microsoft")
@@ -70,9 +70,9 @@ class Test() : Game() {
 		FCircle(1.0)
 		FPoint(1, 2)
 
-//		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
-//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
-//				10.0, 10.0))
+		//		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
+		//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
+		//				10.0, 10.0))
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.gray())
 	}
@@ -94,4 +94,6 @@ class Test() : Game() {
 	}
 }
 
-fun main(args: Array<String>) = Test()
+fun main(args: Array<String>) {
+	Test()
+}

@@ -7,7 +7,7 @@ import org.frice.game.obj.button.ImageButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
-import org.frice.game.utils.kotlin.loop
+import org.frice.game.utils.misc.loop
 import java.io.File
 import java.util.*
 

@@ -1,6 +1,6 @@
 package org.frice.game.utils.data
 
-import org.frice.game.utils.kotlin.forceRun
+import org.frice.game.utils.misc.forceRun
 import java.io.File
 import java.util.*
 

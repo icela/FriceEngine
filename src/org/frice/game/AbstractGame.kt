@@ -31,8 +31,8 @@ import javax.swing.WindowConstants
  */
 abstract class AbstractGame() : JFrame() {
 	companion object {
-		@JvmStatic private val TO_X = 100
-		@JvmStatic private val TO_Y = 100
+		@JvmStatic val TO_X = 100
+		@JvmStatic val TO_Y = 100
 
 		@JvmStatic val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
 		@JvmStatic val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)

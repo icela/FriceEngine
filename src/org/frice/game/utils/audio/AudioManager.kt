@@ -1,6 +1,6 @@
 package org.frice.game.utils.audio
 
-import org.frice.game.utils.kotlin.async
+import org.frice.game.utils.misc.async
 import java.io.File
 
 /**

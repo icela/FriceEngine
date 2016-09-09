@@ -7,7 +7,7 @@ import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FShape
-import org.frice.game.utils.kotlin.times
+import org.frice.game.utils.misc.times
 import java.awt.image.BufferedImage
 import java.util.*
 

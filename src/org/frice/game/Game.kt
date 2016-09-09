@@ -17,11 +17,11 @@ import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.utils.ColorUtils.darker
-import org.frice.game.utils.kotlin.forceRun
-import org.frice.game.utils.kotlin.loop
-import org.frice.game.utils.kotlin.loopIf
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.misc.forceRun
+import org.frice.game.utils.misc.loop
+import org.frice.game.utils.misc.loopIf
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.awt.*

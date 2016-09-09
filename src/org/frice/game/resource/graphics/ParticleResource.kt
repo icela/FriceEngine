@@ -3,7 +3,7 @@ package org.frice.game.resource.graphics
 import org.frice.game.Game
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
-import org.frice.game.utils.kotlin.loop
+import org.frice.game.utils.misc.loop
 import java.awt.image.BufferedImage
 import java.util.*
 

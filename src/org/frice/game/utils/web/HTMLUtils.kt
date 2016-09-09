@@ -1,6 +1,6 @@
 package org.frice.game.utils.web
 
-import org.frice.game.utils.kotlin.loop
+import org.frice.game.utils.misc.loop
 import java.util.*
 
 /**

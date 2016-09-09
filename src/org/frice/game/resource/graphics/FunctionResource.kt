@@ -1,7 +1,7 @@
 package org.frice.game.resource.graphics
 
 import org.frice.game.resource.FResource
-import org.frice.game.utils.kotlin.forceRun
+import org.frice.game.utils.misc.forceRun
 import java.awt.image.BufferedImage
 
 /**
