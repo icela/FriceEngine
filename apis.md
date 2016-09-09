@@ -23,16 +23,25 @@ onFocus(OnWindowEvent)|Invoke when game window gets focus
 Method|Usage
 :---|---:
 addObject(FObject)|Adds an object to game window
+addObject(Array)|Adds objects to game window
+addObject(List)|Adds objects to game window
 removeObject(FObject)|Removes an object from screen
-addTimeListener(listener: FTimeListener)|Adds a timer listener. It will be invoked when timeouts.
-removeTimeListener(listener: FTimeListener)|Remove a object from timer listeners.
+removeObject(Array)|Removes objects from screen
+removeObject(List)|Removes objects from screen
+addTimeListener(FTimeListener)|Adds a timer listener. It will be invoked when timeouts.
+addTimeListener(Array)|Add timer listeners. It will be invoked when timeouts.
+addTimeListener(List)|Add timer listeners. It will be invoked when timeouts.
+removeTimeListener(FTimeListener)|Remove a object from timer listeners.
+removeTimeListener(Array)|Remove objects from timer listeners.
+removeTimeListener(List)|Remove objects from timer listeners.
 setBack(FResource)|Sets window background
-setCursor(o: ImageObject)|Sets the cursor as an ImageObject. You can operate it like any other objects. This will call `addObject()` by itself.
-setCursor(o: ImageResource)|Create an ImageObject and invoke the last method
+setCursor(ImageObject)|Sets the cursor as an ImageObject. You can operate it like any other objects. This will call `addObject()` by itself.
+setCursor(ImageResource)|Create an ImageObject and invoke the last method
 getScreenCut(): ImageResource|Returns the current screenshot.
 setAutoGC(Boolean)|if true, the engine will remove objects far from the game window.
-setBounds(int x, int y, int width, int height)|*Inherited from Frame*
+setBounds(Int, Int, Int, Int)|*Inherited from Frame*
 setTitle(String)|*Inherited from Frame*
+setLoseFocusChangeColor(Boolean)|if true, the game scene color will become darker when lose focus.
 
 ## Interface: org.frice.game.obj.FObject
 Represents a game object.

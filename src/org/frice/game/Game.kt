@@ -391,7 +391,7 @@ open class Game() : AbstractGame(), Runnable {
 					bgg.drawString(b.text, b.x.toInt() + 10, b.y.toInt() + 20)
 				} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
 			}
-			if (loseFocus) {
+			if (loseFocus && loseFocusChangeColor) {
 				loop(buffer.width) { x ->
 					loop(buffer.height) { y ->
 						buffer.setRGB(x, y, buffer.getRGB(x, y).darker())
