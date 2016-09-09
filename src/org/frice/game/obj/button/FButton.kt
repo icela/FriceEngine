@@ -13,14 +13,12 @@ import org.frice.game.obj.FContainer
 interface FButton : FContainer {
 	var onClickListener: OnClickListener?
 
-	fun onClick(e: OnClickEvent) {
-		if (containsPoint(e.event.x, e.event.y)) onClickListener?.onClick(e)
-	}
+	infix fun onClick(e: OnClickEvent) = onClickListener?.onClick(e)
 
 	/**
 	 * @return true means pressed
 	 */
-	fun onMouse(e: OnMouseEvent) = (e.type() == OnMouseEvent.MOUSE_PRESSED && containsPoint(e.event.x, e.event.y))
+	infix fun onMouse(e: OnMouseEvent) = (e.type() == OnMouseEvent.MOUSE_PRESSED)
 
 	/**
 	 * Created by ice1000 on 2016/8/19.

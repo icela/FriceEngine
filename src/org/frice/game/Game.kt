@@ -116,7 +116,7 @@ open class Game() : AbstractGame(), Runnable {
 	 * clears all objects.
 	 * this method is safe.
 	 */
-	protected fun clearObjects() = objectDeleteBuffer.addAll(objects)
+	fun clearObjects() = objectDeleteBuffer.addAll(objects)
 
 	/**
 	 * removes objects.
@@ -124,7 +124,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs will remove objects which is equal to them, as an array.
 	 */
-	protected fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
+	fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
 
 	/**
 	 * removes objects.
@@ -132,7 +132,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs will remove objects which is equal to them, as a collection.
 	 */
-	protected fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
+	fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
 
 	/**
 	 * removes single object.
@@ -140,7 +140,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param obj will remove objects which is equal to it.
 	 */
-	protected fun removeObject(obj: AbstractObject) {
+	fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDeleteBuffer.add(obj)
 		else objectDeleteBuffer.add(obj)
 	}
@@ -164,14 +164,14 @@ open class Game() : AbstractGame(), Runnable {
 	/**
 	 * removes all auto-executed time listeners
 	 */
-	protected fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
+	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
 	/**
 	 * removes auto-executed time listeners specified in the given array.
 	 *
 	 * @param listeners the array
 	 */
-	protected fun removeTimeListeners(listeners: Array<FTimeListener>) =
+	infix fun removeTimeListeners(listeners: Array<FTimeListener>) =
 			listeners.forEach { l -> removeTimeListener(l) }
 
 	/**
@@ -179,24 +179,27 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param listeners the collection
 	 */
-	protected fun removeTimeListeners(listeners: Collection<FTimeListener>) =
-			removeTimeListeners(listeners.toTypedArray())
+	infix fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
 
 	/**
 	 * removes specified listener
 	 *
 	 * @param listener the listener
 	 */
-	protected fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
+	infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
-	override fun mouse(e: OnMouseEvent) = texts.forEach { b -> if (b is FButton) b.onMouse(e) }
+	override fun mouse(e: OnMouseEvent) = texts.forEach { b ->
+		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e
+	}
 
-	override fun click(e: OnClickEvent) = texts.forEach { b -> if (b is FButton) b.onClick(e) }
+	override fun click(e: OnClickEvent) = texts.forEach { b ->
+		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
+	}
 
 	/**
 	 * set the frame bounds (size and position)
 	 */
-	override fun setBounds(r: Rectangle) {
+	override infix fun setBounds(r: Rectangle) {
 		super.setBounds(r)
 		panel.bounds = r
 	}
@@ -220,7 +223,7 @@ open class Game() : AbstractGame(), Runnable {
 	/**
 	 * set the frame size
 	 */
-	override fun setSize(d: Dimension) {
+	override infix fun setSize(d: Dimension) {
 		super.setSize(d)
 		panel.size = d
 	}
@@ -230,7 +233,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @return screen cut as an image
 	 */
-	protected fun getScreenCut() = ImageResource.create(stableBuffer)
+	fun getScreenCut() = ImageResource.create(stableBuffer)
 
 	/**
 	 * this method escaped the error
@@ -241,11 +244,11 @@ open class Game() : AbstractGame(), Runnable {
 
 	override fun run() {
 		loopIf({ !paused && !stopped && refresh.ended() }) {
-			forceRun { onRefresh() }
-			timeListeners.forEach { it.check() }
-			panel.repaint()
-			fpsCounter++
 			forceRun {
+				onRefresh()
+				timeListeners.forEach { it.check() }
+				panel.repaint()
+				fpsCounter++
 				if (fpsTimer.ended()) {
 					fpsDisplay = fpsCounter
 					fpsCounter = 0
