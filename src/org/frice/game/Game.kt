@@ -95,19 +95,19 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs as a collection
 	 */
-	fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
+	infix fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
 
 	/**
 	 * adds objects
 	 *
 	 * @param objs as an array
 	 */
-	fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+	infix fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
 
 	/**
 	 * adds an object to game, to be shown on game window.
 	 */
-	fun addObject(obj: AbstractObject) {
+	infix fun addObject(obj: AbstractObject) {
 		if (obj is FText) textAddBuffer.add(obj)
 		else objectAddBuffer.add(obj)
 	}
@@ -124,7 +124,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs will remove objects which is equal to them, as an array.
 	 */
-	fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
+	infix fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
 
 	/**
 	 * removes objects.
@@ -132,7 +132,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param objs will remove objects which is equal to them, as a collection.
 	 */
-	fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
+	infix fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
 
 	/**
 	 * removes single object.
@@ -140,7 +140,7 @@ open class Game() : AbstractGame(), Runnable {
 	 *
 	 * @param obj will remove objects which is equal to it.
 	 */
-	fun removeObject(obj: AbstractObject) {
+	infix fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDeleteBuffer.add(obj)
 		else objectDeleteBuffer.add(obj)
 	}
@@ -149,17 +149,17 @@ open class Game() : AbstractGame(), Runnable {
 	 * adds a auto-executed time listener
 	 * you must add or it won't work.
 	 */
-	fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
+	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
 	/**
 	 * adds an array of auto-executed time listeners
 	 */
-	fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
+	infix fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
 
 	/**
 	 * adds a collection of auto-executed time listeners
 	 */
-	fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
+	infix fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
 
 	/**
 	 * removes all auto-executed time listeners

@@ -94,6 +94,4 @@ class Test() : Game() {
 	}
 }
 
-fun main(args: Array<String>) {
-	Test()
-}
+fun main(args: Array<String>) = Test()
