@@ -2,7 +2,7 @@
 This is the full API reference of frice engine.<br/>
 Some classes and interface are private, so they are not shown here.<br/>
 
-## Abstract: org.frice.game.Game
+## Abstract: org.frice.game.AbstractGame (also Class: org.frice.game.Game)
 **Do not override the constructor, anything about initialization please put them into "onInit()"!**
 
 ### Demos
@@ -18,6 +18,7 @@ onClick(OnClickEvent)|Invoked while clicking in game window
 onMouse(OnMouseEvent)|Invoked when a mouse event arrives(moving, pressing, etc)
 onLoseFocus(OnWindowEvent)|Invoked when game window blurs
 onFocus(OnWindowEvent)|Invoke when game window gets focus
+customDraw(Graphics2D)|Override to draw something after everything was drawn.
 
 ### APIs
 Method|Usage
@@ -93,9 +94,37 @@ Param|Usage
 res: ColorResource|Color of this object.
 shape: FShape|Shape of this object
 
-## Interface: org.frice.game.resource.FResource
+## Class: org.frice.game.obj.button.SimpleButton
+A Button.
 
-## Interface: org.frice.game.resource.ImageResource
+### Constructors
+Param|Usage
+:---|---:
+colorResource: ColorResource|the color of the button
+text: String|the text on button
+font: Font|the font of the text(doesn't work)
+x: Double|position
+y: Double|position
+width: Double|width
+height: Double|height
+
+## Class: org.frice.game.obj.button.ImageButton
+A Button containing an image.
+
+### Constructors
+Param|Usage
+:---|---:
+imageNormal: ImageResource|this will be displayed while button is not pressed.
+imagePressed: ImageResource|the image will be displayed while button is pressed.
+x: Double|position
+y: Double|position
+width: Double|width
+height: Double|height
+
+## Class: org.frice.game.obj.effects.ParticleEffect
+An object to display particles.
+
+## Abstract: org.frice.game.resource.ImageResource
 
 ### Members
 Name: Type|Usage
@@ -276,9 +305,3 @@ Param|Usage
 :---|---:
 x: Double|How many times bigger that the owner should scale per second, horizontally.
 y: Double|How many times bigger that the owner should scale per second, vertically.
-
-## Class:org.frice.game.obj.button.SimpleButton
-A Button.
-
-## Class:org.frice.game.obj.effects.ParticleEffect
-An object to display particles.

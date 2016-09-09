@@ -346,8 +346,7 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			objects.forEach { o ->
 				val bgg = bg
-				bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON)
+				bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
@@ -360,11 +359,7 @@ open class Game() : AbstractGame(), Runnable {
 									o.y.toInt(),
 									o.width.toInt(),
 									o.height.toInt())
-							is FOval -> bgg.fillOval(
-									o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt())
+							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
 						}
 					}
 					is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
@@ -379,18 +374,20 @@ open class Game() : AbstractGame(), Runnable {
 			}
 			texts.forEach { b ->
 				val bgg = bg
-				bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-						RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
+				bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 				bgg.rotate(b.rotate)
 				if (b is FButton) {
 					bgg.color = b.getColor().color
 					bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
 							b.width.toInt(), b.height.toInt(),
-							(b.width * 0.15).toInt(), (b.height * 0.15).toInt())
-					bgg.color = ColorResource.GRAY.color
-					bgg.drawString(b.text, b.x.toInt() + 10, b.y.toInt() + 20)
+							(b.width * 0.3).toInt(), (b.height * 0.3).toInt())
+					bgg.color = ColorResource.DARK_GRAY.color
+					bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
 				} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
 			}
+
+			customDraw(bg)
+
 			if (loseFocus && loseFocusChangeColor) {
 				loop(buffer.width) { x ->
 					loop(buffer.height) { y ->

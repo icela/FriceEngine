@@ -10,6 +10,7 @@ import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.message.FDialog
 import java.awt.BorderLayout
+import java.awt.Graphics2D
 import java.awt.Point
 import java.awt.Rectangle
 import java.awt.event.KeyEvent
@@ -115,11 +116,13 @@ abstract class AbstractGame() : JFrame() {
 		paused = false
 	}
 
+	protected open fun customDraw(g: Graphics2D) = Unit
+
 	/**
 	 * for kotlin only
 	 * add keyboard listeners with lambda
 	 */
-	protected fun addKeyListener(
+	fun addKeyListener(
 			typed: (KeyEvent) -> Unit = { },
 			pressed: (KeyEvent) -> Unit = { },
 			released: (KeyEvent) -> Unit = { }) {
@@ -130,31 +133,31 @@ abstract class AbstractGame() : JFrame() {
 		})
 	}
 
-	protected fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed({ e -> key.execute(e) })
-	protected fun listenKeyPressed(key: (KeyEvent) -> Unit) =
+	fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed({ e -> key.execute(e) })
+	fun listenKeyPressed(key: (KeyEvent) -> Unit) =
 			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
 
-	protected fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
-	protected fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
+	fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
+	fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
 	})
 
-	protected fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
+	fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyPressedEvent(keyCode, { e -> key.execute(e) })
 
-	protected fun addKeyPressedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(pressed = { e ->
+	fun addKeyPressedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(pressed = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
 	})
 
-	protected fun addKeyReleasedEvent(keyCode: Int, key: OnKeyEvent) =
+	fun addKeyReleasedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyReleasedEvent(keyCode, { e -> key.execute(e) })
 
-	protected fun addKeyReleasedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(released = { e ->
+	fun addKeyReleasedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(released = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
 	})
 
-	protected fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
-	protected fun setCursor(o: ImageObject) {
+	fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
+	fun setCursor(o: ImageObject) {
 		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
 }
