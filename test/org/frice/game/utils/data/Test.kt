@@ -19,7 +19,6 @@ import org.frice.game.utils.graphics.utils.ColorUtils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
-import org.frice.game.utils.time.OnTimeEvent
 
 /**
  * Created by ice1000 on 2016/8/21.
@@ -33,17 +32,15 @@ class Test() : Game() {
 
 	override fun onInit() {
 		super.onInit()
-		addTimeListener(FTimeListener(100, object : OnTimeEvent {
-			override fun execute() {
-				FLog.v("100 ms has passed")
-			}
-		}))
+		autoGC = true
 
-		addObject(ParticleEffect(ParticleResource(this, width / 2, height / 2), width * 0.25, height * 0.25))
+		addTimeListener(FTimeListener(100, { FLog.v("100 ms has passed") }))
+
+		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10), width * 0.1, height * 0.1))
 		addObject(SimpleButton("I am a button", 30.0, 30.0, 80.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
-					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 20.0), 100.0, 100.0).apply {
+					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
 						anims.add(SimpleMove(150, 150))
 						anims.add(AccelerateMove(-1.0, -1.0))
 						anims.add(SimpleScale(1.1, 1.0))
@@ -80,6 +77,11 @@ class Test() : Game() {
 	override fun onRefresh() {
 		super.onRefresh()
 		if (timer.ended()) {
+			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
+					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
+				anims.add(AccelerateMove.getGravity())
+				anims.add(SimpleMove(random.nextInt(200) - 100, 0))
+			})
 		}
 	}
 

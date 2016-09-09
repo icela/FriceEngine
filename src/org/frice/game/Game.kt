@@ -3,26 +3,14 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.event.OnWindowEvent
-import org.frice.game.obj.AbstractObject
-import org.frice.game.obj.FObject
-import org.frice.game.obj.PhysicalObject
-import org.frice.game.obj.button.FButton
-import org.frice.game.obj.button.FText
-import org.frice.game.obj.effects.LineEffect
-import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
-import org.frice.game.utils.graphics.shape.FOval
-import org.frice.game.utils.graphics.shape.FPoint
-import org.frice.game.utils.graphics.shape.FRectangle
-import org.frice.game.utils.graphics.utils.ColorUtils.darker
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.loopIf
-import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.awt.*
 import java.awt.event.MouseEvent
@@ -30,7 +18,6 @@ import java.awt.event.MouseListener
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 import java.awt.image.BufferedImage
-import java.util.*
 import javax.imageio.ImageIO
 import javax.swing.JPanel
 
@@ -47,18 +34,6 @@ import javax.swing.JPanel
  */
 open class Game() : AbstractGame(), Runnable {
 	private val refresh = FTimer(3)
-
-	private val objects = LinkedList<AbstractObject>()
-	private val objectDeleteBuffer = ArrayList<AbstractObject>()
-	private val objectAddBuffer = ArrayList<AbstractObject>()
-
-	private val texts = LinkedList<FText>()
-	private val textDeleteBuffer = ArrayList<FText>()
-	private val textAddBuffer = ArrayList<FText>()
-
-	private val timeListeners = LinkedList<FTimeListener>()
-	private val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
-	private val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
 	private val buffer: BufferedImage
 
@@ -88,112 +63,6 @@ open class Game() : AbstractGame(), Runnable {
 		//		insets.set(0, insets.left, insets.bottom, insets.right)
 		FLog.v("Engine start!")
 		onLastInit()
-	}
-
-	/**
-	 * adds objects
-	 *
-	 * @param objs as a collection
-	 */
-	infix fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
-
-	/**
-	 * adds objects
-	 *
-	 * @param objs as an array
-	 */
-	infix fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
-
-	/**
-	 * adds an object to game, to be shown on game window.
-	 */
-	infix fun addObject(obj: AbstractObject) {
-		if (obj is FText) textAddBuffer.add(obj)
-		else objectAddBuffer.add(obj)
-	}
-
-	/**
-	 * clears all objects.
-	 * this method is safe.
-	 */
-	fun clearObjects() = objectDeleteBuffer.addAll(objects)
-
-	/**
-	 * removes objects.
-	 * this method is safe.
-	 *
-	 * @param objs will remove objects which is equal to them, as an array.
-	 */
-	infix fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
-
-	/**
-	 * removes objects.
-	 * this method is safe.
-	 *
-	 * @param objs will remove objects which is equal to them, as a collection.
-	 */
-	infix fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
-
-	/**
-	 * removes single object.
-	 * this method is safe.
-	 *
-	 * @param obj will remove objects which is equal to it.
-	 */
-	infix fun removeObject(obj: AbstractObject) {
-		if (obj is FText) textDeleteBuffer.add(obj)
-		else objectDeleteBuffer.add(obj)
-	}
-
-	/**
-	 * adds a auto-executed time listener
-	 * you must add or it won't work.
-	 */
-	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
-
-	/**
-	 * adds an array of auto-executed time listeners
-	 */
-	infix fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
-
-	/**
-	 * adds a collection of auto-executed time listeners
-	 */
-	infix fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
-
-	/**
-	 * removes all auto-executed time listeners
-	 */
-	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
-
-	/**
-	 * removes auto-executed time listeners specified in the given array.
-	 *
-	 * @param listeners the array
-	 */
-	infix fun removeTimeListeners(listeners: Array<FTimeListener>) =
-			listeners.forEach { l -> removeTimeListener(l) }
-
-	/**
-	 * auto-execute time listeners which are equal to the given collection.
-	 *
-	 * @param listeners the collection
-	 */
-	infix fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
-
-	/**
-	 * removes specified listener
-	 *
-	 * @param listener the listener
-	 */
-	infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
-
-	override fun mouse(e: OnMouseEvent) = texts.forEach { b ->
-		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e
-	}
-
-	override fun click(e: OnClickEvent) = texts.forEach { b ->
-		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
 	}
 
 	/**
@@ -267,26 +136,6 @@ open class Game() : AbstractGame(), Runnable {
 	}
 
 	/**
-	 * do the delete and add work, to prevent Exceptions
-	 */
-	private fun processBuffer() {
-		objects.addAll(objectAddBuffer)
-		objects.removeAll(objectDeleteBuffer)
-		objectDeleteBuffer.clear()
-		objectAddBuffer.clear()
-
-		timeListeners.addAll(timeListenerAddBuffer)
-		timeListeners.removeAll(timeListenerDeleteBuffer)
-		timeListenerDeleteBuffer.clear()
-		timeListenerAddBuffer.clear()
-
-		texts.addAll(textAddBuffer)
-		texts.removeAll(textDeleteBuffer)
-		textDeleteBuffer.clear()
-		textAddBuffer.clear()
-	}
-
-	/**
 	 * Main game view.
 	 * all rendering work and game object calculating are here.
 	 *
@@ -335,58 +184,8 @@ open class Game() : AbstractGame(), Runnable {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			processBuffer()
-
 			drawBackground(back, bg)
-			objects.forEach { o ->
-				if (o is FObject) {
-					o.runAnims()
-					o.checkCollision()
-				}
-			}
-			objects.forEach { o ->
-				val bgg = bg
-				bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
-				else bgg.rotate(o.rotate, o.x, o.y)
-				when (o) {
-					is FObject.ImageOwner -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
-					is ShapeObject -> {
-						bgg.color = o.getResource().color
-						when (o.collideBox) {
-							is FPoint, is FRectangle -> bgg.fillRect(
-									o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt())
-							is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
-						}
-					}
-					is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
-				}
-				if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
-						o.y.toInt() < -height || o.y.toInt() > height + height)) {
-					if (o is PhysicalObject) o.died = true
-					removeObject(o)
-					//FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
-					//		" o.y.toInt() = ${o.y.toInt()}, height = $height")
-				}
-			}
-			texts.forEach { b ->
-				val bgg = bg
-				bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
-				bgg.rotate(b.rotate)
-				if (b is FButton) {
-					bgg.color = b.getColor().color
-					bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
-							b.width.toInt(), b.height.toInt(),
-							(b.width * 0.3).toInt(), (b.height * 0.3).toInt())
-					bgg.color = ColorResource.DARK_GRAY.color
-					bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
-				} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
-			}
-
-			customDraw(bg)
+			drawEverything(bg)
 
 			if (loseFocus && loseFocusChangeColor) {
 				loop(buffer.width) { x ->
