@@ -16,10 +16,17 @@ class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, 
 
 	init {
 		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		var lastTime = f(0.0)
+		var thisTime: Double
 		(0..width step 1).forEach { x ->
-			listOf(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9).forEach { d ->
-				forceRun { image.setRGB((x + d).toInt(), f(x + d).toInt(), colorResource.color.rgb) }
+			thisTime = f(x.toDouble())
+			forceRun { image.setRGB(x.toInt(), thisTime.toInt(), colorResource.color.rgb) }
+			if (Math.abs(thisTime - lastTime) >= 1.0) forceRun {
+				(Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()).forEach { i ->
+					image.setRGB(x, i, colorResource.color.rgb)
+				}
 			}
+			lastTime = thisTime
 		}
 	}
 
