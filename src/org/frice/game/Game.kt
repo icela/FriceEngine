@@ -164,6 +164,7 @@ open class Game() : AbstractGame(), Runnable {
 					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
 				}
 			})
+
 			addWindowListener(object : WindowListener {
 				override fun windowDeiconified(e: WindowEvent) = Unit
 				override fun windowActivated(e: WindowEvent) {
