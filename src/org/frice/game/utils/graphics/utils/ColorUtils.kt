@@ -23,4 +23,6 @@ object ColorUtils {
 		return (color.blue * 2 / 3) or ((color.green * 2 / 3) shl 8) or
 				((color.red * 2 / 3) shl 16) or ((color.alpha shl 24))
 	}
+
+	@JvmStatic fun darkerRGB(int: Int) = int.darker()
 }

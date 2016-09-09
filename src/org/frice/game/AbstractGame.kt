@@ -90,7 +90,7 @@ abstract class AbstractGame() : JFrame() {
 	var showFPS = true
 
 	var loseFocus = false
-		private set
+		protected set
 
 	var loseFocusChangeColor = true
 
@@ -159,7 +159,7 @@ abstract class AbstractGame() : JFrame() {
 	}
 
 	fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed({ e -> key.execute(e) })
-	fun listenKeyPressed(key: (KeyEvent) -> Unit) =
+	infix fun listenKeyPressed(key: (KeyEvent) -> Unit) =
 			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
 
 	fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
@@ -181,8 +181,8 @@ abstract class AbstractGame() : JFrame() {
 		if (e.keyCode == keyCode) key.invoke(e)
 	})
 
-	fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
-	fun setCursor(o: ImageObject) {
+	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
+	infix fun setCursor(o: ImageObject) {
 		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
 	}
 
@@ -307,7 +307,7 @@ abstract class AbstractGame() : JFrame() {
 		textAddBuffer.clear()
 	}
 
-	protected fun drawEverything(bg: Graphics2D) {
+	protected fun drawEverything(getBGG: () -> Graphics2D) {
 		processBuffer()
 
 		objects.forEach { o ->
@@ -316,8 +316,9 @@ abstract class AbstractGame() : JFrame() {
 				o.checkCollision()
 			}
 		}
+
 		objects.forEach { o ->
-			val bgg = bg
+			val bgg = getBGG()
 			bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 			if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 			else bgg.rotate(o.rotate, o.x, o.y)
@@ -330,8 +331,14 @@ abstract class AbstractGame() : JFrame() {
 								o.x.toInt(),
 								o.y.toInt(),
 								o.width.toInt(),
-								o.height.toInt())
-						is FOval -> bgg.fillOval(o.x.toInt(), o.y.toInt(), o.width.toInt(), o.height.toInt())
+								o.height.toInt()
+						)
+						is FOval -> bgg.fillOval(
+								o.x.toInt(),
+								o.y.toInt(),
+								o.width.toInt(),
+								o.height.toInt()
+						)
 					}
 				}
 				is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
@@ -344,21 +351,23 @@ abstract class AbstractGame() : JFrame() {
 				//		" o.y.toInt() = ${o.y.toInt()}, height = $height")
 			}
 		}
+
 		texts.forEach { b ->
-			val bgg = bg
+			val bgg = getBGG()
 			bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 			bgg.rotate(b.rotate)
 			if (b is FButton) {
 				bgg.color = b.getColor().color
 				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
 						b.width.toInt(), b.height.toInt(),
-						(b.width * 0.3).toInt(), (b.height * 0.3).toInt())
+						Math.min((b.width * 0.5).toInt(), 10),
+						Math.min((b.height * 0.5).toInt(), 10))
 				bgg.color = ColorResource.DARK_GRAY.color
 				bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
 			} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
 		}
 
-		customDraw(bg)
+		customDraw(getBGG())
 	}
 
 }

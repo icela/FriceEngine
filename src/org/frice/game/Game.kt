@@ -6,6 +6,7 @@ import org.frice.game.event.OnWindowEvent
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
+import org.frice.game.utils.graphics.utils.ColorUtils
 import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.forceRun
@@ -185,12 +186,12 @@ open class Game() : AbstractGame(), Runnable {
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
 			drawBackground(back, bg)
-			drawEverything(bg)
+			drawEverything({ bg })
 
 			if (loseFocus && loseFocusChangeColor) {
 				loop(buffer.width) { x ->
 					loop(buffer.height) { y ->
-						buffer.setRGB(x, y, buffer.getRGB(x, y).darker())
+						buffer.setRGB(x, y, ColorUtils.darkerRGB(buffer.getRGB(x, y)))
 					}
 				}
 			}

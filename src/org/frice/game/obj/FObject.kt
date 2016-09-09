@@ -32,14 +32,14 @@ abstract class FObject : PhysicalObject() {
 
 	abstract fun getResource(): FResource
 
-	abstract fun scale(p: Pair<Double, Double>)
+	abstract infix fun scale(p: Pair<Double, Double>)
 
-	open fun move(p: Pair<Double, Double>) {
+	open infix fun move(p: Pair<Double, Double>) {
 		x += p.first
 		y += p.second
 	}
 
-	open fun rotate(angle: Double) {
+	open infix fun rotate(angle: Double) {
 		rotate += angle
 	}
 

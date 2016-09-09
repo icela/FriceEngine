@@ -6,6 +6,8 @@ import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.SimpleMove
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
+import org.frice.game.obj.FObject
+import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.ParticleEffect
@@ -19,6 +21,7 @@ import org.frice.game.utils.graphics.utils.ColorUtils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
+import java.util.*
 
 /**
  * Created by ice1000 on 2016/8/21.
@@ -29,6 +32,7 @@ class Test() : Game() {
 	private lateinit var preference: Preference
 	private lateinit var xmlPreference: XMLPreference
 	private val timer = FTimer(200)
+	private val objs = LinkedList<PhysicalObject>()
 
 	override fun onInit() {
 		super.onInit()
@@ -40,12 +44,14 @@ class Test() : Game() {
 		addObject(SimpleButton("I am a button", 30.0, 30.0, 80.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
-					addObject(ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
+					val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
 						anims.add(SimpleMove(150, 150))
 						anims.add(AccelerateMove(-1.0, -1.0))
 						anims.add(SimpleScale(1.1, 1.0))
 						anims.add(RotateAnim(0.1))
-					})
+					}
+					objs.add(obj)
+					addObject(obj)
 				}
 			}
 		})
@@ -77,10 +83,20 @@ class Test() : Game() {
 	override fun onRefresh() {
 		super.onRefresh()
 		if (timer.ended()) {
+			objs.removeAll { o -> o.died }
 			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
 					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(SimpleMove(random.nextInt(200) - 100, 0))
+				targets.clear()
+				objs.forEach { o ->
+					targets.add(Pair(o, object : FObject.OnCollideEvent {
+						override fun handle() {
+							anims.clear()
+							anims.add(SimpleMove(-200, 0))
+						}
+					}))
+				}
 			})
 		}
 	}
