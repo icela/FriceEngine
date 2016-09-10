@@ -15,41 +15,41 @@ class ColorResource(val color: Color) : FResource {
 	 * Read these color names in UTF-8 w/o BOM encoding, and pick up your 信仰 and 节操.
 	 */
 	companion object {
-		@JvmStatic val GREEN = ColorResource(Color.GREEN)
-		@JvmStatic val BLUE = ColorResource(Color.BLUE)
-		@JvmStatic val GRAY = ColorResource(Color.GRAY)
-		@JvmStatic val DARK_GRAY = ColorResource(Color.DARK_GRAY)
-		@JvmStatic val LIGHT_GRAY = ColorResource(Color.LIGHT_GRAY)
-		@JvmStatic val WHITE = ColorResource(Color.WHITE)
-		@JvmStatic val RED = ColorResource(Color.RED)
-		@JvmStatic val BLACK = ColorResource(Color.BLACK)
-		@JvmStatic val CYAN = ColorResource(Color.CYAN)
-		@JvmStatic val MAGENTA = ColorResource(Color.MAGENTA)
-		@JvmStatic val YELLOW = ColorResource(Color.YELLOW)
-		@JvmStatic val SHIT_YELLOW = ColorResource(0x633516)
-		@JvmStatic val ORANGE = ColorResource(Color.ORANGE)
-		@JvmStatic val PINK = ColorResource(Color.PINK)
-		@JvmStatic val 小埋色 = ColorResource(0xFFAC2B)
-		@JvmStatic val 基佬紫 = ColorResource(0x781895)
-		@JvmStatic val 吾王蓝 = BLUE
-		@JvmStatic val 教主黄 = YELLOW
-		@JvmStatic val 宝强绿 = GREEN
-		@JvmStatic val 冰封绿 = 宝强绿
-		@JvmStatic val 如果奇迹有颜色那么一定是橙色 = ORANGE
-		@JvmStatic val 高坂穗乃果 = ORANGE
-		@JvmStatic val 南小鸟 = GRAY
-		@JvmStatic val 园田海未 = BLUE
-		@JvmStatic val 洵濑绘理 = ColorResource(0x0FFFFF)
-		@JvmStatic val 星空凛 = 教主黄
-		@JvmStatic val 西木野真姬 = RED
-		@JvmStatic val 东条希 = 基佬紫
-		@JvmStatic val 小泉花阳 = ColorResource(0x1BA61C)
-		@JvmStatic val 矢泽妮可 = PINK
-		@JvmStatic val 屎黄色 = SHIT_YELLOW
-		@JvmStatic val 天依蓝 = ColorResource(0x66CCFF)
-		@JvmStatic val 清真绿 = ColorResource(0x038B43)
-		@JvmStatic val IntelliJ_IDEA黑 = ColorResource(0x2B2B2B)
-		@JvmStatic val 如果真爱有颜色那么一定是黄色 = 教主黄
+		@JvmField val GREEN = ColorResource(Color.GREEN)
+		@JvmField val BLUE = ColorResource(Color.BLUE)
+		@JvmField val GRAY = ColorResource(Color.GRAY)
+		@JvmField val DARK_GRAY = ColorResource(Color.DARK_GRAY)
+		@JvmField val LIGHT_GRAY = ColorResource(Color.LIGHT_GRAY)
+		@JvmField val WHITE = ColorResource(Color.WHITE)
+		@JvmField val RED = ColorResource(Color.RED)
+		@JvmField val BLACK = ColorResource(Color.BLACK)
+		@JvmField val CYAN = ColorResource(Color.CYAN)
+		@JvmField val MAGENTA = ColorResource(Color.MAGENTA)
+		@JvmField val YELLOW = ColorResource(Color.YELLOW)
+		@JvmField val SHIT_YELLOW = ColorResource(0x633516)
+		@JvmField val ORANGE = ColorResource(Color.ORANGE)
+		@JvmField val PINK = ColorResource(Color.PINK)
+		@JvmField val 小埋色 = ColorResource(0xFFAC2B)
+		@JvmField val 基佬紫 = ColorResource(0x781895)
+		@JvmField val 吾王蓝 = BLUE
+		@JvmField val 教主黄 = YELLOW
+		@JvmField val 宝强绿 = GREEN
+		@JvmField val 冰封绿 = 宝强绿
+		@JvmField val 如果奇迹有颜色那么一定是橙色 = ORANGE
+		@JvmField val 高坂穗乃果 = ORANGE
+		@JvmField val 南小鸟 = GRAY
+		@JvmField val 园田海未 = BLUE
+		@JvmField val 洵濑绘理 = ColorResource(0x0FFFFF)
+		@JvmField val 星空凛 = 教主黄
+		@JvmField val 西木野真姬 = RED
+		@JvmField val 东条希 = 基佬紫
+		@JvmField val 小泉花阳 = ColorResource(0x1BA61C)
+		@JvmField val 矢泽妮可 = PINK
+		@JvmField val 屎黄色 = SHIT_YELLOW
+		@JvmField val 天依蓝 = ColorResource(0x66CCFF)
+		@JvmField val 清真绿 = ColorResource(0x038B43)
+		@JvmField val IntelliJ_IDEA黑 = ColorResource(0x2B2B2B)
+		@JvmField val 如果真爱有颜色那么一定是黄色 = 教主黄
 	}
 
 	constructor(color: Int):this(Color(color))

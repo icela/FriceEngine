@@ -24,6 +24,7 @@ import org.frice.game.utils.time.FTimer
 import java.util.*
 
 /**
+ * Sample
  * Created by ice1000 on 2016/8/21.
  *
  * @author ice1000
@@ -41,12 +42,13 @@ class Test() : Game() {
 		addTimeListener(FTimeListener(100, { FLog.v("100 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10), width * 0.1, height * 0.1))
-		addObject(SimpleButton("I am a button", 30.0, 30.0, 80.0, 30.0).apply {
+		addObject(SimpleButton("I am a button", 30.0, 30.0, 100.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
 					val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
-						anims.add(SimpleMove(150, 150))
-						anims.add(AccelerateMove(-1.0, -1.0))
+						mass = 3.0
+						addForce(-1.0, -1.0)
+						anims.add(SimpleMove(400, 400))
 						anims.add(SimpleScale(1.1, 1.0))
 						anims.add(RotateAnim(0.1))
 					}
@@ -87,13 +89,14 @@ class Test() : Game() {
 			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
 					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
 				anims.add(AccelerateMove.getGravity())
-				anims.add(SimpleMove(random.nextInt(200) - 100, 0))
+				anims.add(SimpleMove(random.nextInt(400) - 200, 0))
 				targets.clear()
 				objs.forEach { o ->
 					targets.add(Pair(o, object : FObject.OnCollideEvent {
 						override fun handle() {
 							anims.clear()
-							anims.add(SimpleMove(-200, 0))
+							anims.add(SimpleMove(0, -300))
+							res = ColorResource.MAGENTA
 						}
 					}))
 				}
