@@ -72,6 +72,10 @@ abstract class FObject : PhysicalObject() {
 		targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
 	}
 
+	/**
+	 * add a force to this object
+	 * the effect of the force have sth to do with the mass
+	 */
 	fun addForce(x: Double, y: Double) {
 		force.ax += x
 		force.ay += y

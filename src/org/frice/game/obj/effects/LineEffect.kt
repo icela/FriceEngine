@@ -7,6 +7,7 @@ import org.frice.game.resource.graphics.ColorResource
  * Created by ice1000 on 2016/8/19.
  *
  * @author ice1000
+ * @since v0.5
  */
 class LineEffect(var colorResource: ColorResource, override var x: Double, override var y: Double,
                  var x2: Double, var y2: Double) : AbstractObject {

@@ -14,7 +14,7 @@ import org.frice.game.utils.graphics.shape.FShape
  * @author ice1000
  * @since v0.1.1
  */
-open class ShapeObject(protected val res: ColorResource, override val collideBox: FShape, override var id: Int,
+open class ShapeObject(var res: ColorResource, override val collideBox: FShape, override var id: Int,
                        override var x: Double, override var y: Double) : FObject() {
 	constructor(res: ColorResource, shape: FShape, x: Double, y: Double) : this(res, shape, -1, x, y)
 

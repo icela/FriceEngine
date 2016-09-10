@@ -40,6 +40,7 @@ open class Game() : AbstractGame(), Runnable {
 
 	private val panel: GamePanel
 	private val stableBuffer: BufferedImage
+
 	private val bg: Graphics2D
 		get() = buffer.graphics as Graphics2D
 
