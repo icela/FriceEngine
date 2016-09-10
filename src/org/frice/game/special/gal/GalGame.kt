@@ -20,9 +20,9 @@ import java.util.*
 class GalGame() : Game() {
 
 	companion object {
-		@JvmStatic val POSITION_LEFT = 0
-		@JvmStatic val POSITION_MIDDLE = 1
-		@JvmStatic val POSITION_RIGHT = 2
+		@JvmField val POSITION_LEFT = 0
+		@JvmField val POSITION_MIDDLE = 1
+		@JvmField val POSITION_RIGHT = 2
 	}
 
 	private val stepSequence = ArrayList<Step>()
