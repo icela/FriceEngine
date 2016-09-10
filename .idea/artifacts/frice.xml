@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/frice</output-path>
     <root id="archive" name="engineee.jar">
       <element id="module-output" name="FriceEngine" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-runtime-origin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-runtime.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

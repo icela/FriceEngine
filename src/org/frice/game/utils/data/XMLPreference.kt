@@ -1,8 +1,8 @@
 package org.frice.game.utils.data
 
+import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.misc.forceGet
 import org.frice.game.utils.misc.forceLoop
-import org.frice.game.utils.message.error.FatalError
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import java.io.File
@@ -27,18 +27,18 @@ class XMLPreference constructor(val file: File) : Database{
 	private val root: Element
 
 	companion object {
-		private val ROOT = "PREFERENCE_CONST_ROOT"
-		private val TYPE = "PREFERENCE_CONST_TYPE"
-		private val VALUE = "PREFERENCE_CONST_VALUE"
+		@JvmField val ROOT = "PREFERENCE_CONST_ROOT"
+		@JvmField val TYPE = "PREFERENCE_CONST_TYPE"
+		@JvmField val VALUE = "PREFERENCE_CONST_VALUE"
 
-		private val TYPE_BYTE = "PREFERENCE_CONST_TYPE_BYTE"
-		private val TYPE_INT = "PREFERENCE_CONST_TYPE_INT"
-		private val TYPE_LONG = "PREFERENCE_CONST_TYPE_LONG"
-		private val TYPE_SHORT = "PREFERENCE_CONST_TYPE_SHORT"
-		private val TYPE_DOUBLE = "PREFERENCE_CONST_TYPE_DOUBLE"
-		private val TYPE_FLOAT = "PREFERENCE_CONST_TYPE_FLOAT"
-		private val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
-		private val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
+		@JvmField val TYPE_BYTE = "PREFERENCE_CONST_TYPE_BYTE"
+		@JvmField val TYPE_INT = "PREFERENCE_CONST_TYPE_INT"
+		@JvmField val TYPE_LONG = "PREFERENCE_CONST_TYPE_LONG"
+		@JvmField val TYPE_SHORT = "PREFERENCE_CONST_TYPE_SHORT"
+		@JvmField val TYPE_DOUBLE = "PREFERENCE_CONST_TYPE_DOUBLE"
+		@JvmField val TYPE_FLOAT = "PREFERENCE_CONST_TYPE_FLOAT"
+		@JvmField val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
+		@JvmField val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
 
 		private var instance: XMLPreference? = null
 

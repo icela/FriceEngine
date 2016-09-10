@@ -50,7 +50,7 @@ abstract class AbstractGame() : JFrame() {
 		@JvmField val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
 		@JvmField val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
 
-		@JvmStatic fun Rectangle.turn() {
+		@JvmStatic fun Rectangle.rotate() {
 			width -= -height
 			height -= width
 			width += height

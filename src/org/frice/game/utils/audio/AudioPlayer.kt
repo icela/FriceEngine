@@ -32,7 +32,7 @@ class AudioPlayer internal constructor(file: File) {
 	private val thread = Thread { main() }
 
 	companion object {
-		val BUFFER_SIZE = 2048
+		@JvmField val BUFFER_SIZE = 2048
 
 		private fun getLine(audioFormat: AudioFormat): SourceDataLine {
 			return (AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java,
