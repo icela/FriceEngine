@@ -94,17 +94,17 @@ abstract class AbstractGame() : JFrame() {
 
 	var loseFocusChangeColor = true
 
-	protected val objects = LinkedList<AbstractObject>()
-	protected val objectDeleteBuffer = ArrayList<AbstractObject>()
-	protected val objectAddBuffer = ArrayList<AbstractObject>()
+	protected @JvmField val objects = LinkedList<AbstractObject>()
+	protected @JvmField val objectDeleteBuffer = ArrayList<AbstractObject>()
+	protected @JvmField val objectAddBuffer = ArrayList<AbstractObject>()
 
-	protected val timeListeners = LinkedList<FTimeListener>()
-	protected val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
-	protected val timeListenerAddBuffer = ArrayList<FTimeListener>()
+	protected @JvmField val timeListeners = LinkedList<FTimeListener>()
+	protected @JvmField val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
+	protected @JvmField val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
-	protected val texts = LinkedList<FText>()
-	protected val textDeleteBuffer = ArrayList<FText>()
-	protected val textAddBuffer = ArrayList<FText>()
+	protected @JvmField val texts = LinkedList<FText>()
+	protected @JvmField val textDeleteBuffer = ArrayList<FText>()
+	protected @JvmField val textAddBuffer = ArrayList<FText>()
 
 	init {
 		isResizable = false

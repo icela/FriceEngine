@@ -1,7 +1,5 @@
 package org.frice.game.obj
 
-import org.frice.game.obj.collide.CollideBox
-
 /**
  * Created by ice1000 on 2016/8/19.
  *
