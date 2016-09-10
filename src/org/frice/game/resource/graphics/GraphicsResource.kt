@@ -57,6 +57,10 @@ class ColorResource(val color: Color) : FResource {
 		@JvmField val 清真绿 = ColorResource(0x038B43)
 		@JvmField val IntelliJ_IDEA黑 = ColorResource(0x2B2B2B)
 		@JvmField val 如果真爱有颜色那么一定是黄色 = 教主黄
+		@JvmField val 杀老师 = 如果真爱有颜色那么一定是黄色
+		@JvmField val 潮田渚 = 园田海未
+		@JvmField val 茅野枫 = 冰封绿
+		@JvmField val 赤羽业 = 西木野真姬
 	}
 
 	constructor(color: Int) : this(Color(color))
@@ -117,7 +121,8 @@ class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, 
  * @since v0.3.2
  */
 class ParticleResource(val game: Game,
-                       var x: Int, var y: Int,
+                       var width: Int,
+                       var height: Int,
                        val back: FResource,
                        var fore: ColorResource,
                        var percentage: Double) : FResource {
@@ -132,24 +137,24 @@ class ParticleResource(val game: Game,
 	/**
 	 * particle effects as an image
 	 */
-	private val image = BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB_PRE)
+	private val image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE)
 	private val random = Random(Random().nextLong())
 
 	private fun drawBackground() {
 		val g = image.graphics
 		when (back) {
 			is ColorResource -> {
-					g.fillRect(0, 0, x, y)
+				g.fillRect(0, 0, width, height)
 				g.color = back.color
 			}
-			is ImageResource -> g.drawImage(back.image, 0, 0, x, y, game)
+			is ImageResource -> g.drawImage(back.image, 0, 0, width, height, game)
 		}
 	}
 
 	init {
 		drawBackground()
 		loop((image.width * image.height * percentage).toInt()) {
-			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
+			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
 		}
 	}
 
@@ -158,9 +163,9 @@ class ParticleResource(val game: Game,
 		var cache1: Int
 		var cache2: Int
 		loop((image.width * image.height * percentage).toInt()) {
-			cache1 = random.nextInt(x)
-			cache2 = random.nextInt(y)
-			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
+			cache1 = random.nextInt(width)
+			cache2 = random.nextInt(height)
+			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
 			image.setRGB(cache1, cache2, when (back) {
 				is ColorResource -> back.color.rgb
 				is ImageResource -> back.image.getRGB(cache1, cache2)

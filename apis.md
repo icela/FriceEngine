@@ -11,8 +11,8 @@ See [README](README.md).
 ### Life cycle methods
 Method|Usage
 :---|---:
-onInit()|Invoked when initializing
-onExit()|Invoked when exiting (NOTE: engine does not perform process termination automatically)
+onInit()|Invoked while initializing
+onExit()|Invoked while exiting (NOTE: engine does not perform process termination automatically)
 onRefresh()|Invoked after game window is refreshed, if not paused)
 onClick(OnClickEvent)|Invoked while clicking in game window
 onMouse(OnMouseEvent)|Invoked when a mouse event arrives(moving, pressing, etc)
@@ -44,7 +44,7 @@ setBounds(Int, Int, Int, Int)|*Inherited from Frame*
 setTitle(String)|*Inherited from Frame*
 setLoseFocusChangeColor(Boolean)|if true, the game scene color will become darker when lose focus.
 
-## Interface: org.frice.game.obj.FObject
+## Abstract: org.frice.game.obj.FObject
 Represents a game object.
 
 ### APIs
@@ -53,7 +53,7 @@ Name|Usage
 getAnims(): List<(FAnim)>|get the list of anims, you can add and remove animations via this.
 getTargets(): List<(Pair<(FObject, Event)>)>|get a list of pairs, it has an object reference and an event interface. when collision occurs, the interface will be called.
 addForce(Double, Double)|add a force to this object(actually you added an accelerate anim to it). It's force, and you had better set the mass first.
-setMass(Double)|set the mass. It's safe, if you set an unsafe value, it will fuck the value automatically. :joy:
+setMass(Double)|set the mass. It's safe, if you set an unsafe value, it will ignore the operation automatically. :joy:
 
 ### Demos
 see Demo1.java in the demo repo.
@@ -65,7 +65,7 @@ id: Int|Unique ID
 x: Int|Location x
 y: Int|Location y
 anims: ArrayList<FAnim>|Animation list of this object. Engine will play them if game is not paused.
-targets: ArrayList<Pair<FObject, OnCollideEvent>>|Param `FObject` is the target object, `OnCollideEvent` is a lambda which will be called when owner collides the target object.
+targets: ArrayList<(Pair<FObject, OnCollideEvent>)>|Param `FObject` is the target object, `OnCollideEvent` is a lambda which will be called when owner collides the target object.
 
 ## Class: org.frice.game.obj.sub.ImageObject
 
@@ -145,7 +145,8 @@ fun fromURL(url: URL)| create an image from url
 ### Constructors
 Param|Usage
 :---|---:
-file: File<br />file: String|Image file handler or path to the image file.
+file: File|Image file handler to the image file.
+file: String|Image path to the image file.
 
 ## Class: org.frice.game.resource.WebImageResource
 
@@ -164,13 +165,13 @@ game: Game|Game context, just pass `this` in your own Game class
 list: List<ImageResource>, Array<ImageResource>|List of images
 div: Int|Division time between two images
 
-## Class: org.frice.game.resource.image.PartImageResource
-Create an image resource from a part of another image.
-
 ### APIs
 Method|Usage
 :---|---:
 setLoop(Boolean)|Set whether the animation should loop.
+
+## Class: org.frice.game.resource.image.PartImageResource
+Create an image resource from a part of another image.
 
 ## Class: org.frice.game.resource.ColorResource
 
@@ -182,6 +183,7 @@ color: Color, Int, String|color
 ### Built-in colors
 ```
 GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELLOW, SHIT_YELLOW, ORANGE, PINK
+and so on!
 ```
 
 ## Static object: org.frice.game.utils.message.log.FLog
@@ -287,7 +289,7 @@ y: Int|Pixels that the owner's speed should be increased by **per second**, vert
 ### APIs
 Method|Usage
 :---|---:
-getGravity(g: Double), getGravity()|Returns an `AccelerateMove` instance which y = g  (default 10) and x = 0
+getGravity(g: Double)<br/>getGravity()|Returns an `AccelerateMove` instance which y = g  (default 10) and x = 0
 
 ## Abstract:org.frice.game.anim.move.CustomMove
 Defines a user-customized move.

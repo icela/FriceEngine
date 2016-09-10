@@ -34,17 +34,17 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
 	override val width: Double
-		get() = resource.x.toDouble()
+		get() = resource.width.toDouble()
 	override val height: Double
-		get() = resource.y.toDouble()
+		get() = resource.height.toDouble()
 
 	override fun getImage() = resource.getResource()
 
 	override fun getResource() = ImageResource.create(getImage())
 
 	override fun scale(p: Pair<Double, Double>) {
-		resource.x = (resource.x * p.first).toInt()
-		resource.y = (resource.y * p.second).toInt()
+		resource.width = (resource.width * p.first).toInt()
+		resource.height = (resource.height * p.second).toInt()
 	}
 
 	//	override fun isCollide(other: CollideBox): Boolean = false
