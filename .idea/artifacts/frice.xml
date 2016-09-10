@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="frice">
     <output-path>$PROJECT_DIR$/out/artifacts/frice</output-path>
-    <root id="archive" name="engineee.jar">
+    <root id="archive" name="engine.jar">
       <element id="module-output" name="FriceEngine" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-runtime.jar" path-in-jar="/" />
     </root>

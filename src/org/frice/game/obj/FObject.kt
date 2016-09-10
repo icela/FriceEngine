@@ -18,8 +18,11 @@ import java.util.*
  */
 abstract class FObject : PhysicalObject() {
 	open var id = -1
+
 	val anims = ArrayList<FAnim>()
+
 	val targets = ArrayList<Pair<PhysicalObject, OnCollideEvent>>()
+
 	override var rotate = 0.0
 
 	/**
@@ -27,6 +30,11 @@ abstract class FObject : PhysicalObject() {
 	 * will change with mass(see #runAnims below)
 	 */
 	val force = AccelerateMove(0.0, 0.0)
+
+	val gravityX: Double? = null
+		get() = field ?: x
+	val gravityY: Double? = null
+		get() = field ?: y
 
 	abstract val collideBox: FShape
 

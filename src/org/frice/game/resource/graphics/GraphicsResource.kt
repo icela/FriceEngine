@@ -35,6 +35,7 @@ class ColorResource(val color: Color) : FResource {
 		@JvmField val SHIT_YELLOW = ColorResource(0x633516)
 		@JvmField val ORANGE = ColorResource(Color.ORANGE)
 		@JvmField val PINK = ColorResource(Color.PINK)
+		@JvmField val COLORLESS = ColorResource(Color(0, 0, 0, 0))
 		@JvmField val 小埋色 = ColorResource(0xFFAC2B)
 		@JvmField val 基佬紫 = ColorResource(0x781895)
 		@JvmField val 吾王蓝 = BLUE
@@ -119,12 +120,14 @@ class ParticleResource(val game: Game,
                        var x: Int, var y: Int,
                        val back: FResource,
                        var fore: ColorResource,
-                       percentage: Double) : FResource {
+                       var percentage: Double) : FResource {
 	constructor(game: Game, x: Int, y: Int, back: ColorResource, fore: ColorResource) :
 	this(game, x, y, back, fore, 0.5)
 
-	constructor(game: Game, x: Int, y: Int) :
-	this(game, x, y, ColorResource.BLACK, ColorResource.WHITE, 0.5)
+	constructor(game: Game, x: Int, y: Int, percentage: Double) :
+	this(game, x, y, ColorResource.COLORLESS, ColorResource.BLACK, percentage)
+
+	constructor(game: Game, x: Int, y: Int) : this(game, x, y, 0.5)
 
 	/**
 	 * particle effects as an image
@@ -136,8 +139,8 @@ class ParticleResource(val game: Game,
 		val g = image.graphics
 		when (back) {
 			is ColorResource -> {
+					g.fillRect(0, 0, x, y)
 				g.color = back.color
-				g.fillRect(0, 0, x, y)
 			}
 			is ImageResource -> g.drawImage(back.image, 0, 0, x, y, game)
 		}
@@ -154,14 +157,14 @@ class ParticleResource(val game: Game,
 		//		FLog.debug("Ah!? Ah!")
 		var cache1: Int
 		var cache2: Int
-		loop((image.width * image.height * 0.5).toInt()) {
+		loop((image.width * image.height * percentage).toInt()) {
 			cache1 = random.nextInt(x)
 			cache2 = random.nextInt(y)
 			image.setRGB(random.nextInt(x), random.nextInt(y), fore.color.rgb)
 			image.setRGB(cache1, cache2, when (back) {
 				is ColorResource -> back.color.rgb
 				is ImageResource -> back.image.getRGB(cache1, cache2)
-				else -> ColorResource.WHITE.color.rgb
+				else -> ColorResource.COLORLESS.color.rgb
 			})
 		}
 	}

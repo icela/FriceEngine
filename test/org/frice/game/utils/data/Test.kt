@@ -41,7 +41,7 @@ class Test() : Game() {
 
 		addTimeListener(FTimeListener(100, { FLog.v("100 ms has passed") }))
 
-		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10), width * 0.1, height * 0.1))
+		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton("I am a button", 30.0, 30.0, 100.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
@@ -110,9 +110,7 @@ class Test() : Game() {
 		FLog.v(mousePosition)
 	}
 
-	override fun onExit() {
-		System.exit(0)
-	}
+	override fun onExit() = System.exit(0)
 }
 
 fun main(args: Array<String>) {
