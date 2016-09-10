@@ -17,7 +17,7 @@ import java.util.*
  * @author ice1000
  * @since v0.3.3
  */
-interface  AbstractObject {
+interface AbstractObject {
 	var x: Double
 	var y: Double
 
@@ -82,6 +82,7 @@ abstract class FObject : PhysicalObject() {
 	val targets = LinkedList<Pair<PhysicalObject, OnCollideEvent>>()
 
 	val gravityCentre = LinkedList<AbstractObject>()
+	var gravityConstant = 0.0
 
 	override var rotate = 0.0
 
@@ -120,13 +121,19 @@ abstract class FObject : PhysicalObject() {
 	//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
 	//	}
 
-	fun runAnims() = anims.forEach { a ->
-		// move force first
-		move(force.getDelta().times(mass))
-		when (a) {
-			is MoveAnim -> move(a.getDelta())
-			is ScaleAnim -> scale(a.getAfter())
-			is RotateAnim -> rotate(a.getRotate())
+	fun runAnims() {
+		anims.forEach { a ->
+			// move force first
+			move(force.getDelta().times(mass))
+			when (a) {
+				is MoveAnim -> move(a.getDelta())
+				is ScaleAnim -> scale(a.getAfter())
+				is RotateAnim -> rotate(a.getRotate())
+			}
+		}
+		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
+			move(Pair(gravityConstant * Math.pow(Math.abs(x - c.x), 2.0),
+					gravityConstant * Math.pow(Math.abs(y - c.y), 2.0)))
 		}
 	}
 

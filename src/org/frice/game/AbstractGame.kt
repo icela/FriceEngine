@@ -182,7 +182,7 @@ abstract class AbstractGame() : JFrame() {
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	infix fun setCursor(o: ImageObject) {
-		cursor = toolkit.createCustomCursor(o.getImage(), Point(0, 0), "cursor")
+		cursor = toolkit.createCustomCursor(o.image, Point(0, 0), "cursor")
 	}
 
 
@@ -322,7 +322,7 @@ abstract class AbstractGame() : JFrame() {
 			if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
-				is FObject.ImageOwner -> bgg.drawImage(o.getImage(), o.x.toInt(), o.y.toInt(), this)
+				is FObject.ImageOwner -> bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
 				is ShapeObject -> {
 					bgg.color = o.getResource().color
 					when (o.collideBox) {
