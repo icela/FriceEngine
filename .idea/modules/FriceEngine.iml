@@ -19,7 +19,6 @@
       <sourceFolder url="file://$MODULE_DIR$/../../res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../tres" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../demo" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../demos/demo" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../out" />
     </content>
     <orderEntry type="inheritedJdk" />
