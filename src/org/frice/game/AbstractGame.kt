@@ -16,7 +16,6 @@ import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
-import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.FDialog
 import org.frice.game.utils.time.FTimeListener
@@ -327,7 +326,7 @@ abstract class AbstractGame() : JFrame() {
 				is ShapeObject -> {
 					bgg.color = o.getResource().color
 					when (o.collideBox) {
-						is FPoint, is FRectangle -> bgg.fillRect(
+						is FRectangle -> bgg.fillRect(
 								o.x.toInt(),
 								o.y.toInt(),
 								o.width.toInt(),
@@ -343,8 +342,10 @@ abstract class AbstractGame() : JFrame() {
 				}
 				is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
 			}
-			if (autoGC && (o.x.toInt() < -width || o.x.toInt() > width + width ||
-					o.y.toInt() < -height || o.y.toInt() > height + height)) {
+			if (autoGC && (o.x.toInt() < -width ||
+					o.x.toInt() > width + width ||
+					o.y.toInt() < -height ||
+					o.y.toInt() > height + height)) {
 				if (o is PhysicalObject) o.died = true
 				removeObject(o)
 				//FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +

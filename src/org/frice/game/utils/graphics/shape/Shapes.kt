@@ -37,12 +37,7 @@ open class FOval(var rh: Double, var rv: Double) : FShape {
  * @author ice1000
  * @since v0.3
  */
-class FPoint(var x: Int, var y: Int) : FShape {
-	override var width = 1
-		set (value) = Unit
-	override var height = 1
-		set (value) = Unit
-}
+data class FPoint(var x: Int, var y: Int)
 
 
 /**
