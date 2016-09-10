@@ -49,10 +49,8 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
-	/**
-	 * @return returns an image instance of this res
-	 */
-	override fun getImage() = res.image
+	override val image: BufferedImage
+		get() = res.image
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true

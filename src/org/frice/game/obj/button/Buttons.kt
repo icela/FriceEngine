@@ -7,6 +7,7 @@ import org.frice.game.obj.FObject
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import java.awt.Font
+import java.awt.image.BufferedImage
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -60,7 +61,8 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
 
 	private var bool = false
 
-	override fun getImage() = if (bool) imagePressed.image else imageNormal.image
+	override val image: BufferedImage
+		get () = if (bool) imagePressed.image else imageNormal.image
 
 	override fun onMouse(e: OnMouseEvent): Boolean {
 		bool = super.onMouse(e)

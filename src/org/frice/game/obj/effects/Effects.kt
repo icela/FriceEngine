@@ -31,6 +31,9 @@ class LineEffect(var colorResource: ColorResource, override var x: Double, overr
  */
 class ParticleEffect(private var resource: ParticleResource, override var x: Double, override var y: Double) :
 		ImageObject(resource.getResource(), x, y) {
+	override val image: BufferedImage
+		get() = resource.getResource()
+
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
 	override val width: Double
@@ -38,9 +41,7 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 	override val height: Double
 		get() = resource.height.toDouble()
 
-	override fun getImage() = resource.getResource()
-
-	override fun getResource() = ImageResource.create(getImage())
+	override fun getResource() = ImageResource.create(image)
 
 	override fun scale(p: Pair<Double, Double>) {
 		resource.width = (resource.width * p.first).toInt()
@@ -68,9 +69,10 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 	override val height: Double
 		get() = res.image.height.toDouble()
 
-	override fun getResource() = ImageResource.create(getImage())
+	override fun getResource() = ImageResource.create(image)
 
-	override fun getImage() = res.image
+	override val image: BufferedImage
+		get() = res.image
 
 	override fun scale(p: Pair<Double, Double>) {
 		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),
