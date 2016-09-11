@@ -17,7 +17,6 @@ abstract class MoveAnim : FAnim() {
 		cache = System.currentTimeMillis().toDouble()
 	}
 
-	protected fun getDoublePair(x: Double, y: Double) = DoublePair((now - cache) * x, (now - cache) * y)
 }
 
 
@@ -34,7 +33,7 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = getDoublePair(x.toDouble(), y.toDouble())
+			val pair = DoublePair((now - cache) * x, (now - cache) * y)
 			cache = now * 1000
 			return pair
 		}
@@ -51,7 +50,7 @@ open class AccurateMove(var x: Double, var y: Double): MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = getDoublePair(x, y)
+			val pair = DoublePair((now - cache) * x, (now - cache) * y)
 			cache = now * 1000
 			return pair
 		}
@@ -86,7 +85,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		get() {
 			mx = (now - start) * ax
 			my = (now - start) * ay
-			return getDoublePair(mx, my)
+			return DoublePair((now - cache) * x, (now - cache) * y)
 		}
 
 }

@@ -145,10 +145,10 @@ abstract class FObject : PhysicalObject() {
 		}
 		gravityCentre.forEach { c ->
 			FLog.d("x = $x\t\t c.x = ${c.x}\t\t y = $y\t\t c.y = ${c.y}")
-			gravity.x += (gravityConstant * if (c is PhysicalObject) c.mass else 1 /
-					((c.x - this.x) * Math.abs(c.x - this.x)))
-			gravity.y += (gravityConstant * if (c is PhysicalObject) c.mass else 1 /
-					((c.y - this.y) * Math.abs(c.y - this.y)))
+			gravity.x += if (c is PhysicalObject) c.mass else 1 *
+					gravityConstant / ((c.x - this.x) * Math.abs(c.x - this.x))
+			gravity.y += if (c is PhysicalObject) c.mass else 1 *
+					gravityConstant / ((c.y - this.y) * Math.abs(c.y - this.y))
 		}
 	}
 
