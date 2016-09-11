@@ -116,5 +116,5 @@ class Test() : Game() {
 }
 
 fun main(args: Array<String>) {
-	Test2()
+	Test()
 }

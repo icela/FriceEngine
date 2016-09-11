@@ -1,5 +1,6 @@
 package org.frice.game.obj.sub
 
+import org.frice.game.anim.move.DoublePair
 import org.frice.game.obj.CollideBox
 import org.frice.game.obj.FObject
 import org.frice.game.resource.graphics.ColorResource
@@ -22,13 +23,13 @@ open class ShapeObject(var res: ColorResource, override val collideBox: FShape, 
 
 	constructor(res: ColorResource, shape: FShape) : this(res, shape, -1)
 
-	private var scale = Pair(1.0, 1.0)
+	private var scale = DoublePair(1.0, 1.0)
 
 	override val height: Double
-		get() = (collideBox.height * scale.second)
+		get() = (collideBox.height * scale.y)
 
 	override val width: Double
-		get () = (collideBox.width * scale.first)
+		get () = (collideBox.width * scale.x)
 
 	override var died = false
 
@@ -52,7 +53,8 @@ open class ShapeObject(var res: ColorResource, override val collideBox: FShape, 
 	override fun getResource() = res
 
 	override fun scale(x: Double, y: Double) {
-		scale = Pair(x, y)
+		scale.x = x / 1000.0
+		scale.y = y / 1000.0
 	}
 
 	override fun equals(other: Any?): Boolean {

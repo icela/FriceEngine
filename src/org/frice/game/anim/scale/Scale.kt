@@ -19,7 +19,7 @@ abstract class ScaleAnim : FAnim() {
  */
 class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
 	private val timeFromStart: Double
-		get() = System.currentTimeMillis().toDouble() / 1000 - start + 1
+		get() = System.currentTimeMillis().toDouble() - start + 1
 
 	override val after: DoublePair
 		get() = DoublePair(x * timeFromStart, y * timeFromStart)

@@ -9,7 +9,6 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
-import org.frice.game.utils.message.log.FLog
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -64,7 +63,7 @@ abstract class PhysicalObject : AbstractObject, CollideBox, FContainer {
 	override var rotate = 0.0
 	var mass = 1.0
 		set(value) {
-			if (value <= 0) field = 0.00001
+			if (value <= 0) field = 0.001
 			else field = value
 		}
 }
@@ -109,8 +108,8 @@ abstract class FObject : PhysicalObject() {
 	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
 	fun move(x: Double, y: Double) {
-		this.x += x
-		this.y += y
+		this.x += x / 1000000
+		this.y += y / 1000000
 	}
 
 	open infix fun rotate(angle: Double) {
@@ -131,25 +130,27 @@ abstract class FObject : PhysicalObject() {
 	//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
 	//	}
 
+	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
+	private fun targetMass(c: AbstractObject) = if (c is PhysicalObject) c.mass else 1.0
+
 	fun runAnims() {
 		anims.forEach { a ->
-			// move force first
-			move(force.delta * mass)
-			// affected by gravity
-			move(gravity)
 			when (a) {
 				is MoveAnim -> move(a.delta)
 				is ScaleAnim -> scale(a.after)
 				is RotateAnim -> rotate(a.rotate)
 			}
 		}
-		gravityCentre.forEach { c ->
-			FLog.d("x = $x\t\t c.x = ${c.x}\t\t y = $y\t\t c.y = ${c.y}")
-			gravity.x += if (c is PhysicalObject) c.mass else 1 *
-					gravityConstant / ((c.x - this.x) * Math.abs(c.x - this.x))
-			gravity.y += if (c is PhysicalObject) c.mass else 1 *
-					gravityConstant / ((c.y - this.y) * Math.abs(c.y - this.y))
+		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
+			if (Math.abs(c.x - x) + Math.abs(c.y - y) > 1.5) {
+				gravity.x += targetMass(c) * gravityConstant / squaredDelta(c.x, x)
+				gravity.y += targetMass(c) * gravityConstant / squaredDelta(c.y, y)
+			}
 		}
+		// move force
+		move(force.delta * mass)
+		// affected by gravity
+		move(gravity)
 	}
 
 	fun checkCollision() {

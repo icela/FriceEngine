@@ -7,16 +7,10 @@ import org.frice.game.anim.FAnim
  * @author ice1000
  * @since v0.2.1
  */
-abstract class MoveAnim : FAnim() {
+abstract class MoveAnim() : FAnim() {
 	abstract val delta: DoublePair
 
-	protected var cache: Double
-		get() = field / 1000
-
-	init {
-		cache = System.currentTimeMillis().toDouble()
-	}
-
+	protected var cache: Double = start
 }
 
 
@@ -34,24 +28,24 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 	override val delta: DoublePair
 		get() {
 			val pair = DoublePair((now - cache) * x, (now - cache) * y)
-			cache = now * 1000
+			cache = now
 			return pair
 		}
 
 }
 
 /**
- * Accurate Move anim. Deltas are double, the speed will be more spcific.
+ * Accurate Move anim. Deltas are d1, the speed will be more spcific.
  *
  * @author ice1000
  * @since v0.5.1
  */
-open class AccurateMove(var x: Double, var y: Double): MoveAnim() {
+open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
 			val pair = DoublePair((now - cache) * x, (now - cache) * y)
-			cache = now * 1000
+			cache = now
 			return pair
 		}
 }
@@ -85,7 +79,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		get() {
 			mx = (now - start) * ax
 			my = (now - start) * ay
-			return DoublePair((now - cache) * x, (now - cache) * y)
+			return DoublePair((now - cache) * mx, (now - cache) * my)
 		}
 
 }
@@ -100,7 +94,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
  */
 abstract class CustomMove() : MoveAnim() {
 	private val timeFromStart: Double
-		get() = System.currentTimeMillis().toDouble() / 1000 - start
+		get() = System.currentTimeMillis() - start
 
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double

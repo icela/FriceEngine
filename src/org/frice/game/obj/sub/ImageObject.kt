@@ -45,8 +45,8 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override var died = false
 
 	override fun scale(x: Double, y: Double) {
-		res.image = res.image.getScaledInstance((res.image.width * x).toInt(),
-				(res.image.height * y).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+		res.image = res.image.getScaledInstance((res.image.width * x / 1000.0).toInt(),
+				(res.image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
 	override val image: BufferedImage

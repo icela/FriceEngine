@@ -6,13 +6,8 @@ package org.frice.game.anim
  * @since v0.2.1
  */
 abstract class FAnim() {
-	protected val start: Double
-		get() = field / 1000
+	protected val start: Double = System.currentTimeMillis().toDouble()
 
 	protected val now: Double
-		get() = System.currentTimeMillis().toDouble() / 1000
-
-	init {
-		start = System.currentTimeMillis().toDouble()
-	}
+		get() = System.currentTimeMillis().toDouble()
 }
