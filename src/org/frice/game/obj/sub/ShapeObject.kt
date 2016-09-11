@@ -51,8 +51,8 @@ open class ShapeObject(var res: ColorResource, override val collideBox: FShape, 
 
 	override fun getResource() = res
 
-	override fun scale(p: Pair<Double, Double>) {
-		scale = p
+	override fun scale(x: Double, y: Double) {
+		scale = Pair(x, y)
 	}
 
 	override fun equals(other: Any?): Boolean {

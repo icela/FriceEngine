@@ -6,5 +6,6 @@ package org.frice.game.anim
  * @since v0.4
  */
 open class RotateAnim(var angle: Double) : FAnim() {
-	fun getRotate() = (now - start) * angle
+	val rotate: Double
+		get() = (now - start) * angle
 }

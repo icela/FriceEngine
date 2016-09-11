@@ -39,7 +39,7 @@ class Test() : Game() {
 		super.onInit()
 		autoGC = true
 
-		addTimeListener(FTimeListener(100, { FLog.v("100 ms has passed") }))
+		addTimeListener(FTimeListener(400, { FLog.v("400 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton("I am a button", 30.0, 30.0, 100.0, 30.0).apply {
@@ -95,7 +95,9 @@ class Test() : Game() {
 					targets.add(Pair(o, object : FObject.OnCollideEvent {
 						override fun handle() {
 							anims.clear()
+							targets.clear()
 							anims.add(SimpleMove(0, -300))
+							anims.add(SimpleScale(1.1, 1.1))
 							res = ColorResource.MAGENTA
 						}
 					}))
@@ -114,5 +116,5 @@ class Test() : Game() {
 }
 
 fun main(args: Array<String>) {
-	Test()
+	Test2()
 }

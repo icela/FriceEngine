@@ -21,7 +21,14 @@ object HTMLUtils {
 			// find start index
 			if (c[i] == '<') {
 				tagMark = true
-				tag.forEachIndexed { j, t -> if (c[i + j + 1] != t) tagMark = false }
+				// cannot use loop{} or forEach.
+				// for the reason that I have to break it
+				for (j in 0..tag.size - 1) {
+					if (c[i + j + 1] != tag[j]) {
+						tagMark = false
+						break
+					}
+				}
 				if (tagMark) tagStart = i
 			}
 			// find end index

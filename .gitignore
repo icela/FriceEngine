@@ -9,7 +9,7 @@
 *.ear
 *.db
 
-# Debug & Test Output #
+# Debug & Demo21 Output #
 *.log
 *.xml
 

@@ -23,7 +23,7 @@ public class Java extends Game {
 			getAnims().add(AccelerateMove.getGravity());
 		}});
 	}
-
+	
 	public static void makeImage() throws FileNotFoundException {
 		BufferedImage image = ImageResource.fromPath("D:\\图片\\aniki.jpg").getImage();
 		PrintWriter writer = new PrintWriter("test.txt");

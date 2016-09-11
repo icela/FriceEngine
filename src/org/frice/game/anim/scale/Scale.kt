@@ -8,7 +8,7 @@ import org.frice.game.anim.FAnim
  * @since v0.2.2
  */
 abstract class ScaleAnim : FAnim() {
-	abstract fun getAfter(): Pair<Double, Double>
+	abstract val after: Pair<Double, Double>
 }
 
 /**
@@ -18,9 +18,9 @@ abstract class ScaleAnim : FAnim() {
  */
 class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
 	private val timeFromStart: Double
-		get() = System.currentTimeMillis().toDouble() / 1000 - start
+		get() = System.currentTimeMillis().toDouble() / 1000 - start + 1
 
-	override fun getAfter() = Pair(
-			x * timeFromStart,
-			y * timeFromStart)
+	override val after: Pair<Double, Double>
+		get() = Pair(x * timeFromStart, y * timeFromStart)
+
 }

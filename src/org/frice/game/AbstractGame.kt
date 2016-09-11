@@ -93,6 +93,21 @@ abstract class AbstractGame() : JFrame() {
 
 	var loseFocusChangeColor = true
 
+	/**
+	 * represent the mouse as an object
+	 */
+	@JvmField val mouse = object : AbstractObject {
+		override var x: Double
+			get() = mousePosition.getX()
+			set(value) = Unit
+
+		override var y: Double
+			get() = mousePosition.getY()
+			set(value) = Unit
+
+		override var rotate = 0.0
+	}
+
 	protected @JvmField val objects = LinkedList<AbstractObject>()
 	protected @JvmField val objectDeleteBuffer = ArrayList<AbstractObject>()
 	protected @JvmField val objectAddBuffer = ArrayList<AbstractObject>()

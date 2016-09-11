@@ -19,9 +19,7 @@ inline fun <T> T.loop(count: Int, block: T.(Int) -> Unit): T {
 	return this
 }
 
-inline fun loop(count: Int, block: (Int) -> Unit) {
-	for (index in 0..count - 1) block(index)
-}
+inline fun loop(count: Int, block: (Int) -> Unit) = repeat(count, block)
 
 inline fun loopIf(condition: () -> Boolean, block: () -> Unit) {
 	while (true) if (condition()) block()

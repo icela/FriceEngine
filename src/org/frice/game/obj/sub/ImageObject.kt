@@ -44,9 +44,9 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override val collideBox = FRectangle(res.image.width, res.image.height)
 	override var died = false
 
-	override fun scale(p: Pair<Double, Double>) {
-		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),
-				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+	override fun scale(x: Double, y: Double) {
+		res.image = res.image.getScaledInstance((res.image.width * x).toInt(),
+				(res.image.height * y).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
 	override val image: BufferedImage
