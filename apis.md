@@ -275,6 +275,15 @@ Param|Usage
 x: Int|Pixels that the owner should move by **per second**, horizontally.
 y: Int|Pixels that the owner should move by **per second**, vertically.
 
+## Class: org.frice.game.anim.move.AccurateMove
+a more specific "simple move".
+
+### Constructors
+Param|Usage
+:---|---:
+x: Double|horizontally.
+y: Double|vertically.
+
 ## Class: org.frice.game.anim.move.AccelerateMove
 
 ### Demos

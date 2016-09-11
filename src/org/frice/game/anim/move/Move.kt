@@ -8,7 +8,7 @@ import org.frice.game.anim.FAnim
  * @since v0.2.1
  */
 abstract class MoveAnim : FAnim() {
-	abstract val delta: Pair<Double, Double>
+	abstract val delta: DoublePair
 
 	protected var cache: Double
 		get() = field / 1000
@@ -16,6 +16,8 @@ abstract class MoveAnim : FAnim() {
 	init {
 		cache = System.currentTimeMillis().toDouble()
 	}
+
+	protected fun getDoublePair(x: Double, y: Double) = DoublePair((now - cache) * x, (now - cache) * y)
 }
 
 
@@ -30,24 +32,34 @@ abstract class MoveAnim : FAnim() {
  */
 open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
-	override val delta: Pair<Double, Double>
+	override val delta: DoublePair
 		get() {
-			val pair = getPair(x, y)
+			val pair = getDoublePair(x.toDouble(), y.toDouble())
 			cache = now * 1000
 			return pair
 		}
 
-	protected fun getPair(x: Int, y: Int) = Pair((now - cache) * x, (now - cache) * y)
 }
 
-class AccurateMove(var x: Double, var y: Double): MoveAnim() {
+/**
+ * Accurate Move anim. Deltas are double, the speed will be more spcific.
+ *
+ * @author ice1000
+ * @since v0.5.1
+ */
+open class AccurateMove(var x: Double, var y: Double): MoveAnim() {
 
-	override val delta: Pair<Double, Double>
+	override val delta: DoublePair
 		get() {
-			val pair = Pair((now - cache) * x, (now - cache) * y)
+			val pair = getDoublePair(x, y)
 			cache = now * 1000
 			return pair
 		}
+}
+
+data class DoublePair(var x: Double, var y: Double) {
+
+	operator fun times(double: Double) = DoublePair(x / double, y / double)
 }
 
 
@@ -70,11 +82,11 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	private var mx = 0.0
 	private var my = 0.0
 
-	override val delta: Pair<Double, Double>
+	override val delta: DoublePair
 		get() {
 			mx = (now - start) * ax
 			my = (now - start) * ay
-			return getPair(mx.toInt(), my.toInt())
+			return getDoublePair(mx, my)
 		}
 
 }
@@ -94,7 +106,7 @@ abstract class CustomMove() : MoveAnim() {
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double
 
-	override val delta: Pair<Double, Double>
-		get() = Pair(getXDelta(timeFromStart), getYDelta(timeFromStart))
+	override val delta: DoublePair
+		get() = DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
 
 }

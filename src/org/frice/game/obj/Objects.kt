@@ -3,14 +3,13 @@ package org.frice.game.obj
 import org.frice.game.anim.FAnim
 import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.AccelerateMove
-import org.frice.game.anim.move.AccurateMove
+import org.frice.game.anim.move.DoublePair
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.misc.times
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -97,17 +96,17 @@ abstract class FObject : PhysicalObject() {
 	/**
 	 * the gravity
 	 */
-	private val gravity = AccurateMove(0.0, 0.0)
+	private val gravity = DoublePair(0.0, 0.0)
 
 	abstract val collideBox: FShape
 
 	abstract fun getResource(): FResource
 
-	infix fun scale(p: Pair<Double, Double>) = scale(p.first, p.second)
+	infix fun scale(p: DoublePair) = scale(p.x, p.y)
 
 	abstract fun scale(x: Double, y: Double)
 
-	open infix fun move(p: Pair<Double, Double>) = move(p.first, p.second)
+	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
 	fun move(x: Double, y: Double) {
 		this.x += x
@@ -135,9 +134,9 @@ abstract class FObject : PhysicalObject() {
 	fun runAnims() {
 		anims.forEach { a ->
 			// move force first
-			move(force.delta.times(mass))
+			move(force.delta * mass)
 			// affected by gravity
-			move(gravity.delta)
+			move(gravity)
 			when (a) {
 				is MoveAnim -> move(a.delta)
 				is ScaleAnim -> scale(a.after)

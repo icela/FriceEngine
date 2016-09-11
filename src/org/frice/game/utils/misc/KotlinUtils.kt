@@ -1,5 +1,7 @@
 package org.frice.game.utils.misc
 
+import org.frice.game.anim.move.DoublePair
+
 /**
  * Kotlin language extension
  * for Kotlin only
@@ -61,8 +63,3 @@ fun pause(length: Long) = Thread.sleep(length)
  * an anko-like async block
  */
 inline fun async(crossinline block: () -> Unit) = Thread({ block() }).start()
-
-/**
- * times once, get a pair
- */
-operator fun Pair<Double, Double>.times(double: Double): Pair<Double, Double> = Pair(first / double, second / double)

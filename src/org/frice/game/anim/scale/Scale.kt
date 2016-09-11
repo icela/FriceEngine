@@ -1,6 +1,7 @@
 package org.frice.game.anim.scale
 
 import org.frice.game.anim.FAnim
+import org.frice.game.anim.move.DoublePair
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -8,7 +9,7 @@ import org.frice.game.anim.FAnim
  * @since v0.2.2
  */
 abstract class ScaleAnim : FAnim() {
-	abstract val after: Pair<Double, Double>
+	abstract val after: DoublePair
 }
 
 /**
@@ -20,7 +21,7 @@ class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
 	private val timeFromStart: Double
 		get() = System.currentTimeMillis().toDouble() / 1000 - start + 1
 
-	override val after: Pair<Double, Double>
-		get() = Pair(x * timeFromStart, y * timeFromStart)
+	override val after: DoublePair
+		get() = DoublePair(x * timeFromStart, y * timeFromStart)
 
 }
