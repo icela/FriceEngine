@@ -79,7 +79,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		get() {
 			mx = (now - start) * ax
 			my = (now - start) * ay
-			return DoublePair((now - cache) * mx, (now - cache) * my)
+			return DoublePair((now - cache) / 1000 * mx, (now - cache) / 1000 * my)
 		}
 
 }

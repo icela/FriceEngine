@@ -41,5 +41,5 @@ class Test2() : Game() {
 }
 
 fun main(args: Array<String>) {
-
+	Test2()
 }

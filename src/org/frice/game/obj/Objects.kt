@@ -108,8 +108,8 @@ abstract class FObject : PhysicalObject() {
 	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
 	fun move(x: Double, y: Double) {
-		this.x += x / 1000000
-		this.y += y / 1000000
+		this.x += x / 1000
+		this.y += y / 1000
 	}
 
 	open infix fun rotate(angle: Double) {
