@@ -3,11 +3,13 @@ package org.frice.game.obj
 import org.frice.game.anim.FAnim
 import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.AccelerateMove
+import org.frice.game.anim.move.AccurateMove
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
+import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.times
 import java.awt.image.BufferedImage
 import java.util.*
@@ -90,17 +92,26 @@ abstract class FObject : PhysicalObject() {
 	 * physics force
 	 * will change with mass(see #runAnims below)
 	 */
-	val force = AccelerateMove(0.0, 0.0)
+	private val force = AccelerateMove(0.0, 0.0)
+
+	/**
+	 * the gravity
+	 */
+	private val gravity = AccurateMove(0.0, 0.0)
 
 	abstract val collideBox: FShape
 
 	abstract fun getResource(): FResource
 
-	abstract infix fun scale(p: Pair<Double, Double>)
+	infix fun scale(p: Pair<Double, Double>) = scale(p.first, p.second)
 
-	open infix fun move(p: Pair<Double, Double>) {
-		x += p.first
-		y += p.second
+	abstract fun scale(x: Double, y: Double)
+
+	open infix fun move(p: Pair<Double, Double>) = move(p.first, p.second)
+
+	fun move(x: Double, y: Double) {
+		this.x += x
+		this.y += y
 	}
 
 	open infix fun rotate(angle: Double) {
@@ -124,16 +135,21 @@ abstract class FObject : PhysicalObject() {
 	fun runAnims() {
 		anims.forEach { a ->
 			// move force first
-			move(force.getDelta().times(mass))
+			move(force.delta.times(mass))
+			// affected by gravity
+			move(gravity.delta)
 			when (a) {
-				is MoveAnim -> move(a.getDelta())
-				is ScaleAnim -> scale(a.getAfter())
-				is RotateAnim -> rotate(a.getRotate())
+				is MoveAnim -> move(a.delta)
+				is ScaleAnim -> scale(a.after)
+				is RotateAnim -> rotate(a.rotate)
 			}
 		}
-		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
-			move(Pair(gravityConstant * Math.pow(Math.abs(x - c.x), 2.0),
-					gravityConstant * Math.pow(Math.abs(y - c.y), 2.0)))
+		gravityCentre.forEach { c ->
+			FLog.d("x = $x\t\t c.x = ${c.x}\t\t y = $y\t\t c.y = ${c.y}")
+			gravity.x += (gravityConstant * if (c is PhysicalObject) c.mass else 1 /
+					((c.x - this.x) * Math.abs(c.x - this.x)))
+			gravity.y += (gravityConstant * if (c is PhysicalObject) c.mass else 1 /
+					((c.y - this.y) * Math.abs(c.y - this.y)))
 		}
 	}
 
@@ -150,6 +166,8 @@ abstract class FObject : PhysicalObject() {
 		force.ax += x
 		force.ay += y
 	}
+
+	infix fun addForce(p: FPoint) = addForce(p.x.toDouble(), p.y.toDouble())
 
 	/**
 	 * Created by ice1000 on 2016/8/16.

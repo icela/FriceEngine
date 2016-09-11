@@ -43,9 +43,9 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 
 	override fun getResource() = ImageResource.create(image)
 
-	override fun scale(p: Pair<Double, Double>) {
-		resource.width = (resource.width * p.first).toInt()
-		resource.height = (resource.height * p.second).toInt()
+	override fun scale(x: Double, y: Double) {
+		resource.width = (resource.width * x).toInt()
+		resource.height = (resource.height * y).toInt()
 	}
 
 	//	override fun isCollide(other: CollideBox): Boolean = false
@@ -74,9 +74,9 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 	override val image: BufferedImage
 		get() = res.image
 
-	override fun scale(p: Pair<Double, Double>) {
-		res.image = res.image.getScaledInstance((res.image.width * p.first).toInt(),
-				(res.image.height * p.second).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+	override fun scale(x: Double, y: Double) {
+		res.image = res.image.getScaledInstance((res.image.width * x).toInt(),
+				(res.image.height * y).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
 	/**
