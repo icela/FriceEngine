@@ -36,23 +36,31 @@ class GalGame() : Game() {
 		var recursive = false
 		val now = stepSequence.first()
 		when (now) {
+			// change the background
 			is GalBackground -> {
 				back = now.image
 			}
 			is GalText -> {
+				TODO("print the text")
 			}
 			is Gal立ち絵 -> {
 				when (now.position) {
 					POSITION_LEFT -> {
+						TODO("change the left TaChiE")
 					}
 					POSITION_MIDDLE -> {
+						TODO("change the middle TaChiE")
 					}
 					POSITION_RIGHT -> {
+						TODO("change the right TaChiE")
 					}
 				}
+
+				TODO("show TaChiE")
 			}
 			is GalOptions -> {
 				val list = listOf<SimpleButton>()
+				TODO("show list of game options")
 			}
 			is GalAudio -> {
 				if (!skip) AudioManager.play(now.file)
