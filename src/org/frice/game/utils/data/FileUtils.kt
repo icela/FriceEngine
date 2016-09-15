@@ -1,4 +1,4 @@
-package org.frice.game
+package org.frice.game.utils.data
 
 import java.awt.image.BufferedImage
 import java.io.File
