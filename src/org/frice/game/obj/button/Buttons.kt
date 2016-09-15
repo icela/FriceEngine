@@ -94,8 +94,7 @@ class SimpleButton(var colorResource: ColorResource,
 
 	override var onClickListener: FButton.OnClickListener? = null
 
-	override fun getColor() = if (bool) ColorResource(colorResource.color.darker())
-	else colorResource
+	override fun getColor() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
 
 	override fun onMouse(e: OnMouseEvent): Boolean {
 		bool = super.onMouse(e)

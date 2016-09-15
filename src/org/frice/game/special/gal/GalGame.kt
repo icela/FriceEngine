@@ -5,6 +5,7 @@ import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.ImageButton
 import org.frice.game.obj.button.SimpleButton
+import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
 import org.frice.game.utils.misc.loop
@@ -17,7 +18,7 @@ import java.util.*
  * @author ice1000
  * @since v0.5
  */
-class GalGame() : Game() {
+open class GalGame() : Game() {
 
 	companion object {
 		@JvmField val POSITION_LEFT = 0
@@ -30,6 +31,15 @@ class GalGame() : Game() {
 
 	protected var step = 0
 		private set
+
+	private val leftTaChiE = ImageObject(ImageResource.empty())
+	private val middleTaChiE = ImageObject(ImageResource.empty())
+	private val rightTaChiE = ImageObject(ImageResource.empty())
+
+	override fun onInit() {
+		setBounds(100, 100, 800, 800)
+	}
+
 
 	private fun nextStep(skip: Boolean = false) {
 		++step
@@ -46,16 +56,18 @@ class GalGame() : Game() {
 			is Gal立ち絵 -> {
 				when (now.position) {
 					POSITION_LEFT -> {
+						leftTaChiE.res = now.image
 						TODO("change the left TaChiE")
 					}
 					POSITION_MIDDLE -> {
+						middleTaChiE.res = now.image
 						TODO("change the middle TaChiE")
 					}
 					POSITION_RIGHT -> {
+						rightTaChiE.res = now.image
 						TODO("change the right TaChiE")
 					}
 				}
-
 				TODO("show TaChiE")
 			}
 			is GalOptions -> {

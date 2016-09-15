@@ -62,9 +62,6 @@ open class Game() : AbstractGame(), Runnable {
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
 		Thread(this).start()
-		//		insets.set(0, insets.left, insets.bottom, insets.right)
-		FLog.v("Engine start!")
-		onLastInit()
 	}
 
 	/**
@@ -114,6 +111,8 @@ open class Game() : AbstractGame(), Runnable {
 	override fun getMousePosition() = panel.mousePosition!!
 
 	override fun run() {
+		FLog.v("Engine start!")
+		onLastInit()
 		loopIf(!paused && !stopped && refresh.ended()) {
 			forceRun {
 				onRefresh()
@@ -126,6 +125,7 @@ open class Game() : AbstractGame(), Runnable {
 				}
 			}
 		}
+		FLog.v("Engine thread exited.")
 	}
 
 	private fun drawBackground(back: FResource, g: Graphics2D) {

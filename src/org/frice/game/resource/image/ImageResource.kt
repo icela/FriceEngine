@@ -5,6 +5,7 @@ import org.frice.game.resource.FResource
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.web.WebUtils
+import java.awt.Image
 import java.awt.Rectangle
 import java.awt.image.BufferedImage
 import java.io.File
@@ -23,16 +24,22 @@ abstract class ImageResource : FResource {
 			override var image = image
 		}
 
-		@JvmStatic fun fromImage(image: BufferedImage) = create(image)
+		@JvmStatic fun fromImage(image: BufferedImage): ImageResource = create(image)
 		@JvmStatic fun fromFile(file: File) = FileImageResource(file)
 		@JvmStatic fun fromPath(path: String) = FileImageResource(path)
 		@JvmStatic fun fromWeb(url: String) = WebImageResource(url)
 		@JvmStatic fun fromURL(url: URL) = WebImageResource(url)
+		@JvmStatic fun empty() = create(BufferedImage(0, 0, BufferedImage.TYPE_INT_ARGB))
 	}
 
 	abstract var image: BufferedImage
 
 	override fun getResource() = image
+
+	fun scaled(x: Double, y: Double) = fromImage(image.getScaledInstance(
+			(image.width * x).toInt(), (image.height * y).toInt(), Image.SCALE_DEFAULT) as BufferedImage)
+
+	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.getSubimage(x, y, width, height))
 
 }
 
