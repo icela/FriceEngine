@@ -27,7 +27,7 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = DoublePair((now - cache) * x, (now - cache) * y)
+			val pair = DoublePair.from1000((now - cache) * x, (now - cache) * y)
 			cache = now
 			return pair
 		}
@@ -44,13 +44,17 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = DoublePair((now - cache) * x, (now - cache) * y)
+			val pair = DoublePair.from1000((now - cache) * x, (now - cache) * y)
 			cache = now
 			return pair
 		}
 }
 
 data class DoublePair(var x: Double, var y: Double) {
+
+	companion object {
+		@JvmStatic fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
+	}
 
 	operator fun times(double: Double) = DoublePair(x / double, y / double)
 }
@@ -77,9 +81,9 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 
 	override val delta: DoublePair
 		get() {
-			mx = (now - start) * ax
-			my = (now - start) * ay
-			return DoublePair((now - cache) / 1000 * mx, (now - cache) / 1000 * my)
+			mx = (now - start) * ax / 2.0
+			my = (now - start) * ay / 2.0
+			return DoublePair.from1000((now - cache) / 1000 * mx, (now - cache) / 1000 * my)
 		}
 
 }

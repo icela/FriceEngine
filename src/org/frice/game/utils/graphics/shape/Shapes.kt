@@ -73,7 +73,7 @@ open class FRectangle(override var width: Int, override var height: Int) : FShap
  *
  * @author ice1000
  */
-open class Line(one: FPoint, two: FPoint) {
+open class FLine(one: FPoint, two: FPoint) {
 
 	private val a = two.y - one.y
 	private val b = one.x - two.x
@@ -89,7 +89,7 @@ open class Line(one: FPoint, two: FPoint) {
 	fun y2x(y: Int) = if (a == 0) c / b else -(b * y + c) / a
 
 	override operator fun equals(other: Any?): Boolean {
-		if (other == null || other !is Line) return false
+		if (other == null || other !is FLine) return false
 		return a / other.a == b / other.b && b / other.b == c / other.c
 	}
 

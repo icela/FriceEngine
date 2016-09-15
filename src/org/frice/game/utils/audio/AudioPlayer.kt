@@ -1,5 +1,6 @@
 package org.frice.game.utils.audio
 
+import org.frice.game.utils.misc.until
 import java.io.File
 import javax.sound.sampled.*
 
@@ -19,7 +20,7 @@ class AudioPlayer internal constructor(file: File) {
 		var inBytes = 0
 //		var cnt = 0
 		val audioData = ByteArray(BUFFER_SIZE)
-		while (!exited && inBytes != -1) {
+		until (inBytes == -1 || exited) {
 //			FLog.debug("loop ${cnt++}")
 			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
 			if (inBytes >= 0) line.write(audioData, 0, inBytes)

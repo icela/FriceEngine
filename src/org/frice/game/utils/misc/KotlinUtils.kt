@@ -1,7 +1,5 @@
 package org.frice.game.utils.misc
 
-import org.frice.game.anim.move.DoublePair
-
 /**
  * Kotlin language extension
  * for Kotlin only
@@ -27,6 +25,13 @@ inline fun loopIf(condition: () -> Boolean, block: () -> Unit) {
 	while (true) if (condition()) block()
 }
 
+/**
+ * less blocks, less byte code generated.
+ */
+inline fun loopIf(condition: Boolean, block: () -> Unit) {
+	while (true) if (condition) block()
+}
+
 inline fun <T> T.forceRun(block: T.() -> Unit): T {
 	try {
 		block(this)
@@ -42,7 +47,7 @@ inline fun forceRun(block: () -> Unit) {
 	}
 }
 
-inline fun forceGet(default: Any, block: () -> Any) = try {
+inline fun forceGet(default: Any, block: () -> Any): Any = try {
 	block()
 } catch (e: Throwable) {
 	default
@@ -58,6 +63,14 @@ fun pause(length: Int) = pause(length.toLong())
 fun pause(length: Double) = pause(length.toLong())
 
 fun pause(length: Long) = Thread.sleep(length)
+
+inline fun unless(condition: Boolean, block: () -> Unit) {
+	if (!condition) block()
+}
+
+inline fun until(condition: Boolean, block: () -> Unit) {
+	while (!condition) block()
+}
 
 /**
  * an anko-like async block

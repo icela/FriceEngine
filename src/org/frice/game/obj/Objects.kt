@@ -9,6 +9,7 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
+import org.frice.game.utils.misc.unless
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -108,8 +109,8 @@ abstract class FObject : PhysicalObject() {
 	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
 	fun move(x: Double, y: Double) {
-		this.x += x / 1000
-		this.y += y / 1000
+		this.x += x
+		this.y += y
 	}
 
 	open infix fun rotate(angle: Double) {
@@ -141,8 +142,9 @@ abstract class FObject : PhysicalObject() {
 				is RotateAnim -> rotate(a.rotate)
 			}
 		}
+		// TODO bug
 		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
-			if (Math.abs(c.x - x) + Math.abs(c.y - y) > 1.5) {
+			unless (Math.abs(c.x - x) + Math.abs(c.y - y) < 1.5) {
 				gravity.x += targetMass(c) * gravityConstant / squaredDelta(c.x, x)
 				gravity.y += targetMass(c) * gravityConstant / squaredDelta(c.y, y)
 			}

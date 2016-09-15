@@ -22,7 +22,7 @@ import javax.xml.transform.stream.StreamResult
  */
 interface Database {
 	fun insert(key: String, value: Any?)
-//	fun <T> queryWithType(key: String, default: T): Any
+	//	fun <T> queryWithType(key: String, default: T): Any
 	fun query(key: String, default: Any): Any
 }
 
@@ -46,10 +46,8 @@ class Preference(private val file: File) : Database {
 	override fun query(key: String, default: Any) = when (properties[key] as String) {
 		"true" -> true
 		"false" -> false
-		else -> try {
-			Integer.parseInt(properties[key] as String)
-		} catch (e: Throwable) {
-			properties[key] ?: default
+		else -> forceGet(properties[key] ?: default) {
+			return@forceGet Integer.parseInt(properties[key] as String)
 		}
 	}
 
@@ -69,7 +67,7 @@ class Preference(private val file: File) : Database {
  * @author ice1000
  * @since 0.2.2
  */
-class XMLPreference constructor(val file: File) : Database{
+class XMLPreference constructor(val file: File) : Database {
 	constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder
@@ -102,15 +100,15 @@ class XMLPreference constructor(val file: File) : Database{
 
 	init {
 		builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-		if (!file.exists()) {
+		if (file.exists()) {
+			doc = builder.parse(file)
+			root = doc.documentElement
+		} else {
 			file.createNewFile()
 			doc = builder.newDocument()
 			root = doc.createElement(ROOT)
 			doc.appendChild(root)
 			save()
-		} else {
-			doc = builder.parse(file)
-			root = doc.documentElement
 		}
 	}
 

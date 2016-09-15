@@ -114,7 +114,7 @@ open class Game() : AbstractGame(), Runnable {
 	override fun getMousePosition() = panel.mousePosition!!
 
 	override fun run() {
-		loopIf({ !paused && !stopped && refresh.ended() }) {
+		loopIf(!paused && !stopped && refresh.ended()) {
 			forceRun {
 				onRefresh()
 				timeListeners.forEach { it.check() }

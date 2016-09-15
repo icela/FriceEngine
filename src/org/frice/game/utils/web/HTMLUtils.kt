@@ -24,7 +24,7 @@ object HTMLUtils {
 				// cannot use loop{} or forEach.
 				// for the reason that I have to break it
 				for (j in 0..tag.size - 1) {
-					if (c[i + j + 1] != tag[j]) {
+					if (c[i + j + 1] == tag[j]) {
 						tagMark = false
 						break
 					}
