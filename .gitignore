@@ -33,3 +33,6 @@ tres/
 /bin/
 Fuck.properties
 settings.properties
+dokka.jar
+lib/
+test.txt
