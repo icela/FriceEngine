@@ -1,4 +1,4 @@
-package org.frice.game.utils.data
+package org.frice.game
 
 import org.frice.game.utils.message.log.FLog
 import org.junit.Test

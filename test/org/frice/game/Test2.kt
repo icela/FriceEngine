@@ -1,4 +1,4 @@
-package org.frice.game.utils.data
+package org.frice.game
 
 import org.frice.game.Game
 import org.frice.game.anim.move.SimpleMove
@@ -21,10 +21,10 @@ class Test2() : Game() {
 	lateinit var obj2: ShapeObject
 
 	override fun onInit() {
-		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0).apply {
+		obj2 = ShapeObject(ColorResource.Companion.天依蓝, FRectangle(20, 20), 200.0, 200.0).apply {
 			mass = 2.0
 		}
-		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0).apply {
+		obj = ShapeObject(ColorResource.Companion.西木野真姬, FCircle(30.0), 100.0, 100.0).apply {
 			mass = 1.0
 			anims.add(SimpleMove(80, 0))
 		}

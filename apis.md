@@ -220,7 +220,7 @@ Param|Usage
 :---|---:
 timeUp: () -> Unit, OnTimeEvent|FFunction that will be invoked when time's up(`ended()`)
 
-## Class: org.frice.game.utils.data.XMLPreference
+## Class: XMLPreference
 Operates an xml file for config.
 
 ### Constructors
@@ -233,7 +233,7 @@ getPreference(file: File)<br />getPreference(file: String)|Creates a instance fr
 insert(key: String, value: Any?)|Insert a key-value pair into the file
 query(key: String, value: Any)|Query a value by `key` from the file
 
-## Class:org.frice.game.utils.data.Preference
+## Class:Preference
 
 ### APIs
 Name|Usage

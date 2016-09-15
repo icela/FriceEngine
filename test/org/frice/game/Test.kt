@@ -1,4 +1,4 @@
-package org.frice.game.utils.data
+package org.frice.game
 
 import org.frice.game.Game
 import org.frice.game.anim.RotateAnim
@@ -45,7 +45,7 @@ class Test() : Game() {
 		addObject(SimpleButton("I am a button", 30.0, 30.0, 100.0, 30.0).apply {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
-					val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
+					val obj = ShapeObject(ColorResource.Companion.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
 						mass = 1.0
 						addForce(-1.0, -1.0)
 						anims.add(SimpleMove(400, 400))
@@ -86,7 +86,7 @@ class Test() : Game() {
 		super.onRefresh()
 		if (timer.ended()) {
 			objs.removeAll { o -> o.died }
-			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
+			addObject(ShapeObject(ColorResource.Companion.IntelliJ_IDEA黑, FCircle(10.0),
 					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(SimpleMove(random.nextInt(400) - 200, 0))

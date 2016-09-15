@@ -9,6 +9,7 @@ import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.FText
+import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
@@ -373,16 +374,20 @@ abstract class AbstractGame() : JFrame() {
 			bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 			bgg.rotate(b.rotate)
 			if (b is FButton) {
-				bgg.color = b.getColor().color
-				bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
-						b.width.toInt(), b.height.toInt(),
-						Math.min((b.width * 0.5).toInt(), 10),
-						Math.min((b.height * 0.5).toInt(), 10))
-				bgg.color = ColorResource.DARK_GRAY.color
-				bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
+				when (b) {
+					is FObject.ImageOwner -> bgg.drawImage(b.image, b.x.toInt(), b.y.toInt(), this)
+					is SimpleButton -> {
+						bgg.color = b.getColor().color
+						bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
+								b.width.toInt(), b.height.toInt(),
+								Math.min((b.width * 0.5).toInt(), 10),
+								Math.min((b.height * 0.5).toInt(), 10))
+						bgg.color = ColorResource.DARK_GRAY.color
+						bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
+					}
+				}
 			} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
 		}
-
 		customDraw(getBGG())
 	}
 

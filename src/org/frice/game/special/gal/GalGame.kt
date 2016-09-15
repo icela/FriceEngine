@@ -13,6 +13,7 @@ import java.io.File
 import java.util.*
 
 /**
+ * Easy framework to help you make a galgame.
  * Created by ice1000 on 2016/9/3 0003.
  *
  * @author ice1000
@@ -32,21 +33,34 @@ open class GalGame() : Game() {
 	protected var step = 0
 		private set
 
-	private val leftTaChiE = ImageObject(ImageResource.empty())
-	private val middleTaChiE = ImageObject(ImageResource.empty())
-	private val rightTaChiE = ImageObject(ImageResource.empty())
+	private lateinit var leftTaChiE: ImageObject
+	private lateinit var middleTaChiE: ImageObject
+	private lateinit var rightTaChiE: ImageObject
+	private lateinit var background: ImageObject
 
 	override fun onInit() {
+		autoGC = false
 		setBounds(100, 100, 800, 800)
+		leftTaChiE = ImageObject(ImageResource.empty())
+		middleTaChiE = ImageObject(ImageResource.empty())
+		rightTaChiE = ImageObject(ImageResource.empty())
+		background = ImageObject(ImageResource.empty())
+		// do not change the order!!!!!
+		addObject(background)
+		addObject(leftTaChiE)
+		addObject(middleTaChiE)
+		addObject(rightTaChiE)
+		addObjects(createOptionButtons())
 	}
 
+	protected fun createOptionButtons(): List<FButton> = emptyList()
 
 	private fun nextStep(skip: Boolean = false) {
 		++step
 		var recursive = false
 		val now = stepSequence.first()
 		when (now) {
-			// change the background
+		// change the background
 			is GalBackground -> {
 				back = now.image
 			}
@@ -57,18 +71,20 @@ open class GalGame() : Game() {
 				when (now.position) {
 					POSITION_LEFT -> {
 						leftTaChiE.res = now.image
-						TODO("change the left TaChiE")
+						leftTaChiE.x = width / 2.0 - now.image.image.width / 2
+						leftTaChiE.y = (height - now.image.image.height).toDouble()
 					}
 					POSITION_MIDDLE -> {
 						middleTaChiE.res = now.image
-						TODO("change the middle TaChiE")
+						middleTaChiE.x = width / 4.0 - now.image.image.width / 2
+						middleTaChiE.y = (height - now.image.image.height).toDouble()
 					}
 					POSITION_RIGHT -> {
 						rightTaChiE.res = now.image
-						TODO("change the right TaChiE")
+						rightTaChiE.x = width / 4.0 * 3 - now.image.image.width / 2
+						rightTaChiE.y = (height - now.image.image.height).toDouble()
 					}
 				}
-				TODO("show TaChiE")
 			}
 			is GalOptions -> {
 				val list = listOf<SimpleButton>()
@@ -108,7 +124,7 @@ open class GalGame() : Game() {
 		nextStep()
 	}
 
-	protected inner abstract class Step() {
+	inner abstract class Step() {
 		var marked = false
 			private set
 
@@ -135,27 +151,32 @@ open class GalGame() : Game() {
 	/**
 	 * text
 	 */
-	protected inner class GalText(val text: String) : Step()
+	inner class GalText(val text: String) : Step()
 
 	/**
 	 * background
 	 */
-	protected inner class GalBackground(val image: ImageResource) : Step()
+	inner class GalBackground(val image: ImageResource) : Step()
 
 	/**
 	 * 立绘, 立ち絵
+	 *
+	 * @property position the position of TaChiE, should be these three values:
+	 * @see POSITION_LEFT
+	 * @see POSITION_MIDDLE
+	 * @see POSITION_RIGHT
 	 * @see GalTaChiE
 	 */
-	protected open inner class Gal立ち絵(val image: ImageResource, val position: Int) : Step()
+	open inner class Gal立ち絵(val image: ImageResource, val position: Int) : Step()
 
 	/**
 	 * alias of 立ち絵
 	 * @see Gal立ち絵
 	 */
-	protected inner class GalTaChiE(imageResource: ImageResource, position: Int) : Gal立ち絵(imageResource, position)
+	inner class GalTaChiE(imageResource: ImageResource, position: Int) : Gal立ち絵(imageResource, position)
 
-	protected inner class GalOptions(val list: List<GalOption>) : Step()
-	protected inner class GalSkip(val index: Int) : Step() {
+	inner class GalOptions(val list: List<GalOption>) : Step()
+	inner class GalSkip(val index: Int) : Step() {
 		var isAbsolute = false
 			private set
 
@@ -164,7 +185,7 @@ open class GalGame() : Game() {
 		}
 	}
 
-	protected inner class GalAudio(val file: File) : Step() {
+	inner class GalAudio(val file: File) : Step() {
 		constructor(path: String) : this(File(path))
 	}
 }

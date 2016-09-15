@@ -29,7 +29,7 @@ abstract class ImageResource : FResource {
 		@JvmStatic fun fromPath(path: String) = FileImageResource(path)
 		@JvmStatic fun fromWeb(url: String) = WebImageResource(url)
 		@JvmStatic fun fromURL(url: URL) = WebImageResource(url)
-		@JvmStatic fun empty() = create(BufferedImage(0, 0, BufferedImage.TYPE_INT_ARGB))
+		@JvmStatic fun empty() = create(BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
 	}
 
 	abstract var image: BufferedImage
