@@ -9,7 +9,6 @@ import org.frice.game.anim.scale.ScaleAnim
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
-import org.frice.game.utils.misc.unless
 import java.awt.image.BufferedImage
 import java.util.*
 
@@ -82,9 +81,6 @@ abstract class FObject : PhysicalObject() {
 
 	val targets = LinkedList<Pair<PhysicalObject, OnCollideEvent>>()
 
-	val gravityCentre = LinkedList<AbstractObject>()
-	var gravityConstant = 0.0
-
 	override var rotate = 0.0
 
 	/**
@@ -92,11 +88,6 @@ abstract class FObject : PhysicalObject() {
 	 * will change with mass(see #runAnims below)
 	 */
 	private val force = AccelerateMove(0.0, 0.0)
-
-	/**
-	 * the gravity
-	 */
-	private val gravity = DoublePair(0.0, 0.0)
 
 	abstract val collideBox: FShape
 
@@ -143,16 +134,16 @@ abstract class FObject : PhysicalObject() {
 			}
 		}
 		// TODO bug
-		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
-			unless (Math.abs(c.x - x) + Math.abs(c.y - y) < 1.5) {
-				gravity.x += targetMass(c) * gravityConstant / squaredDelta(c.x, x)
-				gravity.y += targetMass(c) * gravityConstant / squaredDelta(c.y, y)
-			}
-		}
+		//		if (gravityConstant != 0.0) gravityCentre.forEach { c ->
+		//			unless (Math.abs(c.x - x) + Math.abs(c.y - y) < 1.5) {
+		//				gravity.x += targetMass(c) * gravityConstant / squaredDelta(c.x, x)
+		//				gravity.y += targetMass(c) * gravityConstant / squaredDelta(c.y, y)
+		//			}
+		//		}
 		// move force
 		move(force.delta / mass)
 		// affected by gravity
-		move(gravity)
+		//		move(gravity)
 	}
 
 	fun checkCollision() {
@@ -177,6 +168,14 @@ abstract class FObject : PhysicalObject() {
 	 * @since v0.3
 	 */
 	interface OnCollideEvent {
+		companion object {
+			fun from(block: () -> Unit) = object : OnCollideEvent {
+				override fun handle() {
+					block()
+				}
+			}
+		}
+
 		fun handle()
 	}
 

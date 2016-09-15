@@ -26,8 +26,6 @@ class Test2() : Game() {
 		}
 		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0).apply {
 			mass = 1.0
-			gravityConstant = 100.0
-			gravityCentre.add(obj2)
 			anims.add(SimpleMove(80, 0))
 		}
 		addObject(obj2)

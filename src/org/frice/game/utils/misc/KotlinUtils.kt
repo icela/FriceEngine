@@ -21,16 +21,12 @@ inline fun <T> T.loop(count: Int, block: T.(Int) -> Unit): T {
 
 inline fun loop(count: Int, block: (Int) -> Unit) = repeat(count, block)
 
-inline fun loopIf(condition: () -> Boolean, block: () -> Unit) {
-	while (true) if (condition()) block()
-}
+inline fun loopIf(condition: () -> Boolean, block: () -> Unit) = loop { if (condition()) block() }
 
 /**
  * less blocks, less byte code generated.
  */
-inline fun loopIf(condition: Boolean, block: () -> Unit) {
-	while (true) if (condition) block()
-}
+inline fun loopIf(condition: Boolean, block: () -> Unit) = loopIf({ condition }, block)
 
 inline fun <T> T.forceRun(block: T.() -> Unit): T {
 	try {

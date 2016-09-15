@@ -34,7 +34,7 @@ import javax.swing.JPanel
  * @since v0.1
  */
 open class Game() : AbstractGame(), Runnable {
-	private val refresh = FTimer(3)
+	private val refresh = FTimer(30)
 
 	private val buffer: BufferedImage
 
@@ -119,7 +119,7 @@ open class Game() : AbstractGame(), Runnable {
 				onRefresh()
 				timeListeners.forEach { it.check() }
 				panel.repaint()
-				fpsCounter++
+				++fpsCounter
 				if (fpsTimer.ended()) {
 					fpsDisplay = fpsCounter
 					fpsCounter = 0
