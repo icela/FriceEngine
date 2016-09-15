@@ -137,9 +137,9 @@ abstract class FObject : PhysicalObject() {
 	fun runAnims() {
 		anims.forEach { a ->
 			when (a) {
-				is MoveAnim -> move(a.delta)
-				is ScaleAnim -> scale(a.after)
-				is RotateAnim -> rotate(a.rotate)
+				is MoveAnim -> this move a.delta
+				is ScaleAnim -> this scale a.after
+				is RotateAnim -> this rotate a.rotate
 			}
 		}
 		// TODO bug
@@ -150,7 +150,7 @@ abstract class FObject : PhysicalObject() {
 			}
 		}
 		// move force
-		move(force.delta * mass)
+		move(force.delta / mass)
 		// affected by gravity
 		move(gravity)
 	}

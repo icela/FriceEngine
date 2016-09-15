@@ -56,7 +56,19 @@ data class DoublePair(var x: Double, var y: Double) {
 		@JvmStatic fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
 	}
 
-	operator fun times(double: Double) = DoublePair(x / double, y / double)
+	operator fun plusAssign(double: DoublePair) {
+		x += double.x
+		y += double.y
+	}
+
+	operator fun minusAssign(double: DoublePair) {
+		x -= double.x
+		y -= double.y
+	}
+
+	operator fun div(double: Double) = DoublePair(x / double, y / double)
+
+	operator fun times(double: Double) = DoublePair(x * double, y * double)
 }
 
 

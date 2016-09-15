@@ -46,7 +46,7 @@ class Test() : Game() {
 			onClickListener = object : FButton.OnClickListener {
 				override fun onClick(e: OnClickEvent) {
 					val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
-						mass = 5.0
+						mass = 1.0
 						addForce(-1.0, -1.0)
 						anims.add(SimpleMove(400, 400))
 						anims.add(SimpleScale(1.1, 1.1))

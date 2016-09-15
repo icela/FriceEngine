@@ -18,10 +18,12 @@ abstract class ScaleAnim : FAnim() {
  * @since v0.2.3
  */
 class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
-	private val timeFromStart: Double
-		get() = System.currentTimeMillis().toDouble() - start
 
+	private var cache: Double = start
 	override val after: DoublePair
-		get() = DoublePair.from1000(x * timeFromStart + 1, y * timeFromStart + 1)
-
+		get() {
+			val pair = DoublePair.from1000((now - cache) * x, (now - cache) * y)
+			cache = now
+			return pair
+		}
 }
