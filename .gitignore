@@ -4,7 +4,7 @@
 .mtj.tmp/
 
 # Package & Target Files #
-*.jar
+#*.jar
 *.war
 *.ear
 *.db
@@ -28,9 +28,8 @@
 hs_err_pid*
 .idea/copyright/
 .idea/modules/lib/
-lib/
 out/
 tres/
+/bin/
 Fuck.properties
 settings.properties
-/bin/
