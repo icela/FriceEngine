@@ -28,8 +28,8 @@ open class FCircle(r: Double) : FOval(r, r)
  * @since v0.1.1
  */
 open class FOval(var rh: Double, var rv: Double) : FShape {
-	override var width = (rh * 2).toInt()
-	override var height = (rv * 2).toInt()
+	override var width = (rh + rh).toInt()
+	override var height = (rv + rv).toInt()
 }
 
 

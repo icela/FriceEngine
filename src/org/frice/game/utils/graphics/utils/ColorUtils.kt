@@ -15,7 +15,8 @@ object ColorUtils {
 
 	@JvmStatic fun Int.gray(): Int {
 		val color = Color(this)
-		return (color.blue + color.green + color.red) / 3
+		val c = (color.blue + color.green + color.red) / 3
+		return Color(c, c, c).rgb
 	}
 
 	@JvmStatic fun Int.darker(): Int {

@@ -1,7 +1,6 @@
 import org.frice.game.Game;
 import org.frice.game.obj.button.ImageButton;
 import org.frice.game.resource.image.ImageResource;
-import org.frice.game.utils.message.FDialog;
 
 /**
  * Created by Administrator on 2016/9/15 0015.
@@ -19,8 +18,6 @@ public class Java extends Game {
 	}
 
 	public static void main(String[] args) {
-		FDialog.infoDialog("");
-		FDialog.errorDialog("ASS", "WE");
-//		new Java();
+		new Java();
 	}
 }
