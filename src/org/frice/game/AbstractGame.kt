@@ -228,7 +228,10 @@ abstract class AbstractGame() : JFrame() {
 	 * clears all objects.
 	 * this method is safe.
 	 */
-	fun clearObjects() = objectDeleteBuffer.addAll(objects)
+	fun clearObjects() {
+		objectDeleteBuffer.addAll(objects)
+		textDeleteBuffer.addAll(texts)
+	}
 
 	/**
 	 * removes objects.
