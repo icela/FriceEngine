@@ -509,7 +509,7 @@ abstract class Game() : JFrame(), Runnable {
 	}
 
 	/**
-	 * Main game view.
+	 * Demo24 game view.
 	 * all rendering work and game object calculating are here.
 	 *
 	 * Created by ice1000 on 2016/8/13.

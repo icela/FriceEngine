@@ -115,7 +115,7 @@ class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: I
 
 /**
  * used to represent a Curve.
- * something like
+ * something like circle.
  */
 class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width: Int, height: Int) : FResource {
 	private val image: BufferedImage

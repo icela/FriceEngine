@@ -3,6 +3,7 @@ package org.frice.game.obj.effects
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.graphics.ColorResource
+import org.frice.game.resource.graphics.CurveResource
 import org.frice.game.resource.graphics.FunctionResource
 import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.resource.image.ImageResource
@@ -61,8 +62,8 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 class FunctionEffect(res: FunctionResource, override var x: Double, override var y: Double) :
 		ImageObject(res.getResource(), x, y) {
 
-	constructor(FFunction: FFunction, x: Double, y: Double, width: Int, height: Int) :
-	this(FunctionResource(ColorResource.BLUE, { x -> FFunction.call(x) }, width, height), x, y)
+	constructor(function: FFunction, x: Double, y: Double, width: Int, height: Int) :
+	this(FunctionResource(ColorResource.BLUE, { x -> function.call(x) }, width, height), x, y)
 
 	override val width: Double
 		get() = res.image.width.toDouble()
@@ -75,8 +76,8 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 		get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = res.image.getScaledInstance((res.image.width * x / 1000.0).toInt(),
-				(res.image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+		res.image = image.getScaledInstance((image.width * x / 1000.0).toInt(),
+				(image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
 	}
 
 	/**
@@ -90,4 +91,36 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 	}
 }
 
-class CurveEffect()
+/**
+ * used to represent a curve.
+ *
+ * @author ice1000
+ * @since v0.5.2
+ */
+class CurveEffect(res: CurveResource, override var x: Double, override var y: Double) :
+		ImageObject(res.getResource(), x, y) {
+
+	constructor(curve: FCurve, x: Double, y: Double, width: Int, height: Int) :
+	this(CurveResource(ColorResource.BLUE, { x -> curve.call(x) }, width, height), x, y)
+
+	override fun getResource() = ImageResource.create(image)
+
+	override val image: BufferedImage
+		get() = res.image
+
+	override fun scale(x: Double, y: Double) {
+		res.image = image.getScaledInstance((image.width * x / 1000.0).toInt(),
+				(image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+	}
+
+	/**
+	 * for java.
+	 * this can be represent as a lambda in j8.
+	 *
+	 * @author ice1000
+	 * @since v0.5.2
+	 */
+	interface FCurve {
+		fun call(x: Double): List<Double>
+	}
+}
