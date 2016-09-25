@@ -89,3 +89,5 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 		fun call(x: Double): Double
 	}
 }
+
+class CurveEffect()

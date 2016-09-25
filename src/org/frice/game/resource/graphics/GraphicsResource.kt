@@ -90,7 +90,7 @@ class ColorResource(val color: Color) : FResource {
  * @author ice1000
  * @since v0.4
  */
-class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, width: Int, height: Int) : FResource {
+class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: Int, height: Int) : FResource {
 
 	private val image: BufferedImage
 
@@ -100,13 +100,32 @@ class FunctionResource(colorResource: ColorResource, val f: (Double) -> Double, 
 		var thisTime: Double
 		(0..width step 1).forEach { x ->
 			thisTime = f(x.toDouble())
-			forceRun { image.setRGB(x.toInt(), thisTime.toInt(), colorResource.color.rgb) }
+			forceRun { image.setRGB(x.toInt(), thisTime.toInt(), color.color.rgb) }
 			if (Math.abs(thisTime - lastTime) >= 1.0) forceRun {
 				(Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()).forEach { i ->
-					image.setRGB(x, i, colorResource.color.rgb)
+					image.setRGB(x, i, color.color.rgb)
 				}
 			}
 			lastTime = thisTime
+		}
+	}
+
+	override fun getResource() = image
+}
+
+/**
+ * used to represent a Curve.
+ * something like
+ */
+class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width: Int, height: Int) : FResource {
+	private val image: BufferedImage
+
+	init {
+		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		(0..width step 1).forEach { x ->
+			f(x.toDouble()).forEach { y ->
+				forceRun { image.setRGB(x, y.toInt(), color.color.rgb) }
+			}
 		}
 	}
 

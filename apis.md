@@ -100,7 +100,7 @@ A Button.
 ### Constructors
 Param|Usage
 :---|---:
-colorResource: ColorResource|the color of the button
+color: ColorResource|the color of the button
 text: String|the text on button
 font: Font|the font of the text(doesn't work)
 x: Double|position

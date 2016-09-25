@@ -36,3 +36,6 @@ settings.properties
 dokka.jar
 lib/
 test.txt
+sample/
+src/org/frice/game/utils/web/HTMLUtils.kt~
+test/org/frice/game/Java.java~
