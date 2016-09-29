@@ -25,11 +25,17 @@ open class ShapeObject(var res: ColorResource, override val collideBox: FShape, 
 
 	private var scale = DoublePair(1.0, 1.0)
 
-	override val height: Double
+	override var height: Double
 		get() = (collideBox.height * scale.y)
+		set(value) {
+			collideBox.height = (value / scale.y).toInt()
+		}
 
-	override val width: Double
+	override var width: Double
 		get () = (collideBox.width * scale.x)
+		set(value) {
+			collideBox.width = (value / scale.x).toInt()
+		}
 
 	override var died = false
 
