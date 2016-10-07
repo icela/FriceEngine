@@ -36,6 +36,7 @@ import javax.swing.JFrame
 import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.WindowConstants
+import kotlin.concurrent.thread
 
 /**
  * First game class(not for you)
@@ -52,7 +53,7 @@ import javax.swing.WindowConstants
  * @author ice1000
  * @since v0.2.3
  */
-abstract class Game() : JFrame(), Runnable {
+abstract class Game() : JFrame() {
 	companion object {
 		@JvmField val TO_X = 100
 		@JvmField val TO_Y = 100
@@ -165,7 +166,24 @@ abstract class Game() : JFrame(), Runnable {
 		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
 		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
-		Thread(this).start()
+
+		thread {
+			FLog.v("Engine start!")
+			onLastInit()
+			loopIf(!paused && !stopped && refresh.ended()) {
+				forceRun {
+					onRefresh()
+					timeListeners.forEach { it.check() }
+					panel.repaint()
+					++fpsCounter
+					if (fpsTimer.ended()) {
+						fpsDisplay = fpsCounter
+						fpsCounter = 0
+					}
+				}
+			}
+			FLog.v("Engine thread exited.")
+		}
 	}
 
 	protected fun mouse(e: OnMouseEvent) = texts.forEach { b ->
@@ -480,24 +498,6 @@ abstract class Game() : JFrame(), Runnable {
 	 * @return exact position of the mouse
 	 */
 	override fun getMousePosition() = panel.mousePosition!!
-
-	override fun run() {
-		FLog.v("Engine start!")
-		onLastInit()
-		loopIf(!paused && !stopped && refresh.ended()) {
-			forceRun {
-				onRefresh()
-				timeListeners.forEach { it.check() }
-				panel.repaint()
-				++fpsCounter
-				if (fpsTimer.ended()) {
-					fpsDisplay = fpsCounter
-					fpsCounter = 0
-				}
-			}
-		}
-		FLog.v("Engine thread exited.")
-	}
 
 	private fun drawBackground(back: FResource, g: Graphics2D) {
 		when (back) {
