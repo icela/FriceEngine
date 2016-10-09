@@ -9,10 +9,17 @@ import java.util.*
  * @since v0.1.1
  */
 interface FShape {
+}
+
+interface FShapeInt : FShape {
 	var width: Int
 	var height: Int
 }
 
+interface FShapeDouble : FShape {
+	var width: Double
+	var height: Double
+}
 
 /**
  * Created by ice1000 on 2016/8/14.
@@ -27,9 +34,9 @@ open class FCircle(r: Double) : FOval(r, r)
  * @author ice1000
  * @since v0.1.1
  */
-open class FOval(var rh: Double, var rv: Double) : FShape {
-	override var width = (rh + rh).toInt()
-	override var height = (rv + rv).toInt()
+open class FOval(var rh: Double, var rv: Double) : FShapeDouble {
+	override var width = rh + rh
+	override var height = rv + rv
 }
 
 
@@ -38,7 +45,7 @@ open class FOval(var rh: Double, var rv: Double) : FShape {
  * @author ice1000
  * @since v0.3
  */
-data class FPoint(var x: Int, var y: Int)
+data class FPoint(var x: Int, var y: Int) : FShape
 
 
 /**
@@ -46,7 +53,7 @@ data class FPoint(var x: Int, var y: Int)
  * @author ice1000
  * @since v0.1.1
  */
-open class FRectangle(override var width: Int, override var height: Int) : FShape {
+open class FRectangle(override var width: Int, override var height: Int) : FShapeInt {
 	constructor(rect: Rectangle2D) : this(rect.width.toInt(), rect.height.toInt())
 
 	override fun equals(other: Any?): Boolean {
@@ -63,6 +70,11 @@ open class FRectangle(override var width: Int, override var height: Int) : FShap
 	}
 
 	//	infix fun rectCollideRect(o: FRectangle) = (x > o.x && )
+}
+
+class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) :
+		FShapeDouble {
+
 }
 
 /**

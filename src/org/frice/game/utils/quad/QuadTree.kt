@@ -1,36 +1,23 @@
 import org.frice.game.obj.PhysicalObject
-import org.frice.game.utils.quad.RectF
+import org.frice.game.utils.graphics.shape.FQuad
 import java.util.*
 
 /**
  * QuadTree
- * @author lfkdsk
  * Created by liufengkai on 2016/10/4.
+ * Some fixes by ice1000
+ *
+ * @author lfkdsk
  */
-class QuadTreeKT {
+class QuadTree(var level: Int, var bounds: FQuad) {
 
 	val MAX_OBJECTS = 3
 
 	val MAX_LEVELS = 5
 
-	var level: Int
+	private val objects = ArrayList<PhysicalObject>()
 
-	private var bounds: RectF
-
-	private val objects: ArrayList<PhysicalObject>
-
-	private val nodes: Array<QuadTreeKT?>
-
-
-	constructor(level: Int, bounds: RectF) {
-		this.level = level
-		this.bounds = bounds
-	}
-
-	init {
-		this.nodes = kotlin.arrayOfNulls<QuadTreeKT>(4)
-		this.objects = ArrayList<PhysicalObject>()
-	}
+	private val nodes = arrayOfNulls<QuadTree>(4)
 
 	fun clear() {
 		objects.clear()
@@ -43,30 +30,29 @@ class QuadTreeKT {
 
 	private fun split() {
 		// width & height
-		val subWidth = (bounds.width() / 2)
-		val subHeight = (bounds.height() / 2)
+		val subWidth = (bounds.width / 2)
+		val subHeight = (bounds.height / 2)
 		// x & y
-		val x = bounds.left
-		val y = bounds.top
+		val x = bounds.x
+		val y = bounds.y
 		// split to four nodes
-		nodes[0] = QuadTreeKT(level + 1, RectF((x + subWidth), y, subWidth, subHeight))
-		nodes[1] = QuadTreeKT(level + 1, RectF(x, y, subWidth, subHeight))
-		nodes[2] = QuadTreeKT(level + 1, RectF(x, (y + subHeight), subWidth, subHeight))
-		nodes[3] = QuadTreeKT(level + 1, RectF((x + subWidth), (y + subHeight), subWidth, subHeight))
+		nodes[0] = QuadTree(level + 1, FQuad((x + subWidth), y, subWidth, subHeight))
+		nodes[1] = QuadTree(level + 1, FQuad(x, y, subWidth, subHeight))
+		nodes[2] = QuadTree(level + 1, FQuad(x, (y + subHeight), subWidth, subHeight))
+		nodes[3] = QuadTree(level + 1, FQuad((x + subWidth), (y + subHeight), subWidth, subHeight))
 	}
 
 
 	/**
 	 * 获取rect 所在的 index
-
+	 *
 	 * @param rectF 传入对象所在的矩形
-	 * *
 	 * @return index 使用类别区分所在象限
 	 */
 	private fun getIndex(rectF: PhysicalObject): Int {
 		var index = -1
-		val verticalMidpoint = bounds.left + bounds.width() / 2
-		val horizontalMidpoint = bounds.top + bounds.height() / 2
+		val verticalMidpoint = bounds.x + bounds.width / 2
+		val horizontalMidpoint = bounds.y + bounds.height / 2
 
 		// contain top
 		val topQuadrant = rectF.y < horizontalMidpoint && rectF.y + rectF.height < horizontalMidpoint
@@ -94,7 +80,7 @@ class QuadTreeKT {
 
 	/**
 	 * insert object to tree
-
+	 *
 	 * @param rectF object
 	 */
 	fun insert(rectF: PhysicalObject) {
@@ -126,7 +112,6 @@ class QuadTreeKT {
 					nodes[index]?.insert(objects.removeAt(i))
 
 				} else {
-
 					// don't in subNode save to parent node.
 					// eq: object on line
 					i++
@@ -139,9 +124,7 @@ class QuadTreeKT {
 	 * return all the object collision with the object
 
 	 * @param returnObjects return list
-	 * *
 	 * @param rectF         object
-	 * *
 	 * @return list of collision
 	 */
 	fun retrieve(returnObjects: ArrayList<ArrayList<PhysicalObject>>, rectF: PhysicalObject): List<List<PhysicalObject>> {
