@@ -46,7 +46,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="IA" level="project" />
     <orderEntry type="library" name="ia" level="project" />
   </component>
 </module>

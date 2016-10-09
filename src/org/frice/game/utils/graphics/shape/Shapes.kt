@@ -34,9 +34,9 @@ open class FCircle(r: Double) : FOval(r, r)
  * @author ice1000
  * @since v0.1.1
  */
-open class FOval(var rh: Double, var rv: Double) : FShapeDouble {
-	override var width = rh + rh
-	override var height = rv + rv
+open class FOval(var rh: Double, var rv: Double) : FShapeInt {
+	override var width = (rh + rh).toInt()
+	override var height = (rv + rv).toInt()
 }
 
 
