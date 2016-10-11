@@ -72,6 +72,9 @@ Currently under construction. Maybe you know how to build your own apps.
 - [X] Language extensions(for Kotlin only)
 - [X] Smart auto garbage collection(you can close it)
 
+## DSL
+see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
+
 ## Basics
 FriceEngine is based on the life cycle mode.<br/>
 To build games based on frice engine, follow these steps:
