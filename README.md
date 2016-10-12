@@ -2,8 +2,6 @@
 
 ![image](https://avatars1.githubusercontent.com/u/21008243)
 
-[![](https://jitpack.io/v/icela/FriceEngine.svg)](https://jitpack.io/#icela/FriceEngine)
-
 一个简单、易用的原生轻量级JVM游戏引擎。<br/>
 查看 [API文档](https://github.com/icela/FriceEngine/blob/master/apis.md) 或者Wiki以更多地了解Frice Engine。
 
@@ -31,18 +29,10 @@ MP3 format support (in the future) will take 200KB.
 This engine is completely platform-independent: no JNIs, no native methods, everything is written by myself in pure Kotlin.<br/>
 And this is what a JVM app should be exactly.
 
-# Before you build
-
-```Shell
-git clone https://github.com/icela/FriceEngine.git
-cd FriceEngine
-git submodule init
-git submodule update
-```
-Then open with IntelliJ IDEA(please install Kotlin, Groovy, or Ruby plugin first).
-
 # Build
-Currently under construction. Maybe you know how to build your own apps.
+Download jar in releases.<br/>
+Then import the jars into your project.<br/>
+Yes, it's only 1MB.
 
 # Usage
 
