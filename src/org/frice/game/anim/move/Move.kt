@@ -1,6 +1,7 @@
 package org.frice.game.anim.move
 
 import org.frice.game.anim.FAnim
+import org.frice.game.utils.time.Clock
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -138,7 +139,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
  */
 abstract class CustomMove() : MoveAnim() {
 	private val timeFromStart: Double
-		get() = System.currentTimeMillis() - start
+		get() = Clock.current - start
 
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double

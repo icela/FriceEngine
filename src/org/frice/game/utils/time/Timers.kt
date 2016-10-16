@@ -39,11 +39,11 @@ open class FTimer(protected val time: Int, times: Int) {
 	constructor(time: Int) : this(time, -1)
 
 	var times = times
-		private set
-	private var start = System.currentTimeMillis()
+		protected set
+	private var start = Clock.current
 
-	fun ended(): Boolean = if (System.currentTimeMillis() - start > time && times != 0) {
-		start = System.currentTimeMillis()
+	fun ended(): Boolean = if (Clock.current - start > time && times != 0) {
+		start = Clock.current
 		if (times > 0) times--
 		true
 	} else false

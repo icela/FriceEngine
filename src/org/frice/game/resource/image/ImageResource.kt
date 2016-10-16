@@ -3,6 +3,7 @@ package org.frice.game.resource.image
 import org.frice.game.Game
 import org.frice.game.resource.FResource
 import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.web.WebUtils
 import java.awt.Image
@@ -101,7 +102,7 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	}
 
 	init {
-		start = System.currentTimeMillis()
+		start = Clock.current
 		timer = FTimeListener(div, {
 			FLog.e("counter = $counter")
 			counter++
