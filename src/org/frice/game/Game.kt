@@ -24,7 +24,7 @@ import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
-import org.frice.game.utils.misc.loopIf
+import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.awt.*
@@ -88,12 +88,22 @@ abstract class Game() : JFrame() {
 	 * if paused, main window will not call `onRefresh()`.
 	 */
 	var paused = false
+		set(value) {
+			if (value) Clock.pause()
+			else Clock.resume()
+			field = value
+		}
 
 	/**
 	 * not implemented yet.
 	 * currently it's same as paused.
 	 */
 	var stopped = false
+		set(value) {
+			if (value) Clock.pause()
+			else Clock.resume()
+			field = value
+		}
 
 	/**
 	 * background resource (don't setBackground, please use `setBack()` instead.)
@@ -170,15 +180,18 @@ abstract class Game() : JFrame() {
 		thread {
 			FLog.v("Engine start!")
 			onLastInit()
-			loopIf(!paused && !stopped && refresh.ended()) {
+			loop {
 				forceRun {
 					onRefresh()
 					timeListeners.forEach { it.check() }
-					panel.repaint()
-					++fpsCounter
-					if (fpsTimer.ended()) {
-						fpsDisplay = fpsCounter
-						fpsCounter = 0
+					// only refresh per "refreshTime"
+					if (!paused && !stopped && refresh.ended()) {
+						panel.repaint()
+						++fpsCounter
+						if (fpsTimer.ended()) {
+							fpsDisplay = fpsCounter
+							fpsCounter = 0
+						}
 					}
 				}
 			}
@@ -541,11 +554,13 @@ abstract class Game() : JFrame() {
 				override fun windowDeiconified(e: WindowEvent) = Unit
 				override fun windowActivated(e: WindowEvent) {
 					loseFocus = false
+					Clock.resume()
 					onFocus(OnWindowEvent.create(e))
 				}
 
 				override fun windowDeactivated(e: WindowEvent) {
 					loseFocus = true
+					Clock.pause()
 					onLoseFocus(OnWindowEvent.create(e))
 				}
 
