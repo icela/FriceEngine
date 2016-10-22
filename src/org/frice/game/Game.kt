@@ -199,13 +199,15 @@ abstract class Game() : JFrame() {
 		}
 	}
 
-	protected fun mouse(e: OnMouseEvent) = texts.forEach { b ->
-		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e
-	}
+	protected fun mouse(e: OnMouseEvent) =
+			texts.forEach { b ->
+				if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e
+			}
 
-	protected fun click(e: OnClickEvent) = texts.forEach { b ->
-		if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
-	}
+	protected fun click(e: OnClickEvent) =
+			texts.forEach { b ->
+				if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
+			}
 
 	protected open fun onInit() = Unit
 	protected open fun onLastInit() = Unit
@@ -257,16 +259,18 @@ abstract class Game() : JFrame() {
 	fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyPressedEvent(keyCode, { e -> key.execute(e) })
 
-	fun addKeyPressedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(pressed = { e ->
-		if (e.keyCode == keyCode) key.invoke(e)
-	})
+	fun addKeyPressedEvent(keyCode: Int, key: (KeyEvent) -> Unit) =
+			addKeyListener(pressed = { e ->
+				if (e.keyCode == keyCode) key.invoke(e)
+			})
 
 	fun addKeyReleasedEvent(keyCode: Int, key: OnKeyEvent) =
 			addKeyReleasedEvent(keyCode, { e -> key.execute(e) })
 
-	fun addKeyReleasedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(released = { e ->
-		if (e.keyCode == keyCode) key.invoke(e)
-	})
+	fun addKeyReleasedEvent(keyCode: Int, key: (KeyEvent) -> Unit) =
+			addKeyListener(released = { e ->
+				if (e.keyCode == keyCode) key.invoke(e)
+			})
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	infix fun setCursor(o: ImageObject) {
@@ -287,6 +291,11 @@ abstract class Game() : JFrame() {
 	 * @param objs as an array
 	 */
 	infix fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
+
+	/**
+	 * add Objects using vararg
+	 */
+	fun addObject(vararg objs: AbstractObject) = objs.forEach { o -> addObject(o) }
 
 	/**
 	 * adds an object to game, to be shown on game window.
@@ -332,12 +341,21 @@ abstract class Game() : JFrame() {
 		else objectDeleteBuffer.add(obj)
 	}
 
+	/**
+	 * remove Objects using vararg
+	 */
+	fun removeObject(vararg objs: AbstractObject) = objs.forEach { o -> removeObject(o) }
 
 	/**
 	 * adds a auto-executed time listener
 	 * you must add or it won't work.
 	 */
 	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
+
+	/**
+	 * add TimeListeners using vararg
+	 */
+	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
 
 	/**
 	 * adds an array of auto-executed time listeners
@@ -359,8 +377,12 @@ abstract class Game() : JFrame() {
 	 *
 	 * @param listeners the array
 	 */
-	infix fun removeTimeListeners(listeners: Array<FTimeListener>) =
-			listeners.forEach { l -> removeTimeListener(l) }
+	infix fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
+
+	/**
+	 * remove TimeListeners using vararg
+	 */
+	fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> removeTimeListener(l) }
 
 	/**
 	 * auto-execute time listeners which are equal to the given collection.
