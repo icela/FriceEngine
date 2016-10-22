@@ -437,19 +437,19 @@ abstract class Game() : JFrame() {
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
 				is FObject.ImageOwner ->
-					unless((o.x + o.image.width).toInt() < -width ||
-							o.x.toInt() > width + width ||
-							(o.y + o.image.height).toInt() < -height ||
-							o.y.toInt() > height + height) {
+					unless((o.x + o.image.width).toInt() < 0 ||
+							o.x.toInt() > width ||
+							(o.y + o.image.height).toInt() < 0 ||
+							o.y.toInt() > height) {
 
 						bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
 
 					}
 				is ShapeObject ->
-					unless((o.x + o.width).toInt() < -width ||
-							o.x.toInt() > width + width ||
-							(o.y + o.height).toInt() < -height ||
-							o.y.toInt() > height + height) {
+					unless((o.x + o.width).toInt() < 0 ||
+							o.x.toInt() > width ||
+							(o.y + o.height).toInt() < 0 ||
+							o.y.toInt() > height) {
 
 						bgg.color = o.getResource().color
 						when (o.collideBox) {
@@ -489,10 +489,10 @@ abstract class Game() : JFrame() {
 			if (b is FButton) {
 				when (b) {
 					is FObject.ImageOwner ->
-						unless((b.x + b.image.width).toInt() < -width ||
-								b.x.toInt() > width + width ||
-								(b.y + b.image.height).toInt() < -height ||
-								b.y.toInt() > height + height) {
+						unless((b.x + b.image.width).toInt() < 0 ||
+								b.x.toInt() > width ||
+								(b.y + b.image.height).toInt() < 0 ||
+								b.y.toInt() > height) {
 
 							bgg.drawImage(b.image, b.x.toInt(), b.y.toInt(), this)
 
