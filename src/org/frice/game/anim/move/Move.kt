@@ -1,7 +1,6 @@
 package org.frice.game.anim.move
 
 import org.frice.game.anim.FAnim
-import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.time.Clock
 
 /**
@@ -130,15 +129,27 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 
 }
 
-class CircumAnim(var x: Double, var y: Double, var radius: Double, var angularVelocity: Double) : MoveAnim() {
+class CircumAnim(var x: Double, var y: Double, var angularVelocity: Double) : MoveAnim() {
 
-	constructor(center: DoublePair, radius: Double, angularVelocity: Double) :
-	this(center.x, center.y, radius, angularVelocity)
+	constructor(distance: DoublePair, angularVelocity: Double) :
+	this(distance.x, distance.y, angularVelocity)
 
+	private val cos: Double
+		get() = Math.cos(angularVelocity)
+
+	private val sin: Double
+		get() = Math.cos(angularVelocity)
+
+	init {
+		x = -x
+		y = -y
+	}
+
+	/**
+	 * x' = x cos α-y sin α, y' = x sin α + y cos α
+	 */
 	override val delta: DoublePair
-		get() {
-			//
-		}
+		get() = DoublePair.from1000(x * cos - y * sin, y * sin - x * cos)
 }
 
 

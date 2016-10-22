@@ -24,6 +24,7 @@ import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
+import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
@@ -435,24 +436,38 @@ abstract class Game() : JFrame() {
 			if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
-				is FObject.ImageOwner -> bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
-				is ShapeObject -> {
-					bgg.color = o.getResource().color
-					when (o.collideBox) {
-						is FRectangle -> bgg.fillRect(
-								o.x.toInt(),
-								o.y.toInt(),
-								o.width.toInt(),
-								o.height.toInt()
-						)
-						is FOval -> bgg.fillOval(
-								o.x.toInt(),
-								o.y.toInt(),
-								o.width.toInt(),
-								o.height.toInt()
-						)
+				is FObject.ImageOwner ->
+					unless((o.x + o.image.width).toInt() < -width ||
+							o.x.toInt() > width + width ||
+							(o.y + o.image.height).toInt() < -height ||
+							o.y.toInt() > height + height) {
+
+						bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
+
 					}
-				}
+				is ShapeObject ->
+					unless((o.x + o.width).toInt() < -width ||
+							o.x.toInt() > width + width ||
+							(o.y + o.height).toInt() < -height ||
+							o.y.toInt() > height + height) {
+
+						bgg.color = o.getResource().color
+						when (o.collideBox) {
+							is FRectangle -> bgg.fillRect(
+									o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt()
+							)
+							is FOval -> bgg.fillOval(
+									o.x.toInt(),
+									o.y.toInt(),
+									o.width.toInt(),
+									o.height.toInt()
+							)
+						}
+
+					}
 				is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
 			}
 			if (autoGC && (o.x.toInt() < -width ||
@@ -466,13 +481,22 @@ abstract class Game() : JFrame() {
 			}
 		}
 
-		texts.forEach { b ->
+		texts.forEach {
+			b ->
 			val bgg = getBGG()
 			bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 			bgg.rotate(b.rotate)
 			if (b is FButton) {
 				when (b) {
-					is FObject.ImageOwner -> bgg.drawImage(b.image, b.x.toInt(), b.y.toInt(), this)
+					is FObject.ImageOwner ->
+						unless((b.x + b.image.width).toInt() < -width ||
+								b.x.toInt() > width + width ||
+								(b.y + b.image.height).toInt() < -height ||
+								b.y.toInt() > height + height) {
+
+							bgg.drawImage(b.image, b.x.toInt(), b.y.toInt(), this)
+
+						}
 					is SimpleButton -> {
 						bgg.color = b.getColor().color
 						bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
