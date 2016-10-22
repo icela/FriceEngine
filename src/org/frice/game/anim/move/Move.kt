@@ -10,8 +10,7 @@ import org.frice.game.utils.time.Clock
  */
 abstract class MoveAnim() : FAnim() {
 	abstract val delta: DoublePair
-
-	protected var cache: Double = start
+	protected var lastRefresh: Double = start
 }
 
 
@@ -29,8 +28,8 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = DoublePair.from1000((now - cache) * x, (now - cache) * y)
-			cache = now
+			val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+			lastRefresh = now
 			return pair
 		}
 
@@ -46,8 +45,8 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-			val pair = DoublePair.from1000((now - cache) * x, (now - cache) * y)
-			cache = now
+			val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+			lastRefresh = now
 			return pair
 		}
 }
@@ -124,7 +123,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		get() {
 			mx = (now - start) * ax / 2.0
 			my = (now - start) * ay / 2.0
-			return DoublePair.from1000((now - cache) / 1000 * mx, (now - cache) / 1000 * my)
+			return DoublePair.from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
 		}
 
 }
