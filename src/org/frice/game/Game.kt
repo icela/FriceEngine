@@ -132,7 +132,7 @@ abstract class Game() : JFrame() {
 
 	var loseFocusChangeColor = true
 
-	private val refresh = FTimer(50)
+	private val refresh = FTimer(10)
 
 	private val buffer: BufferedImage
 
