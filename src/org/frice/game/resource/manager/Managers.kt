@@ -1,3 +1,8 @@
+/**
+ * Created by ice1000 on 2016/10/24.
+ *
+ * @author ice1000
+ */
 package org.frice.game.resource.manager
 
 import org.frice.game.utils.web.WebUtils
@@ -9,11 +14,12 @@ import java.util.*
 import javax.imageio.ImageIO
 
 /**
- * Created by ice1000 on 2016/10/24.
+ * copy a image.
+ * to replace the operation of reading an image from file.
+ * if an image is already read from file, it can be copied from RAM directly.
  *
- * @author ice1000
+ * classes in this file is to do this job.
  */
-
 internal fun BufferedImage.clone(): BufferedImage {
 	return BufferedImage(width, height, type).apply {
 		setRGB(0, 0, width, height,
