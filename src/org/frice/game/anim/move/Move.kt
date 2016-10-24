@@ -165,8 +165,12 @@ abstract class CustomMove() : MoveAnim() {
 
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double
+	fun update(timeFromBegin: Double) = Unit
 
 	override val delta: DoublePair
-		get() = DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
+		get() {
+			update(timeFromStart)
+			return DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
+		}
 
 }

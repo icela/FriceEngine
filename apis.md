@@ -135,10 +135,8 @@ image: Image|Image object.
 Name|Usage
 :---|---:
 fun fromImage(image: BufferedImage)| create an image from bufferedImage
-fun fromFile(file: File)| create an image from file
 fun fromPath(path: String)| create an image from file path
-fun fromWeb(url: String)| create an image from url as string
-fun fromURL(url: URL)| create an image from url
+fun fromWeb(url: String)| create an image from url as path
 
 ## Class: org.frice.game.resource.FileImageResource
 

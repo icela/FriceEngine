@@ -185,7 +185,7 @@ abstract class Game() : JFrame() {
 				forceRun {
 					onRefresh()
 					timeListeners.forEach { it.check() }
-					// only refresh per "refreshTime"
+					// only update per "refreshTime"
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()
 						++fpsCounter

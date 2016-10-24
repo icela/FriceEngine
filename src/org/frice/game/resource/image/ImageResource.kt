@@ -2,6 +2,7 @@ package org.frice.game.resource.image
 
 import org.frice.game.Game
 import org.frice.game.resource.FResource
+import org.frice.game.resource.manager.ImageManager
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
@@ -9,9 +10,7 @@ import org.frice.game.utils.web.WebUtils
 import java.awt.Image
 import java.awt.Rectangle
 import java.awt.image.BufferedImage
-import java.io.File
 import java.net.URL
-import javax.imageio.ImageIO
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -26,10 +25,8 @@ abstract class ImageResource : FResource {
 		}
 
 		@JvmStatic fun fromImage(image: BufferedImage): ImageResource = create(image)
-		@JvmStatic fun fromFile(file: File) = FileImageResource(file)
 		@JvmStatic fun fromPath(path: String) = FileImageResource(path)
-		@JvmStatic fun fromWeb(url: String) = fromURL(URL(url))
-		@JvmStatic fun fromURL(url: URL) = WebImageResource(url)
+		@JvmStatic fun fromWeb(url: String) = WebImageResource(URL(url))
 		@JvmStatic fun empty() = create(BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
 	}
 
@@ -41,7 +38,6 @@ abstract class ImageResource : FResource {
 			(image.width * x).toInt(), (image.height * y).toInt(), Image.SCALE_DEFAULT) as BufferedImage)
 
 	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.getSubimage(x, y, width, height))
-
 }
 
 
@@ -117,10 +113,6 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
  * @author ice1000
  * @since v0.1
  */
-class FileImageResource(file: File) : ImageResource() {
-
-	constructor(path: String) : this(File(path))
-
-	override var image = ImageIO.read(file)!!
-
+class FileImageResource(file: String) : ImageResource() {
+	override var image = ImageManager[file]
 }
