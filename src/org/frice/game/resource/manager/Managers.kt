@@ -14,7 +14,7 @@ import javax.imageio.ImageIO
  * @author ice1000
  */
 
-fun BufferedImage.clone(): BufferedImage {
+internal fun BufferedImage.clone(): BufferedImage {
 	return BufferedImage(width, height, type).apply {
 		setRGB(0, 0, width, height,
 				getRGB(0, 0, width, height, null, 0, 0),
@@ -22,7 +22,16 @@ fun BufferedImage.clone(): BufferedImage {
 	}
 }
 
-interface FManager<T> {
+/**
+ * resource manager, like a pool.
+ * to do the resource reusing.
+ *
+ * @param T the type of the resource.
+ * @property res the resource map(a string key and a T value)
+ * @author ice1000
+ * @since v0.6
+ */
+internal interface FManager<T> {
 	val res: MutableMap<String, T>
 	fun create(path: String): T
 
@@ -34,28 +43,48 @@ interface FManager<T> {
 	}
 }
 
+/**
+ * @author ice1000
+ * @since v0.6
+ */
 object FileManager : FManager<File> {
 	override val res = HashMap<String, File>()
 	override fun create(path: String) = File(path)
 }
 
+/**
+ * @author ice1000
+ * @since v0.6
+ */
 object ImageManager : FManager<BufferedImage> {
 	override val res = HashMap<String, BufferedImage>()
 	override fun create(path: String) = ImageIO.read(File(path))!!
 	override fun get(path: String) = super.get(path).clone()
 }
 
+/**
+ * @author ice1000
+ * @since v0.6
+ */
 object WebImageManager : FManager<BufferedImage> {
 	override val res = HashMap<String, BufferedImage>()
 	override fun create(path: String) = WebUtils.readImage(path)
 	override fun get(path: String) = super.get(path).clone()
 }
 
+/**
+ * @author ice1000
+ * @since v0.6
+ */
 object URLTextManager : FManager<String> {
 	override val res = HashMap<String, String>()
 	override fun create(path: String) = URL(path).readText(Charset.defaultCharset())
 }
 
+/**
+ * @author ice1000
+ * @since v0.6
+ */
 object URLBytesManager : FManager<ByteArray> {
 	override val res = HashMap<String, ByteArray>()
 	override fun create(path: String) = URL(path).readBytes()

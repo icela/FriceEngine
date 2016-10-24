@@ -112,7 +112,6 @@ open class GalGame() : Game() {
 	}
 
 	protected fun load(path: String) = ImageResource.fromPath(path)
-	protected fun load(file: File) = ImageResource.fromFile(file)
 
 	protected fun addStep(o: Step) {
 		stepSequence.add(o)
