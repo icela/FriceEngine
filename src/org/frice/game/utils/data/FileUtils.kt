@@ -11,13 +11,24 @@ import javax.imageio.ImageIO
  * @since v0.5
  */
 object FileUtils {
-	@JvmStatic fun image2File(image: BufferedImage, type: String, file: File) = ImageIO.write(image, type, file)
-	@JvmStatic fun image2File(image: BufferedImage, file: File) = image2File(image, "png", file)
-	@JvmStatic fun image2File(image: BufferedImage, file: String) = image2File(image, File(file))
+	@JvmStatic
+	fun image2File(image: BufferedImage, file: File) = image2File(image, "png", file)
 
-	@JvmStatic fun string2File(string: String, file: File) = file.writeText(string)
-	@JvmStatic fun string2File(string: String, file: String) = string2File(string, File(file))
+	@JvmStatic
+	fun image2File(image: BufferedImage, type: String, file: File) = ImageIO.write(image, type, file)
 
-	@JvmStatic fun bytes2File(byteArray: ByteArray, file: File) = file.writeBytes(byteArray)
-	@JvmStatic fun bytes2File(byteArray: ByteArray, file: String) = bytes2File(byteArray, File(file))
+	@JvmStatic
+	fun image2File(image: BufferedImage, file: String) = image2File(image, File(file))
+
+	@JvmStatic
+	fun string2File(string: String, file: File) = file.writeText(string)
+
+	@JvmStatic
+	fun string2File(string: String, file: String) = string2File(string, File(file))
+
+	@JvmStatic
+	fun bytes2File(byteArray: ByteArray, file: File) = file.writeBytes(byteArray)
+
+	@JvmStatic
+	fun bytes2File(byteArray: ByteArray, file: String) = bytes2File(byteArray, File(file))
 }

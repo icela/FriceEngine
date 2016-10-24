@@ -12,7 +12,8 @@ import java.util.*
  */
 
 object HTMLUtils {
-	@JvmStatic fun findTag(html: String, tag: CharArray): ArrayList<String> {
+	@JvmStatic
+	fun findTag(html: String, tag: CharArray): ArrayList<String> {
 		val c = html.toCharArray()
 		val tags = ArrayList<String>()
 		var tagMark = false
@@ -40,5 +41,6 @@ object HTMLUtils {
 		return tags
 	}
 
-	@JvmStatic fun findTag(html: String, tag: String) = findTag(html, tag.toCharArray())
+	@JvmStatic
+	fun findTag(html: String, tag: String) = findTag(html, tag.toCharArray())
 }

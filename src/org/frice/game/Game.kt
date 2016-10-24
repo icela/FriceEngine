@@ -56,34 +56,51 @@ import kotlin.concurrent.thread
  */
 abstract class Game() : JFrame() {
 	companion object {
-		@JvmField val TO_X = 100
-		@JvmField val TO_Y = 100
+		@JvmField
+		val TO_X = 100
+		@JvmField
+		val TO_Y = 100
 
-		@JvmField val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
-		@JvmField val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)
-		@JvmField val HUGE_PHONE = Rectangle(TO_X, TO_Y, 1080, 1920)
+		@JvmField
+		val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
+		@JvmField
+		val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)
+		@JvmField
+		val HUGE_PHONE = Rectangle(TO_X, TO_Y, 1080, 1920)
 
-		@JvmField val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
-		@JvmField val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
+		@JvmField
+		val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
+		@JvmField
+		val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
 
-		@JvmStatic fun Rectangle.rotate() {
+		@JvmStatic
+		fun Rectangle.rotate() {
 			width -= -height
 			height -= width
 			width += height
 		}
 	}
 
-	protected @JvmField val objects = LinkedList<AbstractObject>()
-	protected @JvmField val objectDeleteBuffer = ArrayList<AbstractObject>()
-	protected @JvmField val objectAddBuffer = ArrayList<AbstractObject>()
+	@JvmField
+	protected val objects = LinkedList<AbstractObject>()
+	@JvmField
+	protected val objectDeleteBuffer = ArrayList<AbstractObject>()
+	@JvmField
+	protected val objectAddBuffer = ArrayList<AbstractObject>()
 
-	protected @JvmField val timeListeners = LinkedList<FTimeListener>()
-	protected @JvmField val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
-	protected @JvmField val timeListenerAddBuffer = ArrayList<FTimeListener>()
+	@JvmField
+	protected val timeListeners = LinkedList<FTimeListener>()
+	@JvmField
+	protected val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
+	@JvmField
+	protected val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
-	protected @JvmField val texts = LinkedList<FText>()
-	protected @JvmField val textDeleteBuffer = ArrayList<FText>()
-	protected @JvmField val textAddBuffer = ArrayList<FText>()
+	@JvmField
+	protected val texts = LinkedList<FText>()
+	@JvmField
+	protected val textDeleteBuffer = ArrayList<FText>()
+	@JvmField
+	protected val textAddBuffer = ArrayList<FText>()
 
 	/**
 	 * if paused, main window will not call `onRefresh()`.
@@ -149,7 +166,8 @@ abstract class Game() : JFrame() {
 	/**
 	 * represent the mouse as an object
 	 */
-	@JvmField val mouse = object : AbstractObject {
+	@JvmField
+	val mouse = object : AbstractObject {
 		override var x: Double
 			get() = mousePosition.getX()
 			set(value) = Unit

@@ -9,21 +9,26 @@ import java.awt.Color
  */
 
 object ColorUtils {
-	@JvmField val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
+	@JvmField
+	val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
 
-	@JvmStatic fun Int.toAscii() = asciiList[gray() / (256 / asciiList.size + 1)]
+	@JvmStatic
+	fun Int.toAscii() = asciiList[gray() / (256 / asciiList.size + 1)]
 
-	@JvmStatic fun Int.gray(): Int {
+	@JvmStatic
+	fun Int.gray(): Int {
 		val color = Color(this)
 		val c = (color.blue + color.green + color.red) / 3
 		return Color(c, c, c).rgb
 	}
 
-	@JvmStatic fun Int.darker(): Int {
+	@JvmStatic
+	fun Int.darker(): Int {
 		val color = Color(this)
 		return (color.blue * 2 / 3) or ((color.green * 2 / 3) shl 8) or
 				((color.red * 2 / 3) shl 16) or ((color.alpha shl 24))
 	}
 
-	@JvmStatic fun darkerRGB(int: Int) = int.darker()
+	@JvmStatic
+	fun darkerRGB(int: Int) = int.darker()
 }

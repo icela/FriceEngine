@@ -1,5 +1,8 @@
 package org.frice.game.utils.web
 
+import org.frice.game.resource.manager.ImageManager
+import org.frice.game.resource.manager.URLBytesManager
+import org.frice.game.resource.manager.URLTextManager
 import java.net.URL
 import javax.imageio.ImageIO
 
@@ -10,15 +13,31 @@ import javax.imageio.ImageIO
  * @since v0.5
  */
 object WebUtils {
-	@JvmStatic fun readText(url: URL) = url.readText()
-	@JvmStatic fun readText(url: String) = readText(URL(url))
+	@Deprecated("not recommended", ReplaceWith("readText"), DeprecationLevel.WARNING)
+	@JvmStatic
+	fun readText(url: URL) = url.readText()
 
-	@JvmStatic fun readBytes(url: URL) = url.readBytes()
-	@JvmStatic fun readBytes(url: String) = readBytes(URL(url))
+	@JvmStatic
+	fun readText(url: String) = URLTextManager[url]
 
-	@JvmStatic fun readImage(url: URL) = ImageIO.read(url)!!
-	@JvmStatic fun readImage(url: String) = readImage(URL(url))
+	@Deprecated("not recommended", ReplaceWith("readBytes"), DeprecationLevel.ERROR)
+	@JvmStatic
+	fun readBytes(url: URL) = url.readBytes()
 
-	@JvmStatic fun readImages(url: String) = HTMLUtils.findTag(readText(url), "img")
-	@JvmStatic fun readImages(url: URL) = HTMLUtils.findTag(readText(url), "img")
+	@JvmStatic
+	fun readBytes(url: String) = URLBytesManager[url]
+
+	@Deprecated("not recommended", ReplaceWith("readImage"), DeprecationLevel.ERROR)
+	@JvmStatic
+	fun readImage(url: URL) = ImageIO.read(url)!!
+
+	@JvmStatic
+	fun readImage(url: String) = ImageManager[url]
+
+	@Deprecated("not recommended", ReplaceWith("readImages"), DeprecationLevel.ERROR)
+	@JvmStatic
+	fun readImages(url: URL) = HTMLUtils.findTag(readText(url), "img")
+
+	@JvmStatic
+	fun readImages(url: String) = HTMLUtils.findTag(readText(url), "img")
 }

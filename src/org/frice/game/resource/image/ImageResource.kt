@@ -3,14 +3,13 @@ package org.frice.game.resource.image
 import org.frice.game.Game
 import org.frice.game.resource.FResource
 import org.frice.game.resource.manager.ImageManager
+import org.frice.game.resource.manager.WebImageManager
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
-import org.frice.game.utils.web.WebUtils
 import java.awt.Image
 import java.awt.Rectangle
 import java.awt.image.BufferedImage
-import java.net.URL
 
 /**
  * Created by ice1000 on 2016/8/13.
@@ -20,14 +19,22 @@ import java.net.URL
 abstract class ImageResource : FResource {
 
 	companion object {
-		@JvmStatic fun create(image: BufferedImage) = object : ImageResource() {
+		@JvmStatic
+		fun create(image: BufferedImage) = object : ImageResource() {
 			override var image = image
 		}
 
-		@JvmStatic fun fromImage(image: BufferedImage): ImageResource = create(image)
-		@JvmStatic fun fromPath(path: String) = FileImageResource(path)
-		@JvmStatic fun fromWeb(url: String) = WebImageResource(URL(url))
-		@JvmStatic fun empty() = create(BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
+		@JvmStatic
+		fun fromImage(image: BufferedImage): ImageResource = create(image)
+
+		@JvmStatic
+		fun fromPath(path: String) = FileImageResource(path)
+
+		@JvmStatic
+		fun fromWeb(url: String) = WebImageResource(url)
+
+		@JvmStatic
+		fun empty() = create(BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB))
 	}
 
 	abstract var image: BufferedImage
@@ -54,7 +61,6 @@ class PartImageResource(origin: ImageResource, x: Int, y: Int, width: Int, heigh
 	override var image = origin.image.getSubimage(x, y, width, height)
 }
 
-
 /**
  * Image Resource from internet
  *
@@ -62,14 +68,9 @@ class PartImageResource(origin: ImageResource, x: Int, y: Int, width: Int, heigh
  * @author ice1000
  * @since v0.2.2
  */
-class WebImageResource(url: URL) : ImageResource() {
-
-	constructor(url: String) : this(URL(url))
-
-	override var image = WebUtils.readImage(url)
-
+class WebImageResource(url: String) : ImageResource() {
+	override var image = WebImageManager[url]
 }
-
 
 /**
  * Created by ice1000 on 2016/8/16.

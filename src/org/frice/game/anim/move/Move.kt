@@ -54,7 +54,8 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 data class DoublePair(var x: Double, var y: Double) {
 
 	companion object {
-		@JvmStatic fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
+		@JvmStatic
+		fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
 	}
 
 	operator fun plusAssign(d: DoublePair) {
@@ -112,8 +113,11 @@ data class DoublePair(var x: Double, var y: Double) {
 
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	companion object {
-		@JvmStatic fun getGravity() = AccelerateMove(0.0, 10.0)
-		@JvmStatic fun getGravity(g: Double) = AccelerateMove(0.0, g)
+		@JvmStatic
+		fun getGravity() = AccelerateMove(0.0, 10.0)
+
+		@JvmStatic
+		fun getGravity(g: Double) = AccelerateMove(0.0, g)
 	}
 
 	private var mx = 0.0
