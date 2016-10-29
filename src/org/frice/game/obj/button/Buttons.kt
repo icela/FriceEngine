@@ -53,7 +53,7 @@ interface FButton : FContainer, AbstractObject {
  * @since v0.5
  */
 class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResource, x: Double, y: Double) :
-		FButton, FObject.ImageOwner, SimpleButton("", x, y,
+		FObject.ImageOwner, SimpleButton("", x, y,
 		imageNormal.image.width.toDouble(), imageNormal.image.height.toDouble()) {
 
 	override var rotate = 0.0
@@ -67,11 +67,6 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
 
 	override val image: BufferedImage
 		get () = if (bool) imagePressed.image else imageNormal.image
-
-	override fun onMouse(e: OnMouseEvent): Boolean {
-		bool = super<FButton>.onMouse(e)
-		return bool
-	}
 }
 
 /**
