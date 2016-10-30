@@ -1,9 +1,10 @@
 package org.frice.game
 
-import org.frice.game.Game
 import org.frice.game.anim.move.SimpleMove
+import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.graphics.ColorResource
+import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.time.FTimer
@@ -28,8 +29,7 @@ class Test2() : Game() {
 			mass = 1.0
 			anims.add(SimpleMove(80, 0))
 		}
-		addObject(obj2)
-		addObject(obj)
+		addObject(obj2, obj, ImageObject(ImageResource.fromWeb("http://media.openjudge.cn/images/1251_1.jpg")))
 	}
 
 	override fun onRefresh() {
