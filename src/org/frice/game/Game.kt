@@ -340,9 +340,11 @@ abstract class Game() : JFrame() {
 	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
 
 	/**
-	 * adds a collection of auto-executed time listeners
+	 * add a time listener.
+	 *
+	 * @param listener time listener to be added
 	 */
-	infix fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
+	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
 	/**
 	 * removes all auto-executed time listeners
