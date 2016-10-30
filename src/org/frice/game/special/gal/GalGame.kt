@@ -50,7 +50,7 @@ open class GalGame() : Game() {
 		addObject(leftTaChiE)
 		addObject(middleTaChiE)
 		addObject(rightTaChiE)
-		addObjects(createOptionButtons())
+//		addObjects(createOptionButtons())
 	}
 
 	protected fun createOptionButtons(): List<FButton> = emptyList()
