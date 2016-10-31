@@ -4,6 +4,7 @@ import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.button.FText
 import org.frice.game.platform.adapter.JvmDrawer
 import org.frice.game.resource.graphics.ColorResource
+import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.util.*
@@ -152,5 +153,7 @@ interface FriceGame {
 	fun addObject(vararg objs: AbstractObject)
 
 	fun drawEverything(bgg: JvmDrawer)
+
+	fun getScreenCut(): ImageResource
 }
 

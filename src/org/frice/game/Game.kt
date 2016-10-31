@@ -15,14 +15,11 @@ import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.platform.FriceClock
 import org.frice.game.platform.FriceGame
 import org.frice.game.platform.adapter.JvmDrawer
-import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
-import org.frice.game.utils.graphics.utils.ColorUtils
 import org.frice.game.utils.message.FDialog
-import org.frice.game.utils.message.error.FatalError
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
@@ -32,9 +29,7 @@ import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.awt.*
 import java.awt.event.*
-import java.awt.image.BufferedImage
 import java.util.*
-import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JOptionPane
 import javax.swing.JPanel
@@ -58,6 +53,7 @@ import kotlin.concurrent.thread
  */
 @Suppress("LeakingThis")
 open class Game() : JFrame(), FriceGame {
+
 	companion object {
 		@JvmField
 		val TO_X = 100
@@ -119,10 +115,6 @@ open class Game() : JFrame(), FriceGame {
 			field = value
 		}
 
-	/**
-	 * background resource (don't setBackground, please use `setBack()` instead.)
-	 */
-	var back: FResource = ColorResource.LIGHT_GRAY
 	var debug = true
 
 	/**
@@ -153,6 +145,7 @@ open class Game() : JFrame(), FriceGame {
 
 	override var fpsCounter = 0
 	override var fpsDisplay = 0
+	override var fpsTimer = FTimer(1000)
 
 	/**
 	 * represent the mouse as an object
@@ -175,13 +168,12 @@ open class Game() : JFrame(), FriceGame {
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 		// set icon
-		iconImage = ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
+		iconImage = javax.imageio.ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
 
 		/// to prevent this engine from the call#cking NPE!!
 		panel = GamePanel()
 		this.add(panel, BorderLayout.CENTER)
 		bounds = BIG_SQUARE
-		fpsTimer = FTimer(1000)
 		onInit()
 		isVisible = true
 
@@ -433,7 +425,7 @@ open class Game() : JFrame(), FriceGame {
 	 *
 	 * @return screen cut as an image
 	 */
-	fun getScreenCut() = ImageResource.create(stableBuffer)
+	override fun getScreenCut() = ImageResource.create(drawer.friceImage.image)
 
 	/**
 	 * this method escaped the error
@@ -441,15 +433,6 @@ open class Game() : JFrame(), FriceGame {
 	 * @return exact position of the mouse
 	 */
 	override fun getMousePosition() = panel.mousePosition!!
-
-	private fun drawBackground(back: FResource, g: Graphics2D) {
-		when (back) {
-			is ImageResource -> g.paint = TexturePaint(back.image, Rectangle(0, 0, width, height))
-			is ColorResource -> g.color = back.color
-			else -> throw FatalError("Unable to draw background")
-		}
-		g.fillRect(0, 0, width, height)
-	}
 
 	/**
 	 * Demo24 game view.
@@ -503,26 +486,23 @@ open class Game() : JFrame(), FriceGame {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			drawBackground(back, drawer)
 			drawEverything(drawer)
 
 			if (loseFocus && loseFocusChangeColor) {
-				loop(buffer.width) { x ->
-					loop(buffer.height) { y ->
-						buffer.setRGB(x, y, ColorUtils.darkerRGB(buffer.getRGB(x, y)))
+				loop(drawer.friceImage.width) { x ->
+					loop(drawer.friceImage.height) { y ->
+						drawer.friceImage.set(x, y, ColorResource(drawer.friceImage[x, y].color.darker()))
 					}
 				}
 			}
 
-			if (showFPS) drawer.drawString("fps: $fpsDisplay", 30, height - 30)
+			if (showFPS) drawer.drawString("fps: $fpsDisplay", 30.0, height - 30.0)
 
 			/*
 			 * 厚颜无耻
 			 * drawer.drawString("Powered by FriceEngine. ice1000", 5, 20)
 			 */
-
-			stableBuffer.graphics.drawImage(buffer, 0, 0, this)
-			g.drawImage(buffer, 0, 0, this)
+			g.drawImage(drawer.friceImage.image, 0, 0, this)
 		}
 	}
 
