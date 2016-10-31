@@ -14,6 +14,7 @@ import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.platform.FriceClock
+import org.frice.game.platform.FriceGame
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
@@ -55,7 +56,7 @@ import kotlin.concurrent.thread
  * @author ice1000
  * @since v0.2.3
  */
-abstract class Game() : JFrame() {
+abstract class Game() : JFrame(), FriceGame {
 	companion object {
 		@JvmField
 		val TO_X = 100
@@ -231,12 +232,12 @@ abstract class Game() : JFrame() {
 				if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
 			}
 
-	protected open fun onInit() = Unit
-	protected open fun onLastInit() = Unit
-	protected open fun onRefresh() = Unit
-	protected open fun onClick(e: OnClickEvent) = Unit
-	protected open fun onMouse(e: OnMouseEvent) = Unit
-	protected open fun onExit() {
+	override fun onInit() = Unit
+	override fun onLastInit() = Unit
+	override fun onRefresh() = Unit
+	fun onClick(e: OnClickEvent) = Unit
+	fun onMouse(e: OnMouseEvent) = Unit
+	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?",
 				"Ensuring", JOptionPane.YES_NO_OPTION) ==
 				JOptionPane.YES_OPTION)

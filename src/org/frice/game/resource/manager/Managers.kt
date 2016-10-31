@@ -20,9 +20,8 @@ import javax.imageio.ImageIO
  * classes in this file is to do this job.
  */
 internal fun BufferedImage.clone(): BufferedImage {
-	return BufferedImage(width, height, type).apply {
-		this@apply.data = this@clone.data
-	}
+	TODO()
+//	TODO()
 }
 
 /**
