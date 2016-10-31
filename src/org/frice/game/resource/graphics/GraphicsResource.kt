@@ -14,7 +14,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1.1
  */
-class ColorResource(val color: Color) : FResource {
+data class ColorResource(val color: Color) : FResource {
 
 	/**
 	 * 颜表立。。。
@@ -139,7 +139,7 @@ class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width
  * @author ice1000
  * @since v0.3.2
  */
-class ParticleResource(
+data class ParticleResource(
 		val game: Game,
 		var width: Int,
 		var height: Int,

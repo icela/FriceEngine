@@ -13,6 +13,7 @@ import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
+import org.frice.game.platform.FriceClock
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
@@ -102,13 +103,15 @@ abstract class Game() : JFrame() {
 	@JvmField
 	protected val textAddBuffer = ArrayList<FText>()
 
+	val clock: FriceClock = Clock()
+
 	/**
 	 * if paused, main window will not call `onRefresh()`.
 	 */
 	var paused = false
 		set(value) {
-			if (value) Clock.pause()
-			else Clock.resume()
+			if (value) clock.pause()
+			else clock.resume()
 			field = value
 		}
 
@@ -118,8 +121,8 @@ abstract class Game() : JFrame() {
 	 */
 	var stopped = false
 		set(value) {
-			if (value) Clock.pause()
-			else Clock.resume()
+			if (value) clock.pause()
+			else clock.resume()
 			field = value
 		}
 
@@ -564,13 +567,13 @@ abstract class Game() : JFrame() {
 				override fun windowDeiconified(e: WindowEvent) = Unit
 				override fun windowActivated(e: WindowEvent) {
 					loseFocus = false
-					Clock.resume()
+					clock.resume()
 					onFocus(OnWindowEvent.create(e))
 				}
 
 				override fun windowDeactivated(e: WindowEvent) {
 					loseFocus = true
-					Clock.pause()
+					clock.pause()
 					onLoseFocus(OnWindowEvent.create(e))
 				}
 
