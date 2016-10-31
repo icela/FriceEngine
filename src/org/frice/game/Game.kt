@@ -3,7 +3,6 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnKeyEvent
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.event.OnWindowEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
@@ -15,6 +14,7 @@ import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.platform.FriceClock
 import org.frice.game.platform.FriceGame
+import org.frice.game.platform.adapter.JvmDrawer
 import org.frice.game.resource.FResource
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
@@ -56,7 +56,8 @@ import kotlin.concurrent.thread
  * @author ice1000
  * @since v0.2.3
  */
-abstract class Game() : JFrame(), FriceGame {
+@Suppress("LeakingThis")
+open class Game() : JFrame(), FriceGame {
 	companion object {
 		@JvmField
 		val TO_X = 100
@@ -83,28 +84,19 @@ abstract class Game() : JFrame(), FriceGame {
 		}
 	}
 
-	@JvmField
-	protected val objects = LinkedList<AbstractObject>()
-	@JvmField
-	protected val objectDeleteBuffer = ArrayList<AbstractObject>()
-	@JvmField
-	protected val objectAddBuffer = ArrayList<AbstractObject>()
+	override val objects = LinkedList<AbstractObject>()
+	override val objectDeleteBuffer = ArrayList<AbstractObject>()
+	override val objectAddBuffer = ArrayList<AbstractObject>()
 
-	@JvmField
-	protected val timeListeners = LinkedList<FTimeListener>()
-	@JvmField
-	protected val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
-	@JvmField
-	protected val timeListenerAddBuffer = ArrayList<FTimeListener>()
+	override val timeListeners = LinkedList<FTimeListener>()
+	override val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
+	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
 
-	@JvmField
-	protected val texts = LinkedList<FText>()
-	@JvmField
-	protected val textDeleteBuffer = ArrayList<FText>()
-	@JvmField
-	protected val textAddBuffer = ArrayList<FText>()
+	override val texts = LinkedList<FText>()
+	override val textDeleteBuffer = ArrayList<FText>()
+	override val textAddBuffer = ArrayList<FText>()
 
-	val clock: FriceClock = Clock()
+	override val clock: FriceClock = Clock()
 
 	/**
 	 * if paused, main window will not call `onRefresh()`.
@@ -155,17 +147,12 @@ abstract class Game() : JFrame(), FriceGame {
 
 	private val refresh = FTimer(10)
 
-	private val buffer: BufferedImage
-
 	private val panel: GamePanel
-	private val stableBuffer: BufferedImage
 
-	private val bg: Graphics2D
-		get() = buffer.graphics as Graphics2D
+	override val drawer = JvmDrawer(this)
 
-	private var fpsCounter = 0
-	private var fpsDisplay = 0
-	private val fpsTimer: FTimer
+	override var fpsCounter = 0
+	override var fpsDisplay = 0
 
 	/**
 	 * represent the mouse as an object
@@ -196,8 +183,6 @@ abstract class Game() : JFrame(), FriceGame {
 		bounds = BIG_SQUARE
 		fpsTimer = FTimer(1000)
 		onInit()
-		buffer = BufferedImage(panel.width, panel.height, BufferedImage.TYPE_INT_ARGB)
-		stableBuffer = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
 		isVisible = true
 
 		thread {
@@ -245,15 +230,15 @@ abstract class Game() : JFrame(), FriceGame {
 		else return
 	}
 
-	protected open fun onLoseFocus(e: OnWindowEvent?) {
+	override fun onLoseFocus() {
 		paused = true
 	}
 
-	protected open fun onFocus(e: OnWindowEvent?) {
+	override fun onFocus() {
 		paused = false
 	}
 
-	protected open fun customDraw(g: Graphics2D) = Unit
+	override fun customDraw(g: JvmDrawer) = Unit
 
 	/**
 	 * for kotlin only
@@ -300,95 +285,37 @@ abstract class Game() : JFrame(), FriceGame {
 		cursor = toolkit.createCustomCursor(o.image, Point(0, 0), "cursor")
 	}
 
-	/**
-	 * add Objects using vararg
-	 */
-	fun addObject(vararg objs: AbstractObject) = objs.forEach { o -> addObject(o) }
+	override fun addObject(vararg objs: AbstractObject) = objs.forEach { o -> addObject(o) }
 
-	/**
-	 * adds an object to game, to be shown on game window.
-	 */
-	infix fun addObject(obj: AbstractObject) {
+	override infix fun addObject(obj: AbstractObject) {
 		if (obj is FText) textAddBuffer.add(obj)
 		else objectAddBuffer.add(obj)
 	}
 
-	/**
-	 * clears all objects.
-	 * this method is safe.
-	 */
-	fun clearObjects() {
+	override fun clearObjects() {
 		objectDeleteBuffer.addAll(objects)
 		textDeleteBuffer.addAll(texts)
 	}
 
-	/**
-	 * removes single object.
-	 * this method is safe.
-	 *
-	 * @param obj will remove objects which is equal to it.
-	 */
-	infix fun removeObject(obj: AbstractObject) {
+
+	override infix fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDeleteBuffer.add(obj)
 		else objectDeleteBuffer.add(obj)
 	}
 
-	/**
-	 * remove Objects using vararg
-	 */
-	fun removeObject(vararg objs: AbstractObject) = objs.forEach { o -> removeObject(o) }
+	override fun removeObject(vararg objs: AbstractObject) = objs.forEach { o -> removeObject(o) }
 
-	/**
-	 * add TimeListeners using vararg
-	 */
-	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
+	override fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
 
-	/**
-	 * add a time listener.
-	 *
-	 * @param listener time listener to be added
-	 */
-	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
+	override infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
-	/**
-	 * removes all auto-executed time listeners
-	 */
-	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
+	override fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
-	/**
-	 * remove TimeListeners using vararg
-	 */
-	fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> removeTimeListener(l) }
+	override fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> removeTimeListener(l) }
 
-	/**
-	 * removes specified listener
-	 *
-	 * @param listener the listener
-	 */
-	infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
+	override infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
-
-	/**
-	 * do the delete and add work, to prevent Exceptions
-	 */
-	private fun processBuffer() {
-		objects.addAll(objectAddBuffer)
-		objects.removeAll(objectDeleteBuffer)
-		objectDeleteBuffer.clear()
-		objectAddBuffer.clear()
-
-		timeListeners.addAll(timeListenerAddBuffer)
-		timeListeners.removeAll(timeListenerDeleteBuffer)
-		timeListenerDeleteBuffer.clear()
-		timeListenerAddBuffer.clear()
-
-		texts.addAll(textAddBuffer)
-		texts.removeAll(textDeleteBuffer)
-		textDeleteBuffer.clear()
-		textAddBuffer.clear()
-	}
-
-	protected fun drawEverything(getBGG: () -> Graphics2D) {
+	override fun drawEverything(bgg: JvmDrawer) {
 		processBuffer()
 
 		objects.forEach { o ->
@@ -399,8 +326,8 @@ abstract class Game() : JFrame(), FriceGame {
 		}
 
 		objects.forEach { o ->
-			val bgg = getBGG()
-			bgg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+			bgg.restore()
+			bgg.init()
 			if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
@@ -410,74 +337,63 @@ abstract class Game() : JFrame(), FriceGame {
 							o.y + o.image.height < 0 ||
 							o.y > height) {
 
-						bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
+						bgg.drawImage(o.image, o.x, o.y)
 
 					}
 				is ShapeObject ->
-					unless((o.x + o.width).toInt() < 0 ||
-							o.x.toInt() > width ||
-							(o.y + o.height).toInt() < 0 ||
-							o.y.toInt() > height) {
+					unless((o.x + o.width) < 0 ||
+							o.x > width ||
+							(o.y + o.height) < 0 ||
+							o.y > height) {
 
-						bgg.color = o.getResource().color
+						bgg.color = o.getResource()
 						when (o.collideBox) {
-							is FRectangle -> bgg.fillRect(
-									o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt()
-							)
-							is FOval -> bgg.fillOval(
-									o.x.toInt(),
-									o.y.toInt(),
-									o.width.toInt(),
-									o.height.toInt()
-							)
+							is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
+							is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 						}
 
 					}
-				is LineEffect -> bgg.drawLine(o.x.toInt(), o.y.toInt(), o.x2.toInt(), o.y2.toInt())
+				is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
 			}
-			if (autoGC && (o.x.toInt() < -width ||
-					o.x.toInt() > width + width ||
-					o.y.toInt() < -height ||
-					o.y.toInt() > height + height)) {
+			if (autoGC && (o.x < -width ||
+					o.x > width + width ||
+					o.y < -height ||
+					o.y > height + height)) {
 				if (o is PhysicalObject) o.died = true
 				removeObject(o)
-				//FLog.i("o.x.toInt() = ${o.x.toInt()}, width = $width," +
-				//		" o.y.toInt() = ${o.y.toInt()}, height = $height")
+				//FLog.i("o.x = ${o.x}, width = $width," +
+				//		" o.y = ${o.y}, height = $height")
 			}
 		}
 
 		texts.forEach {
 			b ->
-			val bgg = getBGG()
-			bgg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
+			bgg.restore()
+			bgg.init()
 			bgg.rotate(b.rotate)
 			if (b is FButton) {
 				when (b) {
-					is FObject.ImageOwner ->
-						unless((b.x + b.image.width).toInt() < 0 ||
-								b.x.toInt() > width ||
-								(b.y + b.image.height).toInt() < 0 ||
-								b.y.toInt() > height) {
-
-							bgg.drawImage(b.image, b.x.toInt(), b.y.toInt(), this)
-
+					is FObject.ImageOwner -> {
+						unless(b.x + b.image.width < 0 ||
+								b.x > width ||
+								b.y + b.image.height < 0 ||
+								b.y > height) {
+							bgg.drawImage(b.image, b.x, b.y)
 						}
+					}
 					is SimpleButton -> {
-						bgg.color = b.getColor().color
-						bgg.fillRoundRect(b.x.toInt(), b.y.toInt(),
-								b.width.toInt(), b.height.toInt(),
-								Math.min((b.width * 0.5).toInt(), 10),
-								Math.min((b.height * 0.5).toInt(), 10))
-						bgg.color = ColorResource.DARK_GRAY.color
-						bgg.drawString(b.text, b.x.toInt() + 10, (b.y + (b.height / 2)).toInt())
+						bgg.color = b.getColor()
+						bgg.drawRoundRect(b.x, b.y,
+								b.width, b.height,
+								Math.min(b.width * 0.5, 10.0),
+								Math.min(b.height * 0.5, 10.0))
+						bgg.color = ColorResource.DARK_GRAY
+						bgg.drawString(b.text, b.x + 10, (b.y + (b.height / 2)))
 					}
 				}
-			} else bgg.drawString(b.text, b.x.toInt(), b.y.toInt())
+			} else bgg.drawString(b.text, b.x, b.y)
 		}
-		customDraw(getBGG())
+		customDraw(bgg)
 	}
 
 	/**
@@ -569,13 +485,13 @@ abstract class Game() : JFrame(), FriceGame {
 				override fun windowActivated(e: WindowEvent) {
 					loseFocus = false
 					clock.resume()
-					onFocus(OnWindowEvent.create(e))
+					onFocus()
 				}
 
 				override fun windowDeactivated(e: WindowEvent) {
 					loseFocus = true
 					clock.pause()
-					onLoseFocus(OnWindowEvent.create(e))
+					onLoseFocus()
 				}
 
 				override fun windowIconified(e: WindowEvent) = Unit
@@ -587,8 +503,8 @@ abstract class Game() : JFrame(), FriceGame {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			drawBackground(back, bg)
-			drawEverything({ bg })
+			drawBackground(back, drawer)
+			drawEverything(drawer)
 
 			if (loseFocus && loseFocusChangeColor) {
 				loop(buffer.width) { x ->
@@ -598,11 +514,11 @@ abstract class Game() : JFrame(), FriceGame {
 				}
 			}
 
-			if (showFPS) bg.drawString("fps: $fpsDisplay", 30, height - 30)
+			if (showFPS) drawer.drawString("fps: $fpsDisplay", 30, height - 30)
 
 			/*
 			 * 厚颜无耻
-			 * bg.drawString("Powered by FriceEngine. ice1000", 5, 20)
+			 * drawer.drawString("Powered by FriceEngine. ice1000", 5, 20)
 			 */
 
 			stableBuffer.graphics.drawImage(buffer, 0, 0, this)

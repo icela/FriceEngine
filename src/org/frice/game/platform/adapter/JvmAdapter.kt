@@ -43,7 +43,19 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer<BufferedImage> {
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =
 			g.drawRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
+	override fun drawLine(x: Double, y: Double, width: Double, height: Double) =
+			g.drawLine(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+
 	override fun rotate(theta: Double, x: Double, y: Double) = g.rotate(theta, x, y)
+	override fun rotate(theta: Double) = g.rotate(theta)
+
+	override fun drawRoundRect(x: Double,
+	                           y: Double,
+	                           width: Double,
+	                           height: Double,
+	                           arcWidth: Double,
+	                           arcHeight: Double) =
+			g.fillRoundRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), arcWidth.toInt(), arcHeight.toInt())
 
 	override fun restore() {
 		g = getG
