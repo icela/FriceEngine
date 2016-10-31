@@ -5,7 +5,6 @@
  */
 package org.frice.game.resource.manager
 
-import org.frice.game.utils.web.WebUtils
 import java.awt.image.BufferedImage
 import java.io.File
 import java.net.URL
@@ -22,9 +21,7 @@ import javax.imageio.ImageIO
  */
 internal fun BufferedImage.clone(): BufferedImage {
 	return BufferedImage(width, height, type).apply {
-		setRGB(0, 0, width, height,
-				getRGB(0, 0, width, height, null, 0, 0),
-				0, 0)
+		this@apply.data = this@clone.data
 	}
 }
 
@@ -74,7 +71,7 @@ object ImageManager : FManager<BufferedImage> {
  */
 object WebImageManager : FManager<BufferedImage> {
 	override val res = HashMap<String, BufferedImage>()
-	override fun create(path: String) = WebUtils.readImage(path)
+	override fun create(path: String) = ImageIO.read(URL(path))!!
 	override fun get(path: String) = super.get(path).clone()
 }
 

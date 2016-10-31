@@ -296,21 +296,6 @@ abstract class Game() : JFrame() {
 		cursor = toolkit.createCustomCursor(o.image, Point(0, 0), "cursor")
 	}
 
-
-	/**
-	 * adds objects
-	 *
-	 * @param objs as a collection
-	 */
-	infix fun addObjects(objs: Collection<AbstractObject>) = addObjects(objs.toTypedArray())
-
-	/**
-	 * adds objects
-	 *
-	 * @param objs as an array
-	 */
-	infix fun addObjects(objs: Array<AbstractObject>) = objs.forEach { o -> addObject(o) }
-
 	/**
 	 * add Objects using vararg
 	 */
@@ -334,22 +319,6 @@ abstract class Game() : JFrame() {
 	}
 
 	/**
-	 * removes objects.
-	 * this method is safe.
-	 *
-	 * @param objs will remove objects which is equal to them, as an array.
-	 */
-	infix fun removeObjects(objs: Array<AbstractObject>) = objs.forEach { o -> objectDeleteBuffer.add(o) }
-
-	/**
-	 * removes objects.
-	 * this method is safe.
-	 *
-	 * @param objs will remove objects which is equal to them, as a collection.
-	 */
-	infix fun removeObjects(objs: Collection<AbstractObject>) = removeObjects(objs.toTypedArray())
-
-	/**
 	 * removes single object.
 	 * this method is safe.
 	 *
@@ -366,25 +335,16 @@ abstract class Game() : JFrame() {
 	fun removeObject(vararg objs: AbstractObject) = objs.forEach { o -> removeObject(o) }
 
 	/**
-	 * adds a auto-executed time listener
-	 * you must add or it won't work.
-	 */
-	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
-
-	/**
 	 * add TimeListeners using vararg
 	 */
 	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
 
 	/**
-	 * adds an array of auto-executed time listeners
+	 * add a time listener.
+	 *
+	 * @param listener time listener to be added
 	 */
-	infix fun addTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> addTimeListener(l) }
-
-	/**
-	 * adds a collection of auto-executed time listeners
-	 */
-	infix fun addTimeListeners(listeners: Collection<FTimeListener>) = addTimeListeners(listeners.toTypedArray())
+	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
 
 	/**
 	 * removes all auto-executed time listeners
@@ -392,23 +352,9 @@ abstract class Game() : JFrame() {
 	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
 	/**
-	 * removes auto-executed time listeners specified in the given array.
-	 *
-	 * @param listeners the array
-	 */
-	infix fun removeTimeListeners(listeners: Array<FTimeListener>) = listeners.forEach { l -> removeTimeListener(l) }
-
-	/**
 	 * remove TimeListeners using vararg
 	 */
 	fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> removeTimeListener(l) }
-
-	/**
-	 * auto-execute time listeners which are equal to the given collection.
-	 *
-	 * @param listeners the collection
-	 */
-	infix fun removeTimeListeners(listeners: Collection<FTimeListener>) = removeTimeListeners(listeners.toTypedArray())
 
 	/**
 	 * removes specified listener
