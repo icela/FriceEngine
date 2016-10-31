@@ -401,10 +401,10 @@ abstract class Game() : JFrame() {
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
 				is FObject.ImageOwner ->
-					unless((o.x + o.image.width).toInt() < 0 ||
-							o.x.toInt() > width ||
-							(o.y + o.image.height).toInt() < 0 ||
-							o.y.toInt() > height) {
+					unless(o.x + o.image.width < 0 ||
+							o.x > width ||
+							o.y + o.image.height < 0 ||
+							o.y > height) {
 
 						bgg.drawImage(o.image, o.x.toInt(), o.y.toInt(), this)
 
