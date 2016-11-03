@@ -135,11 +135,11 @@ open class Game() : JFrame(), FriceGame {
 
 	var loseFocusChangeColor = true
 
-	private val refresh = FTimer(10)
+	private val refresh = FTimer(4)
 
 	private val panel: GamePanel
 
-	override val drawer = JvmDrawer(this)
+	override val drawer: JvmDrawer
 
 	override var fpsCounter = 0
 	override var fpsDisplay = 0
@@ -173,6 +173,8 @@ open class Game() : JFrame(), FriceGame {
 		this.add(panel, BorderLayout.CENTER)
 		bounds = BIG_SQUARE
 		onInit()
+		drawer = JvmDrawer(this)
+		drawer.init()
 		isVisible = true
 
 		thread {
@@ -432,6 +434,12 @@ open class Game() : JFrame(), FriceGame {
 	 */
 	override fun getMousePosition() = panel.mousePosition!!
 
+	override fun clearScreen() {
+		drawer.color = ColorResource.WHITE
+		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
+		drawer.restore()
+	}
+
 	/**
 	 * Demo24 game view.
 	 * all rendering work and game object calculating are here.
@@ -484,6 +492,7 @@ open class Game() : JFrame(), FriceGame {
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
+			clearScreen()
 			drawEverything(drawer)
 
 			if (loseFocus && loseFocusChangeColor) {

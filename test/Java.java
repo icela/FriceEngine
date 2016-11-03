@@ -9,7 +9,7 @@ import org.frice.game.resource.image.ImageResource;
  */
 public class Java extends Game {
 	@Override
-	protected void onInit() {
+	public void onInit() {
 		super.onInit();
 		addObject(new ImageButton(
 				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175207052"),

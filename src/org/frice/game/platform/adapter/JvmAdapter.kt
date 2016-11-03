@@ -14,16 +14,21 @@ import java.awt.image.BufferedImage
  * @author ice1000
  */
 data class JvmDrawer(val frame: Frame) : FriceDrawer {
+
 	override fun init() {
 		getG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 	}
 
-	override val friceImage = JvmImage(frame.width, frame.height)
+	override val friceImage: JvmImage
 	override var color: ColorResource
 		get() = ColorResource(g.color)
 		set(value) {
 			g.color = value.color
 		}
+
+	init {
+		friceImage = JvmImage(frame.width, frame.height)
+	}
 
 	val getG: Graphics2D
 		get() = friceImage.image.graphics as Graphics2D
@@ -31,7 +36,7 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 	var g: Graphics2D = getG
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =
-			g.drawOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+			g.fillOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
 	override fun drawString(string: String, x: Double, y: Double) =
 			g.drawString(string, x.toInt(), y.toInt())
@@ -41,7 +46,7 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =
-			g.drawRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+			g.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
 	override fun drawLine(x: Double, y: Double, width: Double, height: Double) =
 			g.drawLine(x.toInt(), y.toInt(), width.toInt(), height.toInt())

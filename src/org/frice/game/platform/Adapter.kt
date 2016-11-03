@@ -164,6 +164,7 @@ interface FriceGame {
 	fun addObject(vararg objs: AbstractObject)
 
 	fun drawEverything(bgg: JvmDrawer)
+	fun clearScreen()
 
 	fun getScreenCut(): ImageResource
 }
