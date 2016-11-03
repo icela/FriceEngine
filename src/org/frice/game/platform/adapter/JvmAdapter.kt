@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage
  *
  * @author ice1000
  */
-data class JvmDrawer(val frame: Frame) : FriceDrawer<BufferedImage> {
+data class JvmDrawer(val frame: Frame) : FriceDrawer {
 	override fun init() {
 		getG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 	}
@@ -36,8 +36,8 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer<BufferedImage> {
 	override fun drawString(string: String, x: Double, y: Double) =
 			g.drawString(string, x.toInt(), y.toInt())
 
-	override fun drawImage(image: BufferedImage, x: Double, y: Double) {
-		g.drawImage(image, x.toInt(), y.toInt(), frame)
+	override fun drawImage(image: FriceImage, x: Double, y: Double) {
+		g.drawImage((image as JvmImage).image, x.toInt(), y.toInt(), frame)
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =
@@ -71,6 +71,12 @@ data class JvmImage(val image: BufferedImage) : FriceImage {
 	override fun set(x: Int, y: Int, color: ColorResource) {
 		image.setRGB(x, y, color.color.rgb)
 	}
+
+	override fun getScaledInstance(x: Double, y: Double) =
+			JvmImage(image.getScaledInstance(x.toInt(), y.toInt(), BufferedImage.SCALE_DEFAULT) as BufferedImage)
+
+	override fun getSubImage(x: Int, y: Int, width: Int, height: Int) =
+			JvmImage(image.getSubimage(x, y, width, height))
 
 	override fun clone(): FriceImage {
 		return JvmImage(BufferedImage(width, height, image.type).apply {

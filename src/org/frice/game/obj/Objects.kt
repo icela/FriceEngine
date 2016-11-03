@@ -6,10 +6,10 @@ import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.DoublePair
 import org.frice.game.anim.move.MoveAnim
 import org.frice.game.anim.scale.ScaleAnim
+import org.frice.game.platform.FriceImage
 import org.frice.game.resource.FResource
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FShape
-import java.awt.image.BufferedImage
 import java.util.*
 
 /**
@@ -180,7 +180,7 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	interface ImageOwner {
-		val image: BufferedImage
+		val image: FriceImage
 	}
 }
 

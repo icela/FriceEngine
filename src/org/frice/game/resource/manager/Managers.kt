@@ -5,24 +5,13 @@
  */
 package org.frice.game.resource.manager
 
-import java.awt.image.BufferedImage
+import org.frice.game.platform.FriceImage
+import org.frice.game.platform.adapter.JvmImage
 import java.io.File
 import java.net.URL
 import java.nio.charset.Charset
 import java.util.*
 import javax.imageio.ImageIO
-
-/**
- * copy a image.
- * to replace the operation of reading an image from file.
- * if an image is already read from file, it can be copied from RAM directly.
- *
- * classes in this file is to do this job.
- */
-internal fun BufferedImage.clone(): BufferedImage {
-	TODO()
-//	TODO()
-}
 
 /**
  * resource manager, like a pool.
@@ -58,9 +47,9 @@ object FileManager : FManager<File> {
  * @author ice1000
  * @since v0.6
  */
-object ImageManager : FManager<BufferedImage> {
-	override val res = HashMap<String, BufferedImage>()
-	override fun create(path: String) = ImageIO.read(File(path))!!
+object ImageManager : FManager<FriceImage> {
+	override val res = HashMap<String, FriceImage>()
+	override fun create(path: String) = JvmImage(ImageIO.read(File(path))!!)
 	override fun get(path: String) = super.get(path).clone()
 }
 
@@ -68,9 +57,9 @@ object ImageManager : FManager<BufferedImage> {
  * @author ice1000
  * @since v0.6
  */
-object WebImageManager : FManager<BufferedImage> {
-	override val res = HashMap<String, BufferedImage>()
-	override fun create(path: String) = ImageIO.read(URL(path))!!
+object WebImageManager : FManager<FriceImage> {
+	override val res = HashMap<String, FriceImage>()
+	override fun create(path: String) = JvmImage(ImageIO.read(URL(path))!!)
 	override fun get(path: String) = super.get(path).clone()
 }
 

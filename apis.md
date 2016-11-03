@@ -102,7 +102,6 @@ Param|Usage
 :---|---:
 color: ColorResource|the color of the button
 text: String|the text on button
-font: Font|the font of the text(doesn't work)
 x: Double|position
 y: Double|position
 width: Double|width

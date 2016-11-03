@@ -92,15 +92,13 @@ open class Game() : JFrame(), FriceGame {
 	override val textDeleteBuffer = ArrayList<FText>()
 	override val textAddBuffer = ArrayList<FText>()
 
-	override val clock: FriceClock = Clock()
-
 	/**
 	 * if paused, main window will not call `onRefresh()`.
 	 */
 	var paused = false
 		set(value) {
-			if (value) clock.pause()
-			else clock.resume()
+			if (value) Clock.pause()
+			else Clock.resume()
 			field = value
 		}
 
@@ -110,8 +108,8 @@ open class Game() : JFrame(), FriceGame {
 	 */
 	var stopped = false
 		set(value) {
-			if (value) clock.pause()
-			else clock.resume()
+			if (value) Clock.pause()
+			else Clock.resume()
 			field = value
 		}
 
@@ -425,7 +423,7 @@ open class Game() : JFrame(), FriceGame {
 	 *
 	 * @return screen cut as an image
 	 */
-	override fun getScreenCut() = ImageResource.create(drawer.friceImage.image)
+	override fun getScreenCut() = ImageResource.create(drawer.friceImage)
 
 	/**
 	 * this method escaped the error
@@ -467,13 +465,13 @@ open class Game() : JFrame(), FriceGame {
 				override fun windowDeiconified(e: WindowEvent) = Unit
 				override fun windowActivated(e: WindowEvent) {
 					loseFocus = false
-					clock.resume()
+					Clock.resume()
 					onFocus()
 				}
 
 				override fun windowDeactivated(e: WindowEvent) {
 					loseFocus = true
-					clock.pause()
+					Clock.pause()
 					onLoseFocus()
 				}
 

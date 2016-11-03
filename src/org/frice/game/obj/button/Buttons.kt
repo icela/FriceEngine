@@ -5,10 +5,9 @@ import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FContainer
 import org.frice.game.obj.FObject
+import org.frice.game.platform.FriceImage
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
-import java.awt.Font
-import java.awt.image.BufferedImage
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -65,7 +64,7 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
 
 	private var bool = false
 
-	override val image: BufferedImage
+	override val image: FriceImage
 		get () = if (bool) imagePressed.image else imageNormal.image
 }
 
@@ -76,18 +75,14 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
  * @since v0.3.3
  */
 open class SimpleButton(var colorResource: ColorResource,
-                        override var text: String, override var font: Font,
-                        override var x: Double, override var y: Double,
-                        override var width: Double, override var height: Double) : FButton, FText() {
-
-	constructor(text: String, font: Font, x: Double, y: Double,
-	            width: Double, height: Double) : this(ColorResource.GRAY, text, font, x, y, width, height)
-
-	constructor(text: String, font: Int, x: Double, y: Double, width: Double, height: Double) :
-	this(text, Font(Font.MONOSPACED, Font.BOLD, font), x, y, width, height)
+                        override var text: String,
+                        override var x: Double,
+                        override var y: Double,
+                        override var width: Double,
+                        override var height: Double) : FButton, FText() {
 
 	constructor(text: String, x: Double, y: Double, width: Double, height: Double) :
-	this(text, Font(Font.MONOSPACED, Font.BOLD, 16), x, y, width, height)
+	this(ColorResource.GRAY, text, x, y, width, height)
 
 	private var bool = false
 

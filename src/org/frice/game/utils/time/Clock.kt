@@ -8,7 +8,7 @@ import org.frice.game.utils.misc.unless
  *
  * @author ice1000
  */
-class Clock : FriceClock {
+object Clock : FriceClock {
 	var started = true
 		internal set
 	var startTicks = System.currentTimeMillis()
@@ -16,7 +16,7 @@ class Clock : FriceClock {
 	var pauseTicks = startTicks
 		internal set
 
-	val current: Long
+	override val current: Long
 		get() = if (started) System.currentTimeMillis() - startTicks else pauseTicks - startTicks
 
 	override fun init() {
