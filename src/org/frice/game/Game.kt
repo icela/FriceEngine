@@ -12,9 +12,9 @@ import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
-import org.frice.game.platform.FriceClock
 import org.frice.game.platform.FriceGame
 import org.frice.game.platform.adapter.JvmDrawer
+import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
@@ -210,8 +210,8 @@ open class Game() : JFrame(), FriceGame {
 	override fun onInit() = Unit
 	override fun onLastInit() = Unit
 	override fun onRefresh() = Unit
-	fun onClick(e: OnClickEvent) = Unit
-	fun onMouse(e: OnMouseEvent) = Unit
+	open fun onClick(e: OnClickEvent) = Unit
+	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?",
 				"Ensuring", JOptionPane.YES_NO_OPTION) ==
@@ -272,7 +272,7 @@ open class Game() : JFrame(), FriceGame {
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	infix fun setCursor(o: ImageObject) {
-		cursor = toolkit.createCustomCursor(o.image, Point(0, 0), "cursor")
+		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
 	override fun addObject(vararg objs: AbstractObject) = objs.forEach { o -> addObject(o) }

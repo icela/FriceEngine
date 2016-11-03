@@ -2,10 +2,9 @@ package org.frice.game.obj.sub
 
 import org.frice.game.obj.CollideBox
 import org.frice.game.obj.FObject
+import org.frice.game.platform.FriceImage
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
-import java.awt.Image
-import java.awt.image.BufferedImage
 
 /**
  * Base GameObject class
@@ -22,7 +21,7 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 
 	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
 
-	constructor(res: BufferedImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
+	constructor(res: FriceImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
 
 	override fun getResource() = res
 
@@ -45,11 +44,10 @@ open class ImageObject(var res: ImageResource, override var id: Int,
 	override var died = false
 
 	override fun scale(x: Double, y: Double) {
-		res.image = res.image.getScaledInstance((res.image.width * x / 1000.0).toInt(),
-				(res.image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+		res.image = res.image.getScaledInstance(res.image.width * x / 1000.0, res.image.height * y / 1000.0)
 	}
 
-	override val image: BufferedImage
+	override val image: FriceImage
 		get() = res.image
 
 	override fun equals(other: Any?): Boolean {

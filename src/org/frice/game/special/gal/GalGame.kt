@@ -62,7 +62,7 @@ open class GalGame() : Game() {
 		when (now) {
 		// change the background
 			is GalBackground -> {
-				back = now.image
+//				back = now.image
 			}
 			is GalText -> {
 				TODO("print the text")

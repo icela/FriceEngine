@@ -1,8 +1,8 @@
 package org.frice.game
 
-import org.frice.game.Game
 import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.AccelerateMove
+import org.frice.game.anim.move.AccurateMove
 import org.frice.game.anim.move.SimpleMove
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
@@ -91,7 +91,7 @@ class Test() : Game() {
 			addObject(ShapeObject(ColorResource.Companion.IntelliJ_IDEA黑, FCircle(10.0),
 					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
 				anims.add(AccelerateMove.getGravity())
-				anims.add(SimpleMove(random.nextInt(400) - 200, 0))
+				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 				targets.clear()
 				objs.forEach { o ->
 					targets.add(Pair(o, object : FObject.OnCollideEvent {

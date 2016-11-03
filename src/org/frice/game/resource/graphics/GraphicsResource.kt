@@ -1,12 +1,14 @@
 package org.frice.game.resource.graphics
 
 import org.frice.game.Game
+import org.frice.game.platform.FriceImage
+import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.FResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
 import java.awt.Color
-import java.awt.image.BufferedImage
+import java.awt.Image
 import java.util.*
 
 /**
@@ -92,18 +94,18 @@ data class ColorResource(val color: Color) : FResource {
  */
 class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: Int, height: Int) : FResource {
 
-	private val image: BufferedImage
+	private val image: FriceImage
 
 	init {
-		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		image = JvmImage(width, height)
 		var lastTime = f(0.0)
 		var thisTime: Double
 		(0..width step 1).forEach { x ->
 			thisTime = f(x.toDouble())
-			forceRun { image.setRGB(x.toInt(), thisTime.toInt(), color.color.rgb) }
+			forceRun { image.set(x.toInt(), thisTime.toInt(), color) }
 			if (Math.abs(thisTime - lastTime) >= 1.0) forceRun {
 				(Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()).forEach { i ->
-					image.setRGB(x, i, color.color.rgb)
+					image.set(x, i, color)
 				}
 			}
 			lastTime = thisTime
@@ -118,13 +120,13 @@ class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: I
  * something like circle.
  */
 class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width: Int, height: Int) : FResource {
-	private val image: BufferedImage
+	private val image: FriceImage
 
 	init {
-		image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
+		image = JvmImage(width, height)
 		(0..width step 1).forEach { x ->
 			f(x.toDouble()).forEach { y ->
-				forceRun { image.setRGB(x, y.toInt(), color.color.rgb) }
+				forceRun { image.set(x, y.toInt(), color) }
 			}
 		}
 	}
@@ -157,24 +159,24 @@ data class ParticleResource(
 	/**
 	 * particle effects as an image
 	 */
-	private val image = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB_PRE)
+	private val image = JvmImage(width, height)
 	private val random = Random(Random().nextLong())
 
 	private fun drawBackground() {
-		val g = image.graphics
+		val g = image.image.graphics
 		when (back) {
 			is ColorResource -> {
 				g.color = back.color
 				g.fillRect(0, 0, width, height)
 			}
-			is ImageResource -> g.drawImage(back.image, 0, 0, width, height, game)
+			is ImageResource -> g.drawImage((back.image as Image), 0, 0, width, height, game)
 		}
 	}
 
 	init {
 		drawBackground()
 		loop((image.width * image.height * percentage).toInt()) {
-			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
+			image.set(random.nextInt(width), random.nextInt(height), fore)
 		}
 	}
 
@@ -188,7 +190,7 @@ data class ParticleResource(
 			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
 			image.setRGB(cache1, cache2, when (back) {
 				is ColorResource -> back.color.rgb
-				is ImageResource -> back.image.getRGB(cache1, cache2)
+				is ImageResource -> back.image[cache1, cache2].color.rgb
 				else -> ColorResource.COLORLESS.color.rgb
 			})
 		}

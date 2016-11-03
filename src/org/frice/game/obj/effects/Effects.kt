@@ -2,6 +2,7 @@ package org.frice.game.obj.effects
 
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.sub.ImageObject
+import org.frice.game.platform.FriceImage
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.CurveResource
 import org.frice.game.resource.graphics.FunctionResource
@@ -32,7 +33,7 @@ class LineEffect(var colorResource: ColorResource, override var x: Double, overr
  */
 class ParticleEffect(private var resource: ParticleResource, override var x: Double, override var y: Double) :
 		ImageObject(resource.getResource(), x, y) {
-	override val image: BufferedImage
+	override val image: FriceImage
 		get() = resource.getResource()
 
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
@@ -72,12 +73,12 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
 
 	override fun getResource() = ImageResource.create(image)
 
-	override val image: BufferedImage
+	override val image: FriceImage
 		get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = image.getScaledInstance((image.width * x / 1000.0).toInt(),
-				(image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+		res.image = image.getScaledInstance(image.width * x / 1000.0,
+				image.height * y / 1000.0)
 	}
 
 	/**
@@ -105,12 +106,12 @@ class CurveEffect(res: CurveResource, override var x: Double, override var y: Do
 
 	override fun getResource() = ImageResource.create(image)
 
-	override val image: BufferedImage
+	override val image: FriceImage
 		get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = image.getScaledInstance((image.width * x / 1000.0).toInt(),
-				(image.height * y / 1000.0).toInt(), Image.SCALE_DEFAULT) as BufferedImage
+		res.image = image.getScaledInstance(image.width * x / 1000.0,
+				image.height * y / 1000.0)
 	}
 
 	/**
