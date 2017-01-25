@@ -102,7 +102,7 @@ class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: I
 		var thisTime: Double
 		(0..width step 1).forEach { x ->
 			thisTime = f(x.toDouble())
-			forceRun { image.set(x.toInt(), thisTime.toInt(), color) }
+			forceRun { image.set(x, thisTime.toInt(), color) }
 			if (Math.abs(thisTime - lastTime) >= 1.0) forceRun {
 				(Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()).forEach { i ->
 					image.set(x, i, color)
