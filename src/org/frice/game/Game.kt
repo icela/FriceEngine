@@ -27,7 +27,10 @@ import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Graphics
+import java.awt.Point
+import java.awt.Rectangle
 import java.awt.event.*
 import java.util.*
 import javax.swing.JFrame
@@ -162,6 +165,7 @@ open class Game() : JFrame(), FriceGame {
 	}
 
 	init {
+		panel = GamePanel()
 		isResizable = false
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
@@ -169,7 +173,6 @@ open class Game() : JFrame(), FriceGame {
 		iconImage = javax.imageio.ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
 
 		/// to prevent this engine from the call#cking NPE!!
-		panel = GamePanel()
 		this.add(panel, BorderLayout.CENTER)
 		bounds = BIG_SQUARE
 		onInit()
@@ -388,37 +391,37 @@ open class Game() : JFrame(), FriceGame {
 		customDraw(bgg)
 	}
 
-	/**
-	 * set the frame bounds (size and position)
-	 */
-	override infix fun setBounds(r: Rectangle) {
-		super.setBounds(r)
-		panel.bounds = r
-	}
-
-	/**
-	 * set the frame bounds (size and position)
-	 */
-	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
-		super.setBounds(x, y, width, height)
-		panel.setBounds(x, y, width, height)
-	}
-
-	/**
-	 * set the frame size
-	 */
-	override fun setSize(width: Int, height: Int) {
-		super.setSize(width, height)
-		panel.setSize(width, height)
-	}
-
-	/**
-	 * set the frame size
-	 */
-	override infix fun setSize(d: Dimension) {
-		super.setSize(d)
-		panel.size = d
-	}
+//	/**
+//	 * set the frame bounds (size and position)
+//	 */
+//	override infix fun setBounds(r: Rectangle) {
+//		super.setBounds(r)
+//		panel.bounds = r
+//	}
+//
+//	/**
+//	 * set the frame bounds (size and position)
+//	 */
+//	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
+//		super.setBounds(x, y, width, height)
+//		panel.setBounds(x, y, width, height)
+//	}
+//
+//	/**
+//	 * set the frame size
+//	 */
+//	override fun setSize(width: Int, height: Int) {
+//		super.setSize(width, height)
+//		panel.setSize(width, height)
+//	}
+//
+//	/**
+//	 * set the frame size
+//	 */
+//	override infix fun setSize(d: Dimension) {
+//		super.setSize(d)
+//		panel.size = d
+//	}
 
 	/**
 	 * get a screenShot.
@@ -498,7 +501,10 @@ open class Game() : JFrame(), FriceGame {
 			if (loseFocus && loseFocusChangeColor) {
 				loop(drawer.friceImage.width) { x ->
 					loop(drawer.friceImage.height) { y ->
-						drawer.friceImage.set(x, y, ColorResource(drawer.friceImage[x, y].color.darker()))
+						drawer.friceImage.set(x, y, ColorResource(drawer
+								.friceImage[x, y]
+								.color
+								.darker()))
 					}
 				}
 			}
