@@ -20,9 +20,6 @@ targetCompatibility = 1.6
 
 repositories {
 	mavenCentral()
-	flatDir {
-		dirs 'lib'
-	}
 }
 
 sourceSets {
@@ -35,7 +32,6 @@ sourceSets {
 dependencies {
 	compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
 	compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
-	compile name: 'ia'
 
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"

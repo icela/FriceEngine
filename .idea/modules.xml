@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FriceEngine.iml" filepath="$PROJECT_DIR$/.idea/modules/FriceEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/friceEngine.iml" filepath="$PROJECT_DIR$/.idea/modules/friceEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/friceEngine_main.iml" filepath="$PROJECT_DIR$/.idea/modules/friceEngine_main.iml" group="friceEngine" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/friceEngine_test.iml" filepath="$PROJECT_DIR$/.idea/modules/friceEngine_test.iml" group="friceEngine" />
+      <module fileurl="file://D:\git-repos\FriceEngine\sample\sample.iml" filepath="D:\git-repos\FriceEngine\sample\sample.iml" />
     </modules>
   </component>
 </project>
