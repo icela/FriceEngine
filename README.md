@@ -2,6 +2,8 @@
 
 ![image](https://avatars1.githubusercontent.com/u/21008243)
 
+[![Build Status](https://travis-ci.org/icela/FriceEngine.svg?branch=master)](https://travis-ci.org/icela/FriceEngine)
+
 一个简单、易用的原生轻量级JVM游戏引擎。<br/>
 查看 [API文档](https://github.com/icela/FriceEngine/blob/master/apis.md) 或者Wiki以更多地了解Frice Engine。
 

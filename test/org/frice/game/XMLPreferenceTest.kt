@@ -1,6 +1,7 @@
 package org.frice.game
 
 import org.frice.game.utils.data.XMLPreference
+import org.junit.BeforeClass
 import org.junit.Test
 
 /**
@@ -10,15 +11,8 @@ import org.junit.Test
  */
 class XMLPreferenceTest {
 
-	lateinit var p: XMLPreference
-
-	fun init() {
-		p = XMLPreference("D://text.xml")
-	}
-
 	@Test
 	fun insert() {
-		init()
 		p.insert("ice", 1000)
 		p.insert("lizhaohan", 1)
 		p.insert("jelly", "bean")
@@ -26,8 +20,17 @@ class XMLPreferenceTest {
 
 	@Test
 	fun query() {
-		init()
 		println("p?.query(\"ice\", 5) = ${p.query("ice", 5)}")
 		println("p?.query(\"jelly\", jelly) = ${p.query("jelly", "")}")
+	}
+
+	companion object Init {
+		lateinit var p: XMLPreference
+
+		@BeforeClass
+		@JvmStatic
+		fun init() {
+			p = XMLPreference("./test.xml")
+		}
 	}
 }

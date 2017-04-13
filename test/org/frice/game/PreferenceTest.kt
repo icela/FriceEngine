@@ -11,15 +11,19 @@ import org.junit.Test
  */
 class PreferenceTest {
 
-	private val p = Preference("Fuck.properties")
+	private val p = Preference("./test.properties")
 
 	@Test
 	fun query() {
-		p.insert("fuck", 2333)
+		p.insert(KEY, 2333)
 	}
 
 	@Test
 	fun insert() {
-		FLog.i(p.query("fuck", 6666))
+		FLog.i(p.query(KEY, 6666))
+	}
+
+	companion object Init {
+		val KEY = "fuck"
 	}
 }
