@@ -20,6 +20,6 @@ class PreferenceTest {
 
 	@Test
 	fun insert() {
-		FLog.i(p.query("fuck", "6666"))
+		FLog.i(p.query("fuck", 6666))
 	}
 }

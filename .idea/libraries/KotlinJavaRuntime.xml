@@ -2,10 +2,8 @@
   <library name="KotlinJavaRuntime">
     <CLASSES>
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime.jar!/" />
-      <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <LIBRARY_FILE />
     <SOURCES>
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-runtime-sources.jar!/" />
     </SOURCES>

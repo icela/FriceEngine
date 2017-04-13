@@ -1,0 +1,11 @@
+sudo: required
+language: java
+language: kotlin
+jdk:
+- oraclejdk8
+script:
+- "./gradlew check"
+- "./gradlew javadoc"
+- "./gradlew jar"
+before_install:
+- chmod a+x gradlew

@@ -43,7 +43,7 @@ class Preference(private val file: File) : Database {
 		forceRun { properties.load(file.inputStream()) }
 	}
 
-	override fun query(key: String, default: Any) = when (properties[key] as String) {
+	override fun query(key: String, default: Any) = when (properties[key].toString()) {
 		"true" -> true
 		"false" -> false
 		else -> forceGet(properties[key] ?: default) {
