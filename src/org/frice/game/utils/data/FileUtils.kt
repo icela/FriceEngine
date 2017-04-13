@@ -12,23 +12,23 @@ import javax.imageio.ImageIO
  */
 object FileUtils {
 	@JvmStatic
-	fun image2File(image: BufferedImage, file: File) = image2File(image, "png", file)
+	fun BufferedImage.image2File(type: String, file: File) = ImageIO.write(this, type, file)
 
 	@JvmStatic
-	fun image2File(image: BufferedImage, type: String, file: File) = ImageIO.write(image, type, file)
+	fun BufferedImage.image2File(file: File) = image2File("png", file)
 
 	@JvmStatic
-	fun image2File(image: BufferedImage, file: String) = image2File(image, File(file))
+	fun BufferedImage.image2File(file: String) = image2File(File(file))
 
 	@JvmStatic
-	fun string2File(string: String, file: File) = file.writeText(string)
+	fun String.string2File(file: File) = file.writeText(this)
 
 	@JvmStatic
-	fun string2File(string: String, file: String) = string2File(string, File(file))
+	fun String.string2File(file: String) = string2File(File(file))
 
 	@JvmStatic
-	fun bytes2File(byteArray: ByteArray, file: File) = file.writeBytes(byteArray)
+	fun ByteArray.bytes2File(file: File) = file.writeBytes(this)
 
 	@JvmStatic
-	fun bytes2File(byteArray: ByteArray, file: String) = bytes2File(byteArray, File(file))
+	fun ByteArray.bytes2File(byteArray: ByteArray, file: String) = bytes2File(File(file))
 }

@@ -54,13 +54,21 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 	override fun rotate(theta: Double, x: Double, y: Double) = g.rotate(theta, x, y)
 	override fun rotate(theta: Double) = g.rotate(theta)
 
-	override fun drawRoundRect(x: Double,
-	                           y: Double,
-	                           width: Double,
-	                           height: Double,
-	                           arcWidth: Double,
-	                           arcHeight: Double) =
-			g.fillRoundRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), arcWidth.toInt(), arcHeight.toInt())
+	override fun drawRoundRect(
+			x: Double,
+			y: Double,
+			width: Double,
+			height: Double,
+			arcWidth: Double,
+			arcHeight: Double) =
+			g.fillRoundRect(
+					x.toInt(),
+					y.toInt(),
+					width.toInt(),
+					height.toInt(),
+					arcWidth.toInt(),
+					arcHeight.toInt()
+			)
 
 	override fun restore() {
 		g = getG
@@ -73,9 +81,7 @@ data class JvmImage(val image: BufferedImage) : FriceImage {
 	override val width = image.width
 	override val height = image.height
 	override fun get(x: Int, y: Int) = ColorResource(image.getRGB(x, y))
-	override fun set(x: Int, y: Int, color: ColorResource) {
-		image.setRGB(x, y, color.color.rgb)
-	}
+	override fun set(x: Int, y: Int, color: ColorResource) = image.setRGB(x, y, color.color.rgb)
 
 	override fun getScaledInstance(x: Double, y: Double) =
 			JvmImage(image.getScaledInstance(x.toInt(), y.toInt(), BufferedImage.SCALE_DEFAULT) as BufferedImage)

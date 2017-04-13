@@ -23,11 +23,7 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 
 	fun clear() {
 		objects.clear()
-		for (i in nodes.indices) {
-			if (nodes[i] != null) {
-				nodes[i] = null
-			}
-		}
+		nodes.indices.forEach { nodes[it] = null }
 	}
 
 	private fun split() {
@@ -63,18 +59,12 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 
 		// contain left
 		if (rectF.x < verticalMidpoint && rectF.x + rectF.width < verticalMidpoint) {
-			if (topQuadrant) {
-				index = 1
-			} else if (bottomQuadrant) {
-				index = 2
-			}
+			if (topQuadrant) index = 1
+			else if (bottomQuadrant) index = 2
 			// contain right
 		} else if (rectF.x > verticalMidpoint) {
-			if (topQuadrant) {
-				index = 0
-			} else if (bottomQuadrant) {
-				index = 3
-			}
+			if (topQuadrant) index = 0
+			else if (bottomQuadrant) index = 3
 		}
 
 		return index
@@ -100,24 +90,15 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 		if (objects.size > MAX_OBJECTS && level < MAX_LEVELS) {
 			// don't have subNodes
 			// split node
-			if (nodes[0] == null) {
-				split()
-			}
+			if (nodes[0] == null) split()
 
 			var i = 0
 			while (i < objects.size) {
-
 				val index = getIndex(objects[i])
-
-				if (index != -1) {
-
-					nodes[index]?.insert(objects.removeAt(i))
-
-				} else {
-					// don't in subNode save to parent node.
-					// eq: object on line
-					i++
-				}
+				if (index != -1) nodes[index]?.insert(objects.removeAt(i))
+				// don't in subNode save to parent node.
+				// eq: object on line
+				else i++
 			}
 		}
 	}
@@ -133,11 +114,7 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 			returnObjects: ArrayList<ArrayList<PhysicalObject>>,
 			rectF: PhysicalObject): List<List<PhysicalObject>> {
 		val index = getIndex(rectF)
-
-		if (index != -1 && nodes[0] != null) {
-			nodes[index]?.retrieve(returnObjects, rectF)
-		}
-
+		if (index != -1 && nodes[0] != null) nodes[index]?.retrieve(returnObjects, rectF)
 		returnObjects.add(objects)
 		return returnObjects
 	}

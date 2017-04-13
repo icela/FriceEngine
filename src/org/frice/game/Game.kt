@@ -55,7 +55,7 @@ import kotlin.concurrent.thread
  * @since v0.2.3
  */
 @Suppress("LeakingThis")
-open class Game() : JFrame(), FriceGame {
+open class Game : JFrame(), FriceGame {
 
 	companion object {
 		@JvmField
@@ -239,6 +239,7 @@ open class Game() : JFrame(), FriceGame {
 	 * for kotlin only
 	 * add keyboard listeners with lambda
 	 */
+	@JvmOverloads
 	fun addKeyListener(
 			typed: (KeyEvent) -> Unit = { },
 			pressed: (KeyEvent) -> Unit = { },
@@ -327,33 +328,20 @@ open class Game() : JFrame(), FriceGame {
 			else bgg.rotate(o.rotate, o.x, o.y)
 			when (o) {
 				is FObject.ImageOwner ->
-					unless(o.x + o.image.width < 0 ||
-							o.x > width ||
-							o.y + o.image.height < 0 ||
-							o.y > height) {
-
+					unless(o.x + o.image.width < 0 || o.x > width || o.y + o.image.height < 0 || o.y > height) {
 						bgg.drawImage(o.image, o.x, o.y)
-
 					}
 				is ShapeObject ->
-					unless((o.x + o.width) < 0 ||
-							o.x > width ||
-							(o.y + o.height) < 0 ||
-							o.y > height) {
-
+					unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
 						bgg.color = o.getResource()
 						when (o.collideBox) {
 							is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
 							is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 						}
-
 					}
 				is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
 			}
-			if (autoGC && (o.x < -width ||
-					o.x > width + width ||
-					o.y < -height ||
-					o.y > height + height)) {
+			if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
 				if (o is PhysicalObject) o.died = true
 				removeObject(o)
 				//FLog.i("o.x = ${o.x}, width = $width," +
@@ -363,9 +351,11 @@ open class Game() : JFrame(), FriceGame {
 
 		texts.forEach {
 			b ->
-			bgg.restore()
-			bgg.init()
-			bgg.rotate(b.rotate)
+			bgg.run {
+				restore()
+				init()
+				rotate(b.rotate)
+			}
 			if (b is FButton) {
 				when (b) {
 					is FObject.ImageOwner -> {

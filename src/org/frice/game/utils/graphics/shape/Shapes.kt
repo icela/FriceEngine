@@ -8,8 +8,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1.1
  */
-interface FShape {
-}
+interface FShape
 
 interface FShapeInt : FShape {
 	var width: Int

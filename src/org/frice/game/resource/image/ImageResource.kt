@@ -80,7 +80,7 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 
 	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 
-	private var start: Long
+	private var start = Clock.current
 	private val timer: FTimeListener
 	private var counter = 0
 	private var ended = false
@@ -98,7 +98,6 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	}
 
 	init {
-		start = Clock.current
 		timer = FTimeListener(div, {
 			FLog.e("counter = $counter")
 			counter++

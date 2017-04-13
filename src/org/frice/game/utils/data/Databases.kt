@@ -70,7 +70,9 @@ class Preference(private val file: File) : Database {
 class XMLPreference constructor(val file: File) : Database {
 	constructor(path: String) : this(File(path))
 
-	private val builder: DocumentBuilder
+	private val builder: DocumentBuilder = DocumentBuilderFactory
+			.newInstance()
+			.newDocumentBuilder()
 	private val doc: Document
 	private val root: Element
 
@@ -112,7 +114,6 @@ class XMLPreference constructor(val file: File) : Database {
 	}
 
 	init {
-		builder = DocumentBuilderFactory.newInstance().newDocumentBuilder()
 		if (file.exists()) {
 			doc = builder.parse(file)
 			root = doc.documentElement
@@ -148,11 +149,6 @@ class XMLPreference constructor(val file: File) : Database {
 		root.appendChild(node)
 		save()
 	}
-
-	//	override fun <T> queryWithType(key: String, default: T): Any {
-	//		val value = doc.getElementsByTagName(key).item(0).attributes.getNamedItem(VALUE).nodeValue
-	//		return value ?: default!!
-	//	}
 
 	override fun query(key: String, default: Any): Any {
 		val node = doc.getElementsByTagName(key).item(0)

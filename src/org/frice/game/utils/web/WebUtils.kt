@@ -13,22 +13,11 @@ import javax.imageio.ImageIO
  * @since v0.5
  */
 object WebUtils {
-	@Deprecated("not recommended", ReplaceWith("readText"), DeprecationLevel.WARNING)
-	@JvmStatic
-	fun readText(url: URL) = url.readText()
-
 	/**
 	 * reuse text already read before
 	 */
 	@JvmStatic
 	fun readText(url: String) = URLTextManager[url]
-
-	/**
-	 * don't use this anymore
-	 */
-	@Deprecated("not recommended", ReplaceWith("readBytes"), DeprecationLevel.ERROR)
-	@JvmStatic
-	fun readBytes(url: URL) = url.readBytes()
 
 	/**
 	 * reuse bytes already read before
@@ -37,24 +26,10 @@ object WebUtils {
 	fun readBytes(url: String) = URLBytesManager[url]
 
 	/**
-	 * don't use this anymore
-	 */
-	@Deprecated("not recommended", ReplaceWith("readImage"), DeprecationLevel.ERROR)
-	@JvmStatic
-	fun readImage(url: URL) = ImageIO.read(url)!!
-
-	/**
 	 * reuse
 	 */
 	@JvmStatic
 	fun readImage(url: String) = ImageManager[url]
-
-	/**
-	 * don't use this anymore
-	 */
-	@Deprecated("not recommended", ReplaceWith("readImages"), DeprecationLevel.ERROR)
-	@JvmStatic
-	fun readImages(url: URL) = HTMLUtils.findTag(readText(url), "img")
 
 	/**
 	 * reuse
