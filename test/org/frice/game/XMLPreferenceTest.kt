@@ -20,8 +20,8 @@ class XMLPreferenceTest {
 
 	@Test
 	fun query() {
-		println("p?.query(\"ice\", 5) = ${p.query("ice", 5)}")
-		println("p?.query(\"jelly\", jelly) = ${p.query("jelly", "")}")
+		println("p.query(\"ice\", 5) = ${p.query("ice", 5)}")
+		println("p.query(\"jelly\", jelly) = ${p.query("jelly", "")}")
 	}
 
 	companion object Init {
