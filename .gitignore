@@ -45,3 +45,4 @@ build/
 .idea/modules/friceEngine_main.iml
 .idea/modules/friceEngine_test.iml
 test.properties
+.idea/libraries/

@@ -10,10 +10,10 @@ import java.io.File
  */
 object AudioManager {
 	@JvmStatic
-	fun play(file: File) = async() { AudioPlayer(file).main() }
+	fun play(file: File) = async { AudioPlayer(file).main() }
 
 	@JvmStatic
-	fun play(path: String) = async() { AudioPlayer(path).main() }
+	fun play(path: String) = async { AudioPlayer(path).main() }
 
 	@JvmStatic
 	fun getPlayer(file: File) = AudioPlayer(file)
