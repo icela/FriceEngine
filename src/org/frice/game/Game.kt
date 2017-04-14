@@ -170,7 +170,7 @@ open class Game : JFrame(), FriceGame {
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 		// set icon
-		iconImage = javax.imageio.ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
+		// iconImage = javax.imageio.ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
 
 		/// to prevent this engine from the call#cking NPE!!
 		this.add(panel, BorderLayout.CENTER)
