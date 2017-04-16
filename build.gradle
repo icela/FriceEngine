@@ -37,3 +37,6 @@ dependencies {
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
