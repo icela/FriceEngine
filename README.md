@@ -9,33 +9,20 @@ AppVeyor|[![Build status](https://ci.appveyor.com/api/projects/status/75d7wx28u3
 
 [![](https://jitpack.io/v/icela/FriceEngine.svg)](https://jitpack.io/#icela/FriceEngine)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-
-一个简单、易用的原生轻量级JVM游戏引擎。<br/>
-查看 [API文档](https://github.com/icela/FriceEngine/blob/master/apis.md) 或者Wiki以更多地了解Frice Engine。
+[![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
 An easy, light, native game engine running on JVM.<br/>
 View [APIs](https://github.com/icela/FriceEngine/blob/master/apis.md) or wiki to learn more about Frice Engine.
 
-## Why easy? 为什么简单易用？
-[一个简单的Flappy bird](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) 仅用了65行代码。
-使用Kotlin写就，并支持Java, JRuby, Groovy, Scala等语言。
-
-[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) is in 65 lines of code only.<br/>
+## Why easy?
+[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 65 lines of code only.<br/>
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
-## Why light? 为什么轻量？
-Kotlin运行时库仅用736KB（使用Kotlin开发游戏，可以直接使用引擎附带的运行时），引擎也仅仅略大于800KB。<br/>
-未来将会加入的MP3支持可能会占用200KB。
-
-Kotlin runtime is only 736KB(if you choose Kotlin to build games, you won't need to add another kotlin-runtime), and the engine JAR file size is just a bit above 800KB.<br/>
-MP3 format support (in the future) will take 200KB.
+## Why light?
+The release build jar is about 200kb only.<br/>
 
 ## Why native? 为什么原生？
-这个引擎是完全平台无关的：没有JNI，没有native的方法，所有的一切均由Kotlin编写。<br/>
-这正是一个JVM App所应该有的样子。
-
-This engine is completely platform-independent: no JNIs, no native methods, everything is written by myself in pure Kotlin.<br/>
-And this is what a JVM app should be exactly.
+This engine is completely platform-independent: no JNI linkage, no native methods, everything is written in pure Kotlin.<br/>
 
 # Build
 
@@ -50,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.0'
+  compile 'com.github.icela:FriceEngine:v1.0.3'
 }
 ```
 
@@ -59,17 +46,16 @@ dependencies {
 ## Supported
 
 ### Languages
-- [X] Kotlin (Native)
+- [X] Kotlin
 - [X] Java
 - [X] Groovy
 - [X] Scala
-- [X] JRuby(with bugs)
 
-### Functions
+### Progress
 - [X] Game Objects (from image or shape, image from file or web)
 - [X] Life cycle
 - [X] Collision detecting
-- [X] Audio playing (*.wav only)
+- [X] Audio playing (\*.wav only)
 - [X] Dialogs
 - [X] Cursor overriding
 - [X] Clock system
