@@ -6,13 +6,14 @@ CI|status
 :---|:---:
 Travis CI|[![Build Status](https://travis-ci.org/icela/FriceEngine.svg?branch=master)](https://travis-ci.org/icela/FriceEngine)
 AppVeyor|[![Build status](https://ci.appveyor.com/api/projects/status/75d7wx28u3tgtnat?svg=true)](https://ci.appveyor.com/project/ice1000/friceengine)
+CircleCI|[![CircleCI](https://circleci.com/gh/icela/FriceEngine.svg?style=svg)](https://circleci.com/gh/icela/FriceEngine)
 
 [![](https://jitpack.io/v/icela/FriceEngine.svg)](https://jitpack.io/#icela/FriceEngine)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
 An easy, light, native game engine running on JVM.<br/>
-View [APIs](https://github.com/icela/FriceEngine/blob/master/apis.md) or wiki to learn more about Frice Engine.
+View [APIs](./res/apis.md) or wiki to learn more about Frice Engine.
 
 ## Why easy?
 [A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 65 lines of code only.<br/>
@@ -21,7 +22,7 @@ Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 ## Why light?
 The release build jar is about 200kb only.<br/>
 
-## Why native? 为什么原生？
+## Why native?
 This engine is completely platform-independent: no JNI linkage, no native methods, everything is written in pure Kotlin.<br/>
 
 # Build
@@ -79,16 +80,7 @@ To build games based on frice engine, follow these steps:
 2. Create a class extends Game in org.frice.game package.
 3. Implement the abstract methods, just understand them by name.
 4. call the empty constructor in the public static void main.
-5. For full API doc please view [APIs](https://github.com/icela/FriceEngine/blob/master/apis.md)
+5. For full API doc please view [APIs](./res/apis.md)
 
 ## Demos
 see [FriceDemo](https://github.com/icela/FriceDemo)
-
-## How can it be?
-
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/0.gif?raw=true)<br/>
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/2.gif?raw=true)<br/>
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/3.gif?raw=true)<br/>
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/4.gif?raw=true)<br/>
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/5.gif?raw=true)<br/>
-![](https://github.com/ice1000/ice1000.github.io/blob/master/assets/images/game/5/6.gif?raw=true)<br/>

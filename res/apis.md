@@ -6,7 +6,7 @@ Some classes and interface are private, so they are not shown here.<br/>
 **Do not override the constructor, anything about initialization please put them into "onInit()"!**
 
 ### Demos
-See [README](README.md).
+See [README](../README.md).
 
 ### Life cycle methods
 Method|Usage
@@ -243,7 +243,7 @@ query(key: String, value: Any)|Query a value by `key` from the file
 ## Class: org.frice.game.utils.message.FDialog
 Shows dialogs on screen. Quite simple to use, I think there's no need to write a doc for it.<br/>
 Constructor needs a context.
-See [FDialog.kt](src/org/frice/game/utils/message/FDialog.kt).
+See [FDialog.kt](../src/org/frice/game/utils/message/FDialog.kt).
 
 ## org.frice.game.utils.audio.AudioManager
 Singleton.<br/>
