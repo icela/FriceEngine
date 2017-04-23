@@ -19,7 +19,7 @@ import java.util.*
  * @author ice1000
  * @since v0.5
  */
-open class GalGame() : Game() {
+internal class GalGame : Game() {
 
 	companion object {
 		@JvmField val POSITION_LEFT = 0

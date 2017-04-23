@@ -14,7 +14,6 @@ import java.util.*
  * Created by ice1000 on 2016/10/31.
  *
  * @author ice1000
- * @param T image type
  */
 interface FriceDrawer {
 	val friceImage: FriceImage
