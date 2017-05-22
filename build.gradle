@@ -1,8 +1,8 @@
 group 'org.frice'
-version '1.0'
+version '1.1'
 
 buildscript {
-	ext.kotlin_version = '1.1.1'
+	ext.kotlin_version = '1.1.2-3'
 	repositories {
 		mavenCentral()
 	}
@@ -29,13 +29,31 @@ sourceSets {
 	test.java.srcDirs += 'test'
 }
 
+configurations {
+  artifact
+}
+
 dependencies {
-	compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-	compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
+	artifact "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+	artifact group: 'org.jetbrains', name: 'annotations', version: '15.0'
+
+  configurations.compile.extendsFrom(configurations.artifact)
 
 	testCompile group: 'junit', name: 'junit', version: '4.12'
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
+
+
+jar {
+	manifest {
+	}
+	from {
+		configurations
+				.artifact
+				.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
