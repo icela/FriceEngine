@@ -4,8 +4,8 @@ import org.frice.game.anim.move.DoublePair
 import org.frice.game.obj.CollideBox
 import org.frice.game.obj.FObject
 import org.frice.game.resource.graphics.ColorResource
-import org.frice.game.utils.graphics.shape.FShapeInt
 import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.graphics.shape.FShapeInt
 
 /**
  * an object with a utils and a shape, used to create an simple object quickly
@@ -15,8 +15,12 @@ import org.frice.game.utils.graphics.shape.FRectangle
  * @author ice1000
  * @since v0.1.1
  */
-open class ShapeObject(var res: ColorResource, override val collideBox: FShapeInt, override var id: Int,
-                       override var x: Double, override var y: Double) : FObject() {
+open class ShapeObject(
+		var res: ColorResource,
+		override val collideBox: FShapeInt,
+		override var id: Int,
+		override var x: Double,
+		override var y: Double) : FObject() {
 	constructor(res: ColorResource, shape: FShapeInt, x: Double, y: Double) : this(res, shape, -1, x, y)
 
 	constructor(res: ColorResource, shape: FShapeInt, id: Int) : this(res, shape, id, 0.0, 0.0)

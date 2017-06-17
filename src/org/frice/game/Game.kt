@@ -418,7 +418,7 @@ open class Game : JFrame(), FriceGame {
 	 *
 	 * @return screen cut as an image
 	 */
-	override fun getScreenCut() = ImageResource.create(drawer.friceImage)
+	override fun getScreenCut() = ImageResource(drawer.friceImage)
 
 	/**
 	 * this method escaped the error

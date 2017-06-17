@@ -9,8 +9,6 @@ import org.frice.game.resource.graphics.FunctionResource
 import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FRectangle
-import java.awt.Image
-import java.awt.image.BufferedImage
 
 /**
  * Created by ice1000 on 2016/8/19.
@@ -43,7 +41,7 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
 	override val height: Double
 		get() = resource.height.toDouble()
 
-	override fun getResource() = ImageResource.create(image)
+	override fun getResource() = ImageResource(image)
 
 	override fun scale(x: Double, y: Double) {
 		resource.width = (resource.width * x / 1000.0).toInt()
@@ -60,25 +58,24 @@ class ParticleEffect(private var resource: ParticleResource, override var x: Dou
  * @author ice1000
  * @since v0.4.1
  */
-class FunctionEffect(res: FunctionResource, override var x: Double, override var y: Double) :
-		ImageObject(res.getResource(), x, y) {
+class FunctionEffect(
+		res: FunctionResource,
+		override var x: Double,
+		override var y: Double) : ImageObject(res.getResource(), x, y) {
 
 	constructor(function: FFunction, x: Double, y: Double, width: Int, height: Int) :
-	this(FunctionResource(ColorResource.BLUE, { x -> function.call(x) }, width, height), x, y)
+			this(FunctionResource(ColorResource.BLUE, { x -> function.call(x) }, width, height), x, y)
 
-	override val width: Double
-		get() = res.image.width.toDouble()
-	override val height: Double
-		get() = res.image.height.toDouble()
+	override val width: Double get() = res.image.width.toDouble()
+	override val height: Double get() = res.image.height.toDouble()
 
-	override fun getResource() = ImageResource.create(image)
+	override fun getResource() = ImageResource(image)
 
 	override val image: FriceImage
 		get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = image.getScaledInstance(image.width * x / 1000.0,
-				image.height * y / 1000.0)
+		res.image = image.getScaledInstance(image.width * x / 1000.0, image.height * y / 1000.0)
 	}
 
 	/**
@@ -98,13 +95,15 @@ class FunctionEffect(res: FunctionResource, override var x: Double, override var
  * @author ice1000
  * @since v0.5.2
  */
-class CurveEffect(res: CurveResource, override var x: Double, override var y: Double) :
-		ImageObject(res.getResource(), x, y) {
+class CurveEffect(
+		res: CurveResource,
+		override var x: Double,
+		override var y: Double) : ImageObject(res.getResource(), x, y) {
 
 	constructor(curve: FCurve, x: Double, y: Double, width: Int, height: Int) :
-	this(CurveResource(ColorResource.BLUE, { x -> curve.call(x) }, width, height), x, y)
+			this(CurveResource(ColorResource.BLUE, { x -> curve.call(x) }, width, height), x, y)
 
-	override fun getResource() = ImageResource.create(image)
+	override fun getResource() = ImageResource(image)
 
 	override val image: FriceImage
 		get() = res.image

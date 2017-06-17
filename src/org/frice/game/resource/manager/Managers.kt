@@ -1,4 +1,6 @@
 /**
+ * platform dependent
+ * Java SE only
  * Created by ice1000 on 2016/10/24.
  *
  * @author ice1000

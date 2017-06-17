@@ -22,12 +22,13 @@ abstract class FText : AbstractObject {
  * @author ice1000
  * @since v0.4
  */
-class SimpleText(var colorResource: ColorResource,
-                 override var text: String,
-                 override var x: Double, override var y: Double) : FText() {
+class SimpleText(
+		var colorResource: ColorResource,
+		override var text: String,
+		override var x: Double, override var y: Double) : FText() {
 
 	constructor(text: String, x: Double, y: Double) :
-	this(ColorResource.DARK_GRAY, text, x, y)
+			this(ColorResource.DARK_GRAY, text, x, y)
 
 	override fun getColor() = colorResource
 }

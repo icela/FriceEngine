@@ -18,11 +18,13 @@ import java.awt.Rectangle
  */
 abstract class ImageResource : FResource {
 
-	companion object {
+	companion object Factories {
 		@JvmStatic
 		fun create(image: FriceImage) = object : ImageResource() {
 			override var image = image
 		}
+
+		operator fun invoke(image: FriceImage) = create(image)
 
 		@JvmStatic
 		fun fromImage(image: FriceImage): ImageResource = create(image)
@@ -89,7 +91,7 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	override var image: FriceImage
 		get() = if (loop || ended) list.getImage(counter).image else list.last().image
 		set(value) {
-			list.add(ImageResource.create(value))
+			list.add(ImageResource(value))
 		}
 
 	fun MutableList<ImageResource>.getImage(index: Int): ImageResource {
@@ -98,11 +100,11 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	}
 
 	init {
-		timer = FTimeListener(div, {
+		timer = FTimeListener(div) {
 			FLog.e("counter = $counter")
 			counter++
 			counter %= list.size
-		})
+		}
 		game.addTimeListener(timer)
 	}
 }

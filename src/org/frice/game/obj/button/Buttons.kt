@@ -51,14 +51,17 @@ interface FButton : FContainer, AbstractObject {
  * @author ice1000
  * @since v0.5
  */
-class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResource, x: Double, y: Double) :
-		FObject.ImageOwner, SimpleButton("", x, y,
-		imageNormal.image.width.toDouble(), imageNormal.image.height.toDouble()) {
+class ImageButton(
+		val imageNormal: ImageResource,
+		val imagePressed: ImageResource,
+		x: Double,
+		y: Double) : FObject.ImageOwner,
+		SimpleButton("", x, y, imageNormal.image.width.toDouble(), imageNormal.image.height.toDouble()) {
 
 	override var rotate = 0.0
 
 	constructor(image: ImageResource, x: Double, y: Double) :
-	this(image, image, x, y)
+			this(image, image, x, y)
 
 	override var onClickListener: FButton.OnClickListener? = null
 
@@ -74,15 +77,16 @@ class ImageButton(val imageNormal: ImageResource, val imagePressed: ImageResourc
  * @author ice1000
  * @since v0.3.3
  */
-open class SimpleButton(var colorResource: ColorResource,
-                        override var text: String,
-                        override var x: Double,
-                        override var y: Double,
-                        override var width: Double,
-                        override var height: Double) : FButton, FText() {
+open class SimpleButton(
+		var colorResource: ColorResource,
+		override var text: String,
+		override var x: Double,
+		override var y: Double,
+		override var width: Double,
+		override var height: Double) : FButton, FText() {
 
 	constructor(text: String, x: Double, y: Double, width: Double, height: Double) :
-	this(ColorResource.GRAY, text, x, y, width, height)
+			this(ColorResource.GRAY, text, x, y, width, height)
 
 	private var bool = false
 
