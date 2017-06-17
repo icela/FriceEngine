@@ -71,4 +71,4 @@ inline fun until(condition: Boolean, block: () -> Unit) {
 /**
  * an anko-like async block
  */
-inline fun async(crossinline block: () -> Unit) = Thread({ block() }).start()
+inline fun async(crossinline block: () -> Unit) = Thread { block() }.start()

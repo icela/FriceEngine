@@ -7,12 +7,8 @@ package org.frice.game.utils.misc
  * @since v0.5.1
  */
 
-class AssertionException() : Exception()
-
-inline fun assert(block: () -> Boolean) {
-	if (!block()) throw AssertionException()
+inline fun assert1(block: () -> Boolean) {
+	if (!block()) throw AssertionError()
 }
 
-fun assert(boolean: Boolean) {
-	if (boolean) throw AssertionException()
-}
+infix fun <Any> Any?.shouleBe(o: Any?) = this === o || null != this && equals(o)
