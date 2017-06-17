@@ -28,14 +28,6 @@ inline fun loopIf(condition: () -> Boolean, block: () -> Unit) = loop { if (cond
  */
 inline fun loopIf(condition: Boolean, block: () -> Unit) = loopIf({ condition }, block)
 
-inline fun <T> T.forceRun(block: T.() -> Unit): T {
-	try {
-		block(this)
-	} catch (e: Throwable) {
-	}
-	return this
-}
-
 inline fun forceRun(block: () -> Unit) {
 	try {
 		block()
