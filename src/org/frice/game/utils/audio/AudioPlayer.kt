@@ -31,7 +31,7 @@ class AudioPlayer internal constructor(file: File) {
 		line.close()
 	}
 
-	private val thread = Thread { main() }
+	private val thread = Thread(this::main)
 
 	companion object {
 		@JvmField val BUFFER_SIZE = 2048

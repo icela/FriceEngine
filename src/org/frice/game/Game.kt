@@ -251,27 +251,27 @@ open class Game : JFrame(), FriceGame {
 		})
 	}
 
-	fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed({ e -> key.execute(e) })
-	infix fun listenKeyPressed(key: (KeyEvent) -> Unit) =
+	fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed(key::execute)
+	inline infix fun listenKeyPressed(crossinline key: (KeyEvent) -> Unit) =
 			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
 
-	fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, { e -> key.execute(e) })
-	fun addKeyTypedEvent(keyCode: Int, key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
+	fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, key::execute)
+	inline fun addKeyTypedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
 		if (e.keyCode == keyCode) key.invoke(e)
 	})
 
 	fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
-			addKeyPressedEvent(keyCode, { e -> key.execute(e) })
+			addKeyPressedEvent(keyCode, key::execute)
 
-	fun addKeyPressedEvent(keyCode: Int, key: (KeyEvent) -> Unit) =
+	inline fun addKeyPressedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
 			addKeyListener(pressed = { e ->
 				if (e.keyCode == keyCode) key.invoke(e)
 			})
 
 	fun addKeyReleasedEvent(keyCode: Int, key: OnKeyEvent) =
-			addKeyReleasedEvent(keyCode, { e -> key.execute(e) })
+			addKeyReleasedEvent(keyCode, key::execute)
 
-	fun addKeyReleasedEvent(keyCode: Int, key: (KeyEvent) -> Unit) =
+	inline fun addKeyReleasedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
 			addKeyListener(released = { e ->
 				if (e.keyCode == keyCode) key.invoke(e)
 			})
@@ -299,17 +299,23 @@ open class Game : JFrame(), FriceGame {
 		else objectDeleteBuffer.add(obj)
 	}
 
-	override fun removeObject(vararg objs: AbstractObject) = objs.forEach { o -> removeObject(o) }
+	override fun removeObject(vararg objs: AbstractObject) =
+			objs.forEach(this::removeObject)
 
-	override fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> addTimeListener(l) }
+	override fun addTimeListener(vararg listeners: FTimeListener) =
+			listeners.forEach { addTimeListener(it) }
 
-	override infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
+	override infix fun addTimeListener(listener: FTimeListener) =
+			timeListenerAddBuffer.add(listener)
 
-	override fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
+	override fun clearTimeListeners() =
+			timeListenerDeleteBuffer.addAll(timeListeners)
 
-	override fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { l -> removeTimeListener(l) }
+	override fun removeTimeListener(vararg listeners: FTimeListener) =
+			listeners.forEach { removeTimeListener(it) }
 
-	override infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
+	override infix fun removeTimeListener(listener: FTimeListener) =
+			timeListenerDeleteBuffer.add(listener)
 
 	override fun drawEverything(bgg: JvmDrawer) {
 		processBuffer()
@@ -381,38 +387,6 @@ open class Game : JFrame(), FriceGame {
 		customDraw(bgg)
 	}
 
-//	/**
-//	 * set the frame bounds (size and position)
-//	 */
-//	override infix fun setBounds(r: Rectangle) {
-//		super.setBounds(r)
-//		panel.bounds = r
-//	}
-//
-//	/**
-//	 * set the frame bounds (size and position)
-//	 */
-//	override fun setBounds(x: Int, y: Int, width: Int, height: Int) {
-//		super.setBounds(x, y, width, height)
-//		panel.setBounds(x, y, width, height)
-//	}
-//
-//	/**
-//	 * set the frame size
-//	 */
-//	override fun setSize(width: Int, height: Int) {
-//		super.setSize(width, height)
-//		panel.setSize(width, height)
-//	}
-//
-//	/**
-//	 * set the frame size
-//	 */
-//	override infix fun setSize(d: Dimension) {
-//		super.setSize(d)
-//		panel.size = d
-//	}
-
 	/**
 	 * get a screenShot.
 	 *
@@ -441,7 +415,7 @@ open class Game : JFrame(), FriceGame {
 	 * @author ice1000
 	 * @since v0.1
 	 */
-	inner class GamePanel() : JPanel() {
+	inner class GamePanel : JPanel() {
 		init {
 			addMouseListener(object : MouseListener {
 				override fun mouseClicked(e: MouseEvent) {
