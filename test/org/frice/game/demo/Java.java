@@ -26,12 +26,12 @@ public class Java extends Game {
 				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175205567"),
 				50, 50);
 		ImageObject imageObject = new ImageObject(ImageResource.fromWeb(URL), -90, 100);
-		ImageObject imageObject1 = new ImageObject(ImageResource.fromWeb(URL), -30, 200);
+		ImageObject imageObject1 = new ImageObject(ImageResource.fromWeb(URL), -20, 200);
 		ImageObject imageObject2 = new ImageObject(ImageResource.fromWeb(URL), 300, 100);
-		SimpleText text = new SimpleText(ColorResource.BLACK, "暗中观察.kt", 50, 200);
+		SimpleText text = new SimpleText(ColorResource.BLACK, "暗中观察.jpg", 50, 200);
 		imageObject.addAnim(new AccurateMove(50, 0));
 		imageObject.addCollider(imageObject2, imageObject::stopAnims);
-		addObject(imageObject, imageObject2, imageObject1);
+		addObject(text, imageObject, imageObject2, imageObject1);
 //		addObject(imageButton);
 	}
 

@@ -19,16 +19,12 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 		getG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 	}
 
-	override val friceImage: JvmImage
+	override val friceImage = JvmImage(frame.width, frame.height)
 	override var color: ColorResource
 		get() = ColorResource(g.color)
 		set(value) {
 			g.color = value.color
 		}
-
-	init {
-		friceImage = JvmImage(frame.width, frame.height)
-	}
 
 	val getG: Graphics2D
 		get() = friceImage.image.graphics as Graphics2D

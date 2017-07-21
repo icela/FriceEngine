@@ -8,6 +8,6 @@ import org.frice.game.resource.image.ImageResource
  *
  * @author ice1000
  */
-class BoneObject(res: ImageResource, id: Int, x: Double, y: Double) : ImageObject(res, id, x, y) {
+class BoneObject(res: ImageResource, x: Double, y: Double, id: Int) : ImageObject(res, x, y, id) {
 	override var died = false
 }

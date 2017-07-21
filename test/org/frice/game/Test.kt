@@ -44,19 +44,22 @@ class Test : Game() {
 		addTimeListener(FTimeListener(400, { FLog.v("400 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
-		addObject(SimpleButton("I am a button", 30.0, 30.0, 100.0, 30.0).apply {
-			onClickListener = object : FButton.OnClickListener {
-				override fun onClick(e: OnClickEvent) {
-					val obj = ShapeObject(ColorResource.Companion.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
-						mass = 1.0
-						addForce(-1.0, -1.0)
-						anims.add(SimpleMove(400, 400))
-						anims.add(SimpleScale(1.1, 1.1))
-						anims.add(RotateAnim(0.1))
-					}
-					objs.add(obj)
-					addObject(obj)
+		addObject(SimpleButton(
+				text = "I am a button",
+				x = 30.0,
+				y = 30.0,
+				width = 100.0,
+				height = 30.0).apply {
+			onClickListener = {
+				val obj = ShapeObject(ColorResource.Companion.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
+					mass = 1.0
+					addForce(-1.0, -1.0)
+					anims.add(SimpleMove(400, 400))
+					anims.add(SimpleScale(1.1, 1.1))
+					anims.add(RotateAnim(0.1))
 				}
+				objs.add(obj)
+				addObject(obj)
 			}
 		})
 		//		AudioManager.getPlayer("1.wav").start()

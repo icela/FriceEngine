@@ -378,10 +378,13 @@ open class Game : JFrame(), FriceGame {
 								Math.min(b.width * 0.5, 10.0),
 								Math.min(b.height * 0.5, 10.0))
 						bgg.color = ColorResource.DARK_GRAY
-						bgg.drawString(b.text, b.x + 10, (b.y + (b.height / 2)))
+						bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
 					}
 				}
-			} else bgg.drawString(b.text, b.x, b.y)
+			} else {
+				bgg.color = b.getColor()
+				bgg.drawString(b.text, b.x, b.y)
+			}
 		}
 		customDraw(bgg)
 	}
