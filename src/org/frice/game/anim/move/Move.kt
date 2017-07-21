@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package org.frice.game.anim.move
 
 import org.frice.game.anim.FAnim
@@ -23,15 +25,14 @@ abstract class MoveAnim : FAnim() {
  * @param x pixels per second
  * @param y pixels per second
  */
-@Deprecated("AccurateMove is suggested.", ReplaceWith("AccurateMove()"), DeprecationLevel.WARNING)
+// @Deprecated("AccurateMove is suggested.", ReplaceWith("AccurateMove()"), DeprecationLevel.WARNING)
 open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
-	override val delta: DoublePair
-		get() {
-			val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
-			lastRefresh = now
-			return pair
-		}
+	override val delta: DoublePair get() {
+		val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+		lastRefresh = now
+		return pair
+	}
 
 }
 
@@ -43,12 +44,11 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
  */
 open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
-	override val delta: DoublePair
-		get() {
-			val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
-			lastRefresh = now
-			return pair
-		}
+	override val delta: DoublePair get() {
+		val pair = DoublePair.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+		lastRefresh = now
+		return pair
+	}
 }
 
 data class DoublePair(var x: Double, var y: Double) {
@@ -58,46 +58,46 @@ data class DoublePair(var x: Double, var y: Double) {
 		fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
 	}
 
-	operator fun plusAssign(d: DoublePair) {
+	inline operator fun plusAssign(d: DoublePair) {
 		x += d.x
 		y += d.y
 	}
 
-	operator fun plusAssign(d: Double) {
+	inline operator fun plusAssign(d: Double) {
 		x += d
 		y += d
 	}
 
-	operator fun minusAssign(d: DoublePair) {
+	inline operator fun minusAssign(d: DoublePair) {
 		x -= d.x
 		y -= d.y
 	}
 
-	operator fun minusAssign(d: Double) {
+	inline operator fun minusAssign(d: Double) {
 		x -= d
 		y -= d
 	}
 
-	operator fun timesAssign(d: Double) {
+	inline operator fun timesAssign(d: Double) {
 		x *= d
 		y *= d
 	}
 
-	operator fun divAssign(d: Double) {
+	inline operator fun divAssign(d: Double) {
 		x /= d
 		y /= d
 	}
 
-	operator fun div(d: Double) = DoublePair(x / d, y / d)
-	operator fun times(d: Double) = DoublePair(x * d, y * d)
-	operator fun plus(d: Double) = DoublePair(x + d, y + d)
-	operator fun plus(d: DoublePair) = DoublePair(x + d.x, y + d.y)
-	operator fun minus(d: Double) = DoublePair(x - d, y - d)
-	operator fun minus(d: DoublePair) = DoublePair(x - d.x, y - d.y)
-	operator fun inc() = DoublePair(x++, y++)
-	operator fun dec() = DoublePair(x--, y--)
-	operator fun unaryPlus() = DoublePair(x, y)
-	operator fun unaryMinus() = DoublePair(-x, -y)
+	inline operator fun div(d: Double) = DoublePair(x / d, y / d)
+	inline operator fun times(d: Double) = DoublePair(x * d, y * d)
+	inline operator fun plus(d: Double) = DoublePair(x + d, y + d)
+	inline operator fun plus(d: DoublePair) = DoublePair(x + d.x, y + d.y)
+	inline operator fun minus(d: Double) = DoublePair(x - d, y - d)
+	inline operator fun minus(d: DoublePair) = DoublePair(x - d.x, y - d.y)
+	inline operator fun inc() = DoublePair(x++, y++)
+	inline operator fun dec() = DoublePair(x--, y--)
+	inline operator fun unaryPlus() = DoublePair(x, y)
+	inline operator fun unaryMinus() = DoublePair(-x, -y)
 }
 
 
@@ -110,9 +110,8 @@ data class DoublePair(var x: Double, var y: Double) {
  * @param ax accelerate on x
  * @param ay accelerate on y
  */
-
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
-	companion object {
+	companion object Factory {
 		@JvmStatic
 		fun getGravity() = AccelerateMove(0.0, 10.0)
 
@@ -123,19 +122,18 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	private var mx = 0.0
 	private var my = 0.0
 
-	override val delta: DoublePair
-		get() {
-			mx = (now - start) * ax / 2.0
-			my = (now - start) * ay / 2.0
-			return DoublePair.from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
-		}
+	override val delta: DoublePair get() {
+		mx = (now - start) * ax / 2.0
+		my = (now - start) * ay / 2.0
+		return DoublePair.from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
+	}
 
 }
 
 class CircumAnim(var x: Double, var y: Double, var angularVelocity: Double) : MoveAnim() {
 
 	constructor(distance: DoublePair, angularVelocity: Double) :
-	this(distance.x, distance.y, angularVelocity)
+			this(distance.x, distance.y, angularVelocity)
 
 	private val cos: Double
 		get() = Math.cos(angularVelocity)

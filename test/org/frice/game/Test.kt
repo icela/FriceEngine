@@ -31,7 +31,7 @@ import java.util.*
  *
  * @author ice1000
  */
-class Test() : Game() {
+class Test : Game() {
 	private lateinit var preference: Preference
 	private lateinit var xmlPreference: XMLPreference
 	private val timer = FTimer(200)

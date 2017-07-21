@@ -15,17 +15,15 @@ import org.frice.game.utils.graphics.shape.FShapeInt
  * @author ice1000
  * @since v0.1.1
  */
-open class ShapeObject(
+open class ShapeObject
+@JvmOverloads
+constructor(
 		var res: ColorResource,
 		override val collideBox: FShapeInt,
-		override var id: Int,
-		override var x: Double,
-		override var y: Double) : FObject() {
+		override var id: Int = -1,
+		override var x: Double = 0.0,
+		override var y: Double = 0.0) : FObject() {
 	constructor(res: ColorResource, shape: FShapeInt, x: Double, y: Double) : this(res, shape, -1, x, y)
-
-	constructor(res: ColorResource, shape: FShapeInt, id: Int) : this(res, shape, id, 0.0, 0.0)
-
-	constructor(res: ColorResource, shape: FShapeInt) : this(res, shape, -1)
 
 	private var scale = DoublePair(1.0, 1.0)
 

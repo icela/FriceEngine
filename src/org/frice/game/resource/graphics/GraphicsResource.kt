@@ -141,20 +141,20 @@ class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width
  * @author ice1000
  * @since v0.3.2
  */
-data class ParticleResource(
+data class ParticleResource
+@JvmOverloads
+constructor(
 		val game: Game,
 		var width: Int,
 		var height: Int,
-		val back: FResource,
-		var fore: ColorResource,
-		var percentage: Double) : FResource {
+		val back: FResource = ColorResource.COLORLESS,
+		var fore: ColorResource = ColorResource.BLACK,
+		var percentage: Double = 0.5) : FResource {
 	constructor(game: Game, x: Int, y: Int, back: ColorResource, fore: ColorResource) :
 	this(game, x, y, back, fore, 0.5)
 
 	constructor(game: Game, x: Int, y: Int, percentage: Double) :
 	this(game, x, y, ColorResource.COLORLESS, ColorResource.BLACK, percentage)
-
-	constructor(game: Game, x: Int, y: Int) : this(game, x, y, 0.5)
 
 	/**
 	 * particle effects as an image
