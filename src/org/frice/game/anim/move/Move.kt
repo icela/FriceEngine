@@ -8,7 +8,7 @@ import org.frice.game.utils.time.Clock
  * @author ice1000
  * @since v0.2.1
  */
-abstract class MoveAnim() : FAnim() {
+abstract class MoveAnim : FAnim() {
 	abstract val delta: DoublePair
 	protected var lastRefresh: Double = start
 }
@@ -53,7 +53,7 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
 data class DoublePair(var x: Double, var y: Double) {
 
-	companion object {
+	companion object Factory {
 		@JvmStatic
 		fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
 	}

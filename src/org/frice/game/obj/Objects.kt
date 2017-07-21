@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package org.frice.game.obj
 
 import org.frice.game.anim.FAnim
@@ -41,6 +43,7 @@ interface FContainer {
 	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 
 	infix fun containsPoint(point: FPoint) = containsPoint(point.x, point.y)
+	operator fun contains(point: FPoint) = containsPoint(point)
 }
 
 /**
@@ -123,9 +126,9 @@ abstract class FObject : PhysicalObject() {
 	//	}
 
 	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
-	private fun targetMass(c: AbstractObject) = if (c is PhysicalObject) c.mass else 1.0
+	private fun targetMass(c: AbstractObject) = (c as? PhysicalObject)?.mass ?: 1.0
 
-	fun runAnims() {
+	internal fun runAnims() {
 		anims.forEach { a ->
 			when (a) {
 				is MoveAnim -> this move a.delta
@@ -146,10 +149,15 @@ abstract class FObject : PhysicalObject() {
 		//		move(gravity)
 	}
 
-	fun checkCollision() {
-		targets.removeAll { t -> t.first.died }
-		targets.forEach { t -> if (isCollide(t.first)) t.second.handle() }
+	internal fun checkCollision() {
+		targets.removeAll { (first) -> first.died }
+		targets.forEach { (first, second) -> if (isCollide(first)) second.handle() }
 	}
+
+	inline fun addAnim(anim: FAnim) = anims.add(anim)
+	inline fun addCollider(o: PhysicalObject, e: OnCollideEvent) = addCollider(o to e)
+	inline fun addCollider(p: Pair<PhysicalObject, OnCollideEvent>) = targets.add(p)
+	inline fun stopAnims() = anims.clear()
 
 	/**
 	 * add a force to this object
@@ -168,8 +176,8 @@ abstract class FObject : PhysicalObject() {
 	 * @since v0.3
 	 */
 	interface OnCollideEvent {
-		companion object {
-			fun from(block: () -> Unit) = object : OnCollideEvent {
+		companion object Factory {
+			inline fun from(crossinline block: () -> Unit) = object : OnCollideEvent {
 				override fun handle() {
 					block()
 				}
