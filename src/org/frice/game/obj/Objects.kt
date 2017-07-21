@@ -96,13 +96,13 @@ abstract class FObject : PhysicalObject() {
 
 	abstract fun getResource(): FResource
 
-	infix fun scale(p: DoublePair) = scale(p.x, p.y)
+	inline infix fun scale(p: DoublePair) = scale(p.x, p.y)
 
 	abstract fun scale(x: Double, y: Double)
 
 	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
-	fun move(x: Double, y: Double) {
+	inline fun move(x: Double, y: Double) {
 		this.x += x
 		this.y += y
 	}

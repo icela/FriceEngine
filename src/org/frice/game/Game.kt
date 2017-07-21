@@ -281,7 +281,7 @@ open class Game : JFrame(), FriceGame {
 		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
-	override fun addObject(vararg objs: AbstractObject) = objs.forEach { o -> addObject(o) }
+	override fun addObject(vararg objs: AbstractObject) = objs.forEach(this::addObject)
 
 	override infix fun addObject(obj: AbstractObject) {
 		if (obj is FText) textAddBuffer.add(obj)
@@ -292,7 +292,6 @@ open class Game : JFrame(), FriceGame {
 		objectDeleteBuffer.addAll(objects)
 		textDeleteBuffer.addAll(texts)
 	}
-
 
 	override infix fun removeObject(obj: AbstractObject) {
 		if (obj is FText) textDeleteBuffer.add(obj)

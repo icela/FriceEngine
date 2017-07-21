@@ -13,17 +13,13 @@ import org.frice.game.utils.graphics.shape.FRectangle
  * @author ice1000
  * @since v0.1
  */
-open class ImageObject(
+open class ImageObject
+@JvmOverloads
+constructor(
 		var res: ImageResource,
-		override var id: Int,
-		override var x: Double,
-		override var y: Double) : FObject(), FObject.ImageOwner {
-	constructor(res: ImageResource, id: Int) : this(res, id, 0.0, 0.0)
-
-	constructor(res: ImageResource) : this(res, -1, 0.0, 0.0)
-
-	constructor(res: ImageResource, x: Double, y: Double) : this(res, -1, x, y)
-
+		override var id: Int = -1,
+		override var x: Double = 0.0,
+		override var y: Double = 0.0) : FObject(), FObject.ImageOwner {
 	constructor(res: FriceImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
 
 	override fun getResource() = res
@@ -38,10 +34,8 @@ open class ImageObject(
 		else -> false
 	}
 
-	override val width: Double
-		get() = res.image.width.toDouble()
-	override val height: Double
-		get() = res.image.height.toDouble()
+	override val width: Double get() = res.image.width.toDouble()
+	override val height: Double get() = res.image.height.toDouble()
 
 	override val collideBox = FRectangle(res.image.width, res.image.height)
 	override var died = false
@@ -50,8 +44,7 @@ open class ImageObject(
 		res.image = res.image.getScaledInstance(res.image.width * x / 1000.0, res.image.height * y / 1000.0)
 	}
 
-	override val image: FriceImage
-		get() = res.image
+	override val image: FriceImage get() = res.image
 
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
