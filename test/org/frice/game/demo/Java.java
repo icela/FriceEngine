@@ -7,6 +7,7 @@ import org.frice.game.obj.button.ImageButton;
 import org.frice.game.obj.button.SimpleText;
 import org.frice.game.obj.sub.ImageObject;
 import org.frice.game.resource.graphics.ColorResource;
+import org.frice.game.resource.graphics.ParticleResource;
 import org.frice.game.resource.image.ImageResource;
 
 /**
@@ -20,10 +21,10 @@ public class Java extends Game {
 	@Override
 	public void onInit() {
 		super.onInit();
-//		ImageButton imageButton = new ImageButton(
-//				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175207052"),
-//				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175205567"),
-//				50, 50);
+		ImageButton imageButton = new ImageButton(
+				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175207052"),
+				ImageResource.fromWeb("http://img.blog.csdn.net/20151123175205567"),
+				50, 50);
 		ImageObject imageObject = new ImageObject(ImageResource.fromWeb(URL), -90, 100);
 		ImageObject imageObject1 = new ImageObject(ImageResource.fromWeb(URL), -30, 200);
 		ImageObject imageObject2 = new ImageObject(ImageResource.fromWeb(URL), 300, 100);

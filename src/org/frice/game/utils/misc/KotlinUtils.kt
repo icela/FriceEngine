@@ -1,3 +1,4 @@
+@file:JvmName("Utils")
 package org.frice.game.utils.misc
 
 /**
@@ -12,11 +13,6 @@ package org.frice.game.utils.misc
 
 inline fun loop(block: () -> Unit) {
 	while (true) block()
-}
-
-inline fun <T> T.loop(count: Int, block: T.(Int) -> Unit): T {
-	for (index in 0..count - 1) block(this, index)
-	return this
 }
 
 inline fun loop(count: Int, block: (Int) -> Unit) = repeat(count, block)

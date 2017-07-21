@@ -16,32 +16,14 @@ import org.frice.game.resource.image.ImageResource
  */
 
 interface FButton : FContainer, AbstractObject {
-	var onClickListener: OnClickListener?
+	var onClickListener: (OnClickEvent) -> Unit
 
-	infix fun onClick(e: OnClickEvent) = onClickListener?.onClick(e)
+	infix fun onClick(e: OnClickEvent) = onClickListener.invoke(e)
 
 	/**
 	 * @return true means pressed
 	 */
 	infix fun onMouse(e: OnMouseEvent) = (e.type() == OnMouseEvent.MOUSE_PRESSED)
-
-	/**
-	 * Created by ice1000 on 2016/8/19.
-	 * @author ice1000
-	 * @since v0.4
-	 */
-	interface OnClickListener {
-		fun onClick(e: OnClickEvent)
-	}
-
-	/**
-	 * Created by ice1000 on 2016/8/19.
-	 * @author ice1000
-	 * @since v0.4
-	 */
-	interface OnMouseListener {
-		fun onMouse(e: OnMouseEvent)
-	}
 }
 
 
@@ -51,24 +33,26 @@ interface FButton : FContainer, AbstractObject {
  * @author ice1000
  * @since v0.5
  */
-class ImageButton(
+class ImageButton
+@JvmOverloads
+constructor(
 		val imageNormal: ImageResource,
-		val imagePressed: ImageResource,
+		val imagePressed: ImageResource = imageNormal,
 		x: Double,
-		y: Double) : FObject.ImageOwner,
-		SimpleButton("", x, y, imageNormal.image.width.toDouble(), imageNormal.image.height.toDouble()) {
+		y: Double) : FObject.ImageOwner, SimpleButton(
+		text = "",
+		x = x,
+		y = y,
+		width = imageNormal.image.width.toDouble(),
+		height = imageNormal.image.height.toDouble()) {
 
 	override var rotate = 0.0
 
-	constructor(image: ImageResource, x: Double, y: Double) :
-			this(image, image, x, y)
-
-	override var onClickListener: FButton.OnClickListener? = null
+	override var onClickListener: (OnClickEvent) -> Unit = { }
 
 	private var bool = false
 
-	override val image: FriceImage
-		get () = if (bool) imagePressed.image else imageNormal.image
+	override val image: FriceImage get () = if (bool) imagePressed.image else imageNormal.image
 }
 
 /**
@@ -77,20 +61,19 @@ class ImageButton(
  * @author ice1000
  * @since v0.3.3
  */
-open class SimpleButton(
-		var colorResource: ColorResource,
+open class SimpleButton
+@JvmOverloads
+constructor(
+		var colorResource: ColorResource = ColorResource.GRAY,
 		override var text: String,
 		override var x: Double,
 		override var y: Double,
 		override var width: Double,
 		override var height: Double) : FButton, FText() {
 
-	constructor(text: String, x: Double, y: Double, width: Double, height: Double) :
-			this(ColorResource.GRAY, text, x, y, width, height)
-
 	private var bool = false
 
-	override var onClickListener: FButton.OnClickListener? = null
+	override var onClickListener: (OnClickEvent) -> Unit = { }
 
 	override fun getColor() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
 

@@ -150,11 +150,8 @@ constructor(
 		val back: FResource = ColorResource.COLORLESS,
 		var fore: ColorResource = ColorResource.BLACK,
 		var percentage: Double = 0.5) : FResource {
-	constructor(game: Game, x: Int, y: Int, back: ColorResource, fore: ColorResource) :
-	this(game, x, y, back, fore, 0.5)
-
-	constructor(game: Game, x: Int, y: Int, percentage: Double) :
-	this(game, x, y, ColorResource.COLORLESS, ColorResource.BLACK, percentage)
+	constructor(game: Game, width: Int, height: Int, percentage: Double) :
+	this(game, width, height, ColorResource.COLORLESS, ColorResource.BLACK, percentage)
 
 	/**
 	 * particle effects as an image

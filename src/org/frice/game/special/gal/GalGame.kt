@@ -9,6 +9,7 @@ import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.audio.AudioManager
 import org.frice.game.utils.misc.loop
+import org.frice.game.utils.misc.unless
 import java.io.File
 import java.util.*
 
@@ -19,7 +20,7 @@ import java.util.*
  * @author ice1000
  * @since v0.5
  */
-internal class GalGame : Game() {
+internal open class GalGame : Game() {
 
 	companion object {
 		@JvmField val POSITION_LEFT = 0
@@ -100,7 +101,9 @@ internal class GalGame : Game() {
 				loop(if (now.isAbsolute) now.index - step else now.index) { nextStep(true) }
 			}
 		}
-		if (!recursive) stepSequence.removeAt(0)
+		unless (recursive) {
+			stepSequence.removeAt(0)
+		}
 	}
 
 	/**
@@ -123,7 +126,7 @@ internal class GalGame : Game() {
 		nextStep()
 	}
 
-	inner abstract class Step() {
+	inner abstract class Step {
 		var marked = false
 			private set
 
@@ -139,11 +142,16 @@ internal class GalGame : Game() {
 		val button: FButton
 	}
 
-	inner class GalTextOption(val text: String, val target: Int) : GalOption {
-		override val button = SimpleButton(text, width / 4.0, 0.0, width / 2.0, 25.0)
+	inner class GalTextOption(text: String, val target: Int) : GalOption {
+		override val button = SimpleButton(
+				text = text,
+				x = width / 4.0,
+				y = 0.0,
+				width = width / 2.0,
+				height = 25.0)
 	}
 
-	class GalImageOption(val imageButton: ImageButton) : GalOption {
+	class GalImageOption(imageButton: ImageButton) : GalOption {
 		override val button = imageButton
 	}
 

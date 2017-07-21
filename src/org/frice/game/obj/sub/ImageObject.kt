@@ -17,10 +17,10 @@ open class ImageObject
 @JvmOverloads
 constructor(
 		var res: ImageResource,
-		override var id: Int = -1,
 		override var x: Double = 0.0,
-		override var y: Double = 0.0) : FObject(), FObject.ImageOwner {
-	constructor(res: FriceImage, x: Double, y: Double) : this(ImageResource.create(res), -1, x, y)
+		override var y: Double = 0.0,
+		override var id: Int = -1) : FObject(), FObject.ImageOwner {
+	constructor(res: FriceImage, x: Double, y: Double) : this(ImageResource.create(res), x, y, -1)
 
 	override fun getResource() = res
 
