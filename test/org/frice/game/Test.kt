@@ -66,8 +66,8 @@ class Test : Game() {
 				addObject(obj)
 			}
 		})
-		getPlayer("1.wav").start()
-		play("1.wav")
+//		getPlayer("1.wav").start()
+//		play("1.wav")
 
 //		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
 
