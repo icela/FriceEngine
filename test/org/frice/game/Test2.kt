@@ -16,19 +16,20 @@ import org.frice.game.utils.time.FTimer
  */
 
 
-class Test2() : Game() {
+class Test2 : Game() {
 	val timer = FTimer(200)
 	lateinit var obj: ShapeObject
 	lateinit var obj2: ShapeObject
 
 	override fun onInit() {
-		obj2 = ShapeObject(ColorResource.Companion.天依蓝, FRectangle(20, 20), 200.0, 200.0).apply {
+		obj2 = ShapeObject(ColorResource.Companion.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233).apply {
 			mass = 2.0
 		}
-		obj = ShapeObject(ColorResource.Companion.西木野真姬, FCircle(30.0), 100.0, 100.0).apply {
+		obj = ShapeObject(ColorResource.Companion.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
 			mass = 1.0
 			anims.add(SimpleMove(80, 0))
 		}
+		assert(obj == obj2)
 		addObject(obj2, obj, ImageObject(ImageResource.fromWeb("http://media.openjudge.cn/images/1251_1.jpg")))
 	}
 

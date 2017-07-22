@@ -64,17 +64,8 @@ constructor(
 	}
 
 	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-//		if (other == null || other !is ShapeObject) return false
-//		if ((id != -1 && id == other.id) ||
-//				res == other.res && x == other.x && y == other.y) return true
+		if (other == null || other !is FObject) return false
+		if ((id != -1 && id == other.id) || this === other) return true
 		return false
 	}
-
-	override fun hashCode(): Int {
-		var result = res.hashCode()
-		result = 31 * result + id
-		return result
-	}
-
 }

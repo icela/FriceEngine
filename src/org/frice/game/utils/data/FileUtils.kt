@@ -41,7 +41,7 @@ fun ByteArray.bytes2File(file: File) {
 	FileBytesManager[file.path] = this
 }
 
-fun ByteArray.bytes2File(byteArray: ByteArray, file: String) = bytes2File(File(file))
+fun ByteArray.bytes2File(file: String) = bytes2File(File(file))
 
 fun File.readString() = FileTextManager[path]
 

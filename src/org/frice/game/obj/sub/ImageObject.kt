@@ -47,7 +47,7 @@ constructor(
 	override val image: FriceImage get() = res.image
 
 	override fun equals(other: Any?): Boolean {
-		if (other == null || other !is ImageObject) return false
+		if (other == null || other !is FObject) return false
 		if ((id != -1 && id == other.id) || this === other) return true
 		return false
 	}

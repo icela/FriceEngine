@@ -10,7 +10,7 @@ import org.frice.game.utils.graphics.shape.FCircle
  *
  * @author ice1000
  */
-class Test3() : Game() {
+class Test3 : Game() {
 	lateinit var a: ShapeObject
 	val d = 3.14 * 6
 	val e = 0.1

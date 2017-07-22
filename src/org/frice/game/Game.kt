@@ -1,7 +1,6 @@
 package org.frice.game
 
 import org.frice.game.event.OnClickEvent
-import org.frice.game.event.OnKeyEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
@@ -243,35 +242,25 @@ open class Game : JFrame(), FriceGame {
 			pressed: (KeyEvent) -> Unit = { },
 			released: (KeyEvent) -> Unit = { }) {
 		addKeyListener(object : KeyListener {
-			override fun keyPressed(e: KeyEvent?) = pressed(e!!)
-			override fun keyReleased(e: KeyEvent?) = released(e!!)
-			override fun keyTyped(e: KeyEvent?) = typed(e!!)
+			override fun keyPressed(e: KeyEvent?) = e?.let(pressed) ?: Unit
+			override fun keyReleased(e: KeyEvent?) = e?.let(released) ?: Unit
+			override fun keyTyped(e: KeyEvent?) = e?.let(typed) ?: Unit
 		})
 	}
 
-	fun listenKeyPressed(key: OnKeyEvent) = listenKeyPressed(key::execute)
-	inline infix fun listenKeyPressed(crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener({ key.invoke(it) }, { key.invoke(it) }, { key.invoke(it) })
-
-	fun addKeyTypedEvent(keyCode: Int, key: OnKeyEvent) = addKeyTypedEvent(keyCode, key::execute)
-	inline fun addKeyTypedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) = addKeyListener(typed = { e ->
-		if (e.keyCode == keyCode) key.invoke(e)
-	})
-
-	fun addKeyPressedEvent(keyCode: Int, key: OnKeyEvent) =
-			addKeyPressedEvent(keyCode, key::execute)
+	inline fun addKeyTypedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
+			addKeyListener(typed = { e ->
+				if (e.keyCode == keyCode) key(e)
+			})
 
 	inline fun addKeyPressedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
 			addKeyListener(pressed = { e ->
-				if (e.keyCode == keyCode) key.invoke(e)
+				if (e.keyCode == keyCode) key(e)
 			})
-
-	fun addKeyReleasedEvent(keyCode: Int, key: OnKeyEvent) =
-			addKeyReleasedEvent(keyCode, key::execute)
 
 	inline fun addKeyReleasedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
 			addKeyListener(released = { e ->
-				if (e.keyCode == keyCode) key.invoke(e)
+				if (e.keyCode == keyCode) key(e)
 			})
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
@@ -300,7 +289,7 @@ open class Game : JFrame(), FriceGame {
 			objs.forEach(this::removeObject)
 
 	override fun addTimeListener(vararg listeners: FTimeListener) =
-			listeners.forEach { addTimeListener(it) }
+			listeners.forEach { this addTimeListener it }
 
 	override infix fun addTimeListener(listener: FTimeListener) =
 			timeListenerAddBuffer.add(listener)
@@ -419,20 +408,20 @@ open class Game : JFrame(), FriceGame {
 		init {
 			addMouseListener(object : MouseListener {
 				override fun mouseClicked(e: MouseEvent) {
-					click(OnMouseEvent.create(e, OnMouseEvent.MOUSE_CLICK))
-					onClick(OnClickEvent.create(e))
+					click(OnMouseEvent(e, OnMouseEvent.MOUSE_CLICK))
+					onClick(OnClickEvent(e))
 				}
 
-				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_ENTERED))
-				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_EXITED))
+				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_ENTERED))
+				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_EXITED))
 				override fun mouseReleased(e: MouseEvent) {
-					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
-					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_RELEASED))
+					mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
+					onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
 				}
 
 				override fun mousePressed(e: MouseEvent) {
-					mouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
-					onMouse(OnMouseEvent.create(e, OnMouseEvent.MOUSE_PRESSED))
+					mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
+					onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
 				}
 			})
 
