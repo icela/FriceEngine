@@ -16,7 +16,7 @@ CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4
 An easy, light, native game engine running on JVM.<br/>
 ~~View [APIs](./res/apis.md) or wiki to learn more about Frice Engine.~~
 
-The doc is deprecated. I'm deciding to make some tutorials.
+The doc is poorly maintained and deprecated. I'm deciding to make some tutorials soon.
 
 ## Why easy?
 [A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 65 lines of code only.<br/>
@@ -41,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.0.3'
+  compile 'com.github.icela:FriceEngine:v1.1.2'
 }
 ```
 

@@ -46,3 +46,4 @@ build/
 .idea/modules/friceEngine_test.iml
 test.properties
 .idea/
+test/org/frice/game/demo/

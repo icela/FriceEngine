@@ -47,19 +47,8 @@ constructor(
 	override val image: FriceImage get() = res.image
 
 	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
 		if (other == null || other !is ImageObject) return false
-		if ((id != -1 && id == other.id) ||
-				res == other.res && x == other.x && y == other.y) return true
+		if ((id != -1 && id == other.id) || this === other) return true
 		return false
-	}
-
-	override fun hashCode(): Int {
-		var result = res.hashCode()
-		result = 31 * result + id
-		result = 31 * result + x.hashCode()
-		result = 31 * result + y.hashCode()
-		result = 31 * result + anims.hashCode()
-		return result
 	}
 }
