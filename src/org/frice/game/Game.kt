@@ -32,6 +32,7 @@ import java.awt.Point
 import java.awt.Rectangle
 import java.awt.event.*
 import java.util.*
+import javax.imageio.ImageIO.read
 import javax.swing.JFrame
 import javax.swing.JOptionPane
 import javax.swing.JPanel
@@ -82,7 +83,7 @@ open class Game : JFrame(), FriceGame {
 		}
 
 		@JvmStatic
-		fun launch(c: Class<out Game>) = c.newInstance()
+		fun launch(c: Class<out Game>): Game? = c.newInstance()
 	}
 
 	override val objects = LinkedList<AbstractObject>()
@@ -170,7 +171,7 @@ open class Game : JFrame(), FriceGame {
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 		// set icon
-		// iconImage = javax.imageio.ImageIO.read(javaClass.getResourceAsStream("/icon.png"))
+		iconImage = read(javaClass.getResourceAsStream("/icon.png"))
 
 		/// to prevent this engine from the call#cking NPE!!
 		this.add(panel, BorderLayout.CENTER)

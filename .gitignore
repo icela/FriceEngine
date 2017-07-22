@@ -1,10 +1,10 @@
 *.class
+*~
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package & Target Files #
-#*.jar
 *.war
 *.ear
 *.db
@@ -26,24 +26,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.idea/copyright/
-.idea/modules/lib/
 out/
 tres/
 /bin/
-Fuck.properties
 settings.properties
 dokka.jar
 lib/
 test.txt
 sample/
-src/org/frice/game/utils/web/HTMLUtils.kt~
-test/org/frice/game/Java.java~
 .gradle/
 build/
-.idea/.name
-.idea/modules/friceEngine_main.iml
-.idea/modules/friceEngine_test.iml
 test.properties
 .idea/
 test/org/frice/game/demo/

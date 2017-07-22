@@ -1,5 +1,6 @@
 package org.frice.game.demo;
 
+import kotlin.Unit;
 import org.frice.game.Game;
 import org.frice.game.anim.move.AccurateMove;
 import org.frice.game.obj.button.FText;
@@ -34,7 +35,10 @@ public class Java extends Game {
 		ImageObject imageObject2 = new ImageObject(ImageResource.fromWeb(URL), 300, 100);
 		SimpleText text = new SimpleText(ColorResource.BLACK, "暗中观察.jpg", 50, 200);
 		imageObject.addAnim(new AccurateMove(50, 0));
-		imageObject.addCollider(imageObject2, imageObject::stopAnims);
+		imageObject.addCollider(imageObject2, () -> {
+			imageObject.stopAnims();
+			return Unit.INSTANCE;
+		});
 		addObject(text, imageObject, imageObject2, imageObject1);
 		Database database = new Preference("save.txt");
 		boolean[] booleans = new boolean[]{true, true, true, true, false, true};

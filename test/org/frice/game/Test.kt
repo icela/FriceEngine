@@ -3,26 +3,30 @@ package org.frice.game
 import org.frice.game.anim.RotateAnim
 import org.frice.game.anim.move.AccelerateMove
 import org.frice.game.anim.move.AccurateMove
+import org.frice.game.anim.move.CustomMove
 import org.frice.game.anim.move.SimpleMove
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
-import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.ParticleResource
+import org.frice.game.utils.audio.getPlayer
+import org.frice.game.utils.audio.play
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.XMLPreference
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
+import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.graphics.utils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.util.*
+import kotlin.test.assertEquals
 
 /**
  * Sample
@@ -42,7 +46,8 @@ class Test : Game() {
 
 		addTimeListener(FTimeListener(400, timeUp = { FLog.v("400 ms has passed") }))
 
-		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
+		addObject(ParticleEffect(ParticleResource(
+				this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton(
 				text = "I am a button",
 				x = 30.0,
@@ -61,8 +66,8 @@ class Test : Game() {
 				addObject(obj)
 			}
 		})
-//		AudioManager.getPlayer("1.wav").start()
-//		AudioManager.play("1.wav")
+		getPlayer("1.wav").start()
+		play("1.wav")
 
 //		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
 
@@ -120,6 +125,77 @@ class Test : Game() {
 		@JvmStatic
 		fun main(args: Array<String>) {
 			launch(Test::class.java)
+		}
+	}
+}
+
+
+/**
+ * Created by ice1000 on 2016/9/11.
+ *
+ * @author ice1000
+ */
+class Test2 : Game() {
+	val timer = FTimer(200)
+	lateinit var obj: ShapeObject
+	lateinit var obj2: ShapeObject
+
+	@org.junit.Test
+	override fun onInit() {
+		obj2 = ShapeObject(ColorResource.Companion.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233).apply {
+			mass = 2.0
+		}
+		obj = ShapeObject(ColorResource.Companion.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
+			mass = 1.0
+			anims.add(SimpleMove(80, 0))
+		}
+		assertEquals(obj, obj2)
+		addObject(obj2, obj)
+	}
+
+	override fun onRefresh() {
+		if (timer.ended()) {
+		}
+	}
+
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			launch(Test2::class.java)
+		}
+	}
+}
+
+
+/**
+ * Created by ice1000 on 2016/10/22.
+ *
+ * @author ice1000
+ */
+class Test3 : Game() {
+	lateinit var a: ShapeObject
+	val d = 3.14 * 6
+	val e = 0.1
+	val c = 0.1
+	override fun onInit() {
+		setSize(1000, 1000)
+		a = ShapeObject(ColorResource.BLUE, FCircle(10.0), 100.0, 500.0)
+		a.anims.add(object : CustomMove() {
+			override fun getXDelta(timeFromBegin: Double) =
+					((a.x * c) * Math.sin(d) - (a.y * c) * Math.cos(d)) * e
+
+			override fun getYDelta(timeFromBegin: Double) =
+					((a.x * c) * Math.cos(d) - (a.y * c) * Math.sin(d)) * e
+		})
+		addObject(a)
+	}
+
+	override fun onExit() = System.exit(0)
+
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			launch(Test3::class.java)
 		}
 	}
 }
