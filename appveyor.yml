@@ -7,6 +7,6 @@ build_script:
 #
 
 artifacts:
-  - path: 'build\libs\*.jar'
-    name: lice
+  - path: 'build\libs\engine-1.2.jar'
+    name: frice
 #

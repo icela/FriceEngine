@@ -4,7 +4,7 @@ language: kotlin
 jdk:
 - oraclejdk8
 script:
-- "./gradlew check"
+- "./gradlew assemble"
 - "./gradlew javadoc"
 - "./gradlew jar"
 before_install:
