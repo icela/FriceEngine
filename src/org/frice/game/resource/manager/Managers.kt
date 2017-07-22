@@ -28,21 +28,31 @@ internal interface FManager<T> {
 	val res: MutableMap<String, T>
 	fun create(path: String): T
 
-	operator fun get(path: String): T {
-		if (res.containsKey(path)) return res[path]!!
-		else return create(path).apply {
-			res += Pair(path, this)
-		}
+	operator fun get(path: String): T = res[path] ?: create(path).apply {
+		res += Pair(path, this)
+	}
+
+	operator fun set(path: String, new: T) {
+		res[path] = new
 	}
 }
 
 /**
  * @author ice1000
- * @since v0.6
+ * @since v1.1
  */
-object FileManager : FManager<File> {
-	override val res = HashMap<String, File>()
-	override fun create(path: String) = File(path)
+object FileTextManager : FManager<String> {
+	override val res = HashMap<String, String>()
+	override fun create(path: String) = File(path).readText()
+}
+
+/**
+ * @author ice1000
+ * @since v1.1
+ */
+object FileBytesManager : FManager<ByteArray> {
+	override val res = HashMap<String, ByteArray>()
+	override fun create(path: String) = File(path).readBytes()
 }
 
 /**
@@ -52,7 +62,7 @@ object FileManager : FManager<File> {
 object ImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
 	override fun create(path: String) = JvmImage(ImageIO.read(File(path))!!)
-	override fun get(path: String) = super.get(path).clone()
+	override operator fun get(path: String) = super.get(path).clone()
 }
 
 /**
@@ -62,7 +72,7 @@ object ImageManager : FManager<FriceImage> {
 object WebImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
 	override fun create(path: String) = JvmImage(ImageIO.read(URL(path))!!)
-	override fun get(path: String) = super.get(path).clone()
+	override operator fun get(path: String) = super.get(path).clone()
 }
 
 /**

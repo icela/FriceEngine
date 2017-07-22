@@ -100,8 +100,7 @@ open class Game : JFrame(), FriceGame {
 	 */
 	var paused = false
 		set(value) {
-			if (value) Clock.pause()
-			else Clock.resume()
+			if (value) Clock.pause() else Clock.resume()
 			field = value
 		}
 
@@ -111,8 +110,7 @@ open class Game : JFrame(), FriceGame {
 	 */
 	var stopped = false
 		set(value) {
-			if (value) Clock.pause()
-			else Clock.resume()
+			if (value) Clock.pause() else Clock.resume()
 			field = value
 		}
 

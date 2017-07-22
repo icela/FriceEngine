@@ -12,6 +12,7 @@ See [README](../README.md).
 Method|Usage
 :---|---:
 onInit()|Invoked while initializing
+onLastInit()|Invoked before starting refreshing
 onExit()|Invoked while exiting (NOTE: engine does not perform process termination automatically)
 onRefresh()|Invoked after game window is refreshed, if not paused)
 onClick(OnClickEvent)|Invoked while clicking in game window
@@ -51,7 +52,9 @@ Represents a game object.
 Name|Usage
 :---|---:
 getAnims(): List<(FAnim)>|get the list of anims, you can add and remove animations via this.
+addAnim(FAnim)|same as getAnims().add()
 getTargets(): List<(Pair<(FObject, Event)>)>|get a list of pairs, it has an object reference and an event interface. when collision occurs, the interface will be called.
+addTarget(FObject, Event)|same as getTargets().add(FObject to Event)
 addForce(Double, Double)|add a force to this object(actually you added an accelerate anim to it). It's force, and you had better set the mass first.
 setMass(Double)|set the mass. It's safe, if you set an unsafe value, it will ignore the operation automatically. :joy:
 
