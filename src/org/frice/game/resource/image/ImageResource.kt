@@ -78,7 +78,10 @@ class WebImageResource(url: String) : ImageResource() {
  * @author ice1000
  * @since v0.3.1
  */
-class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, div: Int) : ImageResource() {
+class FrameImageResource(
+		val game: Game,
+		val list: MutableList<ImageResource>,
+		div: Int) : ImageResource() {
 
 	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 
@@ -102,8 +105,7 @@ class FrameImageResource(val game: Game, val list: MutableList<ImageResource>, d
 	init {
 		timer = FTimeListener(div) {
 			FLog.e("counter = $counter")
-			counter++
-			counter %= list.size
+			counter = (counter + 1) % list.size
 		}
 		game.addTimeListener(timer)
 	}
