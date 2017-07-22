@@ -56,19 +56,34 @@ interface FriceClock {
 	fun pause()
 }
 
-interface FriceGame {
+internal class Layer {
+	val objects = LinkedList<AbstractObject>()
+	val objectDeleteBuffer = ArrayList<AbstractObject>()
+	val objectAddBuffer = ArrayList<AbstractObject>()
 
-	val objects: LinkedList<AbstractObject>
-	val objectDeleteBuffer: ArrayList<AbstractObject>
-	val objectAddBuffer: ArrayList<AbstractObject>
+	val texts = LinkedList<FText>()
+	val textDeleteBuffer = ArrayList<FText>()
+	val textAddBuffer = ArrayList<FText>()
+
+	fun processBuffer() {
+		objects.addAll(objectAddBuffer)
+		objects.removeAll(objectDeleteBuffer)
+		objectDeleteBuffer.clear()
+		objectAddBuffer.clear()
+
+		texts.addAll(textAddBuffer)
+		texts.removeAll(textDeleteBuffer)
+		textDeleteBuffer.clear()
+		textAddBuffer.clear()
+	}
+}
+
+interface FriceGame {
 
 	val timeListeners: LinkedList<FTimeListener>
 	val timeListenerDeleteBuffer: ArrayList<FTimeListener>
 	val timeListenerAddBuffer: ArrayList<FTimeListener>
-
-	val texts: LinkedList<FText>
-	val textDeleteBuffer: ArrayList<FText>
-	val textAddBuffer: ArrayList<FText>
+	val layers: Array<Layer>
 
 	val drawer: JvmDrawer
 
@@ -80,20 +95,11 @@ interface FriceGame {
 	 * do the delete and add work, to prevent Exceptions
 	 */
 	fun processBuffer() {
-		objects.addAll(objectAddBuffer)
-		objects.removeAll(objectDeleteBuffer)
-		objectDeleteBuffer.clear()
-		objectAddBuffer.clear()
-
+		layers.forEach(Layer::processBuffer)
 		timeListeners.addAll(timeListenerAddBuffer)
 		timeListeners.removeAll(timeListenerDeleteBuffer)
 		timeListenerDeleteBuffer.clear()
 		timeListenerAddBuffer.clear()
-
-		texts.addAll(textAddBuffer)
-		texts.removeAll(textDeleteBuffer)
-		textDeleteBuffer.clear()
-		textAddBuffer.clear()
 	}
 
 	fun onInit()
@@ -105,38 +111,43 @@ interface FriceGame {
 	fun onLoseFocus()
 
 	/**
-	 * remove Objects using vararg
-	 */
-	fun removeObject(vararg objs: AbstractObject)
-
-	/**
 	 * add TimeListeners using vararg
 	 */
-	fun addTimeListener(vararg listeners: FTimeListener)
+	fun addTimeListener(vararg listeners: FTimeListener) =
+			listeners.forEach { this addTimeListener it }
 
 	/**
 	 * add a time listener.
 	 *
 	 * @param listener time listener to be added
 	 */
-	infix fun addTimeListener(listener: FTimeListener): Boolean
+	infix fun addTimeListener(listener: FTimeListener) =
+			timeListenerAddBuffer.add(listener)
 
 	/**
 	 * removes all auto-executed time listeners
 	 */
-	fun clearTimeListeners(): Boolean
+	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
 
 	/**
 	 * remove TimeListeners using vararg
 	 */
-	fun removeTimeListener(vararg listeners: FTimeListener)
+	fun removeTimeListener(vararg listeners: FTimeListener) =
+			listeners.forEach { removeTimeListener(it) }
 
 	/**
 	 * removes specified listener
 	 *
 	 * @param listener the listener
 	 */
-	infix fun removeTimeListener(listener: FTimeListener): Boolean
+	infix fun removeTimeListener(listener: FTimeListener) =
+			timeListenerDeleteBuffer.add(listener)
+
+	/**
+	 * remove Objects using vararg
+	 */
+	fun removeObject(layer: Int, vararg objs: AbstractObject) =
+			objs.forEach(this::removeObject)
 
 	/**
 	 * removes single object.
@@ -144,23 +155,34 @@ interface FriceGame {
 	 *
 	 * @param obj will remove objects which is equal to it.
 	 */
-	infix fun removeObject(obj: AbstractObject)
+	infix fun removeObject(layer: Int, obj: AbstractObject): Unit = when (obj) {
+		is FText -> textDeleteBuffer.add(obj)
+		is AbstractObject -> objectDeleteBuffer.add(obj)
+		else -> throw FatalError("Type of $obj(${obj::class.java.name}) is neither FText nor AbstractObject")
+	}
 
 	/**
 	 * clears all objects.
 	 * this method is safe.
 	 */
-	fun clearObjects()
+	fun clearObjects() {
+		objectDeleteBuffer.addAll(objects)
+		textDeleteBuffer.addAll(texts)
+	}
 
 	/**
 	 * adds an object to game, to be shown on game window.
 	 */
-	infix fun addObject(obj: AbstractObject)
+	infix fun addObject(obj: AbstractObject): Unit = when (obj) {
+		is FText -> textAddBuffer.add(obj)
+		is AbstractObject -> objectAddBuffer.add(obj)
+		else -> throw FatalError("Type of $obj(${obj::class.java.name}) is neither FText nor AbstractObject")
+	}
 
 	/**
 	 * add Objects using vararg
 	 */
-	fun addObject(vararg objs: AbstractObject)
+	fun addObject(vararg objs: AbstractObject) = objs.forEach(this::addObject)
 
 	fun drawEverything(bgg: JvmDrawer)
 	fun clearScreen()

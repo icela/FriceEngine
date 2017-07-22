@@ -185,9 +185,9 @@ open class Game : JFrame(), FriceGame {
 			FLog.v("Engine start!")
 			onLastInit()
 			loop {
-				forceRun {
+				try {
 					onRefresh()
-					timeListeners.forEach { it.check() }
+					timeListeners.forEach(FTimeListener::check)
 					// only update per "refreshTime"
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()
@@ -197,6 +197,8 @@ open class Game : JFrame(), FriceGame {
 							fpsCounter = 0
 						}
 					}
+				} catch (e: Exception) {
+					e.printStackTrace()
 				}
 			}
 			FLog.v("Engine thread exited.")
@@ -219,9 +221,8 @@ open class Game : JFrame(), FriceGame {
 	open fun onClick(e: OnClickEvent) = Unit
 	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
-		if (FDialog(this).confirm("Are you sure to exit?",
-				"Ensuring", JOptionPane.YES_NO_OPTION) ==
-				JOptionPane.YES_OPTION)
+		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
+				FDialog.YES_OPTION)
 			System.exit(0)
 		else return
 	}
@@ -240,7 +241,6 @@ open class Game : JFrame(), FriceGame {
 	 * for kotlin only
 	 * add keyboard listeners with lambda
 	 */
-	@JvmOverloads
 	fun addKeyListener(
 			typed: (KeyEvent) -> Unit = { },
 			pressed: (KeyEvent) -> Unit = { },
@@ -272,109 +272,75 @@ open class Game : JFrame(), FriceGame {
 		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
-	override fun addObject(vararg objs: AbstractObject) = objs.forEach(this::addObject)
-
-	override infix fun addObject(obj: AbstractObject) {
-		if (obj is FText) textAddBuffer.add(obj)
-		else objectAddBuffer.add(obj)
-	}
-
-	override fun clearObjects() {
-		objectDeleteBuffer.addAll(objects)
-		textDeleteBuffer.addAll(texts)
-	}
-
-	override infix fun removeObject(obj: AbstractObject) {
-		if (obj is FText) textDeleteBuffer.add(obj)
-		else objectDeleteBuffer.add(obj)
-	}
-
-	override fun removeObject(vararg objs: AbstractObject) =
-			objs.forEach(this::removeObject)
-
-	override fun addTimeListener(vararg listeners: FTimeListener) =
-			listeners.forEach { this addTimeListener it }
-
-	override infix fun addTimeListener(listener: FTimeListener) =
-			timeListenerAddBuffer.add(listener)
-
-	override fun clearTimeListeners() =
-			timeListenerDeleteBuffer.addAll(timeListeners)
-
-	override fun removeTimeListener(vararg listeners: FTimeListener) =
-			listeners.forEach { removeTimeListener(it) }
-
-	override infix fun removeTimeListener(listener: FTimeListener) =
-			timeListenerDeleteBuffer.add(listener)
-
 	override fun drawEverything(bgg: JvmDrawer) {
 		processBuffer()
-
-		objects.forEach { o ->
-			if (o is FObject) {
-				o.runAnims()
-				o.checkCollision()
-			}
-		}
-
-		objects.forEach { o ->
-			bgg.restore()
-			bgg.init()
-			if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
-			else bgg.rotate(o.rotate, o.x, o.y)
-			when (o) {
-				is FObject.ImageOwner ->
-					unless(o.x + o.image.width < 0 || o.x > width || o.y + o.image.height < 0 || o.y > height) {
-						bgg.drawImage(o.image, o.x, o.y)
-					}
-				is ShapeObject ->
-					unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
-						bgg.color = o.getResource()
-						when (o.collideBox) {
-							is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
-							is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
-						}
-					}
-				is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
-			}
-			if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
-				if (o is PhysicalObject) o.died = true
-				removeObject(o)
-				//FLog.i("o.x = ${o.x}, width = $width," +
-				//		" o.y = ${o.y}, height = $height")
-			}
-		}
-
-		texts.forEach {
-			b ->
-			bgg.run {
-				restore()
-				init()
-				rotate(b.rotate)
-			}
-			if (b is FButton) {
-				when (b) {
-					is FObject.ImageOwner -> {
-						unless(b.x + b.image.width < 0 ||
-								b.x > width ||
-								b.y + b.image.height < 0 ||
-								b.y > height) {
-							bgg.drawImage(b.image, b.x, b.y)
-						}
-					}
-					is SimpleButton -> {
-						bgg.color = b.getColor()
-						bgg.drawRoundRect(b.x, b.y,
-								b.width, b.height,
-								Math.min(b.width * 0.5, 10.0),
-								Math.min(b.height * 0.5, 10.0))
-						bgg.color = ColorResource.DARK_GRAY
-						bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
-					}
+		layers.forEach {
+			it.objects.forEach { o ->
+				if (o is FObject) {
+					o.runAnims()
+					o.checkCollision()
 				}
-			} else {
-				bgg.color = b.getColor()
-				bgg.drawString(b.text, b.x, b.y)
+			}
+
+			it.objects.forEach { o ->
+				bgg.restore()
+				bgg.init()
+				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
+				else bgg.rotate(o.rotate, o.x, o.y)
+				when (o) {
+					is FObject.ImageOwner ->
+						unless(o.x + o.image.width < 0 || o.x > width || o.y + o.image.height < 0 || o.y > height) {
+							bgg.drawImage(o.image, o.x, o.y)
+						}
+					is ShapeObject ->
+						unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
+							bgg.color = o.getResource()
+							when (o.collideBox) {
+								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
+								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
+							}
+						}
+					is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
+				}
+				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
+					if (o is PhysicalObject) o.died = true
+					removeObject(o)
+					//FLog.i("o.x = ${o.x}, width = $width," +
+					//		" o.y = ${o.y}, height = $height")
+				}
+			}
+
+			it.texts.forEach {
+				b ->
+				bgg.run {
+					restore()
+					init()
+					rotate(b.rotate)
+				}
+				if (b is FButton) {
+					when (b) {
+						is FObject.ImageOwner -> {
+							unless(b.x + b.image.width < 0 ||
+									b.x > width ||
+									b.y + b.image.height < 0 ||
+									b.y > height) {
+								bgg.drawImage(b.image, b.x, b.y)
+							}
+						}
+						is SimpleButton -> {
+							bgg.color = b.getColor()
+							bgg.drawRoundRect(b.x, b.y,
+									b.width, b.height,
+									Math.min(b.width * 0.5, 10.0),
+									Math.min(b.height * 0.5, 10.0))
+							bgg.color = ColorResource.DARK_GRAY
+							bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
+						}
+					}
+				} else {
+					bgg.color = b.getColor()
+					bgg.drawString(b.text, b.x, b.y)
+				}
 			}
 		}
 		customDraw(bgg)
