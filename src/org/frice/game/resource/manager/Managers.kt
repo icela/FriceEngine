@@ -35,6 +35,17 @@ internal interface FManager<T> {
 	operator fun set(path: String, new: T) {
 		res[path] = new
 	}
+
+	companion object Utils {
+		fun clearAll() {
+			FileBytesManager.res.clear()
+			FileTextManager.res.clear()
+			ImageManager.res.clear()
+			WebImageManager.res.clear()
+			URLBytesManager.res.clear()
+			URLTextManager.res.clear()
+		}
+	}
 }
 
 /**
@@ -92,5 +103,3 @@ object URLBytesManager : FManager<ByteArray> {
 	override val res = HashMap<String, ByteArray>()
 	override fun create(path: String) = URL(path).readBytes()
 }
-
-

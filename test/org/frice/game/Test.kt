@@ -61,10 +61,10 @@ class Test : Game() {
 				addObject(obj)
 			}
 		})
-		//		AudioManager.getPlayer("1.wav").start()
-		//		AudioManager.play("1.wav")
+//		AudioManager.getPlayer("1.wav").start()
+//		AudioManager.play("1.wav")
 
-		//		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
+//		setCursor(WebImageResource("https://avatars1.githubusercontent.com/u/16477304?v=3&s=84"))
 
 		preference = Preference("settings.properties")
 		preference.insert("fuck", "microsoft")
@@ -79,9 +79,9 @@ class Test : Game() {
 		FCircle(1.0)
 		FPoint(1, 2)
 
-		//		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
-		//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
-		//				10.0, 10.0))
+//		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
+//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
+//				10.0, 10.0))
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.gray())
 	}
@@ -96,15 +96,13 @@ class Test : Game() {
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 				targets.clear()
 				objs.forEach { o ->
-					targets.add(Pair(o, object : FObject.OnCollideEvent {
-						override fun handle() {
-							anims.clear()
-							targets.clear()
-							anims.add(SimpleMove(0, -300))
-							anims.add(SimpleScale(1.1, 1.1))
-							res = ColorResource.MAGENTA
-						}
-					}))
+					addCollider(o, {
+						anims.clear()
+						targets.clear()
+						anims.add(SimpleMove(0, -300))
+						anims.add(SimpleScale(1.1, 1.1))
+						res = ColorResource.MAGENTA
+					})
 				}
 			})
 		}
@@ -117,8 +115,11 @@ class Test : Game() {
 	}
 
 	override fun onExit() = System.exit(0)
-}
 
-fun main(args: Array<String>) {
-	Test()
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			launch(Test::class.java)
+		}
+	}
 }

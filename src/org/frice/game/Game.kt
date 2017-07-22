@@ -80,6 +80,9 @@ open class Game : JFrame(), FriceGame {
 			height -= width
 			width += height
 		}
+
+		@JvmStatic
+		fun launch(c: Class<out Game>) = c.newInstance()
 	}
 
 	override val objects = LinkedList<AbstractObject>()

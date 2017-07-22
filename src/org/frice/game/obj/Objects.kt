@@ -82,7 +82,7 @@ abstract class FObject : PhysicalObject() {
 
 	val anims = LinkedList<FAnim>()
 
-	val targets = LinkedList<Pair<PhysicalObject, OnCollideEvent>>()
+	val targets = LinkedList<Pair<PhysicalObject, () -> Unit>>()
 
 	override var rotate = 0.0
 
@@ -151,12 +151,12 @@ abstract class FObject : PhysicalObject() {
 
 	internal fun checkCollision() {
 		targets.removeAll { (first) -> first.died }
-		targets.forEach { (first, second) -> if (isCollide(first)) second.handle() }
+		targets.forEach { (first, second) -> if (isCollide(first)) second() }
 	}
 
 	inline fun addAnim(anim: FAnim) = anims.add(anim)
-	inline fun addCollider(o: PhysicalObject, e: OnCollideEvent) = addCollider(o to e)
-	inline fun addCollider(p: Pair<PhysicalObject, OnCollideEvent>) = targets.add(p)
+	inline fun addCollider(o: PhysicalObject, noinline e: () -> Unit) = addCollider(o to e)
+	inline fun addCollider(p: Pair<PhysicalObject, () -> Unit>) = targets.add(p)
 	inline fun stopAnims() = anims.clear()
 
 	/**
@@ -169,23 +169,6 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	infix fun addForce(p: FPoint) = addForce(p.x.toDouble(), p.y.toDouble())
-
-	/**
-	 * Created by ice1000 on 2016/8/16.
-	 * @author ice1000
-	 * @since v0.3
-	 */
-	interface OnCollideEvent {
-		companion object Factory {
-			inline fun from(crossinline block: () -> Unit) = object : OnCollideEvent {
-				override fun handle() {
-					block()
-				}
-			}
-		}
-
-		fun handle()
-	}
 
 	interface ImageOwner {
 		val image: FriceImage
