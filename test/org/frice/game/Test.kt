@@ -40,7 +40,7 @@ class Test : Game() {
 		super.onInit()
 		autoGC = true
 
-		addTimeListener(FTimeListener(400, { FLog.v("400 ms has passed") }))
+		addTimeListener(FTimeListener(400, timeUp = { FLog.v("400 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton(

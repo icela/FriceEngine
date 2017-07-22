@@ -7,7 +7,7 @@ import org.frice.game.obj.button.ImageButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.resource.image.ImageResource
-import org.frice.game.utils.audio.AudioManager
+import org.frice.game.utils.audio.play
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
 import java.io.File
@@ -92,7 +92,7 @@ internal open class GalGame : Game() {
 				TODO("show list of game options")
 			}
 			is GalAudio -> {
-				if (!skip) AudioManager.play(now.file)
+				if (!skip) play(now.file)
 				stepSequence.removeAt(0)
 			}
 			is GalSkip -> {
