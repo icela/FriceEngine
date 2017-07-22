@@ -9,6 +9,10 @@ import org.frice.game.obj.sub.ImageObject;
 import org.frice.game.resource.graphics.ColorResource;
 import org.frice.game.resource.graphics.ParticleResource;
 import org.frice.game.resource.image.ImageResource;
+import org.frice.game.utils.data.Database;
+import org.frice.game.utils.data.Preference;
+
+import java.util.Arrays;
 
 /**
  * Created by Administrator on 2016/9/15 0015.
@@ -32,7 +36,24 @@ public class Java extends Game {
 		imageObject.addAnim(new AccurateMove(50, 0));
 		imageObject.addCollider(imageObject2, imageObject::stopAnims);
 		addObject(text, imageObject, imageObject2, imageObject1);
+		Database database = new Preference("save.txt");
+		boolean[] booleans = new boolean[]{true, true, true, true, false, true};
+		database.insert("TheData", makeString(booleans));
+		boolean[] result = makeBoolean(database.query("TheData", "").toString().toCharArray());
+		System.out.println(Arrays.toString(result));
 //		addObject(imageButton);
+	}
+
+	private String makeString(boolean[] booleans) {
+		char[] chars = new char[booleans.length];
+		for (int i = 0; i < booleans.length; i++) chars[i] = booleans[i] ? '1' : '0';
+		return new String(chars);
+	}
+
+	private boolean[] makeBoolean(char[] chars) {
+		boolean[] booleans = new boolean[chars.length];
+		for (int i = 0; i < chars.length; i++) booleans[i] = chars[i] == '1';
+		return booleans;
 	}
 
 	@Override

@@ -24,3 +24,7 @@ fun String.string2File(file: String) = string2File(File(file))
 fun ByteArray.bytes2File(file: File) = file.writeBytes(this)
 
 fun ByteArray.bytes2File(byteArray: ByteArray, file: String) = bytes2File(File(file))
+
+fun File.readString() = readText()
+
+fun File.readByteArray() = readBytes()
