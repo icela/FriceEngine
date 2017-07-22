@@ -1,6 +1,19 @@
 package org.frice.game.utils.message.log
 
 /**
+ * Created by ice1000 on 2016/8/14.
+ * @author ice1000
+ * @since v0.2
+ */
+class FatalError
+@JvmOverloads
+constructor(s: String = "") : Error(s) {
+	init {
+		FLog.e(s)
+	}
+}
+
+/**
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
  * @since v0.1
@@ -22,17 +35,17 @@ object FLog {
 	fun e(e: Any?) = error(e)
 
 	@JvmStatic
-	fun verbose(e: Any?) = println(e?.toString())
+	fun verbose(e: Any?) = println(e.toString())
 
 	@JvmStatic
-	fun debug(e: Any?) = println(e?.toString())
+	fun debug(e: Any?) = println(e.toString())
 
 	@JvmStatic
-	fun info(e: Any?) = println(e?.toString())
+	fun info(e: Any?) = println(e.toString())
 
 	@JvmStatic
-	fun warning(e: Any?) = println(e?.toString())
+	fun warning(e: Any?) = println(e.toString())
 
 	@JvmStatic
-	fun error(e: Any?) = System.err.println(e?.toString())
+	fun error(e: Any?) = System.err.println(e.toString())
 }

@@ -2,6 +2,7 @@ package org.frice.game.utils.graphics.shape
 
 import java.awt.geom.Rectangle2D
 import java.util.*
+import java.lang.Math.*
 
 /**
  * Created by ice1000 on 2016/8/14.
@@ -33,7 +34,7 @@ open class FCircle(r: Double) : FOval(r, r)
  * @author ice1000
  * @since v0.1.1
  */
-open class FOval(var rh: Double, var rv: Double) : FShapeInt {
+open class FOval(rh: Double, rv: Double) : FShapeInt {
 	override var width = (rh + rh).toInt()
 	override var height = (rv + rv).toInt()
 }
@@ -46,7 +47,6 @@ open class FOval(var rh: Double, var rv: Double) : FShapeInt {
  */
 data class FPoint(var x: Int, var y: Int) : FShape
 
-
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
@@ -54,27 +54,9 @@ data class FPoint(var x: Int, var y: Int) : FShape
  */
 open class FRectangle(override var width: Int, override var height: Int) : FShapeInt {
 	constructor(rect: Rectangle2D) : this(rect.width.toInt(), rect.height.toInt())
-
-	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-		if (other == null || other !is FRectangle) return false
-		if (height != other.height || width != other.width) return false
-		return true
-	}
-
-	override fun hashCode(): Int {
-		var result = width
-		result = 31 * result + height
-		return result
-	}
-
-	//	infix fun rectCollideRect(o: FRectangle) = (x > o.x && )
 }
 
-class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) :
-		FShapeDouble {
-
-}
+class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) : FShapeDouble
 
 /**
  * 通过两点构造一条直线
@@ -92,8 +74,12 @@ open class FLine(one: FPoint, two: FPoint) {
 	val set = HashSet<FPoint>()
 
 	init {
-		(Math.min(one.x, two.x)..Math.max(one.x, two.x)).forEach { x -> set.add(FPoint(x, x2y(x))) }
-		(Math.min(one.y, two.y)..Math.max(one.y, two.y)).forEach { y -> set.add(FPoint(y2x(y), y)) }
+		if (a != 0 || b != 0) {
+			(min(one.x, two.x)..max(one.x, two.x))
+					.forEach { x -> set.add(FPoint(x, x2y(x))) }
+			(min(one.y, two.y)..max(one.y, two.y))
+					.forEach { y -> set.add(FPoint(y2x(y), y)) }
+		}
 	}
 
 	fun x2y(x: Int) = if (b == 0) c / a else -(a * x + c) / b

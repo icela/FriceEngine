@@ -1,6 +1,6 @@
 package org.frice.game.utils.data
 
-import org.frice.game.utils.message.error.FatalError
+import org.frice.game.utils.message.log.FatalError
 import org.frice.game.utils.misc.forceGet
 import org.frice.game.utils.misc.forceLoop
 import org.frice.game.utils.misc.forceRun
@@ -100,17 +100,6 @@ class XMLPreference constructor(val file: File) : Database {
 		val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
 		@JvmField
 		val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
-
-		private var instance: XMLPreference? = null
-
-		@JvmStatic
-		fun getPreference(path: String) = getPreference(File(path))
-
-		@JvmStatic
-		fun getPreference(file: File): XMLPreference {
-			if (instance == null) instance = XMLPreference(file)
-			return instance!!
-		}
 	}
 
 	init {

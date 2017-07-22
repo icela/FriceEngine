@@ -4,6 +4,7 @@
  * @author ice1000
  * @since v0.5
  */
+@file:JvmName("FileUtils")
 package org.frice.game.utils.data
 
 import java.awt.image.BufferedImage

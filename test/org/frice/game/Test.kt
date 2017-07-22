@@ -8,7 +8,6 @@ import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
-import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ShapeObject
@@ -19,7 +18,7 @@ import org.frice.game.utils.data.XMLPreference
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
-import org.frice.game.utils.graphics.utils.ColorUtils.gray
+import org.frice.game.utils.graphics.utils.gray
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
