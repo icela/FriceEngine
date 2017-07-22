@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package org.frice.game
 
 import org.frice.game.event.OnClickEvent
@@ -12,6 +14,7 @@ import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.platform.FriceGame
+import org.frice.game.platform.Layer
 import org.frice.game.platform.adapter.JvmDrawer
 import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.graphics.ColorResource
@@ -55,7 +58,9 @@ import kotlin.concurrent.thread
  * @since v0.2.3
  */
 @Suppress("LeakingThis")
-open class Game : JFrame(), FriceGame {
+open class Game
+@JvmOverloads
+constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	companion object {
 		@JvmField
@@ -86,17 +91,10 @@ open class Game : JFrame(), FriceGame {
 		fun launch(c: Class<out Game>): Game? = c.newInstance()
 	}
 
-	override val objects = LinkedList<AbstractObject>()
-	override val objectDeleteBuffer = ArrayList<AbstractObject>()
-	override val objectAddBuffer = ArrayList<AbstractObject>()
-
 	override val timeListeners = LinkedList<FTimeListener>()
 	override val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
 	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
-
-	override val texts = LinkedList<FText>()
-	override val textDeleteBuffer = ArrayList<FText>()
-	override val textAddBuffer = ArrayList<FText>()
+	override val layers = Array(layerCount) { Layer() }
 
 	/**
 	 * if paused, main window will not call `onRefresh()`.
@@ -140,6 +138,11 @@ open class Game : JFrame(), FriceGame {
 	var loseFocusChangeColor = true
 
 	private val refresh = FTimer(4)
+	var millisToRefresh: Int
+		get () = refresh.time
+		set (value) {
+			refresh.time = value
+		}
 
 	private val panel: GamePanel
 
@@ -205,15 +208,13 @@ open class Game : JFrame(), FriceGame {
 		}
 	}
 
-	protected fun mouse(e: OnMouseEvent) =
-			texts.forEach { b ->
-				if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e
-			}
+	protected fun mouse(e: OnMouseEvent) = layers.forEach {
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
+	}
 
-	protected fun click(e: OnClickEvent) =
-			texts.forEach { b ->
-				if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e
-			}
+	protected fun click(e: OnClickEvent) = layers.forEach {
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
+	}
 
 	override fun onInit() = Unit
 	override fun onLastInit() = Unit
@@ -304,7 +305,7 @@ open class Game : JFrame(), FriceGame {
 				}
 				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
 					if (o is PhysicalObject) o.died = true
-					removeObject(o)
+					it.removeObject(o)
 					//FLog.i("o.x = ${o.x}, width = $width," +
 					//		" o.y = ${o.y}, height = $height")
 				}

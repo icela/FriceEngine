@@ -26,7 +26,7 @@ constructor(time: Int, times: Int = -1, val timeUp: () -> Unit) : FTimer(time, t
  */
 open class FTimer
 @JvmOverloads
-constructor(protected val time: Int, times: Int = -1) {
+constructor(var time: Int, times: Int = -1) {
 	var times = times
 		protected set
 	private var start = Clock.current
