@@ -1,3 +1,4 @@
+@file:JvmName("HtmlUtils")
 package org.frice.game.utils.web
 
 import org.frice.game.utils.misc.loop

@@ -4,6 +4,7 @@
  * @author ice1000
  * @since v0.5
  */
+@file:JvmName("WebUtils")
 package org.frice.game.utils.web
 
 import org.frice.game.resource.manager.ImageManager
