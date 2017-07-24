@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package org.frice.game.utils.data
 
 import org.frice.game.utils.message.log.FatalError
@@ -22,8 +24,7 @@ import javax.xml.transform.stream.StreamResult
  */
 interface Database {
 	fun insert(key: String, value: Any?)
-	//	fun <T> queryWithType(key: String, default: T): Any
-	fun query(key: String, default: Any): Any
+	fun <T> query(key: String, default: T): T
 }
 
 /**
@@ -43,11 +44,11 @@ class Preference(private val file: File) : Database {
 		forceRun { properties.load(file.inputStream()) }
 	}
 
-	override fun query(key: String, default: Any) = when (properties[key].toString()) {
-		"true" -> true
-		"false" -> false
-		else -> forceGet(properties[key] ?: default) {
-			return@forceGet Integer.parseInt(properties[key] as String)
+	override fun <T> query(key: String, default: T): T = when (properties[key].toString()) {
+		"true" -> true as T
+		"false" -> false as T
+		else -> forceGet(properties[key] as T ?: default) {
+			return@forceGet Integer.parseInt(properties[key] as String) as T
 		}
 	}
 
@@ -139,7 +140,7 @@ class XMLPreference constructor(val file: File) : Database {
 		save()
 	}
 
-	override fun query(key: String, default: Any): Any {
+	override fun <T> query(key: String, default: T): T {
 		val node = doc.getElementsByTagName(key).item(0)
 		val value: String?
 		try {
@@ -149,14 +150,14 @@ class XMLPreference constructor(val file: File) : Database {
 		}
 		return forceGet(default) {
 			when (node.attributes.getNamedItem(TYPE).nodeValue) {
-				TYPE_BYTE -> value.toByte()
-				TYPE_INT -> value.toInt()
-				TYPE_LONG -> value.toLong()
-				TYPE_SHORT -> value.toShort()
-				TYPE_CHAR -> value.toCharArray()[0]
-				TYPE_FLOAT -> value.toFloat()
-				TYPE_DOUBLE -> value.toDouble()
-				TYPE_STRING -> value
+				TYPE_BYTE -> value.toByte() as T
+				TYPE_INT -> value.toInt() as T
+				TYPE_LONG -> value.toLong() as T
+				TYPE_SHORT -> value.toShort() as T
+				TYPE_CHAR -> value[0] as T
+				TYPE_FLOAT -> value.toFloat() as T
+				TYPE_DOUBLE -> value.toDouble() as T
+				TYPE_STRING -> value as T
 				else -> default
 			}
 		}

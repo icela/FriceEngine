@@ -31,7 +31,7 @@ inline fun forceRun(block: () -> Unit) {
 	}
 }
 
-inline fun forceGet(default: Any, block: () -> Any): Any = try {
+inline fun <T> forceGet(default: T, block: () -> T): T = try {
 	block()
 } catch (e: Throwable) {
 	default
