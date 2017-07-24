@@ -6,14 +6,13 @@ import org.frice.game.resource.graphics.ColorResource
 import java.awt.Frame
 import java.awt.Graphics2D
 import java.awt.RenderingHints
-import java.awt.image.BufferedImage
 
 /**
  * Created by ice1000 on 2016/10/31.
  *
  * @author ice1000
  */
-data class JvmDrawer(val frame: Frame) : FriceDrawer {
+class JvmDrawer(val frame: Frame) : FriceDrawer {
 
 	override fun init() {
 		getG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
@@ -26,8 +25,7 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 			g.color = value.color
 		}
 
-	val getG: Graphics2D
-		get() = friceImage.image.graphics as Graphics2D
+	val getG: Graphics2D get() = friceImage.image.graphics as Graphics2D
 
 	var g: Graphics2D = getG
 
@@ -70,26 +68,3 @@ data class JvmDrawer(val frame: Frame) : FriceDrawer {
 		g = getG
 	}
 }
-
-data class JvmImage(val image: BufferedImage) : FriceImage {
-	constructor(width: Int, height: Int) : this(BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB))
-
-	override val width = image.width
-	override val height = image.height
-	override fun get(x: Int, y: Int) = ColorResource(image.getRGB(x, y))
-	override fun set(x: Int, y: Int, color: ColorResource) = image.setRGB(x, y, color.color.rgb)
-
-	override fun getScaledInstance(x: Double, y: Double) =
-			JvmImage(image.getScaledInstance(x.toInt(), y.toInt(), BufferedImage.SCALE_DEFAULT) as BufferedImage)
-
-	override fun getSubImage(x: Int, y: Int, width: Int, height: Int) =
-			JvmImage(image.getSubimage(x, y, width, height))
-
-	override fun clone(): FriceImage {
-		return JvmImage(BufferedImage(width, height, image.type).apply {
-			this@apply.data = this@JvmImage.image.data
-		})
-	}
-}
-
-
