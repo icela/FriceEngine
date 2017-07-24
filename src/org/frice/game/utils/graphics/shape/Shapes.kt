@@ -28,7 +28,6 @@ interface FShapeDouble : FShape {
  */
 open class FCircle(r: Double) : FOval(r, r)
 
-
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000

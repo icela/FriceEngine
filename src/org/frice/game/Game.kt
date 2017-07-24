@@ -8,7 +8,6 @@ import org.frice.game.obj.AbstractObject
 import org.frice.game.obj.FObject
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.FButton
-import org.frice.game.obj.button.FText
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
@@ -23,7 +22,6 @@ import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.FDialog
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
@@ -37,7 +35,6 @@ import java.awt.event.*
 import java.util.*
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
-import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
