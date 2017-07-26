@@ -91,7 +91,7 @@ class XMLPreference constructor(val file: File) : Database {
 		save()
 	}
 
-	override fun <T> query(key: String, default: T): T {
+	override fun query(key: String, default: Any?): Any? {
 		val node = doc.getElementsByTagName(key).item(0)
 		val value: String?
 		try {
