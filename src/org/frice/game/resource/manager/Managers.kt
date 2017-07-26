@@ -37,6 +37,7 @@ internal interface FManager<T> {
 	}
 
 	companion object Utils {
+		@JvmStatic
 		fun clearAll() {
 			FileBytesManager.res.clear()
 			FileTextManager.res.clear()

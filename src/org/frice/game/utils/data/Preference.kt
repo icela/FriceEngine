@@ -22,11 +22,11 @@ class Preference(private val file: File) : Database {
 		forceRun { properties.load(file.inputStream()) }
 	}
 
-	override fun <T> query(key: String, default: T): T = when (properties[key].toString()) {
-		"true" -> true as T
-		"false" -> false as T
-		else -> forceGet(properties[key] as T ?: default) {
-			return@forceGet Integer.parseInt(properties[key] as String) as T
+	override fun query(key: String, default: Any?): Any? = when (properties[key].toString()) {
+		"true" -> true
+		"false" -> false
+		else -> forceGet(properties[key] ?: default) {
+			return@forceGet Integer.parseInt(properties[key] as String)
 		}
 	}
 

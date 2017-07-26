@@ -19,9 +19,9 @@ open class FLine(one: FPoint, two: FPoint) {
 
 	init {
 		if (a != 0 || b != 0) {
-			(min(one.x, two.x)..max(one.x, two.x))
+			(Math.min(one.x, two.x)..Math.max(one.x, two.x))
 					.forEach { x -> set.add(FPoint(x, x2y(x))) }
-			(min(one.y, two.y)..max(one.y, two.y))
+			(Math.min(one.y, two.y)..Math.max(one.y, two.y))
 					.forEach { y -> set.add(FPoint(y2x(y), y)) }
 		}
 	}
@@ -32,12 +32,5 @@ open class FLine(one: FPoint, two: FPoint) {
 	override operator fun equals(other: Any?): Boolean {
 		if (other == null || other !is FLine) return false
 		return a / other.a == b / other.b && b / other.b == c / other.c
-	}
-
-	override fun hashCode(): Int {
-		var result = a.hashCode()
-		result = 31 * result + b.hashCode()
-		result = 31 * result + c.hashCode()
-		return result
 	}
 }

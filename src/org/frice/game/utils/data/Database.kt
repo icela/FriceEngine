@@ -10,5 +10,6 @@ package org.frice.game.utils.data
  */
 interface Database {
 	fun insert(key: String, value: Any?)
-	fun <T> query(key: String, default: T): T
+	fun <T> queryT(key: String, default: T): T = query(key, default) as T
+	fun query(key: String, default: Any?): Any?
 }

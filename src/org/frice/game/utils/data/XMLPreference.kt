@@ -101,14 +101,14 @@ class XMLPreference constructor(val file: File) : Database {
 		}
 		return forceGet(default) {
 			when (node.attributes.getNamedItem(TYPE).nodeValue) {
-				TYPE_BYTE -> value.toByte() as T
-				TYPE_INT -> value.toInt() as T
-				TYPE_LONG -> value.toLong() as T
-				TYPE_SHORT -> value.toShort() as T
-				TYPE_CHAR -> value[0] as T
-				TYPE_FLOAT -> value.toFloat() as T
-				TYPE_DOUBLE -> value.toDouble() as T
-				TYPE_STRING -> value as T
+				TYPE_BYTE -> value.toByte()
+				TYPE_INT -> value.toInt()
+				TYPE_LONG -> value.toLong()
+				TYPE_SHORT -> value.toShort()
+				TYPE_CHAR -> value[0]
+				TYPE_FLOAT -> value.toFloat()
+				TYPE_DOUBLE -> value.toDouble()
+				TYPE_STRING -> value
 				else -> default
 			}
 		}
