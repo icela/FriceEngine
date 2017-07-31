@@ -128,7 +128,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	var showFPS = true
 
 	var loseFocus = false
-		protected set
+		internal set
 
 	var loseFocusChangeColor = true
 
@@ -238,13 +238,21 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	 * add keyboard listeners with lambda
 	 */
 	fun addKeyListener(
-			typed: (KeyEvent) -> Unit? = null,
-			pressed: (KeyEvent) -> Unit? = null,
-			released: (KeyEvent) -> Unit? = null) {
+			typed: ((KeyEvent) -> Unit)? = null,
+			pressed: ((KeyEvent) -> Unit)? = null,
+			released: ((KeyEvent) -> Unit)? = null) {
 		addKeyListener(object : KeyListener {
-			override fun keyPressed(e: KeyEvent?) = if (null != pressed && null != e) pressed(e) else Unit
-			override fun keyReleased(e: KeyEvent?) = if (null != released && null != e) released(e) else Unit
-			override fun keyTyped(e: KeyEvent?) = if (null != typed && null != e) typed(e) else Unit
+			override fun keyPressed(e: KeyEvent?) {
+				if (null != pressed && null != e) pressed(e)
+			}
+
+			override fun keyReleased(e: KeyEvent?) {
+				if (null != released && null != e) released(e)
+			}
+
+			override fun keyTyped(e: KeyEvent?) {
+				if (null != typed && null != e) typed(e)
+			}
 		})
 	}
 
@@ -279,7 +287,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			}
 
 			it.objects.forEach loop@ { o ->
-				if (o.getResource() == ColorResource.COLORLESS) return@loop
+				
 				bgg.restore()
 				bgg.init()
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
@@ -289,7 +297,8 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 						unless(o.x + o.image.width < 0 || o.x > width || o.y + o.image.height < 0 || o.y > height) {
 							bgg.drawImage(o.image, o.x, o.y)
 						}
-					is ShapeObject ->
+					is ShapeObject -> {
+						if (o.getResource() == ColorResource.COLORLESS) return@loop
 						unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
 							bgg.color = o.getResource()
 							when (o.collideBox) {
@@ -297,6 +306,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 							}
 						}
+					}
 					is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
 				}
 				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {

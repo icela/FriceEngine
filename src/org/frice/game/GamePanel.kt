@@ -44,19 +44,19 @@ class GamePanel(private val game: Game) : JPanel() {
 		game.addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit
 			override fun windowActivated(e: WindowEvent) {
-				loseFocus = false
+				game.loseFocus = false
 				Clock.resume()
-				onFocus()
+				game.onFocus()
 			}
 
 			override fun windowDeactivated(e: WindowEvent) {
-				loseFocus = true
+				game.loseFocus = true
 				Clock.pause()
-				onLoseFocus()
+				game.onLoseFocus()
 			}
 
 			override fun windowIconified(e: WindowEvent) = Unit
-			override fun windowClosing(e: WindowEvent) = onExit()
+			override fun windowClosing(e: WindowEvent) = game.onExit()
 			override fun windowClosed(e: WindowEvent) = Unit
 			override fun windowOpened(e: WindowEvent) = Unit
 		})
