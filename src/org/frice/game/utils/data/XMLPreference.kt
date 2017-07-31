@@ -2,7 +2,8 @@ package org.frice.game.utils.data
 
 import org.frice.game.utils.message.log.FatalError
 import org.frice.game.utils.misc.forceGet
-import org.frice.game.utils.misc.forceLoop
+import org.frice.game.utils.misc.forceRun
+import org.frice.game.utils.misc.loop
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import java.io.File
@@ -73,7 +74,7 @@ class XMLPreference constructor(val file: File) : Database {
 	}
 
 	override fun insert(key: String, value: Any?) = value.let {
-		forceLoop { root.removeChild(doc.getElementsByTagName(key).item(0)) }
+		forceRun { loop { root.removeChild(doc.getElementsByTagName(key).item(0)) } }
 		val node = doc.createElement(key)
 		node.setAttribute(VALUE, value.toString())
 		node.setAttribute(TYPE, when (value) {

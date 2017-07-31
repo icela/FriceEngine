@@ -17,7 +17,7 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 
 	val MAX_LEVELS = 5
 
-	private val objects = ArrayList<PhysicalObject>()
+	private val objects = mutableListOf<PhysicalObject>()
 
 	private val nodes = arrayOfNulls<QuadTree>(4)
 
@@ -28,8 +28,8 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 
 	private fun split() {
 		// width & height
-		val subWidth = (bounds.width / 2)
-		val subHeight = (bounds.height / 2)
+		val subWidth = bounds.width shr 1
+		val subHeight = bounds.height shr 1
 		// x & y
 		val x = bounds.x
 		val y = bounds.y
@@ -49,8 +49,8 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	 */
 	private fun getIndex(rectF: PhysicalObject): Int {
 		var index = -1
-		val verticalMidpoint = bounds.x + bounds.width / 2
-		val horizontalMidpoint = bounds.y + bounds.height / 2
+		val verticalMidpoint = bounds.x + bounds.width shr 1
+		val horizontalMidpoint = bounds.y + bounds.height shr 1
 
 		// contain top
 		val topQuadrant = rectF.y < horizontalMidpoint && rectF.y + rectF.height < horizontalMidpoint
@@ -78,7 +78,6 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	fun insert(rectF: PhysicalObject) {
 		if (nodes[0] != null) {
 			val index = getIndex(rectF)
-
 			if (index != -1) {
 				nodes[index]?.insert(rectF)
 				return
@@ -111,10 +110,10 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	 * @return list of collision
 	 */
 	fun retrieve(
-			returnObjects: ArrayList<ArrayList<PhysicalObject>>,
+			returnObjects: List<List<PhysicalObject>>,
 			rectF: PhysicalObject): List<List<PhysicalObject>> {
 		val index = getIndex(rectF)
-		if (index != -1 && nodes[0] != null) nodes[index]?.retrieve(returnObjects, rectF)
+		if (-1 != index && null != nodes[0]) nodes[index]?.retrieve(returnObjects, rectF)
 		returnObjects.add(objects)
 		return returnObjects
 	}

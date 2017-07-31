@@ -37,11 +37,6 @@ inline fun <T> forceGet(default: T, block: () -> T): T = try {
 	default
 }
 
-/**
- * it will exit when meets an uncaught exception.
- */
-inline fun forceLoop(block: () -> Unit) = forceRun { loop(block) }
-
 fun pause(length: Int) = pause(length.toLong())
 
 fun pause(length: Double) = pause(length.toLong())

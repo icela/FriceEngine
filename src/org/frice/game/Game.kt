@@ -28,14 +28,12 @@ import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.awt.BorderLayout
-import java.awt.Graphics
 import java.awt.Point
 import java.awt.Rectangle
 import java.awt.event.*
 import java.util.*
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
-import javax.swing.JPanel
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
 
@@ -166,7 +164,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	}
 
 	init {
-		panel = GamePanel()
+		panel = GamePanel(this)
 		isResizable = false
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
@@ -205,11 +203,11 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 	}
 
-	protected fun mouse(e: OnMouseEvent) = layers.forEach {
+	fun mouse(e: OnMouseEvent) = layers.forEach {
 		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
 	}
 
-	protected fun click(e: OnClickEvent) = layers.forEach {
+	fun click(e: OnClickEvent) = layers.forEach {
 		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
 	}
 
@@ -240,13 +238,13 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	 * add keyboard listeners with lambda
 	 */
 	fun addKeyListener(
-			typed: (KeyEvent) -> Unit = { },
-			pressed: (KeyEvent) -> Unit = { },
-			released: (KeyEvent) -> Unit = { }) {
+			typed: (KeyEvent) -> Unit? = null,
+			pressed: (KeyEvent) -> Unit? = null,
+			released: (KeyEvent) -> Unit? = null) {
 		addKeyListener(object : KeyListener {
-			override fun keyPressed(e: KeyEvent?) = e?.let(pressed) ?: Unit
-			override fun keyReleased(e: KeyEvent?) = e?.let(released) ?: Unit
-			override fun keyTyped(e: KeyEvent?) = e?.let(typed) ?: Unit
+			override fun keyPressed(e: KeyEvent?) = if (null != pressed && null != e) pressed(e) else Unit
+			override fun keyReleased(e: KeyEvent?) = if (null != released && null != e) released(e) else Unit
+			override fun keyTyped(e: KeyEvent?) = if (null != typed && null != e) typed(e) else Unit
 		})
 	}
 
@@ -280,7 +278,8 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 				}
 			}
 
-			it.objects.forEach { o ->
+			it.objects.forEach loop@ { o ->
+				if (o.getResource() == ColorResource.COLORLESS) return@loop
 				bgg.restore()
 				bgg.init()
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
@@ -308,8 +307,8 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 				}
 			}
 
-			it.texts.forEach {
-				b ->
+			it.texts.forEach loop@ { b ->
+				if (b.getColor() == ColorResource.COLORLESS) return@loop
 				bgg.run {
 					restore()
 					init()
@@ -362,82 +361,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()
-	}
-
-	/**
-	 * Demo24 game view.
-	 * all rendering work and game object calculating are here.
-	 *
-	 * Created by ice1000 on 2016/8/13.
-	 * @author ice1000
-	 * @since v0.1
-	 */
-	inner class GamePanel : JPanel() {
-		init {
-			addMouseListener(object : MouseListener {
-				override fun mouseClicked(e: MouseEvent) {
-					click(OnMouseEvent(e, OnMouseEvent.MOUSE_CLICK))
-					onClick(OnClickEvent(e))
-				}
-
-				override fun mouseEntered(e: MouseEvent) = onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_ENTERED))
-				override fun mouseExited(e: MouseEvent) = onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_EXITED))
-				override fun mouseReleased(e: MouseEvent) {
-					mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
-					onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
-				}
-
-				override fun mousePressed(e: MouseEvent) {
-					mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
-					onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
-				}
-			})
-
-			addWindowListener(object : WindowListener {
-				override fun windowDeiconified(e: WindowEvent) = Unit
-				override fun windowActivated(e: WindowEvent) {
-					loseFocus = false
-					Clock.resume()
-					onFocus()
-				}
-
-				override fun windowDeactivated(e: WindowEvent) {
-					loseFocus = true
-					Clock.pause()
-					onLoseFocus()
-				}
-
-				override fun windowIconified(e: WindowEvent) = Unit
-				override fun windowClosing(e: WindowEvent) = onExit()
-				override fun windowClosed(e: WindowEvent) = Unit
-				override fun windowOpened(e: WindowEvent) = Unit
-			})
-		}
-
-		override fun update(g: Graphics?) = paint(g)
-		override fun paintComponent(g: Graphics) {
-			clearScreen()
-			drawEverything(drawer)
-
-			if (loseFocus && loseFocusChangeColor) {
-				loop(drawer.friceImage.width) { x ->
-					loop(drawer.friceImage.height) { y ->
-						drawer.friceImage.set(x, y, ColorResource(drawer
-								.friceImage[x, y]
-								.color
-								.darker()))
-					}
-				}
-			}
-
-			if (showFPS) drawer.drawString("fps: $fpsDisplay", 30.0, height - 30.0)
-
-			/*
-			 * 厚颜无耻
-			 * drawer.drawString("Powered by FriceEngine. ice1000", 5, 20)
-			 */
-			g.drawImage(drawer.friceImage.image, 0, 0, this)
-		}
 	}
 
 }

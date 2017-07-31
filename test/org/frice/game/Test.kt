@@ -78,7 +78,7 @@ class Test : Game() {
 		FLog.v(preference.query("fuck", "Apple"))
 		FLog.v(xmlPreference.query("shit", "no we don't"))
 
-		FOval(1.0, 1.0)
+//		FOval(1.0, 1.0)
 		FCircle(1.0)
 		FPoint(1, 2)
 
