@@ -33,6 +33,6 @@ constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList(
 	override fun move(p: DoublePair) = objs.forEach { it.move(p) }
 	override fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 
-	fun addObject(vararg objects: FObject) = objects.forEach{ objs.remove(it) }
+	fun addObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
 	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
 }

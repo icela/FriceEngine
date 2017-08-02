@@ -30,17 +30,16 @@ import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
-import sun.awt.X11.XAWTFormatter
 import java.awt.BorderLayout
 import java.awt.Point
 import java.awt.Rectangle
-import java.awt.event.*
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
 import java.util.*
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
 import javax.swing.UIManager
 import javax.swing.WindowConstants
-import kotlin.concurrent.thread
 
 /**
  * First game class(not for you)
@@ -90,7 +89,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		@JvmStatic
 		fun launch(c: Class<out Game>) {
 			val game = c.newInstance()
-			game.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+			game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 			FLog.v("Engine start!")
 			if ("Windows" in System.getProperty("os.name")) UIManager.setLookAndFeel(WindowsLookAndFeel())
 			else UIManager.setLookAndFeel(GTKLookAndFeel())
@@ -184,14 +183,19 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	@JvmField
 	val mouse = object : AbstractObject {
 		override var x: Double
-			get() = mousePosition.getX()
-			set(value) = Unit
+			get() = mousePosition?.getX() ?: -1.0
+			set(value) {
+				mousePosition?.setLocation(value, y)
+			}
 
 		override var y: Double
-			get() = mousePosition.getY()
-			set(value) = Unit
+			get() = mousePosition?.getY() ?: -1.0
+			set(value) {
+				mousePosition?.setLocation(x, value)
+			}
 
 		override var rotate = 0.0
+		override fun toString() = "($x, $y)"
 	}
 
 	init {
@@ -225,9 +229,10 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
-				FDialog.YES_OPTION)
+				FDialog.YES_OPTION) {
+			dispose()
 			System.exit(0)
-		else return
+		} else return
 	}
 
 	override fun onLoseFocus() {
@@ -368,7 +373,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	 *
 	 * @return exact position of the mouse
 	 */
-	override fun getMousePosition() = panel.mousePosition!!
+	override fun getMousePosition(): Point? = panel.mousePosition
 
 	override fun clearScreen() {
 		drawer.color = ColorResource.WHITE

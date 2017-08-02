@@ -18,8 +18,8 @@ class FunctionEffect(
 		override var x: Double,
 		override var y: Double) : ImageObject(res.getResource(), x, y) {
 
-	constructor(function: FFunction, x: Double, y: Double, width: Int, height: Int) :
-			this(FunctionResource(ColorResource.BLUE, function::call, width, height), x, y)
+	constructor(function: Function1<Double, Double>, x: Double, y: Double, width: Int, height: Int) :
+			this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)
 
 	override val width: Double get() = res.image.width.toDouble()
 	override val height: Double get() = res.image.height.toDouble()
@@ -30,15 +30,5 @@ class FunctionEffect(
 
 	override fun scale(x: Double, y: Double) {
 		res.image = image.getScaledInstance(image.width * x / 1000.0, image.height * y / 1000.0)
-	}
-
-	/**
-	 * Created by ice1000 on 2016/8/27.
-	 *
-	 * @author ice1000
-	 * @since v0.4
-	 */
-	interface FFunction {
-		fun call(x: Double): Double
 	}
 }

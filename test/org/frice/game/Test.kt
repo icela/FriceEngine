@@ -9,6 +9,7 @@ import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.SimpleButton
+import org.frice.game.obj.effects.FunctionEffect
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.graphics.ColorResource
@@ -94,7 +95,7 @@ class Test : Game() {
 		if (timer.ended()) {
 			objs.removeAll { o -> o.died }
 			addObject(ShapeObject(ColorResource.Companion.IntelliJ_IDEA黑, FCircle(10.0),
-					mousePosition.x.toDouble(), mousePosition.y.toDouble()).apply {
+					mouse.x, mouse.y).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 				targets.clear()
@@ -114,10 +115,8 @@ class Test : Game() {
 	override fun onClick(e: OnClickEvent) {
 		super.onClick(e)
 		FLog.v(e.toString())
-		FLog.v(mousePosition)
+		FLog.v(mouse)
 	}
-
-	override fun onExit() = System.exit(0)
 
 	companion object {
 		@JvmStatic
@@ -180,10 +179,10 @@ class Test3 : Game() {
 		a = ShapeObject(ColorResource.BLUE, FCircle(10.0), 100.0, 500.0)
 		a.anims.add(object : CustomMove() {
 			override fun getXDelta(timeFromBegin: Double) =
-					((a.x * c) * Math.sin(d) - (a.y * c) * Math.cos(d)) * e
+					(a.x * c * Math.sin(d) - a.y * c * Math.cos(d)) * e
 
 			override fun getYDelta(timeFromBegin: Double) =
-					((a.x * c) * Math.cos(d) - (a.y * c) * Math.sin(d)) * e
+					(a.x * c * Math.cos(d) - a.y * c * Math.sin(d)) * e
 		})
 		addObject(a)
 	}
@@ -194,6 +193,21 @@ class Test3 : Game() {
 		@JvmStatic
 		fun main(args: Array<String>) {
 			launch(Test3::class.java)
+		}
+	}
+}
+
+class Test4 : Game(2) {
+	override fun onInit() {
+		addObject(0, FunctionEffect({
+			Math.sin(it / 10) * 10 + 100
+		}, 10.0, 10.0, 300, 300))
+	}
+
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			launch(Test4::class.java)
 		}
 	}
 }

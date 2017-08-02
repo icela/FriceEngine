@@ -58,7 +58,7 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
  * @author ice1000
  * @since v0.2.3
  */
-abstract class CustomMove() : MoveAnim() {
+abstract class CustomMove : MoveAnim() {
 	private val timeFromStart: Double
 		get() = Clock.current - start
 

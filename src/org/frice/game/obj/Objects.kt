@@ -51,7 +51,7 @@ interface CollideBox {
  * @author ice1000
  * @since v0.4
  */
-abstract class PhysicalObject() : AbstractObject, CollideBox, FContainer {
+abstract class PhysicalObject : AbstractObject, CollideBox, FContainer {
 	open var died = false
 	override var rotate = 0.0
 	var mass = 1.0
