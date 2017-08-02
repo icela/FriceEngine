@@ -2,6 +2,8 @@
 
 package org.frice.game
 
+import com.sun.java.swing.plaf.gtk.GTKLookAndFeel
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.AbstractObject
@@ -22,11 +24,13 @@ import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.FDialog
 import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.misc.async
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
+import sun.awt.X11.XAWTFormatter
 import java.awt.BorderLayout
 import java.awt.Point
 import java.awt.Rectangle
@@ -34,6 +38,7 @@ import java.awt.event.*
 import java.util.*
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
+import javax.swing.UIManager
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
 
@@ -83,7 +88,33 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 
 		@JvmStatic
-		fun launch(c: Class<out Game>): Game? = c.newInstance()
+		fun launch(c: Class<out Game>) {
+			val game = c.newInstance()
+			game.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+			FLog.v("Engine start!")
+			if ("Windows" in System.getProperty("os.name")) UIManager.setLookAndFeel(WindowsLookAndFeel())
+			else UIManager.setLookAndFeel(GTKLookAndFeel())
+			game.run {
+				async {
+					onLastInit()
+					loop {
+						onRefresh()
+						timeListeners.forEach(FTimeListener::check)
+						// only update per "refreshTime"
+						if (!paused && !stopped && refresh.ended()) {
+							panel.repaint()
+							++fpsCounter
+							if (fpsTimer.ended()) {
+								fpsDisplay = fpsCounter
+								fpsCounter = 0
+							}
+						}
+					}
+				}
+				FLog.v("Engine thread exited.")
+			}
+			FLog.v("Engine thread successfully created.")
+		}
 	}
 
 	override val timeListeners = LinkedList<FTimeListener>()
@@ -165,7 +196,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	init {
 		isResizable = false
-		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
 		// set icon
 		iconImage = read(javaClass.getResourceAsStream("/icon.png"))
@@ -177,29 +207,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		drawer = JvmDrawer(this)
 		drawer.init()
 		isVisible = true
-
-		thread {
-			FLog.v("Engine start!")
-			onLastInit()
-			loop {
-				try {
-					onRefresh()
-					timeListeners.forEach(FTimeListener::check)
-					// only update per "refreshTime"
-					if (!paused && !stopped && refresh.ended()) {
-						panel.repaint()
-						++fpsCounter
-						if (fpsTimer.ended()) {
-							fpsDisplay = fpsCounter
-							fpsCounter = 0
-						}
-					}
-				} catch (e: Exception) {
-					e.printStackTrace()
-				}
-			}
-			FLog.v("Engine thread exited.")
-		}
+		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
 
 	fun mouse(e: OnMouseEvent) = layers.forEach {
