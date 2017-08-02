@@ -36,13 +36,13 @@ abstract class FObject() : PhysicalObject() {
 
 	abstract fun getResource(): FResource
 
-	inline infix fun scale(p: DoublePair) = scale(p.x, p.y)
+	infix fun scale(p: DoublePair) = scale(p.x, p.y)
 
 	abstract fun scale(x: Double, y: Double)
 
 	open infix fun move(p: DoublePair) = move(p.x, p.y)
 
-	inline fun move(x: Double, y: Double) {
+	fun move(x: Double, y: Double) {
 		this.x += x
 		this.y += y
 	}
@@ -94,10 +94,10 @@ abstract class FObject() : PhysicalObject() {
 		targets.forEach { (first, second) -> if (isCollide(first)) second() }
 	}
 
-	inline fun addAnim(anim: FAnim) = anims.add(anim)
-	inline fun addCollider(o: PhysicalObject, noinline e: () -> Unit) = addCollider(o to e)
-	inline fun addCollider(p: Pair<PhysicalObject, () -> Unit>) = targets.add(p)
-	inline fun stopAnims() = anims.clear()
+	fun addAnim(anim: FAnim) = anims.add(anim)
+	fun addCollider(o: PhysicalObject, e: () -> Unit) = addCollider(o to e)
+	fun addCollider(p: Pair<PhysicalObject, () -> Unit>) = targets.add(p)
+	fun stopAnims() = anims.clear()
 
 	/**
 	 * add a force to this object

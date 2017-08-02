@@ -35,17 +35,34 @@ object FLog {
 	fun e(e: Any?) = error(e)
 
 	@JvmStatic
-	fun verbose(e: Any?) = println(e.toString())
+	fun verbose(e: Any?) {
+		if (level >= VERBOSE) println(e)
+	}
 
 	@JvmStatic
-	fun debug(e: Any?) = println(e.toString())
+	fun debug(e: Any?) {
+		if (level >= DEBUG) println(e)
+	}
 
 	@JvmStatic
-	fun info(e: Any?) = println(e.toString())
+	fun info(e: Any?) {
+		if (level >= INFO) println(e)
+	}
 
 	@JvmStatic
-	fun warning(e: Any?) = println(e.toString())
+	fun warning(e: Any?) {
+		if (level >= WARN) println(e)
+	}
 
 	@JvmStatic
-	fun error(e: Any?) = System.err.println(e.toString())
+	fun error(e: Any?) {
+		if (level >= ERROR) System.err.println(e)
+	}
+
+	var level = 0
+	const val VERBOSE = 0
+	const val DEBUG = 10
+	const val INFO = 20
+	const val WARN = 30
+	const val ERROR = 40
 }
