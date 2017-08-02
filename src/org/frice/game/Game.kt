@@ -91,8 +91,9 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			val game = c.newInstance()
 			game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 			FLog.v("Engine start!")
-			if ("Windows" in System.getProperty("os.name")) UIManager.setLookAndFeel(WindowsLookAndFeel())
-			else UIManager.setLookAndFeel(GTKLookAndFeel())
+			if ("Windows" in System.getProperty("os.name"))
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
+			else UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
 			game.run {
 				async {
 					onLastInit()
