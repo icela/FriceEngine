@@ -2,8 +2,6 @@
 
 package org.frice.game
 
-import com.sun.java.swing.plaf.gtk.GTKLookAndFeel
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.obj.AbstractObject
