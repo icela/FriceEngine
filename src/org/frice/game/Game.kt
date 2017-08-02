@@ -184,15 +184,15 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	@JvmField
 	val mouse = object : AbstractObject {
 		override var x: Double
-			get() = mousePosition?.getX() ?: -1.0
+			get() = panel.mousePosition?.getX() ?: -1.0
 			set(value) {
-				mousePosition?.setLocation(value, y)
+				panel.mousePosition?.setLocation(value, y)
 			}
 
 		override var y: Double
-			get() = mousePosition?.getY() ?: -1.0
+			get() = panel.mousePosition?.getY() ?: -1.0
 			set(value) {
-				mousePosition?.setLocation(x, value)
+				panel.mousePosition?.setLocation(x, value)
 			}
 
 		override var rotate = 0.0
