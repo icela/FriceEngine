@@ -368,13 +368,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		customDraw(bgg)
 	}
 
-	/**
-	 * this method escaped the error
-	 *
-	 * @return exact position of the mouse
-	 */
-	override fun getMousePosition(): Point? = panel.mousePosition
-
 	override fun clearScreen() {
 		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
