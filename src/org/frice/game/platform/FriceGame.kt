@@ -94,5 +94,11 @@ interface FriceGame {
 
 	fun drawEverything(bgg: JvmDrawer)
 	fun clearScreen()
-	fun getScreenCut(): ImageResource
+
+	/**
+	 * get a screenShot.
+	 *
+	 * @return screen cut as an image
+	 */
+	fun getScreenCut() = ImageResource(drawer.friceImage)
 }

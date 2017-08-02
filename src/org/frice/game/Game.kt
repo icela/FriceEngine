@@ -139,7 +139,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			refresh.time = value
 		}
 
-	private val panel: GamePanel
+	private val panel: GamePanel = GamePanel(this)
 
 	override val drawer: JvmDrawer
 
@@ -164,7 +164,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	}
 
 	init {
-		panel = GamePanel(this)
 		isResizable = false
 		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		layout = BorderLayout()
@@ -287,7 +286,8 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			}
 
 			it.objects.forEach loop@ { o ->
-				
+				if (o is ShapeObject && ColorResource.COLORLESS == o.getResource()) return@loop
+				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
 				bgg.restore()
 				bgg.init()
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
@@ -298,7 +298,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 							bgg.drawImage(o.image, o.x, o.y)
 						}
 					is ShapeObject -> {
-						if (o.getResource() == ColorResource.COLORLESS) return@loop
 						unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
 							bgg.color = o.getResource()
 							when (o.collideBox) {
@@ -307,7 +306,10 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 							}
 						}
 					}
-					is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
+					is LineEffect -> {
+						bgg.color = o.color
+						bgg.drawLine(o.x, o.y, o.x2, o.y2)
+					}
 				}
 				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
 					if (o is PhysicalObject) o.died = true
@@ -352,13 +354,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 		customDraw(bgg)
 	}
-
-	/**
-	 * get a screenShot.
-	 *
-	 * @return screen cut as an image
-	 */
-	override fun getScreenCut() = ImageResource(drawer.friceImage)
 
 	/**
 	 * this method escaped the error

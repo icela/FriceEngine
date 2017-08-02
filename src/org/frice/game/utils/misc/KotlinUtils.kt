@@ -17,13 +17,6 @@ inline fun loop(block: () -> Unit) {
 
 inline fun loop(count: Int, block: (Int) -> Unit) = repeat(count, block)
 
-inline fun loopIf(condition: () -> Boolean, block: () -> Unit) = loop { if (condition()) block() }
-
-/**
- * less blocks, less byte code generated.
- */
-inline fun loopIf(condition: Boolean, block: () -> Unit) = loopIf({ condition }, block)
-
 inline fun forceRun(block: () -> Unit) {
 	try {
 		block()

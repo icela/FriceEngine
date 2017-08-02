@@ -1,3 +1,5 @@
+@file:Suppress("EqualsOrHashCode")
+
 package org.frice.game.obj.sub
 
 import org.frice.game.obj.CollideBox
