@@ -85,8 +85,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 
 		@JvmStatic
-		fun launch(c: Class<out Game>) {
-			val game = c.newInstance()
+		fun launch(game: Game) {
 			game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 			FLog.v("Engine start!")
 			if ("Windows" in System.getProperty("os.name"))
@@ -113,6 +112,9 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			}
 			FLog.v("Engine thread successfully created.")
 		}
+
+		@JvmStatic
+		fun launch(c: Class<out Game>) = launch(c.newInstance())
 	}
 
 	override val timeListeners = LinkedList<FTimeListener>()
