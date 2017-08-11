@@ -108,7 +108,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 						}
 					}
 				}
-				FLog.v("Engine thread exited.")
 			}
 			FLog.v("Engine thread successfully created.")
 		}
