@@ -11,10 +11,9 @@ class FTimeListener
 @JvmOverloads
 constructor(time: Int, times: Int = -1, val timeUp: () -> Unit) : FTimer(time, times) {
 
-	fun check() = if (ended() && times != 0) {
-		if (times > 0) times--
-		timeUp.invoke()
-	} else Unit
+	fun check() {
+		if (ended() && times != 0) timeUp()
+	}
 }
 
 /**
