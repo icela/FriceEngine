@@ -54,12 +54,10 @@ dependencies {
 jar {
 	manifest {
 	}
-	if ("ice1000" == System.getenv("USER")) {
-		from {
-			configurations
-					.artifact
-					.collect { it.isDirectory() ? it : zipTree(it) }
-		}
+	from {
+		configurations
+				.artifact
+				.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
 
