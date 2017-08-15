@@ -59,7 +59,13 @@ open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
-	companion object {
+	companion object Initializer {
+		init {
+			if ("Windows" in System.getProperty("os.name"))
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
+			else UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
+		}
+
 		@JvmField
 		val TO_X = 100
 		@JvmField
@@ -88,12 +94,9 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		fun launch(game: Game) {
 			game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 			FLog.v("Engine start!")
-			if ("Windows" in System.getProperty("os.name"))
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
-			else UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
 			game.run {
+				onLastInit()
 				async {
-					onLastInit()
 					loop {
 						try {
 							onRefresh()

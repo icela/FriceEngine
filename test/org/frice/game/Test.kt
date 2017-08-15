@@ -192,9 +192,7 @@ class Test3 : Game() {
 
 	companion object {
 		@JvmStatic
-		fun main(args: Array<String>) {
-			launch(Test3::class.java)
-		}
+		fun main(args: Array<String>) = launch(Test3::class.java)
 	}
 }
 
@@ -207,12 +205,7 @@ class Test4 : Game(2) {
 
 	companion object {
 		@JvmStatic
-		fun main(args: Array<String>) {
-			launch(Test4::class.java)
-		}
+		fun main(args: Array<String>) = launch(Test4::class.java)
 	}
 }
 
-fun main(args: Array<String>) {
-	play("../MusicGameGen/res/bad-apple.mp3")
-}

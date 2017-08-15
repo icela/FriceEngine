@@ -12,7 +12,10 @@ class FTimeListener
 constructor(time: Int, times: Int = -1, val timeUp: () -> Unit) : FTimer(time, times) {
 
 	fun check() {
-		if (ended() && times != 0) timeUp()
+		if (isEnded && times != 0) {
+			timeUp()
+			if (times > 0) times--
+		}
 	}
 }
 
@@ -25,14 +28,15 @@ constructor(time: Int, times: Int = -1, val timeUp: () -> Unit) : FTimer(time, t
  */
 open class FTimer
 @JvmOverloads
-constructor(var time: Int, times: Int = -1) {
-	var times = times
-		protected set
+constructor(var time: Int, var times: Int = -1) {
 	private var start = Clock.current
+	protected val isEnded: Boolean
+		get() = Clock.current - start > time && times != 0
 
-	fun ended(): Boolean = if (Clock.current - start > time && times != 0) {
-		start = Clock.current
-		if (times > 0) times--
-		true
-	} else false
+	fun ended(): Boolean = isEnded.apply {
+		if (this) {
+			start = Clock.current
+			if (times > 0) times--
+		}
+	}
 }
