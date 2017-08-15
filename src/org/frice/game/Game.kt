@@ -95,16 +95,19 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 				async {
 					onLastInit()
 					loop {
-						onRefresh()
-						timeListeners.forEach(FTimeListener::check)
-						// only update per "refreshTime"
-						if (!paused && !stopped && refresh.ended()) {
-							panel.repaint()
-							++fpsCounter
-							if (fpsTimer.ended()) {
-								fpsDisplay = fpsCounter
-								fpsCounter = 0
+						try {
+							onRefresh()
+							timeListeners.forEach(FTimeListener::check)
+							// only update per "refreshTime"
+							if (!paused && !stopped && refresh.ended()) {
+								panel.repaint()
+								++fpsCounter
+								if (fpsTimer.ended()) {
+									fpsDisplay = fpsCounter
+									fpsCounter = 0
+								}
 							}
+						} catch (ignored: ConcurrentModificationException) {
 						}
 					}
 				}
