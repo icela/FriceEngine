@@ -23,7 +23,7 @@ The doc is poorly maintained and deprecated. I'm deciding to make some tutorials
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
 ## Why light?
-The release build jar is about 200kb only.<br/>
+The release build jar is about 300kb (with a 800kb Kotlin runtime) only.<br/>
 
 ## Why native?
 This engine is completely platform-independent: no JNI linkage, no native methods, everything is written in pure Kotlin.<br/>
@@ -41,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.3'
+  compile 'com.github.icela:FriceEngine:v1.3.2'
 }
 ```
 

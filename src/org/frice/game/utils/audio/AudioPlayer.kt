@@ -3,10 +3,7 @@ package org.frice.game.utils.audio
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.until
 import java.io.File
-import javax.sound.sampled.AudioFormat
-import javax.sound.sampled.AudioSystem
-import javax.sound.sampled.DataLine
-import javax.sound.sampled.SourceDataLine
+import javax.sound.sampled.*
 
 /**
  * From https://github.com/ice1000/Dekoder
@@ -33,16 +30,38 @@ class AudioPlayer internal constructor(file: File) {
 
 	private val thread = Thread(this::main)
 
-	companion object {
+	companion object LineGetter {
 		@JvmField val BUFFER_SIZE = 2048
 
-		private fun getLine(audioFormat: AudioFormat) = (AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java,
-				audioFormat)) as SourceDataLine).apply { open(audioFormat) }
+		fun getLine(audioFormat: AudioFormat): SourceDataLine {
+			val info = DataLine.Info(SourceDataLine::class.java, audioFormat)
+			val res = AudioSystem.getLine(info) as SourceDataLine
+			res.open(audioFormat)
+			return res
+		}
 	}
 
-	private var audioInputStream = AudioSystem.getAudioInputStream(file)
-	private var format = audioInputStream.format
-	private var line: SourceDataLine = getLine(format)
+	private var audioInputStream: AudioInputStream
+	private var format: AudioFormat
+	private var line: SourceDataLine
+
+	init {
+		audioInputStream = AudioSystem.getAudioInputStream(file)
+		format = audioInputStream.format
+		if (format.encoding != AudioFormat.Encoding.PCM_SIGNED) {
+			format = AudioFormat(
+					AudioFormat.Encoding.PCM_SIGNED,
+					format.sampleRate,
+					16,
+					format.channels,
+					format.channels * 2,
+					format.sampleRate,
+					false)
+			audioInputStream = AudioSystem.getAudioInputStream(format, audioInputStream)
+		}
+		line = getLine(format)
+
+	}
 
 	private var exited = false
 
