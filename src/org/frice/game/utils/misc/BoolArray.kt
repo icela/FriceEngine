@@ -13,6 +13,6 @@ class BoolArray(val length: Int) {
 	operator fun set(index: Int, boolean: Boolean) {
 		if (index >= length) throw IndexOutOfBoundsException("Index $index is out of range!(size: $length)")
 		if (boolean) longs[index ushr USHR] = longs[index ushr USHR] or (0b1L shl (index and MOD) - 1)
-		else longs[index ushr USHR] = longs[index ushr USHR] and (0b1L shl (index and MOD) - 1)
+		else longs[index ushr USHR] = longs[index ushr USHR] and (0b1L shl (index and MOD) - 1).inv()
 	}
 }

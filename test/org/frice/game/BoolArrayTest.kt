@@ -17,10 +17,15 @@ class BoolArrayTest {
 		assertTrue(a[1])
 		a[10] = true
 		assertTrue(a[10])
+		a[10] = false
+		assertFalse(a[10])
 		a[50] = true
 		assertTrue(a[50])
-		(2..99)
-				.filter { it !in listOf(10, 50) }
+		a[50] = false
+		assertFalse(a[50])
+		a[99] = true
+		assertTrue(a[99])
+		(2..98)
 				.forEach { assertFalse(a[it]) }
 		assertFails { a[100] }
 		assertFails { a[101] }
