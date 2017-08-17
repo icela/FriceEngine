@@ -1,3 +1,6 @@
+@file:JvmName("Utils")
+@file:JvmMultifileClass
+
 package org.frice.game.utils.misc
 
 /**

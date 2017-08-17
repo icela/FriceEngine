@@ -1,4 +1,6 @@
 @file:JvmName("Utils")
+@file:JvmMultifileClass
+
 package org.frice.game.utils.misc
 
 /**
@@ -43,8 +45,3 @@ inline fun unless(condition: Boolean, block: () -> Unit) {
 inline fun until(condition: Boolean, block: () -> Unit) {
 	while (!condition) block()
 }
-
-/**
- * an anko-like async block
- */
-inline fun async(crossinline block: () -> Unit) = Thread { block() }.start()

@@ -14,9 +14,7 @@ import java.awt.RenderingHints
  */
 class JvmDrawer(val frame: Frame) : FriceDrawer {
 
-	override fun init() {
-		getG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-	}
+	override fun init() = g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 
 	override val friceImage = JvmImage(frame.width, frame.height)
 	override var color: ColorResource
@@ -25,9 +23,7 @@ class JvmDrawer(val frame: Frame) : FriceDrawer {
 			g.color = value.color
 		}
 
-	val getG: Graphics2D get() = friceImage.image.graphics as Graphics2D
-
-	var g: Graphics2D = getG
+	var g: Graphics2D = friceImage.image.graphics as Graphics2D
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =
 			g.fillOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())
@@ -65,6 +61,6 @@ class JvmDrawer(val frame: Frame) : FriceDrawer {
 			)
 
 	override fun restore() {
-		g = getG
+		g = friceImage.image.graphics as Graphics2D
 	}
 }

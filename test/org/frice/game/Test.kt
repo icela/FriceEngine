@@ -158,9 +158,7 @@ class Test2 : Game() {
 
 	companion object {
 		@JvmStatic
-		fun main(args: Array<String>) {
-			launch(Test2::class.java)
-		}
+		fun main(args: Array<String>) = launch(Test2::class.java)
 	}
 }
 
