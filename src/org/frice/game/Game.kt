@@ -22,7 +22,6 @@ import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.FDialog
 import org.frice.game.utils.message.log.FLog
-import org.frice.game.utils.misc.async
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.Clock
@@ -38,6 +37,7 @@ import javax.imageio.ImageIO.read
 import javax.swing.JFrame
 import javax.swing.UIManager
 import javax.swing.WindowConstants
+import kotlin.concurrent.thread
 
 /**
  * First game class(not for you)
@@ -96,7 +96,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			FLog.v("Engine start!")
 			game.run {
 				onLastInit()
-				async {
+				thread {
 					loop {
 						try {
 							onRefresh()
@@ -307,8 +307,10 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			it.objects.forEach loop@ { o ->
 				if (o is ShapeObject && ColorResource.COLORLESS == o.getResource()) return@loop
 				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
-				bgg.restore()
-				bgg.init()
+				bgg.run {
+					restore()
+					init()
+				}
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
