@@ -41,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.3.2'
+  compile 'com.github.icela:FriceEngine:v1.3.3'
 }
 ```
 
@@ -59,7 +59,7 @@ dependencies {
 - [X] Game Objects (from image or shape, image from file or web)
 - [X] Life cycle
 - [X] Collision detecting
-- [X] Audio playing (\*.wav only)
+- [X] Audio playing (\*.wav, \*.mp3 only)
 - [X] Dialogs
 - [X] Cursor overriding
 - [X] Clock system
@@ -69,8 +69,11 @@ dependencies {
 - [X] Buttons
 - [X] Particle effects
 - [X] Easy time controlling
-- [X] Language extensions(for Kotlin only)
-- [X] Smart auto garbage collection(you can close it)
+- [X] Language extensions (for Kotlin only)
+- [X] Smart auto garbage collection (you can close it (objects far from the screen will be removed))
+- [X] Resource manager(when you read files/urls, the result will be cached)
+- [X] File/URL utils
+- [X] A BoolArray implemented in bitwise operation, each boolean value will only take 1 __bit__ space (instead of 1 __byte__ which is default on JVM).
 
 ## DSL
 see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
