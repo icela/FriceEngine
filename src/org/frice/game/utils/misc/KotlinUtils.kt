@@ -17,8 +17,6 @@ inline fun loop(block: () -> Unit) {
 	while (true) block()
 }
 
-inline fun loop(count: Int, block: (Int) -> Unit) = repeat(count, block)
-
 inline fun forceRun(block: () -> Unit) {
 	try {
 		block()

@@ -1,8 +1,6 @@
 @file:JvmName("HtmlUtils")
 package org.frice.game.utils.web
 
-import org.frice.game.utils.misc.loop
-
 /**
  * HTML tags finder
  * Created by ice1000 on 2016/9/3.
@@ -16,7 +14,7 @@ fun findTag(html: String, tag: CharArray): MutableList<String> {
 	val tags = mutableListOf<String>()
 	var tagMark = false
 	var tagStart = 0
-	loop(c.size - tag.size + 2) { i ->
+	repeat(c.size - tag.size + 2) { i: Int ->
 		// find start index
 		if (c[i] == '<') {
 			tagMark = (0..tag.size - 1).none { c[i + it + 1] == tag[it] }

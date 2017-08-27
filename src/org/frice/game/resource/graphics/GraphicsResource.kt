@@ -95,13 +95,11 @@ class FunctionResource(color: ColorResource, val f: (Double) -> Double, width: I
 		image = JvmImage(width, height)
 		var lastTime = f(0.0)
 		var thisTime: Double
-		(0..width step 1).forEach { x ->
+		for (x in 0..width step 1) {
 			thisTime = f(x.toDouble())
 			forceRun { image.set(x, thisTime.toInt(), color) }
 			if (Math.abs(thisTime - lastTime) >= 1.0) forceRun {
-				(Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()).forEach { i ->
-					image.set(x, i, color)
-				}
+				for (i in Math.min(thisTime, lastTime).toInt()..Math.max(thisTime, lastTime).toInt()) image.set(x, i, color)
 			}
 			lastTime = thisTime
 		}
@@ -119,8 +117,8 @@ class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width
 
 	init {
 		image = JvmImage(width, height)
-		(0..width step 1).forEach { x ->
-			f(x.toDouble()).forEach { y ->
+		for (x in 0..width step 1) {
+			for (y in f(x.toDouble())) {
 				forceRun { image.set(x, y.toInt(), color) }
 			}
 		}

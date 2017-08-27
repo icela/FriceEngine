@@ -27,7 +27,8 @@ interface FriceImage {
 	val width: Int
 	val height: Int
 	operator fun get(x: Int, y: Int): ColorResource
-	fun set(x: Int, y: Int, color: ColorResource)
+	operator fun set(x: Int, y: Int, color: ColorResource) = set(x, y, color.color.rgb)
+	operator fun set(x: Int, y: Int, color: Int)
 	fun getScaledInstance(x: Double, y: Double): FriceImage
 	fun getSubImage(x: Int, y: Int, width: Int, height: Int): JvmImage
 

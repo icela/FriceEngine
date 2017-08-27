@@ -9,8 +9,8 @@ class JvmImage(val image: BufferedImage) : FriceImage {
 
 	override val width = image.width
 	override val height = image.height
-	override fun get(x: Int, y: Int) = ColorResource(image.getRGB(x, y))
-	override fun set(x: Int, y: Int, color: ColorResource) = image.setRGB(x, y, color.color.rgb)
+	override operator fun get(x: Int, y: Int) = ColorResource(image.getRGB(x, y))
+	override operator fun set(x: Int, y: Int, color: Int) = image.setRGB(x, y, color)
 
 	override fun getScaledInstance(x: Double, y: Double) =
 			JvmImage(image.getScaledInstance(x.toInt(), y.toInt(), BufferedImage.SCALE_DEFAULT) as BufferedImage)

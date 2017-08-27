@@ -3,7 +3,6 @@ package org.frice.game
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.graphics.ColorResource
-import org.frice.game.utils.misc.loop
 import org.frice.game.utils.time.Clock
 import java.awt.Graphics
 import java.awt.event.MouseEvent
@@ -68,8 +67,8 @@ class GamePanel(private val game: Game) : JPanel() {
 		game.drawEverything(game.drawer)
 
 		if (game.loseFocus and game.loseFocusChangeColor) {
-			loop(game.drawer.friceImage.width) { x ->
-				loop(game.drawer.friceImage.height) { y ->
+			repeat(game.drawer.friceImage.width) { x: Int ->
+				repeat(game.drawer.friceImage.height) { y: Int ->
 					game.drawer.friceImage.set(x, y, ColorResource(game.drawer
 							.friceImage[x, y]
 							.color
