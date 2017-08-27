@@ -10,4 +10,4 @@ package org.frice.game.utils.misc
  * @since v0.5.1
  */
 
-infix fun <Any> Any?.shouleBe(o: Any?) = this === o || null != this && equals(o)
+infix fun <Any> Any?.shouldBe(o: Any?) = this === o || null != this && equals(o)

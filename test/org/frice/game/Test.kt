@@ -1,10 +1,7 @@
 package org.frice.game
 
 import org.frice.game.anim.RotateAnim
-import org.frice.game.anim.move.AccelerateMove
-import org.frice.game.anim.move.AccurateMove
-import org.frice.game.anim.move.CustomMove
-import org.frice.game.anim.move.SimpleMove
+import org.frice.game.anim.move.*
 import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.PhysicalObject
@@ -16,10 +13,7 @@ import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.ParticleResource
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.XMLPreference
-import org.frice.game.utils.graphics.shape.FCircle
-import org.frice.game.utils.graphics.shape.FOval
-import org.frice.game.utils.graphics.shape.FPoint
-import org.frice.game.utils.graphics.shape.FRectangle
+import org.frice.game.utils.graphics.shape.*
 import org.frice.game.utils.graphics.utils.grayify
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener

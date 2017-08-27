@@ -1,7 +1,7 @@
 package org.frice.game.utils.misc
 
 import org.frice.game.obj.PhysicalObject
-import org.frice.game.utils.graphics.shape.FQuad
+import org.frice.game.utils.graphics.shape.FShapeDouble
 import java.util.*
 
 /**
@@ -12,6 +12,7 @@ import java.util.*
  * @author lfkdsk
  */
 class QuadTree(var level: Int, var bounds: FQuad) {
+	class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) : FShapeDouble
 
 	val MAX_OBJECTS = 3
 

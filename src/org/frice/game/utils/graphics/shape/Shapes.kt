@@ -54,5 +54,3 @@ open class FRectangle(override var width: Int, override var height: Int) : FShap
 	constructor(width: Double, height: Double) : this(width.toInt(), height.toInt())
 }
 
-class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) : FShapeDouble
-

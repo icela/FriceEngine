@@ -4,9 +4,7 @@ package org.frice.game
 
 import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
-import org.frice.game.obj.AbstractObject
-import org.frice.game.obj.FObject
-import org.frice.game.obj.PhysicalObject
+import org.frice.game.obj.*
 import org.frice.game.obj.button.FButton
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
@@ -24,19 +22,13 @@ import org.frice.game.utils.message.FDialog
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
-import org.frice.game.utils.time.Clock
-import org.frice.game.utils.time.FTimeListener
-import org.frice.game.utils.time.FTimer
-import java.awt.BorderLayout
-import java.awt.Point
-import java.awt.Rectangle
+import org.frice.game.utils.time.*
+import java.awt.*
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.util.*
 import javax.imageio.ImageIO.read
-import javax.swing.JFrame
-import javax.swing.UIManager
-import javax.swing.WindowConstants
+import javax.swing.*
 import kotlin.concurrent.thread
 
 /**
