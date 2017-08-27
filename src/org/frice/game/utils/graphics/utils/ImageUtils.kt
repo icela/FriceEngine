@@ -10,3 +10,9 @@ import java.awt.image.BufferedImage
  * @since 3.1.4
  */
 
+fun BufferedImage.greenify() {
+	for (i in 0..width - 1)
+		for (i in 0..height - 1) {
+
+		}
+}

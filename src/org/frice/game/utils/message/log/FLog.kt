@@ -60,9 +60,9 @@ object FLog {
 	}
 
 	var level = 0
-	const val VERBOSE = 0
-	const val DEBUG = 10
+	const val VERBOSE = 40
+	const val DEBUG = 30
 	const val INFO = 20
-	const val WARN = 30
-	const val ERROR = 40
+	const val WARN = 10
+	const val ERROR = 0
 }
