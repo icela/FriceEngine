@@ -11,8 +11,6 @@ class TimerTest : Game() {
 	}
 	companion object {
 		@JvmStatic
-		fun main(args: Array<String>) {
-			launch(TimerTest::class.java)
-		}
+		fun main(args: Array<String>) = launch(TimerTest::class.java)
 	}
 }

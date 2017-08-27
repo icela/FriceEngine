@@ -14,14 +14,13 @@ import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ShapeObject
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.ParticleResource
-import org.frice.game.utils.audio.play
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.XMLPreference
 import org.frice.game.utils.graphics.shape.FCircle
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FPoint
 import org.frice.game.utils.graphics.shape.FRectangle
-import org.frice.game.utils.graphics.utils.gray
+import org.frice.game.utils.graphics.utils.grayify
 import org.frice.game.utils.message.log.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
@@ -88,7 +87,7 @@ class Test : Game() {
 //		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
 //				10.0, 10.0))
 
-		FLog.v(ColorResource.小泉花阳.color.rgb.gray())
+		FLog.v(ColorResource.小泉花阳.color.rgb.grayify())
 	}
 
 	override fun onRefresh() {
