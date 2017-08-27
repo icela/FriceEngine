@@ -1,4 +1,5 @@
 @file:JvmName("ColorUtils")
+@file:JvmMultifileClass
 
 package org.frice.game.utils.graphics.utils
 
@@ -8,6 +9,7 @@ import java.awt.Color
  * Created by ice1000 on 16-8-6.
  * Reference: http://blog.csdn.net/lzs109/article/details/7316507
  * @author ice1000
+ * @since 0.3
  */
 
 val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')

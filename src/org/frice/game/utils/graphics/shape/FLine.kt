@@ -19,10 +19,8 @@ open class FLine(one: FPoint, two: FPoint) {
 
 	init {
 		if (a != 0 || b != 0) {
-			(Math.min(one.x, two.x)..Math.max(one.x, two.x))
-					.forEach { x -> set.add(FPoint(x, x2y(x))) }
-			(Math.min(one.y, two.y)..Math.max(one.y, two.y))
-					.forEach { y -> set.add(FPoint(y2x(y), y)) }
+			(Math.min(one.x, two.x)..Math.max(one.x, two.x)).mapTo(set) { FPoint(it, x2y(it)) }
+			(Math.min(one.y, two.y)..Math.max(one.y, two.y)).mapTo(set) { FPoint(y2x(it), it) }
 		}
 	}
 
