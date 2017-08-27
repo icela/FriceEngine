@@ -3,9 +3,7 @@ package org.frice.game.platform.adapter
 import org.frice.game.platform.FriceDrawer
 import org.frice.game.platform.FriceImage
 import org.frice.game.resource.graphics.ColorResource
-import java.awt.Frame
-import java.awt.Graphics2D
-import java.awt.RenderingHints
+import java.awt.*
 
 /**
  * Created by ice1000 on 2016/10/31.
@@ -14,7 +12,10 @@ import java.awt.RenderingHints
  */
 class JvmDrawer(val frame: Frame) : FriceDrawer {
 
-	override fun init() = g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+	override fun init() {
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+		g.font = Font("Consolas", Font.PLAIN, 16)
+	}
 
 	override val friceImage = JvmImage(frame.width, frame.height)
 	override var color: ColorResource
@@ -24,6 +25,10 @@ class JvmDrawer(val frame: Frame) : FriceDrawer {
 		}
 
 	var g: Graphics2D = friceImage.image.graphics as Graphics2D
+
+	fun setStringSize(size: Int) {
+		g.font = g.font.deriveFont(size.toFloat())
+	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =
 			g.fillOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())

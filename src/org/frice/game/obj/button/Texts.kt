@@ -11,6 +11,7 @@ import org.frice.game.resource.graphics.ColorResource
  */
 abstract class FText : AbstractObject {
 	open var text = ""
+	open var textSize = 16
 	override var rotate = 0.0
 
 	abstract fun getColor(): ColorResource
@@ -27,7 +28,8 @@ class SimpleText
 constructor(
 		var colorResource: ColorResource = ColorResource.DARK_GRAY,
 		override var text: String,
-		override var x: Double, override var y: Double) : FText() {
+		override var x: Double,
+		override var y: Double) : FText() {
 
 	override fun getColor() = colorResource
 }

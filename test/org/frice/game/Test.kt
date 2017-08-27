@@ -6,6 +6,7 @@ import org.frice.game.anim.scale.SimpleScale
 import org.frice.game.event.OnClickEvent
 import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.SimpleButton
+import org.frice.game.obj.button.SimpleText
 import org.frice.game.obj.effects.FunctionEffect
 import org.frice.game.obj.effects.ParticleEffect
 import org.frice.game.obj.sub.ImageObject
@@ -155,8 +156,10 @@ class Test2 : Game() {
 			mass = 1.0
 			anims.add(SimpleMove(80, 0))
 		}
+		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
+		text.textSize = 64
 		assertEquals(obj, obj2)
-		addObject(obj2, obj)
+		addObject(obj2, obj, text)
 	}
 
 	override fun onRefresh() {

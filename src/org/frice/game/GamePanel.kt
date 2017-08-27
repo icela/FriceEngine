@@ -4,6 +4,7 @@ import org.frice.game.event.OnClickEvent
 import org.frice.game.event.OnMouseEvent
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.utils.time.Clock
+import java.awt.Font
 import java.awt.Graphics
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
@@ -77,6 +78,8 @@ class GamePanel(private val game: Game) : JPanel() {
 			}
 		}
 
+		game.drawer.init()
+		game.drawer.color = ColorResource.DARK_GRAY
 		if (game.showFPS) game.drawer.drawString("fps: ${game.fpsDisplay}", 30.0, height - 30.0)
 
 		/*
