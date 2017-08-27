@@ -187,7 +187,7 @@ GREEN, BLUE, GRAY, DARK_GRAY, LIGHT_GRAY, WHITE, RED, BLACK, CYAN, MAGENTA, YELL
 and so on!
 ```
 
-## Static object: org.frice.game.utils.message.log.FLog
+## Static object: org.frice.game.utils.message.FLog
 
 ### APIs
 Method|Alias|Usage

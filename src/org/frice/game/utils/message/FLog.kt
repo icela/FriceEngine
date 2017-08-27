@@ -1,4 +1,4 @@
-package org.frice.game.utils.message.log
+package org.frice.game.utils.message
 
 /**
  * Created by ice1000 on 2016/8/13.

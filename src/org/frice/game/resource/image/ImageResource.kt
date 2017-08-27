@@ -6,7 +6,7 @@ import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.FResource
 import org.frice.game.resource.manager.ImageManager
 import org.frice.game.resource.manager.WebImageManager
-import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.message.FLog
 import org.frice.game.utils.time.Clock
 import org.frice.game.utils.time.FTimeListener
 import java.awt.Rectangle

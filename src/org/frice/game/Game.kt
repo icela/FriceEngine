@@ -19,7 +19,7 @@ import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.graphics.shape.FOval
 import org.frice.game.utils.graphics.shape.FRectangle
 import org.frice.game.utils.message.FDialog
-import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.message.FLog
 import org.frice.game.utils.misc.loop
 import org.frice.game.utils.misc.unless
 import org.frice.game.utils.time.*

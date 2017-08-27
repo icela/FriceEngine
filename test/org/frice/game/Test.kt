@@ -18,7 +18,7 @@ import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.XMLPreference
 import org.frice.game.utils.graphics.shape.*
 import org.frice.game.utils.graphics.utils.grayify
-import org.frice.game.utils.message.log.FLog
+import org.frice.game.utils.message.FLog
 import org.frice.game.utils.time.FTimeListener
 import org.frice.game.utils.time.FTimer
 import java.util.*
