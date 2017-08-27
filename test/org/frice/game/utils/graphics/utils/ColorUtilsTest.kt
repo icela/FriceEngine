@@ -31,11 +31,8 @@ class ColorUtilsTest {
 	fun getAlphaTest() {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
-			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
 			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
+			Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255), a).alpha shouldBe a
 		}
 	}
 
@@ -44,10 +41,7 @@ class ColorUtilsTest {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
 			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
+			Color(r, rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)).red shouldBe rand.nextInt(255)
 		}
 	}
 
@@ -55,11 +49,8 @@ class ColorUtilsTest {
 	fun getBlueTest() {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
-			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
 			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
+			Color(rand.nextInt(255), rand.nextInt(255), b, rand.nextInt(255)).green shouldBe b
 		}
 	}
 
@@ -67,48 +58,8 @@ class ColorUtilsTest {
 	fun getGreenTest() {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
-			val r = rand.nextInt(255)
 			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
+			Color(rand.nextInt(255), g, rand.nextInt(255), rand.nextInt(255)).green shouldBe g
 		}
 	}
-
-	@Test
-	fun greenifyTest() {
-		val rand = Random(System.currentTimeMillis())
-		repeat(100) {
-			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
-		}
-	}
-
-	@Test
-	fun redifyTest() {
-		val rand = Random(System.currentTimeMillis())
-		repeat(100) {
-			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
-		}
-	}
-
-	@Test
-	fun bluifyTest() {
-		val rand = Random(System.currentTimeMillis())
-		repeat(100) {
-			val r = rand.nextInt(255)
-			val g = rand.nextInt(255)
-			val b = rand.nextInt(255)
-			val a = rand.nextInt(255)
-			Color(r, g, b, a).alpha shouldBe a
-		}
-	}
-
 }
