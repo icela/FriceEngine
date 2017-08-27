@@ -2,6 +2,7 @@ package org.frice.game.platform.adapter
 
 import org.frice.game.platform.FriceImage
 import org.frice.game.resource.graphics.ColorResource
+import org.frice.game.utils.graphics.utils.*
 import java.awt.image.BufferedImage
 
 class JvmImage(val image: BufferedImage) : FriceImage {
@@ -23,6 +24,10 @@ class JvmImage(val image: BufferedImage) : FriceImage {
 			this@apply.data = this@JvmImage.image.data
 		})
 	}
+
+	fun greenify() = image.greenify()
+	fun redify() = image.redify()
+	fun bluify() = image.bluify()
 }
 
 

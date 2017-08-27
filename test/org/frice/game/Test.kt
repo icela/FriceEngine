@@ -8,9 +8,12 @@ import org.frice.game.obj.PhysicalObject
 import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.FunctionEffect
 import org.frice.game.obj.effects.ParticleEffect
+import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
+import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.graphics.ColorResource
 import org.frice.game.resource.graphics.ParticleResource
+import org.frice.game.resource.image.WebImageResource
 import org.frice.game.utils.data.Preference
 import org.frice.game.utils.data.XMLPreference
 import org.frice.game.utils.graphics.shape.*
@@ -78,8 +81,6 @@ class Test : Game() {
 		FPoint(1, 2)
 
 //		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
-//		addObject(ImageObject(WebImageResource("https://avatars1.githubusercontent.com/u/21008243?v=3&s=200"),
-//				10.0, 10.0))
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.grayify())
 	}
@@ -117,6 +118,20 @@ class Test : Game() {
 		fun main(args: Array<String>) {
 			launch(Test::class.java)
 		}
+	}
+}
+
+class TestImage : Game() {
+	override fun onInit() {
+		super.onInit()
+		addObject(ImageObject((WebImageResource(
+				"https://avatars1.githubusercontent.com/u/21008243?v=3&s=200").image as JvmImage).greenify(),
+				10.0, 10.0))
+	}
+
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) = launch(TestImage::class.java)
 	}
 }
 

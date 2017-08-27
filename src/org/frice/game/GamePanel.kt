@@ -69,10 +69,10 @@ class GamePanel(private val game: Game) : JPanel() {
 		if (game.loseFocus and game.loseFocusChangeColor) {
 			repeat(game.drawer.friceImage.width) { x: Int ->
 				repeat(game.drawer.friceImage.height) { y: Int ->
-					game.drawer.friceImage.set(x, y, ColorResource(game.drawer
+					game.drawer.friceImage[x, y] = ColorResource(game.drawer
 							.friceImage[x, y]
 							.color
-							.darker()))
+							.darker())
 				}
 			}
 		}

@@ -11,7 +11,7 @@ import org.frice.game.platform.adapter.JvmImage
 import java.awt.image.BufferedImage
 
 private inline fun BufferedImage.fy(fy: BufferedImage.(Int, Int) -> Int): JvmImage {
-	val jvmImage = JvmImage(this)
+	val jvmImage = JvmImage(width, height)
 	repeat(width - 1) { x: Int ->
 		repeat(height - 1) { y: Int ->
 			jvmImage[x, y] = fy(x, y)
