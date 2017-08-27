@@ -1,6 +1,5 @@
 package org.frice.game.utils.data
 
-import org.frice.game.utils.message.log.FatalError
 import org.frice.game.utils.misc.forceGet
 import org.frice.game.utils.misc.forceRun
 import org.frice.game.utils.misc.loop
@@ -86,7 +85,7 @@ class XMLPreference constructor(val file: File) : Database {
 			is Double -> TYPE_DOUBLE
 			is Char -> TYPE_CHAR
 			is String -> TYPE_STRING
-			else -> throw FatalError("invalid type!")
+			else -> throw RuntimeException("invalid type $TYPE!")
 		})
 		root.appendChild(node)
 		save()

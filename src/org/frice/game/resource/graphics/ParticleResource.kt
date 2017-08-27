@@ -46,7 +46,7 @@ constructor(
 	init {
 		drawBackground()
 		repeat((image.width * image.height * percentage).toInt()) {
-			image.set(random.nextInt(width), random.nextInt(height), fore)
+			image[random.nextInt(width), random.nextInt(height)] = fore
 		}
 	}
 
@@ -55,7 +55,6 @@ constructor(
 		var cache1: Int
 		var cache2: Int
 		repeat((image.width * image.height * percentage).toInt()) {
-			it: Int ->
 			cache1 = random.nextInt(width)
 			cache2 = random.nextInt(height)
 			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)

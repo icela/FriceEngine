@@ -1,19 +1,6 @@
 package org.frice.game.utils.message.log
 
 /**
- * Created by ice1000 on 2016/8/14.
- * @author ice1000
- * @since v0.2
- */
-class FatalError
-@JvmOverloads
-constructor(s: String = "") : Error(s) {
-	init {
-		FLog.e(s)
-	}
-}
-
-/**
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
  * @since v0.1
