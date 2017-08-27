@@ -12,6 +12,7 @@ import org.frice.game.resource.graphics.ColorResource
 abstract class FText : AbstractObject {
 	open var text = ""
 	open var textSize = 16
+//	open var fontName = "Consolas"
 	override var rotate = 0.0
 
 	abstract fun getColor(): ColorResource
