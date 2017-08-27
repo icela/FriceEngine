@@ -41,7 +41,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.3.3'
+  compile 'com.github.icela:FriceEngine:v1.4.0'
 }
 ```
 
