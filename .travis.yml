@@ -1,11 +1,16 @@
 sudo: required
+
 language: java
 language: kotlin
+
 jdk:
 - oraclejdk8
+
 script:
 - "./gradlew assemble"
 - "./gradlew javadoc"
 - "./gradlew jar"
+- "./gradlew fatJar"
+
 before_install:
 - chmod a+x gradlew

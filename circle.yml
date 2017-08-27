@@ -14,6 +14,7 @@ dependencies:
 
 test:
   override:
-    - ./gradlew test
+    - ./gradlew build
+    - ./gradlew fatJar
 #
 

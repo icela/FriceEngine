@@ -3,10 +3,11 @@ environment:
 #
 
 build_script:
-  - gradlew check --info
+  - gradlew build --info
+  - gradlew fatJar --info
 #
 
 artifacts:
-  - path: 'build\libs\engine-1.2.jar'
+  - path: 'build\libs\engine-all-3.1.4.jar'
     name: frice
 #
