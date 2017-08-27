@@ -82,11 +82,12 @@ see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
 FriceEngine is based on the life cycle mode.<br/>
 To build games based on frice engine, follow these steps:
 
-1. Import the jar in the latest release to your project.
-2. Create a class extends Game in org.frice.game package.
-3. Implement the abstract methods, just understand them by name.
-4. call the empty constructor in the public static void main.
-5. For full API doc please view [APIs](./res/apis.md)
+0. Import the jar in the latest release to your project, or add dependency in your `build.gradle` file.
+0. Create a class extends Game in org.frice.game package.
+0. Override the life cycle methods(`onInit`, `onExit`, `onLastInit`, `onRefresh`, `onFocus`, `onLoseFocus`), just understand them by name.
+0. If you want to draw something additionally, override `customDraw`. This method will be invoked every time after all game objects drawn.
+0. Write `launch(YourGameClass.class)` in the main function.
+0. Feel free to open issue for feature request, bugs, etc.
 
 ## Demos
 see [FriceDemo](https://github.com/icela/FriceDemo)
