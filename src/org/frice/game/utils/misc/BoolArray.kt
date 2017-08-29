@@ -3,10 +3,8 @@ package org.frice.game.utils.misc
 const val USHR = 6
 const val MOD = 0b11_1111
 
-class BoolArray(val longs: LongArray) {
-	constructor(length: Int) : this(LongArray((length ushr USHR) + 1))
-
-	val length = longs.size
+class BoolArray(val length: Int, val longs: LongArray) {
+	constructor(length: Int) : this(length, LongArray((length ushr USHR) + 1))
 
 	operator fun get(index: Int): Boolean {
 		if (index >= length) throw IndexOutOfBoundsException("Index $index is out of range!(size: $length)")
