@@ -1,6 +1,11 @@
 package org.frice.game
 
+import org.frice.game.Game.Initializer.launch
+import org.frice.game.obj.sub.DebugImageObject
+import org.frice.game.obj.sub.ImageObject
+import org.frice.game.resource.image.ImageResource
 import org.frice.game.utils.misc.BoolArray
+import org.frice.game.utils.time.FTimeListener
 import org.junit.Test
 import kotlin.test.assertFails
 import kotlin.test.assertFalse
@@ -29,5 +34,20 @@ class BoolArrayTest {
 				.forEach { assertFalse(a[it]) }
 		assertFails { a[100] }
 		assertFails { a[101] }
+	}
+
+	companion object {
+		@JvmStatic
+		fun main(vararg args: String) {
+			launch(object : Game() {
+				val dbg = DebugImageObject(
+						ImageResource.fromWeb("https://coding.net/u/ice1000/p/Images/git/raw/master/blog-img/13/a.png"), 10.0, 10.0)
+
+				override fun onLastInit() {
+					addObject(dbg)
+					dbg.debugMove(20.0, 20.0)
+				}
+			})
+		}
 	}
 }

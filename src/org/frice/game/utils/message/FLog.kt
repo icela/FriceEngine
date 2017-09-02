@@ -46,7 +46,7 @@ object FLog {
 		if (level >= ERROR) System.err.println(e)
 	}
 
-	var level = 0
+	var level = 50
 	const val VERBOSE = 40
 	const val DEBUG = 30
 	const val INFO = 20

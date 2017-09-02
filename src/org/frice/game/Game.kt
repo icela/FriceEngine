@@ -306,12 +306,19 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
-					is FObject.ImageOwner ->
-						unless(o.x + o.image.width < 0 || o.x > width || o.y + o.image.height < 0 || o.y > height) {
+					is FObject.ImageOwner -> {
+						unless(o.x + o.image.width <= 0 ||
+								o.x >= width ||
+								o.y + o.image.height <= 0 ||
+								o.y >= height) {
 							bgg.drawImage(o.image, o.x, o.y)
 						}
+					}
 					is ShapeObject -> {
-						unless((o.x + o.width) < 0 || o.x > width || (o.y + o.height) < 0 || o.y > height) {
+						unless((o.x + o.width) <= 0 ||
+								o.x >= width ||
+								(o.y + o.height) <= 0 ||
+								o.y >= height) {
 							bgg.color = o.getResource()
 							when (o.collideBox) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
