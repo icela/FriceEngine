@@ -90,6 +90,10 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	override val drawer: JvmDrawer
 
+	var fpsCounter = 0
+	var fpsDisplay = 0
+	var fpsTimer = FTimer(1000)
+
 	/**
 	 * represent the mouse as an object
 	 */

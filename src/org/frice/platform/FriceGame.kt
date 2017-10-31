@@ -8,7 +8,7 @@ import org.frice.utils.time.FTimeListener
 import org.frice.utils.time.FTimer
 import java.util.*
 
-interface FriceGame {
+interface FriceGame : TitleOwner {
 
 	val timeListeners: LinkedList<FTimeListener>
 	val timeListenerDeleteBuffer: ArrayList<FTimeListener>
@@ -52,8 +52,8 @@ interface FriceGame {
 	fun onExit()
 	fun customDraw(g: FriceDrawer)
 	fun onLoseFocus() {
-			paused = true
-		}
+		paused = true
+	}
 
 	fun onFocus() {
 		paused = false

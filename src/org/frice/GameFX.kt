@@ -51,6 +51,14 @@ constructor(layerCount: Int = 1) : FriceGame {
 	open fun onClick(e: OnClickEvent) = Unit
 	open fun onMouse(e: OnMouseEvent) = Unit
 
+	override fun setTitle(title: String) {
+		TODO("not implemented")
+	}
+
+	override fun getTitle(): String {
+		TODO("not implemented")
+	}
+
 	override val drawer: FriceDrawer
 		get() = TODO("not implemented")
 
