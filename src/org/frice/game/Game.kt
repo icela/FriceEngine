@@ -10,8 +10,7 @@ import org.frice.game.obj.button.SimpleButton
 import org.frice.game.obj.effects.LineEffect
 import org.frice.game.obj.sub.ImageObject
 import org.frice.game.obj.sub.ShapeObject
-import org.frice.game.platform.FriceGame
-import org.frice.game.platform.Layer
+import org.frice.game.platform.*
 import org.frice.game.platform.adapter.JvmDrawer
 import org.frice.game.platform.adapter.JvmImage
 import org.frice.game.resource.graphics.ColorResource
@@ -241,7 +240,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		paused = false
 	}
 
-	override fun customDraw(g: JvmDrawer) = Unit
+	override fun customDraw(g: FriceDrawer) = Unit
 
 	/**
 	 * for kotlin only

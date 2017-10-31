@@ -33,7 +33,7 @@ interface FriceGame {
 	fun onLastInit()
 	fun onRefresh()
 	fun onExit()
-	fun customDraw(g: JvmDrawer)
+	fun customDraw(g: FriceDrawer)
 	fun onFocus()
 	fun onLoseFocus()
 
