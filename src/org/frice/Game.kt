@@ -2,6 +2,18 @@
 
 package org.frice
 
+import org.frice.event.OnClickEvent
+import org.frice.event.OnMouseEvent
+import org.frice.obj.*
+import org.frice.obj.button.FButton
+import org.frice.obj.button.SimpleButton
+import org.frice.obj.effects.LineEffect
+import org.frice.obj.sub.*
+import org.frice.platform.*
+import org.frice.platform.adapter.JvmDrawer
+import org.frice.platform.adapter.JvmImage
+import org.frice.resource.graphics.ColorResource
+import org.frice.resource.image.ImageResource
 import org.frice.utils.graphics.shape.FOval
 import org.frice.utils.graphics.shape.FRectangle
 import org.frice.utils.message.FDialog
@@ -34,12 +46,12 @@ import javax.swing.JFrame
 @Suppress("LeakingThis")
 open class Game
 @JvmOverloads
-constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
+constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	override val timeListeners = LinkedList<FTimeListener>()
 	override val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
 	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
-	override val layers = Array(layerCount) { org.frice.platform.Layer() }
+	override val layers = Array(layerCount) { Layer() }
 
 	var paused = false
 		set(value) {
@@ -76,9 +88,9 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 			refresh.time = value
 		}
 
-	internal val panel: org.frice.GamePanel = org.frice.GamePanel(this)
+	internal val panel: GamePanel = GamePanel(this)
 
-	override val drawer: org.frice.platform.adapter.JvmDrawer
+	override val drawer: JvmDrawer
 
 	override var fpsCounter = 0
 	override var fpsDisplay = 0
@@ -88,7 +100,7 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 	 * represent the mouse as an object
 	 */
 	@JvmField
-	val mouse = object : org.frice.obj.AbstractObject {
+	val mouse = object : AbstractObject {
 		override var x: Double
 			get() = panel.mousePosition?.getX() ?: -1.0
 			set(value) {
@@ -113,27 +125,27 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 
 		/// to prevent this engine from the call#cking NPE!!
 		this.add(panel, BorderLayout.CENTER)
-		bounds = org.frice.Initializer.BIG_SQUARE
+		bounds = Initializer.BIG_SQUARE
 		onInit()
-		drawer = org.frice.platform.adapter.JvmDrawer(this)
+		drawer = JvmDrawer(this)
 		drawer.init()
 		isVisible = true
 		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
 
-	fun mouse(e: org.frice.event.OnMouseEvent) = layers.forEach {
+	fun mouse(e: OnMouseEvent) = layers.forEach {
 		it.texts.forEach { b -> if (b is org.frice.obj.button.FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
 	}
 
-	fun click(e: org.frice.event.OnClickEvent) = layers.forEach {
+	fun click(e: OnClickEvent) = layers.forEach {
 		it.texts.forEach { b -> if (b is org.frice.obj.button.FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
 	}
 
 	override fun onInit() = Unit
 	override fun onLastInit() = Unit
 	override fun onRefresh() = Unit
-	open fun onClick(e: org.frice.event.OnClickEvent) = Unit
-	open fun onMouse(e: org.frice.event.OnMouseEvent) = Unit
+	open fun onClick(e: OnClickEvent) = Unit
+	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
 				FDialog.YES_OPTION) {
@@ -150,7 +162,7 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 		paused = false
 	}
 
-	override fun customDraw(g: org.frice.platform.FriceDrawer) = Unit
+	override fun customDraw(g: FriceDrawer) = Unit
 
 	/**
 	 * for kotlin only
@@ -176,26 +188,20 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 	}
 
 	inline fun addKeyTypedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(typed = { e ->
-				if (e.keyCode == keyCode) key(e)
-			})
+			addKeyListener(typed = { e -> if (e.keyCode == keyCode) key(e) })
 
 	inline fun addKeyPressedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(pressed = { e ->
-				if (e.keyCode == keyCode) key(e)
-			})
+			addKeyListener(pressed = { e -> if (e.keyCode == keyCode) key(e) })
 
 	inline fun addKeyReleasedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(released = { e ->
-				if (e.keyCode == keyCode) key(e)
-			})
+			addKeyListener(released = { e -> if (e.keyCode == keyCode) key(e) })
 
-	infix fun setCursor(o: org.frice.resource.image.ImageResource) = setCursor(org.frice.obj.sub.ImageObject(o))
-	infix fun setCursor(o: org.frice.obj.sub.ImageObject) {
-		cursor = toolkit.createCustomCursor((o.image as org.frice.platform.adapter.JvmImage).image, Point(0, 0), "cursor")
+	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
+	infix fun setCursor(o: ImageObject) {
+		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
-	override fun drawEverything(bgg: org.frice.platform.adapter.JvmDrawer) {
+	override fun drawEverything(bgg: JvmDrawer) {
 		processBuffer()
 		layers.forEach {
 			it.objects.forEach { o ->
@@ -206,16 +212,16 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 			}
 
 			it.objects.forEach loop@ { o ->
-				if (o is org.frice.obj.sub.ShapeObject && org.frice.resource.graphics.ColorResource.COLORLESS == o.getResource()) return@loop
-				if (o is org.frice.obj.effects.LineEffect && org.frice.resource.graphics.ColorResource.COLORLESS == o.color) return@loop
+				if (o is ShapeObject && ColorResource.COLORLESS == o.getResource()) return@loop
+				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
 				bgg.run {
 					restore()
 					init()
 				}
-				if (o is org.frice.obj.PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
+				if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
-					is org.frice.obj.FObject.ImageOwner -> {
+					is FObject.ImageOwner -> {
 						unless(o.x + o.image.width <= 0 ||
 								o.x >= width ||
 								o.y + o.image.height <= 0 ||
@@ -223,7 +229,7 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 							bgg.drawImage(o.image, o.x, o.y)
 						}
 					}
-					is org.frice.obj.sub.ShapeObject -> {
+					is ShapeObject -> {
 						unless((o.x + o.width) <= 0 ||
 								o.x >= width ||
 								(o.y + o.height) <= 0 ||
@@ -235,13 +241,13 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 							}
 						}
 					}
-					is org.frice.obj.effects.LineEffect -> {
+					is LineEffect -> {
 						bgg.color = o.color
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
 					}
 				}
 				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
-					if (o is org.frice.obj.PhysicalObject) o.died = true
+					if (o is PhysicalObject) o.died = true
 					it.removeObject(o)
 					//FLog.i("o.x = ${o.x}, width = $width," +
 					//		" o.y = ${o.y}, height = $height")
@@ -249,16 +255,16 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 			}
 
 			it.texts.forEach loop@ { b ->
-				if (b.getColor() == org.frice.resource.graphics.ColorResource.COLORLESS) return@loop
+				if (b.getColor() == ColorResource.COLORLESS) return@loop
 				bgg.run {
 					restore()
 					init()
 					rotate(b.rotate)
 					setStringSize(b.textSize)
 				}
-				if (b is org.frice.obj.button.FButton) {
+				if (b is FButton) {
 					when (b) {
-						is org.frice.obj.FObject.ImageOwner -> {
+						is FObject.ImageOwner -> {
 							unless(b.x + b.image.width < 0 ||
 									b.x > width ||
 									b.y + b.image.height < 0 ||
@@ -266,13 +272,13 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 								bgg.drawImage(b.image, b.x, b.y)
 							}
 						}
-						is org.frice.obj.button.SimpleButton -> {
+						is SimpleButton -> {
 							bgg.color = b.getColor()
 							bgg.drawRoundRect(b.x, b.y,
 									b.width, b.height,
 									Math.min(b.width * 0.5, 10.0),
 									Math.min(b.height * 0.5, 10.0))
-							bgg.color = org.frice.resource.graphics.ColorResource.DARK_GRAY
+							bgg.color = ColorResource.DARK_GRAY
 							bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
 						}
 					}
@@ -286,7 +292,7 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 	}
 
 	override fun clearScreen() {
-		drawer.color = org.frice.resource.graphics.ColorResource.WHITE
+		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()
 	}

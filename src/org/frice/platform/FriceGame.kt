@@ -1,5 +1,6 @@
 package org.frice.platform
 
+import org.frice.obj.AbstractObject
 import org.frice.utils.time.FTimeListener
 import org.frice.utils.time.FTimer
 import java.util.*
@@ -38,7 +39,7 @@ interface FriceGame {
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() {
-		layers.forEach(org.frice.platform.Layer::processBuffer)
+		layers.forEach(Layer::processBuffer)
 		timeListeners.addAll(timeListenerAddBuffer)
 		timeListeners.removeAll(timeListenerDeleteBuffer)
 		timeListenerDeleteBuffer.clear()
@@ -49,7 +50,7 @@ interface FriceGame {
 	fun onLastInit()
 	fun onRefresh()
 	fun onExit()
-	fun customDraw(g: org.frice.platform.FriceDrawer)
+	fun customDraw(g: FriceDrawer)
 	fun onFocus()
 	fun onLoseFocus()
 
@@ -77,7 +78,7 @@ interface FriceGame {
 	infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
 	/** remove Objects using vararg */
-	fun removeObject(layer: Int, vararg objs: org.frice.obj.AbstractObject) = objs.forEach { removeObject(layer, it) }
+	fun removeObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { removeObject(layer, it) }
 
 	/**
 	 * removes single object.
@@ -85,7 +86,7 @@ interface FriceGame {
 	 *
 	 * @param obj will remove objects which is equal to it.
 	 */
-	fun removeObject(layer: Int, obj: org.frice.obj.AbstractObject) = layers[layer].removeObject(obj)
+	fun removeObject(layer: Int, obj: AbstractObject) = layers[layer].removeObject(obj)
 
 	/**
 	 * clears all objects.
@@ -100,13 +101,13 @@ interface FriceGame {
 	fun clearObjects(layer: Int) = layers[layer].clearObjects()
 
 	/** adds an object to game, to be shown on game window. */
-	fun addObject(layer: Int, obj: org.frice.obj.AbstractObject) = layers[layer].addObject(obj)
+	fun addObject(layer: Int, obj: AbstractObject) = layers[layer].addObject(obj)
 
 	/** add Objects using vararg */
-	fun addObject(layer: Int, vararg objs: org.frice.obj.AbstractObject) = objs.forEach { addObject(layer, it) }
+	fun addObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { addObject(layer, it) }
 
-	fun addObject(vararg objs: org.frice.obj.AbstractObject) = addObject(0, *objs)
-	fun removeObject(vararg objs: org.frice.obj.AbstractObject) = removeObject(0, *objs)
+	fun addObject(vararg objs: AbstractObject) = addObject(0, *objs)
+	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
 
 	fun drawEverything(bgg: org.frice.platform.adapter.JvmDrawer)
 	fun clearScreen()
