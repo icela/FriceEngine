@@ -1,6 +1,9 @@
 package org.frice.platform
 
 import org.frice.obj.AbstractObject
+import org.frice.platform.adapter.JvmDrawer
+import org.frice.resource.image.ImageResource
+import org.frice.resource.image.ImageResource.Factories
 import org.frice.utils.time.FTimeListener
 import org.frice.utils.time.FTimer
 import java.util.*
@@ -10,13 +13,9 @@ interface FriceGame {
 	val timeListeners: LinkedList<FTimeListener>
 	val timeListenerDeleteBuffer: ArrayList<FTimeListener>
 	val timeListenerAddBuffer: ArrayList<FTimeListener>
-	val layers: Array<org.frice.platform.Layer>
+	val layers: Array<Layer>
 
-	val drawer: org.frice.platform.adapter.JvmDrawer
-
-	var fpsCounter: Int
-	var fpsDisplay: Int
-	var fpsTimer: FTimer
+	val drawer: FriceDrawer
 
 	/**
 	 * not implemented yet.
@@ -36,6 +35,7 @@ interface FriceGame {
 	var loseFocus: Boolean
 	var loseFocusChangeColor: Boolean
 	var millisToRefresh: Int
+	var paused: Boolean
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() {
@@ -46,13 +46,18 @@ interface FriceGame {
 		timeListenerAddBuffer.clear()
 	}
 
-	fun onInit()
-	fun onLastInit()
-	fun onRefresh()
+	fun onInit() = Unit
+	fun onLastInit() = Unit
+	fun onRefresh() = Unit
 	fun onExit()
 	fun customDraw(g: FriceDrawer)
-	fun onFocus()
-	fun onLoseFocus()
+	fun onLoseFocus() {
+			paused = true
+		}
+
+	fun onFocus() {
+		paused = false
+	}
 
 	/** add TimeListeners using vararg */
 	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { this addTimeListener it }
@@ -92,7 +97,7 @@ interface FriceGame {
 	 * clears all objects.
 	 * this method is safe.
 	 */
-	fun clearObjects() = layers.forEach(org.frice.platform.Layer::clearObjects)
+	fun clearObjects() = layers.forEach(Layer::clearObjects)
 
 	/**
 	 * clears all objects in one layer.
@@ -109,7 +114,6 @@ interface FriceGame {
 	fun addObject(vararg objs: AbstractObject) = addObject(0, *objs)
 	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
 
-	fun drawEverything(bgg: org.frice.platform.adapter.JvmDrawer)
 	fun clearScreen()
 
 	/**
@@ -117,5 +121,5 @@ interface FriceGame {
 	 *
 	 * @return screen cut as an image
 	 */
-	fun getScreenCut() = org.frice.resource.image.ImageResource(drawer.friceImage)
+	fun getScreenCut() = ImageResource(drawer.friceImage)
 }

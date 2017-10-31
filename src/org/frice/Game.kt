@@ -8,7 +8,8 @@ import org.frice.obj.*
 import org.frice.obj.button.FButton
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.effects.LineEffect
-import org.frice.obj.sub.*
+import org.frice.obj.sub.ImageObject
+import org.frice.obj.sub.ShapeObject
 import org.frice.platform.*
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
@@ -53,7 +54,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
 	override val layers = Array(layerCount) { Layer() }
 
-	var paused = false
+	override var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()
 			field = value
@@ -71,9 +72,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	override var autoGC = true
 
-	/**
-	 * if true, there will be a fps calculating on the bottom-left side of window.
-	 */
 	override var showFPS = true
 
 	override var loseFocus = false
@@ -91,10 +89,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	internal val panel: GamePanel = GamePanel(this)
 
 	override val drawer: JvmDrawer
-
-	override var fpsCounter = 0
-	override var fpsDisplay = 0
-	override var fpsTimer = FTimer(1000)
 
 	/**
 	 * represent the mouse as an object
@@ -141,9 +135,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		it.texts.forEach { b -> if (b is org.frice.obj.button.FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
 	}
 
-	override fun onInit() = Unit
-	override fun onLastInit() = Unit
-	override fun onRefresh() = Unit
 	open fun onClick(e: OnClickEvent) = Unit
 	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
@@ -152,14 +143,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			dispose()
 			System.exit(0)
 		} else return
-	}
-
-	override fun onLoseFocus() {
-		paused = true
-	}
-
-	override fun onFocus() {
-		paused = false
 	}
 
 	override fun customDraw(g: FriceDrawer) = Unit
@@ -201,7 +184,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
-	override fun drawEverything(bgg: JvmDrawer) {
+	fun drawEverything(bgg: JvmDrawer) {
 		processBuffer()
 		layers.forEach {
 			it.objects.forEach { o ->

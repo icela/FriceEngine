@@ -1,5 +1,11 @@
 package org.frice
 
+import javafx.application.Application
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
+import javafx.scene.layout.StackPane
+import javafx.stage.Stage
+import org.frice.platform.FriceGame
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.loop
 import org.frice.utils.time.FTimeListener
@@ -8,6 +14,9 @@ import java.util.*
 import javax.swing.UIManager
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
+import javafx.scene.Scene
+import javafx.scene.control.Button
+
 
 object Initializer {
 	init {
@@ -41,6 +50,27 @@ object Initializer {
 	}
 
 	@JvmStatic
+	fun launch(game: GameFX) {
+		val obj = object : Application() {
+			override fun start(stage: Stage) {
+				val btn = Button()
+				btn.text = "Say 'Hello World'"
+				btn.onAction = EventHandler<ActionEvent> { println("Hello World!") }
+
+				val root = StackPane()
+				root.children.add(btn)
+
+				val scene = Scene(root, 300.0, 250.0)
+
+				stage.title = "Hello World!"
+				stage.scene = scene
+				stage.show()
+			}
+		}
+		Application.launch(obj.javaClass)
+	}
+
+	@JvmStatic
 	fun launch(game: Game) {
 		game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		FLog.v("Engine start!")
@@ -69,5 +99,12 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun launch(c: Class<out Game>) = launch(c.newInstance())
+	fun launch(c: Class<FriceGame>) {
+		val instance = c.newInstance()
+		when (instance) {
+			is Game -> launch(instance)
+			is GameFX -> launch(instance)
+			else -> throw IllegalArgumentException("You should launch an instance of Game or GameFX!")
+		}
+	}
 }
