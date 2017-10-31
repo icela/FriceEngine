@@ -50,7 +50,6 @@ dependencies {
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-
 jar {
 	manifest {
 	}
