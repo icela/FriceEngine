@@ -29,7 +29,7 @@ This engine is completely platform-independent: no JNI linkage, no native method
 
 # Build
 
-Add code below to your gradle scrip:
+Add code below to your gradle script:
 
 ```groovy
 allprojects {
@@ -40,7 +40,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.4.0'
+  compile 'com.github.icela:FriceEngine:v1.5.0-alpha2'
 }
 ```
 
