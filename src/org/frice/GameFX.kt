@@ -1,5 +1,12 @@
 package org.frice
 
+import javafx.application.Application
+import javafx.event.ActionEvent
+import javafx.event.EventHandler
+import javafx.scene.Scene
+import javafx.scene.control.Button
+import javafx.scene.layout.StackPane
+import javafx.stage.Stage
 import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.platform.*
@@ -8,7 +15,7 @@ import java.util.*
 
 open class GameFX
 @JvmOverloads
-constructor(layerCount: Int = 1) : FriceGame {
+constructor(layerCount: Int = 1) : Application(), FriceGame {
 	override var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()
@@ -74,4 +81,18 @@ constructor(layerCount: Int = 1) : FriceGame {
 		TODO("not implemented")
 	}
 
+	override fun start(stage: Stage) {
+		val btn = Button()
+		btn.text = "Say 'Hello World'"
+		btn.onAction = EventHandler<ActionEvent> { println("Hello World!") }
+
+		val root = StackPane()
+		root.children.add(btn)
+
+		val scene = Scene(root, 300.0, 250.0)
+
+		stage.title = "Hello World!"
+		stage.scene = scene
+		stage.show()
+	}
 }

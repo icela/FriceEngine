@@ -50,25 +50,7 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun launch(game: GameFX) {
-		val obj = object : Application() {
-			override fun start(stage: Stage) {
-				val btn = Button()
-				btn.text = "Say 'Hello World'"
-				btn.onAction = EventHandler<ActionEvent> { println("Hello World!") }
-
-				val root = StackPane()
-				root.children.add(btn)
-
-				val scene = Scene(root, 300.0, 250.0)
-
-				stage.title = "Hello World!"
-				stage.scene = scene
-				stage.show()
-			}
-		}
-		Application.launch(obj.javaClass)
-	}
+	fun launch(game: GameFX) = Application.launch(game.javaClass)
 
 	@JvmStatic
 	fun launch(game: Game) {
@@ -99,8 +81,7 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun launch(c: Class<FriceGame>) {
-		val instance = c.newInstance()
+	fun launch(c: Class<FriceGame>) = c.newInstance().let { instance ->
 		when (instance) {
 			is Game -> launch(instance)
 			is GameFX -> launch(instance)
