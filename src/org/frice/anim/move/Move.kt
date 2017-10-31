@@ -2,8 +2,7 @@
 
 package org.frice.anim.move
 
-import org.frice.anim.FAnim
-import org.frice.utils.time.Clock
+import org.frice.utils.time.FClock
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -62,7 +61,7 @@ open class AccurateMove(var x: Double, var y: Double) : org.frice.anim.move.Move
  */
 abstract class CustomMove : org.frice.anim.move.MoveAnim() {
 	private val timeFromStart: Double
-		get() = Clock.current - start
+		get() = FClock.current - start
 
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double

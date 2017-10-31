@@ -1,13 +1,7 @@
 package org.frice.resource.image
 
-import org.frice.Game
-import org.frice.platform.FriceImage
-import org.frice.platform.adapter.JvmImage
-import org.frice.resource.FResource
-import org.frice.resource.manager.ImageManager
-import org.frice.resource.manager.WebImageManager
 import org.frice.utils.message.FLog
-import org.frice.utils.time.Clock
+import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimeListener
 import java.awt.Rectangle
 
@@ -85,7 +79,7 @@ class FrameImageResource(
 
 	constructor(game: org.frice.Game, list: Array<org.frice.resource.image.ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 
-	private var start = Clock.current
+	private var start = FClock.current
 	private val timer: FTimeListener
 	private var counter = 0
 	private var ended = false
@@ -107,7 +101,7 @@ class FrameImageResource(
 			FLog.e("counter = $counter")
 			counter = (counter + 1) % list.size
 		}
-		addTimeListener(timer)
+		game.addTimeListener(timer)
 	}
 }
 

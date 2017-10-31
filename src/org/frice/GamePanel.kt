@@ -16,39 +16,39 @@ class GamePanel(private val game: org.frice.Game) : JPanel() {
 	init {
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) {
-				click(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_CLICK))
-				onClick(org.frice.event.OnClickEvent(e))
+				game.click(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_CLICK))
+				game.onClick(org.frice.event.OnClickEvent(e))
 			}
 
-			override fun mouseEntered(e: MouseEvent) = onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_ENTERED))
-			override fun mouseExited(e: MouseEvent) = onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_EXITED))
+			override fun mouseEntered(e: MouseEvent) = game.onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_ENTERED))
+			override fun mouseExited(e: MouseEvent) = game.onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_EXITED))
 			override fun mouseReleased(e: MouseEvent) {
-				mouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_RELEASED))
-				onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_RELEASED))
+				game.mouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_RELEASED))
+				game.onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_RELEASED))
 			}
 
 			override fun mousePressed(e: MouseEvent) {
-				mouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_PRESSED))
-				onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_PRESSED))
+				game.mouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_PRESSED))
+				game.onMouse(org.frice.event.OnMouseEvent(e, org.frice.event.OnMouseEvent.MOUSE_PRESSED))
 			}
 		})
 
-		addWindowListener(object : WindowListener {
+		game.addWindowListener(object : WindowListener {
 			override fun windowDeiconified(e: WindowEvent) = Unit
 			override fun windowActivated(e: WindowEvent) {
-				loseFocus = false
+				game.loseFocus = false
 				FClock.resume()
-				onFocus()
+				game.onFocus()
 			}
 
 			override fun windowDeactivated(e: WindowEvent) {
-				loseFocus = true
+				game.loseFocus = true
 				FClock.pause()
-				onLoseFocus()
+				game.onLoseFocus()
 			}
 
 			override fun windowIconified(e: WindowEvent) = Unit
-			override fun windowClosing(e: WindowEvent) = onExit()
+			override fun windowClosing(e: WindowEvent) = game.onExit()
 			override fun windowClosed(e: WindowEvent) = Unit
 			override fun windowOpened(e: WindowEvent) = Unit
 		})
@@ -56,13 +56,13 @@ class GamePanel(private val game: org.frice.Game) : JPanel() {
 
 	override fun update(g: Graphics?) = paint(g)
 	override fun paintComponent(g: Graphics) {
-		clearScreen()
-		drawEverything(drawer)
+		game.clearScreen()
+		game.drawEverything(game.drawer)
 
-		if (loseFocus and loseFocusChangeColor) {
-			repeat(drawer.friceImage.width) { x: Int ->
-				repeat(drawer.friceImage.height) { y: Int ->
-					drawer.friceImage[x, y] = org.frice.resource.graphics.ColorResource(drawer
+		if (game.loseFocus and game.loseFocusChangeColor) {
+			repeat(game.drawer.friceImage.width) { x: Int ->
+				repeat(game.drawer.friceImage.height) { y: Int ->
+					game.drawer.friceImage[x, y] = org.frice.resource.graphics.ColorResource(game.drawer
 							.friceImage[x, y]
 							.color
 							.darker())
@@ -70,14 +70,14 @@ class GamePanel(private val game: org.frice.Game) : JPanel() {
 			}
 		}
 
-		drawer.init()
-		drawer.color = org.frice.resource.graphics.ColorResource.DARK_GRAY
-		if (showFPS) drawer.drawString("fps: ${fpsDisplay}", 30.0, height - 30.0)
+		game.drawer.init()
+		game.drawer.color = org.frice.resource.graphics.ColorResource.DARK_GRAY
+		if (game.showFPS) game.drawer.drawString("fps: ${game.fpsDisplay}", 30.0, height - 30.0)
 
 		/*
 		 * 厚颜无耻
 		 * drawer.drawString("Powered by FriceEngine. ice1000", 5, 20)
 		 */
-		g.drawImage(drawer.friceImage.image, 0, 0, this)
+		g.drawImage(game.drawer.friceImage.image, 0, 0, this)
 	}
 }

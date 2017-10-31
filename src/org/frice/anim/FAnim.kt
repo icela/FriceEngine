@@ -1,6 +1,6 @@
 package org.frice.anim
 
-import org.frice.utils.time.Clock
+import org.frice.utils.time.FClock
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -8,7 +8,7 @@ import org.frice.utils.time.Clock
  * @since v0.2.1
  */
 abstract class FAnim {
-	protected val start = Clock.current.toDouble()
+	protected val start = FClock.current.toDouble()
 
-	protected val now: Double get() = Clock.current.toDouble()
+	protected val now: Double get() = FClock.current.toDouble()
 }

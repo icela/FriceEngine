@@ -1,12 +1,5 @@
 package org.frice.special.gal
 
-import org.frice.Game
-import org.frice.event.OnClickEvent
-import org.frice.obj.button.FButton
-import org.frice.obj.button.ImageButton
-import org.frice.obj.button.SimpleButton
-import org.frice.obj.sub.ImageObject
-import org.frice.resource.image.ImageResource
 import org.frice.utils.audio.play
 import org.frice.utils.misc.unless
 import java.io.File
@@ -22,12 +15,15 @@ import java.util.*
 internal open class GalGame : org.frice.Game() {
 
 	companion object {
-		@JvmField val POSITION_LEFT = 0
-		@JvmField val POSITION_MIDDLE = 1
-		@JvmField val POSITION_RIGHT = 2
+		@JvmField
+		val POSITION_LEFT = 0
+		@JvmField
+		val POSITION_MIDDLE = 1
+		@JvmField
+		val POSITION_RIGHT = 2
 	}
 
-	private val stepSequence = ArrayList<org.frice.special.gal.GalStep>()
+	private val stepSequence = ArrayList<Step>()
 	private val stepMarked = ArrayList<Int>()
 
 	protected var step = 0
@@ -61,46 +57,46 @@ internal open class GalGame : org.frice.Game() {
 		val now = stepSequence.first()
 		when (now) {
 		// change the background
-			is org.frice.special.gal.GalGalBackground -> {
+			is GalBackground -> {
 //				back = now.image
 			}
-			is org.frice.special.gal.GalGalText -> {
+			is GalText -> {
 				TODO("print the text")
 			}
-			is org.frice.special.gal.GalGal立ち絵 -> {
+			is Gal立ち絵 -> {
 				when (now.position) {
-					org.frice.special.gal.GalCompanion.POSITION_LEFT -> {
+					Companion.POSITION_LEFT -> {
 						leftTaChiE.res = now.image
 						leftTaChiE.x = width / 2.0 - now.image.image.width / 2
 						leftTaChiE.y = (height - now.image.image.height).toDouble()
 					}
-					org.frice.special.gal.GalCompanion.POSITION_MIDDLE -> {
+					Companion.POSITION_MIDDLE -> {
 						middleTaChiE.res = now.image
 						middleTaChiE.x = width / 4.0 - now.image.image.width / 2
 						middleTaChiE.y = (height - now.image.image.height).toDouble()
 					}
-					org.frice.special.gal.GalCompanion.POSITION_RIGHT -> {
+					Companion.POSITION_RIGHT -> {
 						rightTaChiE.res = now.image
 						rightTaChiE.x = width / 4.0 * 3 - now.image.image.width / 2
 						rightTaChiE.y = (height - now.image.image.height).toDouble()
 					}
 				}
 			}
-			is org.frice.special.gal.GalGalOptions -> {
+			is GalOptions -> {
 				val list = listOf<org.frice.obj.button.SimpleButton>()
 				TODO("show list of game options")
 			}
-			is org.frice.special.gal.GalGalAudio -> {
+			is GalAudio -> {
 				if (!skip) play(now.file)
 				stepSequence.removeAt(0)
 			}
-			is org.frice.special.gal.GalGalSkip -> {
+			is GalSkip -> {
 				stepSequence.removeAt(0)
 				recursive = true
 				repeat(if (now.isAbsolute) now.index - step else now.index) { it: Int -> nextStep(true) }
 			}
 		}
-		unless (recursive) {
+		unless(recursive) {
 			stepSequence.removeAt(0)
 		}
 	}
@@ -115,7 +111,7 @@ internal open class GalGame : org.frice.Game() {
 
 	protected fun load(path: String) = org.frice.resource.image.ImageResource.fromPath(path)
 
-	protected fun addStep(o: org.frice.special.gal.GalStep) {
+	protected fun addStep(o: Step) {
 		stepSequence.add(o)
 		if (o.marked) stepMarked.add(stepSequence.lastIndex)
 	}
@@ -141,7 +137,7 @@ internal open class GalGame : org.frice.Game() {
 		val button: org.frice.obj.button.FButton
 	}
 
-	inner class GalTextOption(text: String, val target: Int) : org.frice.special.gal.GalGalOption {
+	inner class GalTextOption(text: String, val target: Int) : GalOption {
 		override val button = org.frice.obj.button.SimpleButton(
 				text = text,
 				x = width / 4.0,
@@ -150,19 +146,19 @@ internal open class GalGame : org.frice.Game() {
 				height = 25.0)
 	}
 
-	class GalImageOption(imageButton: org.frice.obj.button.ImageButton) : org.frice.special.gal.GalGalOption {
+	class GalImageOption(imageButton: org.frice.obj.button.ImageButton) : GalOption {
 		override val button = imageButton
 	}
 
 	/**
 	 * text
 	 */
-	inner class GalText(val text: String) : org.frice.special.gal.GalStep()
+	inner class GalText(val text: String) : Step()
 
 	/**
 	 * background
 	 */
-	inner class GalBackground(val image: org.frice.resource.image.ImageResource) : org.frice.special.gal.GalStep()
+	inner class GalBackground(val image: org.frice.resource.image.ImageResource) : Step()
 
 	/**
 	 * 立绘, 立ち絵
@@ -173,16 +169,16 @@ internal open class GalGame : org.frice.Game() {
 	 * @see POSITION_RIGHT
 	 * @see GalTaChiE
 	 */
-	open inner class Gal立ち絵(val image: org.frice.resource.image.ImageResource, val position: Int) : org.frice.special.gal.GalStep()
+	open inner class Gal立ち絵(val image: org.frice.resource.image.ImageResource, val position: Int) : Step()
 
 	/**
 	 * alias of 立ち絵
 	 * @see Gal立ち絵
 	 */
-	inner class GalTaChiE(imageResource: org.frice.resource.image.ImageResource, position: Int) : org.frice.special.gal.GalGal立ち絵(imageResource, position)
+	inner class GalTaChiE(imageResource: org.frice.resource.image.ImageResource, position: Int) : Gal立ち絵(imageResource, position)
 
-	inner class GalOptions(val list: List<org.frice.special.gal.GalGalOption>) : org.frice.special.gal.GalStep()
-	inner class GalSkip(val index: Int) : org.frice.special.gal.GalStep() {
+	inner class GalOptions(val list: List<GalOption>) : Step()
+	inner class GalSkip(val index: Int) : Step() {
 		var isAbsolute = false
 			private set
 
@@ -191,7 +187,7 @@ internal open class GalGame : org.frice.Game() {
 		}
 	}
 
-	inner class GalAudio(val file: File) : org.frice.special.gal.GalStep() {
+	inner class GalAudio(val file: File) : Step() {
 		constructor(path: String) : this(File(path))
 	}
 }
