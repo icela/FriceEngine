@@ -1,6 +1,8 @@
 package org.frice
 
-import org.frice.Game.Initializer.launch
+import org.frice.Initializer.launch
+import org.frice.obj.sub.DebugImageObject
+import org.frice.resource.image.ImageResource
 import org.frice.utils.misc.BoolArray
 import org.junit.Test
 import kotlin.test.*
@@ -33,9 +35,9 @@ class BoolArrayTest {
 	companion object {
 		@JvmStatic
 		fun main(vararg args: String) {
-			launch(object : org.frice.Game() {
-				val dbg = org.frice.obj.sub.DebugImageObject(
-						org.frice.resource.image.ImageResource.fromWeb("https://coding.net/u/ice1000/p/Images/git/raw/master/blog-img/13/a.png"), 10.0, 10.0)
+			launch(object : Game() {
+				val dbg = DebugImageObject(
+						ImageResource.fromWeb("https://coding.net/u/ice1000/p/Images/git/raw/master/blog-img/13/a.png"), 10.0, 10.0)
 
 				override fun onLastInit() {
 					addObject(dbg)

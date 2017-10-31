@@ -1,6 +1,6 @@
 package org.frice.utils.graphics.utils
 
-import org.frice.game.utils.misc.shouldBe
+import org.frice.utils.misc.shouldBe
 import org.junit.Test
 import java.awt.Color
 import java.util.*

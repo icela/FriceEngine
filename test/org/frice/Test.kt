@@ -1,27 +1,14 @@
 package org.frice
 
-import org.frice.anim.RotateAnim
-import org.frice.game.anim.move.*
-import org.frice.anim.scale.SimpleScale
-import org.frice.event.OnClickEvent
-import org.frice.obj.PhysicalObject
-import org.frice.obj.button.SimpleButton
-import org.frice.obj.button.SimpleText
-import org.frice.obj.effects.FunctionEffect
-import org.frice.obj.effects.ParticleEffect
-import org.frice.obj.sub.ImageObject
-import org.frice.obj.sub.ShapeObject
-import org.frice.platform.adapter.JvmImage
+import org.frice.Initializer.launch
 import org.frice.resource.graphics.ColorResource
-import org.frice.resource.graphics.ParticleResource
-import org.frice.resource.image.WebImageResource
-import org.frice.game.utils.data.Preference
-import org.frice.game.utils.data.XMLPreference
-import org.frice.game.utils.graphics.shape.*
-import org.frice.game.utils.graphics.utils.grayify
-import org.frice.game.utils.message.FLog
-import org.frice.game.utils.time.FTimeListener
-import org.frice.game.utils.time.FTimer
+import org.frice.utils.data.Preference
+import org.frice.utils.data.XMLPreference
+import org.frice.utils.graphics.shape.*
+import org.frice.utils.graphics.utils.grayify
+import org.frice.utils.message.FLog
+import org.frice.utils.time.FTimeListener
+import org.frice.utils.time.FTimer
 import java.util.*
 import kotlin.test.assertEquals
 

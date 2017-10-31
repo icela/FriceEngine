@@ -41,23 +41,23 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun Game.launch() {
-		defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
+	fun launch(game: Game) {
+		game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		FLog.v("Engine start!")
-		run {
-			onLastInit()
+		game.run {
+			this.onLastInit()
 			thread {
 				loop {
 					try {
-						onRefresh()
-						timeListeners.forEach(FTimeListener::check)
+						this.onRefresh()
+						this.timeListeners.forEach(FTimeListener::check)
 						// only update per "refreshTime"
-						if (!paused && !stopped && refresh.ended()) {
-							panel.repaint()
-							++fpsCounter
-							if (fpsTimer.ended()) {
-								fpsDisplay = fpsCounter
-								fpsCounter = 0
+						if (!this.paused && !this.stopped && this.refresh.ended()) {
+							this.panel.repaint()
+							++this.fpsCounter
+							if (this.fpsTimer.ended()) {
+								this.fpsDisplay = this.fpsCounter
+								this.fpsCounter = 0
 							}
 						}
 					} catch (ignored: ConcurrentModificationException) {
@@ -69,5 +69,5 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun launch(c: Class<out org.frice.Game>) = c.newInstance().launch()
+	fun launch(c: Class<out Game>) = launch(c.newInstance())
 }

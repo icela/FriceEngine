@@ -1,7 +1,7 @@
 package org.frice
 
-import org.frice.game.utils.data.Preference
-import org.frice.game.utils.message.FLog
+import org.frice.utils.data.Preference
+import org.frice.utils.message.FLog
 import org.junit.Test
 
 /**
