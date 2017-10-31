@@ -81,7 +81,7 @@ object Initializer {
 	}
 
 	@JvmStatic
-	fun launch(c: Class<FriceGame>) = c.newInstance().let { instance ->
+	fun launch(c: Class<out FriceGame>) = c.newInstance().let { instance ->
 		when (instance) {
 			is Game -> launch(instance)
 			is GameFX -> launch(instance)
