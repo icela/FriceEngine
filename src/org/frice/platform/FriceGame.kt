@@ -17,6 +17,25 @@ interface FriceGame {
 	var fpsDisplay: Int
 	var fpsTimer: FTimer
 
+	/**
+	 * not implemented yet.
+	 * currently it's same as paused.
+	 */
+	var stopped: Boolean
+	var debug: Boolean
+
+	/** a general purpose instance for generating random numbers */
+	val random: Random
+
+	/** if true, the engine will collect all objects which are invisible from game window. */
+	var autoGC: Boolean
+
+	/** if true, there will be a fps calculating on the bottom-left side of window. */
+	var showFPS: Boolean
+	var loseFocus: Boolean
+	var loseFocusChangeColor: Boolean
+	var millisToRefresh: Int
+
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() {
 		layers.forEach(org.frice.platform.Layer::processBuffer)

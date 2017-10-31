@@ -6,16 +6,15 @@ import org.frice.utils.graphics.shape.FOval
 import org.frice.utils.graphics.shape.FRectangle
 import org.frice.utils.message.FDialog
 import org.frice.utils.message.FLog
-import org.frice.utils.misc.loop
 import org.frice.utils.misc.unless
 import org.frice.utils.time.*
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.Point
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.util.*
 import javax.imageio.ImageIO.read
-import javax.swing.*
-import kotlin.concurrent.thread
+import javax.swing.JFrame
 
 /**
  * First game class(not for you)
@@ -42,49 +41,36 @@ constructor(layerCount: Int = 1) : JFrame(), org.frice.platform.FriceGame {
 	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
 	override val layers = Array(layerCount) { org.frice.platform.Layer() }
 
-	/**
-	 * if paused, main window will not call `onRefresh()`.
-	 */
 	var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()
 			field = value
 		}
 
-	/**
-	 * not implemented yet.
-	 * currently it's same as paused.
-	 */
-	var stopped = false
+	override var stopped = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()
 			field = value
 		}
 
-	var debug = true
+	override var debug = true
 
-	/**
-	 * a general purpose instance for generating random numbers
-	 */
-	val random = Random()
+	override val random = Random()
 
-	/**
-	 * if true, the engine will collect all objects which are invisible from game window.
-	 */
-	var autoGC = true
+	override var autoGC = true
 
 	/**
 	 * if true, there will be a fps calculating on the bottom-left side of window.
 	 */
-	var showFPS = true
+	override var showFPS = true
 
-	var loseFocus = false
-		internal set
+	override var loseFocus = false
+		set(value) = Unit
 
-	var loseFocusChangeColor = true
+	override var loseFocusChangeColor = true
 
 	internal val refresh = FTimer(4)
-	var millisToRefresh: Int
+	override var millisToRefresh: Int
 		get () = refresh.time
 		set (value) {
 			refresh.time = value
