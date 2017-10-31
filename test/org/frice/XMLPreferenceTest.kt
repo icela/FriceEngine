@@ -1,6 +1,6 @@
 package org.frice
 
-import org.frice.game.utils.data.XMLPreference
+import org.frice.utils.data.XMLPreference
 import org.junit.BeforeClass
 import org.junit.Test
 

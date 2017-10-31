@@ -1,6 +1,7 @@
 package org.frice
 
-import org.frice.game.utils.time.FTimeListener
+import org.frice.Initializer.launch
+import org.frice.utils.time.FTimeListener
 
 class TimerTest : org.frice.Game() {
 	override fun onInit() {
