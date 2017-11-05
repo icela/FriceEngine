@@ -1,6 +1,7 @@
 package org.frice
 
 import org.frice.Initializer.launch
+import org.frice.obj.SideEffect
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.data.Preference
 import org.frice.utils.data.XMLPreference

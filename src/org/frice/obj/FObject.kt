@@ -97,6 +97,7 @@ abstract class FObject : org.frice.obj.PhysicalObject() {
 	fun addAnim(anim: org.frice.anim.FAnim) = anims.add(anim)
 	fun addCollider(o: org.frice.obj.PhysicalObject, e: SideEffect) = addCollider(o to e)
 	fun addCollider(p: Pair<org.frice.obj.PhysicalObject, SideEffect>) = targets.add(p)
+	fun addCollider(o: org.frice.obj.PhysicalObject, e: () -> Unit) = addCollider(o to SideEffect(e))
 	fun stopAnims() = anims.clear()
 
 	/**
