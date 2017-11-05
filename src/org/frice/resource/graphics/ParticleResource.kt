@@ -52,7 +52,7 @@ constructor(
 		}
 	}
 
-	override val resource: Any
+	override val resource
 		get() = image.apply {
 			drawBackground()
 			var cache1: Int

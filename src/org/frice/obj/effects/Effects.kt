@@ -35,8 +35,8 @@ constructor(
 class ParticleEffect(
 		private var resource: ParticleResource,
 		override var x: Double,
-		override var y: Double) : ImageObject(resource.getResource(), x, y) {
-	override val image: FriceImage get() = resource.getResource()
+		override var y: Double) : ImageObject(resource.resource, x, y) {
+	override val image: FriceImage get() = resource.resource
 
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
