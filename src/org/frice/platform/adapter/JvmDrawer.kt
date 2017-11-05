@@ -10,16 +10,16 @@ import java.awt.*
  *
  * @author ice1000
  */
-class JvmDrawer(val frame: Frame) : org.frice.platform.FriceDrawer {
+class JvmDrawer(private val frame: Frame) : FriceDrawer {
 
 	override fun init() {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
 		g.font = Font("Consolas", Font.PLAIN, 16)
 	}
 
-	override val friceImage = org.frice.platform.adapter.JvmImage(frame.width, frame.height)
-	override var color: org.frice.resource.graphics.ColorResource
-		get() = org.frice.resource.graphics.ColorResource(g.color)
+	override val friceImage = JvmImage(frame.width, frame.height)
+	override var color: ColorResource
+		get() = ColorResource(g.color)
 		set(value) {
 			g.color = value.color
 		}
@@ -36,8 +36,8 @@ class JvmDrawer(val frame: Frame) : org.frice.platform.FriceDrawer {
 	override fun drawString(string: String, x: Double, y: Double) =
 			g.drawString(string, x.toInt(), y.toInt())
 
-	override fun drawImage(image: org.frice.platform.FriceImage, x: Double, y: Double) {
-		g.drawImage((image as org.frice.platform.adapter.JvmImage).image, x.toInt(), y.toInt(), frame)
+	override fun drawImage(image: FriceImage, x: Double, y: Double) {
+		g.drawImage((image as JvmImage).image, x.toInt(), y.toInt(), frame)
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =

@@ -1,7 +1,6 @@
 package org.frice.obj.effects
 
 import org.frice.obj.sub.ImageObject
-import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.FunctionResource
 import org.frice.resource.image.ImageResource
@@ -14,17 +13,17 @@ import org.frice.resource.image.ImageResource
  * @since v0.4.1
  */
 class FunctionEffect(
-		res: org.frice.resource.graphics.FunctionResource,
+		res: FunctionResource,
 		override var x: Double,
-		override var y: Double) : org.frice.obj.sub.ImageObject(res.getResource(), x, y) {
+		override var y: Double) : ImageObject(res.getResource(), x, y) {
 
-	constructor(function: Function1<Double, Double>, x: Double, y: Double, width: Int, height: Int) :
-			this(org.frice.resource.graphics.FunctionResource(org.frice.resource.graphics.ColorResource.BLUE, function::invoke, width, height), x, y)
+	constructor(function: (Double) -> Double, x: Double, y: Double, width: Int, height: Int) :
+			this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)
 
 	override val width: Double get() = res.image.width.toDouble()
 	override val height: Double get() = res.image.height.toDouble()
 
-	override fun getResource() = org.frice.resource.image.ImageResource(image)
+	override fun getResource() = ImageResource(image)
 
 	override val image: org.frice.platform.FriceImage get() = res.image
 
