@@ -3,6 +3,9 @@ package org.frice.platform.adapter
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.graphics.*
+import sun.awt.image.ToolkitImage
+import java.awt.geom.AffineTransform
+import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage
 
 open class JvmImage(val image: BufferedImage) : FriceImage {
@@ -14,7 +17,8 @@ open class JvmImage(val image: BufferedImage) : FriceImage {
 	override operator fun set(x: Int, y: Int, color: Int) = image.setRGB(x, y, color)
 
 	override fun getScaledInstance(x: Double, y: Double) =
-			JvmImage(image.getScaledInstance(x.toInt(), y.toInt(), BufferedImage.SCALE_DEFAULT) as BufferedImage)
+			JvmImage(run { AffineTransformOp(AffineTransform().apply { scale(x, y) }, AffineTransformOp.TYPE_BILINEAR)
+					.filter(image, BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)) })
 
 	override fun getSubImage(x: Int, y: Int, width: Int, height: Int) =
 			JvmImage(image.getSubimage(x, y, width, height))

@@ -1,3 +1,7 @@
+/**
+ * @author ice1000
+ * @since v1.5.0
+ */
 @file:JvmMultifileClass
 @file:JvmName("Initializer")
 

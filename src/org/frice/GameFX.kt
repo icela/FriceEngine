@@ -13,6 +13,10 @@ import org.frice.platform.*
 import org.frice.utils.time.*
 import java.util.*
 
+/**
+ * @author ice1000
+ * @since v1.5.0
+ */
 open class GameFX
 @JvmOverloads
 constructor(layerCount: Int = 1) : Application(), FriceGame {

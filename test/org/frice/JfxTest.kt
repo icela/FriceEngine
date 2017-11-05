@@ -1,6 +1,5 @@
 package org.frice
 
-
 fun main(args: Array<String>) {
 	val obj = O()
 	launch(obj)
@@ -8,6 +7,6 @@ fun main(args: Array<String>) {
 
 class O : GameFX() {
 	override fun onInit() {
-		title = "666"
+		title = "My awesome title"
 	}
 }

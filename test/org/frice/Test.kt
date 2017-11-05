@@ -18,7 +18,7 @@ import org.frice.resource.image.WebImageResource
 import org.frice.utils.data.Preference
 import org.frice.utils.data.XMLPreference
 import org.frice.utils.shape.*
-import org.frice.utils.graphics.grayify
+import org.frice.utils.graphics.greyify
 import org.frice.utils.message.FLog
 import org.frice.utils.time.FTimeListener
 import org.frice.utils.time.FTimer
@@ -84,7 +84,7 @@ class Test : org.frice.Game() {
 
 //		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
 
-		FLog.v(ColorResource.小泉花阳.color.rgb.grayify())
+		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
 	}
 
 	override fun onRefresh() {

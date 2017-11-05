@@ -1,12 +1,14 @@
 package org.frice.resource.image
 
 import org.frice.Game
+import org.frice.anim.move.SimpleMove
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.message.FLog
+import org.frice.utils.misc.squared
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimeListener
 import java.awt.Rectangle
@@ -40,11 +42,9 @@ abstract class ImageResource : FResource {
 	}
 
 	abstract var image: FriceImage
-	override val resource: Any
-		get() = image
+	override val resource get() = image
 
-	fun scaled(x: Double, y: Double) = fromImage(image.getScaledInstance(
-			image.width * x, image.height * y))
+	fun scaled(x: Double, y: Double) = fromImage(image.getScaledInstance(x, y))
 
 	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.getSubImage(x, y, width, height))
 }
@@ -94,10 +94,10 @@ class FrameImageResource(
 	override var image: FriceImage
 		get() = if (loop || ended) list.getImage(counter).image else list.last().image
 		set(value) {
-			list.add(org.frice.resource.image.ImageResource(value))
+			list += ImageResource(value)
 		}
 
-	fun MutableList<ImageResource>.getImage(index: Int): ImageResource {
+	private fun MutableList<ImageResource>.getImage(index: Int): ImageResource {
 		if (index == this.size - 1) ended = true
 		return this[index]
 	}
@@ -118,4 +118,47 @@ class FrameImageResource(
  */
 class FileImageResource(file: String) : ImageResource() {
 	override var image = ImageManager[file]
+}
+
+/**
+ * Android Material Design's ripple effect
+ * tmp given up
+ *
+ * @author ice1000
+ */
+class RippledImageResource(
+		val base: ImageResource,
+		speed: Int = 10) : ImageResource() {
+	private var internalImage = base.image.clone()
+	override var image: FriceImage
+		get() {
+			for (i in 0 until width)
+				for (j in 0 until height)
+					internalImage[i, j] = if ((i - x).squared() + (j - y).squared() > anim.delta.x.toInt().squared()) base.image[i, j] else base.image[i, j].darker()
+			return internalImage
+		}
+		set(value) = Unit
+
+	val width get() = internalImage.width
+	val height get() = internalImage.height
+
+	var x: Int = width / 2
+	var y: Int = height / 2
+	var speed: Int
+		get() = anim.x
+		set(value) {
+			anim.run { x = value }
+		}
+
+	private var anim: SimpleMove = SimpleMove(speed, 0)
+
+	fun reset(x: Int = this.x, y: Int = this.y) {
+		this.x = x
+		this.y = y
+		anim = SimpleMove(speed, 0)
+	}
+
+	init {
+		this.speed = speed
+	}
 }

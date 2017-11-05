@@ -43,3 +43,5 @@ inline fun unless(condition: Boolean, block: () -> Unit) {
 inline fun until(condition: Boolean, block: () -> Unit) {
 	while (!condition) block()
 }
+
+fun Int.squared() = this * this

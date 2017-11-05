@@ -1,5 +1,6 @@
 package org.frice
 
+import org.frice.resource.graphics.ColorResource
 import org.frice.utils.time.FClock
 import java.awt.Graphics
 import java.awt.event.*
@@ -62,7 +63,7 @@ class GamePanel(private val game: org.frice.Game) : JPanel() {
 		if (game.loseFocus and game.loseFocusChangeColor) {
 			repeat(game.drawer.friceImage.width) { x: Int ->
 				repeat(game.drawer.friceImage.height) { y: Int ->
-					game.drawer.friceImage[x, y] = org.frice.resource.graphics.ColorResource(game.drawer
+					game.drawer.friceImage[x, y] = ColorResource(game.drawer
 							.friceImage[x, y]
 							.color
 							.darker())
@@ -71,7 +72,7 @@ class GamePanel(private val game: org.frice.Game) : JPanel() {
 		}
 
 		game.drawer.init()
-		game.drawer.color = org.frice.resource.graphics.ColorResource.DARK_GRAY
+		game.drawer.color = ColorResource.DARK_GRAY
 		if (game.showFPS) game.drawer.drawString("fps: ${game.fpsDisplay}", 30.0, height - 30.0)
 
 		/*

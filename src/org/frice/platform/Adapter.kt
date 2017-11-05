@@ -1,6 +1,5 @@
 package org.frice.platform
 
-import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 
 /**

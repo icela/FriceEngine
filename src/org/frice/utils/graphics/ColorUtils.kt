@@ -16,11 +16,11 @@ val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
 
 fun java.awt.Color.toJfxColor(): javafx.scene.paint.Color = javafx.scene.paint.Color.rgb(red, green, blue)
 
-fun Int.toAscii() = asciiList[grayify() / (256 / asciiList.size + 1)]
+fun Int.toAscii() = asciiList[greyify() / (256 / asciiList.size + 1)]
 
 fun Color.average() = (blue + green + red) / 3
 
-fun Int.grayify(): Int = Color(this).average().let { c -> makeColor(c, c, c, alpha) }
+fun Int.greyify(): Int = Color(this).average().let { c -> makeColor(c, c, c, alpha) }
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun makeColor(red: Int, green: Int, blue: Int, alpha: Int) =
