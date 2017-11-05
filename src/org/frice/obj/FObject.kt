@@ -22,7 +22,7 @@ abstract class FObject : org.frice.obj.PhysicalObject() {
 
 	val anims = LinkedList<org.frice.anim.FAnim>()
 
-	val targets = LinkedList<Pair<org.frice.obj.PhysicalObject, () -> Unit>>()
+	val targets = LinkedList<Pair<org.frice.obj.PhysicalObject, SideEffect>>()
 
 	override var rotate = 0.0
 
@@ -95,8 +95,8 @@ abstract class FObject : org.frice.obj.PhysicalObject() {
 	}
 
 	fun addAnim(anim: org.frice.anim.FAnim) = anims.add(anim)
-	fun addCollider(o: org.frice.obj.PhysicalObject, e: () -> Unit) = addCollider(o to e)
-	fun addCollider(p: Pair<org.frice.obj.PhysicalObject, () -> Unit>) = targets.add(p)
+	fun addCollider(o: org.frice.obj.PhysicalObject, e: SideEffect) = addCollider(o to e)
+	fun addCollider(p: Pair<org.frice.obj.PhysicalObject, SideEffect>) = targets.add(p)
 	fun stopAnims() = anims.clear()
 
 	/**

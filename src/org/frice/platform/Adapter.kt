@@ -1,8 +1,5 @@
 package org.frice.platform
 
-import org.frice.platform.adapter.JvmImage
-import org.frice.resource.graphics.ColorResource
-
 /**
  * Created by ice1000 on 2016/10/31.
  *
@@ -11,7 +8,7 @@ import org.frice.resource.graphics.ColorResource
 interface FriceDrawer {
 	val friceImage: org.frice.platform.FriceImage
 	var color: org.frice.resource.graphics.ColorResource
-	fun init(): Unit
+	fun init()
 	fun drawOval(x: Double, y: Double, width: Double, height: Double)
 	fun drawString(string: String, x: Double, y: Double)
 	fun drawImage(image: org.frice.platform.FriceImage, x: Double, y: Double)
