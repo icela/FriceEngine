@@ -14,17 +14,17 @@ import org.frice.resource.manager.URLTextManager
 /**
  * reuse text already read before
  */
-fun readText(url: String) = org.frice.resource.manager.URLTextManager[url]
+fun readText(url: String) = URLTextManager[url]
 
 /**
  * reuse bytes already read before
  */
-fun readBytes(url: String) = org.frice.resource.manager.URLBytesManager[url]
+fun readBytes(url: String) = URLBytesManager[url]
 
 /**
  * reuse
  */
-fun readImage(url: String) = org.frice.resource.manager.ImageManager[url]
+fun readImage(url: String) = ImageManager[url]
 
 /**
  * reuse

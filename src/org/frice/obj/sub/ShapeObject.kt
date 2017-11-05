@@ -63,9 +63,4 @@ constructor(
 		scale.y += y
 	}
 
-	override fun equals(other: Any?): Boolean {
-		if (other == null || other !is FObject) return false
-		if ((id != -1 && id == other.id) || this === other) return true
-		return false
-	}
 }

@@ -3,7 +3,6 @@ package org.frice.platform.adapter
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.graphics.*
-import org.frice.utils.graphics.utils.*
 import java.awt.image.BufferedImage
 
 open class JvmImage(val image: BufferedImage) : FriceImage {
