@@ -6,5 +6,5 @@ package org.frice.resource
  * @since v0.1.1
  */
 interface FResource {
-	fun getResource(): Any
+	val resource: Any
 }

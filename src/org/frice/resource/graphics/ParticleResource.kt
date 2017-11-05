@@ -52,19 +52,20 @@ constructor(
 		}
 	}
 
-	override fun getResource() = image.apply {
-		drawBackground()
-		var cache1: Int
-		var cache2: Int
-		repeat((image.width * image.height * percentage).toInt()) {
-			cache1 = random.nextInt(width)
-			cache2 = random.nextInt(height)
-			image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
-			image.setRGB(cache1, cache2, when (back) {
-				is ColorResource -> back.color.rgb
-				is ImageResource -> back.image[cache1, cache2].color.rgb
-				else -> COLORLESS.color.rgb
-			})
+	override val resource: Any
+		get() = image.apply {
+			drawBackground()
+			var cache1: Int
+			var cache2: Int
+			repeat((image.width * image.height * percentage).toInt()) {
+				cache1 = random.nextInt(width)
+				cache2 = random.nextInt(height)
+				image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
+				image.setRGB(cache1, cache2, when (back) {
+					is ColorResource -> back.color.rgb
+					is ImageResource -> back.image[cache1, cache2].color.rgb
+					else -> COLORLESS.color.rgb
+				})
+			}
 		}
-	}
 }

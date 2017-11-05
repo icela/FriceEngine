@@ -155,7 +155,7 @@ class Test2 : org.frice.Game() {
 		}
 		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
 			mass = 1.0
-			anims.add(org.frice.anim.move.SimpleMove(80, 0))
+			anims += SimpleMove(80, 0)
 		}
 		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
 		text.textSize = 64
