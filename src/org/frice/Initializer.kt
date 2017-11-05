@@ -1,10 +1,6 @@
 package org.frice
 
 import javafx.application.Application
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
-import javafx.scene.layout.StackPane
-import javafx.stage.Stage
 import org.frice.platform.FriceGame
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.loop
@@ -14,9 +10,6 @@ import java.util.*
 import javax.swing.UIManager
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
-import javafx.scene.Scene
-import javafx.scene.control.Button
-
 
 object Initializer {
 	init {
@@ -57,19 +50,19 @@ object Initializer {
 		game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 		FLog.v("Engine start!")
 		game.run {
-			this.onLastInit()
+			onLastInit()
 			thread {
 				loop {
 					try {
-						this.onRefresh()
-						this.timeListeners.forEach(FTimeListener::check)
+						onRefresh()
+						timeListeners.forEach(FTimeListener::check)
 						// only update per "refreshTime"
-						if (!this.paused && !this.stopped && this.refresh.ended()) {
-							this.panel.repaint()
-							++this.fpsCounter
-							if (this.fpsTimer.ended()) {
-								this.fpsDisplay = this.fpsCounter
-								this.fpsCounter = 0
+						if (!paused && !stopped && refresh.ended()) {
+							panel.repaint()
+							++fpsCounter
+							if (fpsTimer.ended()) {
+								fpsDisplay = fpsCounter
+								fpsCounter = 0
 							}
 						}
 					} catch (ignored: ConcurrentModificationException) {
