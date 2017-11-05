@@ -5,13 +5,13 @@ import org.frice.obj.button.FText
 import java.util.*
 
 class Layer {
-	val objects = LinkedList<org.frice.obj.AbstractObject>()
-	val objectDeleteBuffer = ArrayList<org.frice.obj.AbstractObject>()
-	val objectAddBuffer = ArrayList<org.frice.obj.AbstractObject>()
+	val objects = LinkedList<AbstractObject>()
+	val objectDeleteBuffer = ArrayList<AbstractObject>()
+	val objectAddBuffer = ArrayList<AbstractObject>()
 
-	val texts = LinkedList<org.frice.obj.button.FText>()
-	val textDeleteBuffer = ArrayList<org.frice.obj.button.FText>()
-	val textAddBuffer = ArrayList<org.frice.obj.button.FText>()
+	val texts = LinkedList<FText>()
+	val textDeleteBuffer = ArrayList<FText>()
+	val textAddBuffer = ArrayList<FText>()
 
 	fun processBuffer() {
 		objects.addAll(objectAddBuffer)
@@ -30,13 +30,13 @@ class Layer {
 		textDeleteBuffer.addAll(texts)
 	}
 
-	fun addObject(obj: org.frice.obj.AbstractObject): Boolean = when (obj) {
-		is org.frice.obj.button.FText -> textAddBuffer.add(obj)
+	fun addObject(obj: AbstractObject): Boolean = when (obj) {
+		is FText -> textAddBuffer.add(obj)
 		else -> objectAddBuffer.add(obj)
 	}
 
-	fun removeObject(obj: org.frice.obj.AbstractObject): Boolean = when (obj) {
-		is org.frice.obj.button.FText -> textDeleteBuffer.add(obj)
+	fun removeObject(obj: AbstractObject): Boolean = when (obj) {
+		is FText -> textDeleteBuffer.add(obj)
 		else -> objectDeleteBuffer.add(obj)
 	}
 }

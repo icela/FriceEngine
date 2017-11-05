@@ -3,7 +3,6 @@ package org.frice
 import javafx.application.Application
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
-import javafx.fxml.Initializable
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.layout.StackPane
@@ -12,7 +11,6 @@ import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.platform.*
 import org.frice.utils.time.*
-import java.net.URL
 import java.util.*
 
 open class GameFX

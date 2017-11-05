@@ -19,7 +19,7 @@ open class JvmImage(val image: BufferedImage) : FriceImage {
 	override fun getSubImage(x: Int, y: Int, width: Int, height: Int) =
 			JvmImage(image.getSubimage(x, y, width, height))
 
-	override fun clone(): FriceImage = JvmImage(BufferedImage(width, height, image.type).apply {
+	override fun clone() = JvmImage(BufferedImage(width, height, image.type).apply {
 		this@apply.data = this@JvmImage.image.data
 	})
 

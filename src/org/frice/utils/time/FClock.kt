@@ -1,6 +1,5 @@
 package org.frice.utils.time
 
-import org.frice.platform.FriceClock
 import org.frice.utils.misc.unless
 
 /**
@@ -8,7 +7,7 @@ import org.frice.utils.misc.unless
  *
  * @author ice1000
  */
-object FClock : org.frice.platform.FriceClock {
+object FClock {
 	var started = true
 		internal set
 	var startTicks = System.currentTimeMillis()
@@ -16,21 +15,21 @@ object FClock : org.frice.platform.FriceClock {
 	var pauseTicks = startTicks
 		internal set
 
-	override val current: Long
+	val current: Long
 		get() = if (started) System.currentTimeMillis() - startTicks else pauseTicks - startTicks
 
-	override fun init() {
+	fun init() {
 		startTicks = System.currentTimeMillis()
 		started = true
 	}
 
-	override fun resume() {
+	fun resume() {
 		if (started) return
 		startTicks += System.currentTimeMillis() - pauseTicks
 		started = true
 	}
 
-	override fun pause() {
+	fun pause() {
 		unless(started) {
 			return
 		}

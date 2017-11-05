@@ -1,11 +1,8 @@
 package org.frice.platform
 
 import org.frice.obj.AbstractObject
-import org.frice.platform.adapter.JvmDrawer
 import org.frice.resource.image.ImageResource
-import org.frice.resource.image.ImageResource.Factories
 import org.frice.utils.time.FTimeListener
-import org.frice.utils.time.FTimer
 import java.util.*
 
 interface FriceGame : TitleOwner {

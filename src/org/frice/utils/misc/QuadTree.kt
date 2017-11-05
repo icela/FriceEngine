@@ -1,5 +1,6 @@
 package org.frice.utils.misc
 
+import org.frice.obj.PhysicalObject
 import org.frice.utils.shape.FShapeDouble
 import java.util.*
 
@@ -10,20 +11,19 @@ import java.util.*
  *
  * @author lfkdsk
  */
-class QuadTree(var level: Int, var bounds: FQuad) {
+class QuadTree(private var level: Int, private var bounds: FQuad) {
 	class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) : FShapeDouble
 
-	val MAX_OBJECTS = 3
+	private val maxObjects = 3
+	private val maxLevels = 5
 
-	val MAX_LEVELS = 5
-
-	private val objects = arrayListOf<org.frice.obj.PhysicalObject>()
+	private val objects = arrayListOf<PhysicalObject>()
 
 	private val nodes = arrayOfNulls<QuadTree>(4)
 
 	fun clear() {
 		objects.clear()
-		nodes.indices.forEach { nodes[it] = null }
+		for (i in nodes.indices) nodes[i] = null
 	}
 
 	private fun split() {
@@ -34,10 +34,10 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 		val x = bounds.x
 		val y = bounds.y
 		// split to four nodes
-		nodes[0] = QuadTree(level + 1, FQuad((x + subWidth), y, subWidth, subHeight))
+		nodes[0] = QuadTree(level + 1, FQuad(x + subWidth, y, subWidth, subHeight))
 		nodes[1] = QuadTree(level + 1, FQuad(x, y, subWidth, subHeight))
-		nodes[2] = QuadTree(level + 1, FQuad(x, (y + subHeight), subWidth, subHeight))
-		nodes[3] = QuadTree(level + 1, FQuad((x + subWidth), (y + subHeight), subWidth, subHeight))
+		nodes[2] = QuadTree(level + 1, FQuad(x, subWidth, (y + subHeight), subHeight))
+		nodes[3] = QuadTree(level + 1, FQuad(x + subWidth, y + subHeight, subWidth, subHeight))
 	}
 
 
@@ -47,7 +47,7 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	 * @param rectF 传入对象所在的矩形
 	 * @return index 使用类别区分所在象限
 	 */
-	private fun getIndex(rectF: org.frice.obj.PhysicalObject): Int {
+	private fun getIndex(rectF: PhysicalObject): Int {
 		var index = -1
 		val verticalMidpoint = bounds.x + bounds.width / 2
 		val horizontalMidpoint = bounds.y + bounds.height / 2
@@ -75,7 +75,7 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	 *
 	 * @param rectF object
 	 */
-	fun insert(rectF: org.frice.obj.PhysicalObject) {
+	fun insert(rectF: PhysicalObject) {
 		if (nodes[0] != null) {
 			val index = getIndex(rectF)
 			if (index != -1) {
@@ -84,9 +84,9 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 			}
 		}
 
-		objects.add(rectF)
+		objects += rectF
 
-		if (objects.size > MAX_OBJECTS && level < MAX_LEVELS) {
+		if (objects.size > maxObjects && level < maxLevels) {
 			// don't have subNodes
 			// split node
 			if (nodes[0] == null) split()
@@ -110,11 +110,11 @@ class QuadTree(var level: Int, var bounds: FQuad) {
 	 * @return list of collision
 	 */
 	fun retrieve(
-			returnObjects: ArrayList<List<org.frice.obj.PhysicalObject>>,
-			rectF: org.frice.obj.PhysicalObject): List<List<org.frice.obj.PhysicalObject>> {
+			returnObjects: ArrayList<List<PhysicalObject>>,
+			rectF: PhysicalObject): List<List<PhysicalObject>> {
 		val index = getIndex(rectF)
 		if (-1 != index && null != nodes[0]) nodes[index]?.retrieve(returnObjects, rectF)
-		returnObjects.add(objects)
+		returnObjects += objects
 		return returnObjects
 	}
 }
