@@ -39,8 +39,8 @@ constructor(
 
 	override var died = false
 
-	override fun isCollide(other: CollideBox): Boolean = when (other) {
-		is org.frice.obj.sub.ShapeObject -> when (other.collideBox) {
+	override fun isCollide(other: CollideBox) = when (other) {
+		is ShapeObject -> when (other.collideBox) {
 			is FRectangle -> when (collideBox) {
 				is FRectangle -> this rectCollideRect other
 //				is FOval ->
@@ -49,7 +49,7 @@ constructor(
 //			is FOval ->
 			else -> this rectCollideRect other
 		}
-		is org.frice.obj.sub.ImageObject -> when (collideBox) {
+		is ImageObject -> when (collideBox) {
 			is FRectangle -> this rectCollideRect other
 			else -> this rectCollideRect other
 		}
@@ -63,4 +63,9 @@ constructor(
 		scale.y += y
 	}
 
+	override fun equals(other: Any?): Boolean {
+		if (other == null || other !is FObject) return false
+		if ((id != -1 && id == other.id) || this === other) return true
+		return false
+	}
 }

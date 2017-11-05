@@ -56,7 +56,6 @@ abstract class PhysicalObject : AbstractObject, CollideBox, FContainer {
 	override var rotate = 0.0
 	var mass = 1.0
 		set(value) {
-			if (value <= 0) field = 0.001
-			else field = value
+			field = if (value <= 0) 0.001 else value
 		}
 }

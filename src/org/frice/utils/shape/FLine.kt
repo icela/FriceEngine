@@ -31,13 +31,4 @@ open class FLine(one: FPoint, two: FPoint) {
 		if (other == null || other !is FLine) return false
 		return a / other.a == b / other.b && b / other.b == c / other.c
 	}
-
-	/** just to suppress warning */
-	override fun hashCode(): Int {
-		var result = a
-		result = 31 * result + b
-		result = 31 * result + c
-		result = 31 * result + set.hashCode()
-		return result
-	}
 }
