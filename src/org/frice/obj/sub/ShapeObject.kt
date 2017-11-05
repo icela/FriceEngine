@@ -18,12 +18,12 @@ import org.frice.utils.graphics.shape.FShapeInt
 open class ShapeObject
 @JvmOverloads
 constructor(
-		var res: org.frice.resource.graphics.ColorResource,
+		var res: ColorResource,
 		override val collideBox: FShapeInt,
 		override var x: Double = 0.0,
 		override var y: Double = 0.0,
-		override var id: Int = -1) : org.frice.obj.FObject() {
-	private var scale = org.frice.anim.move.DoublePair(1.0, 1.0)
+		override var id: Int = -1) : FObject() {
+	private var scale = DoublePair(1.0, 1.0)
 
 	override var height: Double
 		get() = (collideBox.height * scale.y)
@@ -39,7 +39,7 @@ constructor(
 
 	override var died = false
 
-	override fun isCollide(other: org.frice.obj.CollideBox): Boolean = when (other) {
+	override fun isCollide(other: CollideBox): Boolean = when (other) {
 		is org.frice.obj.sub.ShapeObject -> when (other.collideBox) {
 			is FRectangle -> when (collideBox) {
 				is FRectangle -> this rectCollideRect other
@@ -64,7 +64,7 @@ constructor(
 	}
 
 	override fun equals(other: Any?): Boolean {
-		if (other == null || other !is org.frice.obj.FObject) return false
+		if (other == null || other !is FObject) return false
 		if ((id != -1 && id == other.id) || this === other) return true
 		return false
 	}
