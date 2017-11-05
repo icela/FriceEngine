@@ -123,7 +123,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 		/// to prevent this engine from the call#cking NPE!!
 		this.add(panel, BorderLayout.CENTER)
-		bounds = Initializer.BIG_SQUARE
+		bounds = BIG_SQUARE
 		onInit()
 		drawer = JvmDrawer(this)
 		drawer.init()

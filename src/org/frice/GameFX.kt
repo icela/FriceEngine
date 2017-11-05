@@ -59,7 +59,6 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 	open fun onMouse(e: OnMouseEvent) = Unit
 
 	override fun setTitle(title: String) {
-		TODO("not implemented")
 	}
 
 	override fun getTitle(): String {

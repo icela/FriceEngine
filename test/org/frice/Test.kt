@@ -1,6 +1,5 @@
 package org.frice
 
-import org.frice.Initializer.launch
 import org.frice.anim.RotateAnim
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
