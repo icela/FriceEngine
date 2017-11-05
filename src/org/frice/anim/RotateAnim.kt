@@ -5,7 +5,7 @@ package org.frice.anim
  * @author ice1000
  * @since v0.4
  */
-open class RotateAnim(var angle: Double) : org.frice.anim.FAnim() {
+open class RotateAnim(var angle: Double) : FAnim() {
 	val rotate: Double
 		get() = (now - start) * angle
 }

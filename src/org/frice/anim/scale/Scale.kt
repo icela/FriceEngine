@@ -2,14 +2,15 @@ package org.frice.anim.scale
 
 import org.frice.anim.FAnim
 import org.frice.anim.move.DoublePair
+import org.frice.anim.move.DoublePair.Factory.from1000
 
 /**
  * Created by ice1000 on 2016/8/15.
  * @author ice1000
  * @since v0.2.2
  */
-abstract class ScaleAnim : org.frice.anim.FAnim() {
-	abstract val after: org.frice.anim.move.DoublePair
+abstract class ScaleAnim : FAnim() {
+	abstract val after: DoublePair
 }
 
 /**
@@ -17,12 +18,12 @@ abstract class ScaleAnim : org.frice.anim.FAnim() {
  * @author ice1000
  * @since v0.2.3
  */
-class SimpleScale(var x: Double, var y: Double) : org.frice.anim.scale.ScaleAnim() {
+class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
 
 	private var cache: Double = start
-	override val after: org.frice.anim.move.DoublePair
+	override val after: DoublePair
 		get() {
-			val pair = org.frice.anim.move.DoublePair.from1000((now - cache) * x, (now - cache) * y)
+			val pair = from1000((now - cache) * x, (now - cache) * y)
 			cache = now
 			return pair
 		}

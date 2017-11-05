@@ -1,8 +1,10 @@
 package org.frice.anim.move
 
-class CircumAnim(var x: Double, var y: Double, var angularVelocity: Double) : org.frice.anim.move.MoveAnim() {
+import org.frice.anim.move.DoublePair.Factory.from1000
 
-	constructor(distance: org.frice.anim.move.DoublePair, angularVelocity: Double) :
+class CircumAnim(var x: Double, var y: Double, var angularVelocity: Double) : MoveAnim() {
+
+	constructor(distance: DoublePair, angularVelocity: Double) :
 			this(distance.x, distance.y, angularVelocity)
 
 	private val cos: Double
@@ -19,6 +21,6 @@ class CircumAnim(var x: Double, var y: Double, var angularVelocity: Double) : or
 	/**
 	 * x' = x cos α-y sin α, y' = x sin α + y cos α
 	 */
-	override val delta: org.frice.anim.move.DoublePair
-		get() = org.frice.anim.move.DoublePair.Factory.from1000(x * cos - y * sin, y * sin - x * cos)
+	override val delta: DoublePair
+		get() = from1000(x * cos - y * sin, y * sin - x * cos)
 }

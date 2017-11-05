@@ -2,6 +2,8 @@
 
 package org.frice.anim.move
 
+import org.frice.anim.FAnim
+import org.frice.anim.move.DoublePair.Factory.from1000
 import org.frice.utils.time.FClock
 
 /**
@@ -9,8 +11,8 @@ import org.frice.utils.time.FClock
  * @author ice1000
  * @since v0.2.1
  */
-abstract class MoveAnim : org.frice.anim.FAnim() {
-	abstract val delta: org.frice.anim.move.DoublePair
+abstract class MoveAnim : FAnim() {
+	abstract val delta: DoublePair
 	protected var lastRefresh: Double = start
 }
 
@@ -25,11 +27,11 @@ abstract class MoveAnim : org.frice.anim.FAnim() {
  * @param y pixels per second
  */
 // @Deprecated("AccurateMove is suggested.", ReplaceWith("AccurateMove()"), DeprecationLevel.WARNING)
-open class SimpleMove(var x: Int, var y: Int) : org.frice.anim.move.MoveAnim() {
+open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
-	override val delta: org.frice.anim.move.DoublePair
+	override val delta: DoublePair
 		get() {
-		val pair = org.frice.anim.move.DoublePair.Factory.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+		val pair = from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
 		lastRefresh = now
 		return pair
 	}
@@ -42,11 +44,11 @@ open class SimpleMove(var x: Int, var y: Int) : org.frice.anim.move.MoveAnim() {
  * @author ice1000
  * @since v0.5.1
  */
-open class AccurateMove(var x: Double, var y: Double) : org.frice.anim.move.MoveAnim() {
+open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
-	override val delta: org.frice.anim.move.DoublePair
+	override val delta: DoublePair
 		get() {
-		val pair = org.frice.anim.move.DoublePair.Factory.from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
+		val pair = from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
 		lastRefresh = now
 		return pair
 	}
@@ -59,7 +61,7 @@ open class AccurateMove(var x: Double, var y: Double) : org.frice.anim.move.Move
  * @author ice1000
  * @since v0.2.3
  */
-abstract class CustomMove : org.frice.anim.move.MoveAnim() {
+abstract class CustomMove : MoveAnim() {
 	private val timeFromStart: Double
 		get() = FClock.current - start
 
@@ -67,10 +69,10 @@ abstract class CustomMove : org.frice.anim.move.MoveAnim() {
 	abstract fun getYDelta(timeFromBegin: Double): Double
 	open fun update(timeFromBegin: Double) = Unit
 
-	override val delta: org.frice.anim.move.DoublePair
+	override val delta: DoublePair
 		get() {
 			update(timeFromStart)
-			return org.frice.anim.move.DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
+			return DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
 		}
 
 }

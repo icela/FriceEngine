@@ -42,7 +42,7 @@ interface FContainer {
  * @since v0.3
  */
 interface CollideBox {
-	fun isCollide(other: org.frice.obj.CollideBox): Boolean
+	fun isCollide(other: CollideBox): Boolean
 }
 
 /**
@@ -51,7 +51,7 @@ interface CollideBox {
  * @author ice1000
  * @since v0.4
  */
-abstract class PhysicalObject : org.frice.obj.AbstractObject, org.frice.obj.CollideBox, org.frice.obj.FContainer {
+abstract class PhysicalObject : AbstractObject, CollideBox, FContainer {
 	open var died = false
 	override var rotate = 0.0
 	var mass = 1.0

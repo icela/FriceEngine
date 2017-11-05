@@ -2,11 +2,12 @@ package org.frice.obj
 
 import org.frice.anim.move.DoublePair
 import org.frice.resource.image.ImageResource
+import org.frice.resource.image.ImageResource.Factories.empty
 import org.frice.utils.graphics.shape.FRectangle
 
 class ObjectGroup
 @JvmOverloads
-constructor(val objs: MutableList<org.frice.obj.FObject> = emptyList<org.frice.obj.FObject>().toMutableList()) : org.frice.obj.FObject() {
+constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList()) : FObject() {
 	override var x = Double.MAX_VALUE
 	override var y = Double.MAX_VALUE
 	override var width = 0.0
@@ -28,11 +29,11 @@ constructor(val objs: MutableList<org.frice.obj.FObject> = emptyList<org.frice.o
 	}
 
 	override fun isCollide(other: org.frice.obj.CollideBox) = objs.any { it.isCollide(other) }
-	override fun getResource() = org.frice.resource.image.ImageResource.empty()
+	override fun getResource() = empty()
 	override fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
 	override fun move(p: org.frice.anim.move.DoublePair) = objs.forEach { it.move(p) }
 	override fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 
-	fun addObject(vararg objects: org.frice.obj.FObject) = objects.forEach { objs.remove(it) }
-	fun removeObject(vararg objects: org.frice.obj.FObject) = objects.forEach { objs.remove(it) }
+	fun addObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
+	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
 }

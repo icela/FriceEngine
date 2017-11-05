@@ -14,7 +14,7 @@ open class OnClickEvent(val event: MouseEvent)
  * @author ice1000
  * @since v0.1
  */
-class OnMouseEvent(e: MouseEvent, val type: Int) : org.frice.event.OnClickEvent(e) {
+class OnMouseEvent(e: MouseEvent, val type: Int) : OnClickEvent(e) {
 	companion object {
 		@JvmField val MOUSE_CLICK = 0x00
 		@JvmField val MOUSE_RELEASED = 0x01
