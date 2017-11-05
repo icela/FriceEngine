@@ -3,6 +3,7 @@ package org.frice.obj.button
 import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.resource.graphics.ColorResource
+import java.util.function.Consumer
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -13,20 +14,20 @@ import org.frice.resource.graphics.ColorResource
 open class SimpleButton
 @JvmOverloads
 constructor(
-		var colorResource: org.frice.resource.graphics.ColorResource = org.frice.resource.graphics.ColorResource.GRAY,
+		var colorResource: ColorResource = ColorResource.GRAY,
 		override var text: String,
 		override var x: Double,
 		override var y: Double,
 		override var width: Double,
-		override var height: Double) : org.frice.obj.button.FButton, org.frice.obj.button.FText() {
+		override var height: Double) : FButton, FText() {
 
 	private var bool = false
 
-	override var onClickListener: (org.frice.event.OnClickEvent) -> Unit = { }
+	override var onClickListener: Consumer<OnClickEvent> = Consumer { }
 
-	override fun getColor() = if (bool) org.frice.resource.graphics.ColorResource(colorResource.color.darker()) else colorResource
+	override fun getColor() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
 
-	override fun onMouse(e: org.frice.event.OnMouseEvent): Boolean {
+	override fun onMouse(e: OnMouseEvent): Boolean {
 		bool = super.onMouse(e)
 		return bool
 	}

@@ -4,6 +4,7 @@ import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.obj.AbstractObject
 import org.frice.obj.FContainer
+import java.util.function.Consumer
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -11,11 +12,11 @@ import org.frice.obj.FContainer
  * @since v0.3.2
  */
 
-interface FButton : org.frice.obj.FContainer, org.frice.obj.AbstractObject {
-	var onClickListener: (org.frice.event.OnClickEvent) -> Unit
+interface FButton : FContainer, AbstractObject {
+	var onClickListener: Consumer<OnClickEvent>
 
-	infix fun onClick(e: org.frice.event.OnClickEvent) = onClickListener(e)
+	infix fun onClick(e: OnClickEvent) = onClickListener.accept(e)
 
 	/** @return true means pressed */
-	infix fun onMouse(e: org.frice.event.OnMouseEvent) = (e.type == org.frice.event.OnMouseEvent.MOUSE_PRESSED)
+	infix fun onMouse(e: OnMouseEvent) = (e.type == OnMouseEvent.MOUSE_PRESSED)
 }

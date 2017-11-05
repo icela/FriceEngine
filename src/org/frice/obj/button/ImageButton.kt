@@ -4,6 +4,7 @@ import org.frice.event.OnClickEvent
 import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
+import java.util.function.Consumer
 
 /**
  * Created by ice1000 on 2016/9/3 0003.
@@ -14,10 +15,10 @@ import org.frice.resource.image.ImageResource
 class ImageButton
 @JvmOverloads
 constructor(
-		val imageNormal: org.frice.resource.image.ImageResource,
-		val imagePressed: org.frice.resource.image.ImageResource = imageNormal,
+		val imageNormal: ImageResource,
+		val imagePressed: ImageResource = imageNormal,
 		x: Double,
-		y: Double) : org.frice.obj.FObject.ImageOwner, org.frice.obj.button.SimpleButton(
+		y: Double) : FObject.ImageOwner, SimpleButton(
 		text = "",
 		x = x,
 		y = y,
@@ -26,9 +27,9 @@ constructor(
 
 	override var rotate = 0.0
 
-	override var onClickListener: (org.frice.event.OnClickEvent) -> Unit = { }
+	override var onClickListener: Consumer<OnClickEvent> = Consumer { }
 
 	private var bool = false
 
-	override val image: org.frice.platform.FriceImage get () = if (bool) imagePressed.image else imageNormal.image
+	override val image: FriceImage get () = if (bool) imagePressed.image else imageNormal.image
 }
