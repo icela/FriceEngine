@@ -1,9 +1,7 @@
 package org.frice.obj
 
-import org.frice.anim.move.DoublePair
-import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.empty
-import org.frice.utils.graphics.shape.FRectangle
+import org.frice.utils.shape.FRectangle
 
 class ObjectGroup
 @JvmOverloads

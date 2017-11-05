@@ -5,7 +5,7 @@
  * @author ice1000
  * @since 3.1.4
  */
-package org.frice.utils.graphics.utils
+package org.frice.utils.graphics
 
 import org.frice.platform.adapter.JvmImage
 import java.awt.image.BufferedImage

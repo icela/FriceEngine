@@ -7,7 +7,7 @@ import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
-import org.frice.utils.graphics.shape.FRectangle
+import org.frice.utils.shape.FRectangle
 import org.frice.utils.message.FLog
 
 /**

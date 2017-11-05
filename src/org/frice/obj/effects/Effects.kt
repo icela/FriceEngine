@@ -7,7 +7,7 @@ import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ParticleResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.graphics.shape.FRectangle
+import org.frice.utils.shape.FRectangle
 
 /**
  * Created by ice1000 on 2016/8/19.

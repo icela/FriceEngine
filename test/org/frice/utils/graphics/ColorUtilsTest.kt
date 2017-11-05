@@ -1,4 +1,4 @@
-package org.frice.utils.graphics.utils
+package org.frice.utils.graphics
 
 import org.frice.utils.misc.shouldBe
 import org.junit.Test

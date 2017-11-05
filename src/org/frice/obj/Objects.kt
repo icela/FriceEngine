@@ -2,7 +2,7 @@
 
 package org.frice.obj
 
-import org.frice.utils.graphics.shape.FPoint
+import org.frice.utils.shape.FPoint
 
 /**
  * Created by ice1000 on 2016/8/18.

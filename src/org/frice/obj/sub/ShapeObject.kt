@@ -4,8 +4,8 @@ import org.frice.anim.move.DoublePair
 import org.frice.obj.CollideBox
 import org.frice.obj.FObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.graphics.shape.FRectangle
-import org.frice.utils.graphics.shape.FShapeInt
+import org.frice.utils.shape.FRectangle
+import org.frice.utils.shape.FShapeInt
 
 /**
  * an object with a utils and a shape, used to create an simple object quickly

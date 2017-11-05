@@ -8,8 +8,8 @@ import org.frice.anim.move.MoveAnim
 import org.frice.anim.scale.ScaleAnim
 import org.frice.platform.FriceImage
 import org.frice.resource.FResource
-import org.frice.utils.graphics.shape.FPoint
-import org.frice.utils.graphics.shape.FShape
+import org.frice.utils.shape.FPoint
+import org.frice.utils.shape.FShape
 import java.util.*
 
 /**

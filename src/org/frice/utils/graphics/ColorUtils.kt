@@ -1,7 +1,7 @@
 @file:JvmName("ColorUtils")
 @file:JvmMultifileClass
 
-package org.frice.utils.graphics.utils
+package org.frice.utils.graphics
 
 import java.awt.Color
 
@@ -13,6 +13,8 @@ import java.awt.Color
  */
 
 val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
+
+fun java.awt.Color.toJfxColor(): javafx.scene.paint.Color = javafx.scene.paint.Color.rgb(red, green, blue)
 
 fun Int.toAscii() = asciiList[grayify() / (256 / asciiList.size + 1)]
 

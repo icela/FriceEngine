@@ -15,8 +15,8 @@ import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.graphics.shape.FOval
-import org.frice.utils.graphics.shape.FRectangle
+import org.frice.utils.shape.FOval
+import org.frice.utils.shape.FRectangle
 import org.frice.utils.message.FDialog
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.unless

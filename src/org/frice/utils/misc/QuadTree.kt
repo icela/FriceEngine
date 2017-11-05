@@ -1,7 +1,6 @@
 package org.frice.utils.misc
 
-import org.frice.obj.PhysicalObject
-import org.frice.utils.graphics.shape.FShapeDouble
+import org.frice.utils.shape.FShapeDouble
 import java.util.*
 
 /**
