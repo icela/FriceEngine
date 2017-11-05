@@ -1,6 +1,5 @@
 package org.frice
 
-import org.frice.Initializer.launch
 import org.frice.obj.sub.DebugImageObject
 import org.frice.resource.image.ImageResource
 import org.frice.utils.misc.BoolArray

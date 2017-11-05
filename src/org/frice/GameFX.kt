@@ -3,6 +3,7 @@ package org.frice
 import javafx.application.Application
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
+import javafx.fxml.Initializable
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.layout.StackPane
@@ -11,6 +12,7 @@ import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.platform.*
 import org.frice.utils.time.*
+import java.net.URL
 import java.util.*
 
 open class GameFX
@@ -39,6 +41,10 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 	override var loseFocus = false
 		set(value) = Unit
 
+	private lateinit var stage: Stage
+	private lateinit var root: StackPane
+	private lateinit var scene: Scene
+
 	var fpsCounter = 0
 	var fpsDisplay = 0
 	var fpsTimer = FTimer(1000)
@@ -58,11 +64,9 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 	open fun onClick(e: OnClickEvent) = Unit
 	open fun onMouse(e: OnMouseEvent) = Unit
 
+	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
-	}
-
-	override fun getTitle(): String {
-		TODO("not implemented")
+		stage.title = title
 	}
 
 	override val drawer: FriceDrawer
@@ -81,17 +85,17 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 	}
 
 	override fun start(stage: Stage) {
+		this.stage = stage
 		val btn = Button()
 		btn.text = "Say 'Hello World'"
 		btn.onAction = EventHandler<ActionEvent> { println("Hello World!") }
 
-		val root = StackPane()
+		root = StackPane()
 		root.children.add(btn)
 
-		val scene = Scene(root, 300.0, 250.0)
-
-		stage.title = "Hello World!"
+		scene = Scene(root, 300.0, 250.0)
 		stage.scene = scene
+		onInit()
 		stage.show()
 	}
 }

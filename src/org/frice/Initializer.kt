@@ -38,9 +38,14 @@ fun Rectangle.rotate() {
 	width += height
 }
 
-fun launch(game: GameFX) = Application.launch(game.javaClass)
+fun launch(game: GameFX) {
+	`{-# LANGUAGE Initializer #-}`
+	Application.launch(game.javaClass)
+	game.onLastInit()
+}
 
 fun launch(game: Game) {
+	`{-# LANGUAGE Initializer #-}`
 	game.defaultCloseOperation = WindowConstants.DO_NOTHING_ON_CLOSE
 	FLog.v("Engine start!")
 	game.run {
@@ -68,6 +73,7 @@ fun launch(game: Game) {
 }
 
 fun launch(c: Class<out FriceGame>) = c.newInstance().let { instance ->
+	`{-# LANGUAGE Initializer #-}`
 	when (instance) {
 		is Game -> launch(instance)
 		is GameFX -> launch(instance)

@@ -1,6 +1,5 @@
 package org.frice
 
-import org.frice.Initializer.launch
 import org.frice.utils.time.FTimeListener
 
 class TimerTest : org.frice.Game() {
