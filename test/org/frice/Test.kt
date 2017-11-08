@@ -5,6 +5,7 @@ import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnClickEvent
 import org.frice.obj.PhysicalObject
+import org.frice.obj.SideEffect
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.effects.FunctionEffect
@@ -42,7 +43,7 @@ class Test : org.frice.Game() {
 		super.onInit()
 		autoGC = true
 
-		addTimeListener(FTimeListener(400, timeUp = { FLog.v("400 ms has passed") }))
+		addTimeListener(FTimeListener(400, timeUp = SideEffect { FLog.v("400 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(
 				this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
