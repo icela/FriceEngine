@@ -26,6 +26,7 @@ import java.awt.Point
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 import java.util.*
+import java.util.function.Consumer
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
 
@@ -132,11 +133,11 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	}
 
 	fun mouse(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is org.frice.obj.button.FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
 	}
 
 	fun click(e: OnClickEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is org.frice.obj.button.FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
 	}
 
 	open fun onClick(e: OnClickEvent) = Unit
@@ -156,32 +157,32 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	 * add keyboard listeners with lambda
 	 */
 	fun addKeyListener(
-			typed: ((KeyEvent) -> Unit)? = null,
-			pressed: ((KeyEvent) -> Unit)? = null,
-			released: ((KeyEvent) -> Unit)? = null) {
+			typed: Consumer<KeyEvent>? = null,
+			pressed: Consumer<KeyEvent>? = null,
+			released: Consumer<KeyEvent>? = null) {
 		addKeyListener(object : KeyListener {
 			override fun keyPressed(e: KeyEvent) {
-				if (null != pressed) pressed(e)
+				pressed?.accept(e)
 			}
 
 			override fun keyReleased(e: KeyEvent) {
-				if (null != released) released(e)
+				released?.accept(e)
 			}
 
 			override fun keyTyped(e: KeyEvent) {
-				if (null != typed) typed(e)
+				typed?.accept(e)
 			}
 		})
 	}
 
-	inline fun addKeyTypedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(typed = { e -> if (e.keyCode == keyCode) key(e) })
+	fun addKeyTypedEvent(keyCode: Int, key: Consumer<KeyEvent>)
+			= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	inline fun addKeyPressedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(pressed = { e -> if (e.keyCode == keyCode) key(e) })
+	fun addKeyPressedEvent(keyCode: Int, key: Consumer<KeyEvent>)
+			= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	inline fun addKeyReleasedEvent(keyCode: Int, crossinline key: (KeyEvent) -> Unit) =
-			addKeyListener(released = { e -> if (e.keyCode == keyCode) key(e) })
+	fun addKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
+			= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	infix fun setCursor(o: ImageObject) {
