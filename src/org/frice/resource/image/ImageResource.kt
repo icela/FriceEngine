@@ -2,6 +2,7 @@ package org.frice.resource.image
 
 import org.frice.Game
 import org.frice.anim.move.SimpleMove
+import org.frice.obj.SideEffect
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
@@ -103,10 +104,10 @@ class FrameImageResource(
 	}
 
 	init {
-		timer = FTimeListener(div) {
+		timer = FTimeListener(div, timeUp = SideEffect {
 			FLog.e("counter = $counter")
 			counter = (counter + 1) % list.size
-		}
+		})
 		game.addTimeListener(timer)
 	}
 }
