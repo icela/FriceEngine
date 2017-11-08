@@ -1,5 +1,7 @@
 package org.frice.utils.time
 
+import org.frice.obj.SideEffect
+
 /**
  * @param times if the value is -1, will loop.
  *
@@ -9,7 +11,7 @@ package org.frice.utils.time
  */
 class FTimeListener
 @JvmOverloads
-constructor(time: Int, times: Int = -1, val timeUp: () -> Unit) : FTimer(time, times) {
+constructor(time: Int, times: Int = -1, val timeUp: SideEffect) : FTimer(time, times) {
 
 	fun check() {
 		if (isEnded && times != 0) {
