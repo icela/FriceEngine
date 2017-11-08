@@ -10,6 +10,7 @@ script:
 - "./gradlew assemble"
 - "./gradlew javadoc"
 - "./gradlew jar"
+- "./gradlew pureJar"
 - "./gradlew fatJar"
 
 before_install:

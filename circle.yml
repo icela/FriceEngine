@@ -16,5 +16,6 @@ test:
   override:
     - ./gradlew build
     - ./gradlew fatJar
+    - ./gradlew pureJar
 #
 

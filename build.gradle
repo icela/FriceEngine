@@ -1,5 +1,5 @@
 group 'org.frice'
-version '1.5.1'
+version '1.5.2'
 
 buildscript {
 	ext.kotlin_version = '1.1.51'
@@ -50,23 +50,19 @@ dependencies {
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-jar {
-	manifest {
-	}
-	from {
-		configurations
-				.artifact
-				.collect { it.isDirectory() ? it : zipTree(it) }
-	}
-}
-
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
+}
+
+task pureJar(type: Jar) {
+	baseName = project.name + '-pure'
+	from { configurations.artifact.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
 }
 
 task fatJar(type: Jar) {
 	baseName = project.name + '-all'
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	with jar
+	with pureJar
 }
 
