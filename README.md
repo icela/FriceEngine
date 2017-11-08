@@ -13,7 +13,7 @@ CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
 An easy, light, native game engine running on JVM.<br/>
-~~View [APIs](./src/apis.md) or wiki to learn more about Frice Engine.~~
+View [Document](https://icela.github.io/#getting-started) to learn more about Frice Engine.
 
 The doc is poorly maintained and deprecated. I'm deciding to make some tutorials soon.
 
@@ -40,7 +40,7 @@ allprojects {
 }
 
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.5.0-alpha3'
+  compile 'com.github.icela:FriceEngine:v1.5.0-alpha5'
 }
 ```
 
