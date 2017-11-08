@@ -18,10 +18,9 @@ import org.frice.resource.graphics.ParticleResource
 import org.frice.resource.image.WebImageResource
 import org.frice.utils.data.Preference
 import org.frice.utils.data.XMLPreference
-import org.frice.utils.shape.*
 import org.frice.utils.graphics.greyify
 import org.frice.utils.message.FLog
-import org.frice.utils.time.FTimeListener
+import org.frice.utils.shape.*
 import org.frice.utils.time.FTimer
 import java.util.*
 import java.util.function.Consumer
@@ -42,8 +41,6 @@ class Test : org.frice.Game() {
 	override fun onInit() {
 		super.onInit()
 		autoGC = true
-
-		addTimeListener(FTimeListener(400, timeUp = SideEffect { FLog.v("400 ms has passed") }))
 
 		addObject(ParticleEffect(ParticleResource(
 				this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))

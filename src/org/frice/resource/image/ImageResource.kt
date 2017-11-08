@@ -10,8 +10,7 @@ import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.squared
-import org.frice.utils.time.FClock
-import org.frice.utils.time.FTimeListener
+import org.frice.utils.time.*
 import java.awt.Rectangle
 
 /**
@@ -86,14 +85,19 @@ class FrameImageResource(
 
 	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 
-	private var start = FClock.current
-	private val timer: FTimeListener
+	private val timer = FTimer(div)
 	private var counter = 0
 	private var ended = false
 	var loop = true
 
 	override var image: FriceImage
-		get() = if (loop || ended) list.getImage(counter).image else list.last().image
+		get() {
+			if (timer.ended()) {
+				FLog.e("counter = $counter")
+				counter = (counter + 1) % list.size
+			}
+			return if (loop || ended) list.getImage(counter).image else list.last().image
+		}
 		set(value) {
 			list += ImageResource(value)
 		}
@@ -101,14 +105,6 @@ class FrameImageResource(
 	private fun MutableList<ImageResource>.getImage(index: Int): ImageResource {
 		if (index == this.size - 1) ended = true
 		return this[index]
-	}
-
-	init {
-		timer = FTimeListener(div, timeUp = SideEffect {
-			FLog.e("counter = $counter")
-			counter = (counter + 1) % list.size
-		})
-		game.addTimeListener(timer)
 	}
 }
 

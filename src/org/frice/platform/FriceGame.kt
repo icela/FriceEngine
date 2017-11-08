@@ -2,14 +2,9 @@ package org.frice.platform
 
 import org.frice.obj.AbstractObject
 import org.frice.resource.image.ImageResource
-import org.frice.utils.time.FTimeListener
 import java.util.*
 
 interface FriceGame : TitleOwner {
-
-	val timeListeners: LinkedList<FTimeListener>
-	val timeListenerDeleteBuffer: ArrayList<FTimeListener>
-	val timeListenerAddBuffer: ArrayList<FTimeListener>
 	val layers: Array<Layer>
 
 	val drawer: FriceDrawer
@@ -35,13 +30,7 @@ interface FriceGame : TitleOwner {
 	var paused: Boolean
 
 	/** do the delete and add work, to prevent Exceptions */
-	fun processBuffer() {
-		layers.forEach(Layer::processBuffer)
-		timeListeners.addAll(timeListenerAddBuffer)
-		timeListeners.removeAll(timeListenerDeleteBuffer)
-		timeListenerDeleteBuffer.clear()
-		timeListenerAddBuffer.clear()
-	}
+	fun processBuffer() = layers.forEach(Layer::processBuffer)
 
 	fun onInit() = Unit
 	fun onLastInit() = Unit
@@ -55,29 +44,6 @@ interface FriceGame : TitleOwner {
 	fun onFocus() {
 		paused = false
 	}
-
-	/** add TimeListeners using vararg */
-	fun addTimeListener(vararg listeners: FTimeListener) = listeners.forEach { this addTimeListener it }
-
-	/**
-	 * add a time listener.
-	 *
-	 * @param listener time listener to be added
-	 */
-	infix fun addTimeListener(listener: FTimeListener) = timeListenerAddBuffer.add(listener)
-
-	/** removes all auto-executed time listeners */
-	fun clearTimeListeners() = timeListenerDeleteBuffer.addAll(timeListeners)
-
-	/** remove TimeListeners using vararg */
-	fun removeTimeListener(vararg listeners: FTimeListener) = listeners.forEach { removeTimeListener(it) }
-
-	/**
-	 * removes specified listener
-	 *
-	 * @param listener the listener
-	 */
-	infix fun removeTimeListener(listener: FTimeListener) = timeListenerDeleteBuffer.add(listener)
 
 	/** remove Objects using vararg */
 	fun removeObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { removeObject(layer, it) }

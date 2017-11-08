@@ -11,7 +11,6 @@ import javafx.application.Application
 import org.frice.platform.FriceGame
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.loop
-import org.frice.utils.time.FTimeListener
 import java.awt.Rectangle
 import java.util.*
 import javax.swing.UIManager
@@ -58,7 +57,6 @@ fun launch(game: Game) {
 			loop {
 				try {
 					onRefresh()
-					timeListeners.forEach(FTimeListener::check)
 					// only update per "refreshTime"
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()

@@ -49,10 +49,6 @@ import javax.swing.JFrame
 open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
-
-	override val timeListeners = LinkedList<FTimeListener>()
-	override val timeListenerDeleteBuffer = ArrayList<FTimeListener>()
-	override val timeListenerAddBuffer = ArrayList<FTimeListener>()
 	override val layers = Array(layerCount) { Layer() }
 
 	override var paused = false
