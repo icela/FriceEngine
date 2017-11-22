@@ -25,7 +25,6 @@ import java.awt.BorderLayout
 import java.awt.Point
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import java.util.*
 import java.util.function.Consumer
 import javax.imageio.ImageIO.read
 import javax.swing.JFrame
@@ -49,11 +48,6 @@ import javax.swing.JFrame
 open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
-	override val width: Double
-		get() = super.getWidth().toDouble()
-	override val height: Double
-		get() = super.getHeight().toDouble()
-
 	override val layers = Layers(layerCount) { Layer() }
 
 	override var paused = false
@@ -69,11 +63,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 
 	override var debug = true
-
-	override val random = Random()
-
 	override var autoGC = true
-
 	override var showFPS = true
 
 	override var loseFocus = false

@@ -21,9 +21,11 @@ import kotlin.concurrent.thread
 open class GameFX
 @JvmOverloads
 constructor(
-	final override val width: Double = 500.0,
-	final override val height: Double = 500.0,
+	@JvmField val width: Int = 500,
+	@JvmField val height: Int = 500,
 	layerCount: Int = 1) : Application(), FriceGame {
+	override fun getWidth() = width
+	override fun getHeight() = height
 
 	override var paused = false
 		set(value) {
@@ -39,7 +41,6 @@ constructor(
 
 	override val layers = Layers(layerCount) { Layer() }
 	override var debug = true
-	override val random = Random(System.currentTimeMillis())
 	override var autoGC = true
 	override var showFPS = true
 	override var loseFocus = false

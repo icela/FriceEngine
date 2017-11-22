@@ -3,11 +3,10 @@ package org.frice.platform
 import org.frice.event.OnMouseEvent
 import org.frice.obj.AbstractObject
 import org.frice.resource.graphics.ColorResource
-import java.util.*
 
 typealias Layers = Array<Layer>
 
-interface FriceGame : TitleOwner {
+interface FriceGame : TitleOwner, BoundsOwner {
 	val layers: Layers
 
 	val drawer: FriceDrawer
@@ -18,9 +17,6 @@ interface FriceGame : TitleOwner {
 	 */
 	var stopped: Boolean
 	var debug: Boolean
-
-	/** a general purpose instance for generating random numbers */
-	val random: Random
 
 	/** if true, the engine will collect all objects which are invisible from game window. */
 	var autoGC: Boolean
@@ -34,9 +30,6 @@ interface FriceGame : TitleOwner {
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)
-
-	val width: Double
-	val height: Double
 
 	fun onInit() = Unit
 	fun onLastInit() = Unit
@@ -86,7 +79,7 @@ interface FriceGame : TitleOwner {
 
 	fun clearScreen() {
 		drawer.color = ColorResource.WHITE
-		drawer.drawRect(0.0, 0.0, width, height)
+		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()
 	}
 }
