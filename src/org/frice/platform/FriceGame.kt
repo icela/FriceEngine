@@ -1,5 +1,6 @@
 package org.frice.platform
 
+import org.frice.event.OnMouseEvent
 import org.frice.obj.AbstractObject
 import org.frice.resource.graphics.ColorResource
 import java.util.*
@@ -40,6 +41,7 @@ interface FriceGame : TitleOwner {
 	fun onInit() = Unit
 	fun onLastInit() = Unit
 	fun onRefresh() = Unit
+	fun onMouse(e: OnMouseEvent)
 	fun onExit()
 	fun customDraw(g: FriceDrawer)
 	fun onLoseFocus() {

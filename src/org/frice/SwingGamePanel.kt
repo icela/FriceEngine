@@ -18,8 +18,8 @@ class SwingGamePanel(private val game: Game) : JComponent() {
 	init {
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) {
-				game.click(swingMouse(e, MOUSE_CLICKED))
-				game.onClick(swingMouse(e, MOUSE_CLICKED))
+				game.mouse(swingMouse(e, MOUSE_CLICKED))
+				game.onMouse(swingMouse(e, MOUSE_CLICKED))
 			}
 
 			override fun mouseEntered(e: MouseEvent) = game.onMouse(swingMouse(e, MOUSE_ENTERED))

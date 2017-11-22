@@ -134,14 +134,12 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	}
 
 	fun mouse(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e }
+		it.texts.forEach { b ->
+			if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
+		}
 	}
 
-	fun click(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onClick e }
-	}
-
-	open fun onMouse(e: OnMouseEvent) = Unit
+	override fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
 			FDialog.YES_OPTION) {

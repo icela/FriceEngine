@@ -15,8 +15,8 @@ onInit()|Invoked while initializing
 onLastInit()|Invoked before starting refreshing
 onExit()|Invoked while exiting (NOTE: engine does not perform process termination automatically)
 onRefresh()|Invoked after game window is refreshed, if not paused)
-onClick(OnClickEvent)|Invoked while clicking in game window
-onMouse(OnMouseEvent)|Invoked when a mouse event arrives(moving, pressing, etc)
+onMouse(OnClickEvent)|Invoked while clicking in game window
+buttonPressed(OnMouseEvent)|Invoked when a mouse event arrives(moving, pressing, etc)
 onLoseFocus(OnWindowEvent)|Invoked when game window blurs
 onFocus(OnWindowEvent)|Invoke when game window gets focus
 customDraw(Graphics2D)|Override to draw something after everything was drawn.

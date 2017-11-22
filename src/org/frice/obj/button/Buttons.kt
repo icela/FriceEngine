@@ -1,6 +1,5 @@
 package org.frice.obj.button
 
-import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.obj.AbstractObject
 import org.frice.obj.FContainer
@@ -13,10 +12,13 @@ import java.util.function.Consumer
  */
 
 interface FButton : FContainer, AbstractObject {
-	var onClickListener: Consumer<OnClickEvent>
+	var onMouseListener: Consumer<OnMouseEvent>?
 
-	infix fun onClick(e: OnClickEvent) = onClickListener.accept(e)
+	infix fun onMouse(e: OnMouseEvent) = {
+		onMouseListener?.accept(e)
+		buttonPressed(e)
+	}
 
 	/** @return true means pressed */
-	infix fun onMouse(e: OnMouseEvent) = (e.type == OnMouseEvent.MOUSE_PRESSED)
+	fun buttonPressed(e: OnMouseEvent)
 }

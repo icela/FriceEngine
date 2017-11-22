@@ -64,8 +64,7 @@ constructor(
 	override fun onInit() = Unit
 	override fun onLastInit() = Unit
 	override fun onRefresh() = Unit
-	open fun onClick(e: OnClickEvent) = Unit
-	open fun onMouse(e: OnMouseEvent) = Unit
+	override fun onMouse(e: OnMouseEvent) = Unit
 
 	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
@@ -87,10 +86,11 @@ constructor(
 	override fun start(stage: Stage) {
 		this.stage = stage
 		scene = Scene(root, width, height)
-		canvas.setOnMouseClicked {
-			onClick(fxClick(it))
-		}
-		canvas.setOnMouseMoved {  }
+		canvas.setOnMouseClicked { onMouse(fxMouse(it, MOUSE_CLICKED)) }
+		canvas.setOnMouseEntered { onMouse(fxMouse(it, MOUSE_ENTERED)) }
+		canvas.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }
+		canvas.setOnMousePressed { onMouse(fxMouse(it, MOUSE_PRESSED)) }
+		canvas.setOnMouseReleased { onMouse(fxMouse(it, MOUSE_RELEASED)) }
 		stage.scene = scene
 		onInit()
 		stage.show()

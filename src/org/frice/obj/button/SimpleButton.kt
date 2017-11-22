@@ -1,6 +1,6 @@
 package org.frice.obj.button
 
-import org.frice.event.OnClickEvent
+import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
 import org.frice.resource.graphics.ColorResource
 import java.util.function.Consumer
@@ -21,15 +21,14 @@ constructor(
 	override var width: Double,
 	override var height: Double) : FButton, FText() {
 
-	private var bool = false
+	protected var bool = false
 
-	override var onClickListener: Consumer<OnClickEvent> = Consumer { }
+	override var onMouseListener: Consumer<OnMouseEvent>? = null
 
 	override val color: ColorResource
 		get() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
 
-	override fun onMouse(e: OnMouseEvent): Boolean {
-		bool = super.onMouse(e)
-		return bool
+	override fun buttonPressed(e: OnMouseEvent) {
+		bool = e.type == MOUSE_PRESSED
 	}
 }
