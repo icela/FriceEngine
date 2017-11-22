@@ -156,7 +156,7 @@ class Test2 : org.frice.Game() {
 			anims += SimpleMove(80, 0)
 		}
 		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
-		text.textSize = 64
+		text.textSize = 64.0
 		assertEquals(obj, obj2)
 		addObject(obj2, obj, text)
 	}
