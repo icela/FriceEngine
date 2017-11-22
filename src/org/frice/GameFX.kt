@@ -66,6 +66,7 @@ constructor(
 	override fun onLastInit() = Unit
 	override fun onRefresh() = Unit
 	override fun onMouse(e: OnMouseEvent) = Unit
+	override fun customDraw(g: FriceDrawer) = Unit
 
 	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
@@ -77,10 +78,6 @@ constructor(
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun onExit() {
-		TODO("not implemented")
-	}
-
-	override fun customDraw(g: FriceDrawer) {
 		TODO("not implemented")
 	}
 
