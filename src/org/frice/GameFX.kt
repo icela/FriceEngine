@@ -21,8 +21,8 @@ import kotlin.concurrent.thread
 open class GameFX
 @JvmOverloads
 constructor(
-	@JvmField val width: Int = 500,
-	@JvmField val height: Int = 500,
+	private val width: Int = 500,
+	private val height: Int = 500,
 	layerCount: Int = 1) : Application(), FriceGame {
 	override fun getWidth() = width
 	override fun getHeight() = height
@@ -55,7 +55,7 @@ constructor(
 
 	override var loseFocusChangeColor = true
 
-	internal val refresh = FTimer(4)
+	private val refresh = FTimer(4)
 	override var millisToRefresh: Int
 		get () = refresh.time
 		set (value) {
@@ -72,7 +72,7 @@ constructor(
 		stage.title = title
 	}
 
-	private val canvas = Canvas(width, height)
+	private val canvas = Canvas(width.toDouble(), height.toDouble())
 	private val root = StackPane(canvas)
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
@@ -86,7 +86,7 @@ constructor(
 
 	override fun start(stage: Stage) {
 		this.stage = stage
-		scene = Scene(root, width, height)
+		scene = Scene(root, width.toDouble(), height.toDouble())
 		canvas.setOnMouseClicked { onMouse(fxMouse(it, MOUSE_CLICKED)) }
 		canvas.setOnMouseEntered { onMouse(fxMouse(it, MOUSE_ENTERED)) }
 		canvas.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }

@@ -71,6 +71,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	override var loseFocusChangeColor = true
 
+	@get:JvmName(" refresh")
 	internal val refresh = FTimer(4)
 	override var millisToRefresh: Int
 		get () = refresh.time

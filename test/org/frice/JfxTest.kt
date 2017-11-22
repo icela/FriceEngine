@@ -5,7 +5,7 @@ fun main(args: Array<String>) {
 	launch(obj)
 }
 
-class O : GameFX(width = 600.0) {
+class O : GameFX(width = 600) {
 	override fun onInit() {
 		title = "My awesome title"
 	}

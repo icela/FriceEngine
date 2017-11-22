@@ -42,7 +42,7 @@ class Test : org.frice.Game() {
 		autoGC = true
 
 		addObject(ParticleEffect(ParticleResource(
-			this, width.toInt() / 10, height.toInt() / 10, 0.01), width * 0.1, height * 0.1))
+			this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton(
 			text = "I am a button",
 			x = 30.0,
@@ -84,6 +84,7 @@ class Test : org.frice.Game() {
 		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
 	}
 
+	private val random = Random(System.currentTimeMillis())
 	override fun onRefresh() {
 		super.onRefresh()
 		if (timer.ended()) {
