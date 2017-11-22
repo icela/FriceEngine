@@ -3,7 +3,7 @@ package org.frice
 import org.frice.anim.RotateAnim
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
-import org.frice.event.OnClickEvent
+import org.frice.event.OnMouseEvent
 import org.frice.obj.PhysicalObject
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
@@ -42,13 +42,13 @@ class Test : org.frice.Game() {
 		autoGC = true
 
 		addObject(ParticleEffect(ParticleResource(
-				this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
+			this, width.toInt() / 10, height.toInt() / 10, 0.01), width * 0.1, height * 0.1))
 		addObject(SimpleButton(
-				text = "I am a button",
-				x = 30.0,
-				y = 30.0,
-				width = 100.0,
-				height = 30.0).apply {
+			text = "I am a button",
+			x = 30.0,
+			y = 30.0,
+			width = 100.0,
+			height = 30.0).apply {
 			onMouseListener = Consumer {
 				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
 					mass = 1.0
@@ -89,7 +89,7 @@ class Test : org.frice.Game() {
 		if (timer.ended()) {
 			objs.removeAll { o -> o.died }
 			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
-					mouse.x, mouse.y).apply {
+				mouse.x, mouse.y).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 				targets.clear()
@@ -106,8 +106,8 @@ class Test : org.frice.Game() {
 		}
 	}
 
-	override fun onClick(e: OnClickEvent) {
-		super.onClick(e)
+	override fun onMouse(e: OnMouseEvent) {
+		super.onMouse(e)
 		FLog.v(e.toString())
 		FLog.v(mouse)
 	}
@@ -124,8 +124,8 @@ class TestImage : org.frice.Game() {
 	override fun onInit() {
 		super.onInit()
 		addObject(ImageObject((WebImageResource(
-				"https://avatars1.githubusercontent.com/u/21008243?v=3&s=200").image as JvmImage).greenify(),
-				10.0, 10.0))
+			"https://avatars1.githubusercontent.com/u/21008243?v=3&s=200").image as JvmImage).greenify(),
+			10.0, 10.0))
 	}
 
 	companion object {
@@ -187,10 +187,10 @@ class Test3 : org.frice.Game() {
 		a = ShapeObject(ColorResource.BLUE, FCircle(10.0), 100.0, 500.0)
 		a.anims.add(object : CustomMove() {
 			override fun getXDelta(timeFromBegin: Double) =
-					(a.x * c * Math.sin(d) - a.y * c * Math.cos(d)) * e
+				(a.x * c * Math.sin(d) - a.y * c * Math.cos(d)) * e
 
 			override fun getYDelta(timeFromBegin: Double) =
-					(a.x * c * Math.cos(d) - a.y * c * Math.sin(d)) * e
+				(a.x * c * Math.cos(d) - a.y * c * Math.sin(d)) * e
 		})
 		addObject(a)
 	}
