@@ -6,7 +6,7 @@ import org.frice.resource.graphics.ColorResource
 import org.frice.utils.time.FClock
 import java.awt.Graphics
 import java.awt.event.*
-import javax.swing.JPanel
+import javax.swing.JComponent
 
 /**
  * all rendering work and game object calculating are here.
@@ -15,7 +15,7 @@ import javax.swing.JPanel
  * @author ice1000
  * @since v0.1
  */
-class SwingGamePanel(private val game: Game) : JPanel() {
+class SwingGamePanel(private val game: Game) : JComponent() {
 	init {
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) {
