@@ -12,10 +12,8 @@ import org.frice.utils.misc.unless
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 
-typealias Layers = Array<Layer>
-
 interface FriceGame : TitleOwner, BoundsOwner {
-	val layers: Layers
+	val layers: Array<Layer>
 
 	val drawer: FriceDrawer
 
@@ -42,9 +40,9 @@ interface FriceGame : TitleOwner, BoundsOwner {
 	fun onInit() = Unit
 	fun onLastInit() = Unit
 	fun onRefresh() = Unit
-	fun onMouse(e: OnMouseEvent)
-	fun onExit()
-	fun customDraw(g: FriceDrawer)
+	fun onMouse(e: OnMouseEvent) = Unit
+	fun onExit() = Unit
+	fun customDraw(g: FriceDrawer) = Unit
 	fun onLoseFocus() {
 		paused = true
 	}

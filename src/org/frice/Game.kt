@@ -48,7 +48,7 @@ import javax.swing.JFrame
 open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
-	override val layers = Layers(layerCount) { Layer() }
+	override val layers = Array<Layer>(layerCount) { Layer() }
 
 	override var paused = false
 		set(value) {
@@ -130,7 +130,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 	}
 
-	override fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
 			FDialog.YES_OPTION) {
@@ -138,8 +137,6 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			System.exit(0)
 		} else return
 	}
-
-	override fun customDraw(g: FriceDrawer) = Unit
 
 	/**
 	 * for kotlin only

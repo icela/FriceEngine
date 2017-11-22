@@ -49,7 +49,7 @@ constructor(
 			field = value
 		}
 
-	override val layers = Layers(layerCount) { Layer() }
+	override val layers = Array<Layer>(layerCount) { Layer() }
 	override var debug = true
 	override var autoGC = true
 	override var showFPS = true
@@ -71,12 +71,6 @@ constructor(
 		set (value) {
 			refresh.time = value
 		}
-
-	override fun onInit() = Unit
-	override fun onLastInit() = Unit
-	override fun onRefresh() = Unit
-	override fun onMouse(e: OnMouseEvent) = Unit
-	override fun customDraw(g: FriceDrawer) = Unit
 
 	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
