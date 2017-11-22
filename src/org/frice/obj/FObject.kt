@@ -2,9 +2,7 @@ package org.frice.obj
 
 import org.frice.anim.FAnim
 import org.frice.anim.RotateAnim
-import org.frice.anim.move.AccelerateMove
-import org.frice.anim.move.DoublePair
-import org.frice.anim.move.MoveAnim
+import org.frice.anim.move.*
 import org.frice.anim.scale.ScaleAnim
 import org.frice.platform.FriceImage
 import org.frice.resource.FResource

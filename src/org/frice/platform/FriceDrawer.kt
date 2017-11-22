@@ -16,7 +16,6 @@ interface FriceDrawer {
 	fun drawRect(x: Double, y: Double, width: Double, height: Double)
 	fun drawLine(x: Double, y: Double, width: Double, height: Double)
 	fun drawRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double)
-	fun rotate(theta: Double, x: Double, y: Double)
 	fun rotate(theta: Double)
 	fun restore()
 }

@@ -123,8 +123,8 @@ class FileImageResource(file: String) : ImageResource() {
  * @author ice1000
  */
 class RippledImageResource(
-		val base: ImageResource,
-		speed: Int = 10) : ImageResource() {
+	val base: ImageResource,
+	speed: Int = 10) : ImageResource() {
 	private var internalImage = base.image.clone()
 	override var image: FriceImage
 		get() {

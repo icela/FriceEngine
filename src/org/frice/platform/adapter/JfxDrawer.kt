@@ -10,47 +10,44 @@ import java.awt.Color
 import javafx.scene.paint.Color as JfxColor
 
 class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
-	override var color: ColorResource
-		get() = TODO("not implemented")
-		set(value) = Unit
+	override var color = ColorResource.BLUE
+		set(value) {
+			field = value
+			g.fill = fromColor(field.color)
+		}
 
 	fun fromColor(c: Color): JfxColor = JfxColor.rgb(c.red, c.green, c.blue)
 
 	override fun init() {
 		forceRun { g.font = Font("Consolas", 16.0) }
-		TODO("not implemented")
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) {
-		TODO("not implemented")
+		g.fillOval(x, y, width, height)
 	}
 
 	override fun drawString(string: String, x: Double, y: Double) {
-		TODO("not implemented")
+		g.fillText(string, x, y)
 	}
 
 	override fun drawImage(image: FriceImage, x: Double, y: Double) {
-		TODO("not implemented")
+		g.drawImage((image as JfxImage).jfxImage, x, y)
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) {
-		TODO("not implemented")
+		g.fillRect(x, y, width, height)
 	}
 
 	override fun drawLine(x: Double, y: Double, width: Double, height: Double) {
-		TODO("not implemented")
+		g.strokeLine(x, y, width, height)
 	}
 
 	override fun drawRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double) {
-		TODO("not implemented")
-	}
-
-	override fun rotate(theta: Double, x: Double, y: Double) {
-		TODO("not implemented")
+		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight)
 	}
 
 	override fun rotate(theta: Double) {
-		TODO("not implemented")
+		g.rotate(theta)
 	}
 
 	override fun restore() = g.restore()

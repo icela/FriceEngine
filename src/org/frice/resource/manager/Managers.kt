@@ -59,7 +59,7 @@ interface FManager<T> {
  * @since v1.1
  */
 object FileTextManager : FManager<String> {
-	override val res = HashMap<String, String>()
+	override val res = hashMapOf<String, String>()
 	override fun create(path: String) = File(path).readText()
 }
 
@@ -68,7 +68,7 @@ object FileTextManager : FManager<String> {
  * @since v1.1
  */
 object FileBytesManager : FManager<ByteArray> {
-	override val res = HashMap<String, ByteArray>()
+	override val res = hashMapOf<String, ByteArray>()
 	override fun create(path: String) = File(path).readBytes()
 }
 
@@ -97,7 +97,7 @@ object WebImageManager : FManager<FriceImage> {
  * @since v0.6
  */
 object URLTextManager : FManager<String> {
-	override val res = HashMap<String, String>()
+	override val res = hashMapOf<String, String>()
 	override fun create(path: String) = URL(path).readText(Charset.defaultCharset())
 }
 
@@ -106,6 +106,6 @@ object URLTextManager : FManager<String> {
  * @since v0.6
  */
 object URLBytesManager : FManager<ByteArray> {
-	override val res = HashMap<String, ByteArray>()
+	override val res = hashMapOf<String, ByteArray>()
 	override fun create(path: String) = URL(path).readBytes()
 }
