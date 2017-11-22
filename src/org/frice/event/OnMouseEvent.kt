@@ -16,7 +16,7 @@ const val MOUSE_PRESSED = 0x04
  * @author ice1000
  * @since v0.1
  */
-class OnMouseEvent(
+data class OnMouseEvent(
 	val x: Double,
 	val y: Double,
 	val screenX: Double,

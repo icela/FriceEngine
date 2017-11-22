@@ -16,6 +16,7 @@ interface FButton : FContainer, AbstractObject {
 
 	infix fun onMouse(e: OnMouseEvent) = {
 		onMouseListener?.accept(e)
+		println(e)
 		buttonPressed(e)
 	}
 
