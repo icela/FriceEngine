@@ -4,8 +4,10 @@ import org.frice.obj.AbstractObject
 import org.frice.resource.image.ImageResource
 import java.util.*
 
+typealias Layers = Array<Layer>
+
 interface FriceGame : TitleOwner {
-	val layers: Array<Layer>
+	val layers: Layers
 
 	val drawer: FriceDrawer
 

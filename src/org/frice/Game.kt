@@ -49,7 +49,7 @@ import javax.swing.JFrame
 open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
-	override val layers = Array(layerCount) { Layer() }
+	override val layers = Layers(layerCount) { Layer() }
 
 	override var paused = false
 		set(value) {

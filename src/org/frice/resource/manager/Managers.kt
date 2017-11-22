@@ -77,7 +77,7 @@ object FileBytesManager : FManager<ByteArray> {
  * @since v0.6
  */
 object ImageManager : FManager<FriceImage> {
-	override val res = HashMap<String, org.frice.platform.FriceImage>()
+	override val res = HashMap<String, FriceImage>()
 	override fun create(path: String) = JvmImage(ImageIO.read(File(path)))
 	override operator fun get(path: String) = super.get(path).clone()
 }
@@ -87,7 +87,7 @@ object ImageManager : FManager<FriceImage> {
  * @since v0.6
  */
 object WebImageManager : FManager<FriceImage> {
-	override val res = HashMap<String, org.frice.platform.FriceImage>()
+	override val res = HashMap<String, FriceImage>()
 	override fun create(path: String) = JvmImage(ImageIO.read(URL(path)))
 	override operator fun get(path: String) = super.get(path).clone()
 }

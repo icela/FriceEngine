@@ -2,7 +2,6 @@ package org.frice.resource.image
 
 import org.frice.Game
 import org.frice.anim.move.SimpleMove
-import org.frice.obj.SideEffect
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource

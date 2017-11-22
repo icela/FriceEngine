@@ -32,7 +32,7 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 			field = value
 		}
 
-	override val layers = Array(layerCount) { Layer() }
+	override val layers = Layers(layerCount) { Layer() }
 	override var debug = true
 	override val random = Random()
 	override var autoGC = true
