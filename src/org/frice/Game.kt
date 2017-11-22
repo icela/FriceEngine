@@ -15,12 +15,13 @@ import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.shape.FOval
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.message.FDialog
 import org.frice.utils.message.FLog
 import org.frice.utils.misc.unless
-import org.frice.utils.time.*
+import org.frice.utils.shape.FOval
+import org.frice.utils.shape.FRectangle
+import org.frice.utils.time.FClock
+import org.frice.utils.time.FTimer
 import java.awt.BorderLayout
 import java.awt.Point
 import java.awt.event.KeyEvent
@@ -83,7 +84,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			refresh.time = value
 		}
 
-	internal val panel: GamePanel = GamePanel(this)
+	internal val panel: SwingGamePanel = SwingGamePanel(this)
 
 	override val drawer: JvmDrawer
 
@@ -171,6 +172,13 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		})
 	}
 
+	/**
+	 * get a screenShot.
+	 *
+	 * @return screen cut as an image
+	 */
+	fun getScreenCut() = ImageResource(drawer.friceImage)
+
 	fun addKeyTypedEvent(keyCode: Int, key: Consumer<KeyEvent>)
 			= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
@@ -239,7 +247,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 			}
 
 			it.texts.forEach loop@ { b ->
-				if (b.getColor() == ColorResource.COLORLESS) return@loop
+				if (b.color == ColorResource.COLORLESS) return@loop
 				bgg.run {
 					restore()
 					init()
@@ -257,7 +265,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 							}
 						}
 						is SimpleButton -> {
-							bgg.color = b.getColor()
+							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,
 									b.width, b.height,
 									Math.min(b.width * 0.5, 10.0),
@@ -267,7 +275,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 						}
 					}
 				} else {
-					bgg.color = b.getColor()
+					bgg.color = b.color
 					bgg.drawString(b.text, b.x, b.y)
 				}
 			}

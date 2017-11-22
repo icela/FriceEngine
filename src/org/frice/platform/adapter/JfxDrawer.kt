@@ -6,8 +6,6 @@ import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
 
 class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
-	override val friceImage: FriceImage
-		get() = TODO()
 	override var color: ColorResource
 		get() = TODO("not implemented")
 		set(value) = Unit

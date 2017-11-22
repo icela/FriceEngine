@@ -17,7 +17,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 		g.font = Font("Consolas", Font.PLAIN, 16)
 	}
 
-	override val friceImage = JvmImage(frame.width, frame.height)
+	val friceImage = JvmImage(frame.width, frame.height)
 	override var color: ColorResource
 		get() = ColorResource(g.color)
 		set(value) {

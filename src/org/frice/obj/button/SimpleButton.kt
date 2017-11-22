@@ -14,18 +14,19 @@ import java.util.function.Consumer
 open class SimpleButton
 @JvmOverloads
 constructor(
-		var colorResource: ColorResource = ColorResource.GRAY,
-		override var text: String,
-		override var x: Double,
-		override var y: Double,
-		override var width: Double,
-		override var height: Double) : FButton, FText() {
+	var colorResource: ColorResource = ColorResource.GRAY,
+	override var text: String,
+	override var x: Double,
+	override var y: Double,
+	override var width: Double,
+	override var height: Double) : FButton, FText() {
 
 	private var bool = false
 
 	override var onClickListener: Consumer<OnClickEvent> = Consumer { }
 
-	override fun getColor() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
+	override val color: ColorResource
+		get() = if (bool) ColorResource(colorResource.color.darker()) else colorResource
 
 	override fun onMouse(e: OnMouseEvent): Boolean {
 		bool = super.onMouse(e)

@@ -8,7 +8,6 @@ import org.frice.resource.graphics.ColorResource
  * @author ice1000
  */
 interface FriceDrawer {
-	val friceImage: FriceImage
 	var color: ColorResource
 	fun init()
 	fun drawOval(x: Double, y: Double, width: Double, height: Double)

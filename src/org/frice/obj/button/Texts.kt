@@ -13,10 +13,10 @@ import org.frice.resource.graphics.ColorResource.Companion.DARK_GRAY
 abstract class FText : AbstractObject {
 	open var text = ""
 	open var textSize = 16
-//	open var fontName = "Consolas"
+	//	open var fontName = "Consolas"
 	override var rotate = 0.0
 
-	abstract fun getColor(): ColorResource
+	abstract val color: ColorResource
 }
 
 /**
@@ -28,10 +28,10 @@ abstract class FText : AbstractObject {
 class SimpleText
 @JvmOverloads
 constructor(
-		var colorResource: ColorResource = DARK_GRAY,
-		override var text: String,
-		override var x: Double,
-		override var y: Double) : FText() {
+	var colorResource: ColorResource = DARK_GRAY,
+	override var text: String,
+	override var x: Double,
+	override var y: Double) : FText() {
 
-	override fun getColor() = colorResource
+	override val color: ColorResource get() = colorResource
 }

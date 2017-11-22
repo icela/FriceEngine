@@ -80,11 +80,4 @@ interface FriceGame : TitleOwner {
 	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
 
 	fun clearScreen()
-
-	/**
-	 * get a screenShot.
-	 *
-	 * @return screen cut as an image
-	 */
-	fun getScreenCut() = ImageResource(drawer.friceImage)
 }
