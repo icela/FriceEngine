@@ -1,6 +1,7 @@
 package org.frice.platform
 
 import org.frice.obj.AbstractObject
+import org.frice.resource.graphics.ColorResource
 import java.util.*
 
 typealias Layers = Array<Layer>
@@ -32,6 +33,9 @@ interface FriceGame : TitleOwner {
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)
+
+	val width: Double
+	val height: Double
 
 	fun onInit() = Unit
 	fun onLastInit() = Unit
@@ -78,5 +82,9 @@ interface FriceGame : TitleOwner {
 	fun addObject(vararg objs: AbstractObject) = addObject(0, *objs)
 	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
 
-	fun clearScreen()
+	fun clearScreen() {
+		drawer.color = ColorResource.WHITE
+		drawer.drawRect(0.0, 0.0, width, height)
+		drawer.restore()
+	}
 }

@@ -1,7 +1,6 @@
 package org.frice
 
-import org.frice.event.OnClickEvent
-import org.frice.event.OnMouseEvent
+import org.frice.event.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.time.FClock
 import java.awt.Graphics
@@ -19,20 +18,20 @@ class SwingGamePanel(private val game: Game) : JComponent() {
 	init {
 		addMouseListener(object : MouseListener {
 			override fun mouseClicked(e: MouseEvent) {
-				game.click(OnMouseEvent(e, OnMouseEvent.MOUSE_CLICK))
-				game.onClick(OnClickEvent(e))
+				game.click(swingMouse(e, MOUSE_CLICKED))
+				game.onClick(swingMouse(e, MOUSE_CLICKED))
 			}
 
-			override fun mouseEntered(e: MouseEvent) = game.onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_ENTERED))
-			override fun mouseExited(e: MouseEvent) = game.onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_EXITED))
+			override fun mouseEntered(e: MouseEvent) = game.onMouse(swingMouse(e, MOUSE_ENTERED))
+			override fun mouseExited(e: MouseEvent) = game.onMouse(swingMouse(e, MOUSE_EXITED))
 			override fun mouseReleased(e: MouseEvent) {
-				game.mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
-				game.onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_RELEASED))
+				game.mouse(swingMouse(e, MOUSE_RELEASED))
+				game.onMouse(swingMouse(e, MOUSE_RELEASED))
 			}
 
 			override fun mousePressed(e: MouseEvent) {
-				game.mouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
-				game.onMouse(OnMouseEvent(e, OnMouseEvent.MOUSE_PRESSED))
+				game.mouse(swingMouse(e, MOUSE_PRESSED))
+				game.onMouse(swingMouse(e, MOUSE_PRESSED))
 			}
 		})
 
@@ -66,9 +65,9 @@ class SwingGamePanel(private val game: Game) : JComponent() {
 			repeat(game.drawer.friceImage.width) { x: Int ->
 				repeat(game.drawer.friceImage.height) { y: Int ->
 					game.drawer.friceImage[x, y] = ColorResource(game.drawer
-							.friceImage[x, y]
-							.color
-							.darker())
+						.friceImage[x, y]
+						.color
+						.darker())
 				}
 			}
 		}

@@ -2,7 +2,6 @@
 
 package org.frice
 
-import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.obj.*
 import org.frice.obj.button.FButton
@@ -50,6 +49,11 @@ import javax.swing.JFrame
 open class Game
 @JvmOverloads
 constructor(layerCount: Int = 1) : JFrame(), FriceGame {
+	override val width: Double
+		get() = super.getWidth().toDouble()
+	override val height: Double
+		get() = super.getHeight().toDouble()
+
 	override val layers = Layers(layerCount) { Layer() }
 
 	override var paused = false
@@ -130,18 +134,17 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	}
 
 	fun mouse(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onMouse e }
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e }
 	}
 
-	fun click(e: OnClickEvent) = layers.forEach {
-		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.event.x, e.event.y)) b onClick e }
+	fun click(e: OnMouseEvent) = layers.forEach {
+		it.texts.forEach { b -> if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onClick e }
 	}
 
-	open fun onClick(e: OnClickEvent) = Unit
 	open fun onMouse(e: OnMouseEvent) = Unit
 	override fun onExit() {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
-				FDialog.YES_OPTION) {
+			FDialog.YES_OPTION) {
 			dispose()
 			System.exit(0)
 		} else return
@@ -154,9 +157,9 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	 * add keyboard listeners with lambda
 	 */
 	fun addKeyListener(
-			typed: Consumer<KeyEvent>? = null,
-			pressed: Consumer<KeyEvent>? = null,
-			released: Consumer<KeyEvent>? = null) {
+		typed: Consumer<KeyEvent>? = null,
+		pressed: Consumer<KeyEvent>? = null,
+		released: Consumer<KeyEvent>? = null) {
 		addKeyListener(object : KeyListener {
 			override fun keyPressed(e: KeyEvent) {
 				pressed?.accept(e)
@@ -180,13 +183,13 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	fun getScreenCut() = ImageResource(drawer.friceImage)
 
 	fun addKeyTypedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-			= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+		= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	fun addKeyPressedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-			= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+		= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	fun addKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-			= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
 	infix fun setCursor(o: ImageObject) {
@@ -215,17 +218,17 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 				when (o) {
 					is FObject.ImageOwner -> {
 						unless(o.x + o.image.width <= 0 ||
-								o.x >= width ||
-								o.y + o.image.height <= 0 ||
-								o.y >= height) {
+							o.x >= width ||
+							o.y + o.image.height <= 0 ||
+							o.y >= height) {
 							bgg.drawImage(o.image, o.x, o.y)
 						}
 					}
 					is ShapeObject -> {
 						unless((o.x + o.width) <= 0 ||
-								o.x >= width ||
-								(o.y + o.height) <= 0 ||
-								o.y >= height) {
+							o.x >= width ||
+							(o.y + o.height) <= 0 ||
+							o.y >= height) {
 							bgg.color = o.getResource()
 							when (o.collideBox) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
@@ -258,18 +261,18 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 					when (b) {
 						is FObject.ImageOwner -> {
 							unless(b.x + b.image.width < 0 ||
-									b.x > width ||
-									b.y + b.image.height < 0 ||
-									b.y > height) {
+								b.x > width ||
+								b.y + b.image.height < 0 ||
+								b.y > height) {
 								bgg.drawImage(b.image, b.x, b.y)
 							}
 						}
 						is SimpleButton -> {
 							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,
-									b.width, b.height,
-									Math.min(b.width * 0.5, 10.0),
-									Math.min(b.height * 0.5, 10.0))
+								b.width, b.height,
+								Math.min(b.width * 0.5, 10.0),
+								Math.min(b.height * 0.5, 10.0))
 							bgg.color = ColorResource.DARK_GRAY
 							bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
 						}
@@ -282,11 +285,4 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		}
 		customDraw(bgg)
 	}
-
-	override fun clearScreen() {
-		drawer.color = ColorResource.WHITE
-		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
-		drawer.restore()
-	}
-
 }

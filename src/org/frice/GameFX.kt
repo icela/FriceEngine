@@ -5,8 +5,7 @@ import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
-import org.frice.event.OnClickEvent
-import org.frice.event.OnMouseEvent
+import org.frice.event.*
 import org.frice.platform.*
 import org.frice.platform.adapter.JfxDrawer
 import org.frice.utils.misc.loop
@@ -21,7 +20,10 @@ import kotlin.concurrent.thread
  */
 open class GameFX
 @JvmOverloads
-constructor(val width: Double = 500.0, val height: Double = 500.0, layerCount: Int = 1) : Application(), FriceGame {
+constructor(
+	final override val width: Double = 500.0,
+	final override val height: Double = 500.0,
+	layerCount: Int = 1) : Application(), FriceGame {
 
 	override var paused = false
 		set(value) {
@@ -82,13 +84,13 @@ constructor(val width: Double = 500.0, val height: Double = 500.0, layerCount: I
 		TODO("not implemented")
 	}
 
-	override fun clearScreen() {
-		TODO("not implemented")
-	}
-
 	override fun start(stage: Stage) {
 		this.stage = stage
 		scene = Scene(root, width, height)
+		canvas.setOnMouseClicked {
+			onClick(fxClick(it))
+		}
+		canvas.setOnMouseMoved {  }
 		stage.scene = scene
 		onInit()
 		stage.show()
@@ -99,6 +101,7 @@ constructor(val width: Double = 500.0, val height: Double = 500.0, layerCount: I
 					onRefresh()
 					if (!paused && !stopped && refresh.ended()) {
 						// TODO("repaint")
+						customDraw(drawer)
 					}
 				} catch (ignored: ConcurrentModificationException) {
 				}
