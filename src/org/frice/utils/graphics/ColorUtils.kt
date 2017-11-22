@@ -4,6 +4,7 @@
 package org.frice.utils.graphics
 
 import java.awt.Color
+import javafx.scene.paint.Color as JfxColor
 
 /**
  * Created by ice1000 on 16-8-6.
@@ -21,6 +22,8 @@ fun Int.toAscii() = asciiList[greyify() / (256 / asciiList.size + 1)]
 fun Color.average() = (blue + green + red) / 3
 
 fun Int.greyify(): Int = Color(this).average().let { c -> makeColor(c, c, c, alpha) }
+
+fun swing2fxColor(c: Color): JfxColor = JfxColor.rgb(c.red, c.green, c.blue)
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun makeColor(red: Int, green: Int, blue: Int, alpha: Int) =

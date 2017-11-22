@@ -5,18 +5,15 @@ import javafx.scene.text.Font
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.graphics.swing2fxColor
 import org.frice.utils.misc.forceRun
-import java.awt.Color
-import javafx.scene.paint.Color as JfxColor
 
 class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override var color = ColorResource.BLUE
 		set(value) {
 			field = value
-			g.fill = fromColor(field.color)
+			g.fill = swing2fxColor(field.color)
 		}
-
-	fun fromColor(c: Color): JfxColor = JfxColor.rgb(c.red, c.green, c.blue)
 
 	override fun init() {
 		forceRun { g.font = Font("Consolas", 16.0) }
