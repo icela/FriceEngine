@@ -126,7 +126,9 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 
 	fun mouse(e: OnMouseEvent) = layers.forEach {
 		it.texts.forEach { b ->
-			if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
+			if (b is FButton) {
+				if (b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
+			}
 		}
 	}
 

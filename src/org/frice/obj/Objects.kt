@@ -29,7 +29,6 @@ interface FContainer {
 	val width: Double
 	val height: Double
 
-
 	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 
 	infix fun containsPoint(point: FPoint) = containsPoint(point.x, point.y)

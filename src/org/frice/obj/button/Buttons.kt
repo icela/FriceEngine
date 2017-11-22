@@ -14,9 +14,8 @@ import java.util.function.Consumer
 interface FButton : FContainer, AbstractObject {
 	var onMouseListener: Consumer<OnMouseEvent>?
 
-	infix fun onMouse(e: OnMouseEvent) = {
+	infix fun onMouse(e: OnMouseEvent) {
 		onMouseListener?.accept(e)
-		println(e)
 		buttonPressed(e)
 	}
 
