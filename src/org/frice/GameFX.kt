@@ -1,17 +1,19 @@
 package org.frice
 
 import javafx.application.Application
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.scene.Scene
-import javafx.scene.control.Button
+import javafx.scene.canvas.Canvas
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.OnClickEvent
 import org.frice.event.OnMouseEvent
 import org.frice.platform.*
-import org.frice.utils.time.*
+import org.frice.platform.adapter.JfxDrawer
+import org.frice.utils.misc.loop
+import org.frice.utils.time.FClock
+import org.frice.utils.time.FTimer
 import java.util.*
+import kotlin.concurrent.thread
 
 /**
  * @author ice1000
@@ -19,7 +21,8 @@ import java.util.*
  */
 open class GameFX
 @JvmOverloads
-constructor(layerCount: Int = 1) : Application(), FriceGame {
+constructor(val width: Double = 500.0, val height: Double = 500.0, layerCount: Int = 1) : Application(), FriceGame {
+
 	override var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()
@@ -34,14 +37,13 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 
 	override val layers = Layers(layerCount) { Layer() }
 	override var debug = true
-	override val random = Random()
+	override val random = Random(System.currentTimeMillis())
 	override var autoGC = true
 	override var showFPS = true
 	override var loseFocus = false
 		set(value) = Unit
 
 	private lateinit var stage: Stage
-	private lateinit var root: StackPane
 	private lateinit var scene: Scene
 
 	var fpsCounter = 0
@@ -68,8 +70,9 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 		stage.title = title
 	}
 
-	override val drawer: FriceDrawer
-		get() = TODO("not implemented")
+	private val canvas = Canvas(width, height)
+	private val root = StackPane(canvas)
+	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun onExit() {
 		TODO("not implemented")
@@ -85,16 +88,21 @@ constructor(layerCount: Int = 1) : Application(), FriceGame {
 
 	override fun start(stage: Stage) {
 		this.stage = stage
-		val btn = Button()
-		btn.text = "Say 'Hello World'"
-		btn.onAction = EventHandler<ActionEvent> { println("Hello World!") }
-
-		root = StackPane()
-		root.children.add(btn)
-
-		scene = Scene(root, 300.0, 250.0)
+		scene = Scene(root, width, height)
 		stage.scene = scene
 		onInit()
 		stage.show()
+		thread {
+			onLastInit()
+			loop {
+				try {
+					onRefresh()
+					if (!paused && !stopped && refresh.ended()) {
+						// TODO("repaint")
+					}
+				} catch (ignored: ConcurrentModificationException) {
+				}
+			}
+		}
 	}
 }

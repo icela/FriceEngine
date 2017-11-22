@@ -17,6 +17,7 @@ import javax.swing.UIManager
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
 
+@Suppress("ClassName")
 object `{-# LANGUAGE Initializer #-}` {
 	init {
 		if ("Windows" in System.getProperty("os.name"))
@@ -42,9 +43,9 @@ fun Rectangle.rotate() {
 }
 
 fun launch(game: GameFX) {
-	`{-# LANGUAGE Initializer #-}`
+	// `{-# LANGUAGE Initializer #-}`
+	FLog.v("Engine start!")
 	Application.launch(game.javaClass)
-	game.onLastInit()
 }
 
 fun launch(game: Game) {

@@ -5,8 +5,13 @@ fun main(args: Array<String>) {
 	launch(obj)
 }
 
-class O : GameFX() {
+class O : GameFX(width = 600.0) {
 	override fun onInit() {
 		title = "My awesome title"
+	}
+
+	override fun onLastInit() {
+		// title = "Your awesome title"
+		// not allowed
 	}
 }
