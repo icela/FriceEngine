@@ -244,7 +244,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 					restore()
 					init()
 					rotate(b.rotate)
-					setStringSize(b.textSize)
+					newFont(b.fontName, b.textSize)
 				}
 				if (b is FButton) {
 					when (b) {

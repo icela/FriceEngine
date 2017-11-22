@@ -27,8 +27,12 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 
 	var g: Graphics2D = friceImage.image.graphics as Graphics2D
 
-	fun setStringSize(size: Int) {
+	override fun stringSize(size: Double) {
 		g.font = g.font.deriveFont(size.toFloat())
+	}
+
+	override fun newFont(name: String, size: Double) {
+		g.font = Font(name, Font.PLAIN, size.toInt())
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =

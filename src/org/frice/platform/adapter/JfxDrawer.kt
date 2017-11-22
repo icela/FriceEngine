@@ -15,6 +15,14 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 			g.fill = swing2fxColor(field.color)
 		}
 
+	override fun stringSize(size: Double) {
+		g.font = Font(g.font.name, size)
+	}
+
+	override fun newFont(name: String, size: Double) {
+		g.font = Font(g.font.name, size)
+	}
+
 	override fun init() {
 		forceRun { g.font = Font("Consolas", 16.0) }
 	}
