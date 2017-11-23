@@ -3,7 +3,7 @@ package org.frice.platform.adapter
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.misc.forceRun
+import org.frice.utils.forceRun
 import java.awt.*
 
 /**

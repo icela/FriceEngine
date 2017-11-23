@@ -1,4 +1,4 @@
-package org.frice.utils.misc
+package org.frice.utils
 
 const val USHR = 6
 const val MOD = 0b11_1111

@@ -1,6 +1,6 @@
 package org.frice.utils.time
 
-import org.frice.utils.misc.unless
+import org.frice.utils.unless
 
 /**
  * Created by ice1000 on 2016/10/16.

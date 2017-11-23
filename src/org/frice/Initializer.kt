@@ -10,7 +10,7 @@ package org.frice
 import javafx.application.Application
 import org.frice.platform.FriceGame
 import org.frice.utils.message.FLog
-import org.frice.utils.misc.loop
+import org.frice.utils.loop
 import java.awt.Rectangle
 import java.util.*
 import javax.swing.UIManager

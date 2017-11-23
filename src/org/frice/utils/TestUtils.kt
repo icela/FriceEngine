@@ -1,7 +1,7 @@
 @file:JvmName("Utils")
 @file:JvmMultifileClass
 
-package org.frice.utils.misc
+package org.frice.utils
 
 /**
  * Created by ice1000 on 2016/9/9 0009.

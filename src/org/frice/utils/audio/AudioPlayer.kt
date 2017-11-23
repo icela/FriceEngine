@@ -1,7 +1,7 @@
 package org.frice.utils.audio
 
-import org.frice.utils.misc.forceRun
-import org.frice.utils.misc.until
+import org.frice.utils.forceRun
+import org.frice.utils.until
 import java.io.File
 import javax.sound.sampled.*
 

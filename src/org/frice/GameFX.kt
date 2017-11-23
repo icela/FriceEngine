@@ -12,7 +12,7 @@ import org.frice.platform.FriceGame
 import org.frice.platform.Layer
 import org.frice.platform.adapter.JfxDrawer
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.misc.loop
+import org.frice.utils.loop
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
 import java.util.*

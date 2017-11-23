@@ -1,7 +1,7 @@
 @file:JvmName("Utils")
 @file:JvmMultifileClass
 
-package org.frice.utils.misc
+package org.frice.utils
 
 /**
  * Kotlin language extension

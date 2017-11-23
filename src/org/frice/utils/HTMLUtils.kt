@@ -1,5 +1,5 @@
 @file:JvmName("HtmlUtils")
-package org.frice.utils.web
+package org.frice.utils
 
 /**
  * HTML tags finder

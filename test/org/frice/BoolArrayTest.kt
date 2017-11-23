@@ -1,8 +1,6 @@
 package org.frice
 
-import org.frice.obj.sub.DebugImageObject
-import org.frice.resource.image.ImageResource
-import org.frice.utils.misc.BoolArray
+import org.frice.utils.BoolArray
 import org.junit.Test
 import kotlin.test.*
 

@@ -1,6 +1,6 @@
 package org.frice.utils.data
 
-import org.frice.utils.misc.*
+import org.frice.utils.*
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import java.io.File

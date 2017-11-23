@@ -8,7 +8,7 @@ import org.frice.resource.FResource
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.message.FLog
-import org.frice.utils.misc.squared
+import org.frice.utils.squared
 import org.frice.utils.time.*
 import java.awt.Rectangle
 

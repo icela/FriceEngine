@@ -6,7 +6,7 @@ import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.graphics.swing2fxColor
-import org.frice.utils.misc.forceRun
+import org.frice.utils.forceRun
 
 class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override var color = ColorResource.BLUE

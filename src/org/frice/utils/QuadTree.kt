@@ -1,4 +1,4 @@
-package org.frice.utils.misc
+package org.frice.utils
 
 import org.frice.obj.PhysicalObject
 import org.frice.utils.shape.FShapeDouble

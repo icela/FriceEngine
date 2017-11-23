@@ -2,7 +2,7 @@ package org.frice.platform.adapter
 
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.graphics.*
+import org.frice.utils.*
 import java.awt.geom.AffineTransform
 import java.awt.image.AffineTransformOp
 import java.awt.image.BufferedImage

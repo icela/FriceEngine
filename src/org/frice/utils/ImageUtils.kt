@@ -5,9 +5,10 @@
  * @author ice1000
  * @since 3.1.4
  */
-package org.frice.utils.graphics
+package org.frice.utils
 
 import org.frice.platform.adapter.JvmImage
+import org.frice.utils.graphics.*
 import java.awt.image.BufferedImage
 
 private inline fun BufferedImage.fy(fy: BufferedImage.(Int, Int) -> Int): JvmImage {

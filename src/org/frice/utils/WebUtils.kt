@@ -5,7 +5,7 @@
  * @since v0.5
  */
 @file:JvmName("WebUtils")
-package org.frice.utils.web
+package org.frice.utils
 
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.URLBytesManager

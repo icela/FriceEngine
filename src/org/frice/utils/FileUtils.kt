@@ -6,7 +6,7 @@
  */
 @file:JvmName("FileUtils")
 
-package org.frice.utils.data
+package org.frice.utils
 
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.manager.*
