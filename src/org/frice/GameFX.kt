@@ -2,16 +2,19 @@ package org.frice
 
 import javafx.application.Application
 import javafx.application.Platform
+import javafx.embed.swing.SwingFXUtils
 import javafx.scene.Scene
+import javafx.scene.SnapshotParameters
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
-import org.frice.platform.FriceGame
-import org.frice.platform.Layer
+import org.frice.platform.*
 import org.frice.platform.adapter.JfxDrawer
+import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
+import org.frice.resource.image.ImageResource
 import org.frice.utils.loop
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
@@ -82,6 +85,8 @@ open class GameFX @JvmOverloads constructor(
 			refresh.time = value
 		}
 
+	override val screenCut get() = JvmImage(SwingFXUtils.fromFXImage(canvas.snapshot(SnapshotParameters(), null), null))
+
 	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
 		stage.title = title
@@ -96,7 +101,7 @@ open class GameFX @JvmOverloads constructor(
 		System.exit(0)
 	}
 
-	override fun start(stage: Stage) {
+	override final fun start(stage: Stage) {
 		this.stage = stage
 		scene = Scene(root, width.toDouble(), height.toDouble())
 		isResizable = false

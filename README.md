@@ -52,7 +52,7 @@ Feature|Swing|JavaFX
 Life cycle|√|√
 Dialogs|√|√
 Cursor overriding|√|×
-Screenshot|√|×
+Screenshot|√|√
 Buttons|√|×
 Full screen|√|√
 Always on top|×|√

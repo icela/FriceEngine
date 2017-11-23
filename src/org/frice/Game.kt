@@ -149,12 +149,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		})
 	}
 
-	/**
-	 * get a screenShot.
-	 *
-	 * @return screen cut as an image
-	 */
-	fun getScreenCut() = ImageResource(drawer.friceImage)
+	override val screenCut get() = drawer.friceImage
 
 	fun addKeyTypedEvent(keyCode: Int, key: Consumer<KeyEvent>)
 		= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
@@ -165,8 +160,8 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	fun addKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
 		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	infix fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
-	infix fun setCursor(o: ImageObject) {
+	fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
+	fun setCursor(o: ImageObject) {
 		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
 	}
 
