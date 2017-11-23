@@ -3,6 +3,7 @@ package org.frice
 import javafx.application.Application
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
+import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
@@ -22,6 +23,7 @@ import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
 import java.util.*
+import javax.swing.Icon
 import kotlin.concurrent.thread
 
 /**
@@ -95,6 +97,7 @@ constructor(
 		canvas.setOnMouseReleased { onMouse(fxMouse(it, MOUSE_RELEASED)) }
 		stage.scene = scene
 		onInit()
+		stage.icons += Image(javaClass.getResourceAsStream("/icon.png"))
 		stage.show()
 		thread {
 			onLastInit()

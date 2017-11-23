@@ -17,18 +17,18 @@ class FDialog(val game: Frame?) {
 	fun confirm(msg: String, title: String, option: Int) = JOptionPane.showConfirmDialog(game, msg, title, option)
 
 	companion object Flags {
-		@JvmField val YES_NO_OPTION = 0
-		@JvmField val YES_NO_CANCEL_OPTION = 1
-		@JvmField val OK_CANCEL_OPTION = 2
-		@JvmField val YES_OPTION = 0
-		@JvmField val NO_OPTION = 1
-		@JvmField val CANCEL_OPTION = 2
-		@JvmField val OK_OPTION = 0
-		@JvmField val CLOSED_OPTION = -1
-		@JvmField val ERROR_MESSAGE = 0
-		@JvmField val INFORMATION_MESSAGE = 1
-		@JvmField val WARNING_MESSAGE = 2
-		@JvmField val QUESTION_MESSAGE = 3
-		@JvmField val PLAIN_MESSAGE = -1
+		const val YES_NO_OPTION = 0
+		const val YES_NO_CANCEL_OPTION = 1
+		const val OK_CANCEL_OPTION = 2
+		const val YES_OPTION = 0
+		const val NO_OPTION = 1
+		const val CANCEL_OPTION = 2
+		const val OK_OPTION = 0
+		const val CLOSED_OPTION = -1
+		const val ERROR_MESSAGE = 0
+		const val INFORMATION_MESSAGE = 1
+		const val WARNING_MESSAGE = 2
+		const val QUESTION_MESSAGE = 3
+		const val PLAIN_MESSAGE = -1
 	}
 }

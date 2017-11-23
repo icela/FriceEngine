@@ -15,7 +15,7 @@ class Preference(private val file: File) : Database {
 
 	constructor(path: String) : this(File(path))
 
-	val properties: Properties = Properties()
+	private val properties: Properties = Properties()
 
 	init {
 		if (!file.exists()) file.createNewFile()

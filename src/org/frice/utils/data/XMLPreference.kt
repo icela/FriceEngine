@@ -1,8 +1,6 @@
 package org.frice.utils.data
 
-import org.frice.utils.misc.forceGet
-import org.frice.utils.misc.forceRun
-import org.frice.utils.misc.loop
+import org.frice.utils.misc.*
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import java.io.File
@@ -23,35 +21,24 @@ class XMLPreference constructor(val file: File) : Database {
 	constructor(path: String) : this(File(path))
 
 	private val builder: DocumentBuilder = DocumentBuilderFactory
-			.newInstance()
-			.newDocumentBuilder()
+		.newInstance()
+		.newDocumentBuilder()
 	private val doc: Document
 	private val root: Element
 
 	companion object {
-		@JvmField
-		val ROOT = "PREFERENCE_CONST_ROOT"
-		@JvmField
-		val TYPE = "PREFERENCE_CONST_TYPE"
-		@JvmField
-		val VALUE = "PREFERENCE_CONST_VALUE"
+		const val ROOT = "PREFERENCE_CONST_ROOT"
+		const val TYPE = "PREFERENCE_CONST_TYPE"
+		const val VALUE = "PREFERENCE_CONST_VALUE"
 
-		@JvmField
-		val TYPE_BYTE = "PREFERENCE_CONST_TYPE_BYTE"
-		@JvmField
-		val TYPE_INT = "PREFERENCE_CONST_TYPE_INT"
-		@JvmField
-		val TYPE_LONG = "PREFERENCE_CONST_TYPE_LONG"
-		@JvmField
-		val TYPE_SHORT = "PREFERENCE_CONST_TYPE_SHORT"
-		@JvmField
-		val TYPE_DOUBLE = "PREFERENCE_CONST_TYPE_DOUBLE"
-		@JvmField
-		val TYPE_FLOAT = "PREFERENCE_CONST_TYPE_FLOAT"
-		@JvmField
-		val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
-		@JvmField
-		val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
+		const val TYPE_BYTE = "PREFERENCE_CONST_TYPE_BYTE"
+		const val TYPE_INT = "PREFERENCE_CONST_TYPE_INT"
+		const val TYPE_LONG = "PREFERENCE_CONST_TYPE_LONG"
+		const val TYPE_SHORT = "PREFERENCE_CONST_TYPE_SHORT"
+		const val TYPE_DOUBLE = "PREFERENCE_CONST_TYPE_DOUBLE"
+		const val TYPE_FLOAT = "PREFERENCE_CONST_TYPE_FLOAT"
+		const val TYPE_STRING = "PREFERENCE_CONST_TYPE_STRING"
+		const val TYPE_CHAR = "PREFERENCE_CONST_TYPE_CHAR"
 	}
 
 	init {

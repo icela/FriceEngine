@@ -89,6 +89,12 @@ interface FriceGame : TitleOwner, BoundsOwner {
 		drawer.restore()
 	}
 
+	fun mouse(e: OnMouseEvent) = layers.forEach {
+		it.texts.forEach { b ->
+			if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
+		}
+	}
+
 	fun drawEverything(bgg: FriceDrawer) {
 		processBuffer()
 		layers.forEach {

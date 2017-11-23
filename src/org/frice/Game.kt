@@ -124,17 +124,8 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
 
-	fun mouse(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b ->
-			if (b is FButton) {
-				if (b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
-			}
-		}
-	}
-
 	override fun onExit() {
-		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) ==
-			FDialog.YES_OPTION) {
+		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) == FDialog.YES_OPTION) {
 			dispose()
 			System.exit(0)
 		} else return
