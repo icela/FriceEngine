@@ -23,12 +23,10 @@ class O : GameFX() {
 
 	@org.junit.Test
 	override fun onInit() {
-		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233).apply {
-			mass = 2.0
-		}
+		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233)
 		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
 			mass = 1.0
-			anims += SimpleMove(80, 0)
+			addAnim(SimpleMove(80, 0))
 		}
 		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
 		text.textSize = 64.0
