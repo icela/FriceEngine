@@ -21,61 +21,55 @@ View [Document](https://icela.github.io/#getting-started) to learn more about Fr
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
 ## Why light?
-The release build jar is about 300kb (with a 800kb Kotlin runtime) only.<br/>
+The release build jar is about 1.6mb (with a 1mb Kotlin runtime) only.<br/>
 
 ## Why native?
-This engine is completely platform-independent: no JNI linkage, no native methods, everything is written in pure Kotlin.<br/>
+This engine is completely platform-independent: no JNI linkage, no native methods.<br/>
 
 # Build
 
 Add code below to your gradle script:
 
-```groovy
-allprojects {
-  repositories {
-    /// ...
-    maven { url 'https://jitpack.io' }
-  }
-}
-
+```gradle
+allprojects { repositories { maven { url 'https://jitpack.io' } } }
 dependencies {
   compile 'com.github.icela:FriceEngine:v1.6.0'
 }
 ```
 
-# Usage
+# Features
 
-## Supported
+## Platform dependent
 
-### GUI Platforms
-- Swing(`org.frice.Game`)
-- JavaFX(`org.frice.GameFX`)
+These features are differently implemented in Swing/JavaFX.  
+Since this project is still in progress, the unsupported features will soon be available.
 
-### Languages
-- Kotlin
-- Java
-- Groovy
-- Scala
+Feature|Swing|JavaFX
+:---|:---:|:---:
+Life cycle|√|√
+Dialogs|√|×
+Cursor overriding|√|×
+Screenshot|√|×
+Buttons|√|×
+Full screen|×|√
+Always on top|×|√
+Text font/size|√|√
 
-### Progress
-- [X] Game Objects (from image or shape, image from file or web)
-- [X] Life cycle
-- [X] Collision detecting
-- [X] Audio playing (\*.wav, \*.mp3 only)
-- [X] Dialogs
-- [X] Cursor overriding
-- [X] Clock system
-- [X] Animations (frames, moving, scaling, accelerations, etc.)
-- [X] A simple key-value database
-- [X] Screen cut
-- [X] Buttons
-- [X] Particle effects
-- [X] Easy time controlling
-- [X] Language extensions (for Kotlin only)
-- [X] Smart auto garbage collection (you can close it (objects far from the screen will be removed))
-- [X] Resource manager(when you read files/urls, the result will be cached)
-- [X] File/URL utils
-- [X] A BoolArray implemented in bitwise operation, each boolean value will only take 1 __bit__ space (instead of 1 __byte__ which is default on JVM).
+You can use swing dialogs in JavaFX.
+
+## Platform independent
+
+- Animations (move, scale, accelerate, etc.)
+- Audio playing (\*.wav, \*.mp3)
+- Clock system, timers
+- A BoolArray implemented in bitwise operation, each boolean value will only take 1 __bit__ space (instead of 1 __byte__ defaultly on JVM).
+- Automatic garbage collection (optional, objects far from the screen will be removed)
+- Resource manager (caching IO)
+- File/Image/Color/URL utils
+- Game objects
+- Key-value database
+- Particle effects
+- Collision detecting
 
 ## DSL
 see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
