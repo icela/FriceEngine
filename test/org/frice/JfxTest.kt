@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
 
 class O : GameFX(width = 600) {
 	override fun onInit() {
-		title = "My awesome title"
+		title = "My awesome titlie"
 	}
 
 	override fun onLastInit() {

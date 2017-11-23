@@ -1,4 +1,4 @@
-package org.frice.platform;
+package org.frice.platform.owners;
 
 import org.jetbrains.annotations.NotNull;
 

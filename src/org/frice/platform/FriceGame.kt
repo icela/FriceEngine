@@ -7,12 +7,13 @@ import org.frice.obj.button.SimpleButton
 import org.frice.obj.effects.LineEffect
 import org.frice.obj.sub.ShapeObject
 import org.frice.platform.adapter.JvmDrawer
+import org.frice.platform.owners.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.misc.unless
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 
-interface FriceGame : TitleOwner, BoundsOwner {
+interface FriceGame : TitleOwner, Sized, Resizable {
 	val layers: Array<Layer>
 
 	val drawer: FriceDrawer

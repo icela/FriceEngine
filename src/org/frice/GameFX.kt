@@ -1,43 +1,51 @@
 package org.frice
 
 import javafx.application.Application
+import javafx.application.Platform
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
-import org.frice.obj.FObject
-import org.frice.obj.PhysicalObject
-import org.frice.obj.button.FButton
-import org.frice.obj.button.SimpleButton
-import org.frice.obj.effects.LineEffect
-import org.frice.obj.sub.ShapeObject
-import org.frice.platform.*
+import org.frice.platform.FriceGame
+import org.frice.platform.Layer
 import org.frice.platform.adapter.JfxDrawer
-import org.frice.resource.graphics.ColorResource
+import org.frice.utils.message.FDialog
 import org.frice.utils.misc.loop
-import org.frice.utils.misc.unless
-import org.frice.utils.shape.FOval
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
 import java.util.*
-import javax.swing.Icon
 import kotlin.concurrent.thread
 
 /**
  * @author ice1000
  * @since v1.5.0
  */
-open class GameFX
-@JvmOverloads
-constructor(
+open class GameFX @JvmOverloads constructor(
 	private val width: Int = 500,
 	private val height: Int = 500,
 	layerCount: Int = 1) : Application(), FriceGame {
+
+	override fun isResizable() = stage.isResizable
+	override fun setResizable(resizable: Boolean) {
+		stage.isResizable = resizable
+	}
+
 	override fun getWidth() = width
 	override fun getHeight() = height
+
+	var isFullScreen: Boolean
+		get() = stage.isFullScreen
+		set(value) {
+			stage.isFullScreen = value
+		}
+
+	var isAlwaysOnTop: Boolean
+		get() = stage.isAlwaysOnTop
+		set(value) {
+			stage.isAlwaysOnTop = value
+		}
 
 	override var paused = false
 		set(value) {
@@ -84,12 +92,16 @@ constructor(
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun onExit() {
-		TODO("not implemented")
+		if (FDialog().confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) == FDialog.YES_OPTION) {
+			Platform.exit()
+			System.exit(0)
+		}
 	}
 
 	override fun start(stage: Stage) {
 		this.stage = stage
 		scene = Scene(root, width.toDouble(), height.toDouble())
+		isResizable = false
 		canvas.setOnMouseClicked { onMouse(fxMouse(it, MOUSE_CLICKED)) }
 		canvas.setOnMouseEntered { onMouse(fxMouse(it, MOUSE_ENTERED)) }
 		canvas.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }

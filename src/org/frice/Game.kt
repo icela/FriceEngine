@@ -2,23 +2,15 @@
 
 package org.frice
 
-import org.frice.event.OnMouseEvent
-import org.frice.obj.*
-import org.frice.obj.button.FButton
-import org.frice.obj.button.SimpleButton
-import org.frice.obj.effects.LineEffect
+import org.frice.obj.AbstractObject
 import org.frice.obj.sub.ImageObject
-import org.frice.obj.sub.ShapeObject
-import org.frice.platform.*
+import org.frice.platform.FriceGame
+import org.frice.platform.Layer
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
-import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.message.FDialog
 import org.frice.utils.message.FLog
-import org.frice.utils.misc.unless
-import org.frice.utils.shape.FOval
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
 import java.awt.BorderLayout
@@ -45,10 +37,8 @@ import javax.swing.JFrame
  * @since v0.2.3
  */
 @Suppress("LeakingThis")
-open class Game
-@JvmOverloads
-constructor(layerCount: Int = 1) : JFrame(), FriceGame {
-	override val layers = Array<Layer>(layerCount) { Layer() }
+open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), FriceGame {
+	override val layers = Array(layerCount) { Layer() }
 
 	override var paused = false
 		set(value) {
@@ -128,7 +118,7 @@ constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) == FDialog.YES_OPTION) {
 			dispose()
 			System.exit(0)
-		} else return
+		}
 	}
 
 	/**
