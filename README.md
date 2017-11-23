@@ -59,10 +59,11 @@ Always on top|×|√
 Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
+Rotate animations|√|×
 
 ## Platform independent
 
-- Animations (move, scale, accelerate, etc.)
+- Non-rotate animations (move, scale, accelerate, etc.)
 - Audio playing (\*.wav, \*.mp3)
 - Clock system, timers
 - A BoolArray implemented in bitwise operation, each boolean value will only take 1 __bit__ space (instead of 1 __byte__ defaultly on JVM).
