@@ -59,7 +59,7 @@ Always on top|×|√
 Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
-Rotate animations|√|×
+Rotate animation|√|×
 
 ## Platform independent
 

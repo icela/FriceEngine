@@ -1,18 +1,13 @@
 package org.frice
 
-import org.frice.anim.RotateAnim
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
 import org.frice.obj.PhysicalObject
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
-import org.frice.obj.effects.ParticleEffect
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.resource.graphics.ParticleResource
-import org.frice.utils.data.Preference
-import org.frice.utils.data.XMLPreference
 import org.frice.utils.graphics.greyify
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
@@ -26,9 +21,13 @@ fun main(args: Array<String>) {
 	launch(obj)
 }
 
-class TestFx : org.frice.GameFX(width = 600, height = 600) {
+class TestFx : GameFX(width = 600, height = 600) {
 	private val timer = FTimer(200)
 	private val objs = LinkedList<PhysicalObject>()
+
+	override fun onExit() {
+		System.exit(0)
+	}
 
 	override fun onInit() {
 		super.onInit()
