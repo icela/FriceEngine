@@ -10,8 +10,6 @@ dependencies:
     - ./gradlew dependencies
 #
 
-
-
 test:
   override:
     - ./gradlew build

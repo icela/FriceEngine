@@ -34,7 +34,7 @@ Add code below to your gradle script:
 ```gradle
 allprojects { repositories { maven { url 'https://jitpack.io' } } }
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.6.0'
+  compile 'com.github.icela:FriceEngine:v1.6.1'
 }
 ```
 
@@ -59,7 +59,7 @@ Always on top|×|√
 Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
-Rotate animations|√|×
+Rotate animation|√|×
 
 ## Platform independent
 
