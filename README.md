@@ -13,18 +13,19 @@ CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4
 [![](https://jitpack.io/v/icela/FriceEngine/month.svg)](https://jitpack.io/#icela/FriceEngine) <br/>
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
-An easy, light, native game engine running on JVM.<br/>
-View [Document](https://icela.github.io/#getting-started) to learn more about Frice Engine.
+An easy, light, native game engine running on JVM.
 
-## Why easy?
-[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 65 lines of code only.<br/>
++ Why easy?
+[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 56 lines of Java code only.<br/>
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
 
-## Why light?
-The release build jar is about 1.6mb (with a 1mb Kotlin runtime) only.<br/>
++ Why light?
+The release build jar is about 1.6mb (with a 1mb Kotlin runtime) only.
 
-## Why native?
-This engine is completely platform-independent: no JNI linkage, no native methods.<br/>
++ Why native?
+This engine is completely platform-independent: no JNI linkage, no native methods.
+
+View [Document](https://icela.github.io/#getting-started) to learn more about Frice Engine.
 
 # Build
 
@@ -36,6 +37,8 @@ dependencies {
   compile 'com.github.icela:FriceEngine:v1.6.0'
 }
 ```
+
+Alternatively, you can download a jar from the [release page](https://github.com/icela/FriceEngine/releases).
 
 # Features
 
@@ -54,6 +57,8 @@ Buttons|√|×
 Full screen|×|√
 Always on top|×|√
 Text font/size|√|√
+Multi-instances|√|×
+Resizability|√|√
 
 You can use swing dialogs in JavaFX.
 
@@ -67,6 +72,7 @@ You can use swing dialogs in JavaFX.
 - Resource manager (caching IO)
 - File/Image/Color/URL utils
 - Game objects
+- Frame animations
 - Key-value database
 - Particle effects
 - Collision detecting
@@ -74,16 +80,9 @@ You can use swing dialogs in JavaFX.
 ## DSL
 see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
 
-## Basics
-FriceEngine is based on the life cycle mode.<br/>
-To build games based on frice engine, follow these steps:
-
-0. Import the jar in the latest release to your project, or add dependency in your `build.gradle` file.
-0. Create a class extends `Game` or `GameFX` in `org.frice` package.
-0. Override the life cycle methods(`onInit`, `onExit`, `onLastInit`, `onRefresh`, `onFocus`, `onLoseFocus`), just understand them by name.
-0. If you want to draw something additionally, override `customDraw`. This method will be invoked every time after all game objects drawn.
-0. Write `launch(YourGameClass.class)` in the main function.
-0. Feel free to open issue for feature request, bugs, etc.
+## Contributions
+Feel free to open issue for feature request, bug reports, etc. <br/>
+This is generally a personal project, so please do give your genuine suggestions.
 
 ## Demos
 see [FriceDemo](https://github.com/icela/FriceDemo)
