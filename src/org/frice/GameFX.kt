@@ -100,11 +100,20 @@ open class GameFX @JvmOverloads constructor(
 		this.stage = stage
 		scene = Scene(root, width.toDouble(), height.toDouble())
 		isResizable = false
-		canvas.setOnMouseClicked { onMouse(fxMouse(it, MOUSE_CLICKED)) }
+		canvas.setOnMouseClicked {
+			mouse(fxMouse(it, MOUSE_CLICKED))
+			onMouse(fxMouse(it, MOUSE_CLICKED))
+		}
 		canvas.setOnMouseEntered { onMouse(fxMouse(it, MOUSE_ENTERED)) }
 		canvas.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }
-		canvas.setOnMousePressed { onMouse(fxMouse(it, MOUSE_PRESSED)) }
-		canvas.setOnMouseReleased { onMouse(fxMouse(it, MOUSE_RELEASED)) }
+		canvas.setOnMousePressed {
+			mouse(fxMouse(it, MOUSE_PRESSED))
+			onMouse(fxMouse(it, MOUSE_PRESSED))
+		}
+		canvas.setOnMouseReleased {
+			mouse(fxMouse(it, MOUSE_RELEASED))
+			onMouse(fxMouse(it, MOUSE_RELEASED))
+		}
 		stage.setOnCloseRequest {
 			onExit()
 			it.consume()

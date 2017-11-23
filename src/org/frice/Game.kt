@@ -11,8 +11,7 @@ import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.message.FDialog
-import org.frice.utils.message.FLog
+import org.frice.utils.message.*
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
 import java.awt.*
@@ -122,14 +121,13 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	}
 
 	override fun onExit() {
-		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) == FDialog.YES_OPTION) {
+		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", YES_NO_OPTION) == YES_OPTION) {
 			dispose()
 			System.exit(0)
 		}
 	}
 
 	/**
-	 * for kotlin only
 	 * add keyboard listeners with lambda
 	 */
 	fun addKeyListener(
