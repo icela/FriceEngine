@@ -24,7 +24,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	}
 
 	override fun init() {
-		forceRun { g.font = Font("Consolas", 16.0) }
+		forceRun { g.font = Font(16.0) }
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) {

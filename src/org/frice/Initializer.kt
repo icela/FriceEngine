@@ -43,7 +43,7 @@ fun Rectangle.rotate() {
 }
 
 fun launch(game: GameFX) {
-	// `{-# LANGUAGE Initializer #-}`
+	`{-# LANGUAGE Initializer #-}`
 	FLog.v("Engine start!")
 	Application.launch(game.javaClass)
 }

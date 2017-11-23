@@ -11,7 +11,7 @@ import org.frice.event.*
 import org.frice.platform.FriceGame
 import org.frice.platform.Layer
 import org.frice.platform.adapter.JfxDrawer
-import org.frice.utils.message.FDialog
+import org.frice.resource.graphics.ColorResource
 import org.frice.utils.misc.loop
 import org.frice.utils.time.FClock
 import org.frice.utils.time.FTimer
@@ -23,8 +23,8 @@ import kotlin.concurrent.thread
  * @since v1.5.0
  */
 open class GameFX @JvmOverloads constructor(
-	private val width: Int = 500,
-	private val height: Int = 500,
+	private val width: Int = 1000,
+	private val height: Int = 1000,
 	layerCount: Int = 1) : Application(), FriceGame {
 
 	override fun isResizable() = stage.isResizable
@@ -92,10 +92,8 @@ open class GameFX @JvmOverloads constructor(
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun onExit() {
-		if (FDialog().confirm("Are you sure to exit?", "Ensuring", FDialog.YES_NO_OPTION) == FDialog.YES_OPTION) {
-			Platform.exit()
-			System.exit(0)
-		}
+		Platform.exit()
+		System.exit(0)
 	}
 
 	override fun start(stage: Stage) {
@@ -121,8 +119,16 @@ open class GameFX @JvmOverloads constructor(
 				try {
 					onRefresh()
 					if (!paused && !stopped && refresh.ended()) {
-						// TODO("repaint")
-						customDraw(drawer)
+						clearScreen()
+						drawEverything(drawer)
+						drawer.init()
+						drawer.color = ColorResource.DARK_GRAY
+						++fpsCounter
+						if (fpsTimer.ended()) {
+							fpsDisplay = fpsCounter
+							fpsCounter = 0
+						}
+						if (showFPS) drawer.drawString("fps: $fpsDisplay", 30.0, height - 30.0)
 					}
 				} catch (ignored: ConcurrentModificationException) {
 				}
