@@ -107,6 +107,10 @@ open class GameFX @JvmOverloads constructor(
 		canvas.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }
 		canvas.setOnMousePressed { onMouse(fxMouse(it, MOUSE_PRESSED)) }
 		canvas.setOnMouseReleased { onMouse(fxMouse(it, MOUSE_RELEASED)) }
+		stage.setOnCloseRequest {
+			onExit()
+			it.consume()
+		}
 		stage.scene = scene
 		onInit()
 		stage.icons += Image(javaClass.getResourceAsStream("/icon.png"))

@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
 class O : GameFX(width = 600) {
 	override fun onInit() {
 		title = "My awesome titlie"
+		// isFullScreen = true
 	}
 
 	override fun onLastInit() {
