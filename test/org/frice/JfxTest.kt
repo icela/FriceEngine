@@ -21,7 +21,6 @@ class O : GameFX() {
 	lateinit var obj: ShapeObject
 	lateinit var obj2: ShapeObject
 
-	@org.junit.Test
 	override fun onInit() {
 		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233)
 		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
