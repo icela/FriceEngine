@@ -5,9 +5,15 @@ import javafx.scene.text.Font
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.graphics.swing2fxColor
 import org.frice.utils.forceRun
+import org.frice.utils.graphics.swing2fxColor
 
+/**
+ * A drawer implementation for javafx
+ *
+ * @author ice1000
+ * @since v1.5.0
+ */
 class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override var color = ColorResource.BLUE
 		set(value) {

@@ -60,8 +60,6 @@ Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
 
-You can use swing dialogs in JavaFX.
-
 ## Platform independent
 
 - Animations (move, scale, accelerate, etc.)
