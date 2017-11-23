@@ -15,8 +15,6 @@ CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4
 An easy, light, native game engine running on JVM.<br/>
 View [Document](https://icela.github.io/#getting-started) to learn more about Frice Engine.
 
-The doc is poorly maintained and deprecated. I'm deciding to make some tutorials soon.
-
 ## Why easy?
 [A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 65 lines of code only.<br/>
 Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
@@ -48,11 +46,15 @@ dependencies {
 
 ## Supported
 
+### GUI Platforms
+- Swing(`org.frice.Game`)
+- JavaFX(`org.frice.GameFX`)
+
 ### Languages
-- [X] Kotlin
-- [X] Java
-- [X] Groovy
-- [X] Scala
+- Kotlin
+- Java
+- Groovy
+- Scala
 
 ### Progress
 - [X] Game Objects (from image or shape, image from file or web)
@@ -82,7 +84,7 @@ FriceEngine is based on the life cycle mode.<br/>
 To build games based on frice engine, follow these steps:
 
 0. Import the jar in the latest release to your project, or add dependency in your `build.gradle` file.
-0. Create a class extends `Game` or `GameFX` in `org.frice.game` package.
+0. Create a class extends `Game` or `GameFX` in `org.frice` package.
 0. Override the life cycle methods(`onInit`, `onExit`, `onLastInit`, `onRefresh`, `onFocus`, `onLoseFocus`), just understand them by name.
 0. If you want to draw something additionally, override `customDraw`. This method will be invoked every time after all game objects drawn.
 0. Write `launch(YourGameClass.class)` in the main function.
