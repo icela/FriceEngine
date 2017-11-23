@@ -62,6 +62,12 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 	override var loseFocusChangeColor = true
 
+	override var isFullScreen: Boolean
+		get() = extendedState == Frame.MAXIMIZED_BOTH
+		set(value) {
+			if (value) extendedState = Frame.MAXIMIZED_BOTH
+		}
+
 	@get:JvmName(" refresh")
 	internal val refresh = FTimer(4)
 	override var millisToRefresh: Int

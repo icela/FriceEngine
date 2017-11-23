@@ -35,7 +35,7 @@ open class GameFX @JvmOverloads constructor(
 	override fun getWidth() = width
 	override fun getHeight() = height
 
-	var isFullScreen: Boolean
+	override var isFullScreen: Boolean
 		get() = stage.isFullScreen
 		set(value) {
 			stage.isFullScreen = value
@@ -59,7 +59,7 @@ open class GameFX @JvmOverloads constructor(
 			field = value
 		}
 
-	override val layers = Array<Layer>(layerCount) { Layer() }
+	override val layers = Array(layerCount) { Layer() }
 	override var debug = true
 	override var autoGC = true
 	override var showFPS = true

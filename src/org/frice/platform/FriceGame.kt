@@ -34,6 +34,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	var loseFocusChangeColor: Boolean
 	var millisToRefresh: Int
 	var paused: Boolean
+	var isFullScreen: Boolean
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)

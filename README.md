@@ -54,7 +54,7 @@ Dialogs|√|×
 Cursor overriding|√|×
 Screenshot|√|×
 Buttons|√|×
-Full screen|×|√
+Full screen|√|√
 Always on top|×|√
 Text font/size|√|√
 Multi-instances|√|×
