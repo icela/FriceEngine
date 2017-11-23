@@ -10,6 +10,7 @@ CircleCI|[![CircleCI](https://circleci.com/gh/icela/FriceEngine.svg?style=svg)](
 CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4d7e33e57/status?branch=master)](https://app.codeship.com/projects/214712)
 
 [![](https://jitpack.io/v/icela/FriceEngine.svg)](https://jitpack.io/#icela/FriceEngine)
+[![](https://jitpack.io/v/icela/FriceEngine/month.svg)](https://jitpack.io/#icela/FriceEngine) <br/>
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
 An easy, light, native game engine running on JVM.<br/>
