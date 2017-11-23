@@ -50,7 +50,7 @@ Since this project is still in progress, the unsupported features will soon be a
 Feature|Swing|JavaFX
 :---|:---:|:---:
 Life cycle|√|√
-Dialogs|√|×
+Dialogs|√|√
 Cursor overriding|√|×
 Screenshot|√|×
 Buttons|√|×
