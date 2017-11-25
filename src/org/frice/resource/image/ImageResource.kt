@@ -1,15 +1,13 @@
 package org.frice.resource.image
 
 import org.frice.Game
-import org.frice.anim.move.SimpleMove
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.message.FLog
-import org.frice.utils.squared
-import org.frice.utils.time.*
+import org.frice.utils.time.FTimer
 import java.awt.Rectangle
 
 /**
@@ -78,9 +76,9 @@ class WebImageResource(url: String) : ImageResource() {
  * @since v0.3.1
  */
 class FrameImageResource(
-		val game: Game,
-		val list: MutableList<ImageResource>,
-		div: Int) : ImageResource() {
+	val game: Game,
+	val list: MutableList<ImageResource>,
+	div: Int) : ImageResource() {
 
 	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
 

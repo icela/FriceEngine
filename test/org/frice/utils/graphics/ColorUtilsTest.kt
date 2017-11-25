@@ -1,11 +1,13 @@
 package org.frice.utils.graphics
 
-import org.frice.utils.shouldBe
 import org.junit.Test
 import java.awt.Color
 import java.util.*
+import kotlin.test.assertEquals
 
 class ColorUtilsTest {
+	private infix fun <Any> Any?.shouldBe(o: Any?) = assertEquals(o, this)
+
 	@Test
 	fun averageTest() {
 		Color(0, 0, 0).average() shouldBe 0
