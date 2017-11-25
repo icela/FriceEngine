@@ -11,7 +11,7 @@ class ColorUtilsTest {
 	@Test
 	fun averageTest() {
 		Color(0, 0, 0).average() shouldBe 0
-		(0..255).forEach { Color(it) shouldBe it }
+		(0..255).forEach { Color(it, it, it).average() shouldBe it }
 	}
 
 	@Test
@@ -43,7 +43,7 @@ class ColorUtilsTest {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
 			val r = rand.nextInt(255)
-			Color(r, rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)).red shouldBe rand.nextInt(255)
+			Color(r, rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)).red shouldBe r
 		}
 	}
 
@@ -52,7 +52,7 @@ class ColorUtilsTest {
 		val rand = Random(System.currentTimeMillis())
 		repeat(100) {
 			val b = rand.nextInt(255)
-			Color(rand.nextInt(255), rand.nextInt(255), b, rand.nextInt(255)).green shouldBe b
+			Color(rand.nextInt(255), rand.nextInt(255), b, rand.nextInt(255)).blue shouldBe b
 		}
 	}
 
