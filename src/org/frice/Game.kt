@@ -12,8 +12,7 @@ import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.message.*
-import org.frice.utils.time.FClock
-import org.frice.utils.time.FTimer
+import org.frice.utils.time.*
 import java.awt.*
 import java.awt.event.*
 import java.util.function.Consumer
@@ -79,13 +78,9 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 	override val drawer: JvmDrawer
 
-	var fpsCounter = 0
-	var fpsDisplay = 0
-	var fpsTimer = FTimer(1000)
+	val fpsCounter = FpsCounter()
 
-	/**
-	 * represent the mouse as an object
-	 */
+	/** represent the mouse as an object */
 	@JvmField
 	val mouse = object : AbstractObject {
 		override var x: Double
@@ -233,7 +228,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 			drawer.init()
 			drawer.color = ColorResource.DARK_GRAY
-			if (showFPS) drawer.drawString("fps: $fpsDisplay", 30.0, height - 30.0)
+			if (showFPS) drawer.drawString("fps: ${fpsCounter.display}", 30.0, height - 30.0)
 
 			/*
 			 * 厚颜无耻

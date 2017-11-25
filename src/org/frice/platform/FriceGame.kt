@@ -10,7 +10,6 @@ import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.platform.owners.*
 import org.frice.resource.graphics.ColorResource
-import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.unless

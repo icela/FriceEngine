@@ -61,11 +61,7 @@ fun launch(game: Game) {
 					// only update per "refreshTime"
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()
-						++fpsCounter
-						if (fpsTimer.ended()) {
-							fpsDisplay = fpsCounter
-							fpsCounter = 0
-						}
+						fpsCounter.refresh()
 					}
 				} catch (ignored: ConcurrentModificationException) {
 				}

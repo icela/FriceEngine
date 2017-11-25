@@ -10,14 +10,13 @@ import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
-import org.frice.platform.*
+import org.frice.platform.FriceGame
+import org.frice.platform.Layer
 import org.frice.platform.adapter.JfxDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.resource.image.ImageResource
 import org.frice.utils.loop
-import org.frice.utils.time.FClock
-import org.frice.utils.time.FTimer
+import org.frice.utils.time.*
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -72,9 +71,7 @@ open class GameFX @JvmOverloads constructor(
 	private lateinit var stage: Stage
 	private lateinit var scene: Scene
 
-	var fpsCounter = 0
-	var fpsDisplay = 0
-	var fpsTimer = FTimer(1000)
+	private val fpsCounter = FpsCounter()
 
 	override var loseFocusChangeColor = true
 
@@ -137,12 +134,8 @@ open class GameFX @JvmOverloads constructor(
 						drawEverything(drawer)
 						drawer.init()
 						drawer.color = ColorResource.DARK_GRAY
-						++fpsCounter
-						if (fpsTimer.ended()) {
-							fpsDisplay = fpsCounter
-							fpsCounter = 0
-						}
-						if (showFPS) drawer.drawString("fps: $fpsDisplay", 30.0, height - 30.0)
+						fpsCounter.refresh()
+						if (showFPS) drawer.drawString("fps: ${fpsCounter.display}", 30.0, height - 30.0)
 					}
 				} catch (ignored: ConcurrentModificationException) {
 				}
