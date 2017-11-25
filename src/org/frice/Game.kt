@@ -66,6 +66,12 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			if (value) extendedState = Frame.MAXIMIZED_BOTH
 		}
 
+	override var isAlwaysTop: Boolean
+		get() = isAlwaysOnTop
+		set(value) {
+			if (isAlwaysOnTopSupported) isAlwaysOnTop = value
+		}
+
 	@get:JvmName(" refresh")
 	internal val refresh = FTimer(4)
 	override var millisToRefresh: Int

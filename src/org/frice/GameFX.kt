@@ -43,7 +43,7 @@ open class GameFX @JvmOverloads constructor(
 			stage.isFullScreen = value
 		}
 
-	var isAlwaysOnTop: Boolean
+	override var isAlwaysTop: Boolean
 		get() = stage.isAlwaysOnTop
 		set(value) {
 			stage.isAlwaysOnTop = value

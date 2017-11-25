@@ -36,6 +36,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	var millisToRefresh: Int
 	var paused: Boolean
 	var isFullScreen: Boolean
+	var isAlwaysTop: Boolean
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)

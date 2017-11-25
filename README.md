@@ -55,7 +55,7 @@ Cursor overriding|√|×
 Screenshot|√|√
 Buttons|√|×
 Full screen|√|√
-Always on top|×|√
+Always on top|√|√
 Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
