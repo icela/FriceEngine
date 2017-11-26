@@ -42,6 +42,8 @@ Alternatively, you can download a jar from the [release page](https://github.com
 
 # Features
 
+This engine is based on Java's built-in GUI framework, both Swing and JavaFX.
+
 ## Platform dependent
 
 These features are differently implemented in Swing/JavaFX.  

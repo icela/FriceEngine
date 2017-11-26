@@ -15,7 +15,7 @@ import javafx.scene.paint.Color as JfxColor
 
 val asciiList = listOf('#', '0', 'X', 'x', '+', '=', '-', ';', ',', '.', ' ')
 
-fun java.awt.Color.toJfxColor(): javafx.scene.paint.Color = javafx.scene.paint.Color.rgb(red, green, blue)
+fun Color.toJfxColor(): JfxColor = JfxColor.rgb(red, green, blue)
 
 fun Int.toAscii() = asciiList[greyify() / (256 / asciiList.size + 1)]
 
