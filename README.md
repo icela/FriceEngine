@@ -53,9 +53,9 @@ Feature|Swing|JavaFX
 :---|:---:|:---:
 Life cycle|√|√
 Dialogs|√|√
-Cursor overriding|√|×
+Cursor overriding|√|√
 Screenshot|√|√
-Buttons|√|×
+Buttons|√|√
 Full screen|√|√
 Always on top|√|√
 Text font/size|√|√

@@ -40,19 +40,17 @@ class TestFx : GameFX(width = 600, height = 600) {
 			width = 100.0,
 			height = 30.0).apply {
 			onMouseListener = Consumer {
-				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
+				ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
 					mass = 1.0
 					addForce(-1.0, -1.0)
-					anims.add(SimpleMove(400, 400))
+					anims.add(SimpleMove(200, 200))
 					anims.add(SimpleScale(1.1, 1.1))
+					objs += this
+					addObject(this)
 				}
-				objs.add(obj)
-				addObject(obj)
 			}
 		})
 
-		FCircle(1.0)
-		FPoint(1, 2)
 		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
 	}
 

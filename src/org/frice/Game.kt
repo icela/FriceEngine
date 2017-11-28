@@ -5,8 +5,7 @@ package org.frice
 import org.frice.event.*
 import org.frice.obj.AbstractObject
 import org.frice.obj.sub.ImageObject
-import org.frice.platform.FriceGame
-import org.frice.platform.Layer
+import org.frice.platform.*
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
@@ -161,9 +160,8 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	fun addKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
 		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	fun setCursor(o: ImageResource) = setCursor(ImageObject(o))
-	fun setCursor(o: ImageObject) {
-		cursor = toolkit.createCustomCursor((o.image as JvmImage).image, Point(0, 0), "cursor")
+	override fun setCursor(o: FriceImage) {
+		cursor = toolkit.createCustomCursor((o as JvmImage).image, Point(0, 0), "cursor")
 	}
 
 	/**

@@ -5,11 +5,13 @@ import org.frice.obj.*
 import org.frice.obj.button.FButton
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.effects.LineEffect
+import org.frice.obj.sub.ImageObject
 import org.frice.obj.sub.ShapeObject
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.platform.owners.*
 import org.frice.resource.graphics.ColorResource
+import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.FOval
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.unless
@@ -188,6 +190,11 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 		}
 		customDraw(bgg)
 	}
+
+	fun setCursor(o: FriceImage)
+
+	fun setCursor(o: ImageObject) = setCursor(o.image)
+	fun setCursor(o: ImageResource) = setCursor(o.image)
 
 	/**
 	 * get a screenShot.

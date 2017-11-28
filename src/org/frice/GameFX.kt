@@ -3,17 +3,14 @@ package org.frice
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
-import javafx.scene.Scene
-import javafx.scene.SnapshotParameters
+import javafx.scene.*
 import javafx.scene.canvas.Canvas
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
-import org.frice.platform.FriceGame
-import org.frice.platform.Layer
-import org.frice.platform.adapter.JfxDrawer
-import org.frice.platform.adapter.JvmImage
+import org.frice.platform.*
+import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.loop
 import org.frice.utils.time.*
@@ -92,6 +89,10 @@ open class GameFX @JvmOverloads constructor(
 	private val canvas = Canvas(width.toDouble(), height.toDouble())
 	private val root = StackPane(canvas)
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
+
+	override fun setCursor(o: FriceImage) {
+		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
+	}
 
 	override fun onExit() {
 		Platform.exit()
