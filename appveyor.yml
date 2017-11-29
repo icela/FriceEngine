@@ -9,6 +9,6 @@ build_script:
 #
 
 artifacts:
-  - path: 'build\libs\engine-all-1.6.3.jar'
+  - path: 'build\libs\engine-all-1.6.4.jar'
     name: frice
 #

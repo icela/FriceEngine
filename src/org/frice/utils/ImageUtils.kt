@@ -8,7 +8,6 @@
 package org.frice.utils
 
 import org.frice.platform.adapter.JvmImage
-import org.frice.utils.graphics.*
 import java.awt.image.BufferedImage
 
 private inline fun BufferedImage.fy(fy: BufferedImage.(Int, Int) -> Int): JvmImage {

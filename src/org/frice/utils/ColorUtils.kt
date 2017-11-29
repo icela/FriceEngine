@@ -1,7 +1,7 @@
 @file:JvmName("ColorUtils")
 @file:JvmMultifileClass
 
-package org.frice.utils.graphics
+package org.frice.utils
 
 import java.awt.Color
 import javafx.scene.paint.Color as JfxColor

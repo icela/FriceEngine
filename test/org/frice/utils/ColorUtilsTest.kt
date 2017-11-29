@@ -1,4 +1,4 @@
-package org.frice.utils.graphics
+package org.frice.utils
 
 import org.junit.Test
 import java.awt.Color
