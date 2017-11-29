@@ -18,11 +18,16 @@ import org.frice.utils.shape.FShapeInt
 open class ShapeObject
 @JvmOverloads
 constructor(
-		var res: ColorResource,
-		override val collideBox: FShapeInt,
-		override var x: Double = 0.0,
-		override var y: Double = 0.0,
-		override var id: Int = -1) : FObject() {
+	var res: ColorResource,
+	override val collideBox: FShapeInt,
+	override var x: Double = 0.0,
+	override var y: Double = 0.0,
+	id: Int = -1) : FObject() {
+
+	init {
+		this.id = id
+	}
+
 	private var scale = DoublePair(1.0, 1.0)
 
 	override var height: Double

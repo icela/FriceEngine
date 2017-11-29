@@ -16,7 +16,7 @@ import java.util.*
  * @since v0.1
  */
 abstract class FObject : PhysicalObject() {
-	open var id = -1
+	var id = -1
 	val anims = LinkedList<FAnim>()
 	val targets = LinkedList<Pair<PhysicalObject, SideEffect>>()
 	override var rotate = 0.0
@@ -50,9 +50,9 @@ abstract class FObject : PhysicalObject() {
 	 * Magic! Don't touch!
 	 */
 	protected infix fun PhysicalObject.rectCollideRect(rect: PhysicalObject) =
-			x + width >= rect.x && rect.y <= y + height &&
-					x <= rect.x + rect.width &&
-					y <= rect.y + rect.height
+		x + width >= rect.x && rect.y <= y + height &&
+			x <= rect.x + rect.width &&
+			y <= rect.y + rect.height
 
 	//	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject): Boolean {
 	//		if (!rectCollideRect(oval)) return false

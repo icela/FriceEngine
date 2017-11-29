@@ -7,8 +7,8 @@ import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.message.FLog
+import org.frice.utils.shape.FRectangle
 
 /**
  * Base GameObject class
@@ -20,11 +20,15 @@ import org.frice.utils.message.FLog
 open class ImageObject
 @JvmOverloads
 constructor(
-		var res: ImageResource,
-		override var x: Double = 0.0,
-		override var y: Double = 0.0,
-		override var id: Int = -1) : FObject(), FObject.ImageOwner {
+	var res: ImageResource,
+	override var x: Double = 0.0,
+	override var y: Double = 0.0,
+	id: Int = -1) : FObject(), FObject.ImageOwner {
 	constructor(res: FriceImage, x: Double, y: Double) : this(create(res), x, y, -1)
+
+	init {
+		this.id = id
+	}
 
 	override fun getResource() = res
 
@@ -68,7 +72,7 @@ class DebugImageObject : ImageObject {
 	}
 
 	fun debugSetY(y: Double) {
-		this.y=y
+		this.y = y
 		FLog.i("set: y = $y")
 	}
 

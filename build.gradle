@@ -55,3 +55,7 @@ task fatJar(type: Jar) {
 	with pureJar
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+  classifier = 'sources'
+  from sourceSets.main.allSource
+}
