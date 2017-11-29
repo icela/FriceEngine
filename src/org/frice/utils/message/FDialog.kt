@@ -5,6 +5,7 @@ import javafx.scene.control.Alert.AlertType
 import java.awt.Frame
 import javax.swing.JOptionPane
 
+@Deprecated("Please use methods from `Game`")
 abstract class FriceDialog {
 	fun input() = input("")
 	abstract fun input(msg: String): String
@@ -14,7 +15,9 @@ abstract class FriceDialog {
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
  * @since v0.2
+ * @deprecated
  */
+@Deprecated("Please use methods from `Game`", level = DeprecationLevel.ERROR)
 class FDialog @JvmOverloads constructor(val game: Frame? = null) : FriceDialog() {
 	fun show(msg: String) = JOptionPane.showMessageDialog(game, msg)
 
@@ -30,6 +33,7 @@ class FDialog @JvmOverloads constructor(val game: Frame? = null) : FriceDialog()
  * @author ice1000
  * @since v1.6.0
  */
+@Deprecated("Please use methods from `GameFX`")
 object FDialogFX : FriceDialog() {
 	@JvmStatic
 	fun confirm(msg: String, type: AlertType = AlertType.CONFIRMATION, vararg buttonType: ButtonType): ButtonType =

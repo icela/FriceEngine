@@ -59,7 +59,7 @@ class TestFx : GameFX(width = 600, height = 600) {
 	override fun onMouse(e: OnMouseEvent) {
 		super.onMouse(e)
 		if (timer.ended()) {
-			objs.removeAll { o -> o.died }
+			objs.removeAll(PhysicalObject::died)
 			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))

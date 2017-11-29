@@ -4,20 +4,17 @@ package org.frice
 
 import org.frice.event.*
 import org.frice.obj.AbstractObject
-import org.frice.obj.sub.ImageObject
 import org.frice.platform.*
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.resource.image.ImageResource
 import org.frice.utils.message.*
 import org.frice.utils.time.*
 import java.awt.*
 import java.awt.event.*
 import java.util.function.Consumer
 import javax.imageio.ImageIO.read
-import javax.swing.JComponent
-import javax.swing.JFrame
+import javax.swing.*
 
 /**
  * First game class(not for you)
@@ -49,6 +46,12 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			if (value) FClock.pause() else FClock.resume()
 			field = value
 		}
+
+	override fun dialogConfirmYesNo(msg: String, title: String) =
+		JOptionPane.showConfirmDialog(this, msg, title, YES_NO_OPTION) == YES_OPTION
+
+	override fun dialogShow(msg: String, title: String) =
+		JOptionPane.showMessageDialog(this, msg, title, OK_OPTION)
 
 	override var debug = true
 	override var autoGC = true
@@ -121,7 +124,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	}
 
 	override fun onExit() {
-		if (FDialog(this).confirm("Are you sure to exit?", "Ensuring", YES_NO_OPTION) == YES_OPTION) {
+		if (dialogConfirmYesNo("Are you sure to exit?")) {
 			dispose()
 			System.exit(0)
 		}
