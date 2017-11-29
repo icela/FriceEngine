@@ -17,7 +17,7 @@ import org.frice.resource.graphics.ParticleResource
 import org.frice.resource.image.WebImageResource
 import org.frice.utils.data.Preference
 import org.frice.utils.data.XMLPreference
-import org.frice.utils.graphics.greyify
+import org.frice.utils.greyify
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
 import org.frice.utils.time.FTimer

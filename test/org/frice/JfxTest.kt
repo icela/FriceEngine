@@ -8,7 +8,7 @@ import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.graphics.greyify
+import org.frice.utils.greyify
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
 import org.frice.utils.time.FTimer
