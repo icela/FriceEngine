@@ -17,8 +17,6 @@ import javax.imageio.ImageIO.read
 import javax.swing.*
 
 /**
- * First game class(not for you)
- *
  * Standard library, mainly for GUI.
  * some other library is in @see
  * The base game class.
