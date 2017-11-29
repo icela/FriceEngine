@@ -53,6 +53,9 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	override fun dialogShow(msg: String, title: String) =
 		JOptionPane.showMessageDialog(this, msg, title, OK_OPTION)
 
+	override fun dialogInput(msg: String, title: String): String =
+		JOptionPane.showInputDialog(this, msg, title)
+
 	override var debug = true
 	override var autoGC = true
 	override var showFPS = true
@@ -117,8 +120,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		this.add(panel, BorderLayout.CENTER)
 		bounds = BIG_SQUARE
 		onInit()
-		drawer = JvmDrawer(this)
-		drawer.init()
+		drawer = JvmDrawer(this).apply(JvmDrawer::init)
 		isVisible = true
 		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}

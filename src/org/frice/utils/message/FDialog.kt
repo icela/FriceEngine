@@ -5,12 +5,6 @@ import javafx.scene.control.Alert.AlertType
 import java.awt.Frame
 import javax.swing.JOptionPane
 
-@Deprecated("Please use methods from `Game`")
-abstract class FriceDialog {
-	fun input() = input("")
-	abstract fun input(msg: String): String
-}
-
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
@@ -18,10 +12,10 @@ abstract class FriceDialog {
  * @deprecated
  */
 @Deprecated("Please use methods from `Game`", level = DeprecationLevel.ERROR)
-class FDialog @JvmOverloads constructor(val game: Frame? = null) : FriceDialog() {
+class FDialog @JvmOverloads constructor(val game: Frame? = null) {
 	fun show(msg: String) = JOptionPane.showMessageDialog(game, msg)
 
-	override fun input(msg: String): String =
+	fun input(msg: String): String =
 		JOptionPane.showInputDialog(game, msg)
 
 	@JvmOverloads
@@ -33,8 +27,8 @@ class FDialog @JvmOverloads constructor(val game: Frame? = null) : FriceDialog()
  * @author ice1000
  * @since v1.6.0
  */
-@Deprecated("Please use methods from `GameFX`")
-object FDialogFX : FriceDialog() {
+@Deprecated("Please use methods from `GameFX`", level = DeprecationLevel.ERROR)
+object FDialogFX {
 	@JvmStatic
 	fun confirm(msg: String, type: AlertType = AlertType.CONFIRMATION, vararg buttonType: ButtonType): ButtonType =
 		Alert(type, msg, *buttonType).let {
@@ -43,7 +37,7 @@ object FDialogFX : FriceDialog() {
 			return@let it.result
 		}
 
-	override fun input(default: String): String = TextInputDialog(default).let {
+	fun input(default: String): String = TextInputDialog(default).let {
 		it.isResizable = false
 		it.showAndWait()
 		return@let it.result

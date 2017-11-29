@@ -208,4 +208,5 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 
 	fun dialogShow(msg: String) = dialogShow(msg, "Information")
 	fun dialogShow(msg: String, title: String)
+	fun dialogInput(msg: String, title: String): String
 }

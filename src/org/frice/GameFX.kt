@@ -5,8 +5,7 @@ import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
 import javafx.scene.*
 import javafx.scene.canvas.Canvas
-import javafx.scene.control.Alert
-import javafx.scene.control.ButtonType
+import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
@@ -81,7 +80,7 @@ open class GameFX @JvmOverloads constructor(
 			refresh.time = value
 		}
 
-	private fun initAlert(it: Alert, title: String) {
+	private fun <T> initAlert(it: Dialog<T>, title: String) {
 		it.isResizable = false
 		it.title = title
 		it.showAndWait()
@@ -94,7 +93,12 @@ open class GameFX @JvmOverloads constructor(
 		}
 
 	override fun dialogShow(msg: String, title: String) {
-		Alert(Alert.AlertType.CONFIRMATION, msg, ButtonType.OK).let { initAlert(it, title) }
+		Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK).let { initAlert(it, title) }
+	}
+
+	override fun dialogInput(msg: String, title: String): String = TextInputDialog().let {
+		initAlert(it, title)
+		return@let it.result
 	}
 
 	override val screenCut
