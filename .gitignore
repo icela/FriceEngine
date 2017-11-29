@@ -31,7 +31,6 @@ tres/
 /bin/
 settings.properties
 dokka.jar
-lib/
 test.txt
 sample/
 .gradle/
