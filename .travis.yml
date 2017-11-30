@@ -12,6 +12,7 @@ script:
 - "./gradlew jar"
 - "./gradlew pureJar"
 - "./gradlew fatJar"
+- "./gradlew sourcesJar"
 
 before_install:
 - chmod a+x gradlew

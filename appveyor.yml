@@ -6,9 +6,10 @@ build_script:
   - gradlew build --info
   - gradlew fatJar --info
   - gradlew pureJar --info
+  - gradlew sourcesJar --info
 #
 
 artifacts:
-  - path: 'build\libs\engine-all-1.6.4.jar'
+  - path: 'build\libs\engine-all-1.6.5.jar'
     name: frice
 #

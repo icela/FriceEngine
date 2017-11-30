@@ -15,5 +15,6 @@ test:
     - ./gradlew build
     - ./gradlew fatJar
     - ./gradlew pureJar
+    - ./gradlew sourcesJar
 #
 
