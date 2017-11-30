@@ -38,6 +38,9 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =
 		g.fillOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
+	override fun strokeOval(x: Double, y: Double, width: Double, height: Double) =
+		g.fillOval(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+
 	override fun drawString(string: String, x: Double, y: Double) =
 		g.drawString(string, x.toInt(), y.toInt())
 
@@ -47,6 +50,9 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =
 		g.fillRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
+
+	override fun strokeRect(x: Double, y: Double, width: Double, height: Double) =
+		g.drawRect(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
 	override fun drawLine(x: Double, y: Double, width: Double, height: Double) =
 		g.drawLine(x.toInt(), y.toInt(), width.toInt(), height.toInt())
@@ -61,14 +67,16 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 		height: Double,
 		arcWidth: Double,
 		arcHeight: Double) =
-		g.fillRoundRect(
-			x.toInt(),
-			y.toInt(),
-			width.toInt(),
-			height.toInt(),
-			arcWidth.toInt(),
-			arcHeight.toInt()
-		)
+		g.fillRoundRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), arcWidth.toInt(), arcHeight.toInt())
+
+	override fun strokeRoundRect(
+		x: Double,
+		y: Double,
+		width: Double,
+		height: Double,
+		arcWidth: Double,
+		arcHeight: Double) =
+		g.drawRoundRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), arcWidth.toInt(), arcHeight.toInt())
 
 	override fun restore() {
 		g = friceImage.image.graphics as Graphics2D

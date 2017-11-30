@@ -20,5 +20,8 @@ interface FriceDrawer {
 	fun newFont(name: String, size: Double)
 	fun rotate(theta: Double)
 	fun restore()
+	fun strokeOval(x: Double, y: Double, width: Double, height: Double)
+	fun strokeRect(x: Double, y: Double, width: Double, height: Double)
+	fun strokeRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double)
 }
 

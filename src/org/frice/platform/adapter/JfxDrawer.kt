@@ -37,6 +37,10 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 		g.fillOval(x, y, width, height)
 	}
 
+	override fun strokeOval(x: Double, y: Double, width: Double, height: Double) {
+		g.strokeOval(x, y, width, height)
+	}
+
 	override fun drawString(string: String, x: Double, y: Double) {
 		g.fillText(string, x, y)
 	}
@@ -49,12 +53,20 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 		g.fillRect(x, y, width, height)
 	}
 
+	override fun strokeRect(x: Double, y: Double, width: Double, height: Double) {
+		g.fillRect(x, y, width, height)
+	}
+
 	override fun drawLine(x: Double, y: Double, width: Double, height: Double) {
 		g.strokeLine(x, y, width, height)
 	}
 
 	override fun drawRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double) {
 		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight)
+	}
+
+	override fun strokeRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double) {
+		g.strokeRoundRect(x, y, width, height, arcWidth, arcHeight)
 	}
 
 	override fun rotate(theta: Double) {
