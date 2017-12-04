@@ -1,5 +1,6 @@
 package org.frice
 
+import javafx.event.EventHandler
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
@@ -32,24 +33,26 @@ class TestFx : GameFX(width = 600, height = 600) {
 	override fun onInit() {
 		super.onInit()
 		autoGC = true
-
-		addObject(SimpleButton(
+		val button = SimpleButton(
 			text = "I am a button",
 			x = 30.0,
 			y = 30.0,
 			width = 100.0,
-			height = 30.0).apply {
-			onMouseListener = Consumer {
-				ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
-					mass = 1.0
-					addForce(-1.0, -1.0)
-					anims.add(SimpleMove(200, 200))
-					anims.add(SimpleScale(1.1, 1.1))
-					objs += this
-					addObject(this)
-				}
+			height = 30.0)
+		button.onMouseListener = Consumer {
+			ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
+				mass = 1.0
+				addForce(-1.0, -1.0)
+				anims.add(SimpleMove(200, 200))
+				anims.add(SimpleScale(1.1, 1.1))
+				objs += this
+				addObject(this)
 			}
-		})
+		}
+		addObject(button)
+		onKeyTyepd = EventHandler { key ->
+			button.text = key.text
+		}
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
 	}
