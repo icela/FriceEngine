@@ -111,21 +111,21 @@ open class GameFX @JvmOverloads constructor(
 	}
 
 	var onKeyTyepd
-		get() = canvas.onKeyTyped
+		get() = scene.onKeyTyped
 		set(value) {
-			canvas.onKeyTyped = value
+			scene.onKeyTyped = value
 		}
 
 	var onKeyPressed
-		get() = canvas.onKeyPressed
+		get() = scene.onKeyPressed
 		set(value) {
-			canvas.onKeyPressed = value
+			scene.onKeyPressed = value
 		}
 
 	var onKeyReleased
-		get() = canvas.onKeyReleased
+		get() = scene.onKeyReleased
 		set(value) {
-			canvas.onKeyReleased = value
+			scene.onKeyReleased = value
 		}
 
 	private val canvas = Canvas(width.toDouble(), height.toDouble())

@@ -37,7 +37,7 @@ class TestFx : GameFX(width = 600, height = 600) {
 			text = "I am a button",
 			x = 30.0,
 			y = 30.0,
-			width = 100.0,
+			width = 120.0,
 			height = 30.0)
 		button.onMouseListener = Consumer {
 			ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
@@ -51,7 +51,8 @@ class TestFx : GameFX(width = 600, height = 600) {
 		}
 		addObject(button)
 		onKeyTyepd = EventHandler { key ->
-			button.text = key.text
+			button.text = key.character
+			layers.first().objects.size.run(::println)
 		}
 
 		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
