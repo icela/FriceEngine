@@ -50,5 +50,5 @@ class ParticleEffect(
 		resource.height = (resource.height * y / 1000.0).toInt()
 	}
 
-	//	override fun isCollide(other: CollideBox): Boolean = false
+	//	override fun collides(other: Collidable): Boolean = false
 }

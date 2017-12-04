@@ -2,15 +2,19 @@ package org.frice.obj
 
 import org.frice.resource.image.ImageResource.Factories.empty
 import org.frice.utils.shape.FRectangle
+import org.frice.utils.shape.FShapeQuad
 
 class ObjectGroup
 @JvmOverloads
-constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList()) : FObject() {
+constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList()) : FShapeQuad, FObject() {
 	override var x = Double.MAX_VALUE
 	override var y = Double.MAX_VALUE
 	override var width = 0.0
 	override var height = 0.0
 	override val collideBox: FRectangle
+
+	var collisionBox: FShapeQuad? = null
+	override val box: FShapeQuad get() = collisionBox ?: this
 
 	init {
 		var r = 0.0
@@ -26,7 +30,7 @@ constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList(
 		collideBox = FRectangle(width, height)
 	}
 
-	override fun isCollide(other: org.frice.obj.CollideBox) = objs.any { it.isCollide(other) }
+	override fun collides(other: Collidable) = objs.any { it.collides(other) }
 	override fun getResource() = empty()
 	override fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
 	override fun move(p: org.frice.anim.move.DoublePair) = objs.forEach { it.move(p) }

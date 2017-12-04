@@ -62,7 +62,7 @@ Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
 Rotate animation|√|×
-Key listener|√|×
+Key listener|√|√
 
 ## Platform independent
 

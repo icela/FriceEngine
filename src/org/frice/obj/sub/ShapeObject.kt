@@ -1,11 +1,10 @@
 package org.frice.obj.sub
 
 import org.frice.anim.move.DoublePair
-import org.frice.obj.CollideBox
 import org.frice.obj.FObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.shape.FShapeInt
+import org.frice.utils.shape.FShapeQuad
 
 /**
  * an object with a utils and a shape, used to create an simple object quickly
@@ -22,11 +21,14 @@ constructor(
 	override val collideBox: FShapeInt,
 	override var x: Double = 0.0,
 	override var y: Double = 0.0,
-	id: Int = -1) : FObject() {
+	id: Int = -1) : FShapeQuad, FObject() {
 
 	init {
 		this.id = id
 	}
+
+	var collisionBox: FShapeQuad? = null
+	override val box: FShapeQuad get() = collisionBox ?: this
 
 	private var scale = DoublePair(1.0, 1.0)
 
@@ -43,23 +45,6 @@ constructor(
 		}
 
 	override var died = false
-
-	override fun isCollide(other: CollideBox) = when (other) {
-		is ShapeObject -> when (other.collideBox) {
-			is FRectangle -> when (collideBox) {
-				is FRectangle -> this rectCollideRect other
-//				is FOval ->
-				else -> this rectCollideRect other
-			}
-//			is FOval ->
-			else -> this rectCollideRect other
-		}
-		is ImageObject -> when (collideBox) {
-			is FRectangle -> this rectCollideRect other
-			else -> this rectCollideRect other
-		}
-		else -> false
-	}
 
 	override fun getResource() = res
 

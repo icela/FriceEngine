@@ -46,20 +46,6 @@ abstract class FObject : PhysicalObject() {
 		rotate += angle
 	}
 
-	/**
-	 * Magic! Don't touch!
-	 */
-	protected infix fun PhysicalObject.rectCollideRect(rect: PhysicalObject) =
-		x + width >= rect.x && rect.y <= y + height &&
-			x <= rect.x + rect.width &&
-			y <= rect.y + rect.height
-
-	//	protected infix fun PhysicalObject.rectCollideOval(oval: PhysicalObject): Boolean {
-	//		if (!rectCollideRect(oval)) return false
-	//		val xxx = if (x + width / 2 > oval.x + oval.width / 2) x else x + width
-	//		val yyy = if (y + height / 2 > oval.y + oval.height / 2) y else y + height
-	//	}
-
 	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
 	private fun targetMass(c: AbstractObject) = (c as? PhysicalObject)?.mass ?: 1.0
 
@@ -86,7 +72,7 @@ abstract class FObject : PhysicalObject() {
 
 	internal fun checkCollision() {
 		targets.removeAll { (first) -> first.died }
-		targets.forEach { (first, second) -> if (isCollide(first)) second() }
+		targets.forEach { (first, second) -> if (collides(first)) second() }
 	}
 
 	fun addAnim(anim: FAnim) = anims.add(anim)

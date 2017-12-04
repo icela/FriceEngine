@@ -1,7 +1,7 @@
 package org.frice.utils
 
 import org.frice.obj.PhysicalObject
-import org.frice.utils.shape.FShapeDouble
+import org.frice.utils.shape.FQuad
 import java.util.*
 
 /**
@@ -12,7 +12,6 @@ import java.util.*
  * @author lfkdsk
  */
 class QuadTree(private var level: Int, private var bounds: FQuad) {
-	class FQuad(var x: Double, var y: Double, override var width: Double, override var height: Double) : FShapeDouble
 
 	private val maxObjects = 3
 	private val maxLevels = 5

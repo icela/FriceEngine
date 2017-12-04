@@ -3,6 +3,7 @@
 package org.frice.obj
 
 import org.frice.utils.shape.FPoint
+import org.frice.utils.shape.FShapeQuad
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -40,8 +41,14 @@ interface FContainer {
  * @author ice1000
  * @since v0.3
  */
-interface CollideBox {
-	fun isCollide(other: CollideBox): Boolean
+interface Collidable {
+	val box: FShapeQuad
+	fun collides(other: Collidable): Boolean = box.run {
+		val rect = other.box
+		x + width >= rect.x && rect.y <= y + height &&
+			x <= rect.x + rect.width &&
+			y <= rect.y + rect.height
+	}
 }
 
 /**
@@ -50,7 +57,7 @@ interface CollideBox {
  * @author ice1000
  * @since v0.4
  */
-abstract class PhysicalObject : AbstractObject, CollideBox, FContainer {
+abstract class PhysicalObject : AbstractObject, Collidable, FContainer {
 	open var died = false
 	override var rotate = 0.0
 	var mass = 1.0

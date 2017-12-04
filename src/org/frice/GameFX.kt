@@ -3,10 +3,12 @@ package org.frice
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
+import javafx.event.EventHandler
 import javafx.scene.*
 import javafx.scene.canvas.Canvas
 import javafx.scene.control.*
 import javafx.scene.image.Image
+import javafx.scene.input.KeyEvent
 import javafx.scene.layout.StackPane
 import javafx.stage.Stage
 import org.frice.event.*
@@ -110,19 +112,19 @@ open class GameFX @JvmOverloads constructor(
 		stage.title = title
 	}
 
-	var onKeyTyepd
+	var onKeyTyepd: EventHandler<in KeyEvent>
 		get() = scene.onKeyTyped
 		set(value) {
 			scene.onKeyTyped = value
 		}
 
-	var onKeyPressed
+	var onKeyPressed: EventHandler<in KeyEvent>
 		get() = scene.onKeyPressed
 		set(value) {
 			scene.onKeyPressed = value
 		}
 
-	var onKeyReleased
+	var onKeyReleased: EventHandler<in KeyEvent>
 		get() = scene.onKeyReleased
 		set(value) {
 			scene.onKeyReleased = value
