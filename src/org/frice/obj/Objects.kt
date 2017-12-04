@@ -32,8 +32,7 @@ interface FContainer {
 
 	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 
-	infix fun containsPoint(point: FPoint) = containsPoint(point.x, point.y)
-	operator fun contains(point: FPoint) = containsPoint(point)
+	operator fun contains(point: FPoint) = containsPoint(point.x, point.y)
 }
 
 /**
@@ -42,7 +41,12 @@ interface FContainer {
  * @since v0.3
  */
 interface Collidable {
+	/**
+	 * @since v1.6.7
+	 * @see org.frice.utils.shape.FQuad
+	 */
 	val box: FShapeQuad
+
 	fun collides(other: Collidable): Boolean = box.run {
 		val rect = other.box
 		x + width >= rect.x && rect.y <= y + height &&

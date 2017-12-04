@@ -19,6 +19,11 @@ interface FShapeDouble : FShape {
 	var height: Double
 }
 
+/**
+ * @author ice1000
+ * @since v1.6.7
+ * @see org.frice.utils.shape.FQuad
+ */
 interface FShapeQuad {
 	val x: Double
 	val y: Double
