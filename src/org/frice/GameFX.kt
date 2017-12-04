@@ -116,11 +116,17 @@ open class GameFX @JvmOverloads constructor(
 			canvas.onKeyTyped = value
 		}
 
-	fun setKeyPressedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-		= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+	var onKeyPressed
+		get() = canvas.onKeyPressed
+		set(value) {
+			canvas.onKeyPressed = value
+		}
 
-	fun setKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+	var onKeyReleased
+		get() = canvas.onKeyReleased
+		set(value) {
+			canvas.onKeyReleased = value
+		}
 
 	private val canvas = Canvas(width.toDouble(), height.toDouble())
 	private val root = StackPane(canvas)
