@@ -56,6 +56,6 @@ task fatJar(type: Jar) {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-  classifier = 'sources'
+  baseName = project.name + '-src'
   from sourceSets.main.allSource
 }

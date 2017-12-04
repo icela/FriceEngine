@@ -110,6 +110,18 @@ open class GameFX @JvmOverloads constructor(
 		stage.title = title
 	}
 
+	var onKeyTyepd
+		get() = canvas.onKeyTyped
+		set(value) {
+			canvas.onKeyTyped = value
+		}
+
+	fun setKeyPressedEvent(keyCode: Int, key: Consumer<KeyEvent>)
+		= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+
+	fun setKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
+		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+
 	private val canvas = Canvas(width.toDouble(), height.toDouble())
 	private val root = StackPane(canvas)
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
