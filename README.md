@@ -34,7 +34,7 @@ Add code below to your gradle script:
 ```gradle
 allprojects { repositories { maven { url 'https://jitpack.io' } } }
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.6.6'
+  compile 'com.github.icela:FriceEngine:v1.6.7'
 }
 ```
 
