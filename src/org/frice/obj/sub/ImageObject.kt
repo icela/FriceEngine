@@ -6,7 +6,6 @@ import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.shape.FShapeQuad
 
 /**
@@ -37,7 +36,6 @@ constructor(
 	override val width: Double get() = res.image.width.toDouble()
 	override val height: Double get() = res.image.height.toDouble()
 
-	override val collideBox = FRectangle(res.image.width, res.image.height)
 	override var died = false
 
 	override fun scale(x: Double, y: Double) {

@@ -233,6 +233,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 				}
 			}
 
+			drawer.restore()
 			drawer.init()
 			drawer.color = ColorResource.DARK_GRAY
 			if (showFPS) drawer.drawString("fps: ${fpsCounter.display}", 30.0, height - 30.0)

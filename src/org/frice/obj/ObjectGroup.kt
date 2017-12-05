@@ -1,6 +1,5 @@
 package org.frice.obj
 
-import org.frice.resource.FResource
 import org.frice.resource.image.ImageResource.Factories.empty
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.shape.FShapeQuad
@@ -12,7 +11,6 @@ constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList(
 	override var y = Double.MAX_VALUE
 	override var width = 0.0
 	override var height = 0.0
-	override val collideBox: FRectangle
 
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this
@@ -28,7 +26,6 @@ constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList(
 		}
 		width = r - x
 		height = d - y
-		collideBox = FRectangle(width, height)
 	}
 
 	override fun collides(other: Collidable) = objs.any { it.collides(other) }

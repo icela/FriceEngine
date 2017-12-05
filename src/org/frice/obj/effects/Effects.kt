@@ -7,7 +7,6 @@ import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ParticleResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.shape.FRectangle
 
 /**
  * Created by ice1000 on 2016/8/19.
@@ -37,8 +36,6 @@ class ParticleEffect(
 	override var x: Double,
 	override var y: Double) : ImageObject(pRes.resource, x, y) {
 	override val image: FriceImage get() = resource.resource
-
-	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
 	override val width: Double get() = pRes.width.toDouble()
 	override val height: Double get() = pRes.height.toDouble()

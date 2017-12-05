@@ -2,7 +2,6 @@ package org.frice.obj.sub
 
 import org.frice.anim.move.DoublePair
 import org.frice.obj.FObject
-import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.shape.FShapeInt
 import org.frice.utils.shape.FShapeQuad
@@ -19,7 +18,7 @@ open class ShapeObject
 @JvmOverloads
 constructor(
 	var res: ColorResource,
-	override val collideBox: FShapeInt,
+	val shape: FShapeInt,
 	override var x: Double = 0.0,
 	override var y: Double = 0.0,
 	id: Int = -1) : FShapeQuad, FObject() {
@@ -34,15 +33,15 @@ constructor(
 	private var scale = DoublePair(1.0, 1.0)
 
 	override var height: Double
-		get() = (collideBox.height * scale.y)
+		get() = (shape.height * scale.y)
 		set(value) {
-			collideBox.height = (value / scale.y).toInt()
+			shape.height = (value / scale.y).toInt()
 		}
 
 	override var width: Double
-		get () = (collideBox.width * scale.x)
+		get () = (shape.width * scale.x)
 		set(value) {
-			collideBox.width = (value / scale.x).toInt()
+			shape.width = (value / scale.x).toInt()
 		}
 
 	override var died = false

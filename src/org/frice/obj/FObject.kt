@@ -27,8 +27,6 @@ abstract class FObject : PhysicalObject() {
 	 */
 	private val force = AccelerateMove(0.0, 0.0)
 
-	abstract val collideBox: FShape
-
 	abstract val resource: FResource
 
 	infix fun scale(p: DoublePair) = scale(p.x, p.y)

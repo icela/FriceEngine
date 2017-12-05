@@ -157,7 +157,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 							(o.y + o.height) <= 0 ||
 							o.y >= height) {
 							bgg.color = o.resource
-							when (o.collideBox) {
+							when (o.shape) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
 								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 							}

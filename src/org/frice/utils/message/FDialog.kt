@@ -1,10 +1,5 @@
 package org.frice.utils.message
 
-import javafx.scene.control.*
-import javafx.scene.control.Alert.AlertType
-import java.awt.Frame
-import javax.swing.JOptionPane
-
 const val YES_NO_OPTION = 0
 const val YES_NO_CANCEL_OPTION = 1
 const val OK_CANCEL_OPTION = 2
