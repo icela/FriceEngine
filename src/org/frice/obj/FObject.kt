@@ -76,10 +76,12 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
+	fun stopAnims() = anims.clear()
 	fun addCollider(o: PhysicalObject, e: SideEffect) = addCollider(o to e)
 	fun addCollider(p: Pair<PhysicalObject, SideEffect>) = targets.add(p)
+
+	@Deprecated("use SideEffect { xxx } instead", level = DeprecationLevel.ERROR)
 	fun addCollider(o: PhysicalObject, e: () -> Unit) = addCollider(o to SideEffect(e))
-	fun stopAnims() = anims.clear()
 
 	/**
 	 * add a force to this object

@@ -54,25 +54,3 @@ constructor(
 		return false
 	}
 }
-
-class DebugImageObject : ImageObject {
-	constructor(res: FriceImage, x: Double, y: Double) : super(res, x, y)
-	@JvmOverloads
-	constructor(res: ImageResource, x: Double, y: Double, id: Int = -1) : super(res, x, y, id)
-
-	fun debugSetX(x: Double) {
-		this.x = x
-		FLog.i("set: x = $x")
-	}
-
-	fun debugSetY(y: Double) {
-		this.y = y
-		FLog.i("set: y = $y")
-	}
-
-	fun debugMove(x: Double, y: Double) {
-		move(x, y)
-		FLog.i("move: x = $x, y = $y")
-	}
-
-}
