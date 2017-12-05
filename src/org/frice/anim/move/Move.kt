@@ -15,7 +15,6 @@ abstract class MoveAnim : FAnim() {
 	protected var lastRefresh: Double = start
 }
 
-
 /**
  * Simple move anim
  *

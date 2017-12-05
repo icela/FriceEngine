@@ -122,11 +122,13 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	fun drawEverything(bgg: FriceDrawer) {
 		processBuffer()
 		layers.forEach {
-			it.objects.forEach { o ->
+			it.objects.removeIf { o ->
 				if (o is FObject) {
 					o.runAnims()
 					o.checkCollision()
+					return@removeIf !o.died
 				}
+				false
 			}
 
 			it.objects.forEach loop@ { o ->
