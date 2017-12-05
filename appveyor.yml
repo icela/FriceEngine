@@ -5,7 +5,6 @@ environment:
 build_script:
   - gradlew build --info
   - gradlew fatJar --info
-  - gradlew pureJar --info
   - gradlew sourcesJar --info
 #
 

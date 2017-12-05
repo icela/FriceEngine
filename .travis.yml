@@ -10,7 +10,6 @@ script:
 - "./gradlew assemble"
 - "./gradlew javadoc"
 - "./gradlew jar"
-- "./gradlew pureJar"
 - "./gradlew fatJar"
 - "./gradlew sourcesJar"
 
