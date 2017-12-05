@@ -11,24 +11,24 @@ import javax.sound.sampled.*
  * Created by ice1000 on 2016/8/16.
  * @author ice1000
  * @since v0.3.1
+ * @see org.frice.utils.audio.getPlayer
  */
-class AudioPlayer internal constructor(file: File) {
+class AudioPlayer internal constructor(file: File) : Thread() {
 	internal constructor(path: String) : this(File(path))
 
-	internal fun main() {
-		forceRun { line.open() }
+	override fun run() {
+		forceRun(line::open)
 		line.start()
 		var inBytes = 0
 		val audioData = ByteArray(BUFFER_SIZE)
-		until(inBytes == -1 || exited) {
+		until(exited) {
 			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
-			if (inBytes >= 0) line.write(audioData, 0, inBytes)
+			if (inBytes == -1) return@until
+			line.write(audioData, 0, inBytes)
 		}
 		line.drain()
 		line.close()
 	}
-
-	private val thread = Thread(this::main)
 
 	companion object LineGetter {
 		@JvmField
@@ -68,8 +68,6 @@ class AudioPlayer internal constructor(file: File) {
 
 	fun exit() {
 		exited = true
-		thread.join()
+		this.join()
 	}
-
-	fun start() = thread.start()
 }

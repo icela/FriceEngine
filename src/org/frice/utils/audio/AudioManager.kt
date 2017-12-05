@@ -10,9 +10,9 @@ import kotlin.concurrent.thread
  * @author ice1000
  * @since v0.3.1
  */
-fun play(file: File) = thread { getPlayer(file).main() }
+fun play(file: File) = getPlayer(file).start()
 
-fun play(path: String) = thread { getPlayer(path).main() }
+fun play(path: String) = getPlayer(path).start()
 
 fun getPlayer(file: File) = AudioPlayer(file)
 
