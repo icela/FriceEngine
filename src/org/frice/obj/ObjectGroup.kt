@@ -1,7 +1,6 @@
 package org.frice.obj
 
 import org.frice.resource.image.ImageResource.Factories.empty
-import org.frice.utils.shape.FRectangle
 import org.frice.utils.shape.FShapeQuad
 
 class ObjectGroup

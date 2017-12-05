@@ -2,7 +2,6 @@ package org.frice.obj.effects
 
 import org.frice.obj.sub.ImageObject
 import org.frice.platform.FriceImage
-import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.FunctionResource
 import org.frice.resource.image.ImageResource
