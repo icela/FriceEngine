@@ -4,7 +4,6 @@ package org.frice.anim.move
 
 import org.frice.anim.FAnim
 import org.frice.anim.move.DoublePair.Factory.from1000
-import org.frice.utils.time.FClock
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -31,10 +30,11 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-		val pair = from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
-		lastRefresh = now
-		return pair
-	}
+			val deltaTime = now - lastRefresh
+			val pair = from1000(deltaTime * x, deltaTime * y)
+			lastRefresh = now
+			return pair
+		}
 
 }
 
@@ -48,10 +48,11 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 
 	override val delta: DoublePair
 		get() {
-		val pair = from1000((now - lastRefresh) * x, (now - lastRefresh) * y)
-		lastRefresh = now
-		return pair
-	}
+			val deltaTime = now - lastRefresh
+			val pair = from1000(deltaTime * x, deltaTime * y)
+			lastRefresh = now
+			return pair
+		}
 }
 
 /**
@@ -62,17 +63,15 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
  * @since v0.2.3
  */
 abstract class CustomMove : MoveAnim() {
-	private val timeFromStart: Double
-		get() = FClock.current - start
-
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double
-	open fun update(timeFromBegin: Double) = Unit
 
 	override val delta: DoublePair
 		get() {
-			update(timeFromStart)
-			return DoublePair(getXDelta(timeFromStart), getYDelta(timeFromStart))
+			val deltaTime = now - lastRefresh
+			val pair = DoublePair(getXDelta(deltaTime), getYDelta(deltaTime))
+			lastRefresh = now
+			return pair
 		}
 
 }
