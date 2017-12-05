@@ -40,12 +40,12 @@ class Layer {
 		else -> objectDeleteBuffer.add(obj)
 	}
 
-	fun InstantAddObject(obj: AbstractObject): Boolean = when (obj) {
+	fun instantAddObject(obj: AbstractObject): Boolean = when (obj) {
 		is FText -> texts.add(obj)
 		else -> objects.add(obj)
 	}
 
-	fun InstantRemoveObject(obj: AbstractObject): Boolean = when (obj) {
+	fun instantRemoveObject(obj: AbstractObject): Boolean = when (obj) {
 		is FText -> texts.remove(obj)
 		else -> objects.remove(obj)
 	}

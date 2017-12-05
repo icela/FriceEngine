@@ -57,8 +57,11 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 		paused = false
 	}
 
-	/** remove Objects using vararg */
+	/** remove objects using vararg */
 	fun removeObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { removeObject(layer, it) }
+
+	/** remove objects unsafely using vararg */
+	fun instantRemoveObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { instantRemoveObject(layer, it) }
 
 	/**
 	 * removes single object.
@@ -67,6 +70,9 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	 * @param obj will remove objects which is equal to it.
 	 */
 	fun removeObject(layer: Int, obj: AbstractObject) = layers[layer].removeObject(obj)
+
+	/** remove objects unsafely */
+	fun instantRemoveObject(layer: Int, obj: AbstractObject) = layers[layer].instantRemoveObject(obj)
 
 	/**
 	 * clears all objects.
@@ -83,11 +89,23 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	/** adds an object to game, to be shown on game window. */
 	fun addObject(layer: Int, obj: AbstractObject) = layers[layer].addObject(obj)
 
-	/** add Objects using vararg */
+	/** add objects using vararg */
 	fun addObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { addObject(layer, it) }
 
 	fun addObject(vararg objs: AbstractObject) = addObject(0, *objs)
 	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
+
+	/** adds an object to game unsafely, to be shown on game window. */
+	fun instantAddObject(layer: Int, obj: AbstractObject) = layers[layer].instantAddObject(obj)
+
+	/** add objects unsafely using vararg */
+	fun instantAddObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { instantAddObject(layer, it) }
+
+	/** add objects unsafely using vararg */
+	fun instantAddObject(vararg objs: AbstractObject) = instantAddObject(0, *objs)
+
+	/** remove objects unsafely using vararg */
+	fun instantRemoveObject(vararg objs: AbstractObject) = instantRemoveObject(0, *objs)
 
 	fun clearScreen() {
 		drawer.color = ColorResource.WHITE
