@@ -1,6 +1,5 @@
 package org.frice.resource.image
 
-import org.frice.Game
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
@@ -75,12 +74,9 @@ class WebImageResource(url: String) : ImageResource() {
  * @author ice1000
  * @since v0.3.1
  */
-class FrameImageResource(
-	val game: Game,
-	val list: MutableList<ImageResource>,
-	div: Int) : ImageResource() {
+class FrameImageResource(val list: MutableList<ImageResource>, div: Int) : ImageResource() {
 
-	constructor(game: Game, list: Array<ImageResource>, div: Int) : this(game, list.toMutableList(), div)
+	constructor(list: Array<ImageResource>, div: Int) : this(list.toMutableList(), div)
 
 	private val timer = FTimer(div)
 	private var counter = 0
