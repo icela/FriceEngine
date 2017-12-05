@@ -47,11 +47,11 @@ interface Collidable {
 	 */
 	val box: FShapeQuad
 
-	fun collides(other: Collidable): Boolean = box.run {
-		val rect = other.box
-		x + width >= rect.x && rect.y <= y + height &&
-			x <= rect.x + rect.width &&
-			y <= rect.y + rect.height
+	fun collides(other: Collidable): Boolean = box.let { myBox ->
+		val hisBox = other.box
+		myBox.x + myBox.width >= hisBox.x && hisBox.y <= myBox.y + myBox.height &&
+			myBox.x <= hisBox.x + hisBox.width &&
+			myBox.y <= hisBox.y + hisBox.height
 	}
 }
 
