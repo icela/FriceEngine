@@ -86,7 +86,6 @@ class FrameImageResource(val list: MutableList<ImageResource>, div: Int) : Image
 	override var image: FriceImage
 		get() {
 			if (timer.ended()) {
-				FLog.e("counter = $counter")
 				counter = (counter + 1) % list.size
 			}
 			return if (loop || ended) list.getImage(counter).image else list.last().image
