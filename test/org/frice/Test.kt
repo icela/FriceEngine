@@ -5,6 +5,7 @@ import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
 import org.frice.obj.PhysicalObject
+import org.frice.obj.SideEffect
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.effects.FunctionEffect
@@ -95,7 +96,7 @@ class Test : org.frice.Game() {
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 				targets.clear()
 				objs.forEach { o ->
-					addCollider(o, {
+					addCollider(o, SideEffect {
 						anims.clear()
 						targets.clear()
 						anims.add(SimpleMove(0, -300))
