@@ -43,16 +43,14 @@ dependencies {
 
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
-task pureJar(type: Jar) {
-	baseName = project.name + '-pure'
+jar {
 	from { configurations.artifact.collect { it.isDirectory() ? it : zipTree(it) } }
-	with jar
 }
 
 task fatJar(type: Jar) {
 	baseName = project.name + '-all'
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	with pureJar
+	with jar
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
