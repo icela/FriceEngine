@@ -2,6 +2,7 @@ package org.frice.obj.effects
 
 import org.frice.obj.sub.ImageObject
 import org.frice.platform.FriceImage
+import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.FunctionResource
 import org.frice.resource.image.ImageResource
@@ -24,7 +25,7 @@ class FunctionEffect(
 	override val width: Double get() = res.image.width.toDouble()
 	override val height: Double get() = res.image.height.toDouble()
 
-	override fun getResource() = ImageResource(image)
+	override val resource get() = ImageResource(image)
 
 	override val image: FriceImage get() = res.image
 

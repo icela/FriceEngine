@@ -2,12 +2,10 @@
 
 package org.frice.obj.sub
 
-import org.frice.obj.Collidable
 import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
-import org.frice.utils.message.FLog
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.shape.FShapeQuad
 
@@ -31,7 +29,7 @@ constructor(
 		this.id = id
 	}
 
-	override fun getResource() = res
+	override val resource get() = res
 
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this

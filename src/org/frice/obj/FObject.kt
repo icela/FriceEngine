@@ -29,7 +29,7 @@ abstract class FObject : PhysicalObject() {
 
 	abstract val collideBox: FShape
 
-	abstract fun getResource(): FResource
+	abstract val resource: FResource
 
 	infix fun scale(p: DoublePair) = scale(p.x, p.y)
 

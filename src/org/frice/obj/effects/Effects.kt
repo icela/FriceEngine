@@ -18,11 +18,11 @@ import org.frice.utils.shape.FRectangle
 class LineEffect
 @JvmOverloads
 constructor(
-		var color: ColorResource = BLACK,
-		override var x: Double,
-		override var y: Double,
-		var x2: Double,
-		var y2: Double) : AbstractObject {
+	var color: ColorResource = BLACK,
+	override var x: Double,
+	override var y: Double,
+	var x2: Double,
+	var y2: Double) : AbstractObject {
 
 	override var rotate = 0.0
 }
@@ -33,21 +33,21 @@ constructor(
  * @since 0.3.2
  */
 class ParticleEffect(
-		private var resource: ParticleResource,
-		override var x: Double,
-		override var y: Double) : ImageObject(resource.resource, x, y) {
+	private var pRes: ParticleResource,
+	override var x: Double,
+	override var y: Double) : ImageObject(pRes.resource, x, y) {
 	override val image: FriceImage get() = resource.resource
 
 	override val collideBox = FRectangle(x.toInt(), y.toInt())
 
-	override val width: Double get() = resource.width.toDouble()
-	override val height: Double get() = resource.height.toDouble()
+	override val width: Double get() = pRes.width.toDouble()
+	override val height: Double get() = pRes.height.toDouble()
 
-	override fun getResource() = ImageResource(image)
+	override val resource: ImageResource get() = ImageResource(image)
 
 	override fun scale(x: Double, y: Double) {
-		resource.width = (resource.width * x / 1000.0).toInt()
-		resource.height = (resource.height * y / 1000.0).toInt()
+		pRes.width = (pRes.width * x / 1000.0).toInt()
+		pRes.height = (pRes.height * y / 1000.0).toInt()
 	}
 
 	//	override fun collides(other: Collidable): Boolean = false

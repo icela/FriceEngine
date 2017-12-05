@@ -2,6 +2,7 @@ package org.frice.obj.sub
 
 import org.frice.anim.move.DoublePair
 import org.frice.obj.FObject
+import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.shape.FShapeInt
 import org.frice.utils.shape.FShapeQuad
@@ -46,7 +47,7 @@ constructor(
 
 	override var died = false
 
-	override fun getResource() = res
+	override val resource get () = res
 
 	override fun scale(x: Double, y: Double) {
 		scale.x += x

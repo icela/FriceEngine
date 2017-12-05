@@ -19,7 +19,7 @@ class AudioPlayer internal constructor(file: File) : Thread() {
 	override fun run() {
 		forceRun(line::open)
 		line.start()
-		var inBytes = 0
+		var inBytes: Int
 		val audioData = ByteArray(BUFFER_SIZE)
 		until(exited) {
 			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)

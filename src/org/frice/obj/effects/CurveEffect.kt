@@ -13,19 +13,19 @@ import org.frice.resource.image.ImageResource
  * @since v0.5.2
  */
 class CurveEffect(
-		res: CurveResource,
-		override var x: Double,
-		override var y: Double) : ImageObject(res.resource, x, y) {
+	res: CurveResource,
+	override var x: Double,
+	override var y: Double) : ImageObject(res.resource, x, y) {
 
 	constructor(curve: (Double) -> List<Double>, x: Double, y: Double, width: Int, height: Int) :
-			this(CurveResource(ColorResource.BLUE, curve::invoke, width, height), x, y)
+		this(CurveResource(ColorResource.BLUE, curve::invoke, width, height), x, y)
 
-	override fun getResource() = ImageResource(image)
+	override val resource get() = ImageResource(image)
 
 	override val image: FriceImage get() = res.image
 
 	override fun scale(x: Double, y: Double) {
 		res.image = image.getScaledInstance(image.width * x / 1000.0,
-				image.height * y / 1000.0)
+			image.height * y / 1000.0)
 	}
 }

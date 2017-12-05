@@ -132,7 +132,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 			}
 
 			it.objects.forEach loop@ { o ->
-				if (o is ShapeObject && ColorResource.COLORLESS == o.getResource()) return@loop
+				if (o is ShapeObject && ColorResource.COLORLESS == o.resource) return@loop
 				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
 				bgg.run {
 					restore()
@@ -156,7 +156,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 							o.x >= width ||
 							(o.y + o.height) <= 0 ||
 							o.y >= height) {
-							bgg.color = o.getResource()
+							bgg.color = o.resource
 							when (o.collideBox) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
 								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
