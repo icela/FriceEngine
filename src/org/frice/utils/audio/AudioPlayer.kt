@@ -22,21 +22,10 @@ class AudioPlayer internal constructor(file: File) {
 		val audioData = ByteArray(BUFFER_SIZE)
 		until(inBytes == -1 || exited) {
 			inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
-			if (!paused && inBytes >= 0) line.write(audioData, 0, inBytes)
+			if (inBytes >= 0) line.write(audioData, 0, inBytes)
 		}
 		line.drain()
 		line.close()
-	}
-
-	var paused = false
-		private set
-
-	fun pause() {
-		paused = true
-	}
-
-	fun resume() {
-		paused = false
 	}
 
 	private val thread = Thread(this::main)
