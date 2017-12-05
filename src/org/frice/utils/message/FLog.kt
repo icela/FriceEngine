@@ -46,7 +46,9 @@ object FLog {
 		if (level >= ERROR) System.err.println(e)
 	}
 
+	@JvmStatic
 	var level = 50
+
 	const val VERBOSE = 40
 	const val DEBUG = 30
 	const val INFO = 20
