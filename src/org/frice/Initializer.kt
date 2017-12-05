@@ -9,8 +9,8 @@ package org.frice
 
 import javafx.application.Application
 import org.frice.platform.FriceGame
-import org.frice.utils.message.FLog
 import org.frice.utils.loop
+import org.frice.utils.message.FLog
 import java.awt.Rectangle
 import java.util.*
 import javax.swing.UIManager
@@ -20,9 +20,11 @@ import kotlin.concurrent.thread
 @Suppress("ClassName")
 object `{-# LANGUAGE Initializer #-}` {
 	init {
-		if ("Windows" in System.getProperty("os.name"))
+		val osName = System.getProperty("os.name")
+		println(osName)
+		if ("Windows" in osName)
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
-		else UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
+		else if ("Linux" in osName) UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
 	}
 }
 
