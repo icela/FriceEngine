@@ -24,7 +24,6 @@ abstract class MoveAnim : FAnim() {
  * @param x pixels per second
  * @param y pixels per second
  */
-// @Deprecated("AccurateMove is suggested.", ReplaceWith("AccurateMove()"), DeprecationLevel.WARNING)
 open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 
 	override val delta: DoublePair

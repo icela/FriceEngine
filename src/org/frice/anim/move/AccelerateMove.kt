@@ -21,5 +21,4 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 			my = (now - start) * ay / 2.0
 			return from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
 		}
-
 }
