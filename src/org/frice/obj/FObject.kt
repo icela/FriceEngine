@@ -25,13 +25,6 @@ abstract class FObject : PhysicalObject() {
 
 	abstract fun scale(x: Double, y: Double)
 
-	open fun move(p: DoublePair) = move(p.x, p.y)
-
-	open fun move(x: Double, y: Double) {
-		this.x += x
-		this.y += y
-	}
-
 	open infix fun rotate(angle: Double) {
 		rotate += angle
 	}
