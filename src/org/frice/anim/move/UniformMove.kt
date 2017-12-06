@@ -1,5 +1,6 @@
 package org.frice.anim.move
 
+import org.frice.obj.AbstractObject
 import org.frice.obj.FObject
 
 
@@ -48,7 +49,7 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
  * @author ice1000
  * @since v1.7.2
  */
-open class DirectedMove(self: FObject, targetX: Double, targetY: Double, speed: Double) : SelfCenteredMoveAnim(self) {
+open class DirectedMove(self: AbstractObject, targetX: Double, targetY: Double, speed: Double) : SelfCenteredMoveAnim(self) {
 	val x: Double
 	val y: Double
 

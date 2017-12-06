@@ -3,6 +3,7 @@
 package org.frice.anim.move
 
 import org.frice.anim.FAnim
+import org.frice.obj.AbstractObject
 import org.frice.obj.FObject
 
 /**
@@ -19,7 +20,7 @@ abstract class MoveAnim : FAnim() {
  * @author ice1000
  * @since v1.7.2
  */
-abstract class SelfCenteredMoveAnim(val self: FObject) : MoveAnim()
+abstract class SelfCenteredMoveAnim(val self: AbstractObject) : MoveAnim()
 
 /**
  * Define your own move object as you like.

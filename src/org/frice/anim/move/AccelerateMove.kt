@@ -1,6 +1,7 @@
 package org.frice.anim.move
 
 import org.frice.anim.move.DoublePair.Factory.from1000
+import org.frice.obj.AbstractObject
 
 /**
  * Move with force (accelerate), give accelerate value to ax and by
@@ -20,5 +21,12 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 			mx = (now - start) * ax / 2.0
 			my = (now - start) * ay / 2.0
 			return from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
+		}
+}
+
+class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed: Double) : SelfCenteredMoveAnim(self) {
+	override val delta: DoublePair
+		get() {
+			TODO()
 		}
 }
