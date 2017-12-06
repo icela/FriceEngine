@@ -29,14 +29,7 @@ View [Document](https://icela.github.io/#getting-started) to learn more about Fr
 
 # Build
 
-Add code below to your gradle script:
-
-```gradle
-allprojects { repositories { maven { url 'https://jitpack.io' } } }
-dependencies {
-  compile 'com.github.icela:FriceEngine:v1.7.1'
-}
-```
+Follow the instruction from [JitPack](https://jitpack.io/#icela/FriceEngine).
 
 Alternatively, you can download a jar from the [release page](https://github.com/icela/FriceEngine/releases).
 

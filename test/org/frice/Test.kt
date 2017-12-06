@@ -4,8 +4,8 @@ import org.frice.anim.RotateAnim
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
+import org.frice.obj.FObject
 import org.frice.obj.PhysicalObject
-import org.frice.obj.SideEffect
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.effects.FunctionEffect
@@ -33,10 +33,11 @@ import kotlin.test.assertEquals
  * @author ice1000
  */
 class Test : org.frice.Game() {
+	private val timer = FTimer(200)
 	private lateinit var preference: Preference
 	private lateinit var xmlPreference: XMLPreference
-	private val timer = FTimer(200)
-	private val objs = LinkedList<PhysicalObject>()
+	private val objs = LinkedList<FObject>()
+	private val objs2 = LinkedList<ShapeObject>()
 
 	override fun onInit() {
 		super.onInit()
@@ -87,31 +88,31 @@ class Test : org.frice.Game() {
 
 	private val random = Random(System.currentTimeMillis())
 	override fun onRefresh() {
-		super.onRefresh()
-		if (timer.ended()) {
-			objs.removeAll { o -> o.died }
-			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0),
-				mouse.x, mouse.y).apply {
-				anims.add(AccelerateMove.getGravity())
-				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
-				targets.clear()
-				objs.forEach { o ->
-					addCollider(o, SideEffect {
-						anims.clear()
-						targets.clear()
-						anims.add(SimpleMove(0, -300))
-						anims.add(SimpleScale(1.1, 1.1))
-						res = ColorResource.MAGENTA
-					})
+		objs.forEach { x ->
+			objs2.forEach { y ->
+				if (x.collides(y)) y.run {
+					anims.clear()
+					anims.add(SimpleMove(0, -300))
+					anims.add(SimpleScale(1.1, 1.1))
+					res = ColorResource.MAGENTA
 				}
-			})
+			}
 		}
 	}
 
 	override fun onMouse(e: OnMouseEvent) {
 		super.onMouse(e)
-		FLog.v(e.toString())
-		FLog.v(mouse)
+		if (timer.ended()) {
+			objs.removeAll(PhysicalObject::died)
+			objs2.removeAll(PhysicalObject::died)
+			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
+				addAnim(AccelerateMove.gravity)
+				addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
+			}
+			objs2 += o
+			addObject(o)
+		}
+
 	}
 
 	companion object {

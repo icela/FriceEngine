@@ -14,7 +14,7 @@ import org.frice.anim.move.DoublePair.Factory.from1000
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	companion object Factory {
 		@JvmStatic
-		fun getGravity() = AccelerateMove(0.0, 10.0)
+		val gravity = AccelerateMove(0.0, 10.0)
 
 		@JvmStatic
 		fun getGravity(g: Double) = AccelerateMove(0.0, g)
@@ -25,9 +25,9 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 
 	override val delta: DoublePair
 		get() {
-		mx = (now - start) * ax / 2.0
-		my = (now - start) * ay / 2.0
-		return from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
-	}
+			mx = (now - start) * ax / 2.0
+			my = (now - start) * ay / 2.0
+			return from1000((now - lastRefresh) / 1000 * mx, (now - lastRefresh) / 1000 * my)
+		}
 
 }

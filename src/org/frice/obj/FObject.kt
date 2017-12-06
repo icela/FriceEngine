@@ -18,7 +18,6 @@ import java.util.*
 abstract class FObject : PhysicalObject() {
 	var id = -1
 	val anims = LinkedList<FAnim>()
-	val targets = LinkedList<Pair<PhysicalObject, SideEffect>>()
 	override var rotate = 0.0
 
 	/**
@@ -68,18 +67,8 @@ abstract class FObject : PhysicalObject() {
 		//		move(gravity)
 	}
 
-	internal fun checkCollision() {
-		targets.removeAll { (first) -> first.died }
-		targets.forEach { (first, second) -> if (collides(first)) second() }
-	}
-
 	fun addAnim(anim: FAnim) = anims.add(anim)
 	fun stopAnims() = anims.clear()
-	fun addCollider(o: PhysicalObject, e: SideEffect) = addCollider(o to e)
-	fun addCollider(p: Pair<PhysicalObject, SideEffect>) = targets.add(p)
-
-	@Deprecated("use SideEffect { xxx } instead", level = DeprecationLevel.ERROR)
-	fun addCollider(o: PhysicalObject, e: () -> Unit) = addCollider(o to SideEffect(e))
 
 	/**
 	 * add a force to this object

@@ -4,8 +4,8 @@ import javafx.event.EventHandler
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
+import org.frice.obj.FObject
 import org.frice.obj.PhysicalObject
-import org.frice.obj.SideEffect
 import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
@@ -25,7 +25,8 @@ fun main(args: Array<String>) {
 
 class TestFx : GameFX(width = 600, height = 600) {
 	private val timer = FTimer(200)
-	private val objs = LinkedList<PhysicalObject>()
+	private lateinit var objs: LinkedList<FObject>
+	private lateinit var objs2: LinkedList<ShapeObject>
 
 	override fun onExit() {
 		System.exit(0)
@@ -33,6 +34,8 @@ class TestFx : GameFX(width = 600, height = 600) {
 
 	override fun onInit() {
 		super.onInit()
+		objs = LinkedList()
+		objs2 = LinkedList()
 		autoGC = true
 		val button = SimpleButton(
 			text = "I am a button",
@@ -42,11 +45,10 @@ class TestFx : GameFX(width = 600, height = 600) {
 			height = 30.0)
 		button.onMouseListener = Consumer {
 			ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
-				mass = 1.0
-				addForce(-1.0, -1.0)
-				anims.add(SimpleMove(200, 200))
-				anims.add(SimpleScale(1.1, 1.1))
-				objs += this
+				addAnim(AccelerateMove(-1.0, -1.0))
+				addAnim(SimpleMove(200, 200))
+				addAnim(SimpleScale(1.1, 1.1))
+				objs.add(this)
 				addObject(this)
 			}
 		}
@@ -61,24 +63,32 @@ class TestFx : GameFX(width = 600, height = 600) {
 
 	private val random = Random(System.currentTimeMillis())
 
+	override fun onRefresh() {
+		objs.removeAll(PhysicalObject::died)
+		objs2.removeAll(PhysicalObject::died)
+		objs.forEach { x ->
+			objs2.forEach { y ->
+				if (x.collides(y)) y.run {
+					anims.clear()
+					anims.add(SimpleMove(0, -300))
+					anims.add(SimpleScale(1.1, 1.1))
+					res = ColorResource.MAGENTA
+				}
+			}
+		}
+	}
+
 	override fun onMouse(e: OnMouseEvent) {
 		super.onMouse(e)
 		if (timer.ended()) {
 			objs.removeAll(PhysicalObject::died)
-			addObject(ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
+			objs2.removeAll(PhysicalObject::died)
+			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
 				anims.add(AccelerateMove.getGravity())
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
-				targets.clear()
-				objs.forEach { o ->
-					addCollider(o, SideEffect {
-						anims.clear()
-						targets.clear()
-						anims.add(SimpleMove(0, -300))
-						anims.add(SimpleScale(1.1, 1.1))
-						res = ColorResource.MAGENTA
-					})
-				}
-			})
+			}
+			objs2.add(o)
+			addObject(o)
 		}
 
 	}

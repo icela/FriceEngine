@@ -125,7 +125,6 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 			it.objects.removeIf { o ->
 				if (o is FObject) {
 					o.runAnims()
-					o.checkCollision()
 					return@removeIf o.died
 				}
 				false
