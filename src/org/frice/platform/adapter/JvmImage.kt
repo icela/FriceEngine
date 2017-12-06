@@ -26,6 +26,8 @@ open class JvmImage(val image: BufferedImage) : FriceImage {
 		this@apply.data = this@JvmImage.image.data
 	})
 
+	override fun fx() = JfxImage(image)
+
 	fun greenify() = image.greenify()
 	fun redify() = image.redify()
 	fun bluify() = image.bluify()

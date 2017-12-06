@@ -11,8 +11,9 @@ import java.awt.image.BufferedImage
  * @since v1.5.0
  */
 class JfxImage : JvmImage {
-	constructor(width: Int, height: Int) : super(BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB))
+	override fun fx() = this
 
+	constructor(width: Int, height: Int) : super(BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB))
 	constructor(image: BufferedImage) : super(image)
 
 	val jfxImage: WritableImage

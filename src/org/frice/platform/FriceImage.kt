@@ -1,5 +1,6 @@
 package org.frice.platform
 
+import org.frice.platform.adapter.JfxImage
 import org.frice.resource.graphics.ColorResource
 
 interface FriceImage {
@@ -10,6 +11,7 @@ interface FriceImage {
 	operator fun set(x: Int, y: Int, color: Int)
 	fun getScaledInstance(x: Double, y: Double): FriceImage
 	fun getSubImage(x: Int, y: Int, width: Int, height: Int): FriceImage
+	fun fx(): JfxImage
 
 	/**
 	 * copy a image.
