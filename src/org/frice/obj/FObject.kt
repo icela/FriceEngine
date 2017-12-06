@@ -49,10 +49,6 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
-	fun addAnim(anim: SelfCenteredMoveAnim) {
-		anim.self = this
-		anims += anim
-	}
 
 	fun stopAnims() = anims.clear()
 

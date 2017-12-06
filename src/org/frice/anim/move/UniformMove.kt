@@ -1,5 +1,7 @@
 package org.frice.anim.move
 
+import org.frice.obj.FObject
+
 
 /**
  * Simple move anim
@@ -39,3 +41,27 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 		}
 }
 
+/**
+ * @author ice1000
+ * @since v1.7.2
+ */
+open class DirectedMove(self: FObject, targetX: Double, targetY: Double, speed: Double) : SelfCenteredMoveAnim(self) {
+	val x: Double
+	val y: Double
+
+	init {
+		val a = targetX - self.x
+		val b = targetY - self.y
+		val c = Math.sqrt(a * a + b * b)
+		x = speed * a / c
+		y = speed * b / c
+	}
+
+	override val delta: DoublePair
+		get() {
+			val deltaTime = now - lastRefresh
+			val pair = DoublePair.from1000(deltaTime * x, deltaTime * y)
+			lastRefresh = now
+			return pair
+		}
+}

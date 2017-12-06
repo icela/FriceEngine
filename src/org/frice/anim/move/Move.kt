@@ -19,9 +19,7 @@ abstract class MoveAnim : FAnim() {
  * @author ice1000
  * @since v1.7.2
  */
-abstract class SelfCenteredMoveAnim : MoveAnim() {
-	lateinit var self: FObject
-}
+abstract class SelfCenteredMoveAnim(val self: FObject) : MoveAnim()
 
 /**
  * Define your own move object as you like.
