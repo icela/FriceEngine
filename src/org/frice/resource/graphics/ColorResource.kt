@@ -50,6 +50,8 @@ class ColorResource(val color: Color) : FResource {
 		@JvmField
 		val 基佬紫 = ColorResource(0x781895)
 		@JvmField
+		val 八云紫 = 基佬紫
+		@JvmField
 		val 吾王蓝 = BLUE
 		@JvmField
 		val 教主黄 = YELLOW

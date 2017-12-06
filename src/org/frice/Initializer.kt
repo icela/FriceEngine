@@ -21,7 +21,7 @@ import kotlin.concurrent.thread
 object `{-# LANGUAGE Initializer #-}` {
 	init {
 		val osName = System.getProperty("os.name")
-		println(osName)
+		FLog.v("Operating system: $osName")
 		if ("Windows" in osName)
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
 		else if ("Linux" in osName) UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")

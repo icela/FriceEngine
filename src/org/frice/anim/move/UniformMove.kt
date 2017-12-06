@@ -42,6 +42,9 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 }
 
 /**
+ * @param self the moving object itself
+ * @param targetX the x axis of the target location
+ * @param targetY the y axis of the target location
  * @author ice1000
  * @since v1.7.2
  */
