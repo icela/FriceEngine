@@ -1,6 +1,7 @@
 package org.frice.resource.image
 
 import org.frice.platform.FriceImage
+import org.frice.platform.adapter.JfxImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
 
@@ -30,6 +31,9 @@ abstract class ImageResource : FResource {
 
 		@JvmStatic
 		fun empty() = create(JvmImage(1, 1))
+
+		@JvmStatic
+		fun emptyFx() = create(JfxImage(1, 1))
 	}
 
 	abstract var image: FriceImage

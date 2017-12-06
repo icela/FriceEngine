@@ -8,6 +8,7 @@
 package org.frice.resource.manager
 
 import org.frice.platform.FriceImage
+import org.frice.platform.adapter.JfxImage
 import org.frice.platform.adapter.JvmImage
 import java.io.File
 import java.net.URL
@@ -78,7 +79,7 @@ object FileBytesManager : FManager<ByteArray> {
  */
 object ImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
-	override fun create(path: String) = JvmImage(ImageIO.read(File(path)))
+	override fun create(path: String) = JfxImage(ImageIO.read(File(path)))
 	override operator fun get(path: String) = super.get(path).clone()
 }
 
@@ -88,7 +89,7 @@ object ImageManager : FManager<FriceImage> {
  */
 object WebImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
-	override fun create(path: String) = JvmImage(ImageIO.read(URL(path)))
+	override fun create(path: String) = JfxImage(ImageIO.read(URL(path)))
 	override operator fun get(path: String) = super.get(path).clone()
 }
 
