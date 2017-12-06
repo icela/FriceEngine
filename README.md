@@ -34,7 +34,7 @@ Add code below to your gradle script:
 ```gradle
 allprojects { repositories { maven { url 'https://jitpack.io' } } }
 dependencies {
-  compile 'com.github.icela:FriceEngine:v1.7.0'
+  compile 'com.github.icela:FriceEngine:v1.7.1'
 }
 ```
 
@@ -80,11 +80,14 @@ Key listener|√|√
 - Collision detecting
 
 ## DSL
-see [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
+
+See [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
 
 ## Contributions
 Feel free to open issue for feature request, bug reports, etc. <br/>
 This is generally a personal project, so please do give your genuine suggestions.
 
 ## Demos
-see [FriceDemo](https://github.com/icela/FriceDemo)
+
+See [FriceDemo](https://github.com/icela/FriceDemo)
+And see [TouhouDemo](https://github.com/ice1000/TouhouDemo)
