@@ -2,8 +2,7 @@ package org.frice.obj
 
 import org.frice.anim.FAnim
 import org.frice.anim.RotateAnim
-import org.frice.anim.move.DoublePair
-import org.frice.anim.move.MoveAnim
+import org.frice.anim.move.*
 import org.frice.anim.scale.ScaleAnim
 import org.frice.platform.FriceImage
 import org.frice.resource.FResource
@@ -50,6 +49,11 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
+	fun addAnim(anim: SelfCenteredMoveAnim) {
+		anim.self = this
+		anims += anim
+	}
+
 	fun stopAnims() = anims.clear()
 
 	interface ImageOwner {

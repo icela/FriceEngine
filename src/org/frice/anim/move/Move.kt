@@ -3,7 +3,7 @@
 package org.frice.anim.move
 
 import org.frice.anim.FAnim
-import org.frice.anim.move.DoublePair.Factory.from1000
+import org.frice.obj.FObject
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -16,41 +16,11 @@ abstract class MoveAnim : FAnim() {
 }
 
 /**
- * Simple move anim
- *
- * Created by ice1000 on 2016/8/15.
  * @author ice1000
- * @since v0.2.1
- * @param x pixels per second
- * @param y pixels per second
+ * @since v1.7.2
  */
-open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
-
-	override val delta: DoublePair
-		get() {
-			val deltaTime = now - lastRefresh
-			val pair = from1000(deltaTime * x, deltaTime * y)
-			lastRefresh = now
-			return pair
-		}
-
-}
-
-/**
- * Accurate Move anim. Deltas are d1, the speed will be more spcific.
- *
- * @author ice1000
- * @since v0.5.1
- */
-open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
-
-	override val delta: DoublePair
-		get() {
-			val deltaTime = now - lastRefresh
-			val pair = from1000(deltaTime * x, deltaTime * y)
-			lastRefresh = now
-			return pair
-		}
+abstract class SelfCenteredMoveAnim : MoveAnim() {
+	lateinit var self: FObject
 }
 
 /**
