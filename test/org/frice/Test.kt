@@ -53,11 +53,10 @@ class Test : org.frice.Game() {
 			height = 30.0).apply {
 			onMouseListener = Consumer {
 				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
-					mass = 1.0
-					addForce(-1.0, -1.0)
-					anims.add(SimpleMove(400, 400))
-					anims.add(SimpleScale(1.1, 1.1))
-					anims.add(RotateAnim(0.1))
+					addAnim(AccelerateMove(-1.0, -1.0))
+					addAnim(SimpleMove(400, 400))
+					addAnim(SimpleScale(1.1, 1.1))
+					addAnim(RotateAnim(0.1))
 				}
 				objs.add(obj)
 				addObject(obj)
@@ -106,7 +105,7 @@ class Test : org.frice.Game() {
 			objs.removeAll(PhysicalObject::died)
 			objs2.removeAll(PhysicalObject::died)
 			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
-				addAnim(AccelerateMove.gravity)
+				addAnim(AccelerateMove(0.0, 10.0))
 				addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 			}
 			objs2 += o

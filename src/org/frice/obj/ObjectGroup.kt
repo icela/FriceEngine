@@ -1,5 +1,6 @@
 package org.frice.obj
 
+import org.frice.anim.move.DoublePair
 import org.frice.resource.image.ImageResource.Factories.empty
 import org.frice.utils.shape.FShapeQuad
 
@@ -30,7 +31,7 @@ constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList(
 	override fun collides(other: Collidable) = objs.any { it.collides(other) }
 	override val resource = empty()
 	override fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
-	override fun move(p: org.frice.anim.move.DoublePair) = objs.forEach { it.move(p) }
+	override fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
 	override fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 
 	fun addObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }

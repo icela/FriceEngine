@@ -12,14 +12,6 @@ import org.frice.anim.move.DoublePair.Factory.from1000
  * @param ay accelerate on y
  */
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
-	companion object Factory {
-		@JvmStatic
-		val gravity = AccelerateMove(0.0, 10.0)
-
-		@JvmStatic
-		fun getGravity(g: Double) = AccelerateMove(0.0, g)
-	}
-
 	private var mx = 0.0
 	private var my = 0.0
 

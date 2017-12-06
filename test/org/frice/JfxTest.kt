@@ -84,7 +84,7 @@ class TestFx : GameFX(width = 600, height = 600) {
 			objs.removeAll(PhysicalObject::died)
 			objs2.removeAll(PhysicalObject::died)
 			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
-				anims.add(AccelerateMove.getGravity())
+				anims.add(AccelerateMove(0.0, 10.0))
 				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 			}
 			objs2.add(o)
