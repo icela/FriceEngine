@@ -58,4 +58,17 @@ constructor(
 		if ((id != -1 && id == other.id) || this === other) return true
 		return false
 	}
+
+	/** auto-generated. */
+	override fun hashCode(): Int {
+		if (id != -1) return id
+		var result = res.hashCode()
+		result = 31 * result + shape.hashCode()
+		result = 31 * result + x.hashCode()
+		result = 31 * result + y.hashCode()
+		result = 31 * result + (collisionBox?.hashCode() ?: 0)
+		result = 31 * result + scale.hashCode()
+		result = 31 * result + died.hashCode()
+		return result
+	}
 }

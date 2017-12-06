@@ -1,9 +1,12 @@
 package org.frice.obj
 
-import org.frice.anim.move.DoublePair
 import org.frice.resource.image.ImageResource.Factories.empty
 import org.frice.utils.shape.FShapeQuad
 
+/**
+ * @author ice1000
+ * @since v1.6.0
+ */
 class ObjectGroup
 @JvmOverloads
 constructor(val objs: MutableList<FObject> = emptyList<FObject>().toMutableList()) : FShapeQuad, FObject() {

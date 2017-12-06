@@ -3,7 +3,6 @@ package org.frice.anim.move
 data class DoublePair(var x: Double, var y: Double) {
 
 	companion object Factory {
-		@JvmStatic
 		fun from1000(x: Double, y: Double) = DoublePair(x / 1000.0, y / 1000.0)
 	}
 
