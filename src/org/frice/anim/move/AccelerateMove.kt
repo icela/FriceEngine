@@ -24,9 +24,8 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		}
 }
 
-class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed: Double) : SelfCenteredMoveAnim(self) {
-	override val delta: DoublePair
-		get() {
-			TODO()
-		}
-}
+//class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed: Double) : SelfCenteredMoveAnim(self) {
+//	override val delta: DoublePair
+//		get() {
+//		}
+//}
