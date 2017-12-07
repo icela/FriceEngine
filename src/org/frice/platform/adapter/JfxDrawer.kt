@@ -27,9 +27,9 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	}
 
 	override fun useFont(text: FText) {
-		if (text.fontTmp == null) text.fontTmp = Font(text.fontName, text.textSize)
-		if (g.font != text.fontTmp)
-			g.font = text.fontTmp as Font?
+		if (text.`font tmp obj` == null) text.`font tmp obj` = Font(text.fontName, text.textSize)
+		if (g.font != text.`font tmp obj`)
+			g.font = text.`font tmp obj` as Font?
 	}
 
 	override fun init() {

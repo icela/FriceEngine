@@ -33,9 +33,9 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 	}
 
 	override fun useFont(text: FText) {
-		if (text.fontTmp == null) text.fontTmp = Font(text.fontName, Font.PLAIN, text.textSize.toInt())
-		if (g.font != text.fontTmp)
-			g.font = text.fontTmp as Font?
+		if (text.`font tmp obj` == null) text.`font tmp obj` = Font(text.fontName, Font.PLAIN, text.textSize.toInt())
+		if (g.font != text.`font tmp obj`)
+			g.font = text.`font tmp obj` as Font?
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =

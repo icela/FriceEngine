@@ -110,8 +110,12 @@ class O : GameFX() {
 		}
 		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
 		text.textSize = 64.0
+		text.fontName = "Fira Code"
+		val text2 = SimpleText(ColorResource.BLUE, "this is another text demo", 100.0, 400.0)
+		text2.textSize = 22.0
+		text2.fontName = "Inziu Iosevka TC"
 		assertEquals(obj, obj2)
-		addObject(obj2, obj, text)
+		addObject(obj2, obj, text, text2)
 	}
 
 	override fun onRefresh() {
