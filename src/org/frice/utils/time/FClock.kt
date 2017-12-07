@@ -8,19 +8,19 @@ import org.frice.utils.unless
  * @author ice1000
  */
 object FClock {
-	@get:JvmStatic
+	@JvmStatic
 	var started = true
 		@JvmName(" ") internal set
 
-	@get:JvmStatic
+	@JvmStatic
 	var startTicks = System.currentTimeMillis()
 		@JvmName("  ") internal set
 
-	@get:JvmStatic
+	@JvmStatic
 	var pauseTicks = startTicks
 		@JvmName("   ") internal set
 
-	@get:JvmStatic
+	@JvmStatic
 	val current: Long
 		get() = if (started) System.currentTimeMillis() - startTicks else pauseTicks - startTicks
 
