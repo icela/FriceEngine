@@ -8,27 +8,36 @@ import org.frice.utils.unless
  * @author ice1000
  */
 object FClock {
+	@get:JvmStatic
 	var started = true
-		internal set
-	var startTicks = System.currentTimeMillis()
-		internal set
-	var pauseTicks = startTicks
-		internal set
+		@JvmName(" ") internal set
 
+	@get:JvmStatic
+	var startTicks = System.currentTimeMillis()
+		@JvmName("  ") internal set
+
+	@get:JvmStatic
+	var pauseTicks = startTicks
+		@JvmName("   ") internal set
+
+	@get:JvmStatic
 	val current: Long
 		get() = if (started) System.currentTimeMillis() - startTicks else pauseTicks - startTicks
 
+	@JvmStatic
 	fun init() {
 		startTicks = System.currentTimeMillis()
 		started = true
 	}
 
+	@JvmStatic
 	fun resume() {
 		if (started) return
 		startTicks += System.currentTimeMillis() - pauseTicks
 		started = true
 	}
 
+	@JvmStatic
 	fun pause() {
 		unless(started) {
 			return

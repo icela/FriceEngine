@@ -18,7 +18,6 @@ import org.frice.utils.unless
 
 interface FriceGame : TitleOwner, Sized, Resizable {
 	val layers: Array<Layer>
-
 	val drawer: FriceDrawer
 
 	/**
