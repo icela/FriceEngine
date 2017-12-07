@@ -26,9 +26,7 @@ class Preference(private val file: File) : Database {
 	override fun query(key: String, default: Any?): Any? = when (properties[key].toString()) {
 		"true" -> true
 		"false" -> false
-		else -> forceGet(properties[key] ?: default) {
-			return@forceGet Integer.parseInt(properties[key] as String)
-		}
+		else -> forceGet(properties[key] ?: default) { (properties[key] as String).toInt() }
 	}
 
 	override fun insert(key: String, value: Any?) {

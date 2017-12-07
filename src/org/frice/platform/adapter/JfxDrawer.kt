@@ -2,6 +2,7 @@ package org.frice.platform.adapter
 
 import javafx.scene.canvas.GraphicsContext
 import javafx.scene.text.Font
+import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
@@ -25,8 +26,10 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 		g.font = Font(g.font.name, size)
 	}
 
-	override fun newFont(name: String, size: Double) {
-		g.font = Font(g.font.name, size)
+	override fun useFont(text: FText) {
+		if (text.fontTmp == null) text.fontTmp = Font(text.fontName, text.textSize)
+		if (g.font != text.fontTmp)
+			g.font = text.fontTmp as Font?
 	}
 
 	override fun init() {

@@ -1,5 +1,6 @@
 package org.frice.platform.adapter
 
+import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
@@ -31,8 +32,10 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 		g.font = g.font.deriveFont(size.toFloat())
 	}
 
-	override fun newFont(name: String, size: Double) {
-		g.font = Font(name, Font.PLAIN, size.toInt())
+	override fun useFont(text: FText) {
+		if (text.fontTmp == null) text.fontTmp = Font(text.fontName, Font.PLAIN, text.textSize.toInt())
+		if (g.font != text.fontTmp)
+			g.font = text.fontTmp as Font?
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =

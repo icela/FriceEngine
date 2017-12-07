@@ -177,7 +177,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 					restore()
 					init()
 					rotate(b.rotate)
-					newFont(b.fontName, b.textSize)
+					useFont(b)
 				}
 				if (b is FButton) {
 					when (b) {

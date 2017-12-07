@@ -1,5 +1,6 @@
 package org.frice.platform
 
+import org.frice.obj.button.FText
 import org.frice.resource.graphics.ColorResource
 
 /**
@@ -17,7 +18,7 @@ interface FriceDrawer {
 	fun drawLine(x: Double, y: Double, width: Double, height: Double)
 	fun drawRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double)
 	fun stringSize(size: Double)
-	fun newFont(name: String, size: Double)
+	fun useFont(text: FText)
 	fun rotate(theta: Double)
 	fun restore()
 	fun strokeOval(x: Double, y: Double, width: Double, height: Double)
