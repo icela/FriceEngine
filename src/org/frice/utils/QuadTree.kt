@@ -41,7 +41,7 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 
 
 	/**
-	 * 获取rect 所在的 index
+	 * 获取 rect 所在的 index
 	 *
 	 * @param rectF 传入对象所在的矩形
 	 * @return index 使用类别区分所在象限
@@ -102,15 +102,15 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 	}
 
 	/**
-	 * return all the object collision with the object
-
+	 * return all the objects that collide the object
+	 *
 	 * @param returnObjects return list
-	 * @param rectF         object
-	 * @return list of collision
+	 * @param rectF object
+	 * @return list of collided objects
 	 */
 	fun retrieve(
-			returnObjects: ArrayList<List<PhysicalObject>>,
-			rectF: PhysicalObject): List<List<PhysicalObject>> {
+		returnObjects: ArrayList<List<PhysicalObject>>,
+		rectF: PhysicalObject): List<List<PhysicalObject>> {
 		val index = getIndex(rectF)
 		if (-1 != index && null != nodes[0]) nodes[index]?.retrieve(returnObjects, rectF)
 		returnObjects += objects

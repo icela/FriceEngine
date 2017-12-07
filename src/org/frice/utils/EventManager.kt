@@ -11,11 +11,11 @@ import java.util.*
 class EventManager {
 	private val queue = PriorityQueue<DelayedEvent>()
 	fun insert(event: DelayedEvent) = queue.offer(event)
+	fun clear() = queue.clear()
 
 	tailrec fun check() {
-		val latest = queue.peek() ?: return
-		if (latest.millisFromStart <= FClock.current) {
-			latest.event()
+		if (queue.isNotEmpty() && queue.peek().millisFromStart <= FClock.current) {
+			queue.remove().event()
 			check()
 		}
 	}
