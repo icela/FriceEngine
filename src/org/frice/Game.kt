@@ -123,7 +123,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
 
-	fun onExit() {
+	open fun onExit() {
 		if (dialogConfirmYesNo("Are you sure to exit?")) {
 			dispose()
 			System.exit(0)

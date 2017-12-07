@@ -32,7 +32,7 @@ import kotlin.test.assertEquals
  *
  * @author ice1000
  */
-class Test : org.frice.Game() {
+class Test : Game() {
 	private val timer = FTimer(200)
 	private lateinit var preference: Preference
 	private lateinit var xmlPreference: XMLPreference
@@ -122,7 +122,7 @@ class Test : org.frice.Game() {
 	}
 }
 
-class TestImage : org.frice.Game() {
+class TestImage : Game() {
 	override fun onInit() {
 		super.onInit()
 		addObject(ImageObject((WebImageResource(
@@ -142,7 +142,7 @@ class TestImage : org.frice.Game() {
  *
  * @author ice1000
  */
-class Test2 : org.frice.Game() {
+class Test2 : Game() {
 	val timer = FTimer(200)
 	lateinit var obj: ShapeObject
 	lateinit var obj2: ShapeObject
@@ -179,7 +179,7 @@ class Test2 : org.frice.Game() {
  *
  * @author ice1000
  */
-class Test3 : org.frice.Game() {
+class Test3 : Game() {
 	lateinit var a: ShapeObject
 	val d = 3.14 * 6
 	val e = 0.1
@@ -205,7 +205,7 @@ class Test3 : org.frice.Game() {
 	}
 }
 
-class Test4 : org.frice.Game(2) {
+class Test4 : Game(2) {
 	override fun onInit() {
 		addObject(0, FunctionEffect({
 			Math.sin(it / 10) * 10 + 100

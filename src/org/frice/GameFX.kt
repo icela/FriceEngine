@@ -1,7 +1,6 @@
 package org.frice
 
 import javafx.application.Application
-import javafx.application.Platform
 import javafx.embed.swing.SwingFXUtils
 import javafx.event.EventHandler
 import javafx.scene.*
@@ -17,7 +16,6 @@ import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.loop
 import org.frice.utils.time.*
-import org.frice.utils.unless
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -139,7 +137,7 @@ open class GameFX @JvmOverloads constructor(
 		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
 	}
 
-	fun onExit(): Boolean {
+	open fun onExit(): Boolean {
 		return false
 	}
 
@@ -161,7 +159,7 @@ open class GameFX @JvmOverloads constructor(
 			mouse(fxMouse(it, MOUSE_RELEASED))
 			onMouse(fxMouse(it, MOUSE_RELEASED))
 		}
-		stage.setOnCloseRequest { unless(onExit(), it::consume) }
+		stage.setOnCloseRequest { if (onExit()) it.consume() }
 		stage.scene = scene
 		onInit()
 		stage.icons += Image(javaClass.getResourceAsStream("/icon.png"))
