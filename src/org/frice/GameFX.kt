@@ -17,6 +17,7 @@ import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.loop
 import org.frice.utils.time.*
+import org.frice.utils.unless
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -138,9 +139,8 @@ open class GameFX @JvmOverloads constructor(
 		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
 	}
 
-	override fun onExit() {
-		Platform.exit()
-		System.exit(0)
+	fun onExit(): Boolean {
+		return false
 	}
 
 	override final fun start(stage: Stage) {
@@ -161,10 +161,7 @@ open class GameFX @JvmOverloads constructor(
 			mouse(fxMouse(it, MOUSE_RELEASED))
 			onMouse(fxMouse(it, MOUSE_RELEASED))
 		}
-		stage.setOnCloseRequest {
-			onExit()
-			it.consume()
-		}
+		stage.setOnCloseRequest { unless(onExit(), it::consume) }
 		stage.scene = scene
 		onInit()
 		stage.icons += Image(javaClass.getResourceAsStream("/icon.png"))

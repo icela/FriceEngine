@@ -28,10 +28,6 @@ class TestFx : GameFX(width = 600, height = 600) {
 	private lateinit var objs: LinkedList<FObject>
 	private lateinit var objs2: LinkedList<ShapeObject>
 
-	override fun onExit() {
-		System.exit(0)
-	}
-
 	override fun onInit() {
 		super.onInit()
 		objs = LinkedList()

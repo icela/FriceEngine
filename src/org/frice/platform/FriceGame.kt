@@ -46,7 +46,6 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	fun onLastInit() = Unit
 	fun onRefresh() = Unit
 	fun onMouse(e: OnMouseEvent) = Unit
-	fun onExit() = Unit
 	fun customDraw(g: FriceDrawer) = Unit
 	fun onLoseFocus() {
 		paused = true

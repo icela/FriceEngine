@@ -32,17 +32,17 @@ object FClock {
 
 	@JvmStatic
 	fun resume() {
-		if (started) return
-		startTicks += System.currentTimeMillis() - pauseTicks
-		started = true
+		unless(started) {
+			startTicks += System.currentTimeMillis() - pauseTicks
+			started = true
+		}
 	}
 
 	@JvmStatic
 	fun pause() {
-		unless(started) {
-			return
+		if (started) {
+			pauseTicks = System.currentTimeMillis()
+			started = false
 		}
-		pauseTicks = System.currentTimeMillis()
-		started = false
 	}
 }
