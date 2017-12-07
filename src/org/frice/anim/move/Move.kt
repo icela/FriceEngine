@@ -4,7 +4,6 @@ package org.frice.anim.move
 
 import org.frice.anim.FAnim
 import org.frice.obj.AbstractObject
-import org.frice.obj.FObject
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -40,5 +39,21 @@ abstract class CustomMove : MoveAnim() {
 			lastRefresh = now
 			return pair
 		}
+}
+/**
+ * Define your own move object as you like.
+ *
+ * Created by ice1000 on 2016/8/15.
+ * @author ice1000
+ * @since v1.7.4
+ */
+abstract class CustomMove2 : MoveAnim() {
+	abstract fun getDelta(timeFromBegin: Double): DoublePair
 
+	override val delta: DoublePair
+		get() {
+			val pair = getDelta(now - lastRefresh)
+			lastRefresh = now
+			return pair
+		}
 }
