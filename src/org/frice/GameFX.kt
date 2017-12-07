@@ -14,7 +14,6 @@ import org.frice.event.*
 import org.frice.platform.*
 import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.loop
 import org.frice.utils.time.*
 import java.util.*
 import kotlin.concurrent.thread
@@ -138,6 +137,7 @@ open class GameFX @JvmOverloads constructor(
 	}
 
 	open fun onExit(): Boolean {
+		stopped = true
 		return false
 	}
 
@@ -166,10 +166,11 @@ open class GameFX @JvmOverloads constructor(
 		stage.show()
 		thread {
 			onLastInit()
-			loop {
+			while (true) {
 				try {
 					onRefresh()
-					if (!paused && !stopped && refresh.ended()) {
+					if (stopped) break
+					if (!paused && refresh.ended()) {
 						clearScreen()
 						drawEverything(drawer)
 						drawer.init()
