@@ -10,6 +10,7 @@ import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.audio.playFX
 import org.frice.utils.greyify
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
@@ -53,7 +54,6 @@ class TestFx : GameFX(width = 600, height = 600) {
 			button.text = key.character
 			layers.first().objects.size.run(::println)
 		}
-
 		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
 	}
 
@@ -65,9 +65,9 @@ class TestFx : GameFX(width = 600, height = 600) {
 		objs.forEach { x ->
 			objs2.forEach { y ->
 				if (x.collides(y)) y.run {
-					anims.clear()
-					anims.add(SimpleMove(0, -300))
-					anims.add(SimpleScale(1.1, 1.1))
+					stopAnims()
+					addAnim(SimpleMove(0, -300))
+					addAnim(SimpleScale(1.1, 1.1))
 					res = ColorResource.MAGENTA
 				}
 			}
@@ -80,8 +80,8 @@ class TestFx : GameFX(width = 600, height = 600) {
 			objs.removeAll(PhysicalObject::died)
 			objs2.removeAll(PhysicalObject::died)
 			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
-				anims.add(AccelerateMove(0.0, 10.0))
-				anims.add(AccurateMove(random.nextInt(400) - 200.0, 0.0))
+				addAnim(AccelerateMove(0.0, 10.0))
+				addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 			}
 			objs2.add(o)
 			addObject(o)

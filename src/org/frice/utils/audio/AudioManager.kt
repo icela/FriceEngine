@@ -36,9 +36,7 @@ fun getPlayer(path: String) = AudioPlayer(path)
  * @author ice1000
  * @since v1.7.6
  */
-fun playSoundFX(path: String) {
-	getPlayerFX(path).play()
-}
+fun playFX(path: String) = getPlayerFX(path).play()
 
 /**
  * @author ice1000
