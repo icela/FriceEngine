@@ -20,24 +20,6 @@ interface FShapeDouble : FShape {
 }
 
 /**
- * @author ice1000
- * @since v1.6.7
- * @see org.frice.utils.shape.FQuad
- */
-interface FShapeQuad {
-	val x: Double
-	val y: Double
-	val width: Double
-	val height: Double
-}
-
-data class FQuad(
-	override var x: Double,
-	override var y: Double,
-	override var width: Double,
-	override var height: Double) : FShapeQuad
-
-/**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
  * @since v0.1.1

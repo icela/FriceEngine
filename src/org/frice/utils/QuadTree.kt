@@ -10,6 +10,7 @@ import java.util.*
  * Some fixes by ice1000
  *
  * @author lfkdsk
+ * @since v0.5.3
  */
 class QuadTree(private var level: Int, private var bounds: FQuad) {
 
