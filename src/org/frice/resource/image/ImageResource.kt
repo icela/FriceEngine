@@ -33,7 +33,7 @@ abstract class ImageResource : FResource {
 		fun empty() = create(JvmImage(1, 1))
 
 		@JvmStatic
-		fun emptyFx() = create(JfxImage(1, 1))
+		fun emptyFX() = create(JfxImage(1, 1))
 	}
 
 	abstract var image: FriceImage
