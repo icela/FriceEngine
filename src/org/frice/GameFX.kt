@@ -115,12 +115,14 @@ open class GameFX @JvmOverloads constructor(
 	}
 
 	override fun measureText(text: FText): FRectangle {
+		drawer.useFont(text)
 		val font: Font = text.`font tmp obj` as? Font ?: drawer.g.font
 		return FRectangle(Toolkit.getToolkit().fontLoader.computeStringWidth(text.text, font),
 			Toolkit.getToolkit().fontLoader.getFontMetrics(font).lineHeight)
 	}
 
 	override fun measureTextHeight(text: FText): Int {
+		drawer.useFont(text)
 		val font: Font = text.`font tmp obj` as? Font ?: drawer.g.font
 		return Toolkit.getToolkit().fontLoader.getFontMetrics(font).lineHeight.toInt()
 	}
