@@ -133,9 +133,15 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	}
 
 	override fun measureText(text: FText): FRectangle {
-		val font = text.`font tmp obj`
 		val g = drawer.g
-		return FRectangle(if (font is Font) font.getStringBounds(text.text, g.fontRenderContext) else g.fontMetrics.getStringBounds(text.text, g))
+		val font = text.`font tmp obj` as? Font ?: g.font
+		return FRectangle(font.getStringBounds(text.text, g.fontRenderContext))
+	}
+
+	override fun measureTextWidth(text: FText): Int {
+		val g = drawer.g
+		val font = text.`font tmp obj` as? Font ?: g.font
+		return g.getFontMetrics(font).stringWidth(text.text)
 	}
 
 	/**

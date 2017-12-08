@@ -228,10 +228,18 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 
 	/**
 	 * measures the width and height of the text.
+	 * @see measureTextWidth if you only care about the width
 	 * @param text the text
 	 * @return the width and height of the text, according to it's font
 	 */
 	fun measureText(text: FText): FRectangle
-	fun measureTextWidth(text: FText): Int = measureText(text).width
+
+	/**
+	 * if you only care about width, choose this.
+	 * @param text the text
+	 * @return the width of the text, according to it's font
+	 */
+	fun measureTextWidth(text: FText): Int
+
 	fun measureTextHeight(text: FText): Int = measureText(text).height
 }
