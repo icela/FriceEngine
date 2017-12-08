@@ -1,4 +1,4 @@
-package org.frice.utils.audio
+package org.frice.utils.media
 
 import org.frice.utils.forceRun
 import org.frice.utils.until
@@ -11,7 +11,7 @@ import javax.sound.sampled.*
  * Created by ice1000 on 2016/8/16.
  * @author ice1000
  * @since v0.3.1
- * @see org.frice.utils.audio.getPlayer
+ * @see org.frice.utils.media.getPlayer
  */
 class AudioPlayer internal constructor(file: File) : Thread() {
 	internal constructor(path: String) : this(File(path))

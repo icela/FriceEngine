@@ -39,3 +39,4 @@ test.properties
 .idea/
 test/org/frice/game/demo/
 save.txt
+*.mp4

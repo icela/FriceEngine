@@ -10,6 +10,7 @@ import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.StackPane
+import javafx.scene.media.MediaView
 import javafx.scene.text.Font
 import javafx.stage.Stage
 import org.frice.event.*
@@ -150,9 +151,9 @@ open class GameFX @JvmOverloads constructor(
 			scene.onKeyReleased = value
 		}
 
-	private val canvas = Canvas(width.toDouble(), height.toDouble())
-	private val root = StackPane(canvas)
+	val canvas = Canvas(width.toDouble(), height.toDouble())
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
+	private val root = StackPane(canvas)
 
 	override fun setCursor(o: FriceImage) {
 		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
