@@ -62,7 +62,6 @@ Key listener|√|√
 - Non-rotate animations (move, scale, accelerate, etc.)
 - Audio playing (\*.wav, \*.mp3)
 - Clock system, timers
-- A BoolArray implemented in bitwise operation, each boolean value will only take 1 __bit__ space (instead of 1 __byte__ defaultly on JVM).
 - Automatic garbage collection (optional, objects far from the screen will be removed)
 - Resource manager (caching IO)
 - File/Image/Color/URL utils

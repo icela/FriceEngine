@@ -31,8 +31,7 @@ class AudioPlayer internal constructor(file: File) : Thread() {
 	}
 
 	companion object LineGetter {
-		@JvmField
-		val BUFFER_SIZE = 2048
+		const val BUFFER_SIZE = 1024
 
 		fun getLine(audioFormat: AudioFormat): SourceDataLine {
 			val info = DataLine.Info(SourceDataLine::class.java, audioFormat)

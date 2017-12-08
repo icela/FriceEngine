@@ -1,5 +1,5 @@
 group 'org.frice'
-version '1.7.4'
+version '1.7.5'
 
 buildscript {
 	ext.kotlin_version = '1.2.0'
