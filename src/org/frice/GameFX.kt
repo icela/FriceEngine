@@ -1,5 +1,6 @@
 package org.frice
 
+import com.sun.javafx.tk.Toolkit
 import javafx.application.Application
 import javafx.embed.swing.SwingFXUtils
 import javafx.event.EventHandler
@@ -9,11 +10,14 @@ import javafx.scene.control.*
 import javafx.scene.image.Image
 import javafx.scene.input.KeyEvent
 import javafx.scene.layout.StackPane
+import javafx.scene.text.Font
 import javafx.stage.Stage
 import org.frice.event.*
+import org.frice.obj.button.FText
 import org.frice.platform.*
 import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
 import java.util.*
 import kotlin.concurrent.thread
@@ -108,6 +112,22 @@ open class GameFX @JvmOverloads constructor(
 	override fun getTitle(): String = stage.title
 	override fun setTitle(title: String) {
 		stage.title = title
+	}
+
+	override fun measureText(text: FText): FRectangle {
+		val font: Font = text.`font tmp obj` as? Font ?: drawer.g.font
+		return FRectangle(Toolkit.getToolkit().fontLoader.computeStringWidth(text.text, font),
+			Toolkit.getToolkit().fontLoader.getFontMetrics(font).lineHeight)
+	}
+
+	override fun measureTextHeight(text: FText): Int {
+		val font: Font = text.`font tmp obj` as? Font ?: drawer.g.font
+		return Toolkit.getToolkit().fontLoader.getFontMetrics(font).lineHeight.toInt()
+	}
+
+	override fun measureTextWidth(text: FText): Int {
+		val font: Font = text.`font tmp obj` as? Font ?: drawer.g.font
+		return Toolkit.getToolkit().fontLoader.computeStringWidth(text.text, font).toInt()
 	}
 
 	var onKeyTyepd: EventHandler<in KeyEvent>

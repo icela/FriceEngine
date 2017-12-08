@@ -2,8 +2,7 @@ package org.frice.platform
 
 import org.frice.event.OnMouseEvent
 import org.frice.obj.*
-import org.frice.obj.button.FButton
-import org.frice.obj.button.SimpleButton
+import org.frice.obj.button.*
 import org.frice.obj.effects.LineEffect
 import org.frice.obj.sub.ImageObject
 import org.frice.obj.sub.ShapeObject
@@ -226,4 +225,13 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	fun dialogShow(msg: String) = dialogShow(msg, "Information")
 	fun dialogShow(msg: String, title: String)
 	fun dialogInput(msg: String, title: String): String
+
+	/**
+	 * measures the width and height of the text.
+	 * @param text the text
+	 * @return the width and height of the text, according to it's font
+	 */
+	fun measureText(text: FText): FRectangle
+	fun measureTextWidth(text: FText): Int = measureText(text).width
+	fun measureTextHeight(text: FText): Int = measureText(text).height
 }

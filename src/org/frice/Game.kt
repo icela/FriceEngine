@@ -132,16 +132,10 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		}
 	}
 
-	/**
-	 * measures the width and height of the text.
-	 * @param text the text
-	 * @return the width and height of the text, according to it's font
-	 */
-	fun measureText(text: FText): FRectangle {
+	override fun measureText(text: FText): FRectangle {
 		val font = text.`font tmp obj`
 		val g = drawer.g
-		return if (font is Font) FRectangle(g.getFontMetrics(font).getStringBounds(text.text, g))
-		else FRectangle(g.fontMetrics.getStringBounds(text.text, g))
+		return FRectangle(if (font is Font) font.getStringBounds(text.text, g.fontRenderContext) else g.fontMetrics.getStringBounds(text.text, g))
 	}
 
 	/**
