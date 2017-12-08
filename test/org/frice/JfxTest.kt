@@ -1,6 +1,7 @@
 package org.frice
 
 import javafx.event.EventHandler
+import javafx.scene.media.MediaView
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
@@ -11,6 +12,7 @@ import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.greyify
+import org.frice.utils.media.getMediaPlayer
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
 import org.frice.utils.time.FTimer
@@ -46,6 +48,9 @@ class TestFx : GameFX(width = 600, height = 600) {
 				addAnim(SimpleScale(1.1, 1.1))
 				objs.add(this)
 				addObject(this)
+				// val player = getMediaPlayer("touhou-test-5.mp4")
+				// root.children.add(MediaView(player))
+				// player.play()
 			}
 		}
 		addObject(button)
