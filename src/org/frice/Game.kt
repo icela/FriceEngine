@@ -4,11 +4,13 @@ package org.frice
 
 import org.frice.event.*
 import org.frice.obj.AbstractObject
+import org.frice.obj.button.FText
 import org.frice.platform.*
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.message.*
+import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
 import java.awt.*
 import java.awt.event.*
@@ -128,6 +130,18 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			dispose()
 			System.exit(0)
 		}
+	}
+
+	/**
+	 * measures the width and height of the text.
+	 * @param text the text
+	 * @return the width and height of the text, according to it's font
+	 */
+	fun measureText(text: FText): FRectangle {
+		val font = text.`font tmp obj`
+		val g = drawer.g
+		return if (font is Font) FRectangle(g.getFontMetrics(font).getStringBounds(text.text, g))
+		else FRectangle(g.fontMetrics.getStringBounds(text.text, g))
 	}
 
 	/**
