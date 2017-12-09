@@ -30,13 +30,10 @@ interface AbstractObject {
  * @author ice1000
  * @since v0.4
  */
-interface FContainer {
+interface FContainer : FShapeQuad {
 
-	var x: Double
-	var y: Double
-
-	val width: Double
-	val height: Double
+	override var x: Double
+	override var y: Double
 
 	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
 

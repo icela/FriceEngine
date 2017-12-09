@@ -2,6 +2,7 @@ package org.frice.utils
 
 import org.frice.obj.PhysicalObject
 import org.frice.utils.shape.FQuad
+import org.frice.utils.shape.FShapeQuad
 import java.util.*
 
 /**
@@ -24,6 +25,13 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 	fun clear() {
 		objects.clear()
 		for (i in nodes.indices) nodes[i] = null
+	}
+
+	private fun isInner(ob: PhysicalObject, quad: FShapeQuad): Boolean {
+		return ob.x >= quad.x
+			&& ob.x + ob.width <= quad.x + quad.width
+			&& ob.y >= quad.y
+			&& ob.y + ob.height <= quad.y + quad.height
 	}
 
 	private fun split() {

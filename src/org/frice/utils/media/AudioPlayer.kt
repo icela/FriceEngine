@@ -31,7 +31,7 @@ class AudioPlayer internal constructor(file: File) : Thread() {
 	/**
 	 * @author ice1000
 	 * @since v1.7.6
-	 * @see AudioPlayer
+	 * @see org.frice.utils.media.AudioPlayer
 	 */
 	class AudioPlayerRunnable(file: File) : Runnable {
 		private var audioInputStream: AudioInputStream

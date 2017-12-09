@@ -2,19 +2,12 @@ package org.frice.utils.shape
 
 import java.awt.geom.Rectangle2D
 
-/**
- * Created by ice1000 on 2016/8/14.
- * @author ice1000
- * @since v0.1.1
- */
-interface FShape
-
-interface FShapeInt : FShape {
+interface FShapeInt {
 	var width: Int
 	var height: Int
 }
 
-interface FShapeDouble : FShape {
+interface FShapeDouble {
 	var width: Double
 	var height: Double
 }
@@ -42,7 +35,7 @@ open class FOval(rh: Double, rv: Double) : FShapeInt {
  * @author ice1000
  * @since v0.3
  */
-data class FPoint(var x: Int, var y: Int) : FShape
+data class FPoint(var x: Int, var y: Int)
 
 /**
  * Created by ice1000 on 2016/8/14.

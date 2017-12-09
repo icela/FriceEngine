@@ -1,6 +1,9 @@
 package org.frice.utils.shape
 
 /**
+ * It's just an abstract representation of an object
+ * with x, y, width and height.
+ *
  * @author ice1000
  * @since v1.6.7
  * @see org.frice.utils.shape.FQuad

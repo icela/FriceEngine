@@ -21,7 +21,7 @@ constructor(
 	var res: ImageResource,
 	override var x: Double = 0.0,
 	override var y: Double = 0.0,
-	id: Int = -1) : FShapeQuad, FObject(), FObject.ImageOwner {
+	id: Int = -1) : FObject(), FObject.ImageOwner {
 	constructor(res: FriceImage, x: Double, y: Double) : this(create(res), x, y, -1)
 
 	init {
