@@ -27,7 +27,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	companion object Factory {
 		/**
 		 * @author ice1000
-		 * @since v1.7.6
+		 * @since v1.7.7
 		 * @param angle degree of counterclockwise rotation from the x-axis
 		 * @param acceleration pixels per second squared
 		 */

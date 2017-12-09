@@ -56,12 +56,14 @@ Multi-instances|√|×
 Resizability|√|√
 Rotate animation|√|×
 Key listener|√|√
+Text measuring|√|√
 
 ## Platform independent
 
-- Non-rotate animations (move, scale, accelerate, etc.)
-- Audio playing (\*.wav, \*.mp3)
+- Non-rotate animations (moving, scaling, accelerating, chasing, approaching, etc.)
+- Audio playing (\*.wav, \*.mp3) by JavaSound/JavaFX Media
 - Clock system, timers
+- Delayed event manager
 - Automatic garbage collection (optional, objects far from the screen will be removed)
 - Resource manager (caching IO)
 - File/Image/Color/URL utils
@@ -69,7 +71,8 @@ Key listener|√|√
 - Frame animations
 - Key-value database
 - Particle effects
-- Collision detecting
+- Attaching game objects
+- Collision detection with collision box
 
 ## DSL
 

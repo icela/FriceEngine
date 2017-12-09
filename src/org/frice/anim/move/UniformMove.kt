@@ -25,7 +25,7 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
 	companion object Factory {
 		/**
 		 * @author ice1000
-		 * @since v1.7.6
+		 * @since v1.7.7
 		 * @param angle degree of counterclockwise rotation from the x-axis
 		 * @param speed pixels per second
 		 */
@@ -60,7 +60,7 @@ open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
 	companion object Factory {
 		/**
 		 * @author ice1000
-		 * @since v1.7.6
+		 * @since v1.7.7
 		 * @param angle degree of counterclockwise rotation from the x-axis
 		 * @param speed pixels per second
 		 */
