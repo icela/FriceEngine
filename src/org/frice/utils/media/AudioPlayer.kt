@@ -12,11 +12,9 @@ import javax.sound.sampled.*
  * @since v0.3.1
  * @see org.frice.utils.media.getPlayer
  */
-class AudioPlayer internal constructor(file: File) : Thread() {
+class AudioPlayer private constructor(val runnable: AudioPlayerRunnable) : Thread(runnable) {
 	internal constructor(path: String) : this(File(path))
-	val runnable = AudioPlayerRunnable(file)
-
-	override fun run() = runnable.run()
+	internal constructor(file: File) : this(AudioPlayerRunnable(file))
 
 	companion object LineGetter {
 		const val BUFFER_SIZE = 1024
@@ -60,7 +58,7 @@ class AudioPlayer internal constructor(file: File) : Thread() {
 			line.start()
 			var inBytes: Int
 			val audioData = ByteArray(BUFFER_SIZE)
-			while(true) {
+			while (true) {
 				inBytes = audioInputStream.read(audioData, 0, BUFFER_SIZE)
 				if (inBytes == -1) break
 				line.write(audioData, 0, inBytes)
