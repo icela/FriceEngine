@@ -26,7 +26,7 @@ fun play(path: String, infinite: Boolean = false) = getPlayer(path, infinite).st
  */
 @JvmOverloads
 fun getPlayer(file: File, infinite: Boolean = false) =
-	AudioPlayer(if (infinite) AudioPlayerImpl.LoopAudioPlayer(file) else AudioPlayerImpl.OnceAudioPlayer(file))
+	AudioPlayer(if (infinite) AudioPlayerRunnable.LoopAudioPlayer(file) else AudioPlayerRunnable.OnceAudioPlayer(file))
 
 /**
  * @author ice1000
