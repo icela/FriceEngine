@@ -212,9 +212,6 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	fun setCursor(o: ImageObject) = setCursor(o.image)
 	fun setCursor(o: ImageResource) = setCursor(o.image)
 
-	fun dialogConfirmYesNo(msg: String) = dialogConfirmYesNo(msg, "Confirm")
-	fun dialogConfirmYesNo(msg: String, title: String): Boolean
-
 	/**
 	 * get a screenShot.
 	 *
@@ -222,8 +219,11 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	 */
 	val screenCut: JvmImage
 
+	fun dialogConfirmYesNo(msg: String) = dialogConfirmYesNo(msg, "Confirm")
+	fun dialogConfirmYesNo(msg: String, title: String): Boolean
 	fun dialogShow(msg: String) = dialogShow(msg, "Information")
 	fun dialogShow(msg: String, title: String)
+	fun dialogInput(msg: String) = dialogInput(msg, "Input")
 	fun dialogInput(msg: String, title: String): String
 
 	/**
