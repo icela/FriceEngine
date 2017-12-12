@@ -1,5 +1,6 @@
 package org.frice.anim
 
+import org.frice.obj.FObject
 import org.frice.utils.time.FClock
 
 /**
@@ -9,8 +10,8 @@ import org.frice.utils.time.FClock
  */
 abstract class FAnim {
 	protected val start = FClock.current.toDouble()
-
 	protected val now: Double get() = FClock.current.toDouble()
-
 	protected var lastRefresh: Double = start
+
+	abstract fun `do`(obj: FObject)
 }

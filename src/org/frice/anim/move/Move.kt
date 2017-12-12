@@ -4,6 +4,7 @@ package org.frice.anim.move
 
 import org.frice.anim.FAnim
 import org.frice.obj.AbstractObject
+import org.frice.obj.FObject
 
 /**
  * Created by ice1000 on 2016/8/15.
@@ -11,6 +12,8 @@ import org.frice.obj.AbstractObject
  * @since v0.2.1
  */
 abstract class MoveAnim : FAnim() {
+	override fun `do`(obj: FObject) = obj.move(delta)
+
 	abstract val delta: DoublePair
 }
 

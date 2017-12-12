@@ -1,5 +1,7 @@
 package org.frice.anim
 
+import org.frice.obj.FObject
+
 /**
  * Rotate, not supported by GameFX.
  * Created by ice1000 on 2016/8/20.
@@ -9,6 +11,10 @@ package org.frice.anim
  * @param angle radian per second
  */
 open class RotateAnim(var angle: Double) : FAnim() {
+	override fun `do`(obj: FObject) {
+		obj.rotate(rotate)
+	}
+
 	val rotate: Double
 		get() {
 			val ret = (now - lastRefresh) * angle / 1e3

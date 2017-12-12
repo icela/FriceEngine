@@ -1,10 +1,7 @@
 package org.frice.obj
 
 import org.frice.anim.FAnim
-import org.frice.anim.RotateAnim
 import org.frice.anim.move.DoublePair
-import org.frice.anim.move.MoveAnim
-import org.frice.anim.scale.ScaleAnim
 import org.frice.platform.FriceImage
 import org.frice.resource.FResource
 import java.util.*
@@ -32,13 +29,7 @@ abstract class FObject : PhysicalObject() {
 	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
 
 	internal fun runAnims() {
-		anims.forEach { a ->
-			when (a) {
-				is MoveAnim -> move(a.delta)
-				is ScaleAnim -> scale(a.after)
-				is RotateAnim -> rotate(a.rotate)
-			}
-		}
+		anims.forEach { a -> a.`do`(this) }
 	}
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
