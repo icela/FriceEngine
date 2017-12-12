@@ -23,7 +23,7 @@ abstract class CustomMove : FAnim() {
 	abstract fun getXDelta(timeFromBegin: Double): Double
 	abstract fun getYDelta(timeFromBegin: Double): Double
 
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val deltaTime = now - lastRefresh
 		lastRefresh = now
 		obj.move(getXDelta(deltaTime), getYDelta(deltaTime))
@@ -42,7 +42,7 @@ abstract class CustomMove2 : FAnim() {
 
 	abstract fun getDelta(timeFromBegin: Double): DoublePair
 
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val pair = getDelta(now - lastRefresh)
 		lastRefresh = now
 		obj.move(pair.x, pair.y)

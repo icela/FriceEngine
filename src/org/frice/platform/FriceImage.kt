@@ -18,7 +18,7 @@ interface FriceImage {
 	 * to replace the operation of reading an image from file.
 	 * if an image is already read from file, it can be copied from RAM directly.
 	 *
-	 * classes in this file is to do this job.
+	 * classes in this file is to `{-# do #-}` this job.
 	 */
 	fun clone(): FriceImage
 }

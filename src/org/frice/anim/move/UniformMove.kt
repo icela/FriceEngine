@@ -15,7 +15,7 @@ import org.frice.obj.FObject
  * @param y pixels per second
  */
 open class SimpleMove(var x: Int, var y: Int) : FAnim() {
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
 		obj.move(deltaTime * x, deltaTime * y)
@@ -47,7 +47,7 @@ open class SimpleMove(var x: Int, var y: Int) : FAnim() {
  * @param y pixels per second
  */
 open class AccurateMove(var x: Double, var y: Double) : FAnim() {
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
 		obj.move(deltaTime * x, deltaTime * y)
@@ -86,7 +86,7 @@ open class DirectedMove(self: AbstractObject, targetX: Double, targetY: Double, 
 		y = speed * b / c
 	}
 
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
 		obj.move(deltaTime * x, deltaTime * y)

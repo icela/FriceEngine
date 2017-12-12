@@ -15,7 +15,7 @@ import org.frice.obj.FObject
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	private var mx = 0.0
 	private var my = 0.0
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		mx = (now - start) * ax / 2
 		my = (now - start) * ay / 2
 		val deltaTime = (now - lastRefresh) / 1e6
@@ -44,7 +44,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
  * @param speed pixels per second
  */
 class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed: Double) : SelfCenteredMoveAnim(self) {
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val a = targetObj.x - self.x
 		val b = targetObj.y - self.y
 		val c = Math.sqrt(a * a + b * b)
@@ -65,7 +65,7 @@ class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed
  * @param proportion per second
  */
 class ApproachingMove(self: AbstractObject, var targetObj: AbstractObject, var proportion: Double) : SelfCenteredMoveAnim(self) {
-	override fun `do`(obj: FObject) {
+	override fun `{-# do #-}`(obj: FObject) {
 		val a = targetObj.x - self.x
 		val b = targetObj.y - self.y
 		@Suppress("LocalVariableName")

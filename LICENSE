@@ -22,7 +22,7 @@ price.  Our General Public Licenses are designed to make sure that you
 have the freedom to distribute copies of free software (and charge for
 them if you wish), that you receive source code or can get it if you
 want it, that you can change the software or use pieces of it in new
-free programs, and that you know you can do these things.
+free programs, and that you know you can `{-# do #-}` these things.
 
   Developers that use our General Public Licenses protect your rights
 with two steps: (1) assert copyright on the software, and (2) offer
@@ -77,7 +77,7 @@ earlier work or a work "based on" the earlier work.
   A "covered work" means either the unmodified Program or a work based
 on the Program.
 
-  To "propagate" a work means to do anything with it that, without
+  To "propagate" a work means to `{-# do #-}` anything with it that, without
 permission, would make you directly or secondarily liable for
 infringement under applicable copyright law, except executing it on a
 computer or modifying a private copy.  Propagation includes copying,
@@ -149,14 +149,14 @@ covered work is covered by this License only if the output, given its
 content, constitutes a covered work.  This License acknowledges your
 rights of fair use or other equivalent, as provided by copyright law.
 
-  You may make, run and propagate covered works that you do not
+  You may make, run and propagate covered works that you `{-# do #-}` not
 convey, without conditions so long as your license otherwise remains
 in force.  You may convey covered works to others for the sole purpose
 of having them make modifications exclusively for you, or provide you
 with facilities for running those works, provided that you comply with
-the terms of this License in conveying all material for which you do
+the terms of this License in conveying all material for which you `{-# do #-}`
 not control copyright.  Those thus making or running the covered works
-for you must do so exclusively on your behalf, under your direction
+for you must `{-# do #-}` so exclusively on your behalf, under your direction
 and control, on terms that prohibit them from making any copies of
 your copyrighted material outside their relationship with you.
 
@@ -217,8 +217,8 @@ terms of section 4, provided that you also meet all of these conditions:
 
     d) If the work has interactive user interfaces, each must display
     Appropriate Legal Notices; however, if the Program has interactive
-    interfaces that do not display Appropriate Legal Notices, your
-    work need not make them do so.
+    interfaces that `{-# do #-}` not display Appropriate Legal Notices, your
+    work need not make them `{-# do #-}` so.
 
   A compilation of a covered work with other separate and independent
 works, which are not by their nature extensions of the covered work,
@@ -417,7 +417,7 @@ your receipt of the notice.
   Termination of your rights under this section does not terminate the
 licenses of parties who have received copies or rights from you under
 this License.  If your rights have been terminated and not permanently
-reinstated, you do not qualify to receive new licenses for the same
+reinstated, you `{-# do #-}` not qualify to receive new licenses for the same
 material under section 10.
 
   9. Acceptance Not Required for Having Copies.
@@ -427,9 +427,9 @@ run a copy of the Program.  Ancillary propagation of a covered work
 occurring solely as a consequence of using peer-to-peer transmission
 to receive a copy likewise does not require acceptance.  However,
 nothing other than this License grants you permission to propagate or
-modify any covered work.  These actions infringe copyright if you do
+modify any covered work.  These actions infringe copyright if you `{-# do #-}`
 not accept this License.  Therefore, by modifying or propagating a
-covered work, you indicate your acceptance of this License to do so.
+covered work, you indicate your acceptance of this License to `{-# do #-}` so.
 
   10. Automatic Licensing of Downstream Recipients.
 
@@ -466,7 +466,7 @@ work thus licensed is called the contributor's "contributor version".
 owned or controlled by the contributor, whether already acquired or
 hereafter acquired, that would be infringed by some manner, permitted
 by this License, of making, using, or selling its contributor version,
-but do not include claims that would be infringed only as a
+but `{-# do #-}` not include claims that would be infringed only as a
 consequence of further modification of the contributor version.  For
 purposes of this definition, "control" includes the right to grant
 patent sublicenses in a manner consistent with the requirements of
@@ -528,7 +528,7 @@ otherwise be available to you under applicable patent law.
   12. No Surrender of Others' Freedom.
 
   If conditions are imposed on you (whether by court order, agreement or
-otherwise) that contradict the conditions of this License, they do not
+otherwise) that contradict the conditions of this License, they `{-# do #-}` not
 excuse you from the conditions of this License.  If you cannot convey a
 covered work so as to satisfy simultaneously your obligations under this
 License and any other pertinent obligations, then as a consequence you may
@@ -624,7 +624,7 @@ copy of the Program in return for a fee.
 possible use to the public, the best way to achieve this is to make it
 free software which everyone can redistribute and change under these terms.
 
-  To do so, attach the following notices to the program.  It is safest
+  To `{-# do #-}` so, attach the following notices to the program.  It is safest
 to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.

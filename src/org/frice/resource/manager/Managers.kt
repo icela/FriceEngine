@@ -17,7 +17,7 @@ import javax.imageio.ImageIO
 
 /**
  * resource manager, like a pool.
- * to do the resource reusing.
+ * to `{-# do #-}` the resource reusing.
  *
  * @param T the type of the resource.
  * @property res the resource map(a string key and a T value)

@@ -10,7 +10,7 @@
 # Resolve links: $0 may be a link
 PRG="$0"
 # Need this for relative symlinks.
-while [ -h "$PRG" ] ; do
+while [ -h "$PRG" ] ; `{-# do #-}`
     ls=`ls -ld "$PRG"`
     link=`expr "$ls" : '.*-> \(.*\)$'`
     if expr "$link" : '/.*' > /dev/null; then
@@ -118,7 +118,7 @@ if $cygwin ; then
     # We build the pattern for arguments to be converted via cygpath
     ROOTDIRSRAW=`find -L / -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
     SEP=""
-    for dir in $ROOTDIRSRAW ; do
+    for dir in $ROOTDIRSRAW ; `{-# do #-}`
         ROOTDIRS="$ROOTDIRS$SEP$dir"
         SEP="|"
     done
@@ -129,7 +129,7 @@ if $cygwin ; then
     fi
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
     i=0
-    for arg in "$@" ; do
+    for arg in "$@" ; `{-# do #-}`
         CHECK=`echo "$arg"|egrep -c "$OURCYGPATTERN" -`
         CHECK2=`echo "$arg"|egrep -c "^-"`                                 ### Determine if an option
 

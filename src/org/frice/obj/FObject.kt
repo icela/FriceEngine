@@ -25,9 +25,8 @@ abstract class FObject : PhysicalObject() {
 
 	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
 
-	internal fun runAnims() {
-		anims.forEach { a -> a.`do`(this) }
-	}
+	@Suppress("FunctionName")
+	internal fun `{-# runAnims #-}`() = anims.forEach { a -> a.`{-# do #-}`(this) }
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
 

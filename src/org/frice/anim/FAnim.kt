@@ -13,5 +13,6 @@ abstract class FAnim {
 	protected val now: Double get() = FClock.current.toDouble()
 	protected var lastRefresh: Double = start
 
-	abstract fun `do`(obj: FObject)
+	@Suppress("FunctionName")
+	abstract fun `{-# do #-}`(obj: FObject)
 }

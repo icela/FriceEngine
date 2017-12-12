@@ -22,7 +22,7 @@ import javax.swing.*
  * Standard library, mainly for GUI.
  * some other library is in @see
  * The base game class.
- * this class do rendering, and something which are invisible to
+ * this class `{-# do #-}` rendering, and something which are invisible to
  * game developer.
  *
  * DO NOT override the constructor.

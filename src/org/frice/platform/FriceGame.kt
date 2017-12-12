@@ -38,7 +38,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 	var isFullScreen: Boolean
 	var isAlwaysTop: Boolean
 
-	/** do the delete and add work, to prevent Exceptions */
+	/** `{-# do #-}` the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)
 
 	fun onInit() = Unit
@@ -121,7 +121,7 @@ interface FriceGame : TitleOwner, Sized, Resizable {
 		layers.forEach {
 			it.objects.removeIf { o ->
 				if (o is FObject) {
-					o.runAnims()
+					o.`{-# runAnims #-}`()
 					return@removeIf o.died
 				}
 				false
