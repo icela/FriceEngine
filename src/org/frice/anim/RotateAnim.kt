@@ -12,13 +12,8 @@ import org.frice.obj.FObject
  */
 open class RotateAnim(var angle: Double) : FAnim() {
 	override fun `do`(obj: FObject) {
-		obj.rotate(rotate)
+		val ret = (now - lastRefresh) * angle / 1e3
+		lastRefresh = now
+		obj.rotate(ret)
 	}
-
-	val rotate: Double
-		get() {
-			val ret = (now - lastRefresh) * angle / 1e3
-			lastRefresh = now
-			return ret
-		}
 }
