@@ -1,6 +1,8 @@
 package org.frice.anim.move
 
+import org.frice.anim.FAnim
 import org.frice.obj.AbstractObject
+import org.frice.obj.FObject
 
 
 /**
@@ -12,15 +14,12 @@ import org.frice.obj.AbstractObject
  * @param x pixels per second
  * @param y pixels per second
  */
-open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
-
-	override val delta: DoublePair
-		get() {
-			val deltaTime = now - lastRefresh
-			val pair = DoublePair.fromK(deltaTime * x, deltaTime * y)
-			lastRefresh = now
-			return pair
-		}
+open class SimpleMove(var x: Int, var y: Int) : FAnim() {
+	override fun `do`(obj: FObject) {
+		val deltaTime = now - lastRefresh
+		lastRefresh = now
+		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+	}
 
 	companion object Factory {
 		/**
@@ -47,15 +46,12 @@ open class SimpleMove(var x: Int, var y: Int) : MoveAnim() {
  * @param x pixels per second
  * @param y pixels per second
  */
-open class AccurateMove(var x: Double, var y: Double) : MoveAnim() {
-
-	override val delta: DoublePair
-		get() {
-			val deltaTime = now - lastRefresh
-			val pair = DoublePair.fromK(deltaTime * x, deltaTime * y)
-			lastRefresh = now
-			return pair
-		}
+open class AccurateMove(var x: Double, var y: Double) : FAnim() {
+	override fun `do`(obj: FObject) {
+		val deltaTime = now - lastRefresh
+		lastRefresh = now
+		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+	}
 
 	companion object Factory {
 		/**
@@ -90,11 +86,9 @@ open class DirectedMove(self: AbstractObject, targetX: Double, targetY: Double, 
 		y = speed * b / c
 	}
 
-	override val delta: DoublePair
-		get() {
-			val deltaTime = now - lastRefresh
-			val pair = DoublePair.fromK(deltaTime * x, deltaTime * y)
-			lastRefresh = now
-			return pair
-		}
+	override fun `do`(obj: FObject) {
+		val deltaTime = now - lastRefresh
+		lastRefresh = now
+		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+	}
 }

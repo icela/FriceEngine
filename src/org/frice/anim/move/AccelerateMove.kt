@@ -1,8 +1,7 @@
 package org.frice.anim.move
 
-import org.frice.anim.move.DoublePair.Factory.fromK
-import org.frice.anim.move.DoublePair.Factory.fromM
 import org.frice.obj.AbstractObject
+import org.frice.obj.FObject
 
 /**
  * Move with force (accelerate), give accelerate value to ax and by
@@ -16,13 +15,11 @@ import org.frice.obj.AbstractObject
 class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	private var mx = 0.0
 	private var my = 0.0
-
-	override val delta: DoublePair
-		get() {
-			mx = (now - start) * ax / 2
-			my = (now - start) * ay / 2
-			return fromM((now - lastRefresh) * mx, (now - lastRefresh) * my)
-		}
+	override fun `do`(obj: FObject) {
+		mx = (now - start) * ax / 2
+		my = (now - start) * ay / 2
+		obj.move((now - lastRefresh) * mx / 1e6, (now - lastRefresh) * my / 1e6)
+	}
 
 	companion object Factory {
 		/**
@@ -46,16 +43,14 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
  * @param speed pixels per second
  */
 class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed: Double) : SelfCenteredMoveAnim(self) {
-	override val delta: DoublePair
-		get() {
-			val a = targetObj.x - self.x
-			val b = targetObj.y - self.y
-			val c = Math.sqrt(a * a + b * b)
-			val deltaTime = now - lastRefresh
-			val pair = fromK(deltaTime * (speed * a / c), deltaTime * (speed * b / c))
-			lastRefresh = now
-			return pair
-		}
+	override fun `do`(obj: FObject) {
+		val a = targetObj.x - self.x
+		val b = targetObj.y - self.y
+		val c = Math.sqrt(a * a + b * b)
+		val deltaTime = now - lastRefresh
+		lastRefresh = now
+		obj.move(deltaTime * (speed * a / c) / 1e3, deltaTime * (speed * b / c) / 1e3)
+	}
 }
 
 /**
@@ -68,15 +63,13 @@ class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed
  * @param proportion per second
  */
 class ApproachingMove(self: AbstractObject, var targetObj: AbstractObject, var proportion: Double) : SelfCenteredMoveAnim(self) {
-	override val delta: DoublePair
-		get() {
-			val a = targetObj.x - self.x
-			val b = targetObj.y - self.y
-			@Suppress("LocalVariableName")
-			val `deltaTime*proportion` = (now - lastRefresh) * proportion
-			val pair = fromK(`deltaTime*proportion` * (a), `deltaTime*proportion` * (b))
-			lastRefresh = now
-			return pair
-		}
+	override fun `do`(obj: FObject) {
+		val a = targetObj.x - self.x
+		val b = targetObj.y - self.y
+		@Suppress("LocalVariableName")
+		val `deltaTime*proportion` = (now - lastRefresh) * proportion
+		lastRefresh = now
+		obj.move(`deltaTime*proportion` * a / 1e3, `deltaTime*proportion` * b / 1e3)
+	}
 }
 

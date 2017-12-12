@@ -2,7 +2,6 @@
 
 package org.frice.obj
 
-import org.frice.anim.move.DoublePair
 import org.frice.utils.shape.FPoint
 import org.frice.utils.shape.FShapeQuad
 
@@ -16,8 +15,6 @@ interface AbstractObject {
 	var y: Double
 
 	var rotate: Double
-
-	fun move(p: DoublePair) = move(p.x, p.y)
 
 	fun move(x: Double, y: Double) {
 		this.x += x

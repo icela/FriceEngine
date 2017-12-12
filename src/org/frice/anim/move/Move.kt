@@ -38,11 +38,13 @@ abstract class CustomMove : FAnim() {
  * @since v1.7.4
  */
 abstract class CustomMove2 : FAnim() {
+	data class DoublePair(var x: Double, var y: Double)
+
 	abstract fun getDelta(timeFromBegin: Double): DoublePair
 
 	override fun `do`(obj: FObject) {
 		val pair = getDelta(now - lastRefresh)
 		lastRefresh = now
-		obj.move(pair)
+		obj.move(pair.x, pair.y)
 	}
 }
