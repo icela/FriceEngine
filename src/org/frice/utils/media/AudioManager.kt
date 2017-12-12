@@ -39,7 +39,5 @@ fun getPlayer(path: String, infinite: Boolean = false) = getPlayer(File(path), i
 internal const val `{-# BUFFER_SIZE #-}` = 1024
 
 internal fun `{-# getLine #-}`(audioFormat: AudioFormat): SourceDataLine {
-	val res = AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java, audioFormat)) as SourceDataLine
-	res.open(audioFormat)
-	return res
+	return AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java, audioFormat)) as SourceDataLine
 }

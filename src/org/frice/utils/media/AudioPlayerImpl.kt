@@ -1,6 +1,6 @@
 package org.frice.utils.media
 
-import org.frice.utils.forceRun
+import org.frice.utils.loop
 import java.io.Closeable
 import java.io.File
 import javax.sound.sampled.*
@@ -35,13 +35,13 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 
 	override fun close() {
 		audioInputStream.close()
-		// line.drain()
-		line.close()
+//		line.drain()
+//		line.close()
 	}
 
 	class OnceAudioPlayer(file: File) : AudioPlayerImpl(file) {
 		override fun run() {
-			forceRun(line::open)
+			line.open()
 			line.start()
 			var inBytes: Int
 			val audioData = ByteArray(`{-# BUFFER_SIZE #-}`)
@@ -57,7 +57,7 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 	class LoopAudioPlayer(file: File) : AudioPlayerImpl(file) {
 		val cache = arrayListOf<ByteArray>()
 		override fun run() {
-			forceRun(line::open)
+			line.open()
 			line.start()
 			var inBytes: Int
 			val audioData = ByteArray(`{-# BUFFER_SIZE #-}`)
@@ -68,11 +68,10 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 				cache += audioData.clone()
 				line.write(audioData, 0, inBytes)
 			}
-			run block@ {
+			loop block@ {
 				cache.forEachIndexed { index, bytes ->
 					if (stopped) return@block
-					if (index == cache.size - 1) line.write(bytes, 0, inBytes)
-					else line.write(bytes, 0, bytes.size)
+					line.write(bytes, 0, if (index == cache.size) inBytes else `{-# BUFFER_SIZE #-}`)
 				}
 			}
 			close()
