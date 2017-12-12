@@ -7,11 +7,6 @@ interface FShapeInt {
 	var height: Int
 }
 
-interface FShapeDouble {
-	var width: Double
-	var height: Double
-}
-
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000

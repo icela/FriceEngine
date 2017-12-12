@@ -37,8 +37,8 @@ class TestFx : GameFX(width = 600, height = 600) {
 			text = "I am a button",
 			x = 30.0,
 			y = 30.0,
-			width = 120.0,
-			height = 30.0)
+			w = 120.0,
+			h = 30.0)
 		button.onMouseListener = Consumer {
 			ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).run {
 				addAnim(AccelerateMove(-1.0, -1.0))

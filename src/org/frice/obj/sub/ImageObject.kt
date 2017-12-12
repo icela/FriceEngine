@@ -33,8 +33,8 @@ constructor(
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this
 
-	override val width: Double get() = res.image.width.toDouble()
-	override val height: Double get() = res.image.height.toDouble()
+	override val w: Double get() = res.image.width.toDouble()
+	override val h: Double get() = res.image.height.toDouble()
 
 	override var died = false
 

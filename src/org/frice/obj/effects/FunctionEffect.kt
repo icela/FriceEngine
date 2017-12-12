@@ -14,15 +14,15 @@ import org.frice.resource.image.ImageResource
  * @since v0.4.1
  */
 class FunctionEffect(
-		res: FunctionResource,
-		override var x: Double,
-		override var y: Double) : ImageObject(res.resource, x, y) {
+	res: FunctionResource,
+	override var x: Double,
+	override var y: Double) : ImageObject(res.resource, x, y) {
 
 	constructor(function: (Double) -> Double, x: Double, y: Double, width: Int, height: Int) :
-			this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)
+		this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)
 
-	override val width: Double get() = res.image.width.toDouble()
-	override val height: Double get() = res.image.height.toDouble()
+	override val w: Double get() = res.image.width.toDouble()
+	override val h: Double get() = res.image.height.toDouble()
 
 	override val resource get() = ImageResource(image)
 

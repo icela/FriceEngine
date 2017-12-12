@@ -11,8 +11,8 @@ package org.frice.utils.shape
 interface FShapeQuad {
 	val x: Double
 	val y: Double
-	val width: Double
-	val height: Double
+	val w: Double
+	val h: Double
 
 	fun smallerBox(topBottom: Double, leftRight: Double) = smallerBox(topBottom, topBottom, leftRight, leftRight)
 
@@ -21,13 +21,13 @@ interface FShapeQuad {
 	fun smallerBox(top: Double, bottom: Double, left: Double, right: Double) = object : FShapeQuad {
 		override val x get() = this@FShapeQuad.x + left
 		override val y get() = this@FShapeQuad.y + top
-		override val width get () = this@FShapeQuad.width - left - right
-		override val height get() = this@FShapeQuad.height - top - bottom
+		override val w get () = this@FShapeQuad.w - left - right
+		override val h get() = this@FShapeQuad.h - top - bottom
 	}
 }
 
 data class FQuad(
 	override var x: Double,
 	override var y: Double,
-	override var width: Double,
-	override var height: Double) : FShapeQuad
+	override var w: Double,
+	override var h: Double) : FShapeQuad

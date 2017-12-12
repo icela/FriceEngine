@@ -18,8 +18,8 @@ constructor(
 	override var text: String,
 	override var x: Double,
 	override var y: Double,
-	override var width: Double,
-	override var height: Double) : FButton, FText() {
+	override var w: Double,
+	override var h: Double) : FButton, FText() {
 
 	protected var bool = false
 

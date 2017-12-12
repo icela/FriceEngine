@@ -29,15 +29,15 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 
 	private fun isInner(ob: PhysicalObject, quad: FShapeQuad): Boolean {
 		return ob.x >= quad.x
-			&& ob.x + ob.width <= quad.x + quad.width
+			&& ob.x + ob.w <= quad.x + quad.w
 			&& ob.y >= quad.y
-			&& ob.y + ob.height <= quad.y + quad.height
+			&& ob.y + ob.h <= quad.y + quad.h
 	}
 
 	private fun split() {
-		// width & height
-		val subWidth = bounds.width / 2
-		val subHeight = bounds.height / 2
+		// w & h
+		val subWidth = bounds.w / 2
+		val subHeight = bounds.h / 2
 		// x & y
 		val x = bounds.x
 		val y = bounds.y
@@ -57,16 +57,16 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 	 */
 	private fun getIndex(rectF: PhysicalObject): Int {
 		var index = -1
-		val verticalMidpoint = bounds.x + bounds.width / 2
-		val horizontalMidpoint = bounds.y + bounds.height / 2
+		val verticalMidpoint = bounds.x + bounds.w / 2
+		val horizontalMidpoint = bounds.y + bounds.h / 2
 
 		// contain top
-		val topQuadrant = rectF.y < horizontalMidpoint && rectF.y + rectF.height < horizontalMidpoint
+		val topQuadrant = rectF.y < horizontalMidpoint && rectF.y + rectF.h < horizontalMidpoint
 		// contain bottom
 		val bottomQuadrant = rectF.y > horizontalMidpoint
 
 		// contain left
-		if (rectF.x < verticalMidpoint && rectF.x + rectF.width < verticalMidpoint) {
+		if (rectF.x < verticalMidpoint && rectF.x + rectF.w < verticalMidpoint) {
 			if (topQuadrant) index = 1
 			else if (bottomQuadrant) index = 2
 			// contain right

@@ -49,8 +49,8 @@ class Test : Game() {
 			text = "I am a button",
 			x = 30.0,
 			y = 30.0,
-			width = 100.0,
-			height = 30.0).apply {
+			w = 100.0,
+			h = 30.0).apply {
 			onMouseListener = Consumer {
 				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
 					addAnim(AccelerateMove(-1.0, -1.0))

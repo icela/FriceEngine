@@ -22,8 +22,8 @@ constructor(
 	text = "",
 	x = x,
 	y = y,
-	width = imageNormal.image.width.toDouble(),
-	height = imageNormal.image.height.toDouble()) {
+	w = imageNormal.image.width.toDouble(),
+	h = imageNormal.image.height.toDouble()) {
 
 	override var rotate = 0.0
 

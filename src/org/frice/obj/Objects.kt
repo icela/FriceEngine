@@ -32,7 +32,7 @@ interface FContainer : FShapeQuad {
 	override var x: Double
 	override var y: Double
 
-	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
+	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + w && py >= y && py <= y + h
 
 	operator fun contains(point: FPoint) = containsPoint(point.x, point.y)
 }
@@ -51,9 +51,9 @@ interface Collidable {
 
 	fun collides(other: Collidable): Boolean = box.let { myBox ->
 		val hisBox = other.box
-		myBox.x + myBox.width >= hisBox.x && hisBox.y <= myBox.y + myBox.height &&
-			myBox.x <= hisBox.x + hisBox.width &&
-			myBox.y <= hisBox.y + hisBox.height
+		myBox.x + myBox.w >= hisBox.x && hisBox.y <= myBox.y + myBox.h &&
+			myBox.x <= hisBox.x + hisBox.w &&
+			myBox.y <= hisBox.y + hisBox.h
 	}
 }
 
