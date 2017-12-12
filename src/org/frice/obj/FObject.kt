@@ -1,7 +1,6 @@
 package org.frice.obj
 
 import org.frice.anim.FAnim
-import org.frice.anim.move.DoublePair
 import org.frice.platform.FriceImage
 import org.frice.resource.FResource
 import java.util.*
@@ -17,8 +16,6 @@ abstract class FObject : PhysicalObject() {
 	override var rotate = 0.0
 
 	abstract val resource: FResource
-
-	infix fun scale(p: DoublePair) = scale(p.x, p.y)
 
 	abstract fun scale(x: Double, y: Double)
 

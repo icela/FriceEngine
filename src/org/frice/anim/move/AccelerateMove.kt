@@ -18,7 +18,8 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 	override fun `do`(obj: FObject) {
 		mx = (now - start) * ax / 2
 		my = (now - start) * ay / 2
-		obj.move((now - lastRefresh) * mx / 1e6, (now - lastRefresh) * my / 1e6)
+		val deltaTime = (now - lastRefresh) / 1e6
+		obj.move(deltaTime * mx, deltaTime * my)
 	}
 
 	companion object Factory {
@@ -47,9 +48,10 @@ class ChasingMove(self: AbstractObject, var targetObj: AbstractObject, var speed
 		val a = targetObj.x - self.x
 		val b = targetObj.y - self.y
 		val c = Math.sqrt(a * a + b * b)
-		val deltaTime = now - lastRefresh
+		@Suppress("LocalVariableName")
+		val `deltaTime*speed{div}c` = (now - lastRefresh) * speed / c / 1e3
 		lastRefresh = now
-		obj.move(deltaTime * (speed * a / c) / 1e3, deltaTime * (speed * b / c) / 1e3)
+		obj.move(`deltaTime*speed{div}c` * a, `deltaTime*speed{div}c` * b)
 	}
 }
 
@@ -67,9 +69,9 @@ class ApproachingMove(self: AbstractObject, var targetObj: AbstractObject, var p
 		val a = targetObj.x - self.x
 		val b = targetObj.y - self.y
 		@Suppress("LocalVariableName")
-		val `deltaTime*proportion` = (now - lastRefresh) * proportion
+		val `deltaTime*proportion` = (now - lastRefresh) * proportion / 1e3
 		lastRefresh = now
-		obj.move(`deltaTime*proportion` * a / 1e3, `deltaTime*proportion` * b / 1e3)
+		obj.move(`deltaTime*proportion` * a, `deltaTime*proportion` * b)
 	}
 }
 

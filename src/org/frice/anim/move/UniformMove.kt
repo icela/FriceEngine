@@ -16,9 +16,9 @@ import org.frice.obj.FObject
  */
 open class SimpleMove(var x: Int, var y: Int) : FAnim() {
 	override fun `do`(obj: FObject) {
-		val deltaTime = now - lastRefresh
+		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
-		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+		obj.move(deltaTime * x, deltaTime * y)
 	}
 
 	companion object Factory {
@@ -48,9 +48,9 @@ open class SimpleMove(var x: Int, var y: Int) : FAnim() {
  */
 open class AccurateMove(var x: Double, var y: Double) : FAnim() {
 	override fun `do`(obj: FObject) {
-		val deltaTime = now - lastRefresh
+		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
-		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+		obj.move(deltaTime * x, deltaTime * y)
 	}
 
 	companion object Factory {
@@ -87,8 +87,8 @@ open class DirectedMove(self: AbstractObject, targetX: Double, targetY: Double, 
 	}
 
 	override fun `do`(obj: FObject) {
-		val deltaTime = now - lastRefresh
+		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
-		obj.move(deltaTime * x / 1e3, deltaTime * y / 1e3)
+		obj.move(deltaTime * x, deltaTime * y)
 	}
 }

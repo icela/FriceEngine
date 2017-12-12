@@ -10,7 +10,7 @@ import org.frice.obj.FObject
  */
 class SimpleScale(var x: Double, var y: Double) : FAnim() {
 	override fun `do`(obj: FObject) {
-		val deltaTime = now - lastRefresh
+		val deltaTime = (now - lastRefresh) / 1e3
 		lastRefresh = now
 		obj.scale(deltaTime * x, deltaTime * x)
 	}
