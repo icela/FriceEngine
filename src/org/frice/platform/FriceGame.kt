@@ -13,15 +13,16 @@ import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.*
 
-interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
+interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
 	val drawer: FriceDrawer
 
-	override val box get() = this
-	override val x get() = 0.0
-	override val w get() = width.toDouble()
-	override val h get() = height.toDouble()
-	override val y get() = 0.0
+	override val box get() = object : FShapeQuad {
+		override val x get() = 0.0
+		override val y get() = 0.0
+		override val width get() = this@FriceGame.width.toDouble()
+		override val height get() = this@FriceGame.height.toDouble()
+	}
 
 	/**
 	 * not implemented yet.
@@ -137,7 +138,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 				bgg.restore()
 				bgg.init()
 				if (bgg is JvmDrawer) {
-					if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.w / 2, o.y + o.w / 2)
+					if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.width / 2)
 					else bgg.rotate(o.rotate, o.x, o.y)
 				} else bgg.rotate(o.rotate)
 				when (o) {
@@ -146,8 +147,8 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 						if (collides(o)) {
 							bgg.color = o.resource
 							when (o.shape) {
-								is FRectangle -> bgg.drawRect(o.x, o.y, o.w, o.h)
-								is FOval -> bgg.drawOval(o.x, o.y, o.w, o.h)
+								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
+								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 							}
 						}
 					}
@@ -176,11 +177,11 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 						is SimpleButton -> {
 							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,
-								b.w, b.h,
-								Math.min(b.w * 0.5, 10.0),
-								Math.min(b.h * 0.5, 10.0))
+								b.width, b.height,
+								Math.min(b.width * 0.5, 10.0),
+								Math.min(b.height * 0.5, 10.0))
 							bgg.color = ColorResource.DARK_GRAY
-							bgg.drawString(b.text, b.x + 10, b.y + b.h / 2)
+							bgg.drawString(b.text, b.x + 10, b.y + b.height / 2)
 						}
 					}
 				} else {

@@ -32,13 +32,13 @@ constructor(
 	private var scaleX: Double = 1.0
 	private var scaleY: Double = 1.0
 
-	override var h: Double
+	override var height: Double
 		get() = (shape.height * scaleY)
 		set(value) {
 			shape.height = (value / scaleY).toInt()
 		}
 
-	override var w: Double
+	override var width: Double
 		get () = (shape.width * scaleX)
 		set(value) {
 			shape.width = (value / scaleX).toInt()

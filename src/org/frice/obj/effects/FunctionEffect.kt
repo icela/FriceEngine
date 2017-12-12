@@ -21,8 +21,8 @@ class FunctionEffect(
 	constructor(function: (Double) -> Double, x: Double, y: Double, width: Int, height: Int) :
 		this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)
 
-	override val w: Double get() = res.image.width.toDouble()
-	override val h: Double get() = res.image.height.toDouble()
+	override val width: Double get() = res.image.width.toDouble()
+	override val height: Double get() = res.image.height.toDouble()
 
 	override val resource get() = ImageResource(image)
 

@@ -35,7 +35,7 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 
 	override fun close() {
 		audioInputStream.close()
-		line.drain()
+		// line.drain()
 		line.close()
 	}
 

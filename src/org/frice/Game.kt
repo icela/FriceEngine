@@ -34,7 +34,6 @@ import javax.swing.*
 @Suppress("LeakingThis")
 open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), FriceGame {
 	override val layers = Array(layerCount) { Layer() }
-
 	override var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()

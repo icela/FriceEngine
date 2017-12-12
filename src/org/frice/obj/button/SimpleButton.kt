@@ -19,8 +19,8 @@ constructor(
 	override var text: String,
 	override var x: Double,
 	override var y: Double,
-	override var w: Double,
-	override var h: Double) : FButton, FText(), FShapeQuad {
+	override var width: Double,
+	override var height: Double) : FButton, FText(), FShapeQuad {
 
 	private var bool = false
 	override var onMouseListener: Consumer<OnMouseEvent>? = null

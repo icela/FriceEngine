@@ -27,8 +27,8 @@ constructor(
 	}
 
 	private var bool = false
-	override var w: Double = super.w
-	override var h: Double = super.h
+	override var width: Double = super.width
+	override var height: Double = super.height
 	override var rotate = 0.0
 	override var onMouseListener: Consumer<OnMouseEvent>? = null
 	override var collisionBox: FShapeQuad? = null
