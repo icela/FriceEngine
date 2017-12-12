@@ -1,6 +1,5 @@
 package org.frice.obj.sub
 
-import org.frice.anim.move.DoublePair
 import org.frice.obj.FObject
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.shape.FShapeInt
@@ -30,18 +29,19 @@ constructor(
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this
 
-	private var scale = DoublePair(1.0, 1.0)
+	private var scaleX: Double = 1.0
+	private var scaleY: Double = 1.0
 
 	override var height: Double
-		get() = (shape.height * scale.y)
+		get() = (shape.height * scaleY)
 		set(value) {
-			shape.height = (value / scale.y).toInt()
+			shape.height = (value / scaleY).toInt()
 		}
 
 	override var width: Double
-		get () = (shape.width * scale.x)
+		get () = (shape.width * scaleX)
 		set(value) {
-			shape.width = (value / scale.x).toInt()
+			shape.width = (value / scaleX).toInt()
 		}
 
 	override var died = false
@@ -49,8 +49,8 @@ constructor(
 	override val resource get () = res
 
 	override fun scale(x: Double, y: Double) {
-		scale.x += x
-		scale.y += y
+		scaleX += x
+		scaleY += y
 	}
 
 	override fun equals(other: Any?): Boolean {
@@ -61,13 +61,13 @@ constructor(
 
 	/** auto-generated. */
 	override fun hashCode(): Int {
-		if (id != -1) return id
 		var result = res.hashCode()
 		result = 31 * result + shape.hashCode()
 		result = 31 * result + x.hashCode()
 		result = 31 * result + y.hashCode()
 		result = 31 * result + (collisionBox?.hashCode() ?: 0)
-		result = 31 * result + scale.hashCode()
+		result = 31 * result + scaleX.hashCode()
+		result = 31 * result + scaleY.hashCode()
 		result = 31 * result + died.hashCode()
 		return result
 	}
