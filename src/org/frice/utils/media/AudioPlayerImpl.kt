@@ -1,7 +1,6 @@
 package org.frice.utils.media
 
 import org.frice.utils.loop
-import java.io.Closeable
 import java.io.File
 import javax.sound.sampled.*
 
@@ -10,7 +9,7 @@ import javax.sound.sampled.*
  * @since v1.7.6
  * @see org.frice.utils.media.AudioPlayer
  */
-sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
+sealed class AudioPlayerImpl(file: File) : Runnable {
 	protected var audioInputStream: AudioInputStream
 	private var format: AudioFormat
 	protected var line: SourceDataLine
@@ -33,11 +32,10 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 		line = `{-# getLine #-}`(format)
 	}
 
-	override fun close() {
-		audioInputStream.close()
-//		line.drain()
-//		line.close()
-	}
+	// fun close() {
+	// line.drain()
+	// line.close()
+	// }
 
 	class OnceAudioPlayer(file: File) : AudioPlayerImpl(file) {
 		override fun run() {
@@ -50,7 +48,7 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 				if (inBytes == -1 || stopped) break
 				line.write(audioData, 0, inBytes)
 			}
-			close()
+			audioInputStream.close()
 		}
 	}
 
@@ -74,7 +72,6 @@ sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 					line.write(bytes, 0, if (index == cache.size) inBytes else `{-# BUFFER_SIZE #-}`)
 				}
 			}
-			close()
 		}
 	}
 }
