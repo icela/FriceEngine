@@ -12,7 +12,6 @@ import org.frice.platform.owners.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.*
-import org.frice.utils.unless
 
 interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 	val layers: Array<Layer>
@@ -135,23 +134,14 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 			it.objects.forEach loop@ { o ->
 				if (o is ShapeObject && ColorResource.COLORLESS == o.resource) return@loop
 				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
-				bgg.run {
-					restore()
-					init()
-				}
+				bgg.restore()
+				bgg.init()
 				if (bgg is JvmDrawer) {
 					if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.w / 2, o.y + o.w / 2)
 					else bgg.rotate(o.rotate, o.x, o.y)
 				} else bgg.rotate(o.rotate)
 				when (o) {
-					is FObject.ImageOwner -> {
-						unless(o.x + o.image.width <= 0 ||
-							o.x >= width ||
-							o.y + o.image.height <= 0 ||
-							o.y >= height) {
-							bgg.drawImage(o.image, o.x, o.y)
-						}
-					}
+					is FObject.ImageOwner -> if (collides(o)) bgg.drawImage(o.image, o.x, o.y)
 					is ShapeObject -> {
 						if (collides(o)) {
 							bgg.color = o.resource
@@ -166,7 +156,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
 					}
 				}
-				if (autoGC && (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
+				if (autoGC and (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
 					if (o is PhysicalObject) o.died = true
 					it.removeObject(o)
 				}
@@ -182,14 +172,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 				}
 				if (b is FButton) {
 					when (b) {
-						is FObject.ImageOwner -> {
-							unless(b.x + b.image.width < 0 ||
-								b.x > width ||
-								b.y + b.image.height < 0 ||
-								b.y > height) {
-								bgg.drawImage(b.image, b.x, b.y)
-							}
-						}
+						is FObject.ImageOwner -> if (collides(b)) bgg.drawImage(b.image, b.x, b.y)
 						is SimpleButton -> {
 							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,
@@ -201,8 +184,10 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable, FShapeQuad {
 						}
 					}
 				} else {
-					bgg.color = b.color
-					bgg.drawString(b.text, b.x, b.y)
+					if (b.x < width && b.y < height) {
+						bgg.color = b.color
+						bgg.drawString(b.text, b.x, b.y)
+					}
 				}
 			}
 		}

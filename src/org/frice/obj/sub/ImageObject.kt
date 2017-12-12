@@ -29,20 +29,13 @@ constructor(
 	}
 
 	override val resource get() = res
-
-	var collisionBox: FShapeQuad? = null
-	override val box: FShapeQuad get() = collisionBox ?: this
-
-	override val w: Double get() = res.image.width.toDouble()
-	override val h: Double get() = res.image.height.toDouble()
-
+	override var collisionBox: FShapeQuad? = null
 	override var died = false
+	override val image: FriceImage get() = res.image
 
 	override fun scale(x: Double, y: Double) {
 		res.image = res.image.getScaledInstance(res.image.width * x / 1000.0, res.image.height * y / 1000.0)
 	}
-
-	override val image: FriceImage get() = res.image
 
 	override fun equals(other: Any?): Boolean {
 		if (other == null || other !is FObject) return false

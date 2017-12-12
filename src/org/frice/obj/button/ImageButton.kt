@@ -1,9 +1,11 @@
 package org.frice.obj.button
 
+import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
 import org.frice.obj.FObject
 import org.frice.platform.FriceImage
 import org.frice.resource.image.ImageResource
+import org.frice.utils.shape.FShapeQuad
 import java.util.function.Consumer
 
 /**
@@ -17,17 +19,18 @@ class ImageButton
 constructor(
 	val imageNormal: ImageResource,
 	val imagePressed: ImageResource = imageNormal,
-	x: Double,
-	y: Double) : FObject.ImageOwner, SimpleButton(
-	text = "",
-	x = x,
-	y = y,
-	w = imageNormal.image.width.toDouble(),
-	h = imageNormal.image.height.toDouble()) {
+	override var x: Double,
+	override var y: Double) : FObject.ImageOwner, FButton {
 
+	override fun buttonPressed(e: OnMouseEvent) {
+		bool = e.type == MOUSE_PRESSED
+	}
+
+	private var bool = false
+	override var w: Double = super.w
+	override var h: Double = super.h
 	override var rotate = 0.0
-
 	override var onMouseListener: Consumer<OnMouseEvent>? = null
-
+	override var collisionBox: FShapeQuad? = null
 	override val image: FriceImage get () = if (bool) imagePressed.image else imageNormal.image
 }
