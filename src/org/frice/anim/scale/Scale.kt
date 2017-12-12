@@ -19,12 +19,11 @@ abstract class ScaleAnim : FAnim() {
  * @since v0.2.3
  */
 class SimpleScale(var x: Double, var y: Double) : ScaleAnim() {
-
-	private var cache: Double = start
 	override val after: DoublePair
 		get() {
-			val pair = fromK((now - cache) * x, (now - cache) * y)
-			cache = now
+			val deltaTime = now - lastRefresh
+			val pair = fromK(deltaTime * x, deltaTime * y)
+			lastRefresh = now
 			return pair
 		}
 }

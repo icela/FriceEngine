@@ -12,7 +12,6 @@ import org.frice.obj.AbstractObject
  */
 abstract class MoveAnim : FAnim() {
 	abstract val delta: DoublePair
-	protected var lastRefresh: Double = start
 }
 
 /**

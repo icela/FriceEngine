@@ -35,7 +35,7 @@ class ParticleEffect(
 	private var pRes: ParticleResource,
 	override var x: Double,
 	override var y: Double) : ImageObject(pRes.resource, x, y) {
-	override val image: FriceImage get() = resource.resource
+	override val image: FriceImage get() = pRes.resource
 
 	override val width: Double get() = pRes.width.toDouble()
 	override val height: Double get() = pRes.height.toDouble()

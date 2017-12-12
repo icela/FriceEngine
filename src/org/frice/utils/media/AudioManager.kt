@@ -2,6 +2,7 @@
 
 package org.frice.utils.media
 
+import org.frice.utils.media.AudioPlayerImpl.*
 import java.io.File
 import javax.sound.sampled.*
 
@@ -26,7 +27,7 @@ fun play(path: String, infinite: Boolean = false) = getPlayer(path, infinite).st
  */
 @JvmOverloads
 fun getPlayer(file: File, infinite: Boolean = false) =
-	AudioPlayer(if (infinite) AudioPlayerRunnable.LoopAudioPlayer(file) else AudioPlayerRunnable.OnceAudioPlayer(file))
+	AudioPlayer(if (infinite) LoopAudioPlayer(file) else OnceAudioPlayer(file))
 
 /**
  * @author ice1000

@@ -10,7 +10,7 @@ import javax.sound.sampled.*
  * @since v1.7.6
  * @see org.frice.utils.media.AudioPlayer
  */
-sealed class AudioPlayerRunnable(file: File) : Runnable, Closeable {
+sealed class AudioPlayerImpl(file: File) : Runnable, Closeable {
 	protected var audioInputStream: AudioInputStream
 	private var format: AudioFormat
 	protected var line: SourceDataLine
@@ -39,7 +39,7 @@ sealed class AudioPlayerRunnable(file: File) : Runnable, Closeable {
 		line.close()
 	}
 
-	class OnceAudioPlayer(file: File) : AudioPlayerRunnable(file) {
+	class OnceAudioPlayer(file: File) : AudioPlayerImpl(file) {
 		override fun run() {
 			forceRun(line::open)
 			line.start()
@@ -54,7 +54,7 @@ sealed class AudioPlayerRunnable(file: File) : Runnable, Closeable {
 		}
 	}
 
-	class LoopAudioPlayer(file: File) : AudioPlayerRunnable(file) {
+	class LoopAudioPlayer(file: File) : AudioPlayerImpl(file) {
 		val cache = arrayListOf<ByteArray>()
 		override fun run() {
 			forceRun(line::open)

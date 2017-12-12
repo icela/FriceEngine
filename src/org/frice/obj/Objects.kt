@@ -69,8 +69,4 @@ interface Collidable {
 abstract class PhysicalObject : AbstractObject, Collidable, FContainer {
 	open var died = false
 	override var rotate = 0.0
-	var mass = 1.0
-		set(value) {
-			field = if (value <= 0) 0.001 else value
-		}
 }

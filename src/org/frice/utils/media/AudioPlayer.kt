@@ -8,7 +8,7 @@ package org.frice.utils.media
  * @since v0.3.1
  * @see org.frice.utils.media.getPlayer
  */
-class AudioPlayer internal constructor(val runnable: AudioPlayerRunnable) : Thread(runnable) {
+class AudioPlayer internal constructor(val runnable: AudioPlayerImpl) : Thread(runnable) {
 
 	/**
 	 * It's the safest way to stop playing.

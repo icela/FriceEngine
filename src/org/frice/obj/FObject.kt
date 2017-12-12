@@ -30,7 +30,6 @@ abstract class FObject : PhysicalObject() {
 	}
 
 	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
-	private fun targetMass(c: AbstractObject) = (c as? PhysicalObject)?.mass ?: 1.0
 
 	internal fun runAnims() {
 		anims.forEach { a ->

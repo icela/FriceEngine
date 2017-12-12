@@ -1,7 +1,6 @@
 package org.frice
 
 import javafx.event.EventHandler
-import javafx.scene.media.MediaView
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
@@ -12,7 +11,6 @@ import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.greyify
-import org.frice.utils.media.getMediaPlayer
 import org.frice.utils.message.FLog
 import org.frice.utils.shape.*
 import org.frice.utils.time.FTimer
@@ -66,15 +64,13 @@ class TestFx : GameFX(width = 600, height = 600) {
 	override fun onRefresh() {
 		objs.removeAll(PhysicalObject::died)
 		objs2.removeAll(PhysicalObject::died)
-		objs.forEach { x ->
-			objs2.forEach { y ->
-				if (x.collides(y)) y.run {
-					stopAnims()
-					addAnim(SimpleMove(0, -300))
-					addAnim(SimpleScale(1.1, 1.1))
-					res = ColorResource.MAGENTA
-				}
-			}
+		val collided = arrayListOf<ShapeObject>()
+		objs.forEach { x -> objs2.forEach { y -> if (x.collides(y) && y.res != ColorResource.MAGENTA) collided += y } }
+		collided.forEach {
+			it.stopAnims()
+			it.addAnim(SimpleMove(0, -300))
+			it.addAnim(SimpleScale(1.1, 1.1))
+			it.res = ColorResource.MAGENTA
 		}
 	}
 
@@ -83,10 +79,9 @@ class TestFx : GameFX(width = 600, height = 600) {
 		if (timer.ended()) {
 			objs.removeAll(PhysicalObject::died)
 			objs2.removeAll(PhysicalObject::died)
-			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y).apply {
-				addAnim(AccelerateMove(0.0, 10.0))
-				addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
-			}
+			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y)
+			o.addAnim(AccelerateMove(0.0, 10.0))
+			o.addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 			objs2.add(o)
 			addObject(o)
 		}
@@ -108,10 +103,8 @@ class O : GameFX() {
 
 	override fun onInit() {
 		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233)
-		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233).apply {
-			mass = 1.0
-			addAnim(SimpleMove(80, 0))
-		}
+		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233)
+		obj.addAnim(SimpleMove(80, 0))
 		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
 		text.textSize = 64.0
 		text.fontName = "Fira Code"

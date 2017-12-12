@@ -11,4 +11,6 @@ abstract class FAnim {
 	protected val start = FClock.current.toDouble()
 
 	protected val now: Double get() = FClock.current.toDouble()
+
+	protected var lastRefresh: Double = start
 }
