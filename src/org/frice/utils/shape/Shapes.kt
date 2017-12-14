@@ -18,10 +18,12 @@ open class FCircle(r: Double) : FOval(r, r)
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
  * @since v0.1.1
+ * @param rh horizontal radius
+ * @param rv vertical radius
  */
 open class FOval(rh: Double, rv: Double) : FShapeInt {
-	override var width = (rh + rh).toInt()
-	override var height = (rv + rv).toInt()
+	override var width = rh.toInt() shl 1
+	override var height = rv.toInt() shl 1
 }
 
 

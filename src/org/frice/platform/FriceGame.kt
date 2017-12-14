@@ -138,7 +138,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 				bgg.restore()
 				bgg.init()
 				if (bgg is JvmDrawer) {
-					if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.width / 2)
+					if (o is PhysicalObject) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 					else bgg.rotate(o.rotate, o.x, o.y)
 				} else bgg.rotate(o.rotate)
 				when (o) {
