@@ -1,6 +1,6 @@
 package org.frice
 
-import org.frice.anim.rotate.RotateAnim
+import org.frice.anim.rotate.SimpleRotate
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
@@ -56,7 +56,7 @@ class Test : Game() {
 					addAnim(AccelerateMove(-200.0, -200.0))
 					addAnim(SimpleMove(400, 400))
 					addAnim(SimpleScale(1.1, 1.1))
-					addAnim(RotateAnim(2 * Math.PI))
+					addAnim(SimpleRotate(2 * Math.PI))
 				}
 				objs.add(obj)
 				addObject(obj)

@@ -1,5 +1,6 @@
-package org.frice.anim
+package org.frice.anim.rotate
 
+import org.frice.anim.FAnim
 import org.frice.obj.FObject
 
 /**
@@ -10,10 +11,11 @@ import org.frice.obj.FObject
  * @since v0.4
  * @param angle radian per second
  */
-open class RotateAnim(var angle: Double) : FAnim() {
+open class SimpleRotate(var angle: Double) : FAnim() {
 	override fun `{-# do #-}`(obj: FObject) {
 		val ret = (now - lastRefresh) * angle / 1e3
 		lastRefresh = now
 		obj.rotate(ret)
 	}
 }
+
