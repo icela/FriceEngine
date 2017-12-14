@@ -1,5 +1,6 @@
 package org.frice.utils.media
 
+import java.io.Closeable
 import java.io.File
 import javax.sound.sampled.*
 
@@ -11,7 +12,7 @@ import javax.sound.sampled.*
  * @since v0.3.1
  * @see org.frice.utils.media.getPlayer
  */
-open class AudioPlayer internal constructor(val file: File) : Thread() {
+open class AudioPlayer internal constructor(val file: File) : Thread(), Closeable {
 	protected var audioInputStream: AudioInputStream
 	private var format: AudioFormat
 	protected var line: SourceDataLine
@@ -27,7 +28,7 @@ open class AudioPlayer internal constructor(val file: File) : Thread() {
 				16,
 				format.channels,
 				format.channels shl 1,
-				format.sampleRate,
+				format.frameRate,
 				false)
 			audioInputStream = AudioSystem.getAudioInputStream(format, audioInputStream)
 		}
@@ -40,5 +41,10 @@ open class AudioPlayer internal constructor(val file: File) : Thread() {
 	 */
 	fun stopPlaying() {
 		stopped = true
+	}
+
+	override fun close() {
+		line.close()
+		audioInputStream.close()
 	}
 }
