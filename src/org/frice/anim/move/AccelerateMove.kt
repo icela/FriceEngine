@@ -4,7 +4,7 @@ import org.frice.obj.AbstractObject
 import org.frice.obj.FObject
 
 /**
- * Move with force (accelerate), give accelerate value to ax and by
+ * Move with acceleration, give acceleration to x and y
  *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000
@@ -19,6 +19,7 @@ class AccelerateMove(var ax: Double, var ay: Double) : SimpleMove(0, 0) {
 		mx = (now - start) * ax / 2
 		my = (now - start) * ay / 2
 		val deltaTime = (now - lastRefresh) / 1e6
+		lastRefresh = now
 		obj.move(deltaTime * mx, deltaTime * my)
 	}
 

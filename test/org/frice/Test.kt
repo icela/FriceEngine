@@ -1,6 +1,6 @@
 package org.frice
 
-import org.frice.anim.RotateAnim
+import org.frice.anim.rotate.RotateAnim
 import org.frice.anim.move.*
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
@@ -53,7 +53,7 @@ class Test : Game() {
 			height = 30.0).apply {
 			onMouseListener = Consumer {
 				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
-					addAnim(AccelerateMove(-1.0, -1.0))
+					addAnim(AccelerateMove(-200.0, -200.0))
 					addAnim(SimpleMove(400, 400))
 					addAnim(SimpleScale(1.1, 1.1))
 					addAnim(RotateAnim(2 * Math.PI))
@@ -105,7 +105,7 @@ class Test : Game() {
 		super.onMouse(e)
 		if (timer.ended()) {
 			val o = ShapeObject(ColorResource.IntelliJ_IDEA黑, FCircle(10.0), e.x, e.y)
-			o.addAnim(AccelerateMove(0.0, 10.0))
+			o.addAnim(AccelerateMove(0.0, 700.0))
 			o.addAnim(AccurateMove(random.nextInt(400) - 200.0, 0.0))
 			objs2 += o
 			addObject(o)
