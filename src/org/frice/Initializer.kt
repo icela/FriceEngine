@@ -18,6 +18,11 @@ import javax.swing.UIManager
 import javax.swing.WindowConstants
 import kotlin.concurrent.thread
 
+/**
+ * You're not expected to use this class yourself.
+ * @author ice1000
+ * @since v1.5.0
+ */
 @Suppress("ClassName")
 object `{-# LANGUAGE Initializer #-}` {
 	init {
@@ -49,6 +54,13 @@ fun launch(game: GameFX) = launchFx(game)
 
 fun launchFx(game: Class<out GameFX>) = launchFx(game.newInstance())
 
+/**
+ * GameFX launcher.
+ * This is actually redundant, just to avoid naming conflict
+ *
+ * @author ice1000
+ * @since v1.5.0
+ */
 fun launchFx(game: GameFX) {
 	`{-# LANGUAGE Initializer #-}`
 	FManager.useJfx = true
@@ -79,6 +91,13 @@ fun launch(game: Game) {
 	FLog.v("Engine thread successfully created.")
 }
 
+/**
+ * Game launcher.
+ * For Game/GameFX.
+ *
+ * @author ice1000
+ * @since v1.5.0
+ */
 fun launch(c: Class<out FriceGame>) = c.newInstance().let { instance ->
 	`{-# LANGUAGE Initializer #-}`
 	when (instance) {

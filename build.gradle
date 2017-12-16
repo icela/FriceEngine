@@ -51,6 +51,7 @@ dependencies {
 	testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
+//noinspection GroovyAssignabilityCheck
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
 jar { from { configurations.library.collect { it.isDirectory() ? it : zipTree(it) } } }
@@ -88,12 +89,16 @@ dokka {
 
 task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
 	outputFormat = 'html'
-	outputDirectory = "$buildDir/javadoc"
+	outputDirectory = javadoc.destinationDir
+}
+
+task javadok(type: Jar, dependsOn: dokkaJavadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
 }
 
 artifacts {
-	fatJar
-	sourcesJar
-	dokkaJavadoc
+	archives fatJar
+	archives sourcesJar
+	archives javadok
 }
-
