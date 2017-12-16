@@ -23,7 +23,7 @@ import java.util.*
 import kotlin.concurrent.thread
 
 /**
- * The base game class.
+ * The base game class using JavaFX as renderer (recommended).
  * This class does rendering jobs, and something which are
  * invisible to game developers.
  *

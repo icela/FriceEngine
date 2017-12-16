@@ -15,17 +15,17 @@ CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4
 
 An easy, light, native game engine running on JVM.
 
-+ Why easy?
-[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/demo/Demo7.java) uses just 56 lines of Java code only.<br/>
-Written in Kotlin, also work on Java, JRuby, Groovy and Scala.
++ Why easy? <br/>
+[A flappy bird game](https://github.com/icela/FriceDemo/tree/master/1.7.9/Demo7.java) uses just 56 lines of Java code only.<br/>
+Written in Kotlin, also work on Java, JRuby, Groovy, Scala and other JVM languages.
 
-+ Why light?
++ Why light? <br/>
 The release build jar is about 1.6mb (with a 1mb Kotlin runtime) only.
 
-+ Why native?
++ Why native? <br/>
 This engine is completely platform-independent: no JNI linkage, no native methods.
 
-View [Document](https://icela.github.io/#getting-started) to learn more about Frice Engine.
+**View [Document](https://icela.github.io/#getting-started) to learn how to use Frice Engine.**
 
 # Build
 

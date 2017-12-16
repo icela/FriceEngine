@@ -19,7 +19,7 @@ import javax.imageio.ImageIO.read
 import javax.swing.*
 
 /**
- * The base game class.
+ * The base game class using Swing as renderer.
  * This class does rendering jobs, and something which are
  * invisible to game developers.
  *
