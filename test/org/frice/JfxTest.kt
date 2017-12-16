@@ -20,7 +20,7 @@ import kotlin.test.assertEquals
 
 fun main(args: Array<String>) {
 	val obj = O()
-	launch(obj)
+	launchFx(obj)
 }
 
 class TestFx : GameFX(width = 600, height = 600) {
@@ -91,7 +91,7 @@ class TestFx : GameFX(width = 600, height = 600) {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {
-			launch(TestFx::class.java)
+			launchFx(TestFx::class.java)
 		}
 	}
 }

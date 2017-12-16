@@ -67,9 +67,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 dokka {
-	outputFormat = 'html'
-	outputDirectory = "$buildDir/libs/"
-
 	includes = ['LICENSE', 'README.md']
 	// samples = ['test/org/frice/Test.kt', 'test/org/frice/JfxTest.kt']
 	impliedPlatforms = ['JVM']
@@ -89,9 +86,14 @@ dokka {
 	externalDocumentationLink { url = new URL("https://icela.github.io/") }
 }
 
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+	outputFormat = 'html'
+	outputDirectory = "$buildDir/javadoc"
+}
+
 artifacts {
 	fatJar
 	sourcesJar
-	dokka
+	dokkaJavadoc
 }
 

@@ -19,13 +19,12 @@ import javax.imageio.ImageIO.read
 import javax.swing.*
 
 /**
- * Standard library, mainly for GUI.
- * some other library is in @see
  * The base game class.
- * this class `{-# do #-}` rendering, and something which are invisible to
- * game developer.
+ * This class does rendering jobs, and something which are
+ * invisible to game developers.
  *
- * DO NOT override the constructor.
+ * Feel free to override the constructor, but please remember to
+ * invoke super().
  *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000

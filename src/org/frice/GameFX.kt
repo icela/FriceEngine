@@ -23,6 +23,13 @@ import java.util.*
 import kotlin.concurrent.thread
 
 /**
+ * The base game class.
+ * This class does rendering jobs, and something which are
+ * invisible to game developers.
+ *
+ * Feel free to override the constructor, but please remember to
+ * invoke super().
+ *
  * @author ice1000
  * @since v1.5.0
  */

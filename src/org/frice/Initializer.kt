@@ -44,7 +44,11 @@ fun Rectangle.rotate() {
 	width += height
 }
 
-fun launch(game: GameFX) {
+fun launch(game: GameFX) = launchFx(game)
+
+fun launchFx(game: Class<out GameFX>) = launchFx(game.newInstance())
+
+fun launchFx(game: GameFX) {
 	`{-# LANGUAGE Initializer #-}`
 	FLog.v("Engine start!")
 	Application.launch(game.javaClass)
