@@ -8,6 +8,7 @@
 package org.frice.resource.manager
 
 import org.frice.platform.FriceImage
+import org.frice.platform.adapter.JfxImage
 import org.frice.platform.adapter.JvmImage
 import java.io.File
 import java.net.URL
@@ -16,8 +17,8 @@ import java.util.*
 import javax.imageio.ImageIO
 
 /**
- * resource manager, like a pool.
- * to `{-# do #-}` the resource reusing.
+ * Resource manager, like a pool.
+ * For resource reusing.
  *
  * @param T the type of the resource.
  * @property res the resource map(a string key and a T value)
@@ -42,6 +43,8 @@ interface FManager<T> {
 				field = value
 				clearAll()
 			}
+
+		var useJfx = false
 
 		fun clearAll() {
 			FileBytesManager.res.clear()
@@ -78,7 +81,7 @@ object FileBytesManager : FManager<ByteArray> {
  */
 object ImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
-	override fun create(path: String) = JvmImage(ImageIO.read(File(path)))
+	override fun create(path: String) = ImageIO.read(File(path)).let { if (FManager.useJfx) JfxImage(it) else JvmImage(it) }
 	override operator fun get(path: String) = super.get(path).clone()
 }
 
@@ -88,7 +91,7 @@ object ImageManager : FManager<FriceImage> {
  */
 object WebImageManager : FManager<FriceImage> {
 	override val res = HashMap<String, FriceImage>()
-	override fun create(path: String) = JvmImage(ImageIO.read(URL(path)))
+	override fun create(path: String) = ImageIO.read(URL(path)).let { if (FManager.useJfx) JfxImage(it) else JvmImage(it) }
 	override operator fun get(path: String) = super.get(path).clone()
 }
 

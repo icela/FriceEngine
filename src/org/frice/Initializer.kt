@@ -9,6 +9,7 @@ package org.frice
 
 import javafx.application.Application
 import org.frice.platform.FriceGame
+import org.frice.resource.manager.FManager
 import org.frice.utils.loop
 import org.frice.utils.message.FLog
 import java.awt.Rectangle
@@ -50,6 +51,7 @@ fun launchFx(game: Class<out GameFX>) = launchFx(game.newInstance())
 
 fun launchFx(game: GameFX) {
 	`{-# LANGUAGE Initializer #-}`
+	FManager.useJfx = true
 	FLog.v("Engine start!")
 	Application.launch(game.javaClass)
 }

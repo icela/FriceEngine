@@ -43,7 +43,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	var isFullScreen: Boolean
 	var isAlwaysTop: Boolean
 
-	/** `{-# do #-}` the delete and add work, to prevent Exceptions */
+	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)
 
 	fun onInit() = Unit
