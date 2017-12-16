@@ -74,8 +74,7 @@ open class GameFX @JvmOverloads constructor(
 	override var debug = true
 	override var autoGC = true
 	override var showFPS = true
-	override var loseFocus = false
-		set(value) = Unit
+	final override var loseFocus = false
 
 	private lateinit var stage: Stage
 	private lateinit var scene: Scene

@@ -13,9 +13,9 @@ import org.frice.utils.forceRun
  * @since v0.4
  */
 class FunctionResource(
-		color: ColorResource,
-		val f: (Double) -> Double,
-		width: Int, height: Int) : FResource {
+	color: ColorResource,
+	val f: (Double) -> Double,
+	width: Int, height: Int) : FResource {
 
 	private val image: FriceImage
 
@@ -38,8 +38,8 @@ class FunctionResource(
 }
 
 /**
- * used to represent a Curve.
- * something like circle.
+ * used to represent a Curve(something like circle).
+ *
  * @author ice1000
  * @since v0.4
  */
@@ -48,10 +48,8 @@ class CurveResource(color: ColorResource, val f: (Double) -> List<Double>, width
 
 	init {
 		image = JvmImage(width, height)
-		for (x in 0..width) {
-			for (y in f(x.toDouble())) {
-				forceRun { image[x, y.toInt()] = color }
-			}
+		for (x in 0..width) for (y in f(x.toDouble())) {
+			forceRun { image[x, y.toInt()] = color }
 		}
 	}
 

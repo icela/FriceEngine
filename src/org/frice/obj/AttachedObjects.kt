@@ -19,6 +19,9 @@ class AttachedObjects<T : FObject>(val objs: MutableList<T>) {
 }
 
 /**
+ * Don't `addObject(objectGroup)`.
+ * This is just an attacher, add objects inside.
+ *
  * @author ice1000
  * @since v1.7.2
  * @see AttachedObjects

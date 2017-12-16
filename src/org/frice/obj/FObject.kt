@@ -7,6 +7,8 @@ import org.frice.utils.shape.FShapeQuad
 import java.util.*
 
 /**
+ * The base class of all concrete game objects
+ *
  * Created by ice1000 on 2016/8/13.
  * @author ice1000
  * @since v0.1

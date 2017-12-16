@@ -17,12 +17,13 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
 	val drawer: FriceDrawer
 
-	override val box get() = object : FShapeQuad {
-		override val x get() = 0.0
-		override val y get() = 0.0
-		override val width get() = this@FriceGame.width.toDouble()
-		override val height get() = this@FriceGame.height.toDouble()
-	}
+	override val box
+		get() = object : FShapeQuad {
+			override val x get() = 0.0
+			override val y get() = 0.0
+			override val width get() = this@FriceGame.width.toDouble()
+			override val height get() = this@FriceGame.height.toDouble()
+		}
 
 	/**
 	 * not implemented yet.

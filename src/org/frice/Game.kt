@@ -58,8 +58,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 	override var autoGC = true
 	override var showFPS = true
 
-	override var loseFocus = false
-		set(value) = Unit
+	final override var loseFocus = false
 
 	override var loseFocusChangeColor = true
 
