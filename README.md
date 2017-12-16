@@ -84,5 +84,5 @@ This is generally a personal project, so please do give your genuine suggestions
 
 ## Demos
 
-See [FriceDemo](https://github.com/icela/FriceDemo)
+See [FriceDemo](https://github.com/icela/FriceDemo) <br/>
 And see [TouhouDemo](https://github.com/ice1000/TouhouDemo)
