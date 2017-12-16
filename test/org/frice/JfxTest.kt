@@ -19,8 +19,8 @@ import java.util.function.Consumer
 import kotlin.test.assertEquals
 
 fun main(args: Array<String>) {
-	val obj = O()
-	launchFx(obj)
+	val game = O()
+	launchFx(game)
 }
 
 class TestFx : GameFX(width = 600, height = 600) {

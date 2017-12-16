@@ -27,8 +27,7 @@ import kotlin.concurrent.thread
  * This class does rendering jobs, and something which are
  * invisible to game developers.
  *
- * Feel free to override the constructor, but please remember to
- * invoke super().
+ * Feel free to override the constructor.
  *
  * @author ice1000
  * @since v1.5.0
@@ -164,10 +163,7 @@ open class GameFX @JvmOverloads constructor(
 		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
 	}
 
-	open fun onExit(): Boolean {
-		stopped = true
-		return false
-	}
+	open fun onExit() = !dialogConfirmYesNo("Are you sure to exit?")
 
 	override final fun start(stage: Stage) {
 		this.stage = stage
