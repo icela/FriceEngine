@@ -1,7 +1,7 @@
 package org.frice
 
-import org.frice.anim.rotate.SimpleRotate
 import org.frice.anim.move.*
+import org.frice.anim.rotate.SimpleRotate
 import org.frice.anim.scale.SimpleScale
 import org.frice.event.OnMouseEvent
 import org.frice.obj.FObject
@@ -82,7 +82,7 @@ class Test : Game() {
 
 //		addObject(ImageObject(FileImageResource("1.png"), 10.0, 10.0))
 
-		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
+		FLog.v(ColorResource.小泉花阳.color.greyify())
 	}
 
 	private val random = Random(System.currentTimeMillis())

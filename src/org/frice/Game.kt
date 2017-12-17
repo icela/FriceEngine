@@ -9,6 +9,7 @@ import org.frice.platform.*
 import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.cast
+import org.frice.utils.darker
 import org.frice.utils.message.*
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*

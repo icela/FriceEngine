@@ -51,7 +51,7 @@ class TestFx : GameFX(width = 600, height = 600) {
 			button.text = key.character
 			layers.first().objects.size.run(::println)
 		}
-		FLog.v(ColorResource.小泉花阳.color.rgb.greyify())
+		FLog.v(ColorResource.小泉花阳.color.greyify())
 	}
 
 	private val random = Random(System.currentTimeMillis())

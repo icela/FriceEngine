@@ -8,6 +8,7 @@ import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ColorResource.Companion.COLORLESS
 import org.frice.resource.image.ImageResource
 import org.frice.utils.cast
+import java.awt.Color
 import java.util.*
 
 /**
@@ -39,7 +40,7 @@ constructor(
 		val g = image.image.graphics
 		when (back) {
 			is ColorResource -> {
-				g.color = back.color
+				g.color = Color(back.color)
 				g.fillRect(0, 0, width, height)
 			}
 			is ImageResource ->
@@ -62,11 +63,11 @@ constructor(
 			repeat((image.width * image.height * percentage).toInt()) {
 				cache1 = random.nextInt(width)
 				cache2 = random.nextInt(height)
-				image.setRGB(random.nextInt(width), random.nextInt(height), fore.color.rgb)
+				image.setRGB(random.nextInt(width), random.nextInt(height), fore.color)
 				image.setRGB(cache1, cache2, when (back) {
-					is ColorResource -> back.color.rgb
-					is ImageResource -> back.image[cache1, cache2].color.rgb
-					else -> COLORLESS.color.rgb
+					is ColorResource -> back.color
+					is ImageResource -> back.image[cache1, cache2].color
+					else -> COLORLESS.color
 				})
 			}
 		}
