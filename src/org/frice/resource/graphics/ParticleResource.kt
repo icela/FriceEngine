@@ -1,14 +1,12 @@
 package org.frice.resource.graphics
 
 import org.frice.Game
-import org.frice.platform.adapter.JfxImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ColorResource.Companion.COLORLESS
 import org.frice.resource.image.ImageResource
 import org.frice.utils.cast
-import java.awt.Color
 import java.util.*
 
 /**
@@ -43,8 +41,7 @@ constructor(
 				g.color = back.`get reused color`()
 				g.fillRect(0, 0, width, height)
 			}
-			is ImageResource ->
-				back.image.let { g.drawImage((it as? JvmImage)?.image ?: cast<JfxImage>(it).image, 0, 0, width, height, game) }
+			is ImageResource -> back.image.let { g.drawImage(cast<JvmImage>(it).image, 0, 0, width, height, game) }
 		}
 	}
 

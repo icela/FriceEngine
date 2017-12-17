@@ -161,7 +161,7 @@ open class GameFX @JvmOverloads constructor(
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun setCursor(o: FriceImage) {
-		scene.cursor = ImageCursor((o as? JfxImage)?.jfxImage ?: SwingFXUtils.toFXImage(cast<JvmImage>(o).image, null))
+		scene.cursor = ImageCursor(o.fx().jfxImage)
 	}
 
 	open fun onExit() = !dialogConfirmYesNo("Are you sure to exit?")
