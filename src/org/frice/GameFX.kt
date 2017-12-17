@@ -17,6 +17,7 @@ import org.frice.obj.button.FText
 import org.frice.platform.*
 import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.cast
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
 import java.util.*
@@ -160,7 +161,7 @@ open class GameFX @JvmOverloads constructor(
 	override val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun setCursor(o: FriceImage) {
-		scene.cursor = ImageCursor((o as JfxImage).jfxImage)
+		scene.cursor = ImageCursor((o as? JfxImage)?.jfxImage ?: SwingFXUtils.toFXImage(cast<JvmImage>(o).image, null))
 	}
 
 	open fun onExit() = !dialogConfirmYesNo("Are you sure to exit?")

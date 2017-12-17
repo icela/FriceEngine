@@ -6,9 +6,9 @@ import org.frice.event.*
 import org.frice.obj.AbstractObject
 import org.frice.obj.button.FText
 import org.frice.platform.*
-import org.frice.platform.adapter.JvmDrawer
-import org.frice.platform.adapter.JvmImage
+import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.cast
 import org.frice.utils.message.*
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
@@ -177,7 +177,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	override fun setCursor(o: FriceImage) {
-		cursor = toolkit.createCustomCursor((o as JvmImage).image, Point(0, 0), "cursor")
+		cursor = toolkit.createCustomCursor((o as? JvmImage)?.image ?: cast<JfxImage>(o).image, Point(0, 0), "cursor")
 	}
 
 	/**

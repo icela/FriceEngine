@@ -4,6 +4,7 @@ import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.cast
 import org.frice.utils.forceRun
 import java.awt.*
 
@@ -26,7 +27,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 			g.color = value.color
 		}
 
-	var g: Graphics2D = friceImage.image.graphics as Graphics2D
+	var g: Graphics2D = cast(friceImage.image.graphics)
 
 	override fun stringSize(size: Double) {
 		g.font = g.font.deriveFont(size.toFloat())
@@ -35,7 +36,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 	override fun useFont(text: FText) {
 		if (text.`font tmp obj` == null) text.`font tmp obj` = Font(text.fontName, Font.PLAIN, text.textSize.toInt())
 		if (g.font != text.`font tmp obj`)
-			g.font = text.`font tmp obj` as Font?
+			g.font = cast(text.`font tmp obj`)
 	}
 
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) =
@@ -48,7 +49,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 		g.drawString(string, x.toInt(), y.toInt())
 
 	override fun drawImage(image: FriceImage, x: Double, y: Double) {
-		g.drawImage((image as JvmImage).image, x.toInt(), y.toInt(), frame)
+		g.drawImage(cast<JvmImage>(image).image, x.toInt(), y.toInt(), frame)
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) =
@@ -82,6 +83,6 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 		g.drawRoundRect(x.toInt(), y.toInt(), width.toInt(), height.toInt(), arcWidth.toInt(), arcHeight.toInt())
 
 	override fun restore() {
-		g = friceImage.image.graphics as Graphics2D
+		g = cast(friceImage.image.graphics)
 	}
 }

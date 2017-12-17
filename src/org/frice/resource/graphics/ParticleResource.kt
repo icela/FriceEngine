@@ -1,12 +1,13 @@
 package org.frice.resource.graphics
 
 import org.frice.Game
+import org.frice.platform.adapter.JfxImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ColorResource.Companion.COLORLESS
 import org.frice.resource.image.ImageResource
-import java.awt.Image
+import org.frice.utils.cast
 import java.util.*
 
 /**
@@ -19,14 +20,14 @@ import java.util.*
 class ParticleResource
 @JvmOverloads
 constructor(
-		val game: Game,
-		var width: Int,
-		var height: Int,
-		val back: FResource = COLORLESS,
-		var fore: ColorResource = BLACK,
-		var percentage: Double = 0.5) : FResource {
+	val game: Game,
+	var width: Int,
+	var height: Int,
+	val back: FResource = COLORLESS,
+	var fore: ColorResource = BLACK,
+	var percentage: Double = 0.5) : FResource {
 	constructor(game: Game, width: Int, height: Int, percentage: Double) :
-			this(game, width, height, COLORLESS, BLACK, percentage)
+		this(game, width, height, COLORLESS, BLACK, percentage)
 
 	/**
 	 * particle effects as an image
@@ -41,7 +42,8 @@ constructor(
 				g.color = back.color
 				g.fillRect(0, 0, width, height)
 			}
-			is ImageResource -> g.drawImage((back.image as Image), 0, 0, width, height, game)
+			is ImageResource ->
+				back.image.let { g.drawImage((it as? JvmImage)?.image ?: cast<JfxImage>(it).image, 0, 0, width, height, game) }
 		}
 	}
 

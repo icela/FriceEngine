@@ -6,8 +6,7 @@ import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.forceRun
-import org.frice.utils.swing2fxColor
+import org.frice.utils.*
 
 /**
  * A drawer implementation for javafx
@@ -29,7 +28,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override fun useFont(text: FText) {
 		if (text.`font tmp obj` == null) text.`font tmp obj` = Font(text.fontName, text.textSize)
 		if (g.font != text.`font tmp obj`)
-			g.font = text.`font tmp obj` as Font?
+			g.font = cast(text.`font tmp obj`)
 	}
 
 	override fun init() {
@@ -49,7 +48,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	}
 
 	override fun drawImage(image: FriceImage, x: Double, y: Double) {
-		g.drawImage((image as JfxImage).jfxImage, x, y)
+		g.drawImage(cast<JfxImage>(image).jfxImage, x, y)
 	}
 
 	override fun drawRect(x: Double, y: Double, width: Double, height: Double) {

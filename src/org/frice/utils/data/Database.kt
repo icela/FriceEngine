@@ -1,6 +1,6 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package org.frice.utils.data
+
+import org.frice.utils.cast
 
 /**
  * Created by ice1000 on 2016/8/20.
@@ -10,6 +10,6 @@ package org.frice.utils.data
  */
 interface Database {
 	fun insert(key: String, value: Any?)
-	fun <T> queryT(key: String, default: T): T = query(key, default) as T
+	fun <T> queryT(key: String, default: T): T = cast(query(key, default))
 	fun query(key: String, default: Any?): Any?
 }

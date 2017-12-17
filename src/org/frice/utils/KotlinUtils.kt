@@ -1,8 +1,6 @@
 @file:JvmName("Utils")
 @file:JvmMultifileClass
 
-package org.frice.utils
-
 /**
  * Kotlin language extension
  * for Kotlin only
@@ -12,10 +10,14 @@ package org.frice.utils
  * @author ice1000
  * @since v0.3.2
  */
+package org.frice.utils
 
 inline fun loop(block: () -> Unit) {
 	while (true) block()
 }
+
+@Suppress("UNCHECKED_CAST", "NOTHING_TO_INLINE")
+inline fun <R> cast(any: Any?): R = any as R
 
 inline fun forceRun(block: () -> Unit) {
 	try {
@@ -24,7 +26,7 @@ inline fun forceRun(block: () -> Unit) {
 	}
 }
 
-inline fun <T> forceGet(default: T, block: () -> T): T = try {
+inline fun <reified T> forceGet(default: T, block: () -> T): T = try {
 	block()
 } catch (e: Throwable) {
 	default

@@ -2,6 +2,7 @@
 
 package org.frice.utils.media
 
+import org.frice.utils.cast
 import java.io.File
 import javax.sound.sampled.*
 
@@ -36,6 +37,5 @@ fun getPlayer(path: String, infinite: Boolean = false) = getPlayer(File(path), i
 
 internal const val `{-# BUFFER_SIZE #-}` = 1024
 
-internal fun `{-# getLine #-}`(audioFormat: AudioFormat): SourceDataLine {
-	return AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java, audioFormat)) as SourceDataLine
-}
+internal fun `{-# getLine #-}`(audioFormat: AudioFormat): SourceDataLine =
+	cast(AudioSystem.getLine(DataLine.Info(SourceDataLine::class.java, audioFormat)))

@@ -10,6 +10,7 @@ package org.frice
 import javafx.application.Application
 import org.frice.platform.FriceGame
 import org.frice.resource.manager.FManager
+import org.frice.utils.cast
 import org.frice.utils.loop
 import org.frice.utils.message.FLog
 import java.awt.Rectangle
@@ -50,10 +51,6 @@ fun Rectangle.rotate() {
 	width += height
 }
 
-fun launch(game: GameFX) = launchFx(game)
-
-fun launchFx(game: Class<out GameFX>) = launchFx(game.newInstance())
-
 /**
  * GameFX launcher.
  * This is actually redundant, just to avoid naming conflict
@@ -61,11 +58,11 @@ fun launchFx(game: Class<out GameFX>) = launchFx(game.newInstance())
  * @author ice1000
  * @since v1.5.0
  */
-fun launchFx(game: GameFX) {
+fun launchFx(game: Class<out GameFX>) {
 	`{-# LANGUAGE Initializer #-}`
 	FManager.useJfx = true
 	FLog.v("Engine start!")
-	Application.launch(game.javaClass)
+	Application.launch(game)
 }
 
 fun launch(game: Game) {
@@ -98,11 +95,9 @@ fun launch(game: Game) {
  * @author ice1000
  * @since v1.5.0
  */
-fun launch(c: Class<out FriceGame>) = c.newInstance().let { instance ->
-	`{-# LANGUAGE Initializer #-}`
-	when (instance) {
-		is Game -> launch(instance)
-		is GameFX -> launch(instance)
-		else -> throw IllegalArgumentException("You should launch an instance of Game or GameFX!")
-	}
+fun <T : FriceGame> launch(c: Class<out T>) {
+	if (c.simpleName.endsWith("FX")) launchFx(cast(c))
+	val instance = c.newInstance()
+	if (instance is Game) launch(instance)
+	else throw IllegalArgumentException("You should launch an instance of Game or GameFX!")
 }
