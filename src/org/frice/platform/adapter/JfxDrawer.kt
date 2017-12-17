@@ -18,7 +18,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override var color = ColorResource.BLUE
 		set(value) {
 			field = value
-			g.fill = swing2fxColor(field.color)
+			g.fill = field.color.toJfxColor()
 		}
 
 	override fun stringSize(size: Double) {

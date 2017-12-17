@@ -1,19 +1,23 @@
 package org.frice.resource.graphics
 
 import org.frice.resource.FResource
+import org.frice.utils.*
 import java.awt.Color
 
 /**
  * Created by ice1000 on 2016/8/14.
  * @author ice1000
  * @since v0.1.1
+ * @see java.awt.SystemColor
+ * @see java.awt.Color
  */
-class ColorResource(val color: Color) : FResource {
+class ColorResource(val color: Int) : FResource {
 
 	/**
 	 * 颜表立。。。
 	 * Read these color names in UTF-8 w/o BOM encoding, and pick up your 信仰 and 节操.
 	 */
+	@Suppress("ObjectPropertyName", "unused")
 	companion object {
 		@JvmField val GREEN = ColorResource(Color.GREEN)
 		@JvmField val BLUE = ColorResource(Color.BLUE)
@@ -60,9 +64,13 @@ class ColorResource(val color: Color) : FResource {
 		@JvmField val 赤羽业 = 西木野取款姬
 	}
 
-	constructor(color: Int) : this(Color(color))
+	constructor(color: Color) : this(makeColor(color))
 	constructor(color: String) : this(Color.getColor(color))
-	fun darker() = ColorResource(color.darker())
+	constructor(rgb: Int, alpha: Int) : this(makeColor(rgb, alpha))
+	constructor(red: Int, green: Int, blue: Int, alpha: Int) : this(makeColor(red, green, blue, alpha))
+
+	fun darker() = ColorResource(Color(color).darker())
+	fun brighter() = ColorResource(Color(color).brighter())
 
 	/**
 	 * not for users and developers.
@@ -74,7 +82,7 @@ class ColorResource(val color: Color) : FResource {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || other !is ColorResource) return false
-		if (color.rgb == other.color.rgb && color.alpha == other.color.alpha) return true
+		if (color == other.color) return true
 		return false
 	}
 }
