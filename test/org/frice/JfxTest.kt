@@ -18,11 +18,6 @@ import java.util.*
 import java.util.function.Consumer
 import kotlin.test.assertEquals
 
-fun main(args: Array<String>) {
-	val game = O()
-	launchFx(game)
-}
-
 class TestFx : GameFX(width = 600, height = 600) {
 	private val timer = FTimer(200)
 	private lateinit var objs: LinkedList<FObject>
@@ -123,5 +118,12 @@ class O : GameFX() {
 	override fun onLastInit() {
 		// title = "Your awesome title"
 		// not allowed
+	}
+
+	companion object {
+		@JvmStatic
+		fun main(args: Array<String>) {
+			launchFx(O::class.java)
+		}
 	}
 }
