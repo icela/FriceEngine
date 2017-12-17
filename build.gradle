@@ -29,11 +29,11 @@ repositories {
 }
 
 sourceSets {
-	main.kotlin.srcDirs += 'src'
-	main.java.srcDirs += 'src'
-	main.resources.srcDirs += 'res'
-	test.kotlin.srcDirs += 'test'
-	test.java.srcDirs += 'test'
+	main.kotlin.srcDirs = ['src']
+	main.java.srcDirs = ['src']
+	main.resources.srcDirs = ['res']
+	test.kotlin.srcDirs = ['test']
+	test.java.srcDirs = ['test']
 }
 
 configurations { library }
@@ -54,16 +54,20 @@ dependencies {
 //noinspection GroovyAssignabilityCheck
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
-jar { from { configurations.library.collect { it.isDirectory() ? it : zipTree(it) } } }
+jar {
+	from { configurations.library.collect { it.isDirectory() ? it : zipTree(it) } }
+}
 
 task fatJar(type: Jar) {
 	classifier = 'all'
+	group 'build'
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	with jar
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
+	group 'build'
 	from sourceSets.main.allSource
 }
 
@@ -94,6 +98,7 @@ task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
 
 task javadok(type: Jar, dependsOn: dokkaJavadoc) {
 	classifier = 'javadoc'
+	group 'documentation'
 	from javadoc.destinationDir
 }
 

@@ -4,8 +4,6 @@ environment:
 
 build_script:
   - gradlew build --info
-  - gradlew fatJar --info
-  - gradlew sourcesJar --info
 #
 
 artifacts:
