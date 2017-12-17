@@ -9,8 +9,6 @@ build_script:
 #
 
 artifacts:
-  - path: 'build\libs\engine-all-1.7.10.jar'
+  - path: 'build\libs\*.jar'
     name: engine
-  - path: 'build\libs\engine-src-1.7.10.jar'
-    name: source
 #
