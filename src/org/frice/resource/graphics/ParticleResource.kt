@@ -40,7 +40,7 @@ constructor(
 		val g = image.image.graphics
 		when (back) {
 			is ColorResource -> {
-				g.color = Color(back.color)
+				g.color = back.`get reused color`()
 				g.fillRect(0, 0, width, height)
 			}
 			is ImageResource ->

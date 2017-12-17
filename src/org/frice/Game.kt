@@ -239,10 +239,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			if (loseFocus and loseFocusChangeColor) {
 				repeat(drawer.friceImage.width) { x: Int ->
 					repeat(drawer.friceImage.height) { y: Int ->
-						drawer.friceImage[x, y] = ColorResource(drawer
-							.friceImage[x, y]
-							.color
-							.darker())
+						drawer.friceImage[x, y] = ColorResource(drawer.friceImage[x, y].color.darker())
 					}
 				}
 			}

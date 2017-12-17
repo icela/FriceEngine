@@ -1,7 +1,7 @@
 package org.frice.resource.graphics
 
 import org.frice.resource.FResource
-import org.frice.utils.*
+import org.frice.utils.makeColor
 import java.awt.Color
 
 /**
@@ -11,7 +11,15 @@ import java.awt.Color
  * @see java.awt.SystemColor
  * @see java.awt.Color
  */
-class ColorResource(val color: Int) : FResource {
+class ColorResource private constructor(
+	val color: Int,
+	private var `color tmp obj`: Color?) : FResource {
+
+	internal fun `get reused color`() = `color tmp obj` ?: run {
+		val rua = Color(color)
+		`color tmp obj` = rua
+		return@run rua
+	}
 
 	/**
 	 * 颜表立。。。
@@ -64,13 +72,14 @@ class ColorResource(val color: Int) : FResource {
 		@JvmField val 赤羽业 = 西木野取款姬
 	}
 
-	constructor(color: Color) : this(makeColor(color))
+	constructor(color: Int) : this(color, null)
+	constructor(color: Color) : this(makeColor(color), color)
 	constructor(color: String) : this(Color.getColor(color))
 	constructor(rgb: Int, alpha: Int) : this(makeColor(rgb, alpha))
 	constructor(red: Int, green: Int, blue: Int, alpha: Int) : this(makeColor(red, green, blue, alpha))
 
-	fun darker() = ColorResource(Color(color).darker())
-	fun brighter() = ColorResource(Color(color).brighter())
+	fun darker() = ColorResource(`get reused color`().darker())
+	fun brighter() = ColorResource(`get reused color`().brighter())
 
 	/**
 	 * not for users and developers.
@@ -78,11 +87,10 @@ class ColorResource(val color: Int) : FResource {
 	 */
 	override val resource get() = color
 
-	override fun hashCode() = color.hashCode()
+	override fun hashCode() = color
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || other !is ColorResource) return false
-		if (color == other.color) return true
-		return false
+		return color == other.color
 	}
 }

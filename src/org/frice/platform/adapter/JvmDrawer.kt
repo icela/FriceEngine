@@ -24,7 +24,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 	override var color: ColorResource
 		get() = ColorResource(g.color)
 		set(value) {
-			g.color = Color(value.color)
+			g.color = value.`get reused color`()
 		}
 
 	var g: Graphics2D = cast(friceImage.image.graphics)
