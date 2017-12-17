@@ -1,8 +1,6 @@
 package org.frice.resource.image
 
 import org.frice.platform.FriceImage
-import org.frice.platform.adapter.JvmImage
-import org.frice.resource.FResource
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.time.FTimer
@@ -18,7 +16,7 @@ import java.awt.Rectangle
 class PartImageResource(origin: ImageResource, x: Int, y: Int, width: Int, height: Int) : ImageResource() {
 	constructor(origin: ImageResource, part: Rectangle) : this(origin, part.x, part.y, part.width, part.height)
 
-	override var image: FriceImage = origin.image.getSubImage(x, y, width, height)
+	override var image: FriceImage = origin.image.part(x, y, width, height)
 }
 
 /**

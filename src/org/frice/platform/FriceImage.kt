@@ -9,8 +9,8 @@ interface FriceImage {
 	operator fun get(x: Int, y: Int): ColorResource
 	operator fun set(x: Int, y: Int, color: ColorResource) = set(x, y, color.color)
 	operator fun set(x: Int, y: Int, color: Int)
-	fun getScaledInstance(x: Double, y: Double): FriceImage
-	fun getSubImage(x: Int, y: Int, width: Int, height: Int): FriceImage
+	fun scale(x: Double, y: Double): FriceImage
+	fun part(x: Int, y: Int, width: Int, height: Int): FriceImage
 	fun fx(): JfxImage
 
 	/**

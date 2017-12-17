@@ -25,7 +25,6 @@ class CurveEffect(
 	override val image: FriceImage get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = image.getScaledInstance(image.width * x / 1000.0,
-			image.height * y / 1000.0)
+		res.image = image.scale(image.width * x / 1000.0, image.height * y / 1000.0)
 	}
 }

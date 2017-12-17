@@ -34,7 +34,7 @@ constructor(
 	override val image: FriceImage get() = res.image
 
 	override fun scale(x: Double, y: Double) {
-		res.image = res.image.getScaledInstance(res.image.width * x / 1000.0, res.image.height * y / 1000.0)
+		res.image = res.image.scale(res.image.width * x / 1000.0, res.image.height * y / 1000.0)
 	}
 
 	override fun equals(other: Any?): Boolean {

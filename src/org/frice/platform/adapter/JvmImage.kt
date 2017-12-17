@@ -15,11 +15,11 @@ open class JvmImage(val image: BufferedImage) : FriceImage {
 	override operator fun get(x: Int, y: Int) = ColorResource(image.getRGB(x, y))
 	override operator fun set(x: Int, y: Int, color: Int) = image.setRGB(x, y, color)
 
-	override fun getScaledInstance(x: Double, y: Double) =
+	override fun scale(x: Double, y: Double) =
 			JvmImage(run { AffineTransformOp(AffineTransform().apply { scale(x, y) }, AffineTransformOp.TYPE_BILINEAR)
 					.filter(image, BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)) })
 
-	override fun getSubImage(x: Int, y: Int, width: Int, height: Int) =
+	override fun part(x: Int, y: Int, width: Int, height: Int) =
 			JvmImage(image.getSubimage(x, y, width, height))
 
 	override fun clone() = JvmImage(BufferedImage(width, height, image.type).apply {

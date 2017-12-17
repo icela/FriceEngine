@@ -39,7 +39,7 @@ abstract class ImageResource : FResource {
 	abstract var image: FriceImage
 	override val resource get() = image
 
-	fun scaled(x: Double, y: Double) = fromImage(image.getScaledInstance(x, y))
+	fun scaled(x: Double, y: Double) = fromImage(image.scale(x, y))
 
-	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.getSubImage(x, y, width, height))
+	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.part(x, y, width, height))
 }
