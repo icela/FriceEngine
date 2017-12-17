@@ -103,6 +103,7 @@ task javadok(type: Jar, dependsOn: dokkaJavadoc) {
 }
 
 artifacts {
+	archives jar
 	archives fatJar
 	archives sourcesJar
 	archives javadok

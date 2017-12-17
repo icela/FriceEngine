@@ -14,7 +14,7 @@ class AttachedObjects<T : FObject>(val objs: MutableList<T>) {
 	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 	operator fun get(x: Int) = objs[x]
 
-	fun addObject(vararg objects: T) = objects.forEach { objs.remove(it) }
+	fun addObject(vararg objects: T) = objects.forEach { objs.add(it) }
 	fun removeObject(vararg objects: T) = objects.forEach { objs.remove(it) }
 }
 
@@ -30,6 +30,6 @@ class AttachedAbstarctObjects<T : AbstractObject>(val objs: MutableList<T>) {
 	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
 	operator fun get(x: Int) = objs[x]
 
-	fun addObject(vararg objects: T) = objects.forEach { objs.remove(it) }
+	fun addObject(vararg objects: T) = objects.forEach { objs.add(it) }
 	fun removeObject(vararg objects: T) = objects.forEach { objs.remove(it) }
 }
