@@ -74,10 +74,11 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 dokka {
-	outputFormat = 'html'
+	moduleName = 'engine'
+	outputFormat = 'html-as-java'
 	outputDirectory = javadoc.destinationDir
 
-	includes = ['LICENSE', 'README.md']
+	includes = ['LICENSE.txt', 'README.md']
 	// samples = ['test/org/frice/Test.kt', 'test/org/frice/JfxTest.kt']
 	impliedPlatforms = ['JVM']
 
@@ -96,7 +97,7 @@ dokka {
 	// externalDocumentationLink { url = new URL("https://icela.github.io/") }
 }
 
-task javadok(type: Jar, dependsOn: [dokka, javadoc]) {
+task javadok(type: Jar, dependsOn: dokka) {
 	classifier = 'javadoc'
 	description 'Assembles a jar archive containing the javadoc of this project.'
 	group 'documentation'
