@@ -60,6 +60,7 @@ jar {
 
 task fatJar(type: Jar) {
 	classifier = 'all'
+	description 'Assembles a jar archive containing the main classes and all the dependencies.'
 	group 'build'
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	with jar
@@ -67,11 +68,12 @@ task fatJar(type: Jar) {
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
+	description 'Assembles a jar archive containing the source code of this project.'
 	group 'build'
 	from sourceSets.main.allSource
 }
 
-task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+dokka {
 	outputFormat = 'html'
 	outputDirectory = javadoc.destinationDir
 
@@ -94,8 +96,9 @@ task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
 	// externalDocumentationLink { url = new URL("https://icela.github.io/") }
 }
 
-task javadok(type: Jar, dependsOn: dokkaJavadoc) {
+task javadok(type: Jar, dependsOn: [dokka, javadoc]) {
 	classifier = 'javadoc'
+	description 'Assembles a jar archive containing the javadoc of this project.'
 	group 'documentation'
 	from javadoc.destinationDir
 }
