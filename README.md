@@ -30,11 +30,11 @@ This engine is completely platform-independent: no JNI linkage, no native method
 
 ## Screenshots
 
-![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-01.gif)
-![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-02.gif)
-![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-03.gif)
-![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-04.gif)
-![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-05.gif)
+- [image link](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-01.gif)
+- [image link](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-02.gif)
+- [image link](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-03.gif)
+- [image link](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-04.gif)
+- [image link](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-05.gif)
 
 ## Build
 
