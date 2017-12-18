@@ -1,7 +1,7 @@
 package org.frice.resource.graphics
 
 import org.frice.resource.FResource
-import org.frice.utils.makeColor
+import org.frice.utils.*
 import java.awt.Color
 
 /**
@@ -80,6 +80,15 @@ class ColorResource private constructor(
 
 	fun darker() = ColorResource(`get reused color`().darker())
 	fun brighter() = ColorResource(`get reused color`().brighter())
+	fun greyify() = ColorResource(color.greyify())
+	fun bluify() = ColorResource(color.bluify())
+	fun redify() = ColorResource(color.redify())
+	fun greenify() = ColorResource(color.greenify())
+	val red get() = color.red
+	val blue get() = color.blue
+	val green get() = color.green
+	val alpha get() = color.alpha
+	val average get() = color.average
 
 	/**
 	 * not for users and developers.

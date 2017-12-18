@@ -3,7 +3,6 @@ package org.frice.obj.button
 import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.darker
 import org.frice.utils.shape.FShapeQuad
 import java.util.function.Consumer
 
@@ -26,8 +25,7 @@ constructor(
 	private var bool = false
 	override var onMouseListener: Consumer<OnMouseEvent>? = null
 
-	override val color: ColorResource
-		get() = if (bool) ColorResource(originalColor.color.darker()) else originalColor
+	override val color get() = if (bool) originalColor.darker() else originalColor
 
 	override fun buttonPressed(e: OnMouseEvent) {
 		bool = e.type == MOUSE_PRESSED

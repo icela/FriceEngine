@@ -31,8 +31,8 @@ inline val Int.alpha: Int inline get() = this shr 24 and 255
 inline val Int.red: Int inline get() = this shr 16 and 255
 inline val Int.blue: Int inline get() = this and 255
 inline val Int.green: Int inline get() = this shr 8 and 255
+inline val Int.average inline get() = (blue + green + red) / 3
 
 inline fun Int.greenify(): Int = makeColor(0, Color(this).average(), 0, alpha)
 inline fun Int.redify(): Int = makeColor(Color(this).average(), 0, 0, alpha)
 inline fun Int.bluify(): Int = makeColor(0, 0, Color(this).average(), alpha)
-inline fun Int.darker(): Int = makeColor(Color(this).darker())

@@ -10,7 +10,6 @@ import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.cast
-import org.frice.utils.darker
 import org.frice.utils.message.*
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
@@ -240,7 +239,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			if (loseFocus and loseFocusChangeColor) {
 				repeat(drawer.friceImage.width) { x: Int ->
 					repeat(drawer.friceImage.height) { y: Int ->
-						drawer.friceImage[x, y] = ColorResource(drawer.friceImage[x, y].color.darker())
+						drawer.friceImage[x, y] = drawer.friceImage[x, y].darker()
 					}
 				}
 			}
