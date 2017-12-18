@@ -40,6 +40,11 @@ abstract class ImageResource : FResource {
 	override val resource get() = image
 
 	fun scaled(x: Double, y: Double) = fromImage(image.scale(x, y))
-
 	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.part(x, y, width, height))
+
+	/**
+	 * @since v1.7.11
+	 * @param orientation true: horizontal; false: vertical
+	 */
+	fun flip(orientation: Boolean)
 }
