@@ -75,14 +75,15 @@ Text measuring|√|√
 - Collision detection with collision box
 
 ## DSL
-
 See [DSL for FriceEngine](https://github.com/icela/FriceEngine-DSL)
 
 ## Contributions
 Feel free to open issue for feature request, bug reports, etc. <br/>
 This is generally a personal project, so please do give your genuine suggestions.
 
-## Demos
+This project is using Issue-Driven-Development. <br/>
+Issues are well organized and used to managed tasks.
 
+## Demos
 See [FriceDemo](https://github.com/icela/FriceDemo) <br/>
 And see [TouhouDemo](https://github.com/ice1000/TouhouDemo)

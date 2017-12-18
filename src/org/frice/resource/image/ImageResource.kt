@@ -14,11 +14,9 @@ abstract class ImageResource : FResource {
 
 	companion object Factories {
 		@JvmStatic
-		fun create(image: FriceImage) = object : ImageResource() {
-			override var image = image
-		}
+		fun create(image: FriceImage): ImageResource = ImageResourceImpl(image)
 
-		operator fun invoke(image: FriceImage) = create(image)
+		operator fun invoke(image: FriceImage): ImageResource = create(image)
 
 		@JvmStatic
 		fun fromImage(image: FriceImage): ImageResource = create(image)

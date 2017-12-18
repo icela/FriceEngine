@@ -1,10 +1,10 @@
-package org.frice.platform.adapter
+package org.frice.platform
 
 import org.frice.*
 import org.frice.obj.sub.ImageObject
 import org.frice.resource.image.ImageResource
 
-class ImageTest : GameFX(width = 300, height = 300) {
+class FriceImageTest : GameFX(width = 300, height = 300) {
 	override fun onInit() {
 		val image = ImageResource.fromPath("res/icon.png")
 		addObject(ImageObject(image),
@@ -17,7 +17,7 @@ class ImageTest : GameFX(width = 300, height = 300) {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {
-			launchFx(ImageTest::class.java)
+			launchFx(FriceImageTest::class.java)
 		}
 	}
 }
