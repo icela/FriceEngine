@@ -13,7 +13,5 @@ dependencies:
 test:
   override:
     - ./gradlew build
-    - ./gradlew fatJar
-    - ./gradlew sourcesJar
 #
 
