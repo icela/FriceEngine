@@ -28,17 +28,25 @@ This engine is completely platform-independent: no JNI linkage, no native method
 
 **View [Document](https://icela.github.io/#getting-started) to learn how to use Frice Engine.**
 
-# Build
+## Screenshots
+
+![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-01.gif)
+![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-02.gif)
+![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-03.gif)
+![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-04.gif)
+![](https://coding.net/u/ice1000/p/Gifs/git/raw/master/frice/frice-05.gif)
+
+## Build
 
 Follow the instruction from [JitPack](https://jitpack.io/#icela/FriceEngine).
 
 Alternatively, you can download a jar from the [release page](https://github.com/icela/FriceEngine/releases).
 
-# Features
+## Features
 
 This engine is based on Java's built-in GUI framework, both Swing and JavaFX.
 
-## Platform dependent
+### Platform dependent
 
 These features are differently implemented in Swing/JavaFX.  
 Since this project is still in progress, the unsupported features will soon be available.
@@ -59,7 +67,7 @@ Rotate animation|√|×
 Key listener|√|√
 Text measuring|√|√
 
-## Platform independent
+### Platform independent
 
 - Non-rotate animations (moving, scaling, accelerating, chasing, approaching, etc.)
 - Audio playing (\*.wav, \*.mp3) by JavaSound/JavaFX Media
