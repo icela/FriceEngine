@@ -39,12 +39,26 @@ abstract class ImageResource : FResource {
 	abstract var image: FriceImage
 	override val resource get() = image
 
+	/**
+	 * @param x size proportion on x axis
+	 * @param y size proportion on y axis
+	 * @return scaled image
+	 */
 	fun scaled(x: Double, y: Double) = fromImage(image.scale(x, y))
+
+	/**
+	 * @param x location x
+	 * @param y location y
+	 * @param width width
+	 * @param height height
+	 * @return a sub image
+	 */
 	fun part(x: Int, y: Int, width: Int, height: Int) = fromImage(image.part(x, y, width, height))
 
 	/**
 	 * @since v1.7.11
 	 * @param orientation true: horizontal; false: vertical
+	 * @return flipped image
 	 */
-	fun flip(orientation: Boolean)
+	fun flip(orientation: Boolean) = fromImage(image.flip(orientation))
 }

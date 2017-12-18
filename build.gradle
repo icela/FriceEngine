@@ -91,7 +91,7 @@ task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
 		suffix = '#L'
 	}
 
-	externalDocumentationLink { url = new URL("https://icela.github.io/") }
+	// externalDocumentationLink { url = new URL("https://icela.github.io/") }
 }
 
 task javadok(type: Jar, dependsOn: dokkaJavadoc) {
