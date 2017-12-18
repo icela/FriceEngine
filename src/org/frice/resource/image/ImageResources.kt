@@ -7,19 +7,6 @@ import org.frice.utils.time.FTimer
 import java.awt.Rectangle
 
 /**
- * create an image from a part of another image
- *
- * Created by ice1000 on 2016/8/15.
- * @author ice1000
- * @since v0.2.3
- */
-class PartImageResource(origin: ImageResource, x: Int, y: Int, width: Int, height: Int) : ImageResource() {
-	constructor(origin: ImageResource, part: Rectangle) : this(origin, part.x, part.y, part.width, part.height)
-
-	override var image: FriceImage = origin.image.part(x, y, width, height)
-}
-
-/**
  * Image Resource from internet
  *
  * Created by ice1000 on 2016/8/15.
