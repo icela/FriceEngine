@@ -27,4 +27,9 @@ class JfxImage : JvmImage {
 		super.set(x, y, color)
 		jfxImage.pixelWriter.setArgb(x, y, color)
 	}
+
+	override fun scale(x: Double, y: Double) = JfxImage(scaleImpl(x, y))
+	override fun part(x: Int, y: Int, width: Int, height: Int) = JfxImage(partImpl(x, y, width, height))
+	override fun flip(orientation: Boolean) = JfxImage(flipImpl(orientation))
+	override fun clone() = JfxImage(cloneImpl())
 }

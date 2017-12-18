@@ -14,11 +14,18 @@ interface FriceImage {
 	fun fx(): JfxImage
 
 	/**
+	 * @since v1.7.11
+	 * @param orientation true: horizontal; false: vertical
+	 */
+	fun flip(orientation: Boolean): FriceImage
+
+	/**
 	 * copy a image.
 	 * to replace the operation of reading an image from file.
 	 * if an image is already read from file, it can be copied from RAM directly.
 	 *
 	 * classes in this file is to do this job.
+	 * @return A copy of this image
 	 */
 	fun clone(): FriceImage
 }
