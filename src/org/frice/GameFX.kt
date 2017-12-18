@@ -17,7 +17,6 @@ import org.frice.obj.button.FText
 import org.frice.platform.*
 import org.frice.platform.adapter.*
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.cast
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
 import java.util.*
@@ -36,7 +35,7 @@ import kotlin.concurrent.thread
 open class GameFX @JvmOverloads constructor(
 	private val width: Int = 1000,
 	private val height: Int = 1000,
-	layerCount: Int = 1) : Application(), FriceGame {
+	layerCount: Int = 1) : Application(), FriceGame<JfxDrawer> {
 
 	override fun isResizable() = stage.isResizable
 	override fun setResizable(resizable: Boolean) {

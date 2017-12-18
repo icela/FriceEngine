@@ -2,13 +2,12 @@
  * @author ice1000
  * @since v1.5.0
  */
-@file:JvmMultifileClass
 @file:JvmName("Initializer")
 
 package org.frice
 
 import javafx.application.Application
-import org.frice.platform.FriceGame
+import org.frice.platform.*
 import org.frice.resource.manager.FManager
 import org.frice.utils.cast
 import org.frice.utils.loop
@@ -29,21 +28,26 @@ object `{-# LANGUAGE Initializer #-}` {
 	init {
 		val osName = System.getProperty("os.name")
 		FLog.v("Operating system: $osName")
-		if ("Windows" in osName)
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel")
-		else if ("Linux" in osName) UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel")
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+		when {
+			osName.startsWith("Windows") -> onWindows?.invoke()
+			osName.startsWith("Linux") -> onLinux?.invoke()
+			osName.startsWith("Mac") -> onMac?.invoke()
+			osName.startsWith("Solaris") || osName.startsWith("SunOS") -> onSolaris?.invoke()
+			osName.startsWith("FreeBSD") -> onBSD?.invoke()
+		}
 	}
 }
 
-val TO_X = 100
-val TO_Y = 100
+const val TO_X = 100
+const val TO_Y = 100
 
-val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
-val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)
-val HUGE_PHONE = Rectangle(TO_X, TO_Y, 1080, 1920)
+@JvmField val SMALL_PHONE = Rectangle(TO_X, TO_Y, 480, 800)
+@JvmField val BIG_PHONE = Rectangle(TO_X, TO_Y, 720, 1200)
+@JvmField val HUGE_PHONE = Rectangle(TO_X, TO_Y, 1080, 1920)
 
-val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
-val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
+@JvmField val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
+@JvmField val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
 
 fun Rectangle.rotate() {
 	width -= -height
@@ -95,9 +99,9 @@ fun launch(game: Game) {
  * @author ice1000
  * @since v1.5.0
  */
-fun <T : FriceGame> launch(c: Class<out T>) {
-	if (c.simpleName.endsWith("FX")) launchFx(cast(c))
-	val instance = c.newInstance()
+fun <GameType : FriceGame<*>> launch(c: Class<out GameType>) {
+	if (GameFX::class.java.isAssignableFrom(c)) launchFx(cast(c))
+	val instance: GameType = c.newInstance()
 	if (instance is Game) launch(instance)
 	else throw IllegalArgumentException("You should launch an instance of Game or GameFX!")
 }

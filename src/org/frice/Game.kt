@@ -33,7 +33,7 @@ import javax.swing.*
  * @since v0.2.3
  */
 @Suppress("LeakingThis")
-open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), FriceGame {
+open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), FriceGame<JvmDrawer> {
 	override val layers = Array(layerCount) { Layer() }
 	override var paused = false
 		set(value) {
@@ -121,7 +121,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		onInit()
 		drawer = JvmDrawer(this).apply(JvmDrawer::init)
 		isVisible = true
-		FLog.i("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
+		FLog.v("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
 
 	open fun onExit() {

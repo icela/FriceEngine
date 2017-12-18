@@ -7,43 +7,43 @@ package org.frice.utils.message
  */
 object FLog {
 	@JvmStatic
-	fun v(e: Any?) = verbose(e)
+	fun v(message: Any?) = verbose(message)
 
 	@JvmStatic
-	fun d(e: Any?) = debug(e)
+	fun d(message: Any?) = debug(message)
 
 	@JvmStatic
-	fun i(e: Any?) = info(e)
+	fun i(message: Any?) = info(message)
 
 	@JvmStatic
-	fun w(e: Any?) = warning(e)
+	fun w(message: Any?) = warning(message)
 
 	@JvmStatic
-	fun e(e: Any?) = error(e)
+	fun e(message: Any?) = error(message)
 
 	@JvmStatic
-	fun verbose(e: Any?) {
-		if (level >= VERBOSE) println(e)
+	fun verbose(message: Any?) {
+		if (level >= VERBOSE) println(message)
 	}
 
 	@JvmStatic
-	fun debug(e: Any?) {
-		if (level >= DEBUG) println(e)
+	fun debug(message: Any?) {
+		if (level >= DEBUG) println(message)
 	}
 
 	@JvmStatic
-	fun info(e: Any?) {
-		if (level >= INFO) println(e)
+	fun info(message: Any?) {
+		if (level >= INFO) println(message)
 	}
 
 	@JvmStatic
-	fun warning(e: Any?) {
-		if (level >= WARN) println(e)
+	fun warning(message: Any?) {
+		if (level >= WARN) println(message)
 	}
 
 	@JvmStatic
-	fun error(e: Any?) {
-		if (level >= ERROR) System.err.println(e)
+	fun error(message: Any?) {
+		if (level >= ERROR) System.err.println(message)
 	}
 
 	@JvmStatic

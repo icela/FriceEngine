@@ -20,7 +20,7 @@ class PreferenceTest {
 
 	@Test
 	fun insert() {
-		FLog.i(p.query(KEY, 6666))
+		FLog.v(p.query(KEY, 6666))
 	}
 
 	companion object Init {

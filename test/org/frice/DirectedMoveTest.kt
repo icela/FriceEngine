@@ -17,7 +17,7 @@ class DirectedMoveTest : GameFX() {
 	companion object {
 		@JvmStatic
 		fun main(args: Array<String>) {
-			launch(DirectedMoveTest::class.java)
+			launchFx(DirectedMoveTest::class.java)
 		}
 	}
 }

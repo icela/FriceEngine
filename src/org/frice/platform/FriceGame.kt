@@ -13,9 +13,15 @@ import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.*
 
-interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
+/**
+ * @author ice1000
+ * @since v1.2
+ * @param Drawer the FriceDrawer used
+ */
+interface FriceGame<Drawer : FriceDrawer>
+	: TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
-	val drawer: FriceDrawer
+	val drawer: Drawer
 
 	override val box
 		get() = object : FShapeQuad {
@@ -51,7 +57,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	fun onLastInit() = Unit
 	fun onRefresh() = Unit
 	fun onMouse(e: OnMouseEvent) = Unit
-	fun customDraw(g: FriceDrawer) = Unit
+	fun customDraw(g: Drawer) = Unit
 	fun onLoseFocus() {
 		paused = true
 	}
@@ -122,7 +128,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 		}
 	}
 
-	fun drawEverything(bgg: FriceDrawer) {
+	fun drawEverything(bgg: Drawer) {
 		processBuffer()
 		layers.forEach {
 			it.objects.removeIf { o ->

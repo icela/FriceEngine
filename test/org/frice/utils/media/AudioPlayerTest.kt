@@ -20,7 +20,7 @@ class AudioPlayerTest : GameFX(300, 300) {
 				player2.start()
 			} else if (!player2.stopped) player2.stopPlaying()
 		}
-		FLog.d("${player.state}, ${player2.state}")
+		FLog.v("${player.state}, ${player2.state}")
 	}
 
 	override fun onExit(): Boolean {
