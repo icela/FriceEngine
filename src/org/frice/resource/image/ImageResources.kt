@@ -4,7 +4,12 @@ import org.frice.platform.FriceImage
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
 import org.frice.utils.time.FTimer
-import java.awt.Rectangle
+
+/**
+ * @author ice1000
+ * @since v1.7.11
+ */
+open class ImageResourceImpl(override var image: FriceImage) : ImageResource()
 
 /**
  * Image Resource from internet
@@ -13,9 +18,14 @@ import java.awt.Rectangle
  * @author ice1000
  * @since v0.2.2
  */
-class WebImageResource(url: String) : ImageResource() {
-	override var image: FriceImage = WebImageManager[url]
-}
+class WebImageResource(url: String) : ImageResourceImpl(WebImageManager[url])
+
+/**
+ * Created by ice1000 on 2016/8/13.
+ * @author ice1000
+ * @since v0.1
+ */
+class FileImageResource(file: String) : ImageResourceImpl(ImageManager[file])
 
 /**
  * Created by ice1000 on 2016/8/16.
@@ -46,13 +56,4 @@ class FrameImageResource(val list: MutableList<ImageResource>, div: Int) : Image
 		if (index == this.size - 1) ended = true
 		return this[index]
 	}
-}
-
-/**
- * Created by ice1000 on 2016/8/13.
- * @author ice1000
- * @since v0.1
- */
-class FileImageResource(file: String) : ImageResource() {
-	override var image = ImageManager[file]
 }
