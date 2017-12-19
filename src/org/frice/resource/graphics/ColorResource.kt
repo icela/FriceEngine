@@ -78,8 +78,32 @@ class ColorResource private constructor(
 	constructor(rgb: Int, alpha: Int) : this(makeColor(rgb, alpha))
 	constructor(red: Int, green: Int, blue: Int, alpha: Int) : this(makeColor(red, green, blue, alpha))
 
-	fun darker() = ColorResource(`get reused color`().darker())
-	fun brighter() = ColorResource(`get reused color`().brighter())
+	/** @see java.awt.Color */
+	fun darker() = ColorResource(
+		Math.max((red * 0.7).toInt(), 0),
+		Math.max((green * 0.7).toInt(), 0),
+		Math.max((blue * 0.7).toInt(), 0),
+		alpha)
+
+	/** @see java.awt.Color */
+	fun brighter(): ColorResource {
+		var r = red
+		var g = green
+		var b = blue
+		val mid = 3
+		return if (r == 0 && g == 0 && b == 0) {
+			ColorResource(mid, mid, mid, alpha)
+		} else {
+			if (r in 1..(mid - 1)) r = mid
+			if (g in 1..(mid - 1)) g = mid
+			if (b in 1..(mid - 1)) b = mid
+			ColorResource(Math.min((r / 0.7).toInt(), 255),
+				Math.min((g / 0.7).toInt(), 255),
+				Math.min((b / 0.7).toInt(), 255),
+				alpha)
+		}
+	}
+
 	fun greyify() = ColorResource(color.greyify())
 	fun bluify() = ColorResource(color.bluify())
 	fun redify() = ColorResource(color.redify())
