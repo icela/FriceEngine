@@ -17,7 +17,7 @@ fun findTag(html: String, tag: CharArray): MutableList<String> {
 	repeat(c.size - tag.size + 2) { i: Int ->
 		// find start index
 		if (c[i] == '<') {
-			tagMark = (0..tag.size - 1).none { c[i + it + 1] == tag[it] }
+			tagMark = (0 until tag.size).none { c[i + it + 1] == tag[it] }
 			// cannot use loop{} or forEach.
 			// for the reason that I have to break it
 			if (tagMark) tagStart = i

@@ -14,5 +14,5 @@ abstract class FAnim {
 	protected var lastRefresh: Double = start
 
 	@Suppress("FunctionName")
-	abstract fun `{-# do #-}`(obj: FObject)
+	abstract internal fun `{-# do #-}`(obj: FObject)
 }

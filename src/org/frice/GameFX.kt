@@ -33,9 +33,9 @@ import kotlin.concurrent.thread
  * @since v1.5.0
  */
 open class GameFX @JvmOverloads constructor(
-	private val width: Int = 1000,
-	private val height: Int = 1000,
-	layerCount: Int = 1) : Application(), FriceGame<JfxDrawer> {
+	layerCount: Int = 1,
+	private val width: Int = 800,
+	private val height: Int = 800) : Application(), FriceGame<JfxDrawer> {
 
 	override fun isResizable() = stage.isResizable
 	override fun setResizable(resizable: Boolean) {

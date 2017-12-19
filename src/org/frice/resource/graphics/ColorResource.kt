@@ -16,9 +16,10 @@ class ColorResource private constructor(
 	private var `color tmp obj`: Color?) : FResource {
 
 	internal fun `get reused color`() = `color tmp obj` ?: run {
-		val rua = Color(color)
-		`color tmp obj` = rua
-		return@run rua
+		Color(color).let {
+			`color tmp obj` = it
+			return@run it
+		}
 	}
 
 	/**

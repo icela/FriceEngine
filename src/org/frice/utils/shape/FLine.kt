@@ -15,7 +15,7 @@ open class FLine(one: FPoint, two: FPoint) {
 	private val a = two.y - one.y
 	private val b = one.x - two.x
 	private val c = two.x * one.y - one.x * two.y
-	val set = HashSet<FPoint>()
+	val set = hashSetOf<FPoint>()
 
 	init {
 		if (a != 0 || b != 0) {

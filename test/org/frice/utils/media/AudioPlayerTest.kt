@@ -5,7 +5,7 @@ import org.frice.event.MOUSE_CLICKED
 import org.frice.event.OnMouseEvent
 import org.frice.utils.message.FLog
 
-class AudioPlayerTest : GameFX(300, 300) {
+class AudioPlayerTest : GameFX(width = 300, height = 300) {
 	val player = getPlayer("../TouhouFrice/res/shake.mp3", true)
 	val player2 = getPlayer("shake.wav", true)
 	override fun onLastInit() {

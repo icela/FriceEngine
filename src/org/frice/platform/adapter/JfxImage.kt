@@ -16,10 +16,9 @@ class JfxImage : JvmImage {
 	constructor(width: Int, height: Int) : super(BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB))
 	constructor(image: BufferedImage) : super(image)
 
-	val jfxImage: WritableImage
+	val jfxImage = WritableImage(image.width, image.height)
 
 	init {
-		this.jfxImage = WritableImage(image.width, image.height)
 		SwingFXUtils.toFXImage(image, jfxImage)
 	}
 

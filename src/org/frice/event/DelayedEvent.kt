@@ -16,5 +16,5 @@ class DelayedEvent(val millisFromStart: Long, val event: SideEffect) : Comparabl
 	}
 
 	override operator fun compareTo(other: DelayedEvent)
-		= (millisFromStart - other.millisFromStart).toInt()
+		= millisFromStart.compareTo(other.millisFromStart)
 }
