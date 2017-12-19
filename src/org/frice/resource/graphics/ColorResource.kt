@@ -73,11 +73,13 @@ class ColorResource private constructor(
 		@JvmField val 赤羽业 = 西木野取款姬
 	}
 
+	@JvmOverloads
+	constructor(red: Int, green: Int, blue: Int, alpha: Int = 0xFF) : this(makeColor(red, green, blue, alpha))
+
 	constructor(color: Int) : this(color, null)
 	constructor(color: Color) : this(makeColor(color), color)
 	constructor(color: String) : this(Color.getColor(color))
 	constructor(rgb: Int, alpha: Int) : this(makeColor(rgb, alpha))
-	constructor(red: Int, green: Int, blue: Int, alpha: Int) : this(makeColor(red, green, blue, alpha))
 
 	/** @see java.awt.Color */
 	fun darker() = ColorResource(
