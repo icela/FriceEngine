@@ -85,7 +85,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 	internal val panel: SwingGamePanel = SwingGamePanel()
 
-	override val drawer: JvmDrawer
+	private val drawer: JvmDrawer
 
 	val fpsCounter = FpsCounter()
 
@@ -233,7 +233,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
-			clearScreen()
+			clearScreen(drawer)
 			drawEverything(drawer)
 
 			if (loseFocus and loseFocusChangeColor) {

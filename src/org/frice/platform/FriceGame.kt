@@ -18,10 +18,9 @@ import org.frice.utils.shape.*
  * @since v1.2
  * @param Drawer the FriceDrawer used
  */
-interface FriceGame<Drawer : FriceDrawer>
+interface FriceGame<in Drawer : FriceDrawer>
 	: TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
-	val drawer: Drawer
 
 	override val box
 		get() = object : FShapeQuad {
@@ -116,7 +115,7 @@ interface FriceGame<Drawer : FriceDrawer>
 	/** remove objects unsafely using vararg */
 	fun instantRemoveObject(vararg objs: AbstractObject) = instantRemoveObject(0, *objs)
 
-	fun clearScreen() {
+	fun clearScreen(drawer: Drawer) {
 		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()

@@ -157,7 +157,7 @@ open class GameFX @JvmOverloads constructor(
 
 	val canvas = Canvas(width.toDouble(), height.toDouble())
 	val root = StackPane(canvas)
-	override val drawer = JfxDrawer(canvas.graphicsContext2D)
+	private val drawer = JfxDrawer(canvas.graphicsContext2D)
 
 	override fun setCursor(o: FriceImage) {
 		scene.cursor = ImageCursor(o.fx().jfxImage)
@@ -195,7 +195,7 @@ open class GameFX @JvmOverloads constructor(
 					onRefresh()
 					if (stopped) break
 					if (!paused && refresh.ended()) {
-						clearScreen()
+						clearScreen(drawer)
 						drawEverything(drawer)
 						drawer.init()
 						drawer.color = ColorResource.DARK_GRAY
