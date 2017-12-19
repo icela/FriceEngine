@@ -2,9 +2,7 @@
 @file:JvmMultifileClass
 
 /**
- * Kotlin language extension
- * for Kotlin only
- *
+ * General purpose utilities
  *
  * Created by ice1000 on 2016/8/17.
  * @author ice1000
@@ -46,4 +44,7 @@ inline fun until(condition: Boolean, block: () -> Unit) {
 	while (!condition) block()
 }
 
-fun Int.squared() = this * this
+fun Any.any2Map() = javaClass
+	.declaredFields
+	.map { it.name to it.get(this) }
+	.toMap()
