@@ -9,6 +9,7 @@ import org.frice.platform.*
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.EventManager
 import org.frice.utils.cast
 import org.frice.utils.message.*
 import org.frice.utils.shape.FRectangle
@@ -34,6 +35,7 @@ import javax.swing.*
 @Suppress("LeakingThis")
 open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), FriceGame<JvmDrawer> {
 	override val layers = Array(layerCount) { Layer() }
+	override val eventManager = EventManager()
 	override var paused = false
 		set(value) {
 			if (value) FClock.pause() else FClock.resume()

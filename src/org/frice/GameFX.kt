@@ -15,8 +15,10 @@ import javafx.stage.Stage
 import org.frice.event.*
 import org.frice.obj.button.FText
 import org.frice.platform.*
-import org.frice.platform.adapter.*
+import org.frice.platform.adapter.JfxDrawer
+import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
+import org.frice.utils.EventManager
 import org.frice.utils.shape.FRectangle
 import org.frice.utils.time.*
 import java.util.*
@@ -36,6 +38,8 @@ open class GameFX @JvmOverloads constructor(
 	layerCount: Int = 1,
 	private val width: Int = 800,
 	private val height: Int = 800) : Application(), FriceGame<JfxDrawer> {
+
+	override val eventManager = EventManager()
 
 	override fun isResizable() = stage.isResizable
 	override fun setResizable(resizable: Boolean) {

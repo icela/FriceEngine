@@ -1,5 +1,6 @@
 package org.frice.platform
 
+import org.frice.event.DelayedEvent
 import org.frice.event.OnMouseEvent
 import org.frice.obj.*
 import org.frice.obj.button.*
@@ -11,6 +12,7 @@ import org.frice.platform.adapter.JvmImage
 import org.frice.platform.owners.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
+import org.frice.utils.EventManager
 import org.frice.utils.shape.*
 
 /**
@@ -21,6 +23,7 @@ import org.frice.utils.shape.*
 interface FriceGame<in Drawer : FriceDrawer>
 	: TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
+	val eventManager: EventManager
 
 	override val box
 		get() = object : FShapeQuad {
@@ -115,17 +118,23 @@ interface FriceGame<in Drawer : FriceDrawer>
 	/** remove objects unsafely using vararg */
 	fun instantRemoveObject(vararg objs: AbstractObject) = instantRemoveObject(0, *objs)
 
+	/** draw a white square */
 	fun clearScreen(drawer: Drawer) {
 		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()
 	}
 
+	/** check buttons' events */
 	fun mouse(e: OnMouseEvent) = layers.forEach {
 		it.texts.forEach { b ->
 			if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
 		}
 	}
+
+	fun runLater(delayedEvent: DelayedEvent) = eventManager.insert(delayedEvent)
+	fun runLater(millisFromNow: Long, event: SideEffect) = runLater(DelayedEvent.millisFromNow(millisFromNow, event))
+	fun runFromStart(millisFromStart: Long, event: SideEffect) = runLater(DelayedEvent(millisFromStart, event))
 
 	/**
 	 * Doing everything related to game objects:
