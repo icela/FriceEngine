@@ -17,8 +17,8 @@ import java.util.function.Consumer
 class ImageButton
 @JvmOverloads
 constructor(
-	val imageNormal: ImageResource,
-	val imagePressed: ImageResource = imageNormal,
+	var imageNormal: ImageResource,
+	var imagePressed: ImageResource = imageNormal,
 	override var x: Double,
 	override var y: Double) : ImageOwner, FButton {
 

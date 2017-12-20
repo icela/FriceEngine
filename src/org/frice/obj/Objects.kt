@@ -67,6 +67,7 @@ abstract class PhysicalObject(
 	override var x: Double,
 	override var y: Double) : AbstractObject, Collidable, FContainer {
 	open var died = false
-	override val box: FShapeQuad get() = this
+	var collisionBox: FShapeQuad? = null
+	override val box: FShapeQuad get() = collisionBox ?: this
 	override var rotate = 0.0
 }
