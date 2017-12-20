@@ -136,6 +136,12 @@ interface FriceGame<in Drawer : FriceDrawer>
 	fun runLater(millisFromNow: Long, event: SideEffect) = runLater(DelayedEvent.millisFromNow(millisFromNow, event))
 	fun runFromStart(millisFromStart: Long, event: SideEffect) = runLater(DelayedEvent(millisFromStart, event))
 
+	/** calling onRefresh and do checking */
+	fun adjust() {
+		onRefresh()
+		eventManager.check()
+	}
+
 	/**
 	 * Doing everything related to game objects:
 	 * removing died objects, deal with animations, draw objects on screen

@@ -78,7 +78,7 @@ fun launch(game: Game) {
 		thread {
 			loop {
 				try {
-					onRefresh()
+					adjust()
 					// only update per "refreshTime"
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()

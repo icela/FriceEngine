@@ -196,7 +196,7 @@ open class GameFX @JvmOverloads constructor(
 			onLastInit()
 			while (true) {
 				try {
-					onRefresh()
+					adjust()
 					if (stopped) break
 					if (!paused && refresh.ended()) {
 						clearScreen(drawer)
