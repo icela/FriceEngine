@@ -63,7 +63,10 @@ interface Collidable {
  * @author ice1000
  * @since v0.4
  */
-abstract class PhysicalObject : AbstractObject, Collidable, FContainer {
+abstract class PhysicalObject(
+	override var x: Double,
+	override var y: Double) : AbstractObject, Collidable, FContainer {
 	open var died = false
+	override val box: FShapeQuad get() = this
 	override var rotate = 0.0
 }

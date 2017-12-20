@@ -4,7 +4,6 @@ import org.frice.obj.FObject
 import org.frice.platform.owners.ColorOwner
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.shape.FShapeInt
-import org.frice.utils.shape.FShapeQuad
 
 /**
  * an object with a utils and a shape, used to create an simple object quickly
@@ -19,16 +18,13 @@ open class ShapeObject
 constructor(
 	override var color: ColorResource,
 	val shape: FShapeInt,
-	override var x: Double = 0.0,
-	override var y: Double = 0.0,
-	id: Int = -1) : FShapeQuad, FObject(), ColorOwner {
+	x: Double = 0.0,
+	y: Double = 0.0,
+	id: Int = -1) : FObject(x, y), ColorOwner {
 
 	init {
 		this.id = id
 	}
-
-	var collisionBox: FShapeQuad? = null
-	override val box: FShapeQuad get() = collisionBox ?: this
 
 	private var scaleX: Double = 1.0
 	private var scaleY: Double = 1.0
@@ -66,7 +62,6 @@ constructor(
 		result = 31 * result + shape.hashCode()
 		result = 31 * result + x.hashCode()
 		result = 31 * result + y.hashCode()
-		result = 31 * result + (collisionBox?.hashCode() ?: 0)
 		result = 31 * result + scaleX.hashCode()
 		result = 31 * result + scaleY.hashCode()
 		result = 31 * result + died.hashCode()

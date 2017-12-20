@@ -15,8 +15,8 @@ import org.frice.resource.image.ImageResource
  */
 class FunctionEffect(
 	res: FunctionResource,
-	override var x: Double,
-	override var y: Double) : ImageObject(res.resource, x, y) {
+	x: Double,
+	y: Double) : ImageObject(res.resource, x, y) {
 
 	constructor(function: (Double) -> Double, x: Double, y: Double, width: Int, height: Int) :
 		this(FunctionResource(ColorResource.BLUE, function::invoke, width, height), x, y)

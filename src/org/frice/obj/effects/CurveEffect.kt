@@ -14,8 +14,8 @@ import org.frice.resource.image.ImageResource
  */
 class CurveEffect(
 	res: CurveResource,
-	override var x: Double,
-	override var y: Double) : ImageObject(res.resource, x, y) {
+	x: Double,
+	y: Double) : ImageObject(res.resource, x, y) {
 
 	constructor(curve: (Double) -> List<Double>, x: Double, y: Double, width: Int, height: Int) :
 		this(CurveResource(ColorResource.BLUE, curve::invoke, width, height), x, y)

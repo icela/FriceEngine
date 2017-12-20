@@ -9,7 +9,4 @@ interface ImageOwner : Collidable, FShapeQuad {
 
 	override val width: Double get() = image.width.toDouble()
 	override val height: Double get() = image.height.toDouble()
-
-	var collisionBox: FShapeQuad?
-	override val box: FShapeQuad get() = collisionBox ?: this
 }

@@ -31,6 +31,7 @@ constructor(
 	override var height: Double = super.height
 	override var rotate = 0.0
 	override var onMouseListener: Consumer<OnMouseEvent>? = null
-	override var collisionBox: FShapeQuad? = null
+	var collisionBox: FShapeQuad? = null
+	override val box: FShapeQuad get() = collisionBox ?: this
 	override val image: FriceImage get () = if (bool) imagePressed.image else imageNormal.image
 }

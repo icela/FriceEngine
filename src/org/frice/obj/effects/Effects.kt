@@ -1,6 +1,6 @@
 package org.frice.obj.effects
 
-import org.frice.obj.AbstractObject
+import org.frice.obj.PhysicalObject
 import org.frice.obj.sub.ImageObject
 import org.frice.platform.FriceImage
 import org.frice.platform.owners.ColorOwner
@@ -19,12 +19,12 @@ class LineEffect
 @JvmOverloads
 constructor(
 	override var color: ColorResource = BLACK,
-	override var x: Double,
-	override var y: Double,
+	x: Double,
+	y: Double,
 	var x2: Double,
-	var y2: Double) : AbstractObject, ColorOwner {
-
-	override var rotate = 0.0
+	var y2: Double) : PhysicalObject(x, y), ColorOwner {
+	override val width: Double get() = Math.abs(x2 - x)
+	override val height: Double get() = Math.abs(y2 - y)
 }
 
 /**
@@ -34,8 +34,8 @@ constructor(
  */
 class ParticleEffect(
 	private var pRes: ParticleResource,
-	override var x: Double,
-	override var y: Double) : ImageObject(pRes.resource, x, y) {
+	x: Double,
+	y: Double) : ImageObject(pRes.resource, x, y) {
 	override val image: FriceImage get() = pRes.resource
 
 	override val width: Double get() = pRes.width.toDouble()

@@ -1,9 +1,7 @@
 package org.frice.obj
 
 import org.frice.anim.FAnim
-import org.frice.platform.FriceImage
 import org.frice.resource.FResource
-import org.frice.utils.shape.FShapeQuad
 import java.util.*
 
 /**
@@ -13,7 +11,7 @@ import java.util.*
  * @author ice1000
  * @since v0.1
  */
-abstract class FObject : PhysicalObject() {
+abstract class FObject(x: Double, y: Double) : PhysicalObject(x, y) {
 	var id = -1
 	val anims = LinkedList<FAnim>()
 	override var rotate = 0.0
