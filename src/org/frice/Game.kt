@@ -105,6 +105,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			}
 
 		override var rotate = 0.0
+		override var isVisible = false
 		override fun toString() = "($x, $y)"
 	}
 

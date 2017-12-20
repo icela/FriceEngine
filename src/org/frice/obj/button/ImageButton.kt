@@ -30,6 +30,7 @@ constructor(
 	override var width: Double = super.width
 	override var height: Double = super.height
 	override var rotate = 0.0
+	override var isVisible = true
 	override var onMouseListener: Consumer<OnMouseEvent>? = null
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this

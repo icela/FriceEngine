@@ -15,6 +15,7 @@ interface AbstractObject {
 	var y: Double
 
 	var rotate: Double
+	var isVisible: Boolean
 
 	fun move(x: Double, y: Double) {
 		this.x += x
@@ -69,5 +70,6 @@ abstract class PhysicalObject(
 	open var died = false
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this
+	override var isVisible = true
 	override var rotate = 0.0
 }

@@ -146,6 +146,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 			}
 
 			it.objects.forEach loop@ { o ->
+				if (!o.isVisible) return@loop
 				if (o is ColorOwner && ColorResource.COLORLESS == o.color) return@loop
 				bgg.restore()
 				bgg.init()
@@ -176,6 +177,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 			}
 
 			it.texts.forEach loop@ { b ->
+				if (!b.isVisible) return@loop
 				if (b.color == ColorResource.COLORLESS) return@loop
 				bgg.run {
 					restore()

@@ -1,6 +1,7 @@
 package org.frice.platform.owners
 
 import org.frice.obj.Collidable
+import org.frice.obj.FContainer
 import org.frice.platform.FriceImage
 import org.frice.utils.shape.FShapeQuad
 
