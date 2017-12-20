@@ -127,7 +127,14 @@ interface FriceGame<in Drawer : FriceDrawer>
 		}
 	}
 
-	fun drawEverything(bgg: Drawer) {
+	/**
+	 * Doing everything related to game objects:
+	 * removing died objects, deal with animations, draw objects on screen
+	 *
+	 * @author ice1000
+	 * @param bgg the drawer used to draw
+	 */
+	fun dealWithObjects(bgg: Drawer) {
 		processBuffer()
 		layers.forEach {
 			it.objects.removeIf { o ->
@@ -139,8 +146,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 			}
 
 			it.objects.forEach loop@ { o ->
-				if (o is ShapeObject && ColorResource.COLORLESS == o.resource) return@loop
-				if (o is LineEffect && ColorResource.COLORLESS == o.color) return@loop
+				if (o is ColorOwner && ColorResource.COLORLESS == o.color) return@loop
 				bgg.restore()
 				bgg.init()
 				if (bgg is JvmDrawer) {
@@ -148,7 +154,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 					else bgg.rotate(o.rotate, o.x, o.y)
 				} else bgg.rotate(o.rotate)
 				when (o) {
-					is FObject.ImageOwner -> if (collides(o)) bgg.drawImage(o.image, o.x, o.y)
+					is ImageOwner -> if (collides(o)) bgg.drawImage(o.image, o.x, o.y)
 					is ShapeObject -> {
 						if (collides(o)) {
 							bgg.color = o.resource
@@ -179,7 +185,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 				}
 				if (b is FButton) {
 					when (b) {
-						is FObject.ImageOwner -> if (collides(b)) bgg.drawImage(b.image, b.x, b.y)
+						is ImageOwner -> if (collides(b)) bgg.drawImage(b.image, b.x, b.y)
 						is SimpleButton -> {
 							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,

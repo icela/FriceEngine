@@ -95,7 +95,7 @@ class Test : Game() {
 					stopAnims()
 					addAnim(SimpleMove(0, -300))
 					addAnim(SimpleScale(1.1, 1.1))
-					res = ColorResource.MAGENTA
+					color = ColorResource.MAGENTA
 				}
 			}
 		}

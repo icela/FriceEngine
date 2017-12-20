@@ -2,8 +2,8 @@ package org.frice.obj.button
 
 import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
-import org.frice.obj.FObject
 import org.frice.platform.FriceImage
+import org.frice.platform.owners.ImageOwner
 import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.FShapeQuad
 import java.util.function.Consumer
@@ -20,7 +20,7 @@ constructor(
 	val imageNormal: ImageResource,
 	val imagePressed: ImageResource = imageNormal,
 	override var x: Double,
-	override var y: Double) : FObject.ImageOwner, FButton {
+	override var y: Double) : ImageOwner, FButton {
 
 	override fun buttonPressed(e: OnMouseEvent) {
 		bool = e.type == MOUSE_PRESSED

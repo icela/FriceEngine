@@ -60,12 +60,12 @@ class TestFx : GameFX(width = 600, height = 600) {
 		objs.removeAll(PhysicalObject::died)
 		objs2.removeAll(PhysicalObject::died)
 		val collided = arrayListOf<ShapeObject>()
-		objs.forEach { x -> objs2.forEach { y -> if (x.collides(y) && y.res != ColorResource.MAGENTA) collided += y } }
+		objs.forEach { x -> objs2.forEach { y -> if (x.collides(y) && y.color != ColorResource.MAGENTA) collided += y } }
 		collided.forEach {
 			it.stopAnims()
 			it.addAnim(SimpleMove(0, -300))
 			it.addAnim(SimpleScale(1.1, 1.1))
-			it.res = ColorResource.MAGENTA
+			it.color = ColorResource.MAGENTA
 		}
 	}
 

@@ -196,7 +196,7 @@ open class GameFX @JvmOverloads constructor(
 					if (stopped) break
 					if (!paused && refresh.ended()) {
 						clearScreen(drawer)
-						drawEverything(drawer)
+						dealWithObjects(drawer)
 						drawer.init()
 						drawer.color = ColorResource.DARK_GRAY
 						fpsCounter.refresh()

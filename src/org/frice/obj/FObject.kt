@@ -34,14 +34,4 @@ abstract class FObject : PhysicalObject() {
 	fun addAnim(anim: FAnim) = anims.add(anim)
 
 	fun stopAnims() = anims.clear()
-
-	interface ImageOwner : Collidable, FShapeQuad {
-		val image: FriceImage
-
-		override val width: Double get() = image.width.toDouble()
-		override val height: Double get() = image.height.toDouble()
-
-		var collisionBox: FShapeQuad?
-		override val box: FShapeQuad get() = collisionBox ?: this
-	}
 }

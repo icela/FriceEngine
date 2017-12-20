@@ -234,7 +234,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		override fun update(g: Graphics?) = paint(g)
 		override fun paintComponent(g: Graphics) {
 			clearScreen(drawer)
-			drawEverything(drawer)
+			dealWithObjects(drawer)
 
 			if (loseFocus and loseFocusChangeColor) {
 				repeat(drawer.friceImage.width) { x: Int ->

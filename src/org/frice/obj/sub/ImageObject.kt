@@ -4,6 +4,7 @@ package org.frice.obj.sub
 
 import org.frice.obj.FObject
 import org.frice.platform.FriceImage
+import org.frice.platform.owners.ImageOwner
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
 import org.frice.utils.shape.FShapeQuad
@@ -21,7 +22,7 @@ constructor(
 	var res: ImageResource,
 	override var x: Double = 0.0,
 	override var y: Double = 0.0,
-	id: Int = -1) : FObject(), FObject.ImageOwner {
+	id: Int = -1) : FObject(), ImageOwner {
 	constructor(res: FriceImage, x: Double, y: Double) : this(create(res), x, y, -1)
 
 	init {

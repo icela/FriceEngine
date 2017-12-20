@@ -1,6 +1,7 @@
 package org.frice.obj.sub
 
 import org.frice.obj.FObject
+import org.frice.platform.owners.ColorOwner
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.shape.FShapeInt
 import org.frice.utils.shape.FShapeQuad
@@ -16,11 +17,11 @@ import org.frice.utils.shape.FShapeQuad
 open class ShapeObject
 @JvmOverloads
 constructor(
-	var res: ColorResource,
+	override var color: ColorResource,
 	val shape: FShapeInt,
 	override var x: Double = 0.0,
 	override var y: Double = 0.0,
-	id: Int = -1) : FShapeQuad, FObject() {
+	id: Int = -1) : FShapeQuad, FObject(), ColorOwner {
 
 	init {
 		this.id = id
@@ -46,7 +47,7 @@ constructor(
 
 	override var died = false
 
-	override val resource get () = res
+	override val resource get () = color
 
 	override fun scale(x: Double, y: Double) {
 		scaleX += x
@@ -61,7 +62,7 @@ constructor(
 
 	/** auto-generated. */
 	override fun hashCode(): Int {
-		var result = res.hashCode()
+		var result = color.hashCode()
 		result = 31 * result + shape.hashCode()
 		result = 31 * result + x.hashCode()
 		result = 31 * result + y.hashCode()

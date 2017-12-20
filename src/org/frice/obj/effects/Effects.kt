@@ -3,6 +3,7 @@ package org.frice.obj.effects
 import org.frice.obj.AbstractObject
 import org.frice.obj.sub.ImageObject
 import org.frice.platform.FriceImage
+import org.frice.platform.owners.ColorOwner
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ParticleResource
@@ -17,11 +18,11 @@ import org.frice.resource.image.ImageResource
 class LineEffect
 @JvmOverloads
 constructor(
-	var color: ColorResource = BLACK,
+	override var color: ColorResource = BLACK,
 	override var x: Double,
 	override var y: Double,
 	var x2: Double,
-	var y2: Double) : AbstractObject {
+	var y2: Double) : AbstractObject, ColorOwner {
 
 	override var rotate = 0.0
 }
