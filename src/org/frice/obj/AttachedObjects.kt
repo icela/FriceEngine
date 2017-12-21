@@ -1,35 +1,59 @@
 package org.frice.obj
 
 /**
- * Don't `addObject(objectGroup)`.
  * This is just an attacher, add objects inside.
  *
  * @author ice1000
  * @since v1.7.2
  */
-class AttachedObjects<T : FObject>(val objs: MutableList<T>) {
+class AttachedObjects(private val objs: MutableList<FObject>) {
 
+	/** scale all objects */
 	fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
+
+	/** move all objects */
 	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
+
+	/** set all objects' `died` to true */
+	fun die() = objs.forEach { it.died = true }
+
+	/** set all objects' `isVisible` to true */
+	fun hide() = objs.forEach { it.isVisible = false }
+
+	/** rotate all objects */
 	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
+
 	operator fun get(x: Int) = objs[x]
 
-	fun addObject(vararg objects: T) = objects.forEach { objs.add(it) }
-	fun removeObject(vararg objects: T) = objects.forEach { objs.remove(it) }
+	/** stop all objects' anims */
+	fun stopAnims() = objs.forEach { it.stopAnims() }
+
+	fun addObject(vararg objects: FObject) = objects.forEach { objs.add(it) }
+	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
 }
 
 /**
- * Don't `addObject(objectGroup)`.
  * This is just an attacher, add objects inside.
  *
  * @author ice1000
  * @since v1.7.2
  * @see AttachedObjects
  */
-class AttachedAbstarctObjects<T : AbstractObject>(val objs: MutableList<T>) {
+class AttachedAbstarctObjects(private val objs: MutableList<AbstractObject>) {
+	/** move all objects */
 	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
+
+	/** set all objects' `died` to true */
+	fun die() = objs.forEach { it.died = true }
+
+	/** set all objects' `isVisible` to true */
+	fun hide() = objs.forEach { it.isVisible = false }
+
+	/** rotate all objects */
+	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
+
 	operator fun get(x: Int) = objs[x]
 
-	fun addObject(vararg objects: T) = objects.forEach { objs.add(it) }
-	fun removeObject(vararg objects: T) = objects.forEach { objs.remove(it) }
+	fun addObject(vararg objects: AbstractObject) = objects.forEach { objs.add(it) }
+	fun removeObject(vararg objects: AbstractObject) = objects.forEach { objs.remove(it) }
 }

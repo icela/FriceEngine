@@ -22,6 +22,10 @@ interface AbstractObject {
 		this.x += x
 		this.y += y
 	}
+
+	infix fun rotate(angle: Double) {
+		rotate += angle
+	}
 }
 
 /**

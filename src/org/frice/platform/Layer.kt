@@ -4,6 +4,10 @@ import org.frice.obj.AbstractObject
 import org.frice.obj.button.FText
 import java.util.*
 
+/**
+ * @author ice1000
+ * @since v1.4.0
+ */
 class Layer {
 	val objects = LinkedList<AbstractObject>()
 	val objectDeleteBuffer = ArrayList<AbstractObject>()

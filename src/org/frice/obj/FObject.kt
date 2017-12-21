@@ -18,12 +18,6 @@ abstract class FObject(x: Double, y: Double) : PhysicalObject(x, y) {
 
 	abstract fun scale(x: Double, y: Double)
 
-	open infix fun rotate(angle: Double) {
-		rotate += angle
-	}
-
-	private fun squaredDelta(d1: Double, d2: Double) = (d1 - d2) * Math.abs(d1 - d2)
-
 	@Suppress("FunctionName")
 	internal fun `{-# runAnims #-}`() = anims.forEach { a -> a.`{-# do #-}`(this) }
 
