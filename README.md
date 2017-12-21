@@ -45,6 +45,7 @@ Alternatively, you can download a jar from the [release page](https://github.com
 ## Features
 
 This engine is based on Java's built-in GUI framework, both Swing and JavaFX.
+"Platform" here refers to Swing/JavaFX.
 
 ### Platform dependent
 
@@ -63,13 +64,12 @@ Always on top|√|√
 Text font/size|√|√
 Multi-instances|√|×
 Resizability|√|√
-Rotate animation|√|×
 Key listener|√|√
 Text measuring|√|√
 
 ### Platform independent
 
-- Non-rotate animations (moving, scaling, accelerating, chasing, approaching, etc.)
+- Animations (moving, scaling, rotating, accelerating, chasing, approaching, etc.)
 - Audio playing (\*.wav, \*.mp3) by JavaSound/JavaFX Media
 - Clock system, timers
 - Delayed event manager
