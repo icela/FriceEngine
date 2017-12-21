@@ -42,7 +42,7 @@ abstract class ImageResource : FResource {
 	 * @param y size proportion on y axis
 	 * @return scaled image
 	 */
-	fun scaled(x: Double, y: Double) = fromImage(image.scale(x, y))
+	fun scale(x: Double, y: Double) = fromImage(image.scale(x, y))
 
 	/**
 	 * @param x location x

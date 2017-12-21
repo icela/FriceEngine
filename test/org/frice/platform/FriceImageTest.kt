@@ -1,6 +1,7 @@
 package org.frice.platform
 
-import org.frice.*
+import org.frice.GameFX
+import org.frice.launchFx
 import org.frice.obj.sub.ImageObject
 import org.frice.resource.image.ImageResource
 

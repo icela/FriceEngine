@@ -23,7 +23,7 @@ interface FriceImage {
 	/**
 	 * @param x size proportion on x axis
 	 * @param y size proportion on y axis
-	 * @return scaled image
+	 * @return scale image
 	 */
 	fun scale(x: Double, y: Double): FriceImage
 
