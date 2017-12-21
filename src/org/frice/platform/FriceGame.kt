@@ -73,10 +73,10 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	}
 
 	/** remove objects using vararg */
-	fun removeObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { removeObject(layer, it) }
+	fun removeObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { removeObject(layer, it) }
 
 	/** remove objects unsafely using vararg */
-	fun instantRemoveObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { instantRemoveObject(layer, it) }
+	fun instantRemoveObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { instantRemoveObject(layer, it) }
 
 	/**
 	 * removes single object.
@@ -105,22 +105,22 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	fun addObject(layer: Int, obj: AbstractObject) = layers[layer].addObject(obj)
 
 	/** add objects using vararg */
-	fun addObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { addObject(layer, it) }
+	fun addObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { addObject(layer, it) }
 
-	fun addObject(vararg objs: AbstractObject) = addObject(0, *objs)
-	fun removeObject(vararg objs: AbstractObject) = removeObject(0, *objs)
+	fun addObject(vararg objects: AbstractObject) = addObject(0, *objects)
+	fun removeObject(vararg objects: AbstractObject) = removeObject(0, *objects)
 
 	/** adds an object to game unsafely, to be shown on game window. */
 	fun instantAddObject(layer: Int, obj: AbstractObject) = layers[layer].instantAddObject(obj)
 
 	/** add objects unsafely using vararg */
-	fun instantAddObject(layer: Int, vararg objs: AbstractObject) = objs.forEach { instantAddObject(layer, it) }
+	fun instantAddObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { instantAddObject(layer, it) }
 
 	/** add objects unsafely using vararg */
-	fun instantAddObject(vararg objs: AbstractObject) = instantAddObject(0, *objs)
+	fun instantAddObject(vararg objects: AbstractObject) = instantAddObject(0, *objects)
 
 	/** remove objects unsafely using vararg */
-	fun instantRemoveObject(vararg objs: AbstractObject) = instantRemoveObject(0, *objs)
+	fun instantRemoveObject(vararg objects: AbstractObject) = instantRemoveObject(0, *objects)
 
 	/** draw a white square */
 	fun clearScreen(drawer: FriceDrawer) {
@@ -156,9 +156,25 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	fun dealWithObjects(bgg: FriceDrawer) {
 		processBuffer()
 		layers.forEach {
-			it.objects.removeIf { o ->
+			it.objects.removeIf removing@ { o ->
+				if (it.autoGC) {
+					if ((o is PhysicalObject && !collides(o)) || (o.x > width || o.y > height)) {
+						o.died = true
+						return@removing true
+					}
+				}
 				(o as? FObject)?.`{-# runAnims #-}`()
-				return@removeIf o.died
+				return@removing o.died
+			}
+
+			it.texts.removeIf removing@ { o ->
+				if (it.autoGC) {
+					if (o.x > width || o.y > height) {
+						o.died = true
+						return@removing true
+					}
+				}
+				return@removing o.died
 			}
 
 			it.objects.forEach loop@ { o ->
@@ -184,12 +200,6 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 					is LineEffect -> {
 						bgg.color = o.color
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
-					}
-				}
-				if (it.autoGC) {
-					if ((o is PhysicalObject && !collides(o)) || (o.x > width || o.y > height)) {
-						o.died = true
-						it.removeObject(o)
 					}
 				}
 			}
