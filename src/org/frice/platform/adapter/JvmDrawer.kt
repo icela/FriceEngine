@@ -61,7 +61,7 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 	override fun drawLine(x: Double, y: Double, width: Double, height: Double) =
 		g.drawLine(x.toInt(), y.toInt(), width.toInt(), height.toInt())
 
-	fun rotate(theta: Double, x: Double, y: Double) = g.rotate(theta, x, y)
+	override fun rotate(theta: Double, x: Double, y: Double) = g.rotate(theta, x, y)
 	override fun rotate(theta: Double) = g.rotate(theta)
 
 	override fun drawRoundRect(

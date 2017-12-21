@@ -7,7 +7,6 @@ import org.frice.obj.button.*
 import org.frice.obj.effects.LineEffect
 import org.frice.obj.sub.ImageObject
 import org.frice.obj.sub.ShapeObject
-import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.platform.owner.*
 import org.frice.resource.graphics.ColorResource
@@ -180,12 +179,9 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 			it.objects.forEach loop@ { o ->
 				if (!o.isVisible) return@loop
 				if (o is ColorOwner && ColorResource.COLORLESS == o.color) return@loop
-				bgg.restore()
 				bgg.init()
-				if (bgg is JvmDrawer) {
-					if (o is FContainer) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
-					else bgg.rotate(o.rotate, o.x, o.y)
-				} else bgg.rotate(o.rotate)
+				if (o is FContainer) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
+				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
 					is ImageOwner -> if (collides(o)) bgg.drawImage(o.image, o.x, o.y)
 					is ShapeObject -> {
@@ -202,17 +198,15 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
 					}
 				}
+				bgg.restore()
 			}
 
 			it.texts.forEach loop@ { b ->
 				if (!b.isVisible) return@loop
 				if (b.color == ColorResource.COLORLESS) return@loop
-				bgg.run {
-					restore()
-					init()
-					rotate(b.rotate)
-					useFont(b)
-				}
+				bgg.init()
+				bgg.rotate(b.rotate)
+				bgg.useFont(b)
 				if (b is FButton) {
 					when (b) {
 						is ImageOwner -> if (collides(b)) bgg.drawImage(b.image, b.x, b.y)
@@ -232,6 +226,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 						bgg.drawString(b.text, b.x, b.y)
 					}
 				}
+				bgg.restore()
 			}
 		}
 		customDraw(bgg)
