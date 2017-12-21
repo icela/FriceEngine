@@ -21,7 +21,7 @@ class EventManager {
 	 */
 	tailrec fun check() {
 		if (queue.isNotEmpty() && queue.peek().millisFromStart <= FClock.current) {
-			queue.remove().event()
+			queue.remove().let { if (!it.isReverted) it.`{-# event #-}`() }
 			check()
 		}
 	}
