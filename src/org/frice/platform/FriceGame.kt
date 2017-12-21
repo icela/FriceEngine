@@ -148,11 +148,8 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 		processBuffer()
 		layers.forEach {
 			it.objects.removeIf { o ->
-				if (o is FObject) {
-					o.`{-# runAnims #-}`()
-					return@removeIf o.died
-				}
-				false
+				(o as? FObject)?.`{-# runAnims #-}`()
+				return@removeIf o.died
 			}
 
 			it.objects.forEach loop@ { o ->
@@ -180,9 +177,10 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
 					}
 				}
-				if (autoGC and (o.x < -width || o.x > width + width || o.y < -height || o.y > height + height)) {
-					if (o is PhysicalObject) o.died = true
-					it.removeObject(o)
+				if (autoGC) {
+					o.died = true
+					if (o is PhysicalObject && collides(o)) it.removeObject(o)
+					else if (o.x > width || o.y > height) it.removeObject(o)
 				}
 			}
 

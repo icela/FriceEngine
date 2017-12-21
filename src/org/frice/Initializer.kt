@@ -99,7 +99,7 @@ fun launch(game: Game) {
  * @author ice1000
  * @since v1.5.0
  */
-fun <GameType : FriceGame<*>> launch(c: Class<out GameType>) {
+fun <GameType : FriceGame> launch(c: Class<out GameType>) {
 	if (GameFX::class.java.isAssignableFrom(c)) launchFx(cast(c))
 	val instance: GameType = c.newInstance()
 	if (instance is Game) launch(instance)

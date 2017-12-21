@@ -25,6 +25,7 @@ abstract class FText : AbstractObject {
 		}
 
 	override var rotate = 0.0
+	override var died = false
 	override var isVisible = true
 	abstract val color: ColorResource
 
