@@ -4,7 +4,7 @@ package org.frice.obj.sub
 
 import org.frice.obj.FObject
 import org.frice.platform.FriceImage
-import org.frice.platform.owners.ImageOwner
+import org.frice.platform.owner.ImageOwner
 import org.frice.resource.image.ImageResource
 import org.frice.resource.image.ImageResource.Factories.create
 

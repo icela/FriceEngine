@@ -3,7 +3,7 @@ package org.frice.obj.button
 import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
 import org.frice.platform.FriceImage
-import org.frice.platform.owners.ImageOwner
+import org.frice.platform.owner.ImageOwner
 import org.frice.resource.image.ImageResource
 import org.frice.utils.shape.FShapeQuad
 import java.util.function.Consumer

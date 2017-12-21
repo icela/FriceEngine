@@ -20,6 +20,7 @@ import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
 import org.frice.utils.EventManager
 import org.frice.utils.shape.FRectangle
+import org.frice.utils.shape.FShapeQuad
 import org.frice.utils.time.*
 import java.util.*
 import kotlin.concurrent.thread
@@ -37,9 +38,10 @@ import kotlin.concurrent.thread
 open class GameFX @JvmOverloads constructor(
 	layerCount: Int = 1,
 	private val width: Int = 800,
-	private val height: Int = 800) : Application(), FriceGame<JfxDrawer> {
+	private val height: Int = 800) : Application(), FriceGame {
 
 	override val eventManager = EventManager()
+	override var activeArea: FShapeQuad? = null
 
 	override fun isResizable() = stage.isResizable
 	override fun setResizable(resizable: Boolean) {

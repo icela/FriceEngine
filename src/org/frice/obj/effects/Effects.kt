@@ -3,7 +3,7 @@ package org.frice.obj.effects
 import org.frice.obj.PhysicalObject
 import org.frice.obj.sub.ImageObject
 import org.frice.platform.FriceImage
-import org.frice.platform.owners.ColorOwner
+import org.frice.platform.owner.ColorOwner
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ParticleResource

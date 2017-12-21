@@ -9,24 +9,19 @@ import org.frice.obj.sub.ImageObject
 import org.frice.obj.sub.ShapeObject
 import org.frice.platform.adapter.JvmDrawer
 import org.frice.platform.adapter.JvmImage
-import org.frice.platform.owners.*
+import org.frice.platform.owner.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
 import org.frice.utils.EventManager
 import org.frice.utils.shape.*
 
-/**
- * @author ice1000
- * @since v1.2
- * @param Drawer the FriceDrawer used
- */
-interface FriceGame<in Drawer : FriceDrawer>
-	: TitleOwner, Sized, Resizable, Collidable {
+interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>
 	val eventManager: EventManager
 
-	override val box
-		get() = object : FShapeQuad {
+	var activeArea: FShapeQuad?
+	override val box: FShapeQuad
+		get() = activeArea ?: object : FShapeQuad {
 			override val x get() = 0.0
 			override val y get() = 0.0
 			override val width get() = this@FriceGame.width.toDouble()
@@ -59,7 +54,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 	fun onLastInit() = Unit
 	fun onRefresh() = Unit
 	fun onMouse(e: OnMouseEvent) = Unit
-	fun customDraw(g: Drawer) = Unit
+	fun customDraw(g: FriceDrawer) = Unit
 	fun onLoseFocus() {
 		paused = true
 	}
@@ -119,7 +114,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 	fun instantRemoveObject(vararg objs: AbstractObject) = instantRemoveObject(0, *objs)
 
 	/** draw a white square */
-	fun clearScreen(drawer: Drawer) {
+	fun clearScreen(drawer: FriceDrawer) {
 		drawer.color = ColorResource.WHITE
 		drawer.drawRect(0.0, 0.0, width.toDouble(), height.toDouble())
 		drawer.restore()
@@ -149,7 +144,7 @@ interface FriceGame<in Drawer : FriceDrawer>
 	 * @author ice1000
 	 * @param bgg the drawer used to draw
 	 */
-	fun dealWithObjects(bgg: Drawer) {
+	fun dealWithObjects(bgg: FriceDrawer) {
 		processBuffer()
 		layers.forEach {
 			it.objects.removeIf { o ->
