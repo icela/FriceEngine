@@ -13,6 +13,8 @@ class Layer {
 	val textDeleteBuffer = ArrayList<FText>()
 	val textAddBuffer = ArrayList<FText>()
 
+	var autoGC = true
+
 	fun processBuffer() {
 		objects.addAll(objectAddBuffer)
 		objects.removeAll(objectDeleteBuffer)

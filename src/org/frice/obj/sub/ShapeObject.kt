@@ -41,8 +41,6 @@ constructor(
 			shape.width = (value / scaleX).toInt()
 		}
 
-	override var died = false
-
 	override val resource get () = color
 
 	override fun scale(x: Double, y: Double) {

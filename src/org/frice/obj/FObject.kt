@@ -14,8 +14,6 @@ import java.util.*
 abstract class FObject(x: Double, y: Double) : PhysicalObject(x, y) {
 	var id = -1
 	val anims = LinkedList<FAnim>()
-	override var rotate = 0.0
-
 	abstract val resource: FResource
 
 	abstract fun scale(x: Double, y: Double)

@@ -20,13 +20,16 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	val eventManager: EventManager
 
 	var activeArea: FShapeQuad?
-	override val box: FShapeQuad
-		get() = activeArea ?: object : FShapeQuad {
+	val defaultActiveArea
+		get() = object : FShapeQuad {
 			override val x get() = 0.0
 			override val y get() = 0.0
 			override val width get() = this@FriceGame.width.toDouble()
 			override val height get() = this@FriceGame.height.toDouble()
 		}
+
+	override val box: FShapeQuad
+		get() = activeArea ?: defaultActiveArea
 
 	/**
 	 * not implemented yet.
@@ -37,6 +40,10 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 
 	/** if true, the engine will collect all objects which are invisible from game window. */
 	var autoGC: Boolean
+		get() = layers.all(Layer::autoGC)
+		set(value) {
+			layers.forEach { it.autoGC = value }
+		}
 
 	/** if true, there will be a fps calculating on the bottom-left side of window. */
 	var showFPS: Boolean
@@ -49,6 +56,8 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 
 	/** do the delete and add work, to prevent Exceptions */
 	fun processBuffer() = layers.forEach(Layer::processBuffer)
+
+	fun getLayers(int: Int) = layers[int]
 
 	fun onInit() = Unit
 	fun onLastInit() = Unit
@@ -177,10 +186,11 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 						bgg.drawLine(o.x, o.y, o.x2, o.y2)
 					}
 				}
-				if (autoGC) {
-					o.died = true
-					if (o is PhysicalObject && collides(o)) it.removeObject(o)
-					else if (o.x > width || o.y > height) it.removeObject(o)
+				if (it.autoGC) {
+					if ((o is PhysicalObject && !collides(o)) || (o.x > width || o.y > height)) {
+						o.died = true
+						it.removeObject(o)
+					}
 				}
 			}
 

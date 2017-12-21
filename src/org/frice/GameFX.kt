@@ -77,7 +77,6 @@ open class GameFX @JvmOverloads constructor(
 
 	override val layers = Array(layerCount) { Layer() }
 	override var debug = true
-	override var autoGC = true
 	override var showFPS = true
 	final override var loseFocus = false
 

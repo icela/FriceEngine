@@ -29,7 +29,6 @@ constructor(
 	}
 
 	override val resource get() = res
-	override var died = false
 	override val image: FriceImage get() = res.image
 
 	override fun scale(x: Double, y: Double) {

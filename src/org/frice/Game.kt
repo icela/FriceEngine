@@ -61,7 +61,6 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		JOptionPane.showInputDialog(this, msg, title)
 
 	override var debug = true
-	override var autoGC = true
 	override var showFPS = true
 
 	final override var loseFocus = false
