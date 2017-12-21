@@ -188,7 +188,7 @@ open class GameFX @JvmOverloads constructor(
 			mouse(fxMouse(it, MOUSE_RELEASED))
 			onMouse(fxMouse(it, MOUSE_RELEASED))
 		}
-		stage.setOnCloseRequest { if (onExit()) it.consume() }
+		stage.setOnCloseRequest { if (onExit()) it.consume() else stopped = true }
 		stage.scene = scene
 		onInit()
 		stage.icons += Image(javaClass.getResourceAsStream("/icon.png"))

@@ -51,6 +51,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 		g.translate(x, y)
 		g.rotate(theta)
 		g.translate(-x, -y)
+		println(theta)
 	}
 
 	override fun restore() = g.restore()
