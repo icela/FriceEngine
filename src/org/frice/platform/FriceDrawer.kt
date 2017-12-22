@@ -29,7 +29,7 @@ interface FriceDrawer {
 
 	/**
 	 * @author ice1000
-	 * @since v1.7.13
+	 * @since v1.8.0
 	 * @param theta radian
 	 * @param x center x
 	 * @param y center y

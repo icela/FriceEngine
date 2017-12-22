@@ -13,7 +13,16 @@ import org.frice.util.time.FClock
 class DelayedEvent(
 	val millisFromStart: Long,
 	@JvmField internal val `{-# event #-}`: SideEffect) : Comparable<DelayedEvent> {
-	var isReverted = false
+	var isCancelled = false
+
+	/**
+	 * Cancelling this event
+	 * @author ice1000
+	 * @since v1.8.0
+	 */
+	fun cancel() {
+		isCancelled = true
+	}
 
 	companion object Factory {
 		/**
