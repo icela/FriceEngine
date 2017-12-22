@@ -9,9 +9,9 @@ package org.frice
 import javafx.application.Application
 import org.frice.platform.*
 import org.frice.resource.manager.FManager
-import org.frice.utils.cast
-import org.frice.utils.loop
-import org.frice.utils.message.FLog
+import org.frice.util.cast
+import org.frice.util.loop
+import org.frice.util.message.FLog
 import java.awt.Rectangle
 import java.util.*
 import javax.swing.UIManager

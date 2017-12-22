@@ -5,7 +5,7 @@ import org.frice.event.OnMouseEvent
 import org.frice.platform.FriceImage
 import org.frice.platform.owner.ImageOwner
 import org.frice.resource.image.ImageResource
-import org.frice.utils.shape.FShapeQuad
+import org.frice.util.shape.FShapeQuad
 import java.util.function.Consumer
 
 /**

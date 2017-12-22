@@ -3,8 +3,8 @@ package org.frice
 import org.frice.anim.move.DirectedMove
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.shape.FOval
-import org.frice.utils.shape.FRectangle
+import org.frice.util.shape.FOval
+import org.frice.util.shape.FRectangle
 
 class DirectedMoveTest : GameFX() {
 	override fun onLastInit() {

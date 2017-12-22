@@ -2,8 +2,8 @@
 
 package org.frice.obj
 
-import org.frice.utils.shape.FPoint
-import org.frice.utils.shape.FShapeQuad
+import org.frice.util.shape.FPoint
+import org.frice.util.shape.FShapeQuad
 
 /**
  * Created by ice1000 on 2016/8/18.
@@ -51,7 +51,7 @@ interface FContainer : FShapeQuad {
 interface Collidable {
 	/**
 	 * @since v1.6.7
-	 * @see org.frice.utils.shape.FQuad
+	 * @see org.frice.util.shape.FQuad
 	 */
 	val box: FShapeQuad
 

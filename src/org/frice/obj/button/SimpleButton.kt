@@ -3,7 +3,7 @@ package org.frice.obj.button
 import org.frice.event.MOUSE_PRESSED
 import org.frice.event.OnMouseEvent
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.shape.FShapeQuad
+import org.frice.util.shape.FShapeQuad
 import java.util.function.Consumer
 
 /**

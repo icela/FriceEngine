@@ -3,7 +3,7 @@ package org.frice.obj.sub
 import org.frice.obj.FObject
 import org.frice.platform.owner.ColorOwner
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.shape.FShapeInt
+import org.frice.util.shape.FShapeInt
 
 /**
  * an object with a utils and a shape, used to create an simple object quickly

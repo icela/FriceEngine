@@ -11,8 +11,8 @@ import org.frice.platform.adapter.JvmImage
 import org.frice.platform.owner.*
 import org.frice.resource.graphics.ColorResource
 import org.frice.resource.image.ImageResource
-import org.frice.utils.EventManager
-import org.frice.utils.shape.*
+import org.frice.util.EventManager
+import org.frice.util.shape.*
 
 interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	val layers: Array<Layer>

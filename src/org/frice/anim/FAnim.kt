@@ -1,7 +1,7 @@
 package org.frice.anim
 
 import org.frice.obj.FObject
-import org.frice.utils.time.FClock
+import org.frice.util.time.FClock
 
 /**
  * Created by ice1000 on 2016/8/15.

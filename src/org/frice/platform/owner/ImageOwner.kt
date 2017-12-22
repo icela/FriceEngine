@@ -2,7 +2,7 @@ package org.frice.platform.owner
 
 import org.frice.obj.Collidable
 import org.frice.platform.FriceImage
-import org.frice.utils.shape.FShapeQuad
+import org.frice.util.shape.FShapeQuad
 
 interface ImageOwner : Collidable, FShapeQuad {
 	val image: FriceImage

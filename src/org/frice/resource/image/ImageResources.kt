@@ -3,7 +3,7 @@ package org.frice.resource.image
 import org.frice.platform.FriceImage
 import org.frice.resource.manager.ImageManager
 import org.frice.resource.manager.WebImageManager
-import org.frice.utils.time.FTimer
+import org.frice.util.time.FTimer
 
 /**
  * @author ice1000

@@ -4,7 +4,7 @@ import org.frice.Game
 import org.frice.launch
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.shape.FOval
+import org.frice.util.shape.FOval
 
 class AccelerateRotateTest : Game() {
 	override fun onInit() {

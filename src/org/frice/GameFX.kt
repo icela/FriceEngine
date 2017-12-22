@@ -18,10 +18,10 @@ import org.frice.platform.*
 import org.frice.platform.adapter.JfxDrawer
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.EventManager
-import org.frice.utils.shape.FRectangle
-import org.frice.utils.shape.FShapeQuad
-import org.frice.utils.time.*
+import org.frice.util.EventManager
+import org.frice.util.shape.FRectangle
+import org.frice.util.shape.FShapeQuad
+import org.frice.util.time.*
 import java.util.*
 import kotlin.concurrent.thread
 

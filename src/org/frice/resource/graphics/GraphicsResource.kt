@@ -3,7 +3,7 @@ package org.frice.resource.graphics
 import org.frice.platform.FriceImage
 import org.frice.platform.adapter.JvmImage
 import org.frice.resource.FResource
-import org.frice.utils.forceRun
+import org.frice.util.forceRun
 
 /**
  * Created by ice1000 on 2016/8/27.

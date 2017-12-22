@@ -6,8 +6,8 @@ import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.cast
-import org.frice.utils.toJfxColor
+import org.frice.util.cast
+import org.frice.util.toJfxColor
 import kotlin.math.PI
 
 /**

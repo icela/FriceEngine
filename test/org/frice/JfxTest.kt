@@ -10,10 +10,10 @@ import org.frice.obj.button.SimpleButton
 import org.frice.obj.button.SimpleText
 import org.frice.obj.sub.ShapeObject
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.greyify
-import org.frice.utils.message.FLog
-import org.frice.utils.shape.*
-import org.frice.utils.time.FTimer
+import org.frice.util.greyify
+import org.frice.util.message.FLog
+import org.frice.util.shape.*
+import org.frice.util.time.FTimer
 import java.util.*
 import java.util.function.Consumer
 import kotlin.test.assertEquals

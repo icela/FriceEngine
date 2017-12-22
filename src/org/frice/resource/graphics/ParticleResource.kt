@@ -6,7 +6,7 @@ import org.frice.resource.FResource
 import org.frice.resource.graphics.ColorResource.Companion.BLACK
 import org.frice.resource.graphics.ColorResource.Companion.COLORLESS
 import org.frice.resource.image.ImageResource
-import org.frice.utils.cast
+import org.frice.util.cast
 import java.util.*
 
 /**

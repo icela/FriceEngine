@@ -1,12 +1,12 @@
 package org.frice.event
 
 import org.frice.obj.SideEffect
-import org.frice.utils.time.FClock
+import org.frice.util.time.FClock
 
 /**
  * @author ice1000
  * @since v1.7.4
- * @see org.frice.utils.EventManager
+ * @see org.frice.util.EventManager
  * @param millisFromStart milli seconds from the very beginning
  * @param `{-# event #-}` the event that is going to happen
  */

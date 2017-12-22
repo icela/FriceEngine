@@ -1,7 +1,7 @@
 package org.frice.resource.graphics
 
 import org.frice.resource.FResource
-import org.frice.utils.*
+import org.frice.util.*
 import java.awt.Color
 
 /**
