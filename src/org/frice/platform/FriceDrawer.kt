@@ -19,7 +19,21 @@ interface FriceDrawer {
 	fun drawRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double)
 	fun stringSize(size: Double)
 	fun useFont(text: FText)
+
+	/**
+	 * Rotate the whole screen
+	 * @author ice1000
+	 * @param theta radian
+	 */
 	fun rotate(theta: Double)
+
+	/**
+	 * @author ice1000
+	 * @since v1.7.13
+	 * @param theta radian
+	 * @param x center x
+	 * @param y center y
+	 */
 	fun rotate(theta: Double, x: Double, y: Double)
 	fun restore()
 	fun strokeOval(x: Double, y: Double, width: Double, height: Double)

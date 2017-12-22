@@ -6,7 +6,9 @@ import org.frice.obj.button.FText
 import org.frice.platform.FriceDrawer
 import org.frice.platform.FriceImage
 import org.frice.resource.graphics.ColorResource
-import org.frice.utils.*
+import org.frice.utils.cast
+import org.frice.utils.toJfxColor
+import kotlin.math.PI
 
 /**
  * A drawer implementation for javafx
@@ -31,7 +33,7 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 			g.font = cast(text.`font tmp obj`)
 	}
 
-	override fun init() = forceRun { g.font = Font(16.0) }
+	override fun init() = g.save()
 	override fun drawOval(x: Double, y: Double, width: Double, height: Double) = g.fillOval(x, y, width, height)
 	override fun strokeOval(x: Double, y: Double, width: Double, height: Double) = g.strokeOval(x, y, width, height)
 	override fun drawString(string: String, x: Double, y: Double) = g.fillText(string, x, y)
@@ -46,12 +48,11 @@ class JfxDrawer(val g: GraphicsContext) : FriceDrawer {
 	override fun strokeRoundRect(x: Double, y: Double, width: Double, height: Double, arcWidth: Double, arcHeight: Double) =
 		g.strokeRoundRect(x, y, width, height, arcWidth, arcHeight)
 
-	override fun rotate(theta: Double) = g.rotate(theta)
+	override fun rotate(theta: Double) = g.rotate(theta * 180 / PI)
 	override fun rotate(theta: Double, x: Double, y: Double) {
 		g.translate(x, y)
-		g.rotate(theta)
+		rotate(theta)
 		g.translate(-x, -y)
-		println(theta)
 	}
 
 	override fun restore() = g.restore()
