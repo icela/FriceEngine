@@ -71,7 +71,7 @@ interface Collidable {
  */
 abstract class PhysicalObject(
 	override var x: Double,
-	override var y: Double) : AbstractObject, Collidable, FContainer {
+	override var y: Double) : AbstractObject, FContainer {
 	var collisionBox: FShapeQuad? = null
 	override val box: FShapeQuad get() = collisionBox ?: this
 	override var died = false

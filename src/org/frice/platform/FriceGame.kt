@@ -157,7 +157,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 		layers.forEach {
 			it.objects.removeIf removing@ { o ->
 				if (it.autoGC) {
-					if ((o is PhysicalObject && !collides(o)) || (o.x > width || o.y > height)) {
+					if ((o is PhysicalObject && !box.collides(o)) || (o.x > width || o.y > height)) {
 						o.died = true
 						return@removing true
 					}
@@ -183,9 +183,9 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 				if (o is FContainer) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
 				when (o) {
-					is ImageOwner -> if (collides(o)) bgg.drawImage(o.image, o.x, o.y)
+					is ImageOwner -> if (defaultActiveArea.collides(o)) bgg.drawImage(o.image, o.x, o.y)
 					is ShapeObject -> {
-						if (collides(o)) {
+						if (defaultActiveArea.collides(o)) {
 							bgg.color = o.resource
 							when (o.shape) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
@@ -209,7 +209,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 				bgg.useFont(b)
 				if (b is FButton) {
 					when (b) {
-						is ImageOwner -> if (collides(b)) bgg.drawImage(b.image, b.x, b.y)
+						is ImageOwner -> if (defaultActiveArea.collides(b)) bgg.drawImage(b.image, b.x, b.y)
 						is SimpleButton -> {
 							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,

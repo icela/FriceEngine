@@ -1,5 +1,7 @@
 package org.frice.util.shape
 
+import org.frice.obj.Collidable
+
 /**
  * It's just an abstract representation of an object
  * with x, y, width and height.
@@ -8,11 +10,12 @@ package org.frice.util.shape
  * @since v1.6.7
  * @see org.frice.util.shape.FQuad
  */
-interface FShapeQuad {
+interface FShapeQuad : Collidable {
 	val x: Double
 	val y: Double
 	val width: Double
 	val height: Double
+	override val box: FShapeQuad get() = this
 
 	fun smallerBox(topBottom: Double, leftRight: Double) = smallerBox(topBottom, topBottom, leftRight, leftRight)
 
