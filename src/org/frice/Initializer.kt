@@ -29,12 +29,17 @@ object `{-# LANGUAGE Initializer #-}` {
 		val osName = System.getProperty("os.name")
 		FLog.v("Operating system: $osName")
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+		isOnWindows = osName.startsWith("Windows")
+		isOnLinux = osName.startsWith("Linux")
+		isOnMac = osName.startsWith("Mac")
+		isOnSolaris = osName.startsWith("Solaris") || osName.startsWith("SunOS")
+		isOnBSD = osName.startsWith("FreeBSD")
 		when {
-			osName.startsWith("Windows") -> onWindows?.invoke()
-			osName.startsWith("Linux") -> onLinux?.invoke()
-			osName.startsWith("Mac") -> onMac?.invoke()
-			osName.startsWith("Solaris") || osName.startsWith("SunOS") -> onSolaris?.invoke()
-			osName.startsWith("FreeBSD") -> onBSD?.invoke()
+			isOnWindows -> onWindows?.invoke()
+			isOnLinux -> onLinux?.invoke()
+			isOnMac -> onMac?.invoke()
+			isOnSolaris -> onSolaris?.invoke()
+			isOnBSD -> onBSD?.invoke()
 		}
 	}
 }

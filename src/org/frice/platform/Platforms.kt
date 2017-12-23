@@ -23,3 +23,9 @@ var onSolaris: SideEffect? = null
 
 /** for FreeBSD */
 var onBSD: SideEffect? = null
+
+var isOnWindows = false @JvmName(" ### windows") internal set
+var isOnMac = false @JvmName(" ### mac") internal set
+var isOnLinux = false @JvmName(" ### linux") internal set
+var isOnSolaris = false @JvmName(" ### solaris") internal set
+var isOnBSD = false @JvmName(" ### bsd") internal set
