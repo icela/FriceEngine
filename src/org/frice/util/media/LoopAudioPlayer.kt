@@ -8,10 +8,9 @@ import java.io.File
  * @see org.frice.util.media.AudioPlayer
  */
 class LoopAudioPlayer(file: File) : AudioPlayer(file) {
-	val cache = arrayListOf<ByteArray>()
+	private val cache = arrayListOf<ByteArray>()
 	override fun run() {
-		line.open()
-		line.start()
+		openLine()
 		var inBytes: Int
 		val audioData = ByteArray(`{-# BUFFER_SIZE #-}`)
 		while (true) {

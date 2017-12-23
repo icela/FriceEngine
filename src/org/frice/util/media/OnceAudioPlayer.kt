@@ -9,8 +9,7 @@ import java.io.File
  */
 class OnceAudioPlayer(file: File) : AudioPlayer(file) {
 	override fun run() {
-		line.open()
-		line.start()
+		openLine()
 		var inBytes: Int
 		val audioData = ByteArray(`{-# BUFFER_SIZE #-}`)
 		while (true) {

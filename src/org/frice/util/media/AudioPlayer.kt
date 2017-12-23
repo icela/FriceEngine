@@ -1,5 +1,7 @@
 package org.frice.util.media
 
+import org.frice.util.message.FLog
+import org.frice.util.unless
 import java.io.Closeable
 import java.io.File
 import javax.sound.sampled.*
@@ -33,6 +35,18 @@ open class AudioPlayer internal constructor(val file: File) : Thread(), Closeabl
 			audioInputStream = AudioSystem.getAudioInputStream(format, audioInputStream)
 		}
 		line = `{-# getLine #-}`(format)
+	}
+
+	protected fun openLine() {
+		try {
+			unless(line.isOpen) {
+				line.open()
+				line.start()
+			}
+		} catch (ignored: IllegalStateException) {
+			FLog.e("""There're some issues with the audio mixer in your JRE.
+Please use `org.frice.util.media.MediaManager instead of AudioManager if you see this message.""")
+		}
 	}
 
 	/**
