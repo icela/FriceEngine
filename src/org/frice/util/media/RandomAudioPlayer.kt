@@ -5,6 +5,7 @@ import java.io.File
 
 class RandomAudioPlayer(file: File) : LoopAudioPlayer(file) {
 	var isPlaying = false
+	private val bytes = byteArrayOf(0, 0, 0, 0)
 
 	override fun run() {
 		openLine()
@@ -12,9 +13,7 @@ class RandomAudioPlayer(file: File) : LoopAudioPlayer(file) {
 			if (isPlaying) {
 				isPlaying = false
 				if (cache.isEmpty()) firstPlay() else subsequentPlay()
-			} else {
-				line.write(byteArrayOf(), 0, 0)
-			}
+			} else line.write(bytes, 0, bytes.size)
 		}
 		close()
 	}

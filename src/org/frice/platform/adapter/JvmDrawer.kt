@@ -17,7 +17,6 @@ class JvmDrawer(private val frame: Frame) : FriceDrawer {
 
 	override fun init() {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-		forceRun { g.font = Font("Consolas", Font.PLAIN, 16) }
 	}
 
 	val friceImage = JvmImage(frame.width, frame.height)
