@@ -35,7 +35,15 @@ fun getPlayer(file: File, infinite: Boolean = false) = if (infinite) LoopAudioPl
 @JvmOverloads
 fun getPlayer(path: String, infinite: Boolean = false) = getPlayer(File(path), infinite)
 
-internal const val `{-# BUFFER_SIZE #-}` = 1024
+/**
+ * @author ice1000
+ * @since v1.8.2
+ */
+fun getRandomPlayer(path: String) = getRandomPlayer(File(path))
+
+fun getRandomPlayer(file: File) = RandomAudioPlayer(file)
+
+internal const val `{-# BUFFER_SIZE #-}` = 4096
 
 @Synchronized
 internal fun `{-# getLine #-}`(audioFormat: AudioFormat) = AudioSystem.getSourceDataLine(audioFormat)
