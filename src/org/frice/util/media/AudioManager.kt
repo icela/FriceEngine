@@ -41,6 +41,10 @@ fun getPlayer(path: String, infinite: Boolean = false) = getPlayer(File(path), i
  */
 fun getRandomPlayer(path: String) = getRandomPlayer(File(path))
 
+/**
+ * @author ice1000
+ * @since v1.8.2
+ */
 fun getRandomPlayer(file: File) = RandomAudioPlayer(file)
 
 internal const val `{-# BUFFER_SIZE #-}` = 4096

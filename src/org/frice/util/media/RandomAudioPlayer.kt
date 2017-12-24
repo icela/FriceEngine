@@ -12,6 +12,8 @@ class RandomAudioPlayer(file: File) : LoopAudioPlayer(file) {
 			if (isPlaying) {
 				isPlaying = false
 				if (cache.isEmpty()) firstPlay() else subsequentPlay()
+			} else {
+				line.write(byteArrayOf(), 0, 0)
 			}
 		}
 		close()
