@@ -1,5 +1,6 @@
 package org.frice.util.media
 
+import org.frice.util.until
 import java.io.File
 
 /**
@@ -7,10 +8,10 @@ import java.io.File
  * @since v1.7.6
  * @see org.frice.util.media.AudioPlayer
  */
-class LoopAudioPlayer(file: File) : AudioPlayer(file) {
-	private val cache = arrayListOf<ByteArray>()
-	override fun run() {
-		openLine()
+open class LoopAudioPlayer(file: File) : AudioPlayer(file) {
+	@JvmField protected val cache = arrayListOf<ByteArray>()
+
+	protected fun firstPlay() {
 		var inBytes: Int
 		val audioData = ByteArray(`{-# BUFFER_SIZE #-}`)
 		while (true) {
@@ -20,12 +21,20 @@ class LoopAudioPlayer(file: File) : AudioPlayer(file) {
 			cache += audioData.clone()
 			line.write(audioData, 0, inBytes)
 		}
-		out@ while (true) {
-			for ((index, bytes) in cache.withIndex()) {
-				if (stopped) break@out
-				line.write(bytes, 0, if (index == cache.size) inBytes else `{-# BUFFER_SIZE #-}`)
-			}
+	}
+
+	protected fun subsequentPlay() {
+		cache.indices.forEach { index ->
+			val bytes = cache[index]
+			if (stopped) return
+			line.write(bytes, 0, if (index == cache.size) -1 else `{-# BUFFER_SIZE #-}`)
 		}
+	}
+
+	override fun run() {
+		openLine()
+		firstPlay()
+		until(stopped, ::subsequentPlay)
 		close()
 	}
 }
