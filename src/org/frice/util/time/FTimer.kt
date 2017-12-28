@@ -12,7 +12,7 @@ open class FTimer
 constructor(var time: Int, var times: Int = -1) {
 	private var start = FClock.current
 	private val isEnded: Boolean
-		get() = FClock.current - start > time && times != 0
+		get() = FClock.current - start >= time && times != 0
 
 	fun ended(): Boolean = isEnded.apply {
 		if (this) {
