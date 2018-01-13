@@ -75,7 +75,25 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	fun removeObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { removeObject(layer, it) }
 
 	/** remove objects unsafely using vararg */
-	fun instantRemoveObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { instantRemoveObject(layer, it) }
+	fun instantRemoveObject(
+		layer: Int,
+		vararg objects: AbstractObject) = objects.forEach { instantRemoveObject(layer, it) }
+
+	/** remove objects */
+	fun removeObject(layer: Int, objects: AttachedObjects) = objects.objs.forEach { removeObject(layer, it) }
+
+	/** remove objects unsafely */
+	fun instantRemoveObject(
+		layer: Int,
+		objects: AttachedObjects) = objects.objs.forEach { instantRemoveObject(layer, it) }
+
+	/** remove objects */
+	fun removeObject(layer: Int, objects: AttachedAbstarctObjects) = objects.objs.forEach { removeObject(layer, it) }
+
+	/** remove objects unsafely */
+	fun instantRemoveObject(
+		layer: Int,
+		objects: AttachedAbstarctObjects) = objects.objs.forEach { instantRemoveObject(layer, it) }
 
 	/**
 	 * removes single object.
@@ -106,6 +124,12 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	/** add objects using vararg */
 	fun addObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { addObject(layer, it) }
 
+	/** add objects */
+	fun addObject(layer: Int, objects: AttachedObjects) = objects.objs.forEach { addObject(layer, it) }
+
+	/** add objects */
+	fun addObject(layer: Int, objects: AttachedAbstarctObjects) = objects.objs.forEach { addObject(layer, it) }
+
 	fun addObject(vararg objects: AbstractObject) = addObject(0, *objects)
 	fun removeObject(vararg objects: AbstractObject) = removeObject(0, *objects)
 
@@ -114,6 +138,14 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 
 	/** add objects unsafely using vararg */
 	fun instantAddObject(layer: Int, vararg objects: AbstractObject) = objects.forEach { instantAddObject(layer, it) }
+
+	/** add objects unsafely using vararg */
+	fun instantAddObject(layer: Int, objects: AttachedObjects) = objects.objs.forEach { instantAddObject(layer, it) }
+
+	/** add objects unsafely using vararg */
+	fun instantAddObject(
+		layer: Int,
+		objects: AttachedAbstarctObjects) = objects.objs.forEach { instantAddObject(layer, it) }
 
 	/** add objects unsafely using vararg */
 	fun instantAddObject(vararg objects: AbstractObject) = instantAddObject(0, *objects)
