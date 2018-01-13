@@ -23,12 +23,12 @@ class AttachedObjects(val objs: MutableList<FObject>) {
 	/** rotate all objects */
 	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 
-	operator fun get(x: Int) = objs[x]
-
 	/** stop all objects' anims */
-	fun stopAnims() = objs.forEach { it.stopAnims() }
+	fun stopAnims() = objs.forEach(FObject::stopAnims)
 
-	fun addObject(vararg objects: FObject) = objects.forEach { objs.add(it) }
+	operator fun get(x: Int) = objs[x]
+	fun clearDied() = objs.removeIf(FObject::died)
+	fun addObject(vararg objects: FObject) = objects.forEach { objs += it }
 	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
 	fun size() = objs.size
 }
@@ -54,8 +54,8 @@ class AttachedAbstarctObjects(val objs: MutableList<AbstractObject>) {
 	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
 
 	operator fun get(x: Int) = objs[x]
-
 	fun addObject(vararg objects: AbstractObject) = objects.forEach { objs.add(it) }
+	fun clearDied() = objs.removeIf(AbstractObject::died)
 	fun removeObject(vararg objects: AbstractObject) = objects.forEach { objs.remove(it) }
 	fun size() = objs.size
 }
