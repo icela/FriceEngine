@@ -6,7 +6,7 @@ package org.frice.obj
  * @author ice1000
  * @since v1.7.2
  */
-class AttachedObjects(private val objs: MutableList<FObject>) {
+class AttachedObjects(val objs: MutableList<FObject>) {
 
 	/** scale all objects */
 	fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
@@ -30,6 +30,7 @@ class AttachedObjects(private val objs: MutableList<FObject>) {
 
 	fun addObject(vararg objects: FObject) = objects.forEach { objs.add(it) }
 	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
+	fun size() = objs.size
 }
 
 /**
@@ -39,7 +40,7 @@ class AttachedObjects(private val objs: MutableList<FObject>) {
  * @since v1.7.2
  * @see AttachedObjects
  */
-class AttachedAbstarctObjects(private val objs: MutableList<AbstractObject>) {
+class AttachedAbstarctObjects(val objs: MutableList<AbstractObject>) {
 	/** move all objects */
 	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
 
@@ -56,4 +57,5 @@ class AttachedAbstarctObjects(private val objs: MutableList<AbstractObject>) {
 
 	fun addObject(vararg objects: AbstractObject) = objects.forEach { objs.add(it) }
 	fun removeObject(vararg objects: AbstractObject) = objects.forEach { objs.remove(it) }
+	fun size() = objs.size
 }

@@ -101,7 +101,7 @@ class O : GameFX() {
 		obj2 = ShapeObject(ColorResource.天依蓝, FRectangle(20, 20), 200.0, 200.0, 233)
 		obj = ShapeObject(ColorResource.西木野真姬, FCircle(30.0), 100.0, 100.0, 233)
 		obj.addAnim(SimpleMove(80, 0))
-		val text = SimpleText(ColorResource.BLUE, "this is a text demo", 100.0, 300.0)
+		val text = SimpleText(ColorResource.BLUE, "this is a \ntext demo", 100.0, 300.0)
 		text.textSize = 64.0
 		text.fontName = "Fira Code"
 		val text2 = SimpleText(ColorResource.BLUE, "this is another text demo", 100.0, 400.0)
@@ -123,8 +123,6 @@ class O : GameFX() {
 
 	companion object {
 		@JvmStatic
-		fun main(args: Array<String>) {
-			launchFx(O::class.java)
-		}
+		fun main(args: Array<String>) = launchFx(O::class.java)
 	}
 }
