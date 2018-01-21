@@ -39,6 +39,7 @@ interface FContainer : FShapeQuad {
 	override var y: Double
 
 	fun containsPoint(px: Int, py: Int) = px >= x && px <= x + width && py >= y && py <= y + height
+	fun containsPoint(px: Double, py: Double) = px >= x && px <= x + width && py >= y && py <= y + height
 
 	operator fun contains(point: FPoint) = containsPoint(point.x, point.y)
 }

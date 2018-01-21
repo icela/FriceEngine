@@ -1,6 +1,7 @@
 package org.frice.platform
 
 import org.frice.obj.AbstractObject
+import org.frice.obj.button.FButton
 import org.frice.obj.button.FText
 import java.util.*
 
@@ -18,6 +19,7 @@ class Layer {
 	private val textAddBuffer = ArrayList<FText>()
 
 	var autoGC = true
+	val buttons = LinkedList<FButton>()
 
 	fun processBuffer() {
 		objects.addAll(objectAddBuffer)
@@ -29,30 +31,45 @@ class Layer {
 		texts.removeAll(textDeleteBuffer)
 		textDeleteBuffer.clear()
 		textAddBuffer.clear()
+
+		buttons.removeIf(FButton::died)
 	}
 
 	fun clearObjects() {
 		objectDeleteBuffer.addAll(objects)
 		textDeleteBuffer.addAll(texts)
+		buttons.clear()
 	}
 
-	fun addObject(obj: AbstractObject): Boolean = when (obj) {
-		is FText -> textAddBuffer.add(obj)
-		else -> objectAddBuffer.add(obj)
+	fun addObject(obj: AbstractObject): Boolean {
+		if (obj is FButton) buttons.add(obj)
+		return when (obj) {
+			is FText -> textAddBuffer.add(obj)
+			else -> objectAddBuffer.add(obj)
+		}
 	}
 
-	fun removeObject(obj: AbstractObject): Boolean = when (obj) {
-		is FText -> textDeleteBuffer.add(obj)
-		else -> objectDeleteBuffer.add(obj)
+	fun removeObject(obj: AbstractObject): Boolean {
+		if (obj is FButton) buttons.add(obj)
+		return when (obj) {
+			is FText -> textDeleteBuffer.add(obj)
+			else -> objectDeleteBuffer.add(obj)
+		}
 	}
 
-	fun instantAddObject(obj: AbstractObject): Boolean = when (obj) {
-		is FText -> texts.add(obj)
-		else -> objects.add(obj)
+	fun instantAddObject(obj: AbstractObject): Boolean {
+		if (obj is FButton) buttons.add(obj)
+		return when (obj) {
+			is FText -> texts.add(obj)
+			else -> objects.add(obj)
+		}
 	}
 
-	fun instantRemoveObject(obj: AbstractObject): Boolean = when (obj) {
-		is FText -> texts.remove(obj)
-		else -> objects.remove(obj)
+	fun instantRemoveObject(obj: AbstractObject): Boolean {
+		if (obj is FButton) buttons.add(obj)
+		return when (obj) {
+			is FText -> texts.remove(obj)
+			else -> objects.remove(obj)
+		}
 	}
 }

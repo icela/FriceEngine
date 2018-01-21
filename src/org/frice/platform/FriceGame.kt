@@ -158,9 +158,7 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 
 	/** check buttons' events */
 	fun mouse(e: OnMouseEvent) = layers.forEach {
-		it.texts.forEach { b ->
-			if (b is FButton && b.containsPoint(e.x.toInt(), e.y.toInt())) b onMouse e
-		}
+		it.buttons.forEach { b -> if (b.containsPoint(e.x, e.y)) b onMouse e }
 	}
 
 	fun runLater(delayedEvent: DelayedEvent) = eventManager.insert(delayedEvent)
