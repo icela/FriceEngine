@@ -10,26 +10,26 @@ class AttachedObjects(val objs: MutableList<FObject>) : MutableList<FObject> by 
 	constructor(vararg fObject: FObject) : this(fObject.toMutableList())
 
 	/** scale all objects */
-	fun scale(x: Double, y: Double) = objs.forEach { it.scale(x, y) }
+	fun scale(x: Double, y: Double) = forEach { it.scale(x, y) }
 
 	/** move all objects */
-	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
+	fun move(x: Double, y: Double) = forEach { it.move(x, y) }
 
 	/** set all objects' `died` to true */
-	fun die() = objs.forEach { it.died = true }
+	fun die() = forEach { it.died = true }
 
 	/** set all objects' `isVisible` to false */
-	fun hide() = objs.forEach { it.isVisible = false }
+	fun hide() = forEach { it.isVisible = false }
 
 	/** rotate all objects */
-	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
+	fun rotate(angle: Double) = forEach { it.rotate(angle) }
 
 	/** stop all objects' anims */
-	fun stopAnims() = objs.forEach(FObject::stopAnims)
+	fun stopAnims() = forEach(FObject::stopAnims)
 
-	fun clearDied() = objs.removeIf(FObject::died)
-	fun addObject(vararg objects: FObject) = objects.forEach { objs += it }
-	fun removeObject(vararg objects: FObject) = objects.forEach { objs.remove(it) }
+	fun clearDied() = removeIf(FObject::died)
+	fun addObject(vararg objects: FObject) = objects.forEach { add(it) }
+	fun removeObject(vararg objects: FObject) = objects.forEach { remove(it) }
 }
 
 /**
@@ -43,18 +43,18 @@ class AttachedAbstractObjects(val objs: MutableList<AbstractObject>) : MutableLi
 	constructor(vararg fObject: AbstractObject) : this(fObject.toMutableList())
 
 	/** move all objects */
-	fun move(x: Double, y: Double) = objs.forEach { it.move(x, y) }
+	fun move(x: Double, y: Double) = forEach { it.move(x, y) }
 
 	/** set all objects' `died` to true */
-	fun die() = objs.forEach { it.died = true }
+	fun die() = forEach { it.died = true }
 
 	/** set all objects' `isVisible` to false */
-	fun hide() = objs.forEach { it.isVisible = false }
+	fun hide() = forEach { it.isVisible = false }
 
 	/** rotate all objects */
-	fun rotate(angle: Double) = objs.forEach { it.rotate(angle) }
+	fun rotate(angle: Double) = forEach { it.rotate(angle) }
 
-	fun addObject(vararg objects: AbstractObject) = objects.forEach { objs.add(it) }
-	fun clearDied() = objs.removeIf(AbstractObject::died)
-	fun removeObject(vararg objects: AbstractObject) = objects.forEach { objs.remove(it) }
+	fun addObject(vararg objects: AbstractObject) = objects.forEach { add(it) }
+	fun clearDied() = removeIf(AbstractObject::died)
+	fun removeObject(vararg objects: AbstractObject) = objects.forEach { remove(it) }
 }
