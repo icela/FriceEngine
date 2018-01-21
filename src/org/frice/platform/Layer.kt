@@ -10,12 +10,12 @@ import java.util.*
  */
 class Layer {
 	val objects = LinkedList<AbstractObject>()
-	val objectDeleteBuffer = ArrayList<AbstractObject>()
-	val objectAddBuffer = ArrayList<AbstractObject>()
+	private val objectDeleteBuffer = ArrayList<AbstractObject>()
+	private val objectAddBuffer = ArrayList<AbstractObject>()
 
 	val texts = LinkedList<FText>()
-	val textDeleteBuffer = ArrayList<FText>()
-	val textAddBuffer = ArrayList<FText>()
+	private val textDeleteBuffer = ArrayList<FText>()
+	private val textAddBuffer = ArrayList<FText>()
 
 	var autoGC = true
 
