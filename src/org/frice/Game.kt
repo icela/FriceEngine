@@ -121,10 +121,10 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 		iconImage = read(javaClass.getResourceAsStream("/icon.png"))
 
 		/// to prevent this engine from the call#cking NPE!!
-		this.add(panel, BorderLayout.CENTER)
+		add(panel, BorderLayout.CENTER)
 		bounds = BIG_SQUARE
 		onInit()
-		drawer = JvmDrawer(this).apply(JvmDrawer::init)
+		drawer = JvmDrawer(this).also(JvmDrawer::init)
 		isVisible = true
 		FLog.v("If the window doesn't appear, please call `launch(YourGameClass.class)` instead of the constructor.")
 	}
@@ -135,6 +135,9 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			System.exit(0)
 		}
 	}
+
+	fun putBottom(component: JComponent) = add(component, BorderLayout.SOUTH)
+	fun putTop(component: JComponent) = add(component, BorderLayout.NORTH)
 
 	override fun measureText(text: FText): FRectangle {
 		drawer.useFont(text)

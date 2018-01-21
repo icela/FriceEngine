@@ -19,7 +19,7 @@ abstract class FObject(x: Double, y: Double) : PhysicalObject(x, y) {
 	abstract fun scale(x: Double, y: Double)
 
 	@Suppress("FunctionName")
-	internal fun `{-# runAnims #-}`() = anims.forEach { a -> a.`{-# do #-}`(this) }
+	internal fun `{-# runAnims #-}`() = anims.forEach { it.`{-# do #-}`(this) }
 
 	fun addAnim(anim: FAnim) = anims.add(anim)
 

@@ -24,6 +24,8 @@ import org.frice.util.shape.*
 import org.frice.util.time.FTimer
 import java.util.*
 import java.util.function.Consumer
+import javax.swing.JButton
+import javax.swing.JTextField
 import kotlin.test.assertEquals
 
 /**
@@ -42,6 +44,10 @@ class Test : Game() {
 	override fun onInit() {
 		super.onInit()
 		autoGC = true
+		val textField = JTextField()
+		putBottom(textField)
+		val button = JButton("Boy next door")
+		putTop(button)
 
 		addObject(ParticleEffect(ParticleResource(
 			this, width / 10, height / 10, 0.01), width * 0.1, height * 0.1))
@@ -52,7 +58,7 @@ class Test : Game() {
 			width = 100.0,
 			height = 30.0).apply {
 			onMouseListener = Consumer {
-				val obj = ShapeObject(ColorResource.西木野真姬, FOval(40.0, 30.0), 100.0, 100.0).apply {
+				val obj = ShapeObject(ColorResource.西木野真姬, FOval(50.0, 20.0), 100.0, 100.0).apply {
 					addAnim(AccelerateMove(-200.0, -200.0))
 					addAnim(SimpleMove(400, 400))
 					addAnim(SimpleScale(1.1, 1.1))
