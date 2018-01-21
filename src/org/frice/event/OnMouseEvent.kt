@@ -7,9 +7,8 @@ import javafx.scene.input.MouseEvent as JfxMouseEvent
 
 const val MOUSE_CLICKED = 0x00
 const val MOUSE_RELEASED = 0x01
-const val MOUSE_ENTERED = 0x02
-const val MOUSE_EXITED = 0x03
-const val MOUSE_PRESSED = 0x04
+const val MOUSE_MOVED = 0x02
+const val MOUSE_PRESSED = 0x03
 
 /**
  * Created by ice1000 on 2016/8/13.

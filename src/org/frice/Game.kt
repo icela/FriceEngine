@@ -174,14 +174,17 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 	override val screenCut get() = drawer.friceImage
 
-	fun addKeyTypedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-		= addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+	fun addKeyTypedEvent(
+		keyCode: Int,
+		key: Consumer<KeyEvent>) = addKeyListener(typed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	fun addKeyPressedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-		= addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+	fun addKeyPressedEvent(
+		keyCode: Int,
+		key: Consumer<KeyEvent>) = addKeyListener(pressed = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
-	fun addKeyReleasedEvent(keyCode: Int, key: Consumer<KeyEvent>)
-		= addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
+	fun addKeyReleasedEvent(
+		keyCode: Int,
+		key: Consumer<KeyEvent>) = addKeyListener(released = Consumer { e -> if (e.keyCode == keyCode) key.accept(e) })
 
 	override fun setCursor(o: FriceImage) {
 		cursor = toolkit.createCustomCursor(cast<JvmImage>(o).image, Point(0, 0), "cursor")
@@ -203,8 +206,8 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 					onMouse(swingMouse(e, MOUSE_CLICKED))
 				}
 
-				override fun mouseEntered(e: MouseEvent) = onMouse(swingMouse(e, MOUSE_ENTERED))
-				override fun mouseExited(e: MouseEvent) = onMouse(swingMouse(e, MOUSE_EXITED))
+				override fun mouseEntered(e: MouseEvent) = Unit
+				override fun mouseExited(e: MouseEvent) = Unit
 				override fun mouseReleased(e: MouseEvent) {
 					mouse(swingMouse(e, MOUSE_RELEASED))
 					onMouse(swingMouse(e, MOUSE_RELEASED))

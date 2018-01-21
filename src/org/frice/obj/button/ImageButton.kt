@@ -22,7 +22,7 @@ constructor(
 	override var x: Double,
 	override var y: Double) : ImageOwner, FButton {
 
-	override fun buttonPressed(e: OnMouseEvent) {
+	override fun buttonStateChange(e: OnMouseEvent) {
 		bool = e.type == MOUSE_PRESSED
 	}
 

@@ -27,7 +27,7 @@ constructor(
 
 	override val color get() = if (bool) originalColor.darker() else originalColor
 
-	override fun buttonPressed(e: OnMouseEvent) {
+	override fun buttonStateChange(e: OnMouseEvent) {
 		bool = e.type == MOUSE_PRESSED
 	}
 }

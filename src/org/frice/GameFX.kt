@@ -170,23 +170,29 @@ open class GameFX @JvmOverloads constructor(
 
 	open fun onExit() = !dialogConfirmYesNo("Are you sure to exit?")
 
-	override final fun start(stage: Stage) {
+	final override fun start(stage: Stage) {
 		this.stage = stage
 		scene = Scene(root, width.toDouble(), height.toDouble())
 		isResizable = false
 		scene.setOnMouseClicked {
-			mouse(fxMouse(it, MOUSE_CLICKED))
-			onMouse(fxMouse(it, MOUSE_CLICKED))
+			val event = fxMouse(it, MOUSE_CLICKED)
+			mouse(event)
+			onMouse(event)
 		}
-		scene.setOnMouseEntered { onMouse(fxMouse(it, MOUSE_ENTERED)) }
-		scene.setOnMouseExited { onMouse(fxMouse(it, MOUSE_EXITED)) }
 		scene.setOnMousePressed {
-			mouse(fxMouse(it, MOUSE_PRESSED))
-			onMouse(fxMouse(it, MOUSE_PRESSED))
+			val event = fxMouse(it, MOUSE_PRESSED)
+			mouse(event)
+			onMouse(event)
+		}
+		scene.setOnMouseMoved {
+			val event = fxMouse(it, MOUSE_MOVED)
+			mouse(event)
+			onMouse(event)
 		}
 		scene.setOnMouseReleased {
-			mouse(fxMouse(it, MOUSE_RELEASED))
-			onMouse(fxMouse(it, MOUSE_RELEASED))
+			val event = fxMouse(it, MOUSE_RELEASED)
+			mouse(event)
+			onMouse(event)
 		}
 		stage.setOnCloseRequest { if (onExit()) it.consume() else stopped = true }
 		stage.scene = scene
