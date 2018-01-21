@@ -174,26 +174,10 @@ open class GameFX @JvmOverloads constructor(
 		this.stage = stage
 		scene = Scene(root, width.toDouble(), height.toDouble())
 		isResizable = false
-		scene.setOnMouseClicked {
-			val event = fxMouse(it, MOUSE_CLICKED)
-			mouse(event)
-			onMouse(event)
-		}
-		scene.setOnMousePressed {
-			val event = fxMouse(it, MOUSE_PRESSED)
-			mouse(event)
-			onMouse(event)
-		}
-		scene.setOnMouseMoved {
-			val event = fxMouse(it, MOUSE_MOVED)
-			mouse(event)
-			onMouse(event)
-		}
-		scene.setOnMouseReleased {
-			val event = fxMouse(it, MOUSE_RELEASED)
-			mouse(event)
-			onMouse(event)
-		}
+		scene.setOnMouseClicked { mouse(fxMouse(it, MOUSE_CLICKED)) }
+		scene.setOnMousePressed { mouse(fxMouse(it, MOUSE_PRESSED)) }
+		scene.setOnMouseMoved { mouse(fxMouse(it, MOUSE_MOVED)) }
+		scene.setOnMouseReleased { mouse(fxMouse(it, MOUSE_RELEASED)) }
 		stage.setOnCloseRequest { if (onExit()) it.consume() else stopped = true }
 		stage.scene = scene
 		onInit()

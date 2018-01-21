@@ -201,26 +201,20 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 
 		init {
 			addMouseListener(object : MouseListener {
-				override fun mouseClicked(e: MouseEvent) {
-					mouse(swingMouse(e, MOUSE_CLICKED))
-					onMouse(swingMouse(e, MOUSE_CLICKED))
-				}
+				override fun mouseClicked(event: MouseEvent) = mouse(swingMouse(event, MOUSE_CLICKED))
+				override fun mouseEntered(event: MouseEvent?) = Unit
+				override fun mouseExited(event: MouseEvent?) = Unit
+				override fun mousePressed(event: MouseEvent) = mouse(swingMouse(event, MOUSE_PRESSED))
+				override fun mouseReleased(event: MouseEvent) = mouse(swingMouse(event, MOUSE_RELEASED))
+			})
 
-				override fun mouseEntered(e: MouseEvent) = Unit
-				override fun mouseExited(e: MouseEvent) = Unit
-				override fun mouseReleased(e: MouseEvent) {
-					mouse(swingMouse(e, MOUSE_RELEASED))
-					onMouse(swingMouse(e, MOUSE_RELEASED))
-				}
-
-				override fun mousePressed(e: MouseEvent) {
-					mouse(swingMouse(e, MOUSE_PRESSED))
-					onMouse(swingMouse(e, MOUSE_PRESSED))
-				}
+			addMouseMotionListener(object : MouseMotionListener {
+				override fun mouseDragged(event: MouseEvent?) = Unit
+				override fun mouseMoved(event: MouseEvent) = mouse(swingMouse(event, MOUSE_MOVED))
 			})
 
 			addWindowListener(object : WindowListener {
-				override fun windowDeiconified(e: WindowEvent) = Unit
+				override fun windowDeiconified(e: WindowEvent?) = Unit
 				override fun windowActivated(e: WindowEvent) {
 					loseFocus = false
 					FClock.resume()
@@ -233,10 +227,10 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 					onLoseFocus()
 				}
 
-				override fun windowIconified(e: WindowEvent) = Unit
-				override fun windowClosing(e: WindowEvent) = onExit()
-				override fun windowClosed(e: WindowEvent) = Unit
-				override fun windowOpened(e: WindowEvent) = Unit
+				override fun windowIconified(e: WindowEvent?) = Unit
+				override fun windowClosing(e: WindowEvent?) = onExit()
+				override fun windowClosed(e: WindowEvent?) = Unit
+				override fun windowOpened(e: WindowEvent?) = Unit
 			})
 		}
 
