@@ -7,8 +7,6 @@ jdk:
 - oraclejdk8
 
 script:
-- "./gradlew assemble"
-- "./gradlew javadok"
 - "./gradlew jar"
 - "./gradlew fatJar"
 - "./gradlew sourcesJar"
