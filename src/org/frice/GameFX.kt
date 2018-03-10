@@ -189,7 +189,7 @@ open class GameFX @JvmOverloads constructor(
 				try {
 					adjust()
 					if (stopped) break
-					if (!paused && refresh.ended()) {
+					if (!paused and refresh.ended()) {
 						clearScreen(drawer)
 						dealWithObjects(drawer)
 						drawer.init()

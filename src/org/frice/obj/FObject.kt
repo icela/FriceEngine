@@ -14,14 +14,17 @@ import java.util.*
 abstract class FObject(x: Double, y: Double) : PhysicalObject(x, y) {
 	var id = -1
 	val anims = LinkedList<FAnim>()
+		@Deprecated("Replace with `addAnim` or `clearAnim`", level = DeprecationLevel.WARNING) get
 	abstract val resource: FResource
 
 	abstract fun scale(x: Double, y: Double)
 
-	@Suppress("FunctionName")
+	@Suppress("FunctionName", "DEPRECATION")
 	internal fun `{-# runAnims #-}`() = anims.forEach { it.`{-# do #-}`(this) }
 
+	@Suppress("DEPRECATION")
 	fun addAnim(anim: FAnim) = anims.add(anim)
 
+	@Suppress("DEPRECATION")
 	fun stopAnims() = anims.clear()
 }

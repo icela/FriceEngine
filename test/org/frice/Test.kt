@@ -188,7 +188,7 @@ class Test3 : Game() {
 	override fun onInit() {
 		setSize(1000, 1000)
 		a = ShapeObject(ColorResource.BLUE, FCircle(10.0), 100.0, 500.0)
-		a.anims.add(object : CustomMove() {
+		a.addAnim(object : CustomMove() {
 			override fun getXDelta(timeFromBegin: Double) =
 				(a.x * c * Math.sin(d) - a.y * c * Math.cos(d)) * e
 
