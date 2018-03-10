@@ -1,5 +1,8 @@
+import groovy.lang.Closure
 import org.gradle.api.internal.HasConvention
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.LinkMapping
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.*
@@ -111,6 +114,7 @@ dependencies {
 	testCompile(kotlin("test-junit", kotlinVersion))
 }
 
+val javadoc = tasks["javadoc"] as Javadoc
 val jar = tasks["jar"] as Jar
 jar.from(*libraries)
 
@@ -127,6 +131,37 @@ val sourcesJar = task<Jar>("sourcesJar") {
 	description = "Assembles a jar archive containing the source code of this project."
 	group = "build"
 	from(java.sourceSets["main"].allSource)
+}
+
+val dokka = tasks.withType<DokkaTask> {
+	moduleName = "engine"
+	outputFormat = "html-as-java"
+	outputDirectory = javadoc.destinationDir?.absolutePath.toString()
+
+	includes = listOf("LICENSE.txt", "README.md")
+	// samples = ['test/org/frice/Test.kt', 'test/org/frice/JfxTest.kt']
+	impliedPlatforms = mutableListOf("JVM")
+
+	jdkVersion = 8
+
+	skipDeprecated = false
+	reportNotDocumented = false
+	noStdlibLink = false
+
+	linkMappings.add(LinkMapping().apply {
+		dir = "src"
+		url = "https://github.com/icela/FriceEngine/blob/master/src"
+		suffix = "#L"
+	})
+
+	// externalDocumentationLink { url = new URL("https://icela.github.io/") }
+}
+
+val javadok = task<Jar>("javadok") {
+	classifier = "javadoc"
+	description = "Assembles a jar archive containing the javadoc of this project."
+	group = "documentation"
+	from(javadoc.destinationDir)
 }
 
 task("displayCommitHash") {
