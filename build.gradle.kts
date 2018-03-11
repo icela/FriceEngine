@@ -7,8 +7,9 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.*
 import java.nio.file.*
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.*
 import java.util.stream.Collectors
+import kotlin.streams.toList
 
 val commitHash by lazy {
 	val process: Process = Runtime.getRuntime().exec("git rev-parse --short HEAD")
@@ -101,28 +102,40 @@ configurations {
 	create("library")
 }
 
-val libraries = Files
-	.list(Paths.get("lib"))
-	.filter { it.endsWith(".jar") }
-	.collect(Collectors.toList()).toTypedArray()
+val NamedDomainObjectCollection<Configuration>.library get() = this["library"]
 
 dependencies {
+	val libraries = Files
+		.list(Paths.get("lib"))
+		.map { "$it" }
+		.filter { it.endsWith("jar") }
+
 	compile(kotlin("stdlib-jdk8", kotlinVersion))
-	"library"(files(libraries))
-	configurations.compile.extendsFrom(configurations["library"])
+	"library"(files(*libraries.toList().toTypedArray()))
+	configurations.compileOnly.extendsFrom(configurations.library)
 	testCompile("junit", "junit", "4.12")
 	testCompile(kotlin("test-junit", kotlinVersion))
 }
 
 val javadoc = tasks["javadoc"] as Javadoc
 val jar = tasks["jar"] as Jar
-jar.from(*libraries)
+jar.from(Callable {
+	configurations.library.map {
+		@Suppress("IMPLICIT_CAST_TO_ANY")
+		if (it.isDirectory) it else zipTree(it)
+	}
+})
 
 val fatJar = task<Jar>("fatJar") {
 	classifier = "all"
 	description = "Assembles a jar archive containing the main classes and all the dependencies."
 	group = "build"
-	from(*libraries) // TODO change to all libs
+	from(Callable {
+		configurations.compile.map {
+			@Suppress("IMPLICIT_CAST_TO_ANY")
+			if (it.isDirectory) it else zipTree(it)
+		}
+	})
 	with(jar)
 }
 
@@ -180,3 +193,9 @@ task("isCI") {
 	}
 }
 
+artifacts {
+	add("archives", jar)
+	add("archives", fatJar)
+	add("archives", sourcesJar)
+	add("archives", javadok)
+}
