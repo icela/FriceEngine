@@ -41,6 +41,7 @@ buildscript {
 
 	repositories {
 		mavenCentral()
+		jcenter()
 	}
 
 	dependencies {
@@ -96,6 +97,7 @@ java.sourceSets {
 
 repositories {
 	mavenCentral()
+	jcenter()
 }
 
 configurations {
