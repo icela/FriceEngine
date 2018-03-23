@@ -37,7 +37,7 @@ buildscript {
 	var dokkaVersion: String by extra
 
 	kotlinVersion = "1.2.30"
-	dokkaVersion = "0.9.15"
+	dokkaVersion = "0.9.16"
 
 	repositories {
 		mavenCentral()
@@ -160,7 +160,7 @@ val dokka = tasks.withType<DokkaTask> {
 	jdkVersion = 8
 
 	skipDeprecated = false
-	reportNotDocumented = false
+	reportUndocumented = false
 	noStdlibLink = false
 
 	linkMappings.add(LinkMapping().apply {
