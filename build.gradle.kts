@@ -1,5 +1,4 @@
 import groovy.lang.Closure
-import org.gradle.api.internal.HasConvention
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.LinkMapping
@@ -13,7 +12,7 @@ import kotlin.streams.toList
 
 val commitHash by lazy {
 	val process: Process = Runtime.getRuntime().exec("git rev-parse --short HEAD")
-	process.waitFor(2000L, TimeUnit.MILLISECONDS)
+	process.waitFor()
 	val output = process.inputStream.use {
 		it.bufferedReader().use {
 			it.readText()
@@ -25,7 +24,7 @@ val commitHash by lazy {
 
 val isCI = !System.getenv("CI").isNullOrBlank()
 
-val comingVersion = "1.8.3"
+val comingVersion = "1.8.4"
 val packageName = "org.frice"
 val kotlinVersion: String by extra
 
@@ -36,7 +35,7 @@ buildscript {
 	var kotlinVersion: String by extra
 	var dokkaVersion: String by extra
 
-	kotlinVersion = "1.2.30"
+	kotlinVersion = "1.2.31"
 	dokkaVersion = "0.9.16"
 
 	repositories {
@@ -76,22 +75,20 @@ tasks.withType<JavaCompile> {
 	options.encoding = "UTF-8"
 }
 
-val SourceSet.kotlin
-	get() = (this as HasConvention)
-		.convention
-		.getPlugin(KotlinSourceSet::class.java)
-		.kotlin
-
 java.sourceSets {
 	"main" {
-		java.srcDirs("src")
-		kotlin.srcDirs("src")
 		resources.srcDirs("res")
+		java.srcDirs("src")
+		withConvention(KotlinSourceSet::class) {
+			kotlin.setSrcDirs(listOf("src"))
+		}
 	}
 
 	"test" {
 		java.srcDirs("test")
-		kotlin.srcDirs("test")
+		withConvention(KotlinSourceSet::class) {
+			kotlin.setSrcDirs(listOf("test"))
+		}
 	}
 }
 
