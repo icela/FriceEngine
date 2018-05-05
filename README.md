@@ -10,6 +10,7 @@ CircleCI|[![CircleCI](https://circleci.com/gh/icela/FriceEngine.svg?style=svg)](
 CodeShip|[![CodeShip](https://codeship.com/projects/a1d7bc60-0a30-0135-8b3c-6ed4d7e33e57/status?branch=master)](https://app.codeship.com/projects/214712)
 
 [![](https://jitpack.io/v/icela/FriceEngine.svg)](https://jitpack.io/#icela/FriceEngine)
+[ ![Download](https://api.bintray.com/packages/ice1000/FriceEngine/engine/images/download.svg) ](https://bintray.com/ice1000/FriceEngine/engine/_latestVersion)
 [![](https://jitpack.io/v/icela/FriceEngine/month.svg)](https://jitpack.io/#icela/FriceEngine) <br/>
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://icela.github.io)

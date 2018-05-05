@@ -25,7 +25,7 @@ val commitHash by lazy {
 
 val isCI = !System.getenv("CI").isNullOrBlank()
 
-val comingVersion = "1.8.3"
+val comingVersion = "1.8.4"
 val packageName = "org.frice"
 val kotlinVersion: String by extra
 
@@ -88,6 +88,7 @@ tasks.withType<JavaCompile> {
 
 bintray {
 	user = "ice1000"
+	key = findProperty("key").toString()
 	setConfigurations("archives")
 	pkg.apply {
 		name = project.name
