@@ -1,3 +1,4 @@
+import com.jfrog.bintray.gradle.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -24,7 +25,7 @@ val commitHash by lazy {
 
 val isCI = !System.getenv("CI").isNullOrBlank()
 
-val comingVersion = "1.8.4"
+val comingVersion = "1.8.3"
 val packageName = "org.frice"
 val kotlinVersion: String by extra
 
@@ -51,7 +52,10 @@ buildscript {
 
 plugins {
 	java
+	maven
+	`maven-publish`
 	kotlin("jvm") version "1.2.41"
+	id("com.jfrog.bintray") version "1.7.3"
 }
 
 apply { plugin("org.jetbrains.dokka") }
@@ -71,7 +75,51 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<JavaCompile> {
-	options.encoding = "UTF-8"
+	sourceCompatibility = "1.8"
+	targetCompatibility = "1.8"
+	options.apply {
+		isDeprecation = true
+		isWarnings = true
+		isDebug = !isCI
+		compilerArgs.add("-Xlint:unchecked")
+		encoding = "UTF-8"
+	}
+}
+
+publishing {
+	(publications) {
+		"mavenJava"(MavenPublication::class) {
+			from(components["java"])
+			groupId = packageName
+			artifactId = project.name
+			version = comingVersion
+			artifact(sourcesJar)
+			artifact(javadok)
+			pom.withXml {
+				val root = asNode()
+				root.appendNode("description", "JVM game engine based on Swing/JavaFX")
+				root.appendNode("name", project.name)
+				root.appendNode("url", "https://icela.github.io")
+				root.children().last()
+			}
+		}
+	}
+}
+
+bintray {
+	user = "ice1000"
+	pkg.apply {
+		name = project.name
+		repo = "FriceEngine"
+		githubRepo = "icela/FriceEngine"
+		publicDownloadNumbers = true
+		vcsUrl = "https://github.com/icela/FriceEngine.git"
+		version.apply {
+			name = comingVersion
+			vcsTag = "v$comingVersion"
+			websiteUrl = "https://github.com/icela/FriceEngine/releases/tag/$vcsTag"
+		}
+	}
 }
 
 java.sourceSets {
@@ -144,7 +192,8 @@ val sourcesJar = task<Jar>("sourcesJar") {
 	from(java.sourceSets["main"].allSource)
 }
 
-val dokka = tasks.withType<DokkaTask> {
+val dokka = tasks["dokka"] as DokkaTask
+dokka.apply {
 	moduleName = "engine"
 	outputFormat = "html-as-java"
 	outputDirectory = javadoc.destinationDir?.absolutePath.toString()
@@ -173,6 +222,7 @@ val javadok = task<Jar>("javadok") {
 	description = "Assembles a jar archive containing the javadoc of this project."
 	group = "documentation"
 	from(javadoc.destinationDir)
+	dependsOn(dokka)
 }
 
 task("displayCommitHash") {
