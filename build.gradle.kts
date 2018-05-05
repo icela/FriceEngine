@@ -35,7 +35,7 @@ buildscript {
 	var kotlinVersion: String by extra
 	var dokkaVersion: String by extra
 
-	kotlinVersion = "1.2.31"
+	kotlinVersion = "1.2.41"
 	dokkaVersion = "0.9.16"
 
 	repositories {
@@ -51,14 +51,10 @@ buildscript {
 
 plugins {
 	java
-	kotlin("jvm") version "1.2.30"
+	kotlin("jvm") version "1.2.41"
 }
 
-allprojects {
-	apply {
-		plugin("org.jetbrains.dokka")
-	}
-}
+apply { plugin("org.jetbrains.dokka") }
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_1_8
@@ -68,6 +64,9 @@ java {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		jvmTarget = "1.8"
+		freeCompilerArgs = listOf("-Xenable-jvm-default")
+		suppressWarnings = false
+		verbose = isCI
 	}
 }
 
