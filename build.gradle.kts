@@ -86,6 +86,23 @@ tasks.withType<JavaCompile> {
 	}
 }
 
+bintray {
+	user = "ice1000"
+	setConfigurations("archives")
+	pkg.apply {
+		name = project.name
+		repo = "FriceEngine"
+		githubRepo = "icela/FriceEngine"
+		publicDownloadNumbers = true
+		vcsUrl = "https://github.com/icela/FriceEngine.git"
+		version.apply {
+			name = comingVersion
+			vcsTag = "v$comingVersion"
+			websiteUrl = "https://github.com/icela/FriceEngine/releases/tag/$vcsTag"
+		}
+	}
+}
+
 publishing {
 	(publications) {
 		"mavenJava"(MavenPublication::class) {
@@ -102,22 +119,6 @@ publishing {
 				root.appendNode("url", "https://icela.github.io")
 				root.children().last()
 			}
-		}
-	}
-}
-
-bintray {
-	user = "ice1000"
-	pkg.apply {
-		name = project.name
-		repo = "FriceEngine"
-		githubRepo = "icela/FriceEngine"
-		publicDownloadNumbers = true
-		vcsUrl = "https://github.com/icela/FriceEngine.git"
-		version.apply {
-			name = comingVersion
-			vcsTag = "v$comingVersion"
-			websiteUrl = "https://github.com/icela/FriceEngine/releases/tag/$vcsTag"
 		}
 	}
 }
