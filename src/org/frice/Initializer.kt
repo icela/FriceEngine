@@ -88,8 +88,10 @@ fun launch(game: Game) {
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()
 						fpsCounter.refresh()
+						Thread.sleep((refresh.time / 2).toLong())
 					}
 				} catch (ignored: ConcurrentModificationException) {
+				} catch (ignored: InterruptedException) {
 				}
 			}
 		}
