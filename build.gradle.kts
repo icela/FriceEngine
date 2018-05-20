@@ -4,9 +4,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.LinkMapping
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.nio.file.*
 import java.util.concurrent.*
-import kotlin.streams.*
 
 val commitHash by lazy {
 	val process: Process = Runtime.getRuntime().exec("git rev-parse --short HEAD")
@@ -150,13 +148,10 @@ configurations {
 val NamedDomainObjectCollection<Configuration>.library get() = this["library"]
 
 dependencies {
-	val libraries = Files
-		.list(Paths.get("lib"))
-		.map { "$it" }
-		.filter { it.endsWith("jar") }
+	val libraries = file("lib").list { it, _ -> "jar" == it.extension }
 
 	compile(kotlin("stdlib-jdk8", kotlinVersion))
-	"library"(files(*libraries.toList().toTypedArray()))
+	"library"(files(*libraries))
 	configurations.compileOnly.extendsFrom(configurations.library)
 	testCompile("junit", "junit", "4.12")
 	testCompile(kotlin("test-junit", kotlinVersion))
