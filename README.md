@@ -39,7 +39,14 @@ This engine is completely platform-independent: no JNI linkage, no native method
 
 ## Build
 
-Follow the instruction from [JitPack](https://jitpack.io/#icela/FriceEngine).
+Gradle:
+
+```gradle
+repositories { jcenter() }
+dependencies { compile 'org.frice:engine:1.8.3' }
+```
+
+Alternatively, you can follow the instruction from [JitPack](https://jitpack.io/#icela/FriceEngine).
 
 Alternatively, you can download a jar from the [release page](https://github.com/icela/FriceEngine/releases).
 

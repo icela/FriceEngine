@@ -1,15 +1,12 @@
 import com.jfrog.bintray.gradle.*
-import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.LinkMapping
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.io.*
 import java.nio.file.*
 import java.util.concurrent.*
-import java.util.stream.Collectors
-import kotlin.streams.toList
+import kotlin.streams.*
 
 val commitHash by lazy {
 	val process: Process = Runtime.getRuntime().exec("git rev-parse --short HEAD")
