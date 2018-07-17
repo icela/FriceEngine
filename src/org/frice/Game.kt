@@ -242,7 +242,7 @@ open class Game @JvmOverloads constructor(layerCount: Int = 1) : JFrame(), Frice
 			clearScreen(drawer)
 			dealWithObjects(drawer)
 
-			if (loseFocus and loseFocusChangeColor) {
+			if (loseFocus && loseFocusChangeColor) {
 				repeat(drawer.friceImage.width) { x: Int ->
 					repeat(drawer.friceImage.height) { y: Int ->
 						drawer.friceImage[x, y] = drawer.friceImage[x, y].darker()

@@ -207,7 +207,10 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 
 			it.objects.forEach loop@ { o ->
 				if (!o.isVisible) return@loop
-				if (o is ColorOwner && ColorResource.COLORLESS == o.color) return@loop
+				if (o is ColorOwner) {
+					if (ColorResource.COLORLESS == o.color) return@loop
+					bgg.color = o.color
+				}
 				bgg.init()
 				if (o is FContainer) bgg.rotate(o.rotate, o.x + o.width / 2, o.y + o.height / 2)
 				else bgg.rotate(o.rotate, o.x, o.y)
@@ -215,17 +218,13 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 					is ImageOwner -> if (defaultActiveArea.collides(o)) bgg.drawImage(o.image, o.x, o.y)
 					is ShapeObject -> {
 						if (defaultActiveArea.collides(o)) {
-							bgg.color = o.resource
 							when (o.shape) {
 								is FRectangle -> bgg.drawRect(o.x, o.y, o.width, o.height)
 								is FOval -> bgg.drawOval(o.x, o.y, o.width, o.height)
 							}
 						}
 					}
-					is LineEffect -> {
-						bgg.color = o.color
-						bgg.drawLine(o.x, o.y, o.x2, o.y2)
-					}
+					is LineEffect -> bgg.drawLine(o.x, o.y, o.x2, o.y2)
 				}
 				bgg.restore()
 			}
@@ -240,7 +239,6 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 					when (b) {
 						is ImageOwner -> if (defaultActiveArea.collides(b)) bgg.drawImage(b.image, b.x, b.y)
 						is SimpleButton -> {
-							bgg.color = b.color
 							bgg.drawRoundRect(b.x, b.y,
 								b.width, b.height,
 								Math.min(b.width * 0.5, 10.0),
