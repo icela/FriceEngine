@@ -43,7 +43,7 @@ Gradle:
 
 ```gradle
 repositories { jcenter() }
-dependencies { compile 'org.frice:engine:1.8.3' }
+dependencies { compile 'org.frice:engine:1.8.4' }
 ```
 
 Alternatively, you can follow the instruction from [JitPack](https://jitpack.io/#icela/FriceEngine).
