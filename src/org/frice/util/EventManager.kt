@@ -17,11 +17,11 @@ class EventManager {
 
 	/**
 	 * Should be invoked in onRefresh.
-	 * It's recommended to invoke this as frequently as possible.
+	 * It's recommended to run this as frequently as possible.
 	 */
 	tailrec fun check() {
 		if (queue.isNotEmpty() && queue.peek().millisFromStart <= FClock.current) {
-			queue.remove().let { if (!it.isCancelled) it.`{-# event #-}`() }
+			queue.remove().let { if (!it.isCancelled) it.`{-# event #-}`.run() }
 			check()
 		}
 	}

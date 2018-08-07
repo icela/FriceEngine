@@ -1,6 +1,5 @@
 package org.frice.event
 
-import org.frice.obj.SideEffect
 import org.frice.util.time.FClock
 
 /**
@@ -12,7 +11,7 @@ import org.frice.util.time.FClock
  */
 class DelayedEvent(
 	val millisFromStart: Long,
-	@JvmField internal val `{-# event #-}`: SideEffect) : Comparable<DelayedEvent> {
+	@JvmField internal val `{-# event #-}`: Runnable) : Comparable<DelayedEvent> {
 	var isCancelled = false
 
 	/**
@@ -31,7 +30,7 @@ class DelayedEvent(
 		 * @param event the event that is going to happen
 		 */
 		@JvmStatic
-		fun millisFromNow(millisFromNow: Long, event: SideEffect)
+		fun millisFromNow(millisFromNow: Long, event: Runnable)
 			= DelayedEvent(millisFromNow + FClock.current, event)
 	}
 

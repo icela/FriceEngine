@@ -7,22 +7,20 @@
 
 package org.frice.platform
 
-import org.frice.obj.SideEffect
-
 /** for Windowses */
-var onWindows: SideEffect? = null
+var onWindows: Runnable? = null
 
 /** for Mac OS X */
-var onMac: SideEffect? = null
+var onMac: Runnable? = null
 
 /** for Linuxes */
-var onLinux: SideEffect? = null
+var onLinux: Runnable? = null
 
 /** for SunOS and Solaris */
-var onSolaris: SideEffect? = null
+var onSolaris: Runnable? = null
 
 /** for FreeBSD */
-var onBSD: SideEffect? = null
+var onBSD: Runnable? = null
 
 var isOnWindows = false @JvmName(" ### windows") internal set
 var isOnMac = false @JvmName(" ### mac") internal set

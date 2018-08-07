@@ -27,7 +27,7 @@ import javax.swing.*
  * invisible to game developers.
  *
  * Feel free to override the constructor, but please remember to
- * invoke super().
+ * run super().
  *
  * Created by ice1000 on 2016/8/15.
  * @author ice1000

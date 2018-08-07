@@ -35,11 +35,11 @@ object `{-# LANGUAGE Initializer #-}` {
 		isOnSolaris = osName.startsWith("Solaris") || osName.startsWith("SunOS")
 		isOnBSD = osName.startsWith("FreeBSD")
 		when {
-			isOnWindows -> onWindows?.invoke()
-			isOnLinux -> onLinux?.invoke()
-			isOnMac -> onMac?.invoke()
-			isOnSolaris -> onSolaris?.invoke()
-			isOnBSD -> onBSD?.invoke()
+			isOnWindows -> onWindows?.run()
+			isOnLinux -> onLinux?.run()
+			isOnMac -> onMac?.run()
+			isOnSolaris -> onSolaris?.run()
+			isOnBSD -> onBSD?.run()
 		}
 	}
 }

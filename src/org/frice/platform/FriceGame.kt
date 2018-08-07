@@ -165,8 +165,8 @@ interface FriceGame : TitleOwner, Sized, Resizable, Collidable {
 	}
 
 	fun runLater(delayedEvent: DelayedEvent) = eventManager.insert(delayedEvent)
-	fun runLater(millisFromNow: Long, event: SideEffect) = runLater(DelayedEvent.millisFromNow(millisFromNow, event))
-	fun runFromStart(millisFromStart: Long, event: SideEffect) = runLater(DelayedEvent(millisFromStart, event))
+	fun runLater(millisFromNow: Long, event: Runnable) = runLater(DelayedEvent.millisFromNow(millisFromNow, event))
+	fun runFromStart(millisFromStart: Long, event: Runnable) = runLater(DelayedEvent(millisFromStart, event))
 
 	/** calling onRefresh and do checking */
 	fun adjust() {
