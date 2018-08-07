@@ -20,7 +20,7 @@ val commitHash by lazy {
 
 val isCI = !System.getenv("CI").isNullOrBlank()
 
-val comingVersion = "1.8.4"
+val comingVersion = "1.8.5"
 val packageName = "org.frice"
 val kotlinVersion: String by extra
 
