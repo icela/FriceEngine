@@ -13,7 +13,6 @@ import org.frice.platform.adapter.JvmImage
 import java.io.File
 import java.net.URL
 import java.nio.charset.Charset
-import java.util.*
 import javax.imageio.ImageIO
 
 /**
@@ -25,12 +24,12 @@ import javax.imageio.ImageIO
  * @author ice1000
  * @since v0.6
  */
-interface FManager<T> {
-	val res: MutableMap<String, T>
-	fun create(path: String): T
+sealed class FManager<T> {
+	val res: MutableMap<String, T> = hashMapOf()
+	abstract fun create(path: String): T
 
-	operator fun get(path: String): T = if (enabled) res[path] ?: create(path).apply {
-		res += Pair(path, this)
+	open operator fun get(path: String): T = if (enabled) res[path] ?: create(path).also {
+		res[path] = it
 	} else create(path)
 
 	operator fun set(path: String, new: T) {
@@ -53,16 +52,45 @@ interface FManager<T> {
 			WebImageManager.res.clear()
 			URLBytesManager.res.clear()
 			URLTextManager.res.clear()
+			JarTextManager.res.clear()
+			JarBytesManager.res.clear()
+			JarImageManager.res.clear()
 		}
 	}
 }
 
 /**
  * @author ice1000
+ * @since v1.8.5
+ */
+object JarTextManager : FManager<String>() {
+	override fun create(path: String) = Class.forName(Thread.currentThread().stackTrace[2].className)
+		.getResourceAsStream(path).use { it.bufferedReader().use { it.readText() } }
+}
+
+/**
+ * @author ice1000
+ * @since v1.8.5
+ */
+object JarBytesManager : FManager<ByteArray>() {
+	override fun create(path: String) = Class.forName(Thread.currentThread().stackTrace[2].className)
+		.getResourceAsStream(path).use { it.readBytes() }
+}
+
+/**
+ * @author ice1000
+ * @since v1.8.5
+ */
+object JarImageManager : FManager<FriceImage>() {
+	override fun create(path: String) = Class.forName(Thread.currentThread().stackTrace[2].className)
+		.getResourceAsStream(path).use { ImageIO.read(it).let { if (FManager.useJfx) JfxImage(it) else JvmImage(it) } }
+}
+
+/**
+ * @author ice1000
  * @since v1.1
  */
-object FileTextManager : FManager<String> {
-	override val res = hashMapOf<String, String>()
+object FileTextManager : FManager<String>() {
 	override fun create(path: String) = File(path).readText()
 }
 
@@ -70,8 +98,7 @@ object FileTextManager : FManager<String> {
  * @author ice1000
  * @since v1.1
  */
-object FileBytesManager : FManager<ByteArray> {
-	override val res = hashMapOf<String, ByteArray>()
+object FileBytesManager : FManager<ByteArray>() {
 	override fun create(path: String) = File(path).readBytes()
 }
 
@@ -79,8 +106,7 @@ object FileBytesManager : FManager<ByteArray> {
  * @author ice1000
  * @since v0.6
  */
-object ImageManager : FManager<FriceImage> {
-	override val res = HashMap<String, FriceImage>()
+object ImageManager : FManager<FriceImage>() {
 	override fun create(path: String) = ImageIO.read(File(path)).let { if (FManager.useJfx) JfxImage(it) else JvmImage(it) }
 	override operator fun get(path: String) = super.get(path).clone()
 }
@@ -89,8 +115,7 @@ object ImageManager : FManager<FriceImage> {
  * @author ice1000
  * @since v0.6
  */
-object WebImageManager : FManager<FriceImage> {
-	override val res = HashMap<String, FriceImage>()
+object WebImageManager : FManager<FriceImage>() {
 	override fun create(path: String) = ImageIO.read(URL(path)).let { if (FManager.useJfx) JfxImage(it) else JvmImage(it) }
 	override operator fun get(path: String) = super.get(path).clone()
 }
@@ -99,8 +124,7 @@ object WebImageManager : FManager<FriceImage> {
  * @author ice1000
  * @since v0.6
  */
-object URLTextManager : FManager<String> {
-	override val res = hashMapOf<String, String>()
+object URLTextManager : FManager<String>() {
 	override fun create(path: String) = URL(path).readText(Charset.defaultCharset())
 }
 
@@ -108,7 +132,6 @@ object URLTextManager : FManager<String> {
  * @author ice1000
  * @since v0.6
  */
-object URLBytesManager : FManager<ByteArray> {
-	override val res = hashMapOf<String, ByteArray>()
+object URLBytesManager : FManager<ByteArray>() {
 	override fun create(path: String) = URL(path).readBytes()
 }
