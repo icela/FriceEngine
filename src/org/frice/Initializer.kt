@@ -9,8 +9,7 @@ package org.frice
 import javafx.application.Application
 import org.frice.platform.*
 import org.frice.resource.manager.FManager
-import org.frice.util.cast
-import org.frice.util.loop
+import org.frice.util.*
 import org.frice.util.message.FLog
 import java.awt.Rectangle
 import java.util.*
@@ -54,6 +53,8 @@ const val TO_Y = 100
 @JvmField val SMALL_SQUARE = Rectangle(TO_X, TO_Y, 400, 400)
 @JvmField val BIG_SQUARE = Rectangle(TO_X, TO_Y, 800, 800)
 
+var sleepOnRefresh = true
+
 fun Rectangle.rotate() {
 	width -= -height
 	height -= width
@@ -88,7 +89,8 @@ fun launch(game: Game) {
 					if (!paused && !stopped && refresh.ended()) {
 						panel.repaint()
 						fpsCounter.refresh()
-						Thread.sleep((refresh.time / 2).toLong())
+						val deltaTime = refresh.time / 2
+						if (sleepOnRefresh) pause(deltaTime.toLong())
 					}
 				} catch (ignored: ConcurrentModificationException) {
 				} catch (ignored: InterruptedException) {
