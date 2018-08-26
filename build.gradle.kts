@@ -20,7 +20,7 @@ val commitHash by lazy {
 
 val isCI = !System.getenv("CI").isNullOrBlank()
 
-val comingVersion = "1.8.5"
+val comingVersion = "1.8.6"
 val packageName = "org.frice"
 val kotlinVersion: String by extra
 
@@ -28,11 +28,8 @@ group = packageName
 version = if (isCI) "$comingVersion-$commitHash" else comingVersion
 
 buildscript {
-	var kotlinVersion: String by extra
 	var dokkaVersion: String by extra
-
-	kotlinVersion = "1.2.41"
-	dokkaVersion = "0.9.16"
+	dokkaVersion = "0.9.17"
 
 	repositories {
 		mavenCentral()
@@ -40,7 +37,6 @@ buildscript {
 	}
 
 	dependencies {
-		classpath(kotlin("gradle-plugin", kotlinVersion))
 		classpath("org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion")
 	}
 }
@@ -49,7 +45,7 @@ plugins {
 	java
 	maven
 	`maven-publish`
-	kotlin("jvm") version "1.2.41"
+	kotlin("jvm") version "1.2.60"
 	id("com.jfrog.bintray") version "1.7.3"
 }
 
@@ -63,7 +59,7 @@ java {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		jvmTarget = "1.8"
-		freeCompilerArgs = listOf("-Xenable-jvm-default")
+		freeCompilerArgs = listOf("-Xjvm-default=enable")
 		suppressWarnings = false
 		verbose = isCI
 	}
@@ -150,11 +146,11 @@ val NamedDomainObjectCollection<Configuration>.library get() = this["library"]
 dependencies {
 	val libraries = file("lib").list { it, _ -> "jar" == it.extension }
 
-	compile(kotlin("stdlib-jdk8", kotlinVersion))
+	compile(kotlin("stdlib-jdk8"))
 	"library"(files(*libraries))
 	configurations.compileOnly.extendsFrom(configurations.library)
 	testCompile("junit", "junit", "4.12")
-	testCompile(kotlin("test-junit", kotlinVersion))
+	testCompile(kotlin("test-junit"))
 }
 
 val javadoc = tasks["javadoc"] as Javadoc
