@@ -44,7 +44,7 @@ class QuadTree(private var level: Int, private var bounds: FQuad) {
 		// split to four nodes
 		nodes[0] = QuadTree(level + 1, FQuad(x + subWidth, y, subWidth, subHeight))
 		nodes[1] = QuadTree(level + 1, FQuad(x, y, subWidth, subHeight))
-		nodes[2] = QuadTree(level + 1, FQuad(x, subWidth, (y + subHeight), subHeight))
+		nodes[2] = QuadTree(level + 1, FQuad(x, y + subHeight, subWidth, subHeight))
 		nodes[3] = QuadTree(level + 1, FQuad(x + subWidth, y + subHeight, subWidth, subHeight))
 	}
 
