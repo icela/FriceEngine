@@ -142,7 +142,7 @@ open class GameFX @JvmOverloads constructor(
 		return Toolkit.getToolkit().fontLoader.computeStringWidth(text.text, font).toInt()
 	}
 
-	var onKeyTyepd: EventHandler<in KeyEvent>
+	var onKeyTyped: EventHandler<in KeyEvent>
 		get() = scene.onKeyTyped
 		set(value) {
 			scene.onKeyTyped = value
